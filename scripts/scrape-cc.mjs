@@ -37,6 +37,10 @@ function decode(s) {
     .replace(/&#8211;|&ndash;/g, '–').replace(/&#8212;|&mdash;/g, '—')
     .replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&#039;|&apos;/g, "'")
     .replace(/&nbsp;/g, ' ').replace(/&lt;/g, '<').replace(/&gt;/g, '>')
+    .replace(/&#x[aA]0;|&#160;/g, ' ')
+    .replace(/&#(\d+);/g, (m, n) => String.fromCharCode(parseInt(n)))
+    .replace(/&#x([0-9a-fA-F]+);/g, (m, n) => String.fromCharCode(parseInt(n, 16)))
+    .replace(/\s+/g, ' ').trim()
 }
 
 function stripTags(html) {
