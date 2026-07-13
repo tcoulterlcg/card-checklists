@@ -21,7 +21,7 @@ function fullSeason(y) { // "2015-16" -> "2015-2016"
 const HUBS = {
   baseball: (y) => ['/sports-cards-sets/mlb-baseball-cards/' + y + '-baseball-cards', 'Baseball', y],
   football: (y) => ['/sports-cards-sets/nfl-football-cards/' + y + '-football-cards', 'Football', y],
-  basketball: (y) => ['/sports-cards-sets/nba-basketball-cards/' + y + '-basketball-cards', 'Basketball', y],
+  basketball: (y) => ['/sports-cards-sets/nba-basketball-cards/' + fullSeason(y) + '-basketball-cards', 'Basketball', y],
   hockey: (y) => ['/sports-cards-sets/nhl-hockey-cards/' + fullSeason(y) + '-hockey-cards', 'Hockey', y],
   soccer: (y) => ['/sports-cards-sets/soccer-cards/' + y + '-soccer-cards', 'Soccer', y],
 }

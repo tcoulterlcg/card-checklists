@@ -14,6 +14,9 @@ const SPORT_COLORS = {
 
 const BRAND_COLORS = { Panini: '#e11d48', Topps: '#ef8c1c', 'Upper Deck': '#2563eb', Leaf: '#16a34a', Other: '#888' }
 
+const RPA_TYPES = [['RPA', 'Rookie Patch Auto'], ['PA', 'Patch Auto'], ['RA', 'Rookie Auto'], ['AU', 'Autograph'], ['PATCH', 'Patch'], ['RELIC', 'Relic'], ['All', 'All Hits']]
+const RPA_TYPE_COLOR = { RPA: '#d4a843', PA: '#e11d48', RA: '#8b5cf6', AU: '#2563eb', PATCH: '#16a34a', RELIC: '#f97316', All: '#888' }
+
 // Ordered product-line matchers → [brand, product]. First match wins, so more
 // specific lines (Bowman Chrome) precede general ones (Bowman).
 const PRODUCT_MAP = [
@@ -127,8 +130,11 @@ export default function Home() {
   const [sportFilter, setSportFilter] = useState('All')
   const [brandFilter, setBrandFilter] = useState('All')
   const [productFilter, setProductFilter] = useState('All')
-  const [view, setView] = useState('browse') // browse | patchswaps
+  const [view, setView] = useState('browse') // browse | patchswaps | rpa
   const [patchData, setPatchData] = useState(null)
+  const [rpaData, setRpaData] = useState(null)
+  const [rpaType, setRpaType] = useState('RPA')
+  const [rpaQuery, setRpaQuery] = useState('')
   const [globalHits, setGlobalHits] = useState(null)
   const [searching, setSearching] = useState(false)
   const [searchIndex, setSearchIndex] = useState(null)
@@ -184,18 +190,20 @@ export default function Home() {
     if (!idx) {
       try {
         const r = await fetch('/data/search-index.json')
-        idx = (await r.json()).rows
+        idx = await r.json() // { slugs, sections, teams, rows }
         setSearchIndex(idx)
-      } catch (e) { idx = [] }
+      } catch (e) { idx = { slugs: [], sections: [], teams: [], rows: [] } }
     }
     const setMeta = {}
     for (const s of sets) setMeta[s.slug] = s
+    const { slugs, sections, teams, rows } = idx
     const hits = []
-    for (let i = 0; i < idx.length && hits.length < 800; i++) {
-      const row = idx[i] // [player, slug, number, section, team, flag]
+    for (let i = 0; i < rows.length && hits.length < 800; i++) {
+      const row = rows[i] // [player, slugId, number, sectionId, teamId, flag]
       if (row[0].toLowerCase().includes(term)) {
-        const m = setMeta[row[1]] || {}
-        hits.push({ p: row[0], slug: row[1], n: row[2], section: row[3], t: row[4], x: row[5], set: m.name, year: m.year, sport: m.sport })
+        const slug = slugs[row[1]]
+        const m = setMeta[slug] || {}
+        hits.push({ p: row[0], slug, n: row[2], section: sections[row[3]] || '', t: row[4] >= 0 ? teams[row[4]] : '', x: row[5], set: m.name, year: m.year, sport: m.sport })
       }
     }
     hits.sort((a, b) => (b.year || 0) - (a.year || 0))
@@ -251,6 +259,29 @@ export default function Home() {
     if (!patchData) fetch('/data/patch-swaps.json').then(r => r.json()).then(setPatchData).catch(() => setPatchData({ entries: [] }))
     window.scrollTo(0, 0)
   }
+  const openRpa = () => {
+    setView('rpa'); setActiveSet(null); setSetData(null); setGlobalHits(null)
+    if (!rpaData) fetch('/data/rpa-index.json').then(r => r.json()).then(setRpaData).catch(() => setRpaData({ slugs: [], rows: [] }))
+    window.scrollTo(0, 0)
+  }
+
+  const rpaResults = useMemo(() => {
+    if (!rpaData) return []
+    const meta = {}
+    for (const s of sets) meta[s.slug] = s
+    const term = rpaQuery.trim().toLowerCase()
+    const out = []
+    for (const r of rpaData.rows) { // [player, number, slugId, type, serial]
+      if (rpaType !== 'All' && r[3] !== rpaType) continue
+      if (term && !r[0].toLowerCase().includes(term)) continue
+      const m = meta[rpaData.slugs[r[2]]] || {}
+      if (sportFilter !== 'All' && m.sport !== sportFilter) continue
+      out.push({ p: r[0], n: r[1], type: r[3], serial: r[4], slug: rpaData.slugs[r[2]], set: m.name, year: m.year, sport: m.sport })
+      if (out.length >= 1200) break
+    }
+    out.sort((a, b) => (b.year || 0) - (a.year || 0))
+    return out
+  }, [rpaData, rpaType, rpaQuery, sportFilter, sets])
   const searchFor = (name) => { setQuery(name); setTimeout(runGlobalSearch, 0) }
 
   return (
@@ -262,8 +293,8 @@ export default function Home() {
           Checklist<span style={{ color: GOLD }}>HQ</span>
         </div>
         <div style={{ display: 'flex', gap: 24, alignItems: 'center', flexWrap: 'wrap' }}>
-          {[['Sets', () => { goHome(); setSportFilter('All') }], ['Players', () => { goHome(); setTimeout(() => { const el = document.getElementById('hq-search'); if (el) el.focus() }, 0) }], ['Patch Swaps', openPatchSwaps]].map(([label, fn]) => (
-            <button key={label} onClick={fn} style={{ background: 'none', border: 'none', cursor: 'pointer', color: (label === 'Patch Swaps' && view === 'patchswaps') ? GOLD : '#bbb', fontSize: 12, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase' }}>{label}</button>
+          {[['Sets', () => { goHome(); setSportFilter('All') }, 'browse'], ['RPA Tracker', openRpa, 'rpa'], ['Patch Swaps', openPatchSwaps, 'patchswaps']].map(([label, fn, v]) => (
+            <button key={label} onClick={fn} style={{ background: 'none', border: 'none', cursor: 'pointer', color: view === v ? GOLD : '#bbb', fontSize: 12, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase' }}>{label}</button>
           ))}
           <span style={{ ...condensed, fontSize: 14, fontWeight: 700, color: GOLD, border: '1px solid ' + GOLD + '66', borderRadius: 8, padding: '6px 12px', letterSpacing: '0.06em' }}>
             {statN.sets} SETS
@@ -502,6 +533,65 @@ export default function Home() {
             ))}
             {globalHits.length === 0 && <p style={{ padding: 20, color: '#666', fontSize: 14 }}>No player matches yet — more sets import every session.</p>}
           </div>
+        </section>
+      ) : view === 'rpa' ? (
+        <section>
+          <div style={{ background: 'linear-gradient(140deg, #1a1512, #0e0e0e)', border: '1px solid ' + GOLD + '33', borderRadius: 18, padding: '30px 30px', marginBottom: 22 }}>
+            <h1 style={{ ...condensed, fontSize: 40, fontWeight: 800, textTransform: 'uppercase', margin: 0, lineHeight: 1 }}>RPA Tracker</h1>
+            <p style={{ color: '#aaa', fontSize: 15, lineHeight: 1.6, maxWidth: 720, margin: '14px 0 0' }}>
+              Every Rookie Patch Auto, on-card autograph, patch and relic card across {statN.sets.toLocaleString()} sets — with its serial print run — so you can track the hobby's premium hits in one place.
+            </p>
+          </div>
+
+          <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 12 }}>
+            {RPA_TYPES.map(([code, label]) => (
+              <button key={code} onClick={() => setRpaType(code)}
+                style={{
+                  padding: '6px 14px', borderRadius: 999, fontSize: 12, fontWeight: 700, cursor: 'pointer', letterSpacing: '0.04em',
+                  background: rpaType === code ? (RPA_TYPE_COLOR[code] || GOLD) : '#141414',
+                  color: rpaType === code ? '#111' : '#999',
+                  border: '1px solid ' + (rpaType === code ? 'transparent' : '#2a2a2a')
+                }}>{label}</button>
+            ))}
+          </div>
+          <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 12, alignItems: 'center' }}>
+            {sports.map(sp => (
+              <button key={sp} onClick={() => setSportFilter(sp)}
+                style={{
+                  padding: '5px 12px', borderRadius: 999, fontSize: 11, fontWeight: 700, cursor: 'pointer', letterSpacing: '0.05em', textTransform: 'uppercase',
+                  background: sportFilter === sp ? (SPORT_COLORS[sp] || GOLD) : '#141414',
+                  color: sportFilter === sp ? '#111' : '#999', border: '1px solid ' + (sportFilter === sp ? 'transparent' : '#2a2a2a')
+                }}>{sp}</button>
+            ))}
+          </div>
+          <input value={rpaQuery} onChange={(e) => setRpaQuery(e.target.value)} placeholder="Filter by player…"
+            style={{ width: '100%', boxSizing: 'border-box', background: '#141414', border: '1px solid #2a2a2a', borderRadius: 10, padding: '12px 16px', color: '#f5f5f5', fontSize: 15, outline: 'none', marginBottom: 16 }} />
+
+          {!rpaData ? <p style={{ color: '#666' }}>Loading RPA database…</p> : (
+            <>
+              <p style={{ color: '#666', fontSize: 12, margin: '0 0 10px' }}>{rpaResults.length >= 1200 ? '1,200+' : rpaResults.length.toLocaleString()} cards{rpaQuery ? ' for “' + rpaQuery + '”' : ''}</p>
+              <div style={{ border: '1px solid #222', borderRadius: 12, overflow: 'hidden' }}>
+                <div style={{ display: 'flex', gap: 12, padding: '9px 16px', background: '#181818', borderBottom: '1px solid #262626', fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#888' }}>
+                  <span style={{ flex: '0 0 56px' }}>Card</span>
+                  <span style={{ flex: '1 1 auto', minWidth: 0 }}>Player</span>
+                  <span style={{ flex: '0 0 88px' }}>Type</span>
+                  <span style={{ flex: '0 0 64px', textAlign: 'right' }}>Serial</span>
+                  <span style={{ flex: '2 1 0', minWidth: 0 }}>Set</span>
+                </div>
+                {rpaResults.map((c, i) => (
+                  <button key={i} onClick={() => { const s = sets.find(x => x.slug === c.slug); if (s) openSet(Object.assign({}, s, classifySet(s.name))) }}
+                    style={{ width: '100%', textAlign: 'left', display: 'flex', gap: 12, padding: '8px 16px', fontSize: 14, alignItems: 'baseline', background: i % 2 === 0 ? '#0f0f0f' : '#141414', border: 'none', color: '#f5f5f5', cursor: 'pointer' }}>
+                    <span style={{ flex: '0 0 56px', color: GOLD, fontWeight: 700, fontVariantNumeric: 'tabular-nums' }}>#{c.n}</span>
+                    <span style={{ flex: '1 1 auto', minWidth: 0, fontWeight: 600 }}>{c.p}</span>
+                    <span style={{ flex: '0 0 88px' }}><Chip color={RPA_TYPE_COLOR[c.type]}>{c.type}</Chip></span>
+                    <span style={{ flex: '0 0 64px', textAlign: 'right', color: c.serial ? '#f5f5f5' : '#555', fontWeight: 700, fontVariantNumeric: 'tabular-nums' }}>{c.serial || '—'}</span>
+                    <span style={{ flex: '2 1 0', minWidth: 0, color: '#888', fontSize: 12.5, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{c.year} {c.set}</span>
+                  </button>
+                ))}
+                {rpaResults.length === 0 && <p style={{ padding: 20, color: '#666', fontSize: 14 }}>No hits match.</p>}
+              </div>
+            </>
+          )}
         </section>
       ) : view === 'patchswaps' ? (
         <section>
