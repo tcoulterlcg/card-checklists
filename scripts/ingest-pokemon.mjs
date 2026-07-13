@@ -2,12 +2,13 @@
 // format. Each Pokémon set becomes one set file; cards are grouped into
 // sections by rarity. Sport = "Pokémon".
 //   node scripts/ingest-pokemon.mjs
-import { writeFileSync } from 'node:fs'
+import { writeFileSync, existsSync } from 'node:fs'
 
 const API = 'https://api.pokemontcg.io/v2'
 const H = { accept: 'application/json' }
 const sleep = (ms) => new Promise(r => setTimeout(r, ms))
 const dataDir = new URL('../public/data/', import.meta.url)
+const RESUME = process.argv.includes('--resume')
 
 const setsRes = await fetch(API + '/sets?pageSize=500&orderBy=releaseDate', { headers: H })
 const sets = (await setsRes.json()).data
@@ -15,6 +16,7 @@ console.log('Pokémon sets:', sets.length)
 
 let ok = 0, total = 0
 for (const set of sets) {
+  if (RESUME && existsSync(new URL('pkmn-' + set.id + '.json', dataDir))) { ok++; continue }
   const cards = []
   for (let page = 1; page < 12; page++) {
     const r = await fetch(API + '/cards?q=set.id:' + set.id + '&pageSize=250&page=' + page + '&select=name,number,rarity,supertype,subtypes,types', { headers: H })
@@ -23,7 +25,7 @@ for (const set of sets) {
     if (!data || data.length === 0) break
     cards.push(...data)
     if (data.length < 250) break
-    await sleep(120)
+    await sleep(1800)
   }
   if (cards.length === 0) continue
 
@@ -56,6 +58,6 @@ for (const set of sets) {
   writeFileSync(new URL(out.slug + '.json', dataDir), JSON.stringify(out))
   ok++; total += cards.length
   process.stdout.write('.')
-  await sleep(120)
+  await sleep(1800)
 }
 console.log('\ningest-pokemon ->', ok, 'sets,', total.toLocaleString(), 'cards')

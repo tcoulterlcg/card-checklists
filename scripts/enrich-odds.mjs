@@ -69,6 +69,9 @@ for (const f of files) {
   // Only cardboardconnection sets have a page to pull odds from; TCG sets come
   // from APIs and already carry their structure.
   if (set.source !== 'cardboardconnection.com') continue
+  // Skip sets already enriched (any section has odds) unless --all is passed —
+  // keeps re-runs fast so only newly-added sets are fetched.
+  if (!process.argv.includes('--all') && set.sections.some(s => s.odds)) continue
   try {
     const res = await fetch('https://www.cardboardconnection.com/' + set.slug, { headers: HDRS })
     if (res.ok) {
