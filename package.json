@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev -p 3005",
+    "prebuild": "node scripts/build-search-index.mjs && node scripts/build-rpa-index.mjs",
     "build": "next build",
     "start": "next start"
   },
