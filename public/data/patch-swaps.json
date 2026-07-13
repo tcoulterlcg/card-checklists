@@ -2,21 +2,17 @@
   "source": {
     "name": "@fake_hockey_patches",
     "url": "https://www.instagram.com/fake_hockey_patches/",
-    "note": "Community-documented patch swaps. Images are hosted by their original posters; this page links out and credits the source rather than rehosting copyrighted photos."
+    "note": "The hobby's leading community feed documenting swapped patches. We link out and credit the source rather than rehosting their photographs."
   },
-  "entries": [
-    {
-      "id": "example-1",
-      "player": "",
-      "card": "",
-      "set": "",
-      "year": null,
-      "sport": "Hockey",
-      "status": "documented",
-      "summary": "Seed entry — add documented patch-swap cases here (player, card, set, before/after image URLs, and a source link).",
-      "originalImg": null,
-      "swappedImg": null,
-      "sourceUrl": "https://www.instagram.com/fake_hockey_patches/"
-    }
-  ]
+  "intro": "A \"patch swap\" is when the memorabilia window on a game-used or manufactured patch card is opened and the original swatch is replaced with a more desirable one — a multi-color patch, a logo, a nameplate letter — to inflate value. Because the card looks factory-fresh, swaps are hard to catch without a reference photo of the card as issued.",
+  "redFlags": [
+    { "title": "Patch doesn't match the manufacturer photo", "detail": "Panini, Upper Deck and Topps photograph most premium patch cards at production. Compare your card to the seller's or manufacturer's original image — a different swatch is the clearest tell." },
+    { "title": "Patch is too clean or too perfect", "detail": "Genuine game-used swatches are usually single-color and unremarkable. A pristine 3–4 color logo patch on a low-numbered rookie is a red flag worth verifying." },
+    { "title": "Window seal or plastic looks disturbed", "detail": "Look for lifted edges, glue residue, tool marks, bubbling, or a patch that sits proud of the window. Reseals rarely match the factory finish exactly." },
+    { "title": "Patch size or shape fills the window unnaturally", "detail": "Swapped patches are often cut to fit and can look crammed, off-center, or oriented differently than the die-cut window intends." },
+    { "title": "Serial number vs. rarity mismatch", "detail": "Cross-check the print run in the checklist. A ‘1-of-1 patch’ that shows up in multiple listings, or a patch grander than the set warrants, deserves scrutiny." },
+    { "title": "No grading, or a cracked-and-reslabbed history", "detail": "Raw premium patches — or ones removed from a graded holder — carry more swap risk. Reputable third-party authentication of the patch itself is the safest path." }
+  ],
+  "watchSets": ["National Treasures", "Immaculate", "Flawless", "The Cup", "SP Game Used", "SP Authentic", "Ultimate Collection"],
+  "entries": []
 }

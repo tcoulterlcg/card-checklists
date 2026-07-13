@@ -11,10 +11,10 @@ const condensed = { fontFamily: "'Barlow Condensed', 'Arial Narrow', sans-serif"
 const SPORT_COLORS = {
   Baseball: '#60a5fa', Football: '#4ade80', Basketball: '#f97316', Hockey: '#a78bfa', Soccer: '#f43f5e',
   UFC: '#dc2626', Boxing: '#eab308',
-  'Pokémon': '#facc15', Lorcana: '#8b5cf6', 'One Piece': '#ef4444', Disney: '#ec4899', Magic: '#f59e0b'
+  'Pokémon': '#facc15', 'Yu-Gi-Oh!': '#a855f7', Magic: '#f59e0b', Lorcana: '#8b5cf6', 'One Piece': '#ef4444', Disney: '#ec4899'
 }
 // Which categories are trading card games (vs traditional sports cards).
-const TCG_SET = new Set(['Pokémon', 'Lorcana', 'One Piece', 'Disney', 'Magic'])
+const TCG_SET = new Set(['Pokémon', 'Yu-Gi-Oh!', 'Magic', 'Lorcana', 'One Piece', 'Disney'])
 
 const BRAND_COLORS = { Panini: '#e11d48', Topps: '#ef8c1c', 'Upper Deck': '#2563eb', Leaf: '#16a34a', Other: '#888' }
 
@@ -113,6 +113,30 @@ function SortHeader({ label, field, sortField, sortDir, onClick, align, grow }) 
   )
 }
 
+function NewsTicker({ label, color, items, speed }) {
+  if (!items || items.length === 0) return null
+  const row = items.concat(items) // duplicate for seamless loop
+  return (
+    <div style={{ display: 'flex', alignItems: 'stretch', border: '1px solid #222', borderRadius: 10, overflow: 'hidden', background: '#0e0e0e' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 7, padding: '0 14px', background: color, color: '#0a0a0a', flexShrink: 0 }}>
+        <span style={{ width: 7, height: 7, borderRadius: 999, background: '#0a0a0a', opacity: 0.55 }} />
+        <span style={{ ...condensed, fontSize: 13, fontWeight: 800, letterSpacing: '0.12em', textTransform: 'uppercase' }}>{label}</span>
+      </div>
+      <div style={{ overflow: 'hidden', flex: 1, position: 'relative' }}>
+        <div className="hq-track" style={{ animationDuration: (speed || 80) + 's' }}>
+          {row.map((it, i) => (
+            <a key={i} href={it.link || '#'} target="_blank" rel="noreferrer"
+              style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '10px 22px', textDecoration: 'none', borderRight: '1px solid #1c1c1c' }}>
+              <span style={{ width: 4, height: 4, borderRadius: 999, background: color, flexShrink: 0 }} />
+              <span style={{ color: '#c4c4c4', fontSize: 13 }}>{it.title}</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
 function Chip({ children, color, solid }) {
   return (
     <span style={{
@@ -152,6 +176,10 @@ export default function Home() {
 
   // Count-up animation for the hero stat cards.
   const [statN, setStatN] = useState({ sets: 0, cards: 0 })
+  const [news, setNews] = useState({ sports: [], tcg: [] })
+  useEffect(() => {
+    fetch('/api/hobby-news').then(r => r.json()).then(setNews).catch(() => {})
+  }, [])
 
   useEffect(() => {
     fetch('/data/index.json').then(r => r.json()).then(j => setSets(j.sets || [])).catch(() => {})
@@ -159,7 +187,7 @@ export default function Home() {
 
   const totalCards = useMemo(() => sets.reduce((s, x) => s + (x.cardCount || 0), 0), [sets])
   const sports = useMemo(() => {
-    const order = ['Baseball', 'Football', 'Basketball', 'Hockey', 'Soccer', 'UFC', 'Boxing', 'Pokémon', 'Lorcana', 'One Piece', 'Disney', 'Magic']
+    const order = ['Baseball', 'Football', 'Basketball', 'Hockey', 'Soccer', 'UFC', 'Boxing', 'Pokémon', 'Yu-Gi-Oh!', 'Magic', 'Lorcana', 'One Piece', 'Disney']
     const present = [...new Set(sets.map(s => s.sport))]
     present.sort((a, b) => {
       const ia = order.indexOf(a), ib = order.indexOf(b)
@@ -258,7 +286,9 @@ export default function Home() {
 
   const filteredSets = useMemo(() => {
     let list = taggedSets
-    if (sportFilter !== 'All') list = list.filter(s => s.sport === sportFilter)
+    if (sportFilter === 'TCG') list = list.filter(s => TCG_SET.has(s.sport))
+    else if (sportFilter === 'Sports') list = list.filter(s => !TCG_SET.has(s.sport))
+    else if (sportFilter !== 'All') list = list.filter(s => s.sport === sportFilter)
     if (brandFilter !== 'All') list = list.filter(s => s.brand === brandFilter)
     if (productFilter !== 'All') list = list.filter(s => s.product === productFilter)
     const term = query.trim().toLowerCase()
@@ -302,7 +332,7 @@ export default function Home() {
 
   return (
     <main style={{ maxWidth: 1180, margin: '0 auto', padding: '0 24px 90px' }}>
-      <style>{'.hq-setcard:hover{transform:translateY(-4px);border-color:#3a3a3a;box-shadow:0 18px 40px -18px rgba(0,0,0,0.9)}'}</style>
+      <style>{'.hq-setcard:hover{transform:translateY(-4px);border-color:#3a3a3a;box-shadow:0 18px 40px -18px rgba(0,0,0,0.9)}@keyframes hqticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}.hq-track{display:inline-flex;white-space:nowrap;animation:hqticker linear infinite}.hq-track:hover{animation-play-state:paused}'}</style>
       {/* NAV */}
       <nav style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '22px 0', flexWrap: 'wrap', gap: 12 }}>
         <div onClick={goHome} style={{ ...condensed, fontSize: 26, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.02em', cursor: 'pointer', lineHeight: 1 }}>
@@ -367,7 +397,7 @@ export default function Home() {
 
             {/* STAT CARDS */}
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 14, maxWidth: 680, margin: '38px auto 0' }}>
-              {[[statN.sets.toLocaleString(), 'Sets Indexed'], [(statN.cards >= 1000 ? Math.round(statN.cards / 1000) + 'K+' : statN.cards), 'Cards Cataloged'], [String(Math.max(sports.length - 1, 0)), 'Categories']].map(([n, label]) => (
+              {[[statN.sets.toLocaleString(), 'Sets Indexed'], [(statN.cards >= 1000000 ? (statN.cards / 1000000).toFixed(1) + 'M+' : statN.cards >= 1000 ? Math.round(statN.cards / 1000) + 'K+' : String(statN.cards)), 'Cards Cataloged'], [String(Math.max(sports.length - 1, 0)), 'Categories']].map(([n, label]) => (
                 <div key={label} style={{ background: 'linear-gradient(160deg, #171717, #0e0e0e)', border: '1px solid #262626', borderRadius: 14, padding: '22px 14px' }}>
                   <p style={{ ...condensed, margin: 0, fontSize: 40, fontWeight: 800, color: GOLD, lineHeight: 1 }}>{n}</p>
                   <p style={{ margin: '8px 0 0', color: '#888', fontSize: 11, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase' }}>{label}</p>
@@ -376,26 +406,56 @@ export default function Home() {
             </div>
           </section>
 
-          {/* FILTERS */}
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12, margin: '40px 0 14px' }}>
-            <h2 style={{ ...condensed, fontSize: 24, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em', margin: 0 }}>
-              {productFilter !== 'All' ? productFilter + ' Sets' : sportFilter === 'All' ? 'Featured Sets' : sportFilter + ' Sets'}
-              <span style={{ color: '#555', fontSize: 15, marginLeft: 10 }}>{filteredSets.length}</span>
-            </h2>
-            <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-              {sports.map(sp => (
-                <button key={sp} onClick={() => { setSportFilter(sp); setBrandFilter('All'); setProductFilter('All') }}
-                  style={{
-                    padding: '6px 14px', borderRadius: 999, fontSize: 12, fontWeight: 700, cursor: 'pointer',
-                    letterSpacing: '0.06em', textTransform: 'uppercase',
-                    background: sportFilter === sp ? (SPORT_COLORS[sp] || GOLD) : '#141414',
-                    color: sportFilter === sp ? '#111' : '#999',
-                    border: '1px solid ' + (sportFilter === sp ? 'transparent' : '#2a2a2a')
-                  }}>{sp}</button>
-              ))}
+          {/* HOBBY WIRE — Sports + TCG news tickers */}
+          {(news.sports.length > 0 || news.tcg.length > 0) && (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 8, margin: '30px 0 8px' }}>
+              <p style={{ ...condensed, margin: 0, fontSize: 13, fontWeight: 800, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#777' }}>Hobby Wire</p>
+              <NewsTicker label="Sports" color="#60a5fa" items={news.sports} speed={90} />
+              <NewsTicker label="TCG" color="#e879f9" items={news.tcg} speed={80} />
             </div>
-          </div>
-          {/* BRAND CHIPS + PRODUCT DROPDOWN */}
+          )}
+
+          {/* FILTERS */}
+          {(() => {
+            const sportCats = sports.filter(s => s !== 'All' && !TCG_SET.has(s))
+            const tcgCats = sports.filter(s => TCG_SET.has(s))
+            const pick = (v) => { setSportFilter(v); setBrandFilter('All'); setProductFilter('All') }
+            const chip = (label, value, color) => (
+              <button key={label} onClick={() => pick(value)}
+                style={{
+                  padding: '6px 14px', borderRadius: 999, fontSize: 12, fontWeight: 700, cursor: 'pointer',
+                  letterSpacing: '0.06em', textTransform: 'uppercase',
+                  background: sportFilter === value ? (color || GOLD) : '#141414',
+                  color: sportFilter === value ? '#111' : '#999',
+                  border: '1px solid ' + (sportFilter === value ? 'transparent' : '#2a2a2a')
+                }}>{label}</button>
+            )
+            return (
+              <div style={{ margin: '38px 0 18px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', flexWrap: 'wrap', gap: 10, marginBottom: 16 }}>
+                  <h2 style={{ ...condensed, fontSize: 24, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em', margin: 0 }}>
+                    {productFilter !== 'All' ? productFilter + ' Sets' : sportFilter === 'All' ? 'Featured Sets' : sportFilter === 'TCG' ? 'Trading Card Games' : sportFilter === 'Sports' ? 'Sports Cards' : sportFilter + ' Sets'}
+                    <span style={{ color: '#555', fontSize: 15, marginLeft: 10 }}>{filteredSets.length.toLocaleString()}</span>
+                  </h2>
+                  {chip('All', 'All', GOLD)}
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap', marginBottom: 10 }}>
+                  <span style={{ color: '#666', fontSize: 11, fontWeight: 800, letterSpacing: '0.16em', textTransform: 'uppercase', width: 42 }}>Sports</span>
+                  {chip('All Sports', 'Sports', '#cbd5e1')}
+                  {sportCats.map(sp => chip(sp, sp, SPORT_COLORS[sp]))}
+                </div>
+                {tcgCats.length > 0 && (
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap', paddingTop: 10, borderTop: '1px solid #1c1c1c' }}>
+                    <span style={{ color: '#666', fontSize: 11, fontWeight: 800, letterSpacing: '0.16em', textTransform: 'uppercase', width: 42 }}>TCG</span>
+                    {chip('All TCG', 'TCG', '#e879f9')}
+                    {tcgCats.map(sp => chip(sp, sp, SPORT_COLORS[sp]))}
+                  </div>
+                )}
+              </div>
+            )
+          })()}
+          {/* BRAND CHIPS + PRODUCT DROPDOWN (sports only) */}
+          {sportFilter !== 'TCG' && !TCG_SET.has(sportFilter) && (
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12, marginBottom: 22 }}>
             <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center' }}>
               <span style={{ color: '#666', fontSize: 11, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', marginRight: 2 }}>Brand</span>
@@ -417,6 +477,7 @@ export default function Home() {
               </select>
             )}
           </div>
+          )}
         </>
       ) : (activeSet || globalHits) ? (
         <div style={{ display: 'flex', gap: 10, marginBottom: 16 }}>
@@ -624,39 +685,79 @@ export default function Home() {
             </p>
           </div>
 
-          {!patchData ? (
-            <p style={{ color: '#666' }}>Loading…</p>
-          ) : patchData.entries.filter(e => e.player || e.card).length === 0 ? (
-            <div style={{ border: '1px dashed #333', borderRadius: 14, padding: '40px 28px', textAlign: 'center' }}>
-              <p style={{ ...condensed, fontSize: 22, fontWeight: 700, textTransform: 'uppercase', color: '#ccc', margin: 0 }}>Case file is being built</p>
-              <p style={{ color: '#888', fontSize: 14, lineHeight: 1.6, maxWidth: 560, margin: '12px auto 0' }}>
-                Documented swaps are being catalogued here with before/after photos. Follow{' '}
-                <a href="https://www.instagram.com/fake_hockey_patches/" target="_blank" rel="noreferrer" style={{ color: GOLD }}>@fake_hockey_patches</a>{' '}
-                for the live feed in the meantime.
-              </p>
-            </div>
-          ) : (
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: 16 }}>
-              {patchData.entries.filter(e => e.player || e.card).map((e) => (
-                <div key={e.id} style={{ background: 'linear-gradient(155deg, #161616, #0d0d0d)', border: '1px solid #262626', borderRadius: 14, overflow: 'hidden' }}>
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 2, background: '#000' }}>
-                    {[['Original', e.originalImg], ['Swapped', e.swappedImg]].map(([lbl, img]) => (
-                      <div key={lbl} style={{ position: 'relative', aspectRatio: '1', background: '#0a0a0a', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                        {img ? <img src={img} alt={lbl} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                          : <span style={{ color: '#444', fontSize: 12 }}>{lbl} photo</span>}
-                        <span style={{ position: 'absolute', top: 8, left: 8, background: lbl === 'Swapped' ? '#e11d48' : '#333', color: '#fff', fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', padding: '3px 8px', borderRadius: 4 }}>{lbl}</span>
-                      </div>
+          {!patchData ? <p style={{ color: '#666' }}>Loading…</p> : (
+            <>
+              {patchData.intro && (
+                <p style={{ color: '#c9c9c9', fontSize: 15, lineHeight: 1.7, maxWidth: 820, margin: '0 0 26px' }}>{patchData.intro}</p>
+              )}
+
+              {/* LIVE COMMUNITY FEED CTA */}
+              <a href={patchData.source.url} target="_blank" rel="noreferrer"
+                style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16, flexWrap: 'wrap', textDecoration: 'none',
+                  background: 'linear-gradient(120deg, #2a1a2e, #14101a)', border: '1px solid #4a2f52', borderRadius: 16, padding: '20px 24px', marginBottom: 30 }}>
+                <div>
+                  <p style={{ ...condensed, margin: 0, fontSize: 13, fontWeight: 800, letterSpacing: '0.16em', textTransform: 'uppercase', color: '#e879f9' }}>● Live community feed</p>
+                  <p style={{ ...condensed, margin: '6px 0 0', fontSize: 26, fontWeight: 800, color: '#fff' }}>{patchData.source.name}</p>
+                  <p style={{ color: '#b9a9c0', fontSize: 13, margin: '4px 0 0', maxWidth: 560 }}>{patchData.source.note}</p>
+                </div>
+                <span style={{ ...condensed, background: '#e879f9', color: '#1a0f1e', fontWeight: 800, fontSize: 15, letterSpacing: '0.06em', textTransform: 'uppercase', padding: '12px 22px', borderRadius: 10, whiteSpace: 'nowrap' }}>Open on Instagram →</span>
+              </a>
+
+              {/* HOW TO SPOT A SWAP */}
+              <h2 style={{ ...condensed, fontSize: 26, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em', margin: '0 0 16px' }}>How to spot a swap</h2>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 14, marginBottom: 34 }}>
+                {(patchData.redFlags || []).map((f, i) => (
+                  <div key={i} style={{ background: 'linear-gradient(155deg, #161616, #0d0d0d)', border: '1px solid #262626', borderRadius: 14, padding: '18px 20px' }}>
+                    <div style={{ display: 'flex', alignItems: 'baseline', gap: 10, marginBottom: 8 }}>
+                      <span style={{ ...condensed, color: '#e11d48', fontWeight: 800, fontSize: 20 }}>{String(i + 1).padStart(2, '0')}</span>
+                      <p style={{ ...condensed, margin: 0, fontSize: 17, fontWeight: 800, textTransform: 'uppercase', lineHeight: 1.15 }}>{f.title}</p>
+                    </div>
+                    <p style={{ color: '#a9a9a9', fontSize: 13.5, lineHeight: 1.55, margin: 0 }}>{f.detail}</p>
+                  </div>
+                ))}
+              </div>
+
+              {/* HIGHEST-RISK PRODUCTS → link into RPA tracker patch view */}
+              {(patchData.watchSets || []).length > 0 && (
+                <div style={{ background: 'linear-gradient(140deg, #17140c, #0e0e0e)', border: '1px solid ' + GOLD + '2e', borderRadius: 16, padding: '22px 24px', marginBottom: 24 }}>
+                  <h2 style={{ ...condensed, fontSize: 20, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.06em', color: GOLD, margin: '0 0 6px' }}>Products most targeted</h2>
+                  <p style={{ color: '#999', fontSize: 13.5, lineHeight: 1.6, margin: '0 0 14px', maxWidth: 720 }}>High-end patch and RPA products carry the most swap risk. Cross-reference any patch card against its checklist print run — browse the patch and RPA cards in the tracker.</p>
+                  <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 4 }}>
+                    {patchData.watchSets.map(w => (
+                      <span key={w} style={{ background: '#1c1810', border: '1px solid ' + GOLD + '33', color: '#e8d5a8', fontSize: 12.5, fontWeight: 600, padding: '6px 12px', borderRadius: 999 }}>{w}</span>
                     ))}
                   </div>
-                  <div style={{ padding: '16px 18px' }}>
-                    <p style={{ ...condensed, margin: 0, fontSize: 19, fontWeight: 800, textTransform: 'uppercase' }}>{e.player || e.card}</p>
-                    <p style={{ color: '#888', fontSize: 12, margin: '4px 0 0' }}>{[e.year, e.set, e.card].filter(Boolean).join(' · ')}</p>
-                    {e.summary && <p style={{ color: '#b9b9b9', fontSize: 13, lineHeight: 1.5, margin: '10px 0 0' }}>{e.summary}</p>}
-                    {e.sourceUrl && <a href={e.sourceUrl} target="_blank" rel="noreferrer" style={{ color: GOLD, fontSize: 12, fontWeight: 700, display: 'inline-block', marginTop: 10 }}>View source →</a>}
-                  </div>
+                  <button onClick={() => { setRpaType('PA'); openRpa() }}
+                    style={{ ...condensed, marginTop: 14, background: GOLD, color: '#111', border: 'none', borderRadius: 10, padding: '10px 20px', fontWeight: 800, fontSize: 14, letterSpacing: '0.06em', textTransform: 'uppercase', cursor: 'pointer' }}>
+                    Open the Patch-Auto tracker →
+                  </button>
                 </div>
-              ))}
-            </div>
+              )}
+
+              {/* Documented case gallery (populated as sourced-with-rights images are added) */}
+              {patchData.entries && patchData.entries.filter(e => e.player || e.card).length > 0 && (
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: 16, marginTop: 24 }}>
+                  {patchData.entries.filter(e => e.player || e.card).map((e) => (
+                    <div key={e.id} style={{ background: 'linear-gradient(155deg, #161616, #0d0d0d)', border: '1px solid #262626', borderRadius: 14, overflow: 'hidden' }}>
+                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 2, background: '#000' }}>
+                        {[['Original', e.originalImg], ['Swapped', e.swappedImg]].map(([lbl, img]) => (
+                          <div key={lbl} style={{ position: 'relative', aspectRatio: '1', background: '#0a0a0a', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                            {img ? <img src={img} alt={lbl} style={{ width: '100%', height: '100%', objectFit: 'cover' }} /> : <span style={{ color: '#444', fontSize: 12 }}>{lbl} photo</span>}
+                            <span style={{ position: 'absolute', top: 8, left: 8, background: lbl === 'Swapped' ? '#e11d48' : '#333', color: '#fff', fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', padding: '3px 8px', borderRadius: 4 }}>{lbl}</span>
+                          </div>
+                        ))}
+                      </div>
+                      <div style={{ padding: '16px 18px' }}>
+                        <p style={{ ...condensed, margin: 0, fontSize: 19, fontWeight: 800, textTransform: 'uppercase' }}>{e.player || e.card}</p>
+                        <p style={{ color: '#888', fontSize: 12, margin: '4px 0 0' }}>{[e.year, e.set, e.card].filter(Boolean).join(' · ')}</p>
+                        {e.summary && <p style={{ color: '#b9b9b9', fontSize: 13, lineHeight: 1.5, margin: '10px 0 0' }}>{e.summary}</p>}
+                        {e.sourceUrl && <a href={e.sourceUrl} target="_blank" rel="noreferrer" style={{ color: GOLD, fontSize: 12, fontWeight: 700, display: 'inline-block', marginTop: 10 }}>View source →</a>}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </>
           )}
         </section>
       ) : (
