@@ -155,6 +155,10 @@ export default function Home() {
 
   const totalCards = useMemo(() => sets.reduce((s, x) => s + (x.cardCount || 0), 0), [sets])
   const sports = useMemo(() => ['All', ...[...new Set(sets.map(s => s.sport))].sort()], [sets])
+  const yearRange = useMemo(() => {
+    const ys = sets.map(s => s.year).filter(Boolean)
+    return ys.length ? Math.min(...ys) + '–' + Math.max(...ys) : ''
+  }, [sets])
 
   useEffect(() => {
     if (sets.length === 0) return
@@ -316,7 +320,7 @@ export default function Home() {
               letterSpacing: '0.22em', textTransform: 'uppercase', marginBottom: 26
             }}>
               <span style={{ width: 6, height: 6, borderRadius: 999, background: GOLD, display: 'inline-block' }} />
-              The Definitive Card Set Database · 2012–2017
+              The Definitive Card Set Database{yearRange ? ' · ' + yearRange : ''}
             </span>
             <h1 style={{ ...condensed, fontSize: 'clamp(48px, 8vw, 104px)', fontWeight: 800, textTransform: 'uppercase', lineHeight: 0.92, letterSpacing: '-0.01em', margin: 0 }}>
               Every Card.<br /><span style={{ color: GOLD }}>Every Checklist.</span>
