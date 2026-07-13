@@ -24,9 +24,16 @@ for (const f of readdirSync(dataDir)) {
   let s
   try { s = JSON.parse(readFileSync(new URL(f, dataDir), 'utf8')) } catch (e) { continue }
   const sid = intern(s.slug, slugs, slugId)
+  // Parallel-heavy sources (Break Ninja) repeat the same card across hundreds
+  // of parallel sections; collapse to one search row per (set, number, player)
+  // so the client index stays loadable. The set page still shows every parallel.
+  const seen = new Set()
   for (const sec of (s.sections || [])) {
     const secIdx = intern(sec.title, sections, secId)
     for (const c of sec.cards) {
+      const key = c.n + '' + c.p
+      if (seen.has(key)) continue
+      seen.add(key)
       rows.push([c.p, sid, c.n, secIdx, intern(c.t || '', teams, teamId), c.x || ''])
     }
   }

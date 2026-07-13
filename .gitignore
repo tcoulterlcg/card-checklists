@@ -5,3 +5,4 @@ node_modules/
 # Generated at build time (prebuild) — derived from public/data set files
 public/data/search-index.json
 public/data/rpa-index.json
+pipeline.log*
