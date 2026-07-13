@@ -158,6 +158,7 @@ export default function Home() {
   const [sportFilter, setSportFilter] = useState('All')
   const [brandFilter, setBrandFilter] = useState('All')
   const [productFilter, setProductFilter] = useState('All')
+  const [sortBy, setSortBy] = useState('year-desc')
   const [view, setView] = useState('browse') // browse | patchswaps | rpa
   const [patchData, setPatchData] = useState(null)
   const [rpaData, setRpaData] = useState(null)
@@ -387,7 +388,7 @@ export default function Home() {
               </button>
             </div>
             <p style={{ color: '#666', fontSize: 13, margin: '14px 0 0' }}>
-              Try {['Kris Bryant', 'Connor McDavid', 'Todd Gurley', 'Karl-Anthony Towns'].map((n, i) => (
+              Try {['Michael Jordan', 'Tom Brady', 'Mickey Mantle', 'Nikita Kucherov', 'Charizard'].map((n, i) => (
                 <span key={n}>
                   {i > 0 ? ' · ' : ' '}
                   <button onClick={() => searchFor(n)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: GOLD, fontSize: 13, padding: 0 }}>{n}</button>
@@ -437,7 +438,20 @@ export default function Home() {
                     {productFilter !== 'All' ? productFilter + ' Sets' : sportFilter === 'All' ? 'Featured Sets' : sportFilter === 'TCG' ? 'Trading Card Games' : sportFilter === 'Sports' ? 'Sports Cards' : sportFilter + ' Sets'}
                     <span style={{ color: '#555', fontSize: 15, marginLeft: 10 }}>{filteredSets.length.toLocaleString()}</span>
                   </h2>
-                  {chip('All', 'All', GOLD)}
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                    <span style={{ color: '#666', fontSize: 11, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase' }}>Sort</span>
+                    <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}
+                      style={{ background: '#141414', border: '1px solid #2a2a2a', borderRadius: 8, color: '#ddd', fontSize: 13, padding: '8px 12px', cursor: 'pointer' }}>
+                      <option value="year-desc">Newest first</option>
+                      <option value="year-asc">Oldest first</option>
+                      <option value="name-asc">Name (A–Z)</option>
+                      <option value="name-desc">Name (Z–A)</option>
+                      <option value="cards-desc">Most cards</option>
+                      <option value="cards-asc">Fewest cards</option>
+                      <option value="brand">Brand</option>
+                    </select>
+                    {chip('All', 'All', GOLD)}
+                  </div>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap', marginBottom: 10 }}>
                   <span style={{ color: '#666', fontSize: 11, fontWeight: 800, letterSpacing: '0.16em', textTransform: 'uppercase', width: 42 }}>Sports</span>
@@ -763,7 +777,16 @@ export default function Home() {
       ) : (
         <section>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: 14 }}>
-            {filteredSets.sort((a, b) => (b.year - a.year) || a.name.localeCompare(b.name)).map((s) => {
+            {filteredSets.slice().sort((a, b) => {
+              const nm = () => a.name.localeCompare(b.name)
+              if (sortBy === 'year-asc') return (a.year - b.year) || nm()
+              if (sortBy === 'name-asc') return nm()
+              if (sortBy === 'name-desc') return -nm()
+              if (sortBy === 'cards-desc') return (b.cardCount - a.cardCount) || nm()
+              if (sortBy === 'cards-asc') return (a.cardCount - b.cardCount) || nm()
+              if (sortBy === 'brand') return (a.brand || 'zzz').localeCompare(b.brand || 'zzz') || (b.year - a.year) || nm()
+              return (b.year - a.year) || nm() // year-desc default
+            }).map((s) => {
               const c = SPORT_COLORS[s.sport] || GOLD
               return (
                 <button key={s.slug} onClick={() => openSet(s)} className="hq-setcard"

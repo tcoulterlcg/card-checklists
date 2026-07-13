@@ -77,10 +77,16 @@ function parseLine(line) {
 }
 
 function extractSections(html) {
-  const start = html.indexOf('set-checklist')
-  if (start === -1) return []
+  // Modern pages wrap the checklist in a `set-checklist` div; older (2000s)
+  // pages just have a "Checklist" <h2> followed by ezcol/tablechecklist cards.
+  let start = html.indexOf('set-checklist')
+  if (start === -1) {
+    const m = html.search(/<h2[^>]*>\s*(?:\d{4}[^<]*)?Checklist\s*<\/h2>/i)
+    if (m === -1) return []
+    start = m
+  }
   let block = html.slice(start)
-  const end = block.search(/post_anchor_divs clearfix (?!set-checklist)/)
+  const end = block.search(/post_anchor_divs clearfix (?!set-checklist)|>\s*(?:Product Review|User Reviews|Related Products)\b|id=["']comments["']/i)
   if (end > 0) block = block.slice(0, end)
 
   const sections = []
@@ -115,15 +121,20 @@ const yearNum = parseInt(yearArg.slice(0, 4)) + (yearArg.includes('-') ? 1 : 0)
 const hubRes = await fetch(BASE + hubPath, { headers: HDRS })
 if (!hubRes.ok) { console.error('hub fetch failed:', hubRes.status, hubPath); process.exit(1) }
 const hubHtml = await hubRes.text()
-const linkRe = new RegExp('https?://www\\.cardboardconnection\\.com/(' + slugYear.replace('-', '\\-') + '-[a-z0-9-]+)["\']', 'g')
-const slugs = [...new Set([...hubHtml.matchAll(linkRe)].map(m => m[1]))]
+// Broad capture: any set slug on the hub that starts with a year and contains
+// the sport word — catches season ("2011-12-...") AND single-year ("2011-...")
+// formats and every product/brand, not just the requested year prefix.
+const linkRe = new RegExp('cardboardconnection\\.com/(\\d{4}(?:-\\d\\d)?-[a-z0-9-]*' + sportArg + '[a-z0-9-]*)["\\\']', 'g')
+const slugs = [...new Set([...hubHtml.matchAll(linkRe)].map(m => m[1]))].filter(s => !/^sports-cards-sets/.test(s) && !/buying-guide$/.test(s))
 console.log(sportName, yearArg, '-> hub lists', slugs.length, 'sets')
 
 const dataDir = new URL('../public/data/', import.meta.url)
 if (!existsSync(dataDir)) mkdirSync(dataDir, { recursive: true })
 
-let ok = 0, empty = 0
+const existing = new Set(readdirSync(dataDir))
+let ok = 0, empty = 0, skipped = 0
 for (const slug of slugs) {
+  if (existing.has(slug + '.json')) { skipped++; continue }
   try {
     const res = await fetch(BASE + '/' + slug, { headers: HDRS })
     if (!res.ok) { empty++; continue }
@@ -132,13 +143,16 @@ for (const slug of slugs) {
     if (sections.length === 0) { empty++; continue }
     const h1 = html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/i)
     const name = h1 ? stripTags(h1[1]).replace(/checklist.*$/i, '').replace(/, set.*$/i, '').trim() : slug
+    // Year from the slug itself (season "2011-12" -> 2012, single-year "2011" -> 2011).
+    const ym = slug.match(/^(\d{4})(?:-(\d\d))?/)
+    const y = ym ? (parseInt(ym[1]) + (ym[2] ? 1 : 0)) : yearNum
     writeFileSync(new URL(slug + '.json', dataDir), JSON.stringify({
-      slug, name, year: yearNum, sport: sportName, source: 'cardboardconnection.com', sections
+      slug, name, year: y, sport: sportName, source: 'cardboardconnection.com', sections
     }))
     ok++
     process.stdout.write('.')
   } catch (e) { empty++ }
-  await sleep(250)
+  await sleep(220)
 }
 console.log('\nscraped', ok, 'sets (', empty, 'without parseable checklists )')
 
