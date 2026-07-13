@@ -295,6 +295,7 @@ export default function Home() {
               <Chip color={SPORT_COLORS[activeSet.sport]} solid>{activeSet.sport}</Chip>
               <Chip>{activeSet.year}</Chip>
               <Chip>{(setData.sections || []).length} sections</Chip>
+              {(setData.sections || []).some(s => s.odds) && <Chip>Pack odds</Chip>}
             </div>
             <h1 style={{ ...condensed, fontSize: 34, fontWeight: 800, textTransform: 'uppercase', margin: 0, lineHeight: 1.05 }}>{setData.name}</h1>
             <p style={{ color: '#8a8a8a', fontSize: 13, margin: '10px 0 0' }}>
@@ -302,6 +303,25 @@ export default function Home() {
               {rcCount(setData) > 0 ? ' · ' + rcCount(setData) + ' rookies flagged' : ''} · source: {setData.source}
             </p>
           </div>
+
+          {setData.boxBreak && setData.boxBreak.length > 0 && (
+            <div style={{ background: 'linear-gradient(140deg, #17140c, #0e0e0e)', border: '1px solid ' + GOLD + '33', borderRadius: 14, padding: '18px 22px', marginBottom: 20 }}>
+              <p style={{ ...condensed, fontSize: 15, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.1em', color: GOLD, margin: '0 0 12px' }}>
+                📦 Box Break — what a hobby box yields
+              </p>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '6px 20px' }}>
+                {setData.boxBreak.map((b, i) => {
+                  const m = String(b).match(/^(\d+(?:\.\d+)?)\s+(.*)$/)
+                  return (
+                    <div key={i} style={{ display: 'flex', gap: 10, fontSize: 13, alignItems: 'baseline' }}>
+                      <span style={{ ...condensed, color: GOLD, fontWeight: 800, fontSize: 16, minWidth: 28 }}>{m ? m[1] + '×' : ''}</span>
+                      <span style={{ color: '#cfcfcf' }}>{m ? m[2] : b}</span>
+                    </div>
+                  )
+                })}
+              </div>
+            </div>
+          )}
 
           <div style={{ display: 'flex', gap: 8, marginBottom: 18, flexWrap: 'wrap' }}>
             {['All', ...(setData.sections || []).map(s => s.title)].map(t => (
@@ -320,9 +340,15 @@ export default function Home() {
             const sorted = sec.cards.slice().sort(makeComparator(sortField, sortDir))
             return (
               <div key={sec.title} style={{ marginBottom: 26 }}>
-                <h2 style={{ ...condensed, fontSize: 21, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em', margin: '0 0 10px' }}>
+                <h2 style={{ ...condensed, fontSize: 21, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em', margin: '0 0 6px' }}>
                   {sec.title} <span style={{ color: '#666', fontSize: 15 }}>· {sec.cards.length}</span>
                 </h2>
+                {sec.odds && (
+                  <div style={{ display: 'flex', gap: 8, alignItems: 'flex-start', margin: '0 0 10px', padding: '8px 12px', background: '#141109', border: '1px solid ' + GOLD + '2e', borderRadius: 9 }}>
+                    <span style={{ ...condensed, fontSize: 11, fontWeight: 800, letterSpacing: '0.1em', color: GOLD, textTransform: 'uppercase', whiteSpace: 'nowrap', paddingTop: 1 }}>Pack Odds</span>
+                    <span style={{ color: '#b9b9b9', fontSize: 12.5, lineHeight: 1.5 }}>{sec.odds}</span>
+                  </div>
+                )}
                 <div style={{ border: '1px solid #222', borderRadius: 12, overflow: 'hidden' }}>
                   <div style={{ display: 'flex', gap: 14, padding: '9px 16px', background: '#181818', borderBottom: '1px solid #262626', alignItems: 'center' }}>
                     <div style={{ flex: '0 0 68px' }}><SortHeader label="Card #" field="n" sortField={sortField} sortDir={sortDir} onClick={toggleSort} /></div>
