@@ -11,17 +11,24 @@
 // Writes one JSON per set and rebuilds index.json (idempotent per set slug).
 import { writeFileSync, readFileSync, existsSync, mkdirSync, readdirSync } from 'node:fs'
 
+// Each entry returns [hubPath, sportName, slugYear]. slugYear is how set slugs
+// spell the year (may differ from the hub's year token — notably hockey, whose
+// hub uses the full "2015-2016" season but whose set slugs use "2015-16").
+function fullSeason(y) { // "2015-16" -> "2015-2016"
+  const m = y.match(/^(\d{4})-(\d{2})$/)
+  return m ? m[1] + '-' + m[1].slice(0, 2) + m[2] : y
+}
 const HUBS = {
-  baseball: (y) => ['/sports-cards-sets/mlb-baseball-cards/' + y + '-baseball-cards', 'Baseball'],
-  football: (y) => ['/sports-cards-sets/nfl-football-cards/' + y + '-football-cards', 'Football'],
-  basketball: (y) => ['/sports-cards-sets/nba-basketball-cards/' + y + '-basketball-cards', 'Basketball'],
-  hockey: (y) => ['/sports-cards-sets/nhl-hockey-cards/' + y + '-hockey-cards', 'Hockey'],
-  soccer: (y) => ['/sports-cards-sets/soccer-cards/' + y + '-soccer-cards', 'Soccer'],
+  baseball: (y) => ['/sports-cards-sets/mlb-baseball-cards/' + y + '-baseball-cards', 'Baseball', y],
+  football: (y) => ['/sports-cards-sets/nfl-football-cards/' + y + '-football-cards', 'Football', y],
+  basketball: (y) => ['/sports-cards-sets/nba-basketball-cards/' + y + '-basketball-cards', 'Basketball', y],
+  hockey: (y) => ['/sports-cards-sets/nhl-hockey-cards/' + fullSeason(y) + '-hockey-cards', 'Hockey', y],
+  soccer: (y) => ['/sports-cards-sets/soccer-cards/' + y + '-soccer-cards', 'Soccer', y],
 }
 
 const [, , sportArg, yearArg] = process.argv
 if (!HUBS[sportArg] || !yearArg) {
-  console.error('Usage: node scripts/scrape-cc.mjs <baseball|football|basketball|hockey|soccer> <year|2014-15>')
+  console.error('Usage: node scripts/scrape-cc.mjs <baseball|football|basketball|hockey|soccer> <year|2015-16>')
   process.exit(1)
 }
 
@@ -40,11 +47,15 @@ function decode(s) {
     .replace(/&#x[aA]0;|&#160;/g, ' ')
     .replace(/&#(\d+);/g, (m, n) => String.fromCharCode(parseInt(n)))
     .replace(/&#x([0-9a-fA-F]+);/g, (m, n) => String.fromCharCode(parseInt(n, 16)))
-    .replace(/\s+/g, ' ').trim()
+    // Collapse horizontal whitespace only — newlines are the card-line
+    // separators that stripTags relies on, so they must survive.
+    .replace(/[ \t\f\v]+/g, ' ')
 }
 
 function stripTags(html) {
-  return decode(html.replace(/<br\s*\/?>/gi, '\n').replace(/<\/(p|div|li|tr)>/gi, '\n').replace(/<[^>]+>/g, ''))
+  // Break on table cells too — hockey (and some other) checklists lay cards
+  // out in <td>/<th> cells rather than <p>/<div> lines.
+  return decode(html.replace(/<br\s*\/?>/gi, '\n').replace(/<\/(p|div|li|tr|td|th)>/gi, '\n').replace(/<[^>]+>/g, ''))
 }
 
 const LINE_RE = /^#?([A-Za-z]{0,6}-?\d+[A-Za-z]{0,2})\s+(.{2,90})$/
@@ -98,13 +109,13 @@ function extractSections(html) {
 
 const sleep = (ms) => new Promise(r => setTimeout(r, ms))
 
-const [hubPath, sportName] = HUBS[sportArg](yearArg)
+const [hubPath, sportName, slugYear] = HUBS[sportArg](yearArg)
 const yearNum = parseInt(yearArg.slice(0, 4)) + (yearArg.includes('-') ? 1 : 0)
 
 const hubRes = await fetch(BASE + hubPath, { headers: HDRS })
 if (!hubRes.ok) { console.error('hub fetch failed:', hubRes.status, hubPath); process.exit(1) }
 const hubHtml = await hubRes.text()
-const linkRe = new RegExp('https?://www\\.cardboardconnection\\.com/(' + yearArg.replace('-', '\\-') + '-[a-z0-9-]+)["\']', 'g')
+const linkRe = new RegExp('https?://www\\.cardboardconnection\\.com/(' + slugYear.replace('-', '\\-') + '-[a-z0-9-]+)["\']', 'g')
 const slugs = [...new Set([...hubHtml.matchAll(linkRe)].map(m => m[1]))]
 console.log(sportName, yearArg, '-> hub lists', slugs.length, 'sets')
 

@@ -12,6 +12,44 @@ const SPORT_COLORS = {
   Baseball: '#60a5fa', Football: '#4ade80', Basketball: '#f97316', Hockey: '#a78bfa', Soccer: '#f43f5e'
 }
 
+// Natural sort for card numbers: compare the embedded numeric part first
+// (so #2 < #10 < #100), then fall back to the full string for prefixes.
+function cardNumKey(n) {
+  const m = String(n || '').match(/\d+/)
+  return m ? parseInt(m[0]) : Number.MAX_SAFE_INTEGER
+}
+function makeComparator(field, dir) {
+  const s = dir === 'asc' ? 1 : -1
+  return function (a, b) {
+    if (field === 'n') {
+      const ka = cardNumKey(a.n), kb = cardNumKey(b.n)
+      if (ka !== kb) return (ka - kb) * s
+      return String(a.n).localeCompare(String(b.n)) * s
+    }
+    const va = String(a[field] || '').toLowerCase()
+    const vb = String(b[field] || '').toLowerCase()
+    if (va === vb) return 0
+    if (!va) return 1
+    if (!vb) return -1
+    return va.localeCompare(vb) * s
+  }
+}
+
+function SortHeader({ label, field, sortField, sortDir, onClick, align, grow }) {
+  const active = sortField === field
+  return (
+    <button onClick={() => onClick(field)}
+      style={{
+        flex: grow ? '1 1 auto' : '0 0 auto', textAlign: align || 'left', background: 'none', border: 'none',
+        cursor: 'pointer', padding: 0, color: active ? '#d4a843' : '#888', fontSize: 11, fontWeight: 700,
+        letterSpacing: '0.1em', textTransform: 'uppercase', display: 'flex', alignItems: 'center',
+        gap: 4, justifyContent: align === 'right' ? 'flex-end' : 'flex-start', minWidth: grow ? 0 : undefined
+      }}>
+      {label}<span style={{ opacity: active ? 1 : 0.35, fontSize: 9 }}>{active ? (sortDir === 'asc' ? '▲' : '▼') : '↕'}</span>
+    </button>
+  )
+}
+
 function Chip({ children, color, solid }) {
   return (
     <span style={{
@@ -34,6 +72,13 @@ export default function Home() {
   const [globalHits, setGlobalHits] = useState(null)
   const [searching, setSearching] = useState(false)
   const [searchIndex, setSearchIndex] = useState(null)
+  const [sortField, setSortField] = useState('n')
+  const [sortDir, setSortDir] = useState('asc')
+
+  const toggleSort = (field) => {
+    if (sortField === field) setSortDir(d => (d === 'asc' ? 'desc' : 'asc'))
+    else { setSortField(field); setSortDir(field === 'n' ? 'asc' : 'asc') }
+  }
 
   useEffect(() => {
     fetch('/data/index.json').then(r => r.json()).then(j => setSets(j.sets || [])).catch(() => {})
@@ -196,26 +241,36 @@ export default function Home() {
             ))}
           </div>
 
-          {visibleSections.map(sec => (
-            <div key={sec.title} style={{ marginBottom: 26 }}>
-              <h2 style={{ ...condensed, fontSize: 21, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em', margin: '0 0 10px' }}>
-                {sec.title} <span style={{ color: '#666', fontSize: 15 }}>· {sec.cards.length}</span>
-              </h2>
-              <div style={{ border: '1px solid #222', borderRadius: 12, overflow: 'hidden' }}>
-                {sec.cards.slice(0, 500).map((c, i) => (
-                  <div key={i} style={{
-                    display: 'flex', gap: 14, padding: '8px 16px', fontSize: 14,
-                    background: i % 2 === 0 ? '#0f0f0f' : '#141414', alignItems: 'baseline'
-                  }}>
-                    <span style={{ color: GOLD, fontWeight: 700, minWidth: 56, fontVariantNumeric: 'tabular-nums' }}>#{c.n}</span>
-                    <span style={{ fontWeight: 600 }}>{c.p}</span>
-                    {c.t && <span style={{ color: '#777', fontSize: 13 }}>{c.t}</span>}
-                    {c.x && <span style={{ marginLeft: 'auto' }}><Chip color={c.x === 'RC' ? '#4ade80' : '#888'}>{c.x}</Chip></span>}
+          <p style={{ color: '#666', fontSize: 12, margin: '0 0 12px' }}>Click a column header to sort.</p>
+          {visibleSections.map(sec => {
+            const sorted = sec.cards.slice().sort(makeComparator(sortField, sortDir))
+            return (
+              <div key={sec.title} style={{ marginBottom: 26 }}>
+                <h2 style={{ ...condensed, fontSize: 21, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em', margin: '0 0 10px' }}>
+                  {sec.title} <span style={{ color: '#666', fontSize: 15 }}>· {sec.cards.length}</span>
+                </h2>
+                <div style={{ border: '1px solid #222', borderRadius: 12, overflow: 'hidden' }}>
+                  <div style={{ display: 'flex', gap: 14, padding: '9px 16px', background: '#181818', borderBottom: '1px solid #262626', alignItems: 'center' }}>
+                    <div style={{ flex: '0 0 68px' }}><SortHeader label="Card #" field="n" sortField={sortField} sortDir={sortDir} onClick={toggleSort} /></div>
+                    <div style={{ flex: '1 1 auto', minWidth: 0 }}><SortHeader label="Player" field="p" sortField={sortField} sortDir={sortDir} onClick={toggleSort} grow /></div>
+                    <div style={{ flex: '1 1 auto', minWidth: 0 }}><SortHeader label="Team" field="t" sortField={sortField} sortDir={sortDir} onClick={toggleSort} grow /></div>
+                    <div style={{ flex: '0 0 70px' }}><SortHeader label="Flag" field="x" sortField={sortField} sortDir={sortDir} onClick={toggleSort} align="right" /></div>
                   </div>
-                ))}
+                  {sorted.slice(0, 1000).map((c, i) => (
+                    <div key={i} style={{
+                      display: 'flex', gap: 14, padding: '8px 16px', fontSize: 14,
+                      background: i % 2 === 0 ? '#0f0f0f' : '#141414', alignItems: 'baseline'
+                    }}>
+                      <span style={{ flex: '0 0 68px', color: GOLD, fontWeight: 700, fontVariantNumeric: 'tabular-nums' }}>#{c.n}</span>
+                      <span style={{ flex: '1 1 auto', minWidth: 0, fontWeight: 600 }}>{c.p}</span>
+                      <span style={{ flex: '1 1 auto', minWidth: 0, color: '#888', fontSize: 13 }}>{c.t || ''}</span>
+                      <span style={{ flex: '0 0 70px', textAlign: 'right' }}>{c.x ? <Chip color={c.x === 'RC' ? '#4ade80' : '#888'}>{c.x}</Chip> : null}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
-          ))}
+            )
+          })}
           {visibleSections.length === 0 && <p style={{ color: '#666' }}>No cards match.</p>}
         </section>
       ) : globalHits ? (
