@@ -1,0 +1,22 @@
+{
+  "source": {
+    "name": "@fake_hockey_patches",
+    "url": "https://www.instagram.com/fake_hockey_patches/",
+    "note": "Community-documented patch swaps. Images are hosted by their original posters; this page links out and credits the source rather than rehosting copyrighted photos."
+  },
+  "entries": [
+    {
+      "id": "example-1",
+      "player": "",
+      "card": "",
+      "set": "",
+      "year": null,
+      "sport": "Hockey",
+      "status": "documented",
+      "summary": "Seed entry — add documented patch-swap cases here (player, card, set, before/after image URLs, and a source link).",
+      "originalImg": null,
+      "swappedImg": null,
+      "sourceUrl": "https://www.instagram.com/fake_hockey_patches/"
+    }
+  ]
+}

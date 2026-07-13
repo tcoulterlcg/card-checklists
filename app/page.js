@@ -12,6 +12,62 @@ const SPORT_COLORS = {
   Baseball: '#60a5fa', Football: '#4ade80', Basketball: '#f97316', Hockey: '#a78bfa', Soccer: '#f43f5e'
 }
 
+const BRAND_COLORS = { Panini: '#e11d48', Topps: '#ef8c1c', 'Upper Deck': '#2563eb', Leaf: '#16a34a', Other: '#888' }
+
+// Ordered product-line matchers → [brand, product]. First match wins, so more
+// specific lines (Bowman Chrome) precede general ones (Bowman).
+const PRODUCT_MAP = [
+  [/topps chrome/, 'Topps', 'Topps Chrome'], [/bowman chrome/, 'Topps', 'Bowman Chrome'],
+  [/bowman'?s best/, 'Topps', "Bowman's Best"], [/bowman sterling/, 'Topps', 'Bowman Sterling'],
+  [/bowman platinum/, 'Topps', 'Bowman Platinum'], [/bowman draft/, 'Topps', 'Bowman Draft'],
+  [/bowman/, 'Topps', 'Bowman'], [/topps heritage/, 'Topps', 'Heritage'],
+  [/stadium club/, 'Topps', 'Stadium Club'], [/gypsy queen/, 'Topps', 'Gypsy Queen'],
+  [/allen ?(&|and) ?ginter/, 'Topps', 'Allen & Ginter'], [/topps finest|(?<![a-z])finest/, 'Topps', 'Finest'],
+  [/topps fire/, 'Topps', 'Topps Fire'], [/gold label/, 'Topps', 'Gold Label'],
+  [/topps archives/, 'Topps', 'Archives'], [/museum collection/, 'Topps', 'Museum Collection'],
+  [/tier one/, 'Topps', 'Tier One'], [/triple threads/, 'Topps', 'Triple Threads'],
+  [/topps tribute/, 'Topps', 'Tribute'], [/topps inception/, 'Topps', 'Inception'],
+  [/topps dynasty/, 'Topps', 'Dynasty'], [/definitive collection/, 'Topps', 'Definitive'],
+  [/big league/, 'Topps', 'Big League'], [/topps platinum/, 'Topps', 'Topps Platinum'],
+  [/topps/, 'Topps', 'Topps'],
+  [/panini prizm|(?<![a-z])prizm/, 'Panini', 'Prizm'], [/donruss optic|(?<![a-z])optic/, 'Panini', 'Donruss Optic'],
+  [/(?<![a-z])donruss/, 'Panini', 'Donruss'], [/(?<![a-z])select/, 'Panini', 'Select'],
+  [/contenders/, 'Panini', 'Contenders'], [/national treasures/, 'Panini', 'National Treasures'],
+  [/immaculate/, 'Panini', 'Immaculate'], [/(?<![a-z])mosaic/, 'Panini', 'Mosaic'],
+  [/flawless/, 'Panini', 'Flawless'], [/(?<![a-z])absolute/, 'Panini', 'Absolute'],
+  [/(?<![a-z])certified/, 'Panini', 'Certified'], [/(?<![a-z])spectra/, 'Panini', 'Spectra'],
+  [/(?<![a-z])obsidian/, 'Panini', 'Obsidian'], [/(?<![a-z])phoenix/, 'Panini', 'Phoenix'],
+  [/(?<![a-z])chronicles/, 'Panini', 'Chronicles'], [/(?<![a-z])playbook/, 'Panini', 'Playbook'],
+  [/(?<![a-z])prestige/, 'Panini', 'Prestige'], [/(?<![a-z])score/, 'Panini', 'Score'],
+  [/diamond kings/, 'Panini', 'Diamond Kings'], [/crown royale/, 'Panini', 'Crown Royale'],
+  [/rookies (&|and) stars/, 'Panini', 'Rookies & Stars'], [/(?<![a-z])elite/, 'Panini', 'Elite'],
+  [/(?<![a-z])revolution/, 'Panini', 'Revolution'], [/(?<![a-z])illusions/, 'Panini', 'Illusions'],
+  [/gold standard/, 'Panini', 'Gold Standard'], [/(?<![a-z])origins/, 'Panini', 'Origins'],
+  [/(?<![a-z])zenith/, 'Panini', 'Zenith'], [/(?<![a-z])panini/, 'Panini', 'Panini'],
+  [/o-?pee-?chee platinum/, 'Upper Deck', 'O-Pee-Chee Platinum'], [/o-?pee-?chee/, 'Upper Deck', 'O-Pee-Chee'],
+  [/sp authentic/, 'Upper Deck', 'SP Authentic'], [/sp game used/, 'Upper Deck', 'SP Game Used'],
+  [/(?<![a-z])spx/, 'Upper Deck', 'SPx'], [/the cup/, 'Upper Deck', 'The Cup'],
+  [/black diamond/, 'Upper Deck', 'Black Diamond'], [/(?<![a-z])artifacts/, 'Upper Deck', 'Artifacts'],
+  [/ultimate collection/, 'Upper Deck', 'Ultimate Collection'], [/(?<![a-z])trilogy/, 'Upper Deck', 'Trilogy'],
+  [/(?<![a-z])allure/, 'Upper Deck', 'Allure'], [/(?<![a-z])engrained/, 'Upper Deck', 'Engrained'],
+  [/(?<![a-z])synergy/, 'Upper Deck', 'Synergy'], [/(?<![a-z])parkhurst/, 'Upper Deck', 'Parkhurst'],
+  [/(?<![a-z])stature/, 'Upper Deck', 'Stature'], [/upper deck ice|(?<![a-z])ice hockey/, 'Upper Deck', 'Ice'],
+  [/(?<![a-z])compendium/, 'Upper Deck', 'Compendium'], [/(?<![a-z])fleer/, 'Upper Deck', 'Fleer'],
+  [/(?<![a-z])skybox/, 'Upper Deck', 'SkyBox'], [/upper deck mvp|(?<![a-z])mvp hockey/, 'Upper Deck', 'MVP'],
+  [/upper deck/, 'Upper Deck', 'Upper Deck'],
+  [/(?<![a-z])leaf metal/, 'Leaf', 'Leaf Metal'], [/(?<![a-z])leaf trinity/, 'Leaf', 'Leaf Trinity'],
+  [/leaf ultimate/, 'Leaf', 'Leaf Ultimate'], [/(?<![a-z])itg|in the game/, 'Leaf', 'ITG'],
+  [/(?<![a-z])leaf/, 'Leaf', 'Leaf']
+]
+
+function classifySet(name) {
+  const n = (name || '').toLowerCase()
+  for (const [re, brand, product] of PRODUCT_MAP) {
+    if (re.test(n)) return { brand, product }
+  }
+  return { brand: 'Other', product: 'Other' }
+}
+
 // Natural sort for card numbers: compare the embedded numeric part first
 // (so #2 < #10 < #100), then fall back to the full string for prefixes.
 function cardNumKey(n) {
@@ -69,6 +125,10 @@ export default function Home() {
   const [activeSection, setActiveSection] = useState('All')
   const [query, setQuery] = useState('')
   const [sportFilter, setSportFilter] = useState('All')
+  const [brandFilter, setBrandFilter] = useState('All')
+  const [productFilter, setProductFilter] = useState('All')
+  const [view, setView] = useState('browse') // browse | patchswaps
+  const [patchData, setPatchData] = useState(null)
   const [globalHits, setGlobalHits] = useState(null)
   const [searching, setSearching] = useState(false)
   const [searchIndex, setSearchIndex] = useState(null)
@@ -157,18 +217,40 @@ export default function Home() {
     })).filter(s => s.cards.length > 0)
   }, [setData, activeSection, query])
 
+  // Every set tagged with brand + product (derived from its name).
+  const taggedSets = useMemo(() => sets.map(s => Object.assign({}, s, classifySet(s.name))), [sets])
+
+  const brands = useMemo(() => {
+    const base = sportFilter === 'All' ? taggedSets : taggedSets.filter(s => s.sport === sportFilter)
+    return ['All', ...[...new Set(base.map(s => s.brand))].sort((a, b) => (a === 'Other' ? 1 : b === 'Other' ? -1 : a.localeCompare(b)))]
+  }, [taggedSets, sportFilter])
+
+  const products = useMemo(() => {
+    let base = taggedSets
+    if (sportFilter !== 'All') base = base.filter(s => s.sport === sportFilter)
+    if (brandFilter !== 'All') base = base.filter(s => s.brand === brandFilter)
+    return ['All', ...[...new Set(base.map(s => s.product))].filter(p => p !== 'Other').sort()]
+  }, [taggedSets, sportFilter, brandFilter])
+
   const filteredSets = useMemo(() => {
-    let list = sets
+    let list = taggedSets
     if (sportFilter !== 'All') list = list.filter(s => s.sport === sportFilter)
+    if (brandFilter !== 'All') list = list.filter(s => s.brand === brandFilter)
+    if (productFilter !== 'All') list = list.filter(s => s.product === productFilter)
     const term = query.trim().toLowerCase()
     if (term && !activeSet) list = list.filter(s => s.name.toLowerCase().includes(term))
     return list
-  }, [sets, sportFilter, query, activeSet])
+  }, [taggedSets, sportFilter, brandFilter, productFilter, query, activeSet])
 
   const rcCount = (j) => (j.sections || []).reduce((s, sec) => s + sec.cards.filter(c => c.x === 'RC').length, 0)
 
-  const isLanding = !activeSet && !globalHits
-  const goHome = () => { setActiveSet(null); setSetData(null); setGlobalHits(null); setQuery('') }
+  const isLanding = !activeSet && !globalHits && view === 'browse'
+  const goHome = () => { setActiveSet(null); setSetData(null); setGlobalHits(null); setQuery(''); setView('browse') }
+  const openPatchSwaps = () => {
+    setView('patchswaps'); setActiveSet(null); setSetData(null); setGlobalHits(null)
+    if (!patchData) fetch('/data/patch-swaps.json').then(r => r.json()).then(setPatchData).catch(() => setPatchData({ entries: [] }))
+    window.scrollTo(0, 0)
+  }
   const searchFor = (name) => { setQuery(name); setTimeout(runGlobalSearch, 0) }
 
   return (
@@ -179,9 +261,9 @@ export default function Home() {
         <div onClick={goHome} style={{ ...condensed, fontSize: 26, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.02em', cursor: 'pointer', lineHeight: 1 }}>
           Checklist<span style={{ color: GOLD }}>HQ</span>
         </div>
-        <div style={{ display: 'flex', gap: 26, alignItems: 'center' }}>
-          {[['Sets', () => { goHome(); setSportFilter('All') }], ['Players', () => { goHome(); setTimeout(() => { const el = document.getElementById('hq-search'); if (el) el.focus() }, 0) }]].map(([label, fn]) => (
-            <button key={label} onClick={fn} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#bbb', fontSize: 12, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase' }}>{label}</button>
+        <div style={{ display: 'flex', gap: 24, alignItems: 'center', flexWrap: 'wrap' }}>
+          {[['Sets', () => { goHome(); setSportFilter('All') }], ['Players', () => { goHome(); setTimeout(() => { const el = document.getElementById('hq-search'); if (el) el.focus() }, 0) }], ['Patch Swaps', openPatchSwaps]].map(([label, fn]) => (
+            <button key={label} onClick={fn} style={{ background: 'none', border: 'none', cursor: 'pointer', color: (label === 'Patch Swaps' && view === 'patchswaps') ? GOLD : '#bbb', fontSize: 12, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase' }}>{label}</button>
           ))}
           <span style={{ ...condensed, fontSize: 14, fontWeight: 700, color: GOLD, border: '1px solid ' + GOLD + '66', borderRadius: 8, padding: '6px 12px', letterSpacing: '0.06em' }}>
             {statN.sets} SETS
@@ -247,14 +329,15 @@ export default function Home() {
             </div>
           </section>
 
-          {/* SPORT CHIPS + FEATURED HEADING */}
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12, margin: '40px 0 18px' }}>
+          {/* FILTERS */}
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12, margin: '40px 0 14px' }}>
             <h2 style={{ ...condensed, fontSize: 24, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em', margin: 0 }}>
-              {sportFilter === 'All' ? 'Featured Sets' : sportFilter + ' Sets'}
+              {productFilter !== 'All' ? productFilter + ' Sets' : sportFilter === 'All' ? 'Featured Sets' : sportFilter + ' Sets'}
+              <span style={{ color: '#555', fontSize: 15, marginLeft: 10 }}>{filteredSets.length}</span>
             </h2>
             <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
               {sports.map(sp => (
-                <button key={sp} onClick={() => setSportFilter(sp)}
+                <button key={sp} onClick={() => { setSportFilter(sp); setBrandFilter('All'); setProductFilter('All') }}
                   style={{
                     padding: '6px 14px', borderRadius: 999, fontSize: 12, fontWeight: 700, cursor: 'pointer',
                     letterSpacing: '0.06em', textTransform: 'uppercase',
@@ -265,8 +348,30 @@ export default function Home() {
               ))}
             </div>
           </div>
+          {/* BRAND CHIPS + PRODUCT DROPDOWN */}
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12, marginBottom: 22 }}>
+            <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center' }}>
+              <span style={{ color: '#666', fontSize: 11, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', marginRight: 2 }}>Brand</span>
+              {brands.map(b => (
+                <button key={b} onClick={() => { setBrandFilter(b); setProductFilter('All') }}
+                  style={{
+                    padding: '5px 13px', borderRadius: 999, fontSize: 12, fontWeight: 700, cursor: 'pointer', letterSpacing: '0.04em',
+                    background: brandFilter === b ? (BRAND_COLORS[b] || GOLD) : '#141414',
+                    color: brandFilter === b ? '#fff' : '#999',
+                    border: '1px solid ' + (brandFilter === b ? 'transparent' : '#2a2a2a')
+                  }}>{b}</button>
+              ))}
+            </div>
+            {products.length > 1 && (
+              <select value={productFilter} onChange={(e) => setProductFilter(e.target.value)}
+                style={{ background: '#141414', border: '1px solid #2a2a2a', borderRadius: 8, color: '#ddd', fontSize: 13, padding: '8px 12px', cursor: 'pointer' }}>
+                <option value="All">All products ({products.length - 1})</option>
+                {products.slice(1).map(p => <option key={p} value={p}>{p}</option>)}
+              </select>
+            )}
+          </div>
         </>
-      ) : (
+      ) : (activeSet || globalHits) ? (
         <div style={{ display: 'flex', gap: 10, marginBottom: 16 }}>
           <input
             value={query}
@@ -282,7 +387,7 @@ export default function Home() {
             </button>
           )}
         </div>
-      )}
+      ) : null}
 
       {activeSet && setData ? (
         <section>
@@ -397,6 +502,56 @@ export default function Home() {
             ))}
             {globalHits.length === 0 && <p style={{ padding: 20, color: '#666', fontSize: 14 }}>No player matches yet — more sets import every session.</p>}
           </div>
+        </section>
+      ) : view === 'patchswaps' ? (
+        <section>
+          <div style={{ background: 'linear-gradient(140deg, #1a1512, #0e0e0e)', border: '1px solid ' + GOLD + '33', borderRadius: 18, padding: '30px 30px', marginBottom: 24 }}>
+            <h1 style={{ ...condensed, fontSize: 40, fontWeight: 800, textTransform: 'uppercase', margin: 0, lineHeight: 1 }}>Patch Swaps</h1>
+            <p style={{ color: '#aaa', fontSize: 15, lineHeight: 1.6, maxWidth: 720, margin: '14px 0 0' }}>
+              A running record of cards known to have had their game-used or manufactured patches swapped — with the original and the replacement patch side by side so collectors can spot altered cards before they buy.
+            </p>
+            <p style={{ color: '#888', fontSize: 13, margin: '16px 0 0' }}>
+              Primary source:{' '}
+              <a href={(patchData && patchData.source && patchData.source.url) || 'https://www.instagram.com/fake_hockey_patches/'} target="_blank" rel="noreferrer" style={{ color: GOLD, fontWeight: 700 }}>
+                @fake_hockey_patches
+              </a>{' '}on Instagram — the definitive community feed documenting swapped hockey patches.
+            </p>
+          </div>
+
+          {!patchData ? (
+            <p style={{ color: '#666' }}>Loading…</p>
+          ) : patchData.entries.filter(e => e.player || e.card).length === 0 ? (
+            <div style={{ border: '1px dashed #333', borderRadius: 14, padding: '40px 28px', textAlign: 'center' }}>
+              <p style={{ ...condensed, fontSize: 22, fontWeight: 700, textTransform: 'uppercase', color: '#ccc', margin: 0 }}>Case file is being built</p>
+              <p style={{ color: '#888', fontSize: 14, lineHeight: 1.6, maxWidth: 560, margin: '12px auto 0' }}>
+                Documented swaps are being catalogued here with before/after photos. Follow{' '}
+                <a href="https://www.instagram.com/fake_hockey_patches/" target="_blank" rel="noreferrer" style={{ color: GOLD }}>@fake_hockey_patches</a>{' '}
+                for the live feed in the meantime.
+              </p>
+            </div>
+          ) : (
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: 16 }}>
+              {patchData.entries.filter(e => e.player || e.card).map((e) => (
+                <div key={e.id} style={{ background: 'linear-gradient(155deg, #161616, #0d0d0d)', border: '1px solid #262626', borderRadius: 14, overflow: 'hidden' }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 2, background: '#000' }}>
+                    {[['Original', e.originalImg], ['Swapped', e.swappedImg]].map(([lbl, img]) => (
+                      <div key={lbl} style={{ position: 'relative', aspectRatio: '1', background: '#0a0a0a', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                        {img ? <img src={img} alt={lbl} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                          : <span style={{ color: '#444', fontSize: 12 }}>{lbl} photo</span>}
+                        <span style={{ position: 'absolute', top: 8, left: 8, background: lbl === 'Swapped' ? '#e11d48' : '#333', color: '#fff', fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', padding: '3px 8px', borderRadius: 4 }}>{lbl}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <div style={{ padding: '16px 18px' }}>
+                    <p style={{ ...condensed, margin: 0, fontSize: 19, fontWeight: 800, textTransform: 'uppercase' }}>{e.player || e.card}</p>
+                    <p style={{ color: '#888', fontSize: 12, margin: '4px 0 0' }}>{[e.year, e.set, e.card].filter(Boolean).join(' · ')}</p>
+                    {e.summary && <p style={{ color: '#b9b9b9', fontSize: 13, lineHeight: 1.5, margin: '10px 0 0' }}>{e.summary}</p>}
+                    {e.sourceUrl && <a href={e.sourceUrl} target="_blank" rel="noreferrer" style={{ color: GOLD, fontSize: 12, fontWeight: 700, display: 'inline-block', marginTop: 10 }}>View source →</a>}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
         </section>
       ) : (
         <section>

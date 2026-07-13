@@ -21,7 +21,7 @@ function cleanDesc(s) {
   return s.replace(/Shop for[^.]*on eBay\.?/gi, '').replace(/Buy on eBay\.?/gi, '')
     .replace(/\s+·?\s*$/, '').replace(/\s+/g, ' ').trim()
 }
-const ODDS_RE = /\d+\s*:\s*\d|#\/\s*\d|per pack|per box|packs?\b|hobby|retail|blaster|jumbo|serial|parallel|odds|1\/1|one-of-one/i
+const ODDS_RE = /\d+\s*:\s*\d|#\/\s*\d|per pack|per box|packs?\b|hobby|retail|blaster|jumbo|serial|parallel|odds|1\/1|one-of-one|short[- ]?print|\bSP\b|\bSSP\b|super short|image variation|photo variation|\bvariation/i
 
 function extractOdds(html) {
   const start = html.indexOf('set-checklist')
