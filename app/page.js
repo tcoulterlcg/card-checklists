@@ -80,12 +80,30 @@ export default function Home() {
     else { setSortField(field); setSortDir(field === 'n' ? 'asc' : 'asc') }
   }
 
+  // Count-up animation for the hero stat cards.
+  const [statN, setStatN] = useState({ sets: 0, cards: 0 })
+
   useEffect(() => {
     fetch('/data/index.json').then(r => r.json()).then(j => setSets(j.sets || [])).catch(() => {})
   }, [])
 
   const totalCards = useMemo(() => sets.reduce((s, x) => s + (x.cardCount || 0), 0), [sets])
   const sports = useMemo(() => ['All', ...[...new Set(sets.map(s => s.sport))].sort()], [sets])
+
+  useEffect(() => {
+    if (sets.length === 0) return
+    const targetSets = sets.length, targetCards = totalCards
+    const dur = 950, start = performance.now()
+    let raf
+    const tick = (t) => {
+      const p = Math.min((t - start) / dur, 1)
+      const e = 1 - Math.pow(1 - p, 3)
+      setStatN({ sets: Math.round(targetSets * e), cards: Math.round(targetCards * e) })
+      if (p < 1) raf = requestAnimationFrame(tick)
+    }
+    raf = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(raf)
+  }, [sets.length, totalCards])
 
   const openSet = async (s) => {
     setActiveSet(s); setGlobalHits(null); setActiveSection('All'); setQuery('')
@@ -149,64 +167,120 @@ export default function Home() {
 
   const rcCount = (j) => (j.sections || []).reduce((s, sec) => s + sec.cards.filter(c => c.x === 'RC').length, 0)
 
+  const isLanding = !activeSet && !globalHits
+  const goHome = () => { setActiveSet(null); setSetData(null); setGlobalHits(null); setQuery('') }
+  const searchFor = (name) => { setQuery(name); setTimeout(runGlobalSearch, 0) }
+
   return (
-    <main style={{ maxWidth: 1150, margin: '0 auto', padding: '0 24px 80px' }}>
-      <header style={{ padding: '30px 0 22px', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: 12 }}>
-        <div>
-          <div style={{ ...condensed, fontSize: 36, fontWeight: 800, textTransform: 'uppercase', lineHeight: 1, cursor: 'pointer' }}
-            onClick={() => { setActiveSet(null); setSetData(null); setGlobalHits(null); setQuery('') }}>
-            Checklist<span style={{ color: GOLD }}>HQ</span>
-          </div>
-          <p style={{ margin: '6px 0 0', color: '#8a8a8a', fontSize: 11, fontWeight: 600, letterSpacing: '0.2em', textTransform: 'uppercase' }}>
-            Sports Card Checklist Database
-          </p>
+    <main style={{ maxWidth: 1180, margin: '0 auto', padding: '0 24px 90px' }}>
+      <style>{'.hq-setcard:hover{transform:translateY(-4px);border-color:#3a3a3a;box-shadow:0 18px 40px -18px rgba(0,0,0,0.9)}'}</style>
+      {/* NAV */}
+      <nav style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '22px 0', flexWrap: 'wrap', gap: 12 }}>
+        <div onClick={goHome} style={{ ...condensed, fontSize: 26, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.02em', cursor: 'pointer', lineHeight: 1 }}>
+          Checklist<span style={{ color: GOLD }}>HQ</span>
         </div>
-        <div style={{ display: 'flex', gap: 22, textAlign: 'right' }}>
-          <div>
-            <p style={{ ...condensed, margin: 0, fontSize: 26, fontWeight: 800, color: GOLD }}>{sets.length.toLocaleString()}</p>
-            <p style={{ margin: 0, color: '#777', fontSize: 10, fontWeight: 700, letterSpacing: '0.14em' }}>SETS</p>
-          </div>
-          <div>
-            <p style={{ ...condensed, margin: 0, fontSize: 26, fontWeight: 800, color: GOLD }}>{totalCards.toLocaleString()}</p>
-            <p style={{ margin: 0, color: '#777', fontSize: 10, fontWeight: 700, letterSpacing: '0.14em' }}>CARDS</p>
-          </div>
-        </div>
-      </header>
-
-      <div style={{ display: 'flex', gap: 10, marginBottom: 16 }}>
-        <input
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          onKeyDown={(e) => { if (e.key === 'Enter' && !activeSet) runGlobalSearch() }}
-          placeholder={activeSet ? 'Filter this set (player, team, card #)…' : 'Search players across every set, or filter sets by name…'}
-          style={{
-            flex: 1, background: '#141414', border: '1px solid #2a2a2a', borderRadius: 10,
-            padding: '13px 16px', color: '#f5f5f5', fontSize: 15, outline: 'none'
-          }}
-        />
-        {!activeSet && (
-          <button onClick={runGlobalSearch} disabled={searching || query.trim().length < 3}
-            style={{
-              background: GOLD, color: '#111', border: 'none', borderRadius: 10, padding: '0 22px',
-              fontWeight: 700, fontSize: 14, cursor: 'pointer', opacity: searching || query.trim().length < 3 ? 0.5 : 1
-            }}>
-            {searching ? 'Searching…' : 'Player Search'}
-          </button>
-        )}
-      </div>
-
-      {!activeSet && !globalHits && (
-        <div style={{ display: 'flex', gap: 8, marginBottom: 26, flexWrap: 'wrap' }}>
-          {sports.map(sp => (
-            <button key={sp} onClick={() => setSportFilter(sp)}
-              style={{
-                padding: '6px 14px', borderRadius: 999, fontSize: 12, fontWeight: 700, cursor: 'pointer',
-                letterSpacing: '0.06em', textTransform: 'uppercase',
-                background: sportFilter === sp ? (SPORT_COLORS[sp] || GOLD) : '#141414',
-                color: sportFilter === sp ? '#111' : '#999',
-                border: '1px solid ' + (sportFilter === sp ? 'transparent' : '#2a2a2a')
-              }}>{sp}</button>
+        <div style={{ display: 'flex', gap: 26, alignItems: 'center' }}>
+          {[['Sets', () => { goHome(); setSportFilter('All') }], ['Players', () => { goHome(); setTimeout(() => { const el = document.getElementById('hq-search'); if (el) el.focus() }, 0) }]].map(([label, fn]) => (
+            <button key={label} onClick={fn} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#bbb', fontSize: 12, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase' }}>{label}</button>
           ))}
+          <span style={{ ...condensed, fontSize: 14, fontWeight: 700, color: GOLD, border: '1px solid ' + GOLD + '66', borderRadius: 8, padding: '6px 12px', letterSpacing: '0.06em' }}>
+            {statN.sets} SETS
+          </span>
+        </div>
+      </nav>
+
+      {isLanding ? (
+        <>
+          {/* HERO */}
+          <section style={{
+            position: 'relative', textAlign: 'center', padding: '54px 0 40px', marginBottom: 10,
+            borderRadius: 20, overflow: 'hidden',
+            background: 'radial-gradient(120% 100% at 50% 0%, rgba(212,168,67,0.08), rgba(10,10,10,0) 60%)'
+          }}>
+            <span style={{
+              display: 'inline-flex', alignItems: 'center', gap: 8, padding: '6px 16px', borderRadius: 999,
+              border: '1px solid rgba(212,168,67,0.35)', color: GOLD, fontSize: 11, fontWeight: 700,
+              letterSpacing: '0.22em', textTransform: 'uppercase', marginBottom: 26
+            }}>
+              <span style={{ width: 6, height: 6, borderRadius: 999, background: GOLD, display: 'inline-block' }} />
+              The Definitive Card Set Database · 2012–2017
+            </span>
+            <h1 style={{ ...condensed, fontSize: 'clamp(48px, 8vw, 104px)', fontWeight: 800, textTransform: 'uppercase', lineHeight: 0.92, letterSpacing: '-0.01em', margin: 0 }}>
+              Every Card.<br /><span style={{ color: GOLD }}>Every Checklist.</span>
+            </h1>
+            <p style={{ color: '#9a9a9a', fontSize: 17, lineHeight: 1.6, maxWidth: 620, margin: '24px auto 0' }}>
+              Complete set checklists for the modern era of Baseball, Football, Basketball, and Hockey — indexed, sectioned, and searchable.
+            </p>
+
+            {/* HERO SEARCH */}
+            <div style={{ maxWidth: 680, margin: '34px auto 0', display: 'flex', gap: 0, background: '#141414', border: '1px solid #2e2e2e', borderRadius: 14, padding: 6, boxShadow: '0 20px 50px -20px rgba(0,0,0,0.8)' }}>
+              <input
+                id="hq-search"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                onKeyDown={(e) => { if (e.key === 'Enter') runGlobalSearch() }}
+                placeholder="Search any player across every set"
+                style={{ flex: 1, background: 'transparent', border: 'none', padding: '14px 16px', color: '#f5f5f5', fontSize: 16, outline: 'none' }}
+              />
+              <button onClick={runGlobalSearch} disabled={searching || query.trim().length < 3}
+                style={{ ...condensed, background: GOLD, color: '#111', border: 'none', borderRadius: 10, padding: '0 26px', fontWeight: 800, fontSize: 16, letterSpacing: '0.08em', textTransform: 'uppercase', cursor: 'pointer', opacity: searching || query.trim().length < 3 ? 0.5 : 1 }}>
+                {searching ? '…' : 'Search'}
+              </button>
+            </div>
+            <p style={{ color: '#666', fontSize: 13, margin: '14px 0 0' }}>
+              Try {['Kris Bryant', 'Connor McDavid', 'Todd Gurley', 'Karl-Anthony Towns'].map((n, i) => (
+                <span key={n}>
+                  {i > 0 ? ' · ' : ' '}
+                  <button onClick={() => searchFor(n)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: GOLD, fontSize: 13, padding: 0 }}>{n}</button>
+                </span>
+              ))}
+            </p>
+
+            {/* STAT CARDS */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 14, maxWidth: 680, margin: '38px auto 0' }}>
+              {[[statN.sets.toLocaleString(), 'Sets Indexed'], [(statN.cards >= 1000 ? Math.round(statN.cards / 1000) + 'K+' : statN.cards), 'Cards Cataloged'], ['4', 'Sports Covered']].map(([n, label]) => (
+                <div key={label} style={{ background: 'linear-gradient(160deg, #171717, #0e0e0e)', border: '1px solid #262626', borderRadius: 14, padding: '22px 14px' }}>
+                  <p style={{ ...condensed, margin: 0, fontSize: 40, fontWeight: 800, color: GOLD, lineHeight: 1 }}>{n}</p>
+                  <p style={{ margin: '8px 0 0', color: '#888', fontSize: 11, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase' }}>{label}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* SPORT CHIPS + FEATURED HEADING */}
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12, margin: '40px 0 18px' }}>
+            <h2 style={{ ...condensed, fontSize: 24, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em', margin: 0 }}>
+              {sportFilter === 'All' ? 'Featured Sets' : sportFilter + ' Sets'}
+            </h2>
+            <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+              {sports.map(sp => (
+                <button key={sp} onClick={() => setSportFilter(sp)}
+                  style={{
+                    padding: '6px 14px', borderRadius: 999, fontSize: 12, fontWeight: 700, cursor: 'pointer',
+                    letterSpacing: '0.06em', textTransform: 'uppercase',
+                    background: sportFilter === sp ? (SPORT_COLORS[sp] || GOLD) : '#141414',
+                    color: sportFilter === sp ? '#111' : '#999',
+                    border: '1px solid ' + (sportFilter === sp ? 'transparent' : '#2a2a2a')
+                  }}>{sp}</button>
+              ))}
+            </div>
+          </div>
+        </>
+      ) : (
+        <div style={{ display: 'flex', gap: 10, marginBottom: 16 }}>
+          <input
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            onKeyDown={(e) => { if (e.key === 'Enter' && !activeSet) runGlobalSearch() }}
+            placeholder={activeSet ? 'Filter this set (player, team, card #)…' : 'Search players across every set…'}
+            style={{ flex: 1, background: '#141414', border: '1px solid #2a2a2a', borderRadius: 10, padding: '13px 16px', color: '#f5f5f5', fontSize: 15, outline: 'none' }}
+          />
+          {!activeSet && (
+            <button onClick={runGlobalSearch} disabled={searching || query.trim().length < 3}
+              style={{ background: GOLD, color: '#111', border: 'none', borderRadius: 10, padding: '0 22px', fontWeight: 700, fontSize: 14, cursor: 'pointer', opacity: searching || query.trim().length < 3 ? 0.5 : 1 }}>
+              {searching ? 'Searching…' : 'Player Search'}
+            </button>
+          )}
         </div>
       )}
 
@@ -300,21 +374,32 @@ export default function Home() {
         </section>
       ) : (
         <section>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(255px, 1fr))', gap: 12 }}>
-            {filteredSets.sort((a, b) => (b.year - a.year) || a.name.localeCompare(b.name)).map((s) => (
-              <button key={s.slug} onClick={() => openSet(s)}
-                style={{
-                  textAlign: 'left', background: 'linear-gradient(150deg, #151515, #0e0e0e)', border: '1px solid #242424',
-                  borderRadius: 12, padding: '16px 18px', color: '#f5f5f5', cursor: 'pointer'
-                }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6 }}>
-                  <span style={{ color: SPORT_COLORS[s.sport] || '#777', fontSize: 10, fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase' }}>{s.sport} · {s.year}</span>
-                  <span style={{ color: '#666', fontSize: 11 }}>{(s.sections || 0)} sec</span>
-                </div>
-                <p style={{ ...condensed, margin: '0 0 6px', fontSize: 19, fontWeight: 700, textTransform: 'uppercase', lineHeight: 1.12 }}>{s.name.replace(/^\d{4}(-\d{2})?\s*/, '')}</p>
-                <span style={{ color: '#8a8a8a', fontSize: 12 }}>{(s.cardCount || 0).toLocaleString()} cards</span>
-              </button>
-            ))}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: 14 }}>
+            {filteredSets.sort((a, b) => (b.year - a.year) || a.name.localeCompare(b.name)).map((s) => {
+              const c = SPORT_COLORS[s.sport] || GOLD
+              return (
+                <button key={s.slug} onClick={() => openSet(s)} className="hq-setcard"
+                  style={{
+                    position: 'relative', textAlign: 'left', background: 'linear-gradient(155deg, #161616, #0d0d0d)',
+                    border: '1px solid #242424', borderRadius: 14, padding: '18px 18px 16px', color: '#f5f5f5',
+                    cursor: 'pointer', overflow: 'hidden', transition: 'transform .16s ease, border-color .16s ease, box-shadow .16s ease'
+                  }}>
+                  {/* foil edge in the sport color */}
+                  <span style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: 4, background: 'linear-gradient(180deg, ' + c + ', ' + c + '44)' }} />
+                  {/* holographic sheen */}
+                  <span style={{ position: 'absolute', inset: 0, background: 'linear-gradient(120deg, transparent 40%, ' + c + '10 50%, transparent 60%)', pointerEvents: 'none' }} />
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>
+                    <span style={{ color: c, fontSize: 10, fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase' }}>{s.sport} · {s.year}</span>
+                    <span style={{ color: '#666', fontSize: 11 }}>{(s.sections || 0)} sec</span>
+                  </div>
+                  <p style={{ ...condensed, margin: '0 0 12px', fontSize: 20, fontWeight: 800, textTransform: 'uppercase', lineHeight: 1.1, minHeight: 44 }}>{s.name.replace(/^\d{4}(-\d{2})?\s*/, '')}</p>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', borderTop: '1px solid #222', paddingTop: 10 }}>
+                    <span style={{ ...condensed, fontSize: 22, fontWeight: 800, color: GOLD }}>{(s.cardCount || 0).toLocaleString()}</span>
+                    <span style={{ color: '#777', fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase' }}>Cards</span>
+                  </div>
+                </button>
+              )
+            })}
           </div>
           {filteredSets.length === 0 && <p style={{ color: '#666', fontSize: 14 }}>No sets match.</p>}
         </section>
