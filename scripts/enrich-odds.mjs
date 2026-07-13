@@ -61,11 +61,14 @@ function extractOdds(html) {
 }
 
 const dataDir = new URL('../public/data/', import.meta.url)
-const files = readdirSync(dataDir).filter(f => f.endsWith('.json') && f !== 'index.json' && f !== 'search-index.json')
+const files = readdirSync(dataDir).filter(f => f.endsWith('.json') && !['index.json', 'search-index.json', 'rpa-index.json', 'patch-swaps.json'].includes(f))
 let withOdds = 0, withBox = 0, done = 0
 
 for (const f of files) {
   const set = JSON.parse(readFileSync(new URL(f, dataDir), 'utf8'))
+  // Only cardboardconnection sets have a page to pull odds from; TCG sets come
+  // from APIs and already carry their structure.
+  if (set.source !== 'cardboardconnection.com') continue
   try {
     const res = await fetch('https://www.cardboardconnection.com/' + set.slug, { headers: HDRS })
     if (res.ok) {

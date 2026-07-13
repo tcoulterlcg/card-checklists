@@ -9,8 +9,12 @@ const GOLD = '#d4a843'
 const condensed = { fontFamily: "'Barlow Condensed', 'Arial Narrow', sans-serif" }
 
 const SPORT_COLORS = {
-  Baseball: '#60a5fa', Football: '#4ade80', Basketball: '#f97316', Hockey: '#a78bfa', Soccer: '#f43f5e'
+  Baseball: '#60a5fa', Football: '#4ade80', Basketball: '#f97316', Hockey: '#a78bfa', Soccer: '#f43f5e',
+  UFC: '#dc2626', Boxing: '#eab308',
+  'Pokémon': '#facc15', Lorcana: '#8b5cf6', 'One Piece': '#ef4444', Disney: '#ec4899', Magic: '#f59e0b'
 }
+// Which categories are trading card games (vs traditional sports cards).
+const TCG_SET = new Set(['Pokémon', 'Lorcana', 'One Piece', 'Disney', 'Magic'])
 
 const BRAND_COLORS = { Panini: '#e11d48', Topps: '#ef8c1c', 'Upper Deck': '#2563eb', Leaf: '#16a34a', Other: '#888' }
 
@@ -154,7 +158,15 @@ export default function Home() {
   }, [])
 
   const totalCards = useMemo(() => sets.reduce((s, x) => s + (x.cardCount || 0), 0), [sets])
-  const sports = useMemo(() => ['All', ...[...new Set(sets.map(s => s.sport))].sort()], [sets])
+  const sports = useMemo(() => {
+    const order = ['Baseball', 'Football', 'Basketball', 'Hockey', 'Soccer', 'UFC', 'Boxing', 'Pokémon', 'Lorcana', 'One Piece', 'Disney', 'Magic']
+    const present = [...new Set(sets.map(s => s.sport))]
+    present.sort((a, b) => {
+      const ia = order.indexOf(a), ib = order.indexOf(b)
+      return (ia === -1 ? 99 : ia) - (ib === -1 ? 99 : ib) || a.localeCompare(b)
+    })
+    return ['All', ...present]
+  }, [sets])
   const yearRange = useMemo(() => {
     const ys = sets.map(s => s.year).filter(Boolean)
     return ys.length ? Math.min(...ys) + '–' + Math.max(...ys) : ''
@@ -326,7 +338,7 @@ export default function Home() {
               Every Card.<br /><span style={{ color: GOLD }}>Every Checklist.</span>
             </h1>
             <p style={{ color: '#9a9a9a', fontSize: 17, lineHeight: 1.6, maxWidth: 620, margin: '24px auto 0' }}>
-              Complete set checklists for the modern era of Baseball, Football, Basketball, and Hockey — indexed, sectioned, and searchable.
+              Complete set checklists for sports cards and trading card games — Baseball, Football, Basketball, Hockey, Pokémon, Lorcana and more, indexed, sectioned, and searchable.
             </p>
 
             {/* HERO SEARCH */}
@@ -355,7 +367,7 @@ export default function Home() {
 
             {/* STAT CARDS */}
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 14, maxWidth: 680, margin: '38px auto 0' }}>
-              {[[statN.sets.toLocaleString(), 'Sets Indexed'], [(statN.cards >= 1000 ? Math.round(statN.cards / 1000) + 'K+' : statN.cards), 'Cards Cataloged'], ['4', 'Sports Covered']].map(([n, label]) => (
+              {[[statN.sets.toLocaleString(), 'Sets Indexed'], [(statN.cards >= 1000 ? Math.round(statN.cards / 1000) + 'K+' : statN.cards), 'Cards Cataloged'], [String(Math.max(sports.length - 1, 0)), 'Categories']].map(([n, label]) => (
                 <div key={label} style={{ background: 'linear-gradient(160deg, #171717, #0e0e0e)', border: '1px solid #262626', borderRadius: 14, padding: '22px 14px' }}>
                   <p style={{ ...condensed, margin: 0, fontSize: 40, fontWeight: 800, color: GOLD, lineHeight: 1 }}>{n}</p>
                   <p style={{ margin: '8px 0 0', color: '#888', fontSize: 11, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase' }}>{label}</p>
