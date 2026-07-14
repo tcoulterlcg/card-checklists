@@ -6,13 +6,53 @@
   },
   "intro": "A \"patch swap\" is when the memorabilia window on a game-used or manufactured patch card is opened and the original swatch is replaced with a more desirable one — a multi-color patch, a logo, a nameplate letter — to inflate value. Because the card looks factory-fresh, swaps are hard to catch without a reference photo of the card as issued.",
   "redFlags": [
-    { "title": "Patch doesn't match the manufacturer photo", "detail": "Panini, Upper Deck and Topps photograph most premium patch cards at production. Compare your card to the seller's or manufacturer's original image — a different swatch is the clearest tell." },
-    { "title": "Patch is too clean or too perfect", "detail": "Genuine game-used swatches are usually single-color and unremarkable. A pristine 3–4 color logo patch on a low-numbered rookie is a red flag worth verifying." },
-    { "title": "Window seal or plastic looks disturbed", "detail": "Look for lifted edges, glue residue, tool marks, bubbling, or a patch that sits proud of the window. Reseals rarely match the factory finish exactly." },
-    { "title": "Patch size or shape fills the window unnaturally", "detail": "Swapped patches are often cut to fit and can look crammed, off-center, or oriented differently than the die-cut window intends." },
-    { "title": "Serial number vs. rarity mismatch", "detail": "Cross-check the print run in the checklist. A ‘1-of-1 patch’ that shows up in multiple listings, or a patch grander than the set warrants, deserves scrutiny." },
-    { "title": "No grading, or a cracked-and-reslabbed history", "detail": "Raw premium patches — or ones removed from a graded holder — carry more swap risk. Reputable third-party authentication of the patch itself is the safest path." }
+    {
+      "title": "Patch doesn't match the manufacturer photo",
+      "detail": "Panini, Upper Deck and Topps photograph most premium patch cards at production. Compare your card to the seller's or manufacturer's original image — a different swatch is the clearest tell."
+    },
+    {
+      "title": "Patch is too clean or too perfect",
+      "detail": "Genuine game-used swatches are usually single-color and unremarkable. A pristine 3–4 color logo patch on a low-numbered rookie is a red flag worth verifying."
+    },
+    {
+      "title": "Window seal or plastic looks disturbed",
+      "detail": "Look for lifted edges, glue residue, tool marks, bubbling, or a patch that sits proud of the window. Reseals rarely match the factory finish exactly."
+    },
+    {
+      "title": "Patch size or shape fills the window unnaturally",
+      "detail": "Swapped patches are often cut to fit and can look crammed, off-center, or oriented differently than the die-cut window intends."
+    },
+    {
+      "title": "Serial number vs. rarity mismatch",
+      "detail": "Cross-check the print run in the checklist. A ‘1-of-1 patch’ that shows up in multiple listings, or a patch grander than the set warrants, deserves scrutiny."
+    },
+    {
+      "title": "No grading, or a cracked-and-reslabbed history",
+      "detail": "Raw premium patches — or ones removed from a graded holder — carry more swap risk. Reputable third-party authentication of the patch itself is the safest path."
+    }
   ],
-  "watchSets": ["National Treasures", "Immaculate", "Flawless", "The Cup", "SP Game Used", "SP Authentic", "Ultimate Collection"],
-  "entries": []
+  "watchSets": [
+    "National Treasures",
+    "Immaculate",
+    "Flawless",
+    "The Cup",
+    "SP Game Used",
+    "SP Authentic",
+    "Ultimate Collection"
+  ],
+  "entries": [],
+  "posts": [
+    "https://www.instagram.com/p/DM3Bp4YM8Cz/",
+    "https://www.instagram.com/p/DLsZri9MEiM/",
+    "https://www.instagram.com/p/DKXzlPWyz8P/",
+    "https://www.instagram.com/p/DKXzF3gS5N6/",
+    "https://www.instagram.com/p/DIJkYYgsDMD/",
+    "https://www.instagram.com/p/DFZNCldMuM1/",
+    "https://www.instagram.com/p/DEJexIuMpbb/",
+    "https://www.instagram.com/p/DAtfM0bO3o9/",
+    "https://www.instagram.com/p/C72Fd81uQ9E/",
+    "https://www.instagram.com/p/C460VAFssjD/",
+    "https://www.instagram.com/p/C4MpMk5MZFV/",
+    "https://www.instagram.com/p/C1EKBmpM_yE/"
+  ]
 }

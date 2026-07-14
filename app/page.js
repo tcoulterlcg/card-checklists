@@ -4,9 +4,36 @@
 // imported from cardboardconnection.com. Static JSON under /public/data:
 // index.json lists sets; each set file carries sections -> cards.
 import { useEffect, useMemo, useState } from 'react'
+import { useAccount, AccountChip, AuthModal, CollectionView, CommunityView } from '../components/community'
+import { addWant } from '../lib/supa'
 
 const GOLD = '#d4a843'
 const condensed = { fontFamily: "'Barlow Condensed', 'Arial Narrow', sans-serif" }
+
+// Instagram post embeds (Patch Swaps gallery). Renders official IG blockquote
+// embeds and loads embed.js once; process() upgrades them into full post cards
+// with the actual swapped-card photos.
+function InstagramEmbeds({ urls }) {
+  useEffect(() => {
+    const process = () => { if (window.instgrm && window.instgrm.Embeds) window.instgrm.Embeds.process() }
+    if (window.instgrm) { process(); return }
+    const s = document.createElement('script')
+    s.src = 'https://www.instagram.com/embed.js'
+    s.async = true
+    s.onload = process
+    document.body.appendChild(s)
+  }, [urls])
+  return (
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(326px, 1fr))', gap: 16 }}>
+      {urls.map((u) => (
+        <blockquote key={u} className="instagram-media" data-instgrm-permalink={u} data-instgrm-version="14"
+          style={{ background: '#0d0d0d', border: '1px solid #262626', borderRadius: 14, margin: 0, padding: 0, minHeight: 430, maxWidth: '100%' }}>
+          <a href={u} target="_blank" rel="noreferrer" style={{ color: '#666', fontSize: 12, display: 'block', padding: 16 }}>View this post on Instagram</a>
+        </blockquote>
+      ))}
+    </div>
+  )
+}
 
 const SPORT_COLORS = {
   Baseball: '#60a5fa', Football: '#4ade80', Basketball: '#f97316', Hockey: '#a78bfa', Soccer: '#f43f5e',
@@ -159,7 +186,10 @@ export default function Home() {
   const [brandFilter, setBrandFilter] = useState('All')
   const [productFilter, setProductFilter] = useState('All')
   const [sortBy, setSortBy] = useState('year-desc')
-  const [view, setView] = useState('browse') // browse | patchswaps | rpa
+  const [view, setView] = useState('browse') // browse | patchswaps | rpa | community | collection
+  const account = useAccount()
+  const [authOpen, setAuthOpen] = useState(false)
+  const [wantFlash, setWantFlash] = useState('')
   const [patchData, setPatchData] = useState(null)
   const [rpaData, setRpaData] = useState(null)
   const [rpaType, setRpaType] = useState('RPA')
@@ -311,6 +341,14 @@ export default function Home() {
     if (!rpaData) fetch('/data/rpa-index.json').then(r => r.json()).then(setRpaData).catch(() => setRpaData({ slugs: [], rows: [] }))
     window.scrollTo(0, 0)
   }
+  const openView = (v) => { setView(v); setActiveSet(null); setSetData(null); setGlobalHits(null); window.scrollTo(0, 0) }
+  // Wantlist add — whole set or a single card/parallel from the set page.
+  const wantIt = async (item) => {
+    if (!account.session) { setAuthOpen(true); return }
+    await addWant(account.session.user.id, item)
+    setWantFlash(item.card_n ? `#${item.card_n} added to your wantlist` : 'Set added to your wantlist')
+    setTimeout(() => setWantFlash(''), 2500)
+  }
 
   const rpaResults = useMemo(() => {
     if (!rpaData) return []
@@ -340,14 +378,20 @@ export default function Home() {
           Checklist<span style={{ color: GOLD }}>HQ</span>
         </div>
         <div style={{ display: 'flex', gap: 24, alignItems: 'center', flexWrap: 'wrap' }}>
-          {[['Sets', () => { goHome(); setSportFilter('All') }, 'browse'], ['RPA Tracker', openRpa, 'rpa'], ['Patch Swaps', openPatchSwaps, 'patchswaps']].map(([label, fn, v]) => (
+          {[['Sets', () => { goHome(); setSportFilter('All') }, 'browse'], ['RPA Tracker', openRpa, 'rpa'], ['Patch Swaps', openPatchSwaps, 'patchswaps'], ['Community', () => openView('community'), 'community'], ['My Collection', () => openView('collection'), 'collection']].map(([label, fn, v]) => (
             <button key={label} onClick={fn} style={{ background: 'none', border: 'none', cursor: 'pointer', color: view === v ? GOLD : '#bbb', fontSize: 12, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase' }}>{label}</button>
           ))}
+          <AccountChip account={account} onOpenAuth={() => setAuthOpen(true)} />
           <span style={{ ...condensed, fontSize: 14, fontWeight: 700, color: GOLD, border: '1px solid ' + GOLD + '66', borderRadius: 8, padding: '6px 12px', letterSpacing: '0.06em' }}>
             {statN.sets} SETS
           </span>
         </div>
       </nav>
+
+      <AuthModal open={authOpen} onClose={() => setAuthOpen(false)} account={account} />
+      {wantFlash && (
+        <div style={{ position: 'fixed', bottom: 24, right: 24, zIndex: 95, background: GOLD, color: '#111', fontWeight: 800, fontSize: 14, padding: '12px 20px', borderRadius: 12, boxShadow: '0 8px 30px #000a' }}>{wantFlash}</div>
+      )}
 
       {isLanding ? (
         <>
@@ -529,6 +573,16 @@ export default function Home() {
               {(setData.sections || []).reduce((s, x) => s + x.cards.length, 0).toLocaleString()} cards
               {rcCount(setData) > 0 ? ' · ' + rcCount(setData) + ' rookies flagged' : ''} · source: {setData.source}
             </p>
+            <div style={{ display: 'flex', gap: 10, marginTop: 14, flexWrap: 'wrap' }}>
+              <button onClick={() => wantIt({ set_slug: setData.slug, set_name: setData.name })}
+                style={{ ...condensed, background: GOLD, color: '#111', border: 'none', borderRadius: 9, padding: '9px 16px', fontWeight: 800, fontSize: 13, letterSpacing: '0.05em', textTransform: 'uppercase', cursor: 'pointer' }}>
+                + Wantlist this set
+              </button>
+              <button onClick={() => { openView('collection') }}
+                style={{ ...condensed, background: 'transparent', color: '#bbb', border: '1px solid #333', borderRadius: 9, padding: '8px 15px', fontWeight: 700, fontSize: 12.5, letterSpacing: '0.05em', textTransform: 'uppercase', cursor: 'pointer' }}>
+                Track in My Collection
+              </button>
+            </div>
           </div>
 
           {setData.boxBreak && setData.boxBreak.length > 0 && (
@@ -592,6 +646,9 @@ export default function Home() {
                       <span style={{ flex: '1 1 auto', minWidth: 0, fontWeight: 600 }}>{c.p}</span>
                       <span style={{ flex: '1 1 auto', minWidth: 0, color: '#888', fontSize: 13 }}>{c.t || ''}</span>
                       <span style={{ flex: '0 0 70px', textAlign: 'right' }}>{c.x ? <Chip color={c.x === 'RC' ? '#4ade80' : '#888'}>{c.x}</Chip> : null}</span>
+                      <button title="Add this card (and its parallel section) to your wantlist"
+                        onClick={() => wantIt({ set_slug: setData.slug, set_name: setData.name, card_n: c.n, section: sec.title, player: c.p })}
+                        style={{ flex: '0 0 26px', background: 'none', border: '1px solid #2c2c2c', color: '#7a7a7a', borderRadius: 6, fontSize: 13, lineHeight: '18px', cursor: 'pointer', padding: 0 }}>+</button>
                     </div>
                   ))}
                 </div>
@@ -625,6 +682,11 @@ export default function Home() {
             {globalHits.length === 0 && <p style={{ padding: 20, color: '#666', fontSize: 14 }}>No player matches yet — more sets import every session.</p>}
           </div>
         </section>
+      ) : view === 'community' ? (
+        <CommunityView account={account} indexSets={sets} onOpenAuth={() => setAuthOpen(true)} />
+      ) : view === 'collection' ? (
+        <CollectionView account={account} indexSets={sets} onOpenAuth={() => setAuthOpen(true)}
+          onOpenSet={(slug) => { const s = sets.find(x => x.slug === slug); if (s) { setView('browse'); openSet(s) } }} />
       ) : view === 'rpa' ? (
         <section>
           <div style={{ background: 'linear-gradient(140deg, #1a1512, #0e0e0e)', border: '1px solid ' + GOLD + '33', borderRadius: 18, padding: '30px 30px', marginBottom: 22 }}>
@@ -716,6 +778,19 @@ export default function Home() {
                 </div>
                 <span style={{ ...condensed, background: '#e879f9', color: '#1a0f1e', fontWeight: 800, fontSize: 15, letterSpacing: '0.06em', textTransform: 'uppercase', padding: '12px 22px', borderRadius: 10, whiteSpace: 'nowrap' }}>Open on Instagram →</span>
               </a>
+
+              {/* DOCUMENTED SWAPS — actual posts from the feed */}
+              {(patchData.posts || []).length > 0 && (
+                <>
+                  <h2 style={{ ...condensed, fontSize: 26, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em', margin: '0 0 6px' }}>Documented swaps</h2>
+                  <p style={{ color: '#999', fontSize: 13.5, lineHeight: 1.6, margin: '0 0 18px', maxWidth: 760 }}>
+                    Individual cases from @fake_hockey_patches — each post shows the actual card before and after its patch was swapped. Tap any post to see every photo and the community discussion.
+                  </p>
+                  <div style={{ marginBottom: 34 }}>
+                    <InstagramEmbeds urls={patchData.posts} />
+                  </div>
+                </>
+              )}
 
               {/* HOW TO SPOT A SWAP */}
               <h2 style={{ ...condensed, fontSize: 26, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em', margin: '0 0 16px' }}>How to spot a swap</h2>
