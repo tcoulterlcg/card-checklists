@@ -401,6 +401,19 @@ export default function Home() {
             borderRadius: 20, overflow: 'hidden',
             background: 'radial-gradient(120% 100% at 50% 0%, rgba(212,168,67,0.08), rgba(10,10,10,0) 60%)'
           }}>
+            {/* CARD HQ logo — three fanned cards */}
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: 14, marginBottom: 24 }}>
+              <svg width="46" height="46" viewBox="0 0 96 96" aria-hidden="true">
+                <g transform="rotate(-14 48 84)"><rect x="29" y="16" width="38" height="56" rx="5" fill="#0a0a0a" stroke={GOLD} strokeWidth="3.5" opacity="0.4" /></g>
+                <g transform="rotate(0 48 84)"><rect x="29" y="14" width="38" height="56" rx="5" fill="#0a0a0a" stroke={GOLD} strokeWidth="3.5" opacity="0.68" /></g>
+                <g transform="rotate(14 48 84)"><rect x="29" y="12" width="38" height="56" rx="5" fill="#0f0e0c" stroke={GOLD} strokeWidth="4" /><line x1="36" y1="54" x2="60" y2="54" stroke={GOLD} strokeWidth="3" strokeLinecap="round" opacity="0.55" /></g>
+              </svg>
+              <div style={{ textAlign: 'left', lineHeight: 1 }}>
+                <div style={{ ...condensed, fontSize: 36, fontWeight: 800, letterSpacing: '1.5px', textTransform: 'uppercase' }}><span style={{ color: '#f2f0ec' }}>Card</span><span style={{ color: GOLD, marginLeft: 8 }}>HQ</span></div>
+                <div style={{ ...condensed, fontSize: 11, fontWeight: 600, letterSpacing: '5px', color: '#6f6c63', textTransform: 'uppercase', marginTop: 5 }}>Checklist Database</div>
+              </div>
+            </div>
+            <br />
             <span style={{
               display: 'inline-flex', alignItems: 'center', gap: 8, padding: '6px 16px', borderRadius: 999,
               border: '1px solid rgba(212,168,67,0.35)', color: GOLD, fontSize: 11, fontWeight: 700,
