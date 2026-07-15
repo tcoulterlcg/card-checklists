@@ -199,11 +199,29 @@ export default function Home() {
   const [searchIndex, setSearchIndex] = useState(null)
   const [sortField, setSortField] = useState('n')
   const [sortDir, setSortDir] = useState('asc')
+  // Team browse (within a selected sport): filter to one team's cards across all
+  // sets, sortable. Uses the same compact card index as player search.
+  const [teamFilter, setTeamFilter] = useState('All')
+  const [teamInput, setTeamInput] = useState('')
+  const [teamBrowse, setTeamBrowse] = useState(false)
+  const [teamLoading, setTeamLoading] = useState(false)
+  const [teamSort, setTeamSort] = useState('year-desc')
 
   const toggleSort = (field) => {
     if (sortField === field) setSortDir(d => (d === 'asc' ? 'desc' : 'asc'))
     else { setSortField(field); setSortDir(field === 'n' ? 'asc' : 'asc') }
   }
+
+  // Load the compact card index once (shared by player search + team browse).
+  const ensureSearchIndex = async () => {
+    if (searchIndex) return searchIndex
+    try {
+      const r = await fetch('/data/search-index.json')
+      const idx = await r.json()
+      setSearchIndex(idx); return idx
+    } catch { const empty = { slugs: [], sections: [], teams: [], rows: [] }; setSearchIndex(empty); return empty }
+  }
+  const openTeamBrowse = async () => { setTeamBrowse(true); setTeamLoading(true); await ensureSearchIndex(); setTeamLoading(false) }
 
   // Count-up animation for the hero stat cards.
   const [statN, setStatN] = useState({ sets: 0, cards: 0 })
@@ -327,10 +345,58 @@ export default function Home() {
     return list
   }, [taggedSets, sportFilter, brandFilter, productFilter, query, activeSet])
 
+  const oneSport = sportFilter !== 'All' && sportFilter !== 'Sports' && sportFilter !== 'TCG'
+
+  // slug -> sport, so teams can be scoped to the selected sport.
+  const slugSport = useMemo(() => {
+    const m = {}; for (const s of sets) m[s.slug] = s.sport; return m
+  }, [sets])
+
+  // Distinct teams in the selected sport (from the card index). The index's team
+  // field sometimes holds print-run/parallel junk ("#/6", "/199"), so keep only
+  // strings that read like a real team name and appear on at least a few cards.
+  const teamsForSport = useMemo(() => {
+    if (!searchIndex || !oneSport) return []
+    const { slugs, teams, rows } = searchIndex
+    const count = new Map()
+    for (const row of rows) {
+      const tid = row[4]
+      if (tid < 0) continue
+      if (slugSport[slugs[row[1]]] === sportFilter) count.set(tid, (count.get(tid) || 0) + 1)
+    }
+    const isTeam = (t) => t && /[A-Za-z]{3,}/.test(t) && !/^#/.test(t) && !/\d\s*\/\s*\d/.test(t) && !/^\/?\s*\d/.test(t) && t.length >= 4
+    const out = []
+    for (const [tid, n] of count) { const t = teams[tid]; if (n >= 3 && isTeam(t)) out.push(t) }
+    return out.sort((a, b) => a.localeCompare(b))
+  }, [searchIndex, oneSport, sportFilter, slugSport])
+
+  // Every card of the selected team within the selected sport, sorted.
+  const teamHits = useMemo(() => {
+    if (!searchIndex || teamFilter === 'All' || !oneSport) return []
+    const { slugs, sections, teams, rows } = searchIndex
+    const setMeta = {}; for (const s of sets) setMeta[s.slug] = s
+    const out = []
+    for (const row of rows) {
+      if (row[4] < 0 || teams[row[4]] !== teamFilter) continue
+      const slug = slugs[row[1]]
+      if (slugSport[slug] !== sportFilter) continue
+      const m = setMeta[slug] || {}
+      out.push({ p: row[0], slug, n: row[2], section: sections[row[3]] || '', x: row[5], set: m.name, year: m.year, sport: m.sport })
+    }
+    const bySet = (a, b) => (a.set || '').localeCompare(b.set || '')
+    out.sort((a, b) => {
+      if (teamSort === 'year-asc') return (a.year - b.year) || bySet(a, b)
+      if (teamSort === 'player') return (a.p || '').localeCompare(b.p || '') || bySet(a, b)
+      if (teamSort === 'set') return bySet(a, b) || (cardNumKey(a.n) - cardNumKey(b.n))
+      return (b.year - a.year) || bySet(a, b) // year-desc
+    })
+    return out.slice(0, 2500)
+  }, [searchIndex, teamFilter, oneSport, sportFilter, slugSport, sets, teamSort])
+
   const rcCount = (j) => (j.sections || []).reduce((s, sec) => s + sec.cards.filter(c => c.x === 'RC').length, 0)
 
   const isLanding = !activeSet && !globalHits && view === 'browse'
-  const goHome = () => { setActiveSet(null); setSetData(null); setGlobalHits(null); setQuery(''); setView('browse') }
+  const goHome = () => { setActiveSet(null); setSetData(null); setGlobalHits(null); setQuery(''); setView('browse'); setTeamFilter('All'); setTeamInput(''); setTeamBrowse(false) }
   const openPatchSwaps = () => {
     setView('patchswaps'); setActiveSet(null); setSetData(null); setGlobalHits(null)
     if (!patchData) fetch('/data/patch-swaps.json').then(r => r.json()).then(setPatchData).catch(() => setPatchData({ entries: [] }))
@@ -374,8 +440,16 @@ export default function Home() {
       <style>{'.hq-setcard:hover{transform:translateY(-4px);border-color:#3a3a3a;box-shadow:0 18px 40px -18px rgba(0,0,0,0.9)}@keyframes hqticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}.hq-track{display:inline-flex;white-space:nowrap;animation:hqticker linear infinite}.hq-track:hover{animation-play-state:paused}'}</style>
       {/* NAV */}
       <nav style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '22px 0', flexWrap: 'wrap', gap: 12 }}>
-        <div onClick={goHome} style={{ ...condensed, fontSize: 26, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.02em', cursor: 'pointer', lineHeight: 1 }}>
-          Checklist<span style={{ color: GOLD }}>HQ</span>
+        {/* Nav logo — matches the hero CARD HQ lockup (fanned cards + wordmark) */}
+        <div onClick={goHome} style={{ display: 'inline-flex', alignItems: 'center', gap: 10, cursor: 'pointer' }}>
+          <svg width="30" height="30" viewBox="0 0 96 96" aria-hidden="true">
+            <g transform="rotate(-14 48 84)"><rect x="29" y="16" width="38" height="56" rx="5" fill="#0a0a0a" stroke={GOLD} strokeWidth="3.5" opacity="0.4" /></g>
+            <g transform="rotate(0 48 84)"><rect x="29" y="14" width="38" height="56" rx="5" fill="#0a0a0a" stroke={GOLD} strokeWidth="3.5" opacity="0.68" /></g>
+            <g transform="rotate(14 48 84)"><rect x="29" y="12" width="38" height="56" rx="5" fill="#0f0e0c" stroke={GOLD} strokeWidth="4" /><line x1="36" y1="54" x2="60" y2="54" stroke={GOLD} strokeWidth="3" strokeLinecap="round" opacity="0.55" /></g>
+          </svg>
+          <span style={{ ...condensed, fontSize: 26, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.02em', lineHeight: 1 }}>
+            <span style={{ color: '#f2f0ec' }}>Card</span><span style={{ color: GOLD, marginLeft: 6 }}>HQ</span>
+          </span>
         </div>
         <div style={{ display: 'flex', gap: 24, alignItems: 'center', flexWrap: 'wrap' }}>
           {[['Sets', () => { goHome(); setSportFilter('All') }, 'browse'], ['RPA Tracker', openRpa, 'rpa'], ['Patch Swaps', openPatchSwaps, 'patchswaps'], ['Community', () => openView('community'), 'community'], ['My Collection', () => openView('collection'), 'collection']].map(([label, fn, v]) => (
@@ -477,7 +551,7 @@ export default function Home() {
           {(() => {
             const sportCats = sports.filter(s => s !== 'All' && !TCG_SET.has(s))
             const tcgCats = sports.filter(s => TCG_SET.has(s))
-            const pick = (v) => { setSportFilter(v); setBrandFilter('All'); setProductFilter('All') }
+            const pick = (v) => { setSportFilter(v); setBrandFilter('All'); setProductFilter('All'); setTeamFilter('All'); setTeamInput(''); setTeamBrowse(false) }
             const chip = (label, value, color) => (
               <button key={label} onClick={() => pick(value)}
                 style={{
@@ -548,6 +622,48 @@ export default function Home() {
               </select>
             )}
           </div>
+          )}
+          {/* TEAM FILTER + SORT (after a specific sport is selected) */}
+          {oneSport && (
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap', marginBottom: 22 }}>
+              <span style={{ color: '#666', fontSize: 11, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase' }}>Team</span>
+              {!teamBrowse ? (
+                <button onClick={openTeamBrowse}
+                  style={{ background: '#141414', border: '1px solid #2a2a2a', borderRadius: 8, color: '#ddd', fontSize: 13, fontWeight: 600, padding: '8px 14px', cursor: 'pointer' }}>
+                  Filter by team ▾
+                </button>
+              ) : teamLoading ? (
+                <span style={{ color: '#888', fontSize: 13 }}>Loading teams…</span>
+              ) : (
+                <>
+                  <input list="team-options" value={teamInput}
+                    placeholder={'Type a team… (' + teamsForSport.length.toLocaleString() + ')'}
+                    onChange={(e) => {
+                      const v = e.target.value
+                      setTeamInput(v)
+                      const t = v.trim()
+                      if (!t) setTeamFilter('All')
+                      else if (teamsForSport.includes(t)) setTeamFilter(t)
+                    }}
+                    style={{ background: '#141414', border: '1px solid ' + (teamFilter !== 'All' ? GOLD : '#2a2a2a'), borderRadius: 8, color: '#ddd', fontSize: 13, padding: '8px 12px', minWidth: 230, outline: 'none' }} />
+                  <datalist id="team-options">{teamsForSport.map(t => <option key={t} value={t} />)}</datalist>
+                  {teamFilter !== 'All' && (
+                    <>
+                      <span style={{ color: '#666', fontSize: 11, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', marginLeft: 4 }}>Sort</span>
+                      <select value={teamSort} onChange={(e) => setTeamSort(e.target.value)}
+                        style={{ background: '#141414', border: '1px solid #2a2a2a', borderRadius: 8, color: '#ddd', fontSize: 13, padding: '8px 12px', cursor: 'pointer' }}>
+                        <option value="year-desc">Newest first</option>
+                        <option value="year-asc">Oldest first</option>
+                        <option value="player">Player (A–Z)</option>
+                        <option value="set">Set name</option>
+                      </select>
+                      <button onClick={() => { setTeamFilter('All'); setTeamInput('') }}
+                        style={{ background: 'none', border: 'none', color: GOLD, fontSize: 12.5, fontWeight: 600, cursor: 'pointer' }}>Clear</button>
+                    </>
+                  )}
+                </>
+              )}
+            </div>
           )}
         </>
       ) : (activeSet || globalHits) ? (
@@ -861,6 +977,33 @@ export default function Home() {
               )}
             </>
           )}
+        </section>
+      ) : (oneSport && teamFilter !== 'All') ? (
+        <section>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', flexWrap: 'wrap', gap: 8, marginBottom: 14 }}>
+            <h2 style={{ ...condensed, fontSize: 24, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em', margin: 0 }}>
+              {teamFilter} <span style={{ color: SPORT_COLORS[sportFilter] || GOLD, fontSize: 15 }}>· {sportFilter}</span>
+              <span style={{ color: '#555', fontSize: 15, marginLeft: 10 }}>{teamHits.length.toLocaleString()}{teamHits.length >= 2500 ? '+' : ''} cards</span>
+            </h2>
+          </div>
+          <div style={{ border: '1px solid #222', borderRadius: 12, overflow: 'hidden' }}>
+            <div style={{ display: 'flex', gap: 12, padding: '9px 16px', background: '#181818', borderBottom: '1px solid #262626', fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#888' }}>
+              <span style={{ flex: '0 0 60px' }}>Card</span>
+              <span style={{ flex: '1 1 auto', minWidth: 0 }}>Player</span>
+              <span style={{ flex: '0 0 54px' }}>Flag</span>
+              <span style={{ flex: '2 1 0', minWidth: 0 }}>Set · Section</span>
+            </div>
+            {teamHits.map((c, i) => (
+              <button key={i} onClick={() => { const s = sets.find(x => x.slug === c.slug); if (s) openSet(Object.assign({}, s, classifySet(s.name))) }}
+                style={{ width: '100%', textAlign: 'left', display: 'flex', gap: 12, padding: '8px 16px', fontSize: 14, alignItems: 'baseline', background: i % 2 === 0 ? '#0f0f0f' : '#141414', border: 'none', color: '#f5f5f5', cursor: 'pointer' }}>
+                <span style={{ flex: '0 0 60px', color: GOLD, fontWeight: 700, fontVariantNumeric: 'tabular-nums' }}>#{c.n}</span>
+                <span style={{ flex: '1 1 auto', minWidth: 0, fontWeight: 600 }}>{c.p}</span>
+                <span style={{ flex: '0 0 54px' }}>{c.x ? <Chip color={c.x === 'RC' ? '#4ade80' : '#888'}>{c.x}</Chip> : null}</span>
+                <span style={{ flex: '2 1 0', minWidth: 0, color: '#777', fontSize: 12.5 }}>{c.set}{c.section ? ' · ' + c.section : ''}</span>
+              </button>
+            ))}
+            {teamHits.length === 0 && <p style={{ padding: 20, color: '#666', fontSize: 14 }}>No cards found for {teamFilter} in {sportFilter}.</p>}
+          </div>
         </section>
       ) : (
         <section>

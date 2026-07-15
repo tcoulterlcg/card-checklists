@@ -1,5 +1,5 @@
 export const metadata = {
-  title: 'Checklist HQ — Sports Card Checklists',
+  title: 'Card HQ — Sports Card Checklists',
   description: 'Searchable sports card checklist database: baseball, football, basketball, hockey and soccer sets.',
 }
 
