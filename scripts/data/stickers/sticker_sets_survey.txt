@@ -1,0 +1,281 @@
+Baseball|1981|38386|1981 Topps Stickers
+Baseball|1982|8681|1982 Topps Stickers
+Baseball|1983|8684|1983 Topps Stickers
+Baseball|1984|8687|1984 Topps Stickers
+Baseball|1985|8691|1985 Topps Stickers
+Baseball|1986|8695|1986 Topps Stickers
+Baseball|1987|8699|1987 Topps Stickers
+Baseball|1987|187706|1987 Topps Stickers Hard Back Test Issue
+Baseball|1988|8819|1988 Panini Stickers
+Baseball|1988|8703|1988 Topps Stickers
+Baseball|1989|8820|1989 Panini Stickers
+Baseball|1989|8708|1989 Topps Stickers
+Baseball|1990|8821|1990 Panini Stickers
+Baseball|1990|10177|1990 Topps Stickers
+Baseball|1990|193746|1990 Topps Mylar Stickers Test Issue
+Baseball|1991|8822|1991 Panini Stickers
+Baseball|1991|59753|1991 Panini Stickers (Canadian)
+Baseball|1991|59754|1991 Panini Top 15 Stickers (Canadian)
+Baseball|1992|8823|1992 Panini Stickers
+Baseball|1992|59756|1992 Panini Stickers (Canadian)
+Baseball|1993|246562|1993 Topps Brookshire Brothers Nolan Ryan Reprints Stickers
+Baseball|1993|247547|1993 Topps Minyard Nolan Ryan Reprints Stickers
+Baseball|1993|8824|1993 Panini Stickers
+Baseball|1994|8825|1994 Panini Stickers
+Baseball|1995|8826|1995 Fleer Panini Stickers
+Baseball|1996|8827|1996 Panini Stickers
+Baseball|1997|195009|1997 Panini Stickers (Venezuelan)
+Baseball|1998|195010|1998 Panini Stickers (Venezuelan)
+Baseball|2000|195109|2000 Panini Stickers (Venezuelan)
+Baseball|2002|175972|2002 Panini 1952-2002 Leones del Caracas Historical Stickers
+Basketball|1988|65781|1988-89 Panini Stickers (Spanish)
+Basketball|1989|182410|1989-90 Panini Sport Basket Pallacanestro Stickers (Italian)
+Basketball|1989|65782|1989-90 Panini Stickers (Spanish)
+Basketball|1990|65783|1990-91 Panini Stickers
+Basketball|1990|65784|1990-91 Panini Stickers (Spanish)
+Basketball|1991|60174|1991-92 Panini Stickers
+Basketball|1991|227254|1991-92 Panini Stickers (Spanish/Portuguese)
+Basketball|1991|176373|1991-94 Panini Stickers (Greek)
+Basketball|1992|131258|1992-93 Topps Circle K Phoenix Suns Stickers
+Basketball|1992|65786|1992-93 Panini Stickers
+Basketball|1993|65787|1993-94 Panini Stickers
+Basketball|1994|65788|1994-95 Panini Stickers
+Basketball|1995|65789|1995-96 Panini NBA Stickers
+Basketball|1995|166853|1995-96 Panini NBA Stickers (Brazil/Portuguese)
+Basketball|1995|65790|1995-96 Panini NBA Stickers (European Edition)
+Basketball|1996|65795|1996-97 Panini Stickers
+Basketball|1996|166861|1996-97 Panini Stickers (Brazil/Portuguese)
+Basketball|1997|166318|1997 Topps Create a Card Vinyl Stickers
+Basketball|1998|156834|1998-99 Panini NBA Stickers
+Basketball|1998|166869|1998-99 Panini NBA Stickers (Brazil/Portuguese)
+Basketball|1999|156835|1999-00 Panini NBA Stickers
+Basketball|1999|166872|1999-00 Panini NBA Stickers (Brazil/Portuguese)
+Football|1981|183420|1981 Topps Red Border Stickers
+Football|1981|81515|1981 Topps Stickers
+Football|1982|8860|1982 Topps Stickers
+Football|1983|75936|1983 Topps Stickers
+Football|1984|77765|1984 Topps Stickers
+Football|1985|79217|1985 Topps Stickers
+Football|1986|85404|1986 Topps Stickers
+Football|1987|79821|1987 Topps Stickers
+Football|1988|84778|1988 Panini NFL Stickers
+Football|1988|48418|1988 Topps Stickers
+Football|1989|78035|1989 Panini Stickers
+Football|1989|93949|1989 Panini Stickers (UK)
+Football|1990|83890|1990 Panini NFL Stickers
+Football|1990|93950|1990 Panini Stickers (UK)
+Hockey|1982|62389|1982-83 Topps Stickers
+Hockey|1983|106071|1983-84 Topps Stickers
+Hockey|1985|261815|1985-86 Panini Hockey Elitserien (Swedish) Stickers
+Hockey|1986|127453|1986-87 Panini Ishockey (Swedish) Stickers
+Hockey|1987|261841|1987-88 Panini Ishockey (Swedish) Stickers
+Hockey|1987|10570|1987-88 Panini Stickers
+Hockey|1988|10571|1988-89 Panini Stickers
+Hockey|1989|10572|1989-90 Panini Stickers
+Hockey|1990|10573|1990-91 Panini Stickers
+Hockey|1991|10574|1991-92 Panini Stickers
+Hockey|1992|10575|1992-93 Panini Stickers
+Hockey|1992|61379|1992-93 Panini Stickers (French)
+Hockey|1993|10576|1993-94 Panini Stickers
+Hockey|1994|10577|1994-95 Panini Stickers
+Hockey|1995|105636|1995 Panini Hockey '95 World Championship Stickers
+Hockey|1995|10578|1995-96 Panini Stickers
+Hockey|1996|10579|1996-97 Panini Stickers
+Hockey|1997|10580|1997-98 Panini Stickers
+Hockey|1998|10581|1998-99 Panini Stickers
+Hockey|1999|262918|1999-00 Panini Stickers (Swiss)
+Hockey|1999|10582|1999-00 Panini Stickers
+Hockey|2000|262916|2000-01 Panini Swiss Hockey Stickers
+Hockey|2000|10583|2000-01 Panini Stickers
+Soccer|1980|171825|1980 Panini UEFA Euro Stickers
+Soccer|1980|443523|1980-81 Panini Football Stickers (Switzerland)
+Soccer|1980|171040|1980-81 Panini Football Stickers (UK)
+Soccer|1980|407521|1980-81 Panini Football Stickers (Belgium)
+Soccer|1980|351558|1980-81 Panini Voetbal Stickers
+Soccer|1980|427655|1980-81 Panini Football Stickers (France)
+Soccer|1980|378737|1980-81 Panini Calciatori Stickers
+Soccer|1981|443524|1981-82 Panini Football Stickers (Switzerland)
+Soccer|1981|407522|1981-82 Panini Football Stickers (Belgium)
+Soccer|1981|352255|1981-82 Panini Voetbal Stickers
+Soccer|1981|427656|1981-82 Panini Football Stickers (France)
+Soccer|1981|416182|1981-82 Panini Bundesliga Stickers
+Soccer|1981|378738|1981-82 Panini Calciatori Stickers
+Soccer|1981|581038|1981-82 Panini Futbol Stickers
+Soccer|1982|99828|1982 Panini FIFA World Cup Stickers
+Soccer|1982|443525|1982-83 Panini Football Stickers (Switzerland)
+Soccer|1982|171041|1982-83 Panini Football Stickers (UK)
+Soccer|1982|286372|1982-83 Panini Football Stickers (Belgium)
+Soccer|1982|352810|1982-83 Panini Voetbal Stickers
+Soccer|1982|411411|1982-83 Panini Football Stickers (France)
+Soccer|1982|415738|1982-83 Panini Bundesliga Stickers
+Soccer|1982|378739|1982-83 Panini Calciatori Stickers
+Soccer|1983|443526|1983-84 Panini Football Stickers (Switzerland)
+Soccer|1983|171042|1983-84 Panini Football Stickers (UK)
+Soccer|1983|407523|1983-84 Panini Football Stickers (Belgium)
+Soccer|1983|353603|1983-84 Panini Voetbal Stickers
+Soccer|1983|427657|1983-84 Panini Football Stickers (France)
+Soccer|1983|414135|1983-84 Panini Bundesliga Stickers
+Soccer|1983|378740|1983-84 Panini Calciatori Stickers
+Soccer|1984|417286|1984 Panini UEFA Euro Stickers
+Soccer|1984|659398|1984-85 Panini Football Stickers (Norway, Donald Duck)
+Soccer|1984|443527|1984-85 Panini Football Stickers (Switzerland)
+Soccer|1984|171043|1984-85 Panini Football Stickers (UK)
+Soccer|1984|407524|1984-85 Panini Football Stickers (Belgium)
+Soccer|1984|353756|1984-85 Panini Voetbal Stickers
+Soccer|1984|430035|1984-85 Panini Football Stickers (France)
+Soccer|1984|412017|1984-85 Panini Fussball 85 Stickers
+Soccer|1984|378741|1984-85 Panini Calciatori Stickers
+Soccer|1985|171720|1985-86 Panini Football Stickers (UK)
+Soccer|1985|409636|1985-86 Panini Football Stickers (Belgium)
+Soccer|1985|400293|1985-86 Panini Voetbal Stickers
+Soccer|1985|430045|1985-86 Panini Football Stickers (France)
+Soccer|1985|411420|1985-86 Panini Fussball 86 Stickers
+Soccer|1985|378742|1985-86 Panini Calciatori Stickers
+Soccer|1986|175006|1986 Panini FIFA World Cup Stickers
+Soccer|1986|443528|1986-87 Panini Football Stickers (Switzerland)
+Soccer|1986|171044|1986-87 Panini Football Stickers (UK)
+Soccer|1986|409643|1986-87 Panini Football Stickers (Belgium)
+Soccer|1986|354582|1986-87 Panini Voetbal Stickers
+Soccer|1986|430227|1986-87 Panini Football Stickers (France)
+Soccer|1986|367429|1986-87 Panini Fussball 87 Stickers
+Soccer|1986|378743|1986-87 Panini Calciatori Stickers
+Soccer|1987|443529|1987-88 Panini Football Stickers (Switzerland)
+Soccer|1987|171721|1987-88 Panini Football Stickers (UK)
+Soccer|1987|409645|1987-88 Panini Football Stickers (Belgium)
+Soccer|1987|202455|1987-88 Panini Voetbal Stickers
+Soccer|1987|430228|1987-88 Panini Football Stickers (France)
+Soccer|1987|368055|1987-88 Panini Fussball 88 Stickers
+Soccer|1987|378744|1987-88 Panini Calciatori Stickers
+Soccer|1988|147982|1988 Panini UEFA Euro Stickers
+Soccer|1988|171046|1988-89 Panini Football Stickers (UK)
+Soccer|1988|409646|1988-89 Panini Football Stickers (Belgium)
+Soccer|1988|355774|1988-89 Panini Voetbal Stickers
+Soccer|1988|363872|1988-89 Panini Fussball 89 Stickers
+Soccer|1988|378745|1988-89 Panini Calciatori Stickers
+Soccer|1988|216988|1988-89 Panini Spanish Liga Stickers
+Soccer|1989|171047|1989-90 Panini Football Stickers (UK)
+Soccer|1989|409648|1989-90 Panini Football Stickers (Belgium)
+Soccer|1989|355921|1989-90 Panini Voetbal Stickers
+Soccer|1989|430231|1989-90 Panini Foot Stickers
+Soccer|1989|459918|1989-90 Panini Fussball 90 Stickers
+Soccer|1989|378746|1989-90 Panini Calciatori Stickers
+Soccer|1990|177086|1990 Panini FIFA World Cup Stickers
+Soccer|1990|409649|1990-91 Panini Football Stickers (Belgium)
+Soccer|1990|355968|1990-91 Panini Voetbal Stickers
+Soccer|1990|460739|1990-91 Panini Fussball 91 Stickers
+Soccer|1990|378747|1990-91 Panini Calciatori Stickers
+Soccer|1991|409657|1991-92 Panini Football Stickers (Belgium)
+Soccer|1991|356346|1991-92 Panini Voetbal Stickers
+Soccer|1991|171050|1991-92 Panini Football Stickers (England)
+Soccer|1991|515185|1991-92 Panini Foot Stickers
+Soccer|1991|378748|1991-92 Panini Calciatori Stickers
+Soccer|1991|211122|1991-92 Panini Scottish Football Stickers
+Soccer|1992|229658|1992 Panini UEFA Euro Stickers
+Soccer|1992|409659|1992-93 Panini Football Stickers (Belgium)
+Soccer|1992|356808|1992-93 Panini Voetbal Stickers
+Soccer|1992|171051|1992-93 Panini Football Stickers (England)
+Soccer|1992|514842|1992-93 Panini Foot Stickers
+Soccer|1992|378749|1992-93 Panini Calciatori Stickers
+Soccer|1992|423076|1992-93 Panini Fútbol Estrellas de la Liga Stickers
+Soccer|1993|325519|1993 Panini Fotboll Stickers
+Soccer|1993|450594|1993-94 Panini Football Stickers (Switzerland)
+Soccer|1993|412045|1993-94 Panini Football Stickers (Belgium)
+Soccer|1993|356853|1993-94 Panini Voetbal Stickers
+Soccer|1993|515594|1993-94 Panini Foot Stickers
+Soccer|1993|378750|1993-94 Panini Calciatori Stickers
+Soccer|1993|286022|1993-94 Panini Fútbol Estrellas de la Liga Stickers
+Soccer|1994|425870|1994 Panini FIFA World Cup Stickers (Blue Backs)
+Soccer|1994|425785|1994 Panini FIFA World Cup Stickers (Green Backs)
+Soccer|1994|258108|1994 Panini World Cup Story Stickers
+Soccer|1994|450595|1994-95 Panini Football Stickers (Switzerland)
+Soccer|1994|412046|1994-95 Panini Football Stickers (Belgium)
+Soccer|1994|298558|1994-95 Panini Voetbal Stickers
+Soccer|1994|532695|1994-95 Panini Foot Stickers
+Soccer|1994|487841|1994-95 Panini Calciatori Stickers
+Soccer|1994|286386|1994-95 Panini Supercalcio Stickers
+Soccer|1994|400914|1994-95 Panini Scottish Football Stickers
+Soccer|1994|550300|1994-95 Panini Liga Stickers
+Soccer|1995|450597|1995-96 Panini Football Stickers (Switzerland)
+Soccer|1995|412047|1995-96 Panini Football Stickers (Belgium)
+Soccer|1995|289851|1995-96 Panini Voetbal Stickers
+Soccer|1995|532696|1995-96 Panini Foot Stickers
+Soccer|1995|487842|1995-96 Panini Calciatori Stickers
+Soccer|1995|404638|1995-96 Panini Supercalcio Stickers
+Soccer|1995|180467|1995-96 Panini Scottish Football Stickers
+Soccer|1996|269419|1996 Panini UEFA Euro Stickers
+Soccer|1996|450603|1996-97 Panini Football Stickers (Switzerland)
+Soccer|1996|412884|1996-97 Panini Football Stickers (Belgium)
+Soccer|1996|205484|1996-97 Panini Voetbal Stickers
+Soccer|1996|183932|1996-97 Panini Foot Stickers
+Soccer|1996|340864|1996-97 Panini Bundesliga Stickers
+Soccer|1996|461400|1996-97 Panini Fussball Bundesliga zur Endphase der Saison Stickers
+Soccer|1996|390960|1996-97 Panini Calciatori Stickers
+Soccer|1996|398442|1996-97 Panini Scottish Football Stickers
+Soccer|1997|450611|1997-98 Panini Football Stickers (Switzerland)
+Soccer|1997|261092|1997-98 Panini Los Mejores Equipos de Europa Stickers
+Soccer|1997|412894|1997-98 Panini Football Stickers (Belgium)
+Soccer|1997|356883|1997-98 Panini Voetbal Stickers
+Soccer|1997|313062|1997-98 Panini Foot Stickers
+Soccer|1997|97435|1997-98 Panini SuperFoot Stickers
+Soccer|1997|340863|1997-98 Panini Bundesliga Stickers
+Soccer|1997|391521|1997-98 Panini Calciatori Stickers
+Soccer|1997|535951|1997-98 Panini Futebol Stickers
+Soccer|1997|398444|1997-98 Panini Scottish Football Stickers
+Soccer|1998|78106|1998 Panini FIFA World Cup Stickers
+Soccer|1998|366535|1998-99 Panini Euro Football Stickers
+Soccer|1998|450612|1998-99 Panini Football Stickers (Switzerland)
+Soccer|1998|413135|1998-99 Panini Football Stickers (Belgium)
+Soccer|1998|357036|1998-99 Panini Voetbal Stickers
+Soccer|1998|313063|1998-99 Panini Foot Stickers
+Soccer|1998|313029|1998-99 Panini SuperFoot Stickers
+Soccer|1998|340862|1998-99 Panini Bundesliga Stickers
+Soccer|1998|307016|1998-99 Panini Supergol Stickers
+Soccer|1998|391523|1998-99 Panini Calciatori Stickers
+Soccer|1998|531386|1998-99 Panini Futebol Stickers
+Soccer|1999|363459|1999-00 Panini Premier Soccer League Soccer Album 2000 Stickers
+Soccer|1999|450613|1999-00 Panini Football Stickers (Switzerland)
+Soccer|1999|181612|1999-00 Panini UEFA Champions League Stickers
+Soccer|1999|413137|1999-00 Panini Football Stickers (Belgium)
+Soccer|1999|357055|1999-00 Panini Voetbal Stickers
+Soccer|1999|515620|1999-00 Panini Foot Stickers
+Soccer|1999|522858|1999-00 Panini SuperFoot Stickers
+Soccer|1999|236323|1999-00 Panini Bundesliga Stickers
+Soccer|1999|307029|1999-00 Panini Supergol Stickers
+Soccer|1999|392496|1999-00 Panini Calciatori Stickers
+Soccer|1999|492143|1999-00 Panini Futebol Stickers
+Soccer|1999|257739|1999-00 Panini Scottish Premier League Stickers
+Soccer|1999|650808|1999-00 Panini Liga Stickers
+Soccer|2000|244820|2000 Panini UEFA Euro Stickers
+Soccer|2000|195458|2000-01 Panini UEFA Champions League Stickers
+Soccer|2000|413363|2000-01 Panini Football Stickers (Belgium)
+Soccer|2000|522857|2000-01 Panini Foot Stickers
+Soccer|2000|340861|2000-01 Panini Bundesliga Stickers
+Soccer|2000|392733|2000-01 Panini Calciatori Stickers
+Soccer|2000|510501|2000-01 Panini Futebol Stickers
+Soccer|2000|258023|2000-01 Panini Rangers FC Stickers
+Soccer|2000|317936|2000-01 Panini Liga Este Stickers
+Soccer|2001|295497|2001-02 Panini UEFA Champions League Stickers
+Soccer|2001|423696|2001 Panini Copa América Stickers
+Soccer|2001|414097|2001-02 Panini Football Stickers (Belgium)
+Soccer|2001|506723|2001-02 Panini Foot Stickers
+Soccer|2001|340859|2001-02 Panini Bundesliga Stickers
+Soccer|2001|393664|2001-02 Panini Calciatori Stickers
+Soccer|2001|510992|2001-02 Panini Futebol Stickers
+Soccer|2001|257738|2001-02 Panini Scottish Premier League Gum Stickers
+Soccer|2001|375909|2001-02 Panini Liga Este Stickers
+Soccer|2001|486051|2001-02 Panini Superliga Stickers
+Soccer|2002|530556|2002 Panini FIFA World Cup Stickers ("Made in Brazil", Black Backs)
+Soccer|2002|10097|2002 Panini FIFA World Cup Stickers ("Made in Italy", Black Backs)
+Soccer|2002|530555|2002 Panini FIFA World Cup Stickers (Blue Backs)
+Soccer|2002|648679|2002 Panini FIFA World Cup Stickers (Israel Edition)
+Soccer|2002|305361|2002 Panini Road to FIFA World Cup Stickers
+Soccer|2002|91670|2002-03 Panini Football Stickers (England)
+Soccer|2002|509891|2002 Panini Campeonato Brasileiro Stickers
+Soccer|2002|414098|2002-03 Panini Football Stickers (Belgium)
+Soccer|2002|506732|2002-03 Panini Foot Stickers
+Soccer|2002|340720|2002-03 Panini Bundesliga Stickers
+Soccer|2002|393846|2002-03 Panini Calciatori Stickers
+Soccer|2002|379168|2002-03 Panini Futebol Stickers
+Soccer|2002|318689|2002-03 Panini Scottish Premier League Stickers
+Soccer|2002|343620|2002-03 Panini Liga Este Stickers
+Soccer|2002|610948|2002-03 Panini Superliga de Estrellas Stickers
