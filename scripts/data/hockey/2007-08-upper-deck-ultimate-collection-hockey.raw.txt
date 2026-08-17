@@ -1,0 +1,162 @@
+1 Alexander Ovechkin Washington Capitals
+2 Roberto Luongo Vancouver Canucks
+3 Markus Naslund Vancouver Canucks
+4 Mats Sundin Toronto Maple Leafs
+5 Darcy Tucker Toronto Maple Leafs
+6 Darryl Sittler Toronto Maple Leafs
+7 Frank Mahovlich Toronto Maple Leafs
+8 Vincent Lecavalier Tampa Bay Lightning
+9 Martin St. Louis Tampa Bay Lightning
+10 Paul Kariya St. Louis Blues
+11 Keith Tkachuk St. Louis Blues
+12 Joe Thornton San Jose Sharks
+13 Jonathan Cheechoo San Jose Sharks
+14 Patrick Marleau San Jose Sharks
+15 Mario Lemieux Pittsburgh Penguins
+16 Sidney Crosby Pittsburgh Penguins
+17 Marc-Andre Fleury Pittsburgh Penguins
+18 Evgeni Malkin Pittsburgh Penguins
+19 Shane Doan Phoenix Coyotes
+20 Ron Hextall Philadelphia Flyers
+21 Simon Gagne Philadelphia Flyers
+22 Daniel Briere Philadelphia Flyers
+23 Dany Heatley Ottawa Senators
+24 Jason Spezza Ottawa Senators
+25 Ray Emery Ottawa Senators
+26 Jaromir Jagr New York Rangers
+27 Brendan Shanahan New York Rangers
+28 Henrik Lundqvist New York Rangers
+29 Mike Bossy New York Islanders
+30 Rick DiPietro New York Islanders
+31 Martin Brodeur New Jersey Devils
+32 Zach Parise New Jersey Devils
+33 Alexander Radulov Nashville Predators
+34 Saku Koivu Montreal Canadiens
+35 Michael Ryder Montreal Canadiens
+36 Larry Robinson Montreal Canadiens
+37 Marian Gaborik Minnesota Wild
+38 Wayne Gretzky Los Angeles Kings
+39 Anze Kopitar Los Angeles Kings
+40 Tomas Vokoun Florida Panthers
+41 Mark Messier Edmonton Oilers
+42 Dwayne Roloson Edmonton Oilers
+43 Dominik Hasek Detroit Red Wings
+44 Henrik Zetterberg Detroit Red Wings
+45 Gordie Howe Detroit Red Wings
+46 Mike Modano Dallas Stars
+47 Rick Nash Columbus Blue Jackets
+48 Joe Sakic Colorado Avalanche
+49 Patrick Roy Colorado Avalanche
+50 Paul Stastny Colorado Avalanche
+51 Bobby Hull Chicago Blackhawks
+52 Eric Staal Carolina Hurricanes
+53 Jarome Iginla Calgary Flames
+54 Miikka Kiprusoff Calgary Flames
+55 Thomas Vanek Buffalo Sabres
+56 Ryan Miller Buffalo Sabres
+57 Patrice Bergeron Boston Bruins
+58 Bobby Orr Boston Bruins
+59 Ilya Kovalchuk Atlanta Thrashers
+60 Jean-Sebastien Giguere Anaheim Ducks
+61 T.J. Hensick RC Colorado Avalanche
+62 Jannik Hansen RC Vancouver Canucks
+63 Jaroslav Halak RC Montreal Canadiens
+64 Tom Gilbert RC Edmonton Oilers
+65 Jason Jaffray RC Vancouver Canucks
+66 Ryan O'Byrne RC Montreal Canadiens
+67 Steve Downie RC Philadelphia Flyers
+68 David Moss RC Calgary Flames
+69 Mike Weber RC Buffalo Sabres
+70 Tomas Popperle RC Columbus Blue Jackets
+71 Daniel Girardi RC New York Rangers
+72 Matt Keetley RC Calgary Flames
+73 Cal Clutterbuck RC Minnesota Wild
+74 Tobias Stephan RC Dallas Stars
+75 Marc Methot RC Columbus Blue Jackets
+76 Matt Hunwick RC Boston Bruins
+77 Mike Lundin RC Tampa Bay Lightning
+78 Ryan Carter RC Anaheim Ducks
+79 Casey Borer RC Carolina Hurricanes
+80 Martin Lojek RC Florida Panthers
+81 Mark Mancari RC Buffalo Sabres
+82 Jared Boll RC Columbus Blue Jackets
+83 Thomas Greiss RC San Jose Sharks
+84 Bryan Young RC Edmonton Oilers
+85 Patrick Kaleta RC Buffalo Sabres
+86 Rod Pelley RC New Jersey Devils
+87 Jonas Hiller RC Anaheim Ducks
+88 Magnus Johansson RC Chicago Blackhawks
+89 Cory Murphy RC Florida Panthers
+90 Cody Bass RC Ottawa Senators
+91 Craig Weller RC Phoenix Coyotes
+92 Steve Wagner RC St. Louis Blues
+93 Johnny Boychuk RC Colorado Avalanche
+94 Matt Ellis RC Detroit Red Wings
+95 Joel Lundqvist RC Dallas Stars
+96 Jonathan Quick RC Los Angeles Kings
+97 Daniel Winnik RC Phoenix Coyotes
+98 Drew MacIntyre RC Vancouver Canucks
+99 Daniel Carcillo RC Phoenix Coyotes
+100 John Zeiler RC Los Angeles Kings
+101 Brandon Dubinsky RC New York Rangers
+102 Liam Reddox RC Edmonton Oilers
+103 Tomas Plihal RC San Jose Sharks
+104 Frans Nielsen RC New York Islanders
+105 Chris Conner RC Dallas Stars
+106 Jack Skille RC Chicago Blackhawks
+107 Tyler Kennedy RC Pittsburgh Penguins
+108 Matt Moulson RC Los Angeles Kings
+109 Sergei Kostitsyn RC Montreal Canadiens
+110 Tanner Glass RC Florida Panthers
+111 Kent Huskins RC Anaheim Ducks
+112 Riley Cote RC Philadelphia Flyers
+113 Antti Pihlstrom RC Nashville Predators
+114 Chris Bourque RC Washington Capitals
+115 David Jones RC Colorado Avalanche
+116 Lukas Kaspar RC San Jose Sharks
+117 Nathan Guenin RC Philadelphia Flyers
+118 Kris Russell RC Columbus Blue Jackets
+119 Tobias Enstrom RC Atlanta Thrashers
+120 Anton Stralman RC Toronto Maple Leafs
+121 Bobby Ryan AU RC Anaheim Ducks
+122 Sam Gagner AU RC Edmonton Oilers
+123 Nicklas Bergfors AU RC New Jersey Devils
+124 Erik Johnson AU RC St. Louis Blues
+125 Jack Johnson AU RC Los Angeles Kings
+126 Jonathan Bernier AU RC Los Angeles Kings
+127 Bryan Little AU RC Atlanta Thrashers
+128 Tuukka Rask AU RC Boston Bruins
+129 Matt Niskanen AU RC Dallas Stars
+130 Andrew Cogliano AU RC Edmonton Oilers
+131 Marc Staal AU RC New York Rangers
+132 Nick Foligno AU RC Ottawa Senators
+133 Brett Sterling AU RC Atlanta Thrashers
+134 Martin Hanzal AU RC Phoenix Coyotes
+135 Matt Smaby AU RC Tampa Bay Lightning
+136 Petr Kalus AU RC Minnesota Wild
+137 Andy Greene AU RC New Jersey Devils
+138 Ondrej Pavelec AU RC Atlanta Thrashers
+139 Rob Schremp AU RC Edmonton Oilers
+140 Kyle Chipchura AU RC Montreal Canadiens
+141 Ryan Parent AU RC Philadelphia Flyers
+142 David Krejci AU RC Boston Bruins
+143 Lauri Tukonen AU RC Los Angeles Kings
+144 James Sheppard AU RC Minnesota Wild
+145 Mason Raymond AU RC Vancouver Canucks
+146 Devin Setoguchi AU RC San Jose Sharks
+147 Curtis McElhinney AU RC Calgary Flames
+148 Brian Elliott AU RC Ottawa Senators
+149 Drew Miller AU RC Anaheim Ducks
+150 Ryan Callahan AU RC New York Rangers
+151 Ville Koistinen AU RC Nashville Predators
+152 Torrey Mitchell AU RC San Jose Sharks
+153 David Perron AU RC St. Louis Blues
+154 Milan Lucic RC AU Boston Bruins
+155 Jaroslav Hlinka AU RC Colorado Avalanche
+156 Tyler Weiman AU RC Colorado Avalanche
+157 Jonathan Toews AU RC Chicago Blackhawks
+158 Carey Price AU RC Montreal Canadiens
+159 Patrick Kane AU RC Chicago Blackhawks
+160 Nicklas Backstrom AU RC Washington Capitals
+161 Peter Mueller AU RC Phoenix Coyotes
+162 Jiri Tlusty AU RC Toronto Maple Leafs

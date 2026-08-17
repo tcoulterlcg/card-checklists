@@ -1,0 +1,84 @@
+1 Jean-Sebastien Giguere Anaheim Mighty Ducks
+2 Dany Heatley Atlanta Thrashers
+3 Ilya Kovalchuk Atlanta Thrashers
+4 Joe Thornton Boston Bruins
+5 Chris Drury Buffalo Sabres
+6 Jarome Iginla Calgary Flames
+7 Miikka Kiprusoff Calgary Flames
+8 Eric Staal Carolina Hurricanes
+9 Jocelyn Thibault Chicago Blackhawks
+10 Peter Forsberg Colorado Avalanche
+11 Joe Sakic Colorado Avalanche
+12 Rick Nash Columbus Blue Jackets
+13 Mike Modano Dallas Stars
+14 Pavel Datsyuk Detroit Red Wings
+15 Gordie Howe Detroit Red Wings
+16 Steve Yzerman Detroit Red Wings
+17 Wayne Gretzky Edmonton Oilers
+18 Ryan Smyth Edmonton Oilers
+19 Roberto Luongo Florida Panthers
+20 Luc Robitaille Los Angeles Kings
+21 Marian Gaborik Minnesota Wild
+22 Patrick Roy Montreal Canadiens
+23 Jose Theodore Montreal Canadiens
+24 Tomas Vokoun Nashville Predators
+25 Martin Brodeur New Jersey Devils
+26 Jaromir Jagr New York Rangers
+27 Mark Messier New York Rangers
+28 Michael Peca New York Islanders
+29 Dominik Hasek Ottawa Senators
+30 Jason Spezza Ottawa Senators
+31 Jeremy Roenick Philadelphia Flyers
+32 Simon Gagne Philadelphia Flyers
+33 Brett Hull Phoenix Coyotes
+34 Mario Lemieux Pittsburgh Penguins
+35 Evgeni Nabokov San Jose Sharks
+36 Keith Tkachuk St. Louis Blues
+37 Vincent Lecavalier Tampa Bay Lightning
+38 Martin St. Louis Tampa Bay Lightning
+39 Mats Sundin Toronto Maple Leafs
+40 Ed Belfour Toronto Maple Leafs
+41 Markus Naslund Vancouver Canucks
+42 Olaf Kolzig Washington Capitals
+43 Brad Fast RC Carolina Hurricanes
+44 Brennan Evans RC Calgary Flames
+45 Layne Ulmer RC New York Rangers
+46 Mel Angelstad RC Washington Capitals
+47 Garret Stroshein RC Washington Capitals
+48 Marcel Goc RC San Jose Sharks
+49 Alexander Ragulin RC USSR
+50 Herb Brooks RC
+51 Cammi Granato RC USA
+52 Foster Hewitt RC
+53 Mike Keenan
+54 Bob Cole RC
+55 Lord Stanley RC
+56 James Norris RC
+57 Ken Hitchcock RC Philadelphia Flyers
+58 Dave Reece RC Boston Bruins
+59 Mario Lemieux Pittsburgh Penguins
+60 Joe Thornton Boston Bruins
+61 Dany Heatley Atlanta Thrashers
+62 Jarome Iginla Calgary Flames
+63 Joe Sakic Colorado Avalanche
+64 Vincent Lecavalier Tampa Bay Lightning
+65 Martin Brodeur New Jersey Devils
+66 Jaromir Jagr New York Rangers
+67 Milan Hejduk Colorado Avalanche
+68 Miikka Kiprusoff Calgary Flames
+69 Tuomo Ruutu Chicago Blackhawks
+70 Teemu Selanne Colorado Avalanche
+71 Marco Sturm San Jose Sharks
+72 Olaf Kolzig Washington Capitals
+73 Ilya Kovalchuk Atlanta Thrashers
+74 Sergei Samsonov Boston Bruins
+75 Marian Hossa Ottawa Senators
+76 Marian Gaborik Minnesota Wild
+77 Nicklas Lidstrom Detroit Red Wings
+78 Mats Sundin Toronto Maple Leafs
+79 Peter Forsberg Colorado Avalanche
+80 Robert Esche Philadelphia Flyers
+81 Mike Modano Dallas Stars
+82 Bill Guerin Dallas Stars
+83 Tony Amonte Philadelphia Flyers
+84 Keith Tkachuk St. Louis Blues

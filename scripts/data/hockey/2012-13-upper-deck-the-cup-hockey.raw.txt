@@ -1,0 +1,132 @@
+1 Ryan Getzlaf Anaheim Ducks
+2 Teemu Selanne Anaheim Ducks
+3 Ray Bourque Boston Bruins
+4 Bobby Orr Boston Bruins
+5 Tuukka Rask Boston Bruins
+6 Cam Neely Boston Bruins
+7 Zdeno Chara Boston Bruins
+8 Tyler Seguin Boston Bruins
+9 Brad Marchand Boston Bruins
+10 Thomas Vanek Buffalo Sabres
+11 Theoren Fleury Calgary Flames
+12 Miikka Kiprusoff Calgary Flames
+13 Jarome Iginla Calgary Flames
+14 Jeff Skinner Carolina Hurricanes
+15 Phil Esposito Chicago Blackhawks
+16 Patrick Kane Chicago Blackhawks
+17 Tony Esposito Chicago Blackhawks
+18 Bobby Hull Chicago Blackhawks
+19 Jonathan Toews Chicago Blackhawks
+20 Joe Sakic Colorado Avalanche
+21 Patrick Roy Colorado Avalanche
+22 Matt Duchene Colorado Avalanche
+23 Gabriel Landeskog Colorado Avalanche
+24 Jaromir Jagr Boston Bruins
+25 Dominik Hasek Detroit Red Wings
+26 Jimmy Howard Detroit Red Wings
+27 Pavel Datsyuk Detroit Red Wings
+28 Nicklas Lidstrom Detroit Red Wings
+29 Johan Franzen Detroit Red Wings
+30 Henrik Zetterberg Detroit Red Wings
+31 Ryan Smyth Edmonton Oilers
+32 Taylor Hall Edmonton Oilers
+33 Grant Fuhr Edmonton Oilers
+34 Jari Kurri Edmonton Oilers
+35 Jordan Eberle Edmonton Oilers
+36 Paul Coffey Edmonton Oilers
+37 Andy Moog Edmonton Oilers
+38 Ryan Nugent-Hopkins Edmonton Oilers
+39 Ed Belfour Florida Panthers
+40 Jeff Carter Los Angeles Kings
+41 Anze Kopitar Los Angeles Kings
+42 Mike Richards Los Angeles Kings
+43 Luc Robitaille Los Angeles Kings
+44 Drew Doughty Los Angeles Kings
+45 Wayne Gretzky Los Angeles Kings
+46 Jonathan Quick Los Angeles Kings
+47 Mike Modano Minnesota North Stars
+48 Zach Parise Minnesota Wild
+49 Carey Price Montreal Canadiens
+50 Larry Robinson Montreal Canadiens
+51 P.K. Subban Montreal Canadiens
+52 Pekka Rinne Nashville Predators
+53 Ilya Kovalchuk New Jersey Devils
+54 Martin Brodeur New Jersey Devils
+55 Adam Henrique New Jersey Devils
+56 John Tavares New York Islanders
+57 Mike Bossy New York Islanders
+58 Rick Nash New York Rangers
+59 Marian Gaborik New York Rangers
+60 Henrik Lundqvist New York Rangers
+61 Mark Messier New York Rangers
+62 Jason Spezza Ottawa Senators
+63 Eric Lindros New York Rangers
+64 Claude Giroux Philadelphia Flyers
+65 Evgeni Malkin Pittsburgh Penguins
+66 Mario Lemieux Pittsburgh Penguins
+67 Marc-Andre Fleury Pittsburgh Penguins
+68 Sidney Crosby Pittsburgh Penguins
+69 Ron Francis Hartford Whalers
+70 Kristopher Letang Pittsburgh Penguins
+71 Scott Hartnell Philadelphia Flyers
+72 Antti Niemi San Jose Sharks
+73 Patrick Marleau San Jose Sharks
+74 Logan Couture San Jose Sharks
+75 Jaroslav Halak St. Louis Blues
+76 Brett Hull St. Louis Blues
+77 Steven Stamkos Tampa Bay Lightning
+78 Phil Kessel Toronto Maple Leafs
+79 Dion Phaneuf Toronto Maple Leafs
+80 Mats Sundin Toronto Maple Leafs
+81 Alexandre Burrows Vancouver Canucks
+82 Daniel Sedin Vancouver Canucks
+83 Henrik Sedin Vancouver Canucks
+84 Ryan Kesler Vancouver Canucks
+85 Trevor Linden Vancouver Canucks
+86 Pavel Bure Vancouver Canucks
+87 Alexander Ovechkin Washington Capitals
+88 Nicklas Backstrom Washington Capitals
+89 Dale Hawerchuk Winnipeg Jets
+90 Ondrej Pavelec Winnipeg Jets
+91 Maxime Sauve AU RC Boston Bruins
+92 Lane MacDermid AU RC Boston Bruins
+93 Torey Krug AU RC Boston Bruins
+94 Michael Hutchinson AU RC Boston Bruins
+95 Akim Aliu AU RC Calgary Flames
+96 Jeremy Welsh AU RC Carolina Hurricanes
+97 Brandon Bollig AU RC Chicago Blackhawks
+98 Tyson Barrie AU RC Colorado Avalanche
+99 Mike Connolly AU RC Colorado Avalanche
+100 Dalton Prout AU RC Columbus Blue Jackets
+101 Cody Goloubef AU RC Columbus Blue Jackets
+102 Shawn Hunwick AU RC Columbus Blue Jackets
+103 Ryan Garbutt AU RC Dallas Stars
+104 Reilly Smith AU RC Dallas Stars
+105 Brenden Dillon AU RC Dallas Stars
+106 Scott Glennie AU RC Dallas Stars
+107 Riley Sheahan AU RC Detroit Red Wings
+108 Philippe Cornet RC Edmonton Oilers
+109 Jordan Nolan AU RC Los Angeles Kings
+110 Jason Zucker AU RC Minnesota Wild
+111 Tyler Cuma AU RC Minnesota Wild
+112 Chay Genoway AU RC Minnesota Wild
+113 Gabriel Dumont AU RC Montreal Canadiens
+114 Robert Mayer RC Montreal Canadiens
+115 Chet Pickard AU RC Nashville Predators
+116 Aaron Ness AU RC New York Islanders
+117 Casey Cizikas AU RC New York Islanders
+118 Matt Donovan AU RC New York Islanders
+119 Jakob Silfverberg AU RC Ottawa Senators
+120 Mark Stone AU RC Ottawa Senators
+121 Brandon Manning AU RC Philadelphia Flyers
+122 Michael Stone AU RC Phoenix Coyotes
+123 Matt Watkins AU RC Phoenix Coyotes
+124 Tyson Sexsmith RC San Jose Sharks
+125 Jake Allen AU RC St. Louis Blues
+126 J.T. Brown AU RC Tampa Bay Lightning
+127 Carter Ashton AU RC Toronto Maple Leafs
+128 Ryan Hamilton AU RC Toronto Maple Leafs
+129 Jussi Rynnas AU RC Toronto Maple Leafs
+130 Sven Baertschi AU RC Calgary Flames
+131 Chris Kreider AU RC New York Rangers
+132 Jaden Schwartz AU RC St. Louis Blues
