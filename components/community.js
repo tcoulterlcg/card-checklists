@@ -242,7 +242,7 @@ export function CommunityView({ account, indexSets, onOpenAuth }) {
   const { session, profile } = account
   const [feed, setFeed] = useState(null)
   const [composing, setComposing] = useState(false)
-  const [title, setTitle] = useState('')
+  const [postTitle, setPostTitle] = useState('')
   const [body, setBody] = useState('')
   const [ach, setAch] = useState('set-completion')
   const [setQuery, setSetQuery] = useState('')
@@ -259,11 +259,11 @@ export function CommunityView({ account, indexSets, onOpenAuth }) {
   }, [setQuery, indexSets])
 
   async function submit() {
-    if (!title.trim()) return
+    if (!postTitle.trim()) return
     const g = chosenSet ? grails.find(x => x.set_slug === chosenSet.slug) : null
-    await createPost(session.user.id, { title: title.trim(), body: body.trim() || null, set_slug: chosenSet?.slug || null, achievement: ach, grail_tier: g ? g.tier : null })
+    await createPost(session.user.id, { title: postTitle.trim(), body: body.trim() || null, set_slug: chosenSet?.slug || null, achievement: ach, grail_tier: g ? g.tier : null })
     if (g && g.notify && ach === 'set-completion') await notifyGrailCompletion(session.user.id, profile?.username || 'unknown', chosenSet.slug, chosenSet.name, g.tier)
-    setTitle(''); setBody(''); setChosenSet(null); setSetQuery(''); setComposing(false)
+    setPostTitle(''); setBody(''); setChosenSet(null); setSetQuery(''); setComposing(false)
     forumFeed().then(setFeed)
   }
 
@@ -284,7 +284,7 @@ export function CommunityView({ account, indexSets, onOpenAuth }) {
       {composing && session && (
         <div style={{ ...card, padding: 22, marginBottom: 22 }}>
           <div style={{ display: 'grid', gap: 10 }}>
-            <input style={input} placeholder="Title — e.g. Finished the 2004-05 Megacracks base set!" value={title} onChange={(e) => setTitle(e.target.value)} />
+            <input style={input} placeholder="Title — e.g. Finished the 2004-05 Megacracks base set!" value={postTitle} onChange={(e) => setPostTitle(e.target.value)} />
             <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
               {ACHIEVEMENTS.map(([v, label]) => (
                 <button key={v} onClick={() => setAch(v)} style={{ ...btnGhost, padding: '7px 12px', fontSize: 12, borderColor: ach === v ? ACCENT : '#232A3E', color: ach === v ? ACCENT_TEXT : '#A1A1AA' }}>{label}</button>

@@ -4,7 +4,7 @@
 // public/data/players/ (built by scripts/build-player-index.mjs).
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { supa } from '../lib/supa'
-import { TYPE, norm, parseQuery, matchPlayers, rowMatches, typeLabel, TYPE_COLORS, serialLabel, MEM_LABEL, MEM_COLORS, memKind, memTypical } from '../lib/query'
+import { TYPE, norm, parseQuery, parseQueryFor, matchPlayers, rowMatches, typeLabel, TYPE_COLORS, serialLabel, MEM_LABEL, MEM_COLORS, memKind, memTypical } from '../lib/query'
 import { ACCENT, ACCENT_TEXT, BG, SURFACE, SURFACE_2, LINE, CHIP_LINE, TEXT, TEXT_2, LABEL, display, eyebrow, title, buttonText } from '../lib/theme'
 
 const SPORT_COLORS = { Baseball: '#60a5fa', Football: '#4ade80', Basketball: '#f97316', Hockey: '#a78bfa', Soccer: '#f43f5e', UFC: '#dc2626', Boxing: '#eab308', Wrestling: '#f59e0b', Golf: '#22c55e', Tennis: '#14b8a6', Racing: '#ef4444', 'Pokémon': '#facc15', 'Yu-Gi-Oh!': '#a855f7', Magic: '#f59e0b', Lorcana: '#8b5cf6', 'One Piece': '#ef4444', Entertainment: '#ec4899', 'Non-Sport': '#fb923c', 'Multi-Sport': '#94a3b8' }
@@ -125,7 +125,7 @@ export function Omnibox({ value, onChange, onSubmit, onPickPlayer, onPickSet, se
     const h = (e) => { if (box.current && !box.current.contains(e.target)) setOpen(false) }
     document.addEventListener('mousedown', h); document.addEventListener('touchstart', h); return () => { document.removeEventListener('mousedown', h); document.removeEventListener('touchstart', h) }
   }, [])
-  const parsed = useMemo(() => parseQuery(value), [value])
+  const parsed = useMemo(() => parseQueryFor(dir, value), [value, dir])
   const playerHits = useMemo(() => (dir && parsed.player.length >= 2) ? matchPlayers(dir, parsed.player, 6) : [], [dir, parsed.player])
   const setHits = useMemo(() => {
     const t = norm(value); if (t.length < 3 || !sets) return []
@@ -279,7 +279,14 @@ export function PlayerPage({ player, parsed, sets, onOpenSet, myPlayers, onWant,
     return f
   }, [rows])
   const topTeam = useMemo(() => [...facets.teams.entries()].filter(([t]) => /[A-Za-z]{3,}/.test(t) && !/^\/|#/.test(t)).sort((a, b) => b[1] - a[1])[0], [facets])
-  const firstCard = useMemo(() => { const real = rows.filter(r => /^\d{4}/.test(r.set || '') && r.year); return real.filter(r => r.type & TYPE.RC).sort((a, b) => a.year - b.year)[0] || real.slice().sort((a, b) => a.year - b.year)[0] }, [rows])
+  // Earliest season's card; within that season prefer a rookie-flagged base card.
+  const firstCard = useMemo(() => {
+    const real = rows.filter(r => /^\d{4}/.test(r.set || '') && r.year)
+    if (!real.length) return null
+    const y = Math.min(...real.map(r => r.year))
+    const first = real.filter(r => r.year === y)
+    return first.find(r => (r.type & TYPE.RC) && (r.type & TYPE.BASE)) || first.find(r => r.type & TYPE.RC) || first.find(r => r.type & TYPE.BASE) || first[0]
+  }, [rows])
 
   // Apply filters.
   const filtered = useMemo(() => {
@@ -563,7 +570,8 @@ const cnt = { marginLeft: 'auto', color: '#6B7080', fontSize: 12 }
 export function MyPlayersPanel({ myPlayers, onOpenPlayer, dirPlayers }) {
   const [dir, setDir] = useState(null)
   useEffect(() => { loadPlayerDir().then(setDir) }, [])
-  const resolve = (name) => dir ? dir.players.findIndex(p => p[0] === name) : -1
+  // exact name, else the same name spelled differently (saved before a data clean-up: "Shaquille ONeal")
+  const resolve = (name) => { if (!dir) return -1; const i = dir.players.findIndex(p => p[0] === name); if (i >= 0) return i; const k = norm(name); return dir.players.findIndex(p => norm(p[0]) === k) }
   return (
     <div className="hq-panel" style={{ background: 'linear-gradient(140deg, #0f1526, #0F1320)', border: '1px solid ' + ACCENT + '33', borderRadius: 18, padding: '26px 28px' }}>
       <h1 style={{ ...display, fontSize: 40, margin: 0, lineHeight: 1 }}>My Players</h1>
@@ -578,7 +586,7 @@ export function MyPlayersPanel({ myPlayers, onOpenPlayer, dirPlayers }) {
                 <Initials name={name} color={SPORT_COLORS[sport] || ACCENT} />
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <button onClick={() => onOpenPlayer(name)} style={{ ...title(16), background: 'none', border: 'none', color: '#EDEDEF', cursor: 'pointer', padding: 0, textAlign: 'left', lineHeight: 1.05 }}>{name}</button>
-                  <p style={{ margin: '3px 0 0', color: '#8A8A93', fontSize: 12 }}>{p ? sport + ' · ' + p[2].toLocaleString() + ' cards' : '…'}</p>
+                  <p style={{ margin: '3px 0 0', color: '#8A8A93', fontSize: 12 }}>{p ? sport + ' · ' + p[2].toLocaleString() + ' cards' : dir ? 'Not found in the database' : '…'}</p>
                 </div>
                 <button aria-label={'Remove ' + name} onClick={() => myPlayers.toggle(name)} style={{ background: 'none', border: '1px solid #232A3E', color: '#8A8A93', borderRadius: 8, width: 32, height: 32, cursor: 'pointer', fontFamily: 'inherit' }}>×</button>
               </div>

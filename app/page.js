@@ -7,7 +7,7 @@ import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { useAccount, AccountChip, AuthModal, CollectionView, CommunityView } from '../components/community'
 import { addWant } from '../lib/supa'
 import { Omnibox, PlayerPage, MyPlayersPanel, useMyPlayers, loadPlayerDir, seasonLabel, MemBadge, MemChip, memCodeOf } from '../components/player'
-import { parseQuery, matchPlayers, TYPE, typeLabel, TYPE_COLORS, serialLabel } from '../lib/query'
+import { norm, parseQuery, parseQueryFor, matchPlayers, TYPE, typeLabel, TYPE_COLORS, serialLabel } from '../lib/query'
 import { ACCENT, ACCENT_TEXT, BG, SURFACE, SURFACE_2, LINE, CHIP_LINE, TEXT, TEXT_2, LABEL, display, eyebrow, title, buttonText } from '../lib/theme'
 
 
@@ -290,22 +290,48 @@ export default function Home() {
   const [setMemFilter, setSetMemFilter] = useState('any')
   // Big sets have 500+ sections; render them in pages so phones don't freeze.
   const [secLimit, setSecLimit] = useState(20)
+  const [notice, setNotice] = useState('')
+  const [setLimit, setSetLimit] = useState(60) // home grid pages in 60s; all 5k cards at once is slow on phones
 
   const toggleSort = (field) => {
     if (sortField === field) setSortDir(d => (d === 'asc' ? 'desc' : 'asc'))
     else { setSortField(field); setSortDir(field === 'n' ? 'asc' : 'asc') }
   }
 
-  // Load the compact card index once (shared by player search + team browse).
+  // Browse filters load small slices built by build-search-index.mjs instead of
+  // the full 94 MB card index (which crashes phones):
+  //   TCG game  -> /data/teams/<game>.json (all of that game's cards)
+  //   team sport -> /data/teams/<sport>.json (team list), then one file per team
+  // searchIndex holds whichever slice is current, in the same shape as before.
+  const sportFile = (sp) => sp.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
+  const EMPTY_IDX = { slugs: [], sections: [], teams: [], rows: [] }
+  const [teamList, setTeamList] = useState(null) // { sport, teams: [[name, cards]] }
+  const [sliceLoading, setSliceLoading] = useState(false)
+  const getJson = async (url) => { try { const r = await fetch(url); if (!r.ok) throw 0; return await r.json() } catch { return null } }
   const ensureSearchIndex = async () => {
-    if (searchIndex) return searchIndex
-    try {
-      const r = await fetch('/data/search-index.json')
-      const idx = await r.json()
-      setSearchIndex(idx); return idx
-    } catch { const empty = { slugs: [], sections: [], teams: [], rows: [] }; setSearchIndex(empty); return empty }
+    const sp = sportFilter
+    if (TCG_SET.has(sp)) {
+      if (searchIndex && searchIndex.__key === sp) return searchIndex
+      const j = (await getJson('/data/teams/' + sportFile(sp) + '.json')) || { ...EMPTY_IDX }
+      j.__key = sp; setSearchIndex(j); return j
+    }
+    if (!teamList || teamList.sport !== sp) {
+      const j = await getJson('/data/teams/' + sportFile(sp) + '.json')
+      setTeamList({ sport: sp, teams: (j && j.teams) || [] })
+    }
+    return searchIndex
   }
   const openTeamBrowse = async () => { setTeamBrowse(true); setTeamLoading(true); await ensureSearchIndex(); setTeamLoading(false) }
+  // Load one team's slice when a team is picked (team sports only).
+  useEffect(() => {
+    if (TCG_SET.has(sportFilter) || teamFilter === 'All' || !teamList || teamList.sport !== sportFilter) return
+    const i = teamList.teams.findIndex(([t]) => t === teamFilter)
+    if (i < 0) return
+    const key = sportFilter + '|' + teamFilter
+    if (searchIndex && searchIndex.__key === key) return
+    setSliceLoading(true)
+    getJson('/data/teams/' + sportFile(sportFilter) + '/' + i + '.json').then(j => { const x = j || { ...EMPTY_IDX }; x.__key = key; setSearchIndex(x); setSliceLoading(false) })
+  }, [sportFilter, teamFilter, teamList])
 
   // Count-up animation for the hero stat cards.
   const [statN, setStatN] = useState({ sets: 0, cards: 0 })
@@ -348,9 +374,12 @@ export default function Home() {
     return () => cancelAnimationFrame(raf)
   }, [sets.length, totalCards])
 
-  const openSet = async (s) => {
+  // push=false when the change comes from Back/Forward (the URL is already right).
+  const nav = (url, push) => { if (push === false) return; try { history.pushState(null, '', url) } catch {} }
+  const openSet = async (s, push) => {
+    setNotice('')
     setActiveSet(s); setGlobalHits(null); setActiveSection('All'); setQuery(''); setActivePlayer(null); setView('browse'); setSetTypeFilter('All'); setSetRunFilter('any'); setSetRcOnly(false); setSetMemFilter('any'); setSecLimit(20)
-    try { history.pushState(null, '', '?set=' + encodeURIComponent(s.slug)) } catch {}
+    nav('?set=' + encodeURIComponent(s.slug), push)
     try {
       const r = await fetch('/data/' + s.slug + '.json')
       setSetData(await r.json())
@@ -361,27 +390,29 @@ export default function Home() {
   // One compact index (loaded once, then cached) powers instant cross-set
   // player search over every card, rather than fetching 300 set files.
   // Open a player landing page (optionally with the parsed query's filters).
-  const openPlayer = (p, parsed, candidates) => {
+  const openPlayer = (p, parsed, candidates, push) => {
+    setNotice('')
     setActivePlayer(p); setPlayerParsed(parsed || null); setPlayerCandidates(candidates || [])
     setActiveSet(null); setSetData(null); setGlobalHits(null); setView('player')
-    try { history.pushState(null, '', '?player=' + encodeURIComponent(p.name) + (parsed && parsed.raw && parseQuery(parsed.raw).player !== parsed.raw.trim().toLowerCase() ? '&q=' + encodeURIComponent(parsed.raw) : '')) } catch {}
+    nav('?player=' + encodeURIComponent(p.name) + (parsed && parsed.raw && norm(parsed.raw) !== parsed.player ? '&q=' + encodeURIComponent(parsed.raw) : ''), push)
     window.scrollTo(0, 0)
   }
-  const openPlayerByName = async (name, rawQuery) => {
+  const openPlayerByName = async (name, rawQuery, push) => {
     const dir = await loadPlayerDir()
-    const parsed = parseQuery(rawQuery || name)
+    const parsed = parseQueryFor(dir, rawQuery || name)
     const hits = matchPlayers(dir, parsed.player || name, 8)
     const exact = hits.find(h => h.name === name) || hits[0]
-    if (exact) openPlayer(exact, parsed, hits)
+    if (exact) openPlayer(exact, parsed, hits, push)
+    else setNotice('No player called “' + name + '” in the database.')
   }
   // The omnibox: understands "player + 1/1 / auto / rc / season / product".
   const runSearch = async (raw) => {
     const q = (raw == null ? query : raw).trim()
     if (q.length < 2) return
     setSearching(true)
-    const parsed = parseQuery(q)
+    const dir = await loadPlayerDir()
+    const parsed = parseQueryFor(dir, q)
     if (parsed.player.length >= 2) {
-      const dir = await loadPlayerDir()
       const hits = matchPlayers(dir, parsed.player, 8)
       if (hits.length) { setSearching(false); openPlayer(hits[0], parsed, hits); return }
     }
@@ -391,7 +422,7 @@ export default function Home() {
   // Fallback when the omnibox finds no player by name prefix: substring match
   // over the player directory and set names. (Scanning every card meant
   // downloading the 94 MB card index, which crashes phones.)
-  const runGlobalSearch = async (raw) => {
+  const runGlobalSearch = async (raw, push) => {
     const term = (raw == null ? query : raw).trim().toLowerCase()
     if (term.length < 3) return
     setSearching(true); setActiveSet(null); setSetData(null); setActivePlayer(null); setView('browse')
@@ -404,7 +435,8 @@ export default function Home() {
     players.sort((a, b) => b.cards - a.cards)
     const toks = term.split(/\s+/).filter(Boolean)
     const setHits = sets.filter(x => { const n = x.name.toLowerCase(); return toks.every(t => n.includes(t)) }).sort((a, b) => (b.year || 0) - (a.year || 0)).slice(0, 60)
-    setGlobalHits({ players, sets: setHits }); setSearching(false)
+    setGlobalHits({ players, sets: setHits }); setSearching(false); setQuery(raw == null ? query : raw)
+    nav('?search=' + encodeURIComponent(term), push)
   }
 
   const cardSerial = (c, sec) => {
@@ -505,6 +537,7 @@ export default function Home() {
     return list
   }, [taggedSets, sportFilter, brandFilter, productFilter, query, activeSet])
 
+  useEffect(() => { setSetLimit(60) }, [sportFilter, brandFilter, productFilter, sortBy, query])
   const oneSport = sportFilter !== 'All' && sportFilter !== 'Sports' && sportFilter !== 'TCG' && sportFilter !== 'Other'
 
   const isTcg = TCG_SET.has(sportFilter)
@@ -521,25 +554,15 @@ export default function Home() {
   // field sometimes holds print-run/parallel junk ("#/6", "/199"), so keep only
   // strings that read like a real team name and appear on at least a few cards.
   const teamsForSport = useMemo(() => {
-    if (!searchIndex || !oneSport || isTcg) return []
-    const { slugs, teams, rows } = searchIndex
-    const count = new Map()
-    for (const row of rows) {
-      const tid = row[4]
-      if (tid < 0) continue
-      if (slugSport[slugs[row[1]]] === sportFilter) count.set(tid, (count.get(tid) || 0) + 1)
-    }
-    const isTeam = (t) => t && /[A-Za-z]{3,}/.test(t) && !/^#/.test(t) && !/\d\s*\/\s*\d/.test(t) && !/^\/?\s*\d/.test(t) && t.length >= 4
-    const out = []
-    for (const [tid, n] of count) { const t = teams[tid]; if (n >= 3 && isTeam(t)) out.push(t) }
-    return out.sort((a, b) => a.localeCompare(b))
-  }, [searchIndex, oneSport, sportFilter, slugSport, isTcg])
+    if (!teamList || teamList.sport !== sportFilter || !oneSport || isTcg) return []
+    return teamList.teams.map(([t]) => t)
+  }, [teamList, oneSport, sportFilter, isTcg])
 
   // TCG filter options for the selected game: card names (base name, version
   // suffixes dropped), rarities and card types, most common first.
   const tcgOptions = useMemo(() => {
     const empty = { names: [], rarities: [], types: [] }
-    if (!searchIndex || !isTcg) return empty
+    if (!searchIndex || !isTcg || searchIndex.__key !== sportFilter) return empty
     const { slugs, teams, rows } = searchIndex
     const names = new Map(), rar = new Map(), typ = new Map()
     const bump = (m, k) => { if (k) m.set(k, (m.get(k) || 0) + 1) }
@@ -553,7 +576,7 @@ export default function Home() {
 
   // Every card of the selected team within the selected sport, sorted.
   const teamHits = useMemo(() => {
-    if (!searchIndex || !browseActive) return []
+    if (!searchIndex || !browseActive || searchIndex.__key !== (isTcg ? sportFilter : sportFilter + '|' + teamFilter)) return []
     const { slugs, sections, teams, rows } = searchIndex
     const setMeta = {}; for (const s of sets) setMeta[s.slug] = s
     const out = []
@@ -582,7 +605,7 @@ export default function Home() {
   const rcCount = (j) => (j.sections || []).reduce((s, sec) => s + sec.cards.filter(c => c.x === 'RC').length, 0)
 
   const isLanding = !activeSet && !globalHits && view === 'browse'
-  const goHome = () => { setActiveSet(null); setSetData(null); setGlobalHits(null); setQuery(''); setView('browse'); setTeamFilter('All'); setTeamInput(''); setTeamBrowse(false); setTcgRarity('All'); setTcgType('All'); setActivePlayer(null); try { history.pushState(null, '', location.pathname) } catch {} }
+  const goHome = (push) => { setNotice(''); setActiveSet(null); setSetData(null); setGlobalHits(null); setQuery(''); setView('browse'); setTeamFilter('All'); setTeamInput(''); setTeamBrowse(false); setTcgRarity('All'); setTcgType('All'); setActivePlayer(null); nav(location.pathname, push) }
   const openPatchSwaps = () => {
     setView('patchswaps'); setActiveSet(null); setSetData(null); setGlobalHits(null)
     if (!patchData) fetch('/data/patch-swaps.json').then(r => r.json()).then(setPatchData).catch(() => setPatchData({ entries: [] }))
@@ -593,7 +616,7 @@ export default function Home() {
     if (!rpaData) fetch('/data/rpa-index.json').then(r => r.json()).then(setRpaData).catch(() => setRpaData({ slugs: [], rows: [] }))
     window.scrollTo(0, 0)
   }
-  const openView = (v) => { setView(v); setActiveSet(null); setSetData(null); setGlobalHits(null); setActivePlayer(null); window.scrollTo(0, 0) }
+  const openView = (v, push) => { setNotice(''); nav('?view=' + v, push); setView(v); setActiveSet(null); setSetData(null); setGlobalHits(null); setActivePlayer(null); window.scrollTo(0, 0) }
   // Wantlist add — whole set or a single card/parallel from the set page.
   const wantIt = async (item) => {
     if (!account.session) { setAuthOpen(true); return }
@@ -626,17 +649,29 @@ export default function Home() {
     if (s) { setView('browse'); openSet(s) }
   }
   const searchFor = (name) => { setQuery(name); runSearch(name) }
-  // Deep links: ?player=Name[&q=raw query] or ?set=slug
-  useEffect(() => {
-    if (sets.length === 0) return
+  // Deep links and Back/Forward: ?player=Name[&q=raw] · ?set=slug · ?view=community · ?search=term
+  const applyUrl = () => {
     const sp = new URLSearchParams(location.search)
-    const pl = sp.get('player'), st = sp.get('set')
-    if (pl) { const q = sp.get('q'); setQuery(q || pl); openPlayerByName(pl, q) }
+    const pl = sp.get('player'), st = sp.get('set'), v = sp.get('view'), sr = sp.get('search')
+    if (pl) { const q = sp.get('q'); setQuery(q || pl); openPlayerByName(pl, q, false) }
     else if (st) {
       const s = sets.find(x => x.slug === st)
-      if (s) openSet(s)
-      else fetch('/data/redirects.json').then(r => r.json()).then(rd => { const t = rd[st] && sets.find(x => x.slug === rd[st]); if (t) openSet(t) }).catch(() => {})
+      if (s) openSet(s, false)
+      else fetch('/data/redirects.json').then(r => r.json()).then(rd => {
+        const t = rd[st] && sets.find(x => x.slug === rd[st])
+        if (t) openSet(t, false); else { goHome(false); setNotice('That set isn’t in the database (the link may be old). Browse or search below.') }
+      }).catch(() => { goHome(false); setNotice('That set isn’t in the database (the link may be old). Browse or search below.') })
     }
+    else if (sr) runGlobalSearch(sr, false)
+    else if (v && ['myplayers', 'community', 'collection'].includes(v)) openView(v, false)
+    else goHome(false)
+  }
+  useEffect(() => {
+    if (sets.length === 0) return
+    applyUrl()
+    const onPop = () => applyUrl()
+    window.addEventListener('popstate', onPop)
+    return () => window.removeEventListener('popstate', onPop)
   }, [sets.length])
 
   const NAV_ITEMS = [['Sets', () => { goHome(); setSportFilter('All') }, 'browse'], ['Players', () => openView('myplayers'), 'myplayers'], ['Community', () => openView('community'), 'community'], ['My Collection', () => openView('collection'), 'collection']]
@@ -713,6 +748,7 @@ export default function Home() {
     <main className="hq-main" style={{ maxWidth: 1180, margin: '0 auto', padding: '0 24px 90px' }}>
       <style>{'.hq-setcard:hover{transform:translateY(-4px);border-color:#2E3D6B;box-shadow:0 18px 40px -18px rgba(0,0,0,0.9)}@keyframes hqticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}.hq-track{display:inline-flex;white-space:nowrap;animation:hqticker linear infinite}.hq-track:hover{animation-play-state:paused}'}</style>
 
+      {notice && <div role="status" style={{ background: SURFACE, border: '1px solid ' + LINE, borderRadius: 12, padding: '12px 16px', margin: '0 0 16px', color: TEXT_2, fontSize: 14 }}>{notice}</div>}
       <AuthModal open={authOpen} onClose={() => setAuthOpen(false)} account={account} />
       {wantFlash && (
         <div style={{ position: 'fixed', bottom: 56, right: 24, zIndex: 95, background: ACCENT, color: '#fff', fontWeight: 700, fontSize: 14, padding: '12px 20px', borderRadius: 12, boxShadow: '0 8px 30px #000a' }}>{wantFlash}</div>
@@ -952,7 +988,7 @@ export default function Home() {
 
       {activeSet && setData ? (
         <section>
-          <button onClick={() => { setActiveSet(null); setSetData(null); setQuery('') }}
+          <button onClick={() => goHome()}
             style={{ background: 'none', border: 'none', color: ACCENT_TEXT, fontSize: 13, fontWeight: 600, cursor: 'pointer', padding: 0, marginBottom: 14 }}>
             ← All sets
           </button>
@@ -1103,7 +1139,7 @@ export default function Home() {
                       display: 'flex', gap: 14, padding: '8px 16px', fontSize: 14,
                       background: i % 2 === 0 ? '#0F1320' : '#121626', alignItems: 'center'
                     }}>
-                      <span className="hq-col-num" style={{ flex: '0 0 68px', color: ACCENT_TEXT, fontWeight: 700, fontVariantNumeric: 'tabular-nums', overflowWrap: 'anywhere' }}>#{c.n}</span>
+                      <span className="hq-col-num" style={{ flex: '0 0 68px', color: ACCENT_TEXT, fontWeight: 700, fontVariantNumeric: 'tabular-nums', overflowWrap: 'anywhere' }}>{c.n ? '#' + c.n : '—'}</span>
                       <span style={{ flex: '1 1 auto', minWidth: 0 }}>
                         <button onClick={() => openPlayerByName(c.p)} title={'Open ' + c.p + "'s player page"} style={{ fontWeight: 600, background: 'none', border: 'none', color: isMine(c.p) ? ACCENT_TEXT : '#EDEDEF', cursor: 'pointer', padding: 0, textAlign: 'left', fontFamily: 'inherit', fontSize: 14 }}>{c.p}</button>
                         {c.t && <span className="hq-mobile-only" style={{ color: '#8A8A93', fontSize: 12, marginTop: 2 }}>{c.t}</span>}
@@ -1131,7 +1167,7 @@ export default function Home() {
         </section>
       ) : globalHits ? (
         <section>
-          <button onClick={() => setGlobalHits(null)}
+          <button onClick={() => goHome()}
             style={{ background: 'none', border: 'none', color: ACCENT_TEXT, fontSize: 13, fontWeight: 600, cursor: 'pointer', padding: 0, marginBottom: 14 }}>
             ← Browse sets
           </button>
@@ -1141,7 +1177,7 @@ export default function Home() {
           {globalHits.players.length > 0 && (
             <div style={{ border: '1px solid #222', borderRadius: 12, overflow: 'hidden', marginBottom: 18 }}>
               {globalHits.players.map((p, i) => (
-                <button key={p.id} onClick={() => openPlayer(p, parseQuery(p.name), [])}
+                <button key={p.id} onClick={() => openPlayer(p, null, [])}
                   style={{ width: '100%', textAlign: 'left', display: 'flex', gap: 12, padding: '11px 16px', fontSize: 14, alignItems: 'baseline', flexWrap: 'wrap', background: i % 2 === 0 ? '#0F1320' : '#121626', border: 'none', color: '#EDEDEF', cursor: 'pointer', fontFamily: 'inherit' }}>
                   <span style={{ fontWeight: 600 }}>{p.name}</span>
                   <span style={{ color: '#8A8A93', fontSize: 13 }}>{p.sport} · {p.cards.toLocaleString()} cards</span>
@@ -1163,7 +1199,7 @@ export default function Home() {
           {globalHits.players.length + globalHits.sets.length === 0 && <p style={{ padding: 20, color: '#6B7080', fontSize: 14 }}>No players or sets match.</p>}
         </section>
       ) : view === 'player' && activePlayer ? (
-        <PlayerPage player={activePlayer} parsed={playerParsed} sets={sets} myPlayers={myPlayers}
+        <PlayerPage key={activePlayer.id + '|' + ((playerParsed && playerParsed.raw) || '')} player={activePlayer} parsed={playerParsed} sets={sets} myPlayers={myPlayers}
           onOpenSet={openSetBySlug}
           onWant={wantIt} onSearch={runSearch} candidates={playerCandidates} onPickCandidate={(c) => openPlayer(c, playerParsed, playerCandidates)} />
       ) : view === 'myplayers' ? (
@@ -1225,7 +1261,7 @@ export default function Home() {
                 {rpaResults.map((c, i) => (
                   <button key={i} onClick={() => { const s = sets.find(x => x.slug === c.slug); if (s) openSet(Object.assign({}, s, classifySet(s.name))) }}
                     style={{ width: '100%', textAlign: 'left', display: 'flex', gap: 12, padding: '8px 16px', fontSize: 14, alignItems: 'baseline', background: i % 2 === 0 ? '#0F1320' : '#121626', border: 'none', color: '#EDEDEF', cursor: 'pointer' }}>
-                    <span style={{ flex: '0 0 56px', color: ACCENT_TEXT, fontWeight: 700, fontVariantNumeric: 'tabular-nums' }}>#{c.n}</span>
+                    <span style={{ flex: '0 0 56px', color: ACCENT_TEXT, fontWeight: 700, fontVariantNumeric: 'tabular-nums' }}>{c.n ? '#' + c.n : '—'}</span>
                     <span style={{ flex: '1 1 auto', minWidth: 0, fontWeight: 600 }}>{c.p}</span>
                     <span style={{ flex: '0 0 88px' }}><Chip color={RPA_TYPE_COLOR[c.type]}>{c.type}</Chip></span>
                     <span style={{ flex: '0 0 64px', textAlign: 'right', color: c.serial ? '#EDEDEF' : '#6B7080', fontWeight: 700, fontVariantNumeric: 'tabular-nums' }}>{c.serial || '—'}</span>
@@ -1358,28 +1394,31 @@ export default function Home() {
             {teamHits.map((c, i) => (
               <button key={i} onClick={() => { const s = sets.find(x => x.slug === c.slug); if (s) openSet(Object.assign({}, s, classifySet(s.name))) }}
                 style={{ width: '100%', textAlign: 'left', display: 'flex', gap: 12, padding: '8px 16px', fontSize: 14, alignItems: 'baseline', background: i % 2 === 0 ? '#0F1320' : '#121626', border: 'none', color: '#EDEDEF', cursor: 'pointer' }}>
-                <span style={{ flex: '0 0 60px', color: ACCENT_TEXT, fontWeight: 700, fontVariantNumeric: 'tabular-nums' }}>#{c.n}</span>
+                <span style={{ flex: '0 0 60px', color: ACCENT_TEXT, fontWeight: 700, fontVariantNumeric: 'tabular-nums' }}>{c.n ? '#' + c.n : '—'}</span>
                 <span style={{ flex: '1 1 auto', minWidth: 0, fontWeight: 600 }}>{c.p}{isTcg && c.t ? <span style={{ color: '#8A8A93', fontWeight: 400, fontSize: 13 }}> · {c.t}</span> : null}</span>
                 <span style={{ flex: isTcg ? '0 0 120px' : '0 0 54px' }}>{c.x ? <Chip color={c.x === 'RC' ? '#4ade80' : '#8A8A93'}>{c.x}</Chip> : null}</span>
                 <span style={{ flex: '2 1 0', minWidth: 0, color: '#8A8A93', fontSize: 13 }}>{c.set}{c.section ? ' · ' + c.section : ''}</span>
               </button>
             ))}
-            {teamHits.length === 0 && <p style={{ padding: 20, color: '#6B7080', fontSize: 14 }}>No {isTcg ? 'matching cards' : 'cards found for ' + teamFilter} in {sportFilter}.</p>}
+            {sliceLoading && <p style={{ padding: 20, color: '#6B7080', fontSize: 14 }}>Loading {teamFilter} cards…</p>}
+            {!sliceLoading && teamHits.length === 0 && <p style={{ padding: 20, color: '#6B7080', fontSize: 14 }}>No {isTcg ? 'matching cards' : 'cards found for ' + teamFilter} in {sportFilter}.</p>}
           </div>
         </section>
       ) : (
         <section>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(260px, 100%), 1fr))', gap: 14 }}>
             {filteredSets.slice().sort((a, b) => {
-              const nm = () => a.name.localeCompare(b.name)
-              if (sortBy === 'year-asc') return (a.year - b.year) || nm()
+              // A–Z by the product name shown on the card (the season prefix is dropped there);
+              // sets with no year go last in both year orders.
+              const nm = () => a.name.replace(/^\d{4}(-\d{2})?\s*/, '').localeCompare(b.name.replace(/^\d{4}(-\d{2})?\s*/, '')) || (b.year || 0) - (a.year || 0)
+              if (sortBy === 'year-asc') return ((a.year || 9999) - (b.year || 9999)) || nm()
               if (sortBy === 'name-asc') return nm()
               if (sortBy === 'name-desc') return -nm()
               if (sortBy === 'cards-desc') return (b.cardCount - a.cardCount) || nm()
               if (sortBy === 'cards-asc') return (a.cardCount - b.cardCount) || nm()
               if (sortBy === 'brand') return (a.brand || 'zzz').localeCompare(b.brand || 'zzz') || (b.year - a.year) || nm()
               return (b.year - a.year) || nm() // year-desc default
-            }).map((s) => {
+            }).slice(0, setLimit).map((s) => {
               const c = SPORT_COLORS[s.sport] || ACCENT
               return (
                 <button key={s.slug} onClick={() => openSet(s)} className="hq-setcard"
@@ -1393,8 +1432,8 @@ export default function Home() {
                   {/* holographic sheen */}
                   <span style={{ position: 'absolute', inset: 0, background: 'linear-gradient(120deg, transparent 40%, ' + c + '10 50%, transparent 60%)', pointerEvents: 'none' }} />
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>
-                    <span style={{ ...eyebrow, color: c }}>{s.sport} · {yearLabel(s)}</span>
-                    <span style={{ color: '#6B7080', fontSize: 12 }}>{(s.sections || 0)} sec</span>
+                    <span style={{ ...eyebrow, color: c }}>{s.sport}{yearLabel(s) ? ' · ' + yearLabel(s) : ''}</span>
+                    <span style={{ color: '#6B7080', fontSize: 12 }}>{(s.sections || 0)} section{s.sections === 1 ? '' : 's'}</span>
                   </div>
                   <p style={{ ...title(16), margin: '0 0 12px', lineHeight: 1.1, minHeight: 44 }}>{s.name.replace(/^\d{4}(-\d{2})?\s*/, '')}</p>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', borderTop: '1px solid #222', paddingTop: 10 }}>
@@ -1408,6 +1447,14 @@ export default function Home() {
           {sets.length === 0 && (
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: 16 }}>
               {Array.from({ length: 8 }).map((_, i) => <div key={i} style={{ height: 150, borderRadius: 14, background: SURFACE, border: '1px solid ' + LINE }} />)}
+            </div>
+          )}
+          {filteredSets.length > setLimit && (
+            <div style={{ textAlign: 'center', margin: '22px 0 0' }}>
+              <button onClick={() => setSetLimit(n => n + 120)}
+                style={{ background: SURFACE, color: TEXT, border: '1px solid ' + LINE, borderRadius: 10, padding: '0 20px', height: 44, fontSize: 14, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit' }}>
+                Show more sets ({(filteredSets.length - setLimit).toLocaleString()} more)
+              </button>
             </div>
           )}
           {sets.length > 0 && filteredSets.length === 0 && <p style={{ color: LABEL, fontSize: 14 }}>No sets match these filters.</p>}
