@@ -6,7 +6,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useAccount, AccountChip, AuthModal, CollectionView, CommunityView } from '../components/community'
 import { addWant } from '../lib/supa'
-import { Omnibox, PlayerPage, MyPlayersPanel, useMyPlayers, loadPlayerDir, seasonLabel } from '../components/player'
+import { Omnibox, PlayerPage, MyPlayersPanel, useMyPlayers, loadPlayerDir, seasonLabel, MemBadge, MemChip, memCodeOf } from '../components/player'
 import { parseQuery, matchPlayers, TYPE, typeLabel, TYPE_COLORS, serialLabel } from '../lib/query'
 
 const GOLD = '#d4a843'
@@ -217,6 +217,7 @@ export default function Home() {
   const [setTypeFilter, setSetTypeFilter] = useState('All')
   const [setRunFilter, setSetRunFilter] = useState('any')
   const [setRcOnly, setSetRcOnly] = useState(false)
+  const [setMemFilter, setSetMemFilter] = useState('any')
 
   const toggleSort = (field) => {
     if (sortField === field) setSortDir(d => (d === 'asc' ? 'desc' : 'asc'))
@@ -276,7 +277,7 @@ export default function Home() {
   }, [sets.length, totalCards])
 
   const openSet = async (s) => {
-    setActiveSet(s); setGlobalHits(null); setActiveSection('All'); setQuery(''); setActivePlayer(null); setView('browse'); setSetTypeFilter('All'); setSetRunFilter('any'); setSetRcOnly(false)
+    setActiveSet(s); setGlobalHits(null); setActiveSection('All'); setQuery(''); setActivePlayer(null); setView('browse'); setSetTypeFilter('All'); setSetRunFilter('any'); setSetRcOnly(false); setSetMemFilter('any')
     try { history.pushState(null, '', '?set=' + encodeURIComponent(s.slug)) } catch {}
     try {
       const r = await fetch('/data/' + s.slug + '.json')
@@ -366,10 +367,19 @@ export default function Home() {
     let secs = setData.sections || []
     if (activeSection !== 'All') secs = secs.filter(s => s.title === activeSection)
     const term = query.trim().toLowerCase()
-    const anyFilter = term || onlyMine || setTypeFilter !== 'All' || setRunFilter !== 'any' || setRcOnly
+    const anyFilter = term || onlyMine || setTypeFilter !== 'All' || setRunFilter !== 'any' || setRcOnly || setMemFilter !== 'any'
     if (!anyFilter) return secs
     return secs.map(s => {
       const kind = secKind(s.title)
+      if (setMemFilter !== 'any') {
+        const mk = s.mem ? s.mem.k : null
+        if (setMemFilter === 'MEMO' ? !mk : setMemFilter === 'STATED' ? !(mk && s.mem.src !== 'typical' && mk !== 'UNK') : mk !== setMemFilter) {
+          // a card-level stated override can still match
+          const cards = s.cards.filter(c => c.m && c.m.k === setMemFilter)
+          if (!cards.length) return { ...s, cards: [] }
+          return { ...s, cards }
+        }
+      }
       if (setTypeFilter !== 'All' && !(setTypeFilter === 'AU' ? (kind === 'AU' || kind === 'PA') : setTypeFilter === 'PATCH' ? (kind === 'PATCH' || kind === 'PA') : kind === setTypeFilter)) return { ...s, cards: [] }
       return {
         ...s,
@@ -388,7 +398,7 @@ export default function Home() {
         })
       }
     }).filter(s => s.cards.length > 0)
-  }, [setData, activeSection, query, onlyMine, setTypeFilter, setRunFilter, setRcOnly, mineSet])
+  }, [setData, activeSection, query, onlyMine, setTypeFilter, setRunFilter, setRcOnly, setMemFilter, mineSet])
   // Group the filtered cards by player (for the "My players" view of a set).
   const byPlayer = useMemo(() => {
     if (!onlyMine || !setData) return []
@@ -396,7 +406,7 @@ export default function Home() {
     for (const sec of visibleSections) for (const c of sec.cards) {
       const owner = myPlayers.list.find(n => (c.p || '').toLowerCase().includes(n.toLowerCase())) || c.p
       let g = m.get(owner); if (!g) { g = { name: owner, team: c.t || '', rows: [], au: 0, one: 0 }; m.set(owner, g) }
-      g.rows.push({ ...c, section: sec.title, serial: cardSerial(c, sec), kind: secKind(sec.title) })
+      g.rows.push({ ...c, section: sec.title, serial: cardSerial(c, sec), kind: secKind(sec.title), memc: c.m ? memCodeOf(c.m) : memCodeOf(sec.mem) })
       if (g.kind === 'AU' || g.kind === 'PA') g.au++
     }
     for (const g of m.values()) { g.au = g.rows.filter(r => r.kind === 'AU' || r.kind === 'PA').length; g.one = g.rows.filter(r => r.serial === 1).length }
@@ -831,9 +841,14 @@ export default function Home() {
             <select aria-label="Print run" value={setRunFilter} onChange={(e) => setSetRunFilter(e.target.value)} style={{ background: '#141414', border: '1px solid #2a2a2a', borderRadius: 10, color: '#ddd', fontSize: 13, padding: '0 12px', height: 38, cursor: 'pointer' }}>
               <option value="any">Any run</option><option value="1">1/1 only</option><option value="10">≤ /10</option><option value="25">≤ /25</option><option value="99">≤ /99</option><option value="numbered">Numbered</option><option value="unnumbered">Unnumbered</option>
             </select>
+            {(setData.sections || []).some(x => x.mem) && (
+              <select aria-label="Memorabilia" value={setMemFilter} onChange={(e) => setSetMemFilter(e.target.value)} style={{ background: setMemFilter !== 'any' ? '#0f1a12' : '#141414', border: '1px solid ' + (setMemFilter !== 'any' ? '#22c55e' : '#2a2a2a'), borderRadius: 10, color: '#ddd', fontSize: 13, padding: '0 12px', height: 38, cursor: 'pointer' }}>
+                <option value="any">Any material</option><option value="MEMO">Memorabilia only</option><option value="GU">Game-used</option><option value="PW">Player-worn</option><option value="EW">Event-worn</option><option value="MX">Varies by card</option><option value="MFG">Manufactured</option><option value="UNK">Unknown</option><option value="STATED">Stated by maker/source only</option>
+              </select>
+            )}
             <label style={{ display: 'inline-flex', alignItems: 'center', gap: 8, fontSize: 13, color: '#bbb', minHeight: 38, cursor: 'pointer' }}><input type="checkbox" checked={setRcOnly} onChange={(e) => setSetRcOnly(e.target.checked)} style={{ accentColor: GOLD, width: 16, height: 16 }} />Rookies only</label>
-            {(onlyMine || setTypeFilter !== 'All' || setRunFilter !== 'any' || setRcOnly || activeSection !== 'All' || query) && (
-              <button onClick={() => { setOnlyMine(false); setSetTypeFilter('All'); setSetRunFilter('any'); setSetRcOnly(false); setActiveSection('All'); setQuery('') }} style={{ background: 'none', border: 'none', color: GOLD, fontSize: 12.5, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit', marginLeft: 'auto' }}>Clear filters</button>
+            {(onlyMine || setTypeFilter !== 'All' || setRunFilter !== 'any' || setRcOnly || setMemFilter !== 'any' || activeSection !== 'All' || query) && (
+              <button onClick={() => { setSetMemFilter('any'); setOnlyMine(false); setSetTypeFilter('All'); setSetRunFilter('any'); setSetRcOnly(false); setActiveSection('All'); setQuery('') }} style={{ background: 'none', border: 'none', color: GOLD, fontSize: 12.5, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit', marginLeft: 'auto' }}>Clear filters</button>
             )}
           </div>
           {onlyMine && (
@@ -872,12 +887,13 @@ export default function Home() {
               </div>
               <div style={{ overflowX: 'auto' }}>
                 <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 13.5, minWidth: 560 }}>
-                  <thead><tr>{['Card #', 'Section', 'Type', 'Run', 'Want'].map((h, i) => <th key={h} style={{ padding: '9px 14px', fontWeight: 700, textAlign: i >= 3 ? 'right' : 'left', fontSize: 11, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#888' }}>{h}</th>)}</tr></thead>
+                  <thead><tr>{['Card #', 'Section', 'Type', 'Material', 'Run', 'Want'].map((h, i) => <th key={h} style={{ padding: '9px 14px', fontWeight: 700, textAlign: i >= 4 ? 'right' : 'left', fontSize: 11, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#888' }}>{h}</th>)}</tr></thead>
                   <tbody>{g.rows.map((r, i) => (
                     <tr key={i} style={{ borderTop: '1px solid #1a1a1a', background: i % 2 ? '#131313' : 'transparent' }}>
                       <td style={{ padding: '9px 14px', color: GOLD, fontWeight: 700, whiteSpace: 'nowrap' }}>{r.n ? '#' + r.n : '—'}</td>
                       <td style={{ padding: '9px 14px' }}>{r.section}</td>
                       <td style={{ padding: '9px 14px' }}><Chip color={r.kind === 'PA' ? '#e11d48' : r.kind === 'AU' ? '#60a5fa' : r.kind === 'PATCH' ? '#16a34a' : r.kind === 'RELIC' ? '#f97316' : '#9ca3af'}>{r.kind === 'PA' ? 'PATCH AUTO' : r.kind === 'AU' ? 'AUTO' : r.kind === 'OTHER' ? (r.x === 'RC' ? 'RC' : 'INSERT') : r.kind}</Chip></td>
+                      <td style={{ padding: '9px 14px' }}>{r.memc ? <MemChip code={r.memc} /> : <span style={{ color: '#444' }}>—</span>}</td>
                       <td style={{ padding: '9px 14px', textAlign: 'right', whiteSpace: 'nowrap' }}>{r.serial === 1 ? <span style={{ background: GOLD, color: '#111', padding: '2px 8px', borderRadius: 999, fontSize: 11, fontWeight: 800 }}>1/1</span> : r.serial > 0 ? '/' + r.serial : <span style={{ color: '#555' }}>—</span>}</td>
                       <td style={{ padding: '9px 14px', textAlign: 'right' }}><button aria-label="Add to wantlist" onClick={() => wantIt({ set_slug: setData.slug, set_name: setData.name, card_n: r.n, section: r.section, player: r.p })} style={{ background: 'none', border: '1px solid #2c2c2c', color: '#999', borderRadius: 6, width: 32, height: 32, cursor: 'pointer', fontFamily: 'inherit' }}>+</button></td>
                     </tr>
@@ -892,6 +908,7 @@ export default function Home() {
                 <h2 style={{ ...condensed, fontSize: 21, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em', margin: '0 0 6px' }}>
                   {sec.title} <span style={{ color: '#666', fontSize: 15 }}>· {sec.cards.length}</span>
                 </h2>
+                {sec.mem && <div style={{ margin: '0 0 10px' }}><MemBadge mem={sec.mem} /></div>}
                 {sec.odds && (
                   <div style={{ display: 'flex', gap: 8, alignItems: 'flex-start', margin: '0 0 10px', padding: '8px 12px', background: '#141109', border: '1px solid ' + GOLD + '2e', borderRadius: 9 }}>
                     <span style={{ ...condensed, fontSize: 11, fontWeight: 800, letterSpacing: '0.1em', color: GOLD, textTransform: 'uppercase', whiteSpace: 'nowrap', paddingTop: 1 }}>Pack Odds</span>

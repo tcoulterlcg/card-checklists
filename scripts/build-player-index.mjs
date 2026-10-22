@@ -22,6 +22,9 @@ if (!existsSync(outDir)) mkdirSync(outDir, { recursive: true })
 const SKIP = /^(index|search-index|rpa-index|patch-swaps)\.json$/
 const SHARDS = 512
 
+// Memorabilia code: low 3 bits kind, +8 when it is the maker's typical practice rather than stated.
+const MEM_K = { GU: 1, PW: 2, EW: 3, MX: 4, MFG: 5, UNK: 6 }
+const memCode = (m) => (MEM_K[m.k] || 6) + (m.src === 'typical' ? 8 : 0)
 export const TYPE = { BASE: 1, PARALLEL: 2, INSERT: 4, AU: 8, PATCH: 16, RELIC: 32, RC: 64, PLATE: 128, MULTI: 256 }
 
 const norm = (s) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9 ]+/g, ' ').trim().replace(/\s+/g, ' ')
@@ -94,6 +97,7 @@ for (const f of readdirSync(dataDir)) {
   for (const sec of s.sections) {
     const stype = sectionType(sec.title)
     const secSerial = serialFromText(sec.title) || serialFromText(sec.odds)
+    const secMem = sec.mem ? memCode(sec.mem) : 0
     for (const c of sec.cards || []) {
       const names = splitPlayers(c.p)
       if (!names.length) continue
@@ -117,7 +121,9 @@ for (const f of readdirSync(dataDir)) {
         pl.sports.set(sp, (pl.sports.get(sp) || 0) + 1)
         if (s.year) { if (!pl.minYear || s.year < pl.minYear) pl.minYear = s.year; if (s.year > pl.maxYear) pl.maxYear = s.year }
         const sh = shards[pl.shard]
-        sh.rows.push([key, intern(s.slug, sh.slugs, sh.slugId), intern(sec.title || '', sh.sections, sh.secId), c.n == null ? '' : String(c.n), c.t ? intern(c.t, sh.teams, sh.teamId) : -1, serial, type])
+        let mem = c.m ? memCode(c.m) : secMem
+        if (!c.m && sec.mem && sec.mem.rk && (type & TYPE.RC)) mem = memCode({ k: sec.mem.rk, src: sec.mem.src })
+        sh.rows.push([key, intern(s.slug, sh.slugs, sh.slugId), intern(sec.title || '', sh.sections, sh.secId), c.n == null ? '' : String(c.n), c.t ? intern(c.t, sh.teams, sh.teamId) : -1, serial, type, mem])
       }
     }
   }

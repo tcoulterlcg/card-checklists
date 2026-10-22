@@ -4,7 +4,7 @@
 // public/data/players/ (built by scripts/build-player-index.mjs).
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { supa } from '../lib/supa'
-import { TYPE, norm, parseQuery, matchPlayers, rowMatches, typeLabel, TYPE_COLORS, serialLabel } from '../lib/query'
+import { TYPE, norm, parseQuery, matchPlayers, rowMatches, typeLabel, TYPE_COLORS, serialLabel, MEM_LABEL, MEM_COLORS, memKind, memTypical } from '../lib/query'
 
 const GOLD = '#d4a843'
 const condensed = { fontFamily: "'Barlow Condensed', 'Arial Narrow', sans-serif" }
@@ -70,6 +70,35 @@ function Chip({ children, color, solid, onClick, active }) {
   }
   return onClick ? <button onClick={onClick} style={style}>{children}</button> : <span style={style}>{children}</span>
 }
+const MEM_TIP = {
+  GU: 'Game-used: material worn or used in an official game.',
+  PW: 'Player-worn: worn by the player, but not in a specific game.',
+  EW: 'Event-worn: worn at an event such as the NHLPA Rookie Showcase photo shoot.',
+  MX: 'Varies by card: the card back says whether it is game-worn or player-worn.',
+  MFG: 'Manufactured: a patch made for the card, never worn.',
+  UNK: 'Memorabilia source not stated by the maker or any source we checked.'
+}
+export function MemChip({ code }) {
+  const k = memKind(code); if (!k) return null
+  const typical = memTypical(code)
+  const label = { GU: 'Game-used', PW: 'Player-worn', EW: 'Event-worn', MX: 'Varies', MFG: 'Manufactured', UNK: 'Unknown' }[k]
+  const c = MEM_COLORS[k]
+  return <span title={MEM_TIP[k] + (typical ? ' Based on the maker\'s standard practice for this line, not stated on this specific card.' : '')}
+    style={{ display: 'inline-flex', alignItems: 'center', gap: 5, padding: '3px 9px', borderRadius: 999, fontSize: 11, fontWeight: 700, whiteSpace: 'nowrap', color: c, border: '1px ' + (typical ? 'dashed ' : 'solid ') + c + (k === 'UNK' ? '55' : '99'), background: k === 'GU' ? c + '14' : 'transparent' }}>
+    {k === 'GU' && <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" aria-hidden="true"><path d="m5 12 5 5L20 7" /></svg>}
+    {label}{typical ? '*' : ''}
+  </span>
+}
+const MEM_CODE = { GU: 1, PW: 2, EW: 3, MX: 4, MFG: 5, UNK: 6 }
+export const memCodeOf = (m) => m ? (MEM_CODE[m.k] || 6) + (m.src === 'typical' ? 8 : 0) : 0
+// Section-level badge with its evidence (note + link) for set pages.
+export function MemBadge({ mem }) {
+  if (!mem) return null
+  return <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
+    <MemChip code={memCodeOf(mem)} />
+    {mem.note && <span style={{ color: '#888', fontSize: 12 }}>{mem.note}{mem.url ? <> <a href={mem.url} target="_blank" rel="noreferrer" style={{ color: GOLD }}>source</a></> : null}</span>}
+  </span>
+}
 function TypeChip({ t }) { const l = typeLabel(t); return <Chip color={TYPE_COLORS[l] || '#9ca3af'}>{l}</Chip> }
 function Serial({ s }) {
   if (s === 1) return <span style={{ background: GOLD, color: '#111', padding: '2px 8px', borderRadius: 999, fontSize: 11, fontWeight: 800 }}>1/1</span>
@@ -130,6 +159,7 @@ export function Omnibox({ value, onChange, onSubmit, onPickPlayer, onPickSet, se
   if (parsed.sport) understood.push(['sport', parsed.sport])
   if (parsed.season) understood.push(['season', String(parsed.season)])
   for (const p of parsed.products) understood.push(['product', p])
+  if (parsed.mem) understood.push(['material', { GU: 'game-used', PW: 'player-worn', EW: 'event-worn', MFG: 'manufactured' }[parsed.mem]])
   return (
     <div ref={box} style={{ position: 'relative' }}>
       <form role="search" onSubmit={(e) => { e.preventDefault(); go(open && items.length ? sel : -1) }}
@@ -183,8 +213,8 @@ export function Omnibox({ value, onChange, onSubmit, onPickPlayer, onPickSet, se
 }
 
 // ---------- Player page ----------
-const VIEWS = [['all', 'All cards'], ['oneofone', '1/1s'], ['rc', 'Rookies'], ['auto', 'Autos'], ['pa', 'Patch autos'], ['base', 'Base only'], ['rare', '/25 or rarer']]
-const quickFilter = { all: () => true, oneofone: r => r[5] === 1, rc: r => r[6] & TYPE.RC, auto: r => r[6] & TYPE.AU, pa: r => (r[6] & TYPE.AU) && (r[6] & TYPE.PATCH), base: r => r[6] & TYPE.BASE, rare: r => r[5] > 0 && r[5] <= 25 }
+const VIEWS = [['all', 'All cards'], ['oneofone', '1/1s'], ['rc', 'Rookies'], ['auto', 'Autos'], ['pa', 'Patch autos'], ['gu', 'Game-used'], ['base', 'Base only'], ['rare', '/25 or rarer']]
+const quickFilter = { all: () => true, oneofone: r => r[5] === 1, rc: r => r[6] & TYPE.RC, auto: r => r[6] & TYPE.AU, pa: r => (r[6] & TYPE.AU) && (r[6] & TYPE.PATCH), gu: r => (r[7] & 7) === 1, base: r => r[6] & TYPE.BASE, rare: r => r[5] > 0 && r[5] <= 25 }
 
 export function PlayerPage({ player, parsed, sets, onOpenSet, myPlayers, onWant, onSearch, candidates, onPickCandidate }) {
   const [shard, setShard] = useState(null)
@@ -203,6 +233,8 @@ export function PlayerPage({ player, parsed, sets, onOpenSet, myPlayers, onWant,
   const [showAll, setShowAll] = useState(new Set())
   const [limit, setLimit] = useState(40)
   const [hidePlates, setHidePlates] = useState(false)
+  const [mems, setMems] = useState(null) // null = any; Set of GU/PW/EW/MX/MFG/UNK
+  const [statedOnly, setStatedOnly] = useState(false)
 
   useEffect(() => { setShard(null); loadShard(player.shard).then(setShard); setQuick('all'); setExpanded(new Set()); setLimit(40) }, [player.id, player.shard])
   // When the query itself carries filters (1/1, auto…), start from them.
@@ -211,6 +243,7 @@ export function PlayerPage({ player, parsed, sets, onOpenSet, myPlayers, onWant,
     if (parsed.serial === 1) setRun('1'); else if (parsed.serialMax) setRun(String(parsed.serialMax)); else if (parsed.types.has('NUMBERED')) setRun('numbered'); else setRun('any')
     setYearFrom(parsed.season || 0); setYearTo(parsed.season || 9999)
     setProducts(parsed.products.slice())
+    setMems(parsed.mem ? new Set([parsed.mem]) : null)
   }, [parsed])
 
   const setMeta = useMemo(() => { const m = {}; for (const s of sets) m[s.slug] = s; return m }, [sets])
@@ -223,19 +256,20 @@ export function PlayerPage({ player, parsed, sets, onOpenSet, myPlayers, onWant,
       if (r[0] !== player.id) continue
       const slug = shard.slugs[r[1]]
       const m = setMeta[slug] || { name: slug, year: 0, sport: '' }
-      out.push({ slug, set: m.name, year: m.year, sport: m.sport, brand: BRAND_OF(m.name), section: shard.sections[r[2]], n: r[3], team: r[4] >= 0 ? shard.teams[r[4]] : '', serial: r[5], type: r[6], raw: r })
+      out.push({ slug, set: m.name, year: m.year, sport: m.sport, brand: BRAND_OF(m.name), section: shard.sections[r[2]], n: r[3], team: r[4] >= 0 ? shard.teams[r[4]] : '', serial: r[5], type: r[6], mem: r[7] || 0, raw: r })
     }
     return out
   }, [shard, player.id, setMeta])
 
   // Facet universe (counts over the player's full catalogue).
   const facets = useMemo(() => {
-    const f = { sets: new Set(), au: 0, one: 0, rc: 0, patch: 0, base: 0, parallel: 0, insert: 0, relic: 0, plate: 0, brands: new Map(), teams: new Map(), years: new Map(), minY: 9999, maxY: 0, seasons: 0 }
+    const f = { mem: {}, sets: new Set(), au: 0, one: 0, rc: 0, patch: 0, base: 0, parallel: 0, insert: 0, relic: 0, plate: 0, brands: new Map(), teams: new Map(), years: new Map(), minY: 9999, maxY: 0, seasons: 0 }
     for (const r of rows) {
       f.sets.add(r.slug)
       if (r.type & TYPE.AU) f.au++; if (r.serial === 1) f.one++; if (r.type & TYPE.RC) f.rc++; if (r.type & TYPE.PATCH) f.patch++
       if (r.type & TYPE.BASE) f.base++; if (r.type & TYPE.PARALLEL) f.parallel++; if (r.type & TYPE.INSERT) f.insert++; if (r.type & TYPE.RELIC) f.relic++; if (r.type & TYPE.PLATE) f.plate++
       f.brands.set(r.brand, (f.brands.get(r.brand) || 0) + 1)
+      if (r.mem) { const k = memKind(r.mem); f.mem[k] = (f.mem[k] || 0) + 1 }
       if (r.team) f.teams.set(r.team, (f.teams.get(r.team) || 0) + 1)
       if (r.year) { f.years.set(r.year, (f.years.get(r.year) || 0) + 1); if (r.year < f.minY) f.minY = r.year; if (r.year > f.maxY) f.maxY = r.year }
     }
@@ -263,9 +297,11 @@ export function PlayerPage({ player, parsed, sets, onOpenSet, myPlayers, onWant,
       if (products.length) { const n = r.set.toLowerCase(); if (!products.every(p => n.includes(p.toLowerCase()))) return false }
       if (parsed && parsed.types.size) { for (const t of parsed.types) { if (t === 'RPA' && !((r.type & TYPE.AU) && (r.type & TYPE.PATCH) && (r.type & TYPE.RC))) return false; if (TYPE[t] && !(r.type & TYPE[t])) return false } }
       if (parsed && parsed.sport && r.sport !== parsed.sport) return false
+      if (mems && !(r.mem && mems.has(memKind(r.mem)))) return false
+      if (statedOnly && r.mem && memTypical(r.mem)) return false
       return true
     })
-  }, [rows, quick, types, run, brands, teams, yearFrom, yearTo, products, hidePlates, parsed])
+  }, [rows, quick, types, run, brands, teams, yearFrom, yearTo, products, hidePlates, parsed, mems, statedOnly])
 
   const sorted = useMemo(() => {
     const out = filtered.slice()
@@ -283,16 +319,16 @@ export function PlayerPage({ player, parsed, sets, onOpenSet, myPlayers, onWant,
     for (const r of sorted) {
       const k = group === 'season' ? String(r.year || 'Unknown') : r.slug
       let g = m.get(k)
-      if (!g) { g = { key: k, title: group === 'season' ? seasonLabel(r.year, r.sport) : r.set, slug: r.slug, sport: r.sport, year: r.year, brand: r.brand, rows: [], au: 0, one: 0, patch: 0, rc: 0, sections: new Set() }; m.set(k, g) }
+      if (!g) { g = { key: k, title: group === 'season' ? seasonLabel(r.year, r.sport) : r.set, slug: r.slug, sport: r.sport, year: r.year, brand: r.brand, rows: [], au: 0, one: 0, patch: 0, rc: 0, gu: 0, sections: new Set() }; m.set(k, g) }
       g.rows.push(r); g.sections.add(r.section)
-      if (r.type & TYPE.AU) g.au++; if (r.serial === 1) g.one++; if (r.type & TYPE.PATCH) g.patch++; if (r.type & TYPE.RC) g.rc++
+      if (r.type & TYPE.AU) g.au++; if (r.serial === 1) g.one++; if (r.type & TYPE.PATCH) g.patch++; if (r.type & TYPE.RC) g.rc++; if ((r.mem & 7) === 1) g.gu++
     }
     return [...m.values()]
   }, [sorted, group])
 
   const toggleType = (t) => setTypes(prev => { const n = new Set(prev); if (n.has(t)) n.delete(t); else n.add(t); return n })
   const toggleIn = (setter, cur, v, all) => setter(() => { const base = cur ? new Set(cur) : new Set(all); if (base.has(v)) base.delete(v); else base.add(v); return base.size === all.length ? null : base })
-  const resetAll = () => { setQuick('all'); setTypes(new Set(['BASE', 'PARALLEL', 'INSERT', 'AU', 'PATCH', 'RELIC', 'PLATE'])); setRun('any'); setBrands(null); setTeams(null); setProducts([]); setYearFrom(0); setYearTo(9999); setHidePlates(false) }
+  const resetAll = () => { setMems(null); setStatedOnly(false); setQuick('all'); setTypes(new Set(['BASE', 'PARALLEL', 'INSERT', 'AU', 'PATCH', 'RELIC', 'PLATE'])); setRun('any'); setBrands(null); setTeams(null); setProducts([]); setYearFrom(0); setYearTo(9999); setHidePlates(false) }
   const color = SPORT_COLORS[player.sport] || GOLD
   const following = myPlayers.has(player.name)
   const years = [...facets.years.keys()].sort()
@@ -303,7 +339,7 @@ export function PlayerPage({ player, parsed, sets, onOpenSet, myPlayers, onWant,
   const titleSuffix = quick !== 'all' ? ' · ' + VIEWS.find(v => v[0] === quick)[1] : parsed && parsed.serial === 1 ? ' · 1/1s' : ''
 
   const exportCsv = () => {
-    const lines = ['Season,Set,Card #,Section,Type,Print run,Team', ...sorted.map(r => [r.year, r.set, r.n, r.section, typeLabel(r.type), serialLabel(r.serial), r.team].map(v => '"' + String(v || '').replace(/"/g, '""') + '"').join(','))]
+    const lines = ['Season,Set,Card #,Section,Type,Material,Print run,Team', ...sorted.map(r => [r.year, r.set, r.n, r.section, typeLabel(r.type), r.mem ? MEM_LABEL[r.mem & 7] + (memTypical(r.mem) ? ' (typical)' : '') : '', serialLabel(r.serial), r.team].map(v => '"' + String(v || '').replace(/"/g, '""') + '"').join(','))]
     const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([lines.join('\n')], { type: 'text/csv' })); a.download = player.name.replace(/\s+/g, '-') + '-checklist.csv'; a.click()
   }
 
@@ -314,6 +350,7 @@ export function PlayerPage({ player, parsed, sets, onOpenSet, myPlayers, onWant,
       <td style={{ padding: '9px 12px', color: GOLD, fontWeight: 700, fontVariantNumeric: 'tabular-nums', whiteSpace: 'nowrap' }}>{r.n ? '#' + r.n : '—'}</td>
       <td style={{ padding: '9px 12px' }}>{r.section}</td>
       <td style={{ padding: '9px 12px' }}><TypeChip t={r.type} /></td>
+      <td style={{ padding: '9px 12px' }}>{r.mem ? <MemChip code={r.mem} /> : <span style={{ color: '#444' }}>—</span>}</td>
       <td style={{ padding: '9px 12px', textAlign: 'right', whiteSpace: 'nowrap' }}><Serial s={r.serial} /></td>
       <td style={{ padding: '9px 12px', textAlign: 'right' }}><button aria-label={'Add #' + r.n + ' ' + r.section + ' to wantlist'} onClick={() => onWant({ set_slug: r.slug, set_name: r.set, card_n: r.n, section: r.section, player: player.name })} style={{ background: 'none', border: '1px solid #2c2c2c', color: '#999', borderRadius: 6, width: 32, height: 32, cursor: 'pointer', fontFamily: 'inherit' }}>+</button></td>
     </tr>
@@ -353,7 +390,7 @@ export function PlayerPage({ player, parsed, sets, onOpenSet, myPlayers, onWant,
           </div>
         </div>
         <div style={{ flex: '1 1 480px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(110px, 1fr))', gap: 10 }}>
-          {[[rows.length, 'Cards', GOLD], [facets.sets.size, 'Sets'], [facets.au, 'Autographs'], [facets.one, '1/1s'], [facets.rc, 'Rookies'], [facets.patch, 'Patches'], [facets.seasons, 'Seasons'], [facets.brands.size, 'Brands']].map(([n, l, c]) => (
+          {[[rows.length, 'Cards', GOLD], [facets.sets.size, 'Sets'], [facets.au, 'Autographs'], [facets.one, '1/1s'], [facets.rc, 'Rookies'], [facets.patch, 'Patches'], [facets.mem.GU || 0, 'Game-used'], [facets.seasons, 'Seasons']].map(([n, l, c]) => (
             <div key={l} style={{ background: '#0e0e0e', border: '1px solid #262626', borderRadius: 12, padding: '14px 12px' }}>
               <p style={{ ...condensed, margin: 0, fontSize: 32, fontWeight: 800, color: c || '#f2f0ec', lineHeight: 1 }}>{shard ? n.toLocaleString() : '…'}</p>
               <p style={{ margin: '6px 0 0', color: '#888', fontSize: 11, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase' }}>{l}</p>
@@ -390,6 +427,15 @@ export function PlayerPage({ player, parsed, sets, onOpenSet, myPlayers, onWant,
             ))}
             <label style={lbl}><input type="checkbox" checked={hidePlates} onChange={(e) => setHidePlates(e.target.checked)} style={cb} />Hide printing plates</label>
           </div>
+          {Object.keys(facets.mem).length > 0 && (
+            <div>
+              <p style={legend}>Memorabilia</p>
+              {[['GU', 'Game-used'], ['PW', 'Player-worn'], ['EW', 'Event-worn'], ['MX', 'Varies by card'], ['MFG', 'Manufactured'], ['UNK', 'Unknown']].filter(([k]) => facets.mem[k]).map(([k, l]) => (
+                <label key={k} style={lbl}><input type="checkbox" checked={!mems || mems.has(k)} onChange={() => toggleIn(setMems, mems, k, Object.keys(facets.mem))} style={cb} /><span style={{ width: 8, height: 8, borderRadius: 999, background: MEM_COLORS[k], flexShrink: 0 }} />{l}<span style={cnt}>{facets.mem[k].toLocaleString()}</span></label>
+              ))}
+              <label style={lbl} title="Hide tags based on the maker's usual practice; keep only ones stated for that card or insert"><input type="checkbox" checked={statedOnly} onChange={(e) => setStatedOnly(e.target.checked)} style={cb} />Stated only (hide *)</label>
+            </div>
+          )}
           <div>
             <p style={legend}>Print run</p>
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
@@ -435,6 +481,7 @@ export function PlayerPage({ player, parsed, sets, onOpenSet, myPlayers, onWant,
             </div>
           )}
 
+          {Object.keys(facets.mem).length > 0 && <p style={{ color: '#666', fontSize: 12, margin: 0 }}>* Material based on the maker's standard practice for that product line (hover for the source); no asterisk = stated for that card or insert.</p>}
           {!shard ? <p style={{ color: '#666' }}>Loading {player.name}…</p> : groups ? (
             <>
               {groups.slice(0, limit).map((g, gi) => {
@@ -454,6 +501,7 @@ export function PlayerPage({ player, parsed, sets, onOpenSet, myPlayers, onWant,
                         {g.rc > 0 && <Chip color="#4ade80">{g.rc} RC</Chip>}
                         {g.au > 0 && <Chip color="#9a9a9a">{g.au} auto{g.au === 1 ? '' : 's'}</Chip>}
                         {g.patch > 0 && <Chip color="#9a9a9a">{g.patch} patch{g.patch === 1 ? '' : 'es'}</Chip>}
+                        {g.gu > 0 && <Chip color={MEM_COLORS.GU}>{g.gu} game-used</Chip>}
                         {g.one > 0 && <Chip>{g.one} × 1/1</Chip>}
                       </div>
                       <button aria-label={open ? 'Collapse' : 'Expand'} aria-expanded={open} onClick={() => setExpanded(s => { const n = new Set(s); if (n.has(g.key)) n.delete(g.key); else n.add(g.key); if (gi === 0 && s.size === 0) { /* first opens by default */ n.add('__init'); if (open) n.delete(g.key) } return n })}
@@ -463,7 +511,7 @@ export function PlayerPage({ player, parsed, sets, onOpenSet, myPlayers, onWant,
                       <>
                         <div style={{ overflowX: 'auto' }}>
                           <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 13.5, minWidth: group === 'season' ? 760 : 560 }}>
-                            <thead><tr>{group === 'season' && <><th style={th}>Season</th><th style={th}>Set</th></>}<th style={th}>Card #</th><th style={th}>Section</th><th style={th}>Type</th><th style={{ ...th, textAlign: 'right' }}>Run</th><th style={{ ...th, textAlign: 'right' }}>Want</th></tr></thead>
+                            <thead><tr>{group === 'season' && <><th style={th}>Season</th><th style={th}>Set</th></>}<th style={th}>Card #</th><th style={th}>Section</th><th style={th}>Type</th><th style={th}>Material</th><th style={{ ...th, textAlign: 'right' }}>Run</th><th style={{ ...th, textAlign: 'right' }}>Want</th></tr></thead>
                             <tbody>{(all ? g.rows : g.rows.slice(0, 12)).map((r, i) => <Row key={i} r={r} withSet={group === 'season'} />)}</tbody>
                           </table>
                         </div>
@@ -480,7 +528,7 @@ export function PlayerPage({ player, parsed, sets, onOpenSet, myPlayers, onWant,
             <div style={{ border: '1px solid #262626', borderRadius: 14, overflow: 'hidden', background: '#0f0f0f' }}>
               <div style={{ overflowX: 'auto' }}>
                 <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 13.5, minWidth: 820 }}>
-                  <thead><tr style={{ background: '#151515' }}><th style={th}>Season</th><th style={th}>Set</th><th style={th}>Card #</th><th style={th}>Section / parallel</th><th style={th}>Type</th><th style={{ ...th, textAlign: 'right' }}>Run</th><th style={{ ...th, textAlign: 'right' }}>Want</th></tr></thead>
+                  <thead><tr style={{ background: '#151515' }}><th style={th}>Season</th><th style={th}>Set</th><th style={th}>Card #</th><th style={th}>Section / parallel</th><th style={th}>Type</th><th style={th}>Material</th><th style={{ ...th, textAlign: 'right' }}>Run</th><th style={{ ...th, textAlign: 'right' }}>Want</th></tr></thead>
                   <tbody>{sorted.slice(0, limit * 5).map((r, i) => <Row key={i} r={r} withSet />)}</tbody>
                 </table>
               </div>
