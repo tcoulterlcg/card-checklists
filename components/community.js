@@ -30,7 +30,7 @@ export function useAccount() {
 export function AccountChip({ account, onOpenAuth }) {
   const { session, profile } = account
   if (!session) return (
-    <button onClick={onOpenAuth} style={{ ...btnGhost, borderColor: ACCENT + '55', color: ACCENT }}>Sign in</button>
+    <button onClick={onOpenAuth} style={{ ...btnGhost, borderColor: ACCENT + '55', color: ACCENT, display: 'inline-flex', alignItems: 'center', height: 36, boxSizing: 'border-box', padding: '0 16px', whiteSpace: 'nowrap' }}>Sign in</button>
   )
   const name = profile?.username || session.user.email?.split('@')[0] || 'collector'
   return (

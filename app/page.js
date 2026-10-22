@@ -565,20 +565,24 @@ export default function Home() {
     <main style={{ maxWidth: 1180, margin: '0 auto', padding: '0 24px 90px' }}>
       <style>{'.hq-setcard:hover{transform:translateY(-4px);border-color:#3a3a3a;box-shadow:0 18px 40px -18px rgba(0,0,0,0.9)}@keyframes hqticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}.hq-track{display:inline-flex;white-space:nowrap;animation:hqticker linear infinite}.hq-track:hover{animation-play-state:paused}'}</style>
       {/* NAV */}
-      <nav style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '22px 0', flexWrap: 'wrap', gap: 12 }}>
+      <nav style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', minHeight: 72, padding: '12px 0', boxSizing: 'border-box', flexWrap: 'wrap', columnGap: 40, rowGap: 12 }}>
         {/* Nav logo — Scan C mark + wordmark */}
-        <div onClick={goHome} style={{ display: 'inline-flex', alignItems: 'center', gap: 10, cursor: 'pointer' }}>
+        <div onClick={goHome} style={{ display: 'inline-flex', alignItems: 'center', gap: 12, cursor: 'pointer' }}>
           <ScanCMark size={30} />
           <span style={wordmark(24)}>CardHQ</span>
         </div>
-        <div style={{ display: 'flex', gap: 24, alignItems: 'center', flexWrap: 'wrap' }}>
-          {[['Sets', () => { goHome(); setSportFilter('All') }, 'browse'], ['Players', () => openView('myplayers'), 'myplayers'], /* RPA Tracker + Patch Swaps hidden until ready */ ['Community', () => openView('community'), 'community'], ['My Collection', () => openView('collection'), 'collection']].map(([label, fn, v]) => (
-            <button key={label} onClick={fn} style={{ background: 'none', border: 'none', cursor: 'pointer', color: view === v ? '#fff' : '#9a9ba3', fontSize: 14, fontWeight: 600, padding: '4px 0', borderBottom: '2px solid ' + (view === v ? ACCENT : 'transparent') }}>{label}</button>
-          ))}
-          <AccountChip account={account} onOpenAuth={() => setAuthOpen(true)} />
-          <span style={{ ...condensed, fontSize: 14, fontWeight: 700, color: ACCENT, border: '1px solid ' + ACCENT + '66', borderRadius: 8, padding: '6px 12px', letterSpacing: '0.06em' }}>
-            {statN.sets} SETS
-          </span>
+        <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', columnGap: 40, rowGap: 12 }}>
+          <div style={{ display: 'flex', gap: 32, alignItems: 'center', flexWrap: 'wrap' }}>
+            {[['Sets', () => { goHome(); setSportFilter('All') }, 'browse'], ['Players', () => openView('myplayers'), 'myplayers'], /* RPA Tracker + Patch Swaps hidden until ready */ ['Community', () => openView('community'), 'community'], ['My Collection', () => openView('collection'), 'collection']].map(([label, fn, v]) => (
+              <button key={label} onClick={fn} style={{ background: 'none', border: 'none', borderTop: '2px solid transparent', borderBottom: '2px solid ' + (view === v ? ACCENT : 'transparent'), cursor: 'pointer', color: view === v ? '#fff' : '#9a9ba3', fontSize: 14, fontWeight: 600, height: 36, padding: 0, display: 'inline-flex', alignItems: 'center' }}>{label}</button>
+            ))}
+          </div>
+          <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
+            <AccountChip account={account} onOpenAuth={() => setAuthOpen(true)} />
+            <span style={{ ...condensed, display: 'inline-flex', alignItems: 'center', height: 36, boxSizing: 'border-box', padding: '0 16px', fontSize: 13, fontWeight: 700, color: ACCENT, border: '1px solid ' + ACCENT + '55', borderRadius: 10, letterSpacing: '0.05em', whiteSpace: 'nowrap' }}>
+              {statN.sets} SETS
+            </span>
+          </div>
         </div>
       </nav>
 
