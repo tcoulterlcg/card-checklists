@@ -667,7 +667,7 @@ export default function Home() {
       <header className={'hq-header' + (scrolled ? ' hq-scrolled' : '')}>
         <div className="hq-header-inner">
           <a className="hq-lockup" href="/" onClick={(e) => { e.preventDefault(); setMenuOpen(false); goHome(); window.scrollTo(0, 0) }} aria-label="CardHQ home">
-            <ScanCMark size={26} bracket="#ECEEF3" accent="#7FA2FF" />
+            <ScanCMark size={36} bracket="#ECEEF3" accent={ACCENT} />
             <span className="hq-wordmark">CardHQ</span>
           </a>
           <nav className="hq-navlinks" aria-label="Main">
