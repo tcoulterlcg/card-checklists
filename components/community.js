@@ -47,11 +47,20 @@ export function AuthModal({ open, onClose, account }) {
   const [username, setUsername] = useState('')
   const [err, setErr] = useState('')
   const { session, profile, setProfile } = account
+  // Escape closes; focus goes into the dialog and back to where it was after.
+  useEffect(() => {
+    if (!open) return
+    const prev = document.activeElement
+    const onKey = (e) => { if (e.key === 'Escape') onClose() }
+    document.addEventListener('keydown', onKey)
+    return () => { document.removeEventListener('keydown', onKey); if (prev && prev.focus) prev.focus() }
+  }, [open])
   if (!open) return null
   const needsProfile = session && !profile
   return (
     <div onClick={onClose} style={{ position: 'fixed', inset: 0, background: '#000a', zIndex: 90, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      <div onClick={(e) => e.stopPropagation()} style={{ ...card, width: 'min(420px, 92vw)', padding: 28 }}>
+      <div role="dialog" aria-modal="true" aria-label="Sign in to CardHQ" onClick={(e) => e.stopPropagation()} style={{ ...card, width: 'min(420px, 92vw)', padding: 28, position: 'relative' }}>
+        <button aria-label="Close" onClick={onClose} style={{ position: 'absolute', top: 10, right: 10, width: 36, height: 36, background: 'none', border: 'none', color: '#8A8A93', fontSize: 20, cursor: 'pointer', borderRadius: 8 }}>×</button>
         {!session ? (
           <>
             <h3 style={{ ...title(24), margin: 0, color: '#fff' }}>Join CardHQ</h3>
@@ -60,9 +69,9 @@ export function AuthModal({ open, onClose, account }) {
               <p style={{ color: ACCENT_TEXT, fontSize: 14, fontWeight: 600 }}>Check your email — the sign-in link is on its way.</p>
             ) : (
               <>
-                <input style={input} type="email" placeholder="you@email.com" value={email} onChange={(e) => setEmail(e.target.value)} />
+                <input style={input} type="email" autoFocus aria-label="Email address" placeholder="you@email.com" value={email} onChange={(e) => setEmail(e.target.value)} onKeyDown={(e) => { if (e.key === 'Enter') e.currentTarget.parentElement.querySelector('button[data-send]')?.click() }} />
                 {err && <p style={{ color: '#f87171', fontSize: 13, margin: '8px 0 0' }}>{err}</p>}
-                <button style={{ ...btnAccent, width: '100%', marginTop: 12 }} onClick={async () => {
+                <button data-send style={{ ...btnAccent, width: '100%', marginTop: 12 }} onClick={async () => {
                   setErr('')
                   const { error } = await supa.auth.signInWithOtp({ email, options: { emailRedirectTo: typeof window !== 'undefined' ? window.location.origin : undefined } })
                   if (error) setErr(error.message); else setSent(true)

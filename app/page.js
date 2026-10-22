@@ -850,7 +850,7 @@ export default function Home() {
                   </h2>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                     <span style={{ ...eyebrow, color: '#6B7080' }}>Sort</span>
-                    <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}
+                    <select aria-label="Sort sets" value={sortBy} onChange={(e) => setSortBy(e.target.value)}
                       style={{ background: '#121626', border: '1px solid #232A3E', borderRadius: 8, color: '#D4D4D8', fontSize: 13, padding: '8px 12px', cursor: 'pointer' }}>
                       <option value="year-desc">Newest first</option>
                       <option value="year-asc">Oldest first</option>
@@ -901,7 +901,7 @@ export default function Home() {
               ))}
             </div>
             {products.length > 1 && (
-              <select value={productFilter} onChange={(e) => setProductFilter(e.target.value)}
+              <select aria-label="Product line" value={productFilter} onChange={(e) => setProductFilter(e.target.value)}
                 style={{ background: '#121626', border: '1px solid #232A3E', borderRadius: 8, color: '#D4D4D8', fontSize: 13, padding: '8px 12px', cursor: 'pointer' }}>
                 <option value="All">All products ({products.length - 1})</option>
                 {products.slice(1).map(p => <option key={p} value={p}>{p}</option>)}
