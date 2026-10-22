@@ -359,7 +359,7 @@ export default function Home() {
     return ['All', ...present]
   }, [sets])
   const yearRange = useMemo(() => {
-    const ys = sets.map(s => s.year).filter(Boolean)
+    const ys = sets.map(s => s.year).filter(y => y >= 1850)   // ignore malformed years (e.g. a stray "24")
     return ys.length ? Math.min(...ys) + '–' + Math.max(...ys) : ''
   }, [sets])
 
