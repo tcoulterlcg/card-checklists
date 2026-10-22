@@ -3,7 +3,7 @@
 // Checklist HQ v2 — sectioned checklist database (Base / Inserts / Autos …)
 // imported from cardboardconnection.com. Static JSON under /public/data:
 // index.json lists sets; each set file carries sections -> cards.
-import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
+import { useDeferredValue, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { useAccount, AccountChip, AuthModal, CollectionView, CommunityView } from '../components/community'
 import { addWant } from '../lib/supa'
 import { Omnibox, PlayerPage, MyPlayersPanel, useMyPlayers, loadPlayerDir, seasonLabel, MemBadge, MemChip, memCodeOf } from '../components/player'
@@ -251,6 +251,8 @@ export default function Home() {
   const [setData, setSetData] = useState(null)
   const [activeSection, setActiveSection] = useState('All')
   const [query, setQuery] = useState('')
+  // Heavy filtering follows the query a beat behind so typing stays instant.
+  const dQuery = useDeferredValue(query)
   const [sportFilter, setSportFilter] = useState('All')
   const [brandFilter, setBrandFilter] = useState('All')
   const [productFilter, setProductFilter] = useState('All')
@@ -292,6 +294,7 @@ export default function Home() {
   // Big sets have 500+ sections; render them in pages so phones don't freeze.
   const [secLimit, setSecLimit] = useState(20)
   const [notice, setNotice] = useState('')
+  const [openSecs, setOpenSecs] = useState(() => new Set()) // set-page sections expanded past 200 rows
   const [setLimit, setSetLimit] = useState(60) // home grid pages in 60s; all 5k cards at once is slow on phones
 
   const toggleSort = (field) => {
@@ -379,7 +382,7 @@ export default function Home() {
   const nav = (url, push) => { if (push === false) return; try { history.pushState(null, '', url) } catch {} }
   const openSet = async (s, push) => {
     setNotice('')
-    setActiveSet(s); setGlobalHits(null); setActiveSection('All'); setQuery(''); setActivePlayer(null); setView('browse'); setSetTypeFilter('All'); setSetRunFilter('any'); setSetRcOnly(false); setSetMemFilter('any'); setSecLimit(20)
+    setActiveSet(s); setGlobalHits(null); setActiveSection('All'); setQuery(''); setActivePlayer(null); setView('browse'); setSetTypeFilter('All'); setSetRunFilter('any'); setSetRcOnly(false); setSetMemFilter('any'); setSecLimit(20); setOpenSecs(new Set())
     nav('?set=' + encodeURIComponent(s.slug), push)
     try {
       setSetData(await loadSet(s.slug))
@@ -467,7 +470,7 @@ export default function Home() {
     if (!setData) return []
     let secs = setData.sections || []
     if (activeSection !== 'All') secs = secs.filter(s => s.title === activeSection)
-    const term = query.trim().toLowerCase()
+    const term = dQuery.trim().toLowerCase()
     const anyFilter = term || onlyMine || setTypeFilter !== 'All' || setRunFilter !== 'any' || setRcOnly || setMemFilter !== 'any'
     if (!anyFilter) return secs
     return secs.map(s => {
@@ -499,8 +502,8 @@ export default function Home() {
         })
       }
     }).filter(s => s.cards.length > 0)
-  }, [setData, activeSection, query, onlyMine, setTypeFilter, setRunFilter, setRcOnly, setMemFilter, mineSet])
-  useEffect(() => { setSecLimit(20) }, [activeSection, query, onlyMine, setTypeFilter, setRunFilter, setRcOnly, setMemFilter])
+  }, [setData, activeSection, dQuery, onlyMine, setTypeFilter, setRunFilter, setRcOnly, setMemFilter, mineSet])
+  useEffect(() => { setSecLimit(20) }, [activeSection, dQuery, onlyMine, setTypeFilter, setRunFilter, setRcOnly, setMemFilter])
   // Group the filtered cards by player (for the "My players" view of a set).
   const byPlayer = useMemo(() => {
     if (!onlyMine || !setData) return []
@@ -538,12 +541,12 @@ export default function Home() {
     else if (sportFilter !== 'All') list = list.filter(s => s.sport === sportFilter)
     if (brandFilter !== 'All') list = list.filter(s => s.brand === brandFilter)
     if (productFilter !== 'All') list = list.filter(s => s.product === productFilter)
-    const term = query.trim().toLowerCase()
+    const term = dQuery.trim().toLowerCase()
     if (term && !activeSet) list = list.filter(s => s.name.toLowerCase().includes(term))
     return list
-  }, [taggedSets, sportFilter, brandFilter, productFilter, query, activeSet])
+  }, [taggedSets, sportFilter, brandFilter, productFilter, dQuery, activeSet])
 
-  useEffect(() => { setSetLimit(60) }, [sportFilter, brandFilter, productFilter, sortBy, query])
+  useEffect(() => { setSetLimit(60) }, [sportFilter, brandFilter, productFilter, sortBy, dQuery])
   const oneSport = sportFilter !== 'All' && sportFilter !== 'Sports' && sportFilter !== 'TCG' && sportFilter !== 'Other'
 
   const isTcg = TCG_SET.has(sportFilter)
@@ -658,6 +661,14 @@ export default function Home() {
     if (s) { setView('browse'); openSet(s) }
   }
   const searchFor = (name) => { setQuery(name); runSearch(name) }
+  // Stable callbacks for the (memoized) player page, so typing in the search box
+  // doesn't re-render a 1,000-row player page on every keystroke.
+  const cbRef = useRef({})
+  cbRef.current = { openSetBySlug, wantIt, runSearch, pickCandidate: (c) => openPlayer(c, playerParsed, playerCandidates) }
+  const stableCb = useMemo(() => ({
+    openSetBySlug: (...a) => cbRef.current.openSetBySlug(...a), wantIt: (...a) => cbRef.current.wantIt(...a),
+    runSearch: (...a) => cbRef.current.runSearch(...a), pickCandidate: (...a) => cbRef.current.pickCandidate(...a)
+  }), [])
   // Tab / history title per view (shared links and browser history read better).
   useEffect(() => {
     const t = activeSet ? (setData ? setData.name : activeSet.name) + ' Checklist'
@@ -1151,7 +1162,7 @@ export default function Home() {
                     <div className="hq-col-flag" style={{ flex: setIsTcg ? '0 0 110px' : '0 0 70px' }}><SortHeader label={setIsTcg ? 'Rarity' : 'Flag'} field="x" sortField={sortField} sortDir={sortDir} onClick={toggleSort} align="right" /></div>
                     <span aria-hidden="true" style={{ flex: '0 0 32px' }} />
                   </div>
-                  {sorted.slice(0, 1000).map((c, i) => (
+                  {sorted.slice(0, openSecs.has(sec.title) ? 5000 : 200).map((c, i) => (
                     <div key={i} className="hq-setrow" style={{
                       display: 'flex', gap: 14, padding: '8px 16px', fontSize: 14,
                       background: i % 2 === 0 ? '#0F1320' : '#121626', alignItems: 'center'
@@ -1168,6 +1179,9 @@ export default function Home() {
                         aria-label="Add to wantlist" style={{ flex: '0 0 32px', height: 32, background: 'none', border: '1px solid #232A3E', color: '#7a7a7a', borderRadius: 6, fontSize: 14, cursor: 'pointer', padding: 0 }}>+</button>
                     </div>
                   ))}
+                  {sorted.length > 200 && !openSecs.has(sec.title) && (
+                    <button onClick={() => setOpenSecs(o => new Set([...o, sec.title]))} style={{ display: 'block', width: '100%', padding: '10px 16px', background: '#0F1320', border: 'none', borderTop: '1px solid #1A1F31', color: ACCENT_TEXT, fontSize: 13, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit', textAlign: 'left' }}>Show all {sorted.length.toLocaleString()} cards in this section →</button>
+                  )}
                 </div>
               </div>
             )
@@ -1217,8 +1231,8 @@ export default function Home() {
         </section>
       ) : view === 'player' && activePlayer ? (
         <PlayerPage key={activePlayer.id + '|' + ((playerParsed && playerParsed.raw) || '')} player={activePlayer} parsed={playerParsed} sets={sets} myPlayers={myPlayers}
-          onOpenSet={openSetBySlug}
-          onWant={wantIt} onSearch={runSearch} candidates={playerCandidates} onPickCandidate={(c) => openPlayer(c, playerParsed, playerCandidates)} />
+          onOpenSet={stableCb.openSetBySlug}
+          onWant={stableCb.wantIt} onSearch={stableCb.runSearch} candidates={playerCandidates} onPickCandidate={stableCb.pickCandidate} />
       ) : view === 'myplayers' ? (
         <MyPlayersPanel myPlayers={myPlayers} onOpenPlayer={(name) => openPlayerByName(name)} />
       ) : view === 'community' ? (

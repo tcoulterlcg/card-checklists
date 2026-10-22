@@ -2,7 +2,7 @@
 // Player search: omnibox with suggestions, player landing pages with faceted
 // filters, and "My Players" (players the collector follows). Data comes from
 // public/data/players/ (built by scripts/build-player-index.mjs).
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { memo, useDeferredValue, useEffect, useMemo, useRef, useState } from 'react'
 import { supa } from '../lib/supa'
 import { TYPE, norm, parseQuery, parseQueryFor, matchPlayers, rowMatches, typeLabel, TYPE_COLORS, serialLabel, MEM_LABEL, MEM_COLORS, memKind, memTypical } from '../lib/query'
 import { ACCENT, ACCENT_TEXT, BG, SURFACE, SURFACE_2, LINE, CHIP_LINE, TEXT, TEXT_2, LABEL, display, eyebrow, title, buttonText } from '../lib/theme'
@@ -125,13 +125,15 @@ export function Omnibox({ value, onChange, onSubmit, onPickPlayer, onPickSet, se
     const h = (e) => { if (box.current && !box.current.contains(e.target)) setOpen(false) }
     document.addEventListener('mousedown', h); document.addEventListener('touchstart', h); return () => { document.removeEventListener('mousedown', h); document.removeEventListener('touchstart', h) }
   }, [])
-  const parsed = useMemo(() => parseQueryFor(dir, value), [value, dir])
-  const playerHits = useMemo(() => (dir && parsed.player.length >= 2) ? matchPlayers(dir, parsed.player, 6) : [], [dir, parsed.player])
+  // Suggestions follow the input a beat behind (the directory scan is ~160k names).
+  const dValue = useDeferredValue(value)
+  const parsed = useMemo(() => parseQueryFor(dir, dValue), [dValue, dir])
+  const playerHits = useMemo(() => (dir && parsed.player.length >= 2) ? matchPlayers(dir, parsed.player, 6, { fuzzy: parsed.player.length >= 5 }) : [], [dir, parsed.player])
   const setHits = useMemo(() => {
-    const t = norm(value); if (t.length < 3 || !sets) return []
+    const t = norm(dValue); if (t.length < 3 || !sets) return []
     const toks = t.split(' ')
     return sets.filter(s => { const n = norm(s.name); return toks.every(k => n.includes(k)) }).slice(0, 3)
-  }, [value, sets])
+  }, [dValue, sets])
   const refine = useMemo(() => {
     const p = playerHits[0]; if (!p) return []
     const base = p.name.toLowerCase()
@@ -217,7 +219,8 @@ export function Omnibox({ value, onChange, onSubmit, onPickPlayer, onPickSet, se
 const VIEWS = [['all', 'All cards'], ['oneofone', '1/1s'], ['rc', 'Rookies'], ['auto', 'Autos'], ['pa', 'Patch autos'], ['gu', 'Game-used'], ['base', 'Base only'], ['rare', '/25 or rarer']]
 const quickFilter = { all: () => true, oneofone: r => r[5] === 1, rc: r => r[6] & TYPE.RC, auto: r => r[6] & TYPE.AU, pa: r => (r[6] & TYPE.AU) && (r[6] & TYPE.PATCH), gu: r => (r[7] & 7) === 1, base: r => r[6] & TYPE.BASE, rare: r => r[5] > 0 && r[5] <= 25 }
 
-export function PlayerPage({ player, parsed, sets, onOpenSet, myPlayers, onWant, onSearch, candidates, onPickCandidate }) {
+export const PlayerPage = memo(PlayerPageInner, (a, b) => a.player === b.player && a.parsed === b.parsed && a.sets === b.sets && a.candidates === b.candidates && a.myPlayers.list === b.myPlayers.list && a.onWant === b.onWant)
+function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, onSearch, candidates, onPickCandidate }) {
   const [shard, setShard] = useState(null)
   const [quick, setQuick] = useState('all')
   const [group, setGroup] = useState('set')
