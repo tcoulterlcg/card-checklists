@@ -312,8 +312,8 @@ export default function Home() {
   const [teamList, setTeamList] = useState(null) // { sport, teams: [[name, cards]] }
   const [sliceLoading, setSliceLoading] = useState(false)
   const getJson = async (url) => { try { const r = await fetch(url); if (!r.ok) throw 0; return await r.json() } catch { return null } }
-  const ensureSearchIndex = async () => {
-    const sp = sportFilter
+  const ensureSearchIndex = async (forSport) => {
+    const sp = forSport || sportFilter
     if (TCG_SET.has(sp)) {
       if (searchIndex && searchIndex.__key === sp) return searchIndex
       const j = (await getJson('/data/teams/' + sportFile(sp) + '.json')) || { ...EMPTY_IDX }
@@ -325,7 +325,7 @@ export default function Home() {
     }
     return searchIndex
   }
-  const openTeamBrowse = async () => { setTeamBrowse(true); setTeamLoading(true); await ensureSearchIndex(); setTeamLoading(false) }
+  const openTeamBrowse = async (forSport) => { setTeamBrowse(true); setTeamLoading(true); await ensureSearchIndex(typeof forSport === 'string' ? forSport : undefined); setTeamLoading(false) }
   // Load one team's slice when a team is picked (team sports only).
   useEffect(() => {
     if (TCG_SET.has(sportFilter) || teamFilter === 'All' || !teamList || teamList.sport !== sportFilter) return
@@ -677,6 +677,21 @@ export default function Home() {
     openSetBySlug: (...a) => cbRef.current.openSetBySlug(...a), wantIt: (...a) => cbRef.current.wantIt(...a),
     runSearch: (...a) => cbRef.current.runSearch(...a), pickCandidate: (...a) => cbRef.current.pickCandidate(...a)
   }), [])
+  useEffect(() => {
+    if (!isLanding || sets.length === 0) return
+    const sp = new URLSearchParams(location.search)
+    if (sp.get('set') || sp.get('player') || sp.get('view') || sp.get('search')) return
+    const q = new URLSearchParams()
+    if (sportFilter !== 'All') q.set('sport', sportFilter)
+    if (brandFilter !== 'All') q.set('brand', brandFilter)
+    if (productFilter !== 'All') q.set('product', productFilter)
+    if (sortBy !== 'year-desc') q.set('sort', sortBy)
+    if (teamFilter !== 'All') q.set('team', teamFilter)
+    if (tcgRarity !== 'All') q.set('rarity', tcgRarity)
+    if (tcgType !== 'All') q.set('type', tcgType)
+    const url = location.pathname + (q.toString() ? '?' + q : '')
+    if (url !== location.pathname + location.search) { try { history.replaceState(null, '', url) } catch {} }
+  }, [isLanding, sets.length, sportFilter, brandFilter, productFilter, sortBy, teamFilter, tcgRarity, tcgType])
   // Tab / history title per view (shared links and browser history read better).
   useEffect(() => {
     const t = activeSet ? (setData ? setData.name : activeSet.name) + ' Checklist'
@@ -701,7 +716,15 @@ export default function Home() {
     }
     else if (sr) runGlobalSearch(sr, false)
     else if (v && ['myplayers', 'community', 'collection'].includes(v)) openView(v, false)
-    else goHome(false)
+    else {
+      goHome(false)
+      // browse filters live in the URL too (?sport=Hockey&team=...), so Back and shared links restore them
+      const g = (k) => sp.get(k) || 'All'
+      setSportFilter(g('sport')); setBrandFilter(g('brand')); setProductFilter(g('product')); setSortBy(sp.get('sort') || 'year-desc')
+      setTcgRarity(g('rarity')); setTcgType(g('type'))
+      const tm = sp.get('team')
+      if (tm || sp.get('rarity') || sp.get('type')) { setTeamInput(tm || ''); setTeamFilter(tm || 'All'); openTeamBrowse(g('sport')) }
+    }
   }
   useEffect(() => {
     if (sets.length === 0) return
