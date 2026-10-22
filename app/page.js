@@ -9,11 +9,14 @@ import { addWant } from '../lib/supa'
 import { Omnibox, PlayerPage, MyPlayersPanel, useMyPlayers, loadPlayerDir, seasonLabel, MemBadge, MemChip, memCodeOf } from '../components/player'
 import { parseQuery, matchPlayers, TYPE, typeLabel, TYPE_COLORS, serialLabel } from '../lib/query'
 
-const GOLD = '#d4a843'
+const ACCENT = '#2f6bff'
 const condensed = { fontFamily: "'Barlow Condensed', 'Arial Narrow', sans-serif" }
 
+// Wordmark from the logo lockup: heavy Inter, mixed case, tight tracking.
+const wordmark = (size) => ({ fontFamily: "'Inter', system-ui, sans-serif", fontSize: size, fontWeight: 800, letterSpacing: '-0.03em', lineHeight: 1, color: '#fff' })
+
 // Card HQ mark (logo option 7f, "Scan C"): viewfinder corner brackets framing a blue C.
-function ScanCMark({ size = 30, bracket = '#f2f0ec', accent = '#2563eb' }) {
+function ScanCMark({ size = 30, bracket = '#f2f0ec', accent = ACCENT }) {
   return (
     <svg width={size} height={size} viewBox="0 0 96 96" aria-hidden="true">
       <path d="M14 32V14h18M64 14h18v18M82 64v18H64M32 82H14V64" fill="none" stroke={bracket} strokeWidth="7" strokeLinecap="square" strokeLinejoin="miter" />
@@ -143,7 +146,7 @@ function SortHeader({ label, field, sortField, sortDir, onClick, align, grow }) 
     <button onClick={() => onClick(field)}
       style={{
         flex: grow ? '1 1 auto' : '0 0 auto', textAlign: align || 'left', background: 'none', border: 'none',
-        cursor: 'pointer', padding: 0, color: active ? '#d4a843' : '#888', fontSize: 11, fontWeight: 700,
+        cursor: 'pointer', padding: 0, color: active ? ACCENT : '#888', fontSize: 11, fontWeight: 700,
         letterSpacing: '0.1em', textTransform: 'uppercase', display: 'flex', alignItems: 'center',
         gap: 4, justifyContent: align === 'right' ? 'flex-end' : 'flex-start', minWidth: grow ? 0 : undefined
       }}>
@@ -181,9 +184,9 @@ function Chip({ children, color, solid }) {
     <span style={{
       display: 'inline-block', padding: '3px 10px', borderRadius: 999, fontSize: 11, fontWeight: 700,
       letterSpacing: '0.08em', textTransform: 'uppercase',
-      background: solid ? (color || GOLD) : 'transparent',
-      color: solid ? '#111' : (color || GOLD),
-      border: '1px solid ' + (color || GOLD) + (solid ? '' : '55')
+      background: solid ? (color || ACCENT) : 'transparent',
+      color: solid ? '#fff' : (color || ACCENT),
+      border: '1px solid ' + (color || ACCENT) + (solid ? '' : '55')
     }}>{children}</span>
   )
 }
@@ -566,16 +569,14 @@ export default function Home() {
         {/* Nav logo — Scan C mark + wordmark */}
         <div onClick={goHome} style={{ display: 'inline-flex', alignItems: 'center', gap: 10, cursor: 'pointer' }}>
           <ScanCMark size={30} />
-          <span style={{ ...condensed, fontSize: 26, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.02em', lineHeight: 1 }}>
-            <span style={{ color: '#f2f0ec' }}>Card</span><span style={{ color: GOLD, marginLeft: 6 }}>HQ</span>
-          </span>
+          <span style={wordmark(24)}>CardHQ</span>
         </div>
         <div style={{ display: 'flex', gap: 24, alignItems: 'center', flexWrap: 'wrap' }}>
           {[['Sets', () => { goHome(); setSportFilter('All') }, 'browse'], ['Players', () => openView('myplayers'), 'myplayers'], /* RPA Tracker + Patch Swaps hidden until ready */ ['Community', () => openView('community'), 'community'], ['My Collection', () => openView('collection'), 'collection']].map(([label, fn, v]) => (
-            <button key={label} onClick={fn} style={{ background: 'none', border: 'none', cursor: 'pointer', color: view === v ? GOLD : '#bbb', fontSize: 12, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase' }}>{label}</button>
+            <button key={label} onClick={fn} style={{ background: 'none', border: 'none', cursor: 'pointer', color: view === v ? '#fff' : '#9a9ba3', fontSize: 14, fontWeight: 600, padding: '4px 0', borderBottom: '2px solid ' + (view === v ? ACCENT : 'transparent') }}>{label}</button>
           ))}
           <AccountChip account={account} onOpenAuth={() => setAuthOpen(true)} />
-          <span style={{ ...condensed, fontSize: 14, fontWeight: 700, color: GOLD, border: '1px solid ' + GOLD + '66', borderRadius: 8, padding: '6px 12px', letterSpacing: '0.06em' }}>
+          <span style={{ ...condensed, fontSize: 14, fontWeight: 700, color: ACCENT, border: '1px solid ' + ACCENT + '66', borderRadius: 8, padding: '6px 12px', letterSpacing: '0.06em' }}>
             {statN.sets} SETS
           </span>
         </div>
@@ -583,7 +584,7 @@ export default function Home() {
 
       <AuthModal open={authOpen} onClose={() => setAuthOpen(false)} account={account} />
       {wantFlash && (
-        <div style={{ position: 'fixed', bottom: 24, right: 24, zIndex: 95, background: GOLD, color: '#111', fontWeight: 800, fontSize: 14, padding: '12px 20px', borderRadius: 12, boxShadow: '0 8px 30px #000a' }}>{wantFlash}</div>
+        <div style={{ position: 'fixed', bottom: 24, right: 24, zIndex: 95, background: ACCENT, color: '#fff', fontWeight: 800, fontSize: 14, padding: '12px 20px', borderRadius: 12, boxShadow: '0 8px 30px #000a' }}>{wantFlash}</div>
       )}
 
       {isLanding ? (
@@ -592,27 +593,27 @@ export default function Home() {
           <section style={{
             position: 'relative', textAlign: 'center', padding: '54px 0 40px', marginBottom: 10,
             borderRadius: 20, overflow: 'hidden',
-            background: 'radial-gradient(120% 100% at 50% 0%, rgba(212,168,67,0.08), rgba(10,10,10,0) 60%)'
+            background: 'radial-gradient(120% 100% at 50% 0%, rgba(47,107,255,0.08), rgba(10,10,10,0) 60%)'
           }}>
             {/* CARD HQ logo — Scan C mark */}
             <div style={{ display: 'inline-flex', alignItems: 'center', gap: 14, marginBottom: 24 }}>
               <ScanCMark size={46} />
               <div style={{ textAlign: 'left', lineHeight: 1 }}>
-                <div style={{ ...condensed, fontSize: 36, fontWeight: 800, letterSpacing: '1.5px', textTransform: 'uppercase' }}><span style={{ color: '#f2f0ec' }}>Card</span><span style={{ color: GOLD, marginLeft: 8 }}>HQ</span></div>
-                <div style={{ ...condensed, fontSize: 11, fontWeight: 600, letterSpacing: '5px', color: '#6f6c63', textTransform: 'uppercase', marginTop: 5 }}>Checklist Database</div>
+                <div style={wordmark(38)}>CardHQ</div>
+                <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: '4px', color: '#6b7080', textTransform: 'uppercase', marginTop: 6 }}>Checklist Database</div>
               </div>
             </div>
             <br />
             <span style={{
               display: 'inline-flex', alignItems: 'center', gap: 8, padding: '6px 16px', borderRadius: 999,
-              border: '1px solid rgba(212,168,67,0.35)', color: GOLD, fontSize: 11, fontWeight: 700,
+              border: '1px solid rgba(47,107,255,0.35)', color: ACCENT, fontSize: 11, fontWeight: 700,
               letterSpacing: '0.22em', textTransform: 'uppercase', marginBottom: 26
             }}>
-              <span style={{ width: 6, height: 6, borderRadius: 999, background: GOLD, display: 'inline-block' }} />
+              <span style={{ width: 6, height: 6, borderRadius: 999, background: ACCENT, display: 'inline-block' }} />
               The Definitive Card Set Database{yearRange ? ' · ' + yearRange : ''}
             </span>
             <h1 style={{ ...condensed, fontSize: 'clamp(48px, 8vw, 104px)', fontWeight: 800, textTransform: 'uppercase', lineHeight: 0.92, letterSpacing: '-0.01em', margin: 0 }}>
-              Every Card.<br /><span style={{ color: GOLD }}>Every Checklist.</span>
+              Every Card.<br /><span style={{ color: ACCENT }}>Every Checklist.</span>
             </h1>
             <p style={{ color: '#9a9a9a', fontSize: 17, lineHeight: 1.6, maxWidth: 620, margin: '24px auto 0' }}>
               Complete set checklists for sports cards and trading card games — Baseball, Football, Basketball, Hockey, Pokémon, Lorcana and more, indexed, sectioned, and searchable.
@@ -627,7 +628,7 @@ export default function Home() {
               Try {['Tom Brady Auto', 'Connor McDavid Game-Used 1/1'].map((n, i) => (
                 <span key={n}>
                   {i > 0 ? ' · ' : ' '}
-                  <button onClick={() => searchFor(n)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: GOLD, fontSize: 13, padding: 0 }}>{n}</button>
+                  <button onClick={() => searchFor(n)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: ACCENT, fontSize: 13, padding: 0 }}>{n}</button>
                 </span>
               ))}
             </p>
@@ -636,7 +637,7 @@ export default function Home() {
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 14, maxWidth: 680, margin: '38px auto 0' }}>
               {[[statN.sets.toLocaleString(), 'Sets Indexed'], [(statN.cards >= 1000000 ? (statN.cards / 1000000).toFixed(1) + 'M+' : statN.cards >= 1000 ? Math.round(statN.cards / 1000) + 'K+' : String(statN.cards)), 'Cards + Parallels'], [String(Math.max(sports.length - 1, 0)), 'Categories']].map(([n, label]) => (
                 <div key={label} style={{ background: 'linear-gradient(160deg, #171717, #0e0e0e)', border: '1px solid #262626', borderRadius: 14, padding: '22px 14px' }}>
-                  <p style={{ ...condensed, margin: 0, fontSize: 40, fontWeight: 800, color: GOLD, lineHeight: 1 }}>{n}</p>
+                  <p style={{ ...condensed, margin: 0, fontSize: 40, fontWeight: 800, color: ACCENT, lineHeight: 1 }}>{n}</p>
                   <p style={{ margin: '8px 0 0', color: '#888', fontSize: 11, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase' }}>{label}</p>
                 </div>
               ))}
@@ -662,7 +663,7 @@ export default function Home() {
                 style={{
                   padding: '6px 14px', borderRadius: 999, fontSize: 12, fontWeight: 700, cursor: 'pointer',
                   letterSpacing: '0.06em', textTransform: 'uppercase',
-                  background: sportFilter === value ? (color || GOLD) : '#141414',
+                  background: sportFilter === value ? (color || ACCENT) : '#141414',
                   color: sportFilter === value ? '#111' : '#999',
                   border: '1px solid ' + (sportFilter === value ? 'transparent' : '#2a2a2a')
                 }}>{label}</button>
@@ -686,7 +687,7 @@ export default function Home() {
                       <option value="cards-asc">Fewest cards</option>
                       <option value="brand">Brand</option>
                     </select>
-                    {chip('All', 'All', GOLD)}
+                    {chip('All', 'All', ACCENT)}
                   </div>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap', marginBottom: 10 }}>
@@ -713,7 +714,7 @@ export default function Home() {
                 <button key={b} onClick={() => { setBrandFilter(b); setProductFilter('All') }}
                   style={{
                     padding: '5px 13px', borderRadius: 999, fontSize: 12, fontWeight: 700, cursor: 'pointer', letterSpacing: '0.04em',
-                    background: brandFilter === b ? (BRAND_COLORS[b] || GOLD) : '#141414',
+                    background: brandFilter === b ? (BRAND_COLORS[b] || ACCENT) : '#141414',
                     color: brandFilter === b ? '#fff' : '#999',
                     border: '1px solid ' + (brandFilter === b ? 'transparent' : '#2a2a2a')
                   }}>{b}</button>
@@ -750,7 +751,7 @@ export default function Home() {
                       if (!t) setTeamFilter('All')
                       else if (teamsForSport.includes(t)) setTeamFilter(t)
                     }}
-                    style={{ background: '#141414', border: '1px solid ' + (teamFilter !== 'All' ? GOLD : '#2a2a2a'), borderRadius: 8, color: '#ddd', fontSize: 13, padding: '8px 12px', minWidth: 230, outline: 'none' }} />
+                    style={{ background: '#141414', border: '1px solid ' + (teamFilter !== 'All' ? ACCENT : '#2a2a2a'), borderRadius: 8, color: '#ddd', fontSize: 13, padding: '8px 12px', minWidth: 230, outline: 'none' }} />
                   <datalist id="team-options">{teamsForSport.map(t => <option key={t} value={t} />)}</datalist>
                   {teamFilter !== 'All' && (
                     <>
@@ -763,7 +764,7 @@ export default function Home() {
                         <option value="set">Set name</option>
                       </select>
                       <button onClick={() => { setTeamFilter('All'); setTeamInput('') }}
-                        style={{ background: 'none', border: 'none', color: GOLD, fontSize: 12.5, fontWeight: 600, cursor: 'pointer' }}>Clear</button>
+                        style={{ background: 'none', border: 'none', color: ACCENT, fontSize: 12.5, fontWeight: 600, cursor: 'pointer' }}>Clear</button>
                     </>
                   )}
                 </>
@@ -790,7 +791,7 @@ export default function Home() {
       {activeSet && setData ? (
         <section>
           <button onClick={() => { setActiveSet(null); setSetData(null); setQuery('') }}
-            style={{ background: 'none', border: 'none', color: GOLD, fontSize: 13, fontWeight: 600, cursor: 'pointer', padding: 0, marginBottom: 14 }}>
+            style={{ background: 'none', border: 'none', color: ACCENT, fontSize: 13, fontWeight: 600, cursor: 'pointer', padding: 0, marginBottom: 14 }}>
             ← All sets
           </button>
           <div style={{ background: 'linear-gradient(140deg, #191919, #101010)', border: '1px solid #262626', borderRadius: 16, padding: '26px 28px', marginBottom: 20 }}>
@@ -807,7 +808,7 @@ export default function Home() {
             </p>
             <div style={{ display: 'flex', gap: 10, marginTop: 14, flexWrap: 'wrap' }}>
               <button onClick={() => wantIt({ set_slug: setData.slug, set_name: setData.name })}
-                style={{ ...condensed, background: GOLD, color: '#111', border: 'none', borderRadius: 9, padding: '9px 16px', fontWeight: 800, fontSize: 13, letterSpacing: '0.05em', textTransform: 'uppercase', cursor: 'pointer' }}>
+                style={{ ...condensed, background: ACCENT, color: '#fff', border: 'none', borderRadius: 9, padding: '9px 16px', fontWeight: 800, fontSize: 13, letterSpacing: '0.05em', textTransform: 'uppercase', cursor: 'pointer' }}>
                 + Wantlist this set
               </button>
               <button onClick={() => { openView('collection') }}
@@ -818,8 +819,8 @@ export default function Home() {
           </div>
 
           {setData.boxBreak && setData.boxBreak.length > 0 && (
-            <div style={{ background: 'linear-gradient(140deg, #17140c, #0e0e0e)', border: '1px solid ' + GOLD + '33', borderRadius: 14, padding: '18px 22px', marginBottom: 20 }}>
-              <p style={{ ...condensed, fontSize: 15, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.1em', color: GOLD, margin: '0 0 12px' }}>
+            <div style={{ background: 'linear-gradient(140deg, #17140c, #0e0e0e)', border: '1px solid ' + ACCENT + '33', borderRadius: 14, padding: '18px 22px', marginBottom: 20 }}>
+              <p style={{ ...condensed, fontSize: 15, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.1em', color: ACCENT, margin: '0 0 12px' }}>
                 📦 Box Break — what a hobby box yields
               </p>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '6px 20px' }}>
@@ -827,7 +828,7 @@ export default function Home() {
                   const m = String(b).match(/^(\d+(?:\.\d+)?)\s+(.*)$/)
                   return (
                     <div key={i} style={{ display: 'flex', gap: 10, fontSize: 13, alignItems: 'baseline' }}>
-                      <span style={{ ...condensed, color: GOLD, fontWeight: 800, fontSize: 16, minWidth: 28 }}>{m ? m[1] + '×' : ''}</span>
+                      <span style={{ ...condensed, color: ACCENT, fontWeight: 800, fontSize: 16, minWidth: 28 }}>{m ? m[1] + '×' : ''}</span>
                       <span style={{ color: '#cfcfcf' }}>{m ? m[2] : b}</span>
                     </div>
                   )
@@ -839,9 +840,9 @@ export default function Home() {
           {/* FILTER BAR */}
           <div style={{ background: '#101010', border: '1px solid #232323', borderRadius: 14, padding: '10px 12px', display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center', marginBottom: 12 }}>
             <button aria-pressed={onlyMine} onClick={() => setOnlyMine(v => !v)} title={myPlayers.list.length ? 'Only show cards of players you collect' : 'Add players from any player page first'}
-              style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: onlyMine ? '#1c1810' : '#141414', border: '1px solid ' + (onlyMine ? GOLD : '#2a2a2a'), color: onlyMine ? '#f0c76a' : '#ddd', borderRadius: 10, padding: '0 14px', height: 38, fontSize: 13, fontWeight: 700, cursor: 'pointer', fontFamily: 'inherit' }}>
+              style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: onlyMine ? '#0e1630' : '#141414', border: '1px solid ' + (onlyMine ? ACCENT : '#2a2a2a'), color: onlyMine ? '#8fb0ff' : '#ddd', borderRadius: 10, padding: '0 14px', height: 38, fontSize: 13, fontWeight: 700, cursor: 'pointer', fontFamily: 'inherit' }}>
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><path d="M20 21a8 8 0 0 0-16 0" /><circle cx="12" cy="8" r="4" /></svg>
-              My players <span style={{ background: onlyMine ? GOLD : '#2a2a2a', color: onlyMine ? '#111' : '#bbb', borderRadius: 999, padding: '1px 7px', fontSize: 11, fontWeight: 800 }}>{myPlayers.list.length}</span>
+              My players <span style={{ background: onlyMine ? ACCENT : '#2a2a2a', color: onlyMine ? '#fff' : '#bbb', borderRadius: 999, padding: '1px 7px', fontSize: 11, fontWeight: 800 }}>{myPlayers.list.length}</span>
             </button>
             <select aria-label="Section" value={activeSection} onChange={(e) => setActiveSection(e.target.value)} style={{ background: '#141414', border: '1px solid #2a2a2a', borderRadius: 10, color: '#ddd', fontSize: 13, padding: '0 12px', height: 38, maxWidth: 260, cursor: 'pointer' }}>
               <option value="All">All sections ({(setData.sections || []).length})</option>
@@ -858,18 +859,18 @@ export default function Home() {
                 <option value="any">Any material</option><option value="MEMO">Memorabilia only</option><option value="GU">Game-used</option><option value="PW">Player-worn</option><option value="EW">Event-worn</option><option value="MX">Varies by card</option><option value="MFG">Manufactured</option><option value="UNK">Unknown</option><option value="STATED">Stated by maker/source only</option>
               </select>
             )}
-            <label style={{ display: 'inline-flex', alignItems: 'center', gap: 8, fontSize: 13, color: '#bbb', minHeight: 38, cursor: 'pointer' }}><input type="checkbox" checked={setRcOnly} onChange={(e) => setSetRcOnly(e.target.checked)} style={{ accentColor: GOLD, width: 16, height: 16 }} />Rookies only</label>
+            <label style={{ display: 'inline-flex', alignItems: 'center', gap: 8, fontSize: 13, color: '#bbb', minHeight: 38, cursor: 'pointer' }}><input type="checkbox" checked={setRcOnly} onChange={(e) => setSetRcOnly(e.target.checked)} style={{ accentColor: ACCENT, width: 16, height: 16 }} />Rookies only</label>
             {(onlyMine || setTypeFilter !== 'All' || setRunFilter !== 'any' || setRcOnly || setMemFilter !== 'any' || activeSection !== 'All' || query) && (
-              <button onClick={() => { setSetMemFilter('any'); setOnlyMine(false); setSetTypeFilter('All'); setSetRunFilter('any'); setSetRcOnly(false); setActiveSection('All'); setQuery('') }} style={{ background: 'none', border: 'none', color: GOLD, fontSize: 12.5, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit', marginLeft: 'auto' }}>Clear filters</button>
+              <button onClick={() => { setSetMemFilter('any'); setOnlyMine(false); setSetTypeFilter('All'); setSetRunFilter('any'); setSetRcOnly(false); setActiveSection('All'); setQuery('') }} style={{ background: 'none', border: 'none', color: ACCENT, fontSize: 12.5, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit', marginLeft: 'auto' }}>Clear filters</button>
             )}
           </div>
           {onlyMine && (
             <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center', margin: '0 0 14px' }}>
               <span style={{ color: '#666', fontSize: 11, fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase' }}>Showing cards of</span>
               {myPlayers.list.length === 0 && <span style={{ color: '#888', fontSize: 13 }}>nobody yet — open a player page and hit “Collect this player”.</span>}
-              {byPlayer.map(g => <button key={g.name} onClick={() => openPlayerByName(g.name)} style={{ background: '#1c1810', border: '1px solid ' + GOLD + '55', color: '#e8d5a8', fontSize: 12.5, fontWeight: 600, padding: '5px 10px', borderRadius: 999, cursor: 'pointer', fontFamily: 'inherit' }}>{g.name} <span style={{ color: '#b48d33' }}>· {g.rows.length}</span></button>)}
+              {byPlayer.map(g => <button key={g.name} onClick={() => openPlayerByName(g.name)} style={{ background: '#0e1630', border: '1px solid ' + ACCENT + '55', color: '#c9d8ff', fontSize: 12.5, fontWeight: 600, padding: '5px 10px', borderRadius: 999, cursor: 'pointer', fontFamily: 'inherit' }}>{g.name} <span style={{ color: '#5b82e8' }}>· {g.rows.length}</span></button>)}
               {myPlayers.list.filter(n => !byPlayer.some(g => g.name === n)).map(n => <span key={n} style={{ border: '1px solid #2a2a2a', color: '#666', fontSize: 12.5, padding: '5px 10px', borderRadius: 999 }}>{n} · 0</span>)}
-              <button onClick={() => openView('myplayers')} style={{ background: 'none', border: 'none', color: GOLD, fontSize: 12.5, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit' }}>Manage my players</button>
+              <button onClick={() => openView('myplayers')} style={{ background: 'none', border: 'none', color: ACCENT, fontSize: 12.5, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit' }}>Manage my players</button>
             </div>
           )}
 
@@ -878,8 +879,8 @@ export default function Home() {
               <button key={t} onClick={() => setActiveSection(t)}
                 style={{
                   padding: '6px 13px', borderRadius: 8, fontSize: 12, fontWeight: 700, cursor: 'pointer',
-                  background: activeSection === t ? GOLD : '#141414',
-                  color: activeSection === t ? '#111' : '#999',
+                  background: activeSection === t ? ACCENT : '#141414',
+                  color: activeSection === t ? '#fff' : '#999',
                   border: '1px solid ' + (activeSection === t ? 'transparent' : '#2a2a2a')
                 }}>{t}</button>
             ))}
@@ -895,18 +896,18 @@ export default function Home() {
                   <button onClick={() => openPlayerByName(g.name)} style={{ ...condensed, fontSize: 20, fontWeight: 800, textTransform: 'uppercase', background: 'none', border: 'none', color: '#f2f0ec', cursor: 'pointer', padding: 0, textAlign: 'left' }}>{g.name}</button>
                   <p style={{ margin: '2px 0 0', color: '#888', fontSize: 12 }}>{g.team ? g.team + ' · ' : ''}{g.rows.length} card{g.rows.length === 1 ? '' : 's'} in this set{g.au ? ' · ' + g.au + ' autos' : ''}{g.one ? ' · ' + g.one + ' × 1/1' : ''}</p>
                 </div>
-                <button onClick={() => openPlayerByName(g.name)} style={{ background: 'none', border: 'none', color: GOLD, fontSize: 12.5, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit' }}>Player page →</button>
+                <button onClick={() => openPlayerByName(g.name)} style={{ background: 'none', border: 'none', color: ACCENT, fontSize: 12.5, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit' }}>Player page →</button>
               </div>
               <div style={{ overflowX: 'auto' }}>
                 <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 13.5, minWidth: 560 }}>
                   <thead><tr>{['Card #', 'Section', 'Type', 'Material', 'Run', 'Want'].map((h, i) => <th key={h} style={{ padding: '9px 14px', fontWeight: 700, textAlign: i >= 4 ? 'right' : 'left', fontSize: 11, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#888' }}>{h}</th>)}</tr></thead>
                   <tbody>{g.rows.map((r, i) => (
                     <tr key={i} style={{ borderTop: '1px solid #1a1a1a', background: i % 2 ? '#131313' : 'transparent' }}>
-                      <td style={{ padding: '9px 14px', color: GOLD, fontWeight: 700, whiteSpace: 'nowrap' }}>{r.n ? '#' + r.n : '—'}</td>
+                      <td style={{ padding: '9px 14px', color: ACCENT, fontWeight: 700, whiteSpace: 'nowrap' }}>{r.n ? '#' + r.n : '—'}</td>
                       <td style={{ padding: '9px 14px' }}>{r.section}</td>
                       <td style={{ padding: '9px 14px' }}><Chip color={r.kind === 'PA' ? '#e11d48' : r.kind === 'AU' ? '#60a5fa' : r.kind === 'PATCH' ? '#16a34a' : r.kind === 'RELIC' ? '#f97316' : '#9ca3af'}>{r.kind === 'PA' ? 'PATCH AUTO' : r.kind === 'AU' ? 'AUTO' : r.kind === 'OTHER' ? (r.x === 'RC' ? 'RC' : 'INSERT') : r.kind}</Chip></td>
                       <td style={{ padding: '9px 14px' }}>{r.memc ? <MemChip code={r.memc} /> : <span style={{ color: '#444' }}>—</span>}</td>
-                      <td style={{ padding: '9px 14px', textAlign: 'right', whiteSpace: 'nowrap' }}>{r.serial === 1 ? <span style={{ background: GOLD, color: '#111', padding: '2px 8px', borderRadius: 999, fontSize: 11, fontWeight: 800 }}>1/1</span> : r.serial > 0 ? '/' + r.serial : <span style={{ color: '#555' }}>—</span>}</td>
+                      <td style={{ padding: '9px 14px', textAlign: 'right', whiteSpace: 'nowrap' }}>{r.serial === 1 ? <span style={{ background: ACCENT, color: '#fff', padding: '2px 8px', borderRadius: 999, fontSize: 11, fontWeight: 800 }}>1/1</span> : r.serial > 0 ? '/' + r.serial : <span style={{ color: '#555' }}>—</span>}</td>
                       <td style={{ padding: '9px 14px', textAlign: 'right' }}><button aria-label="Add to wantlist" onClick={() => wantIt({ set_slug: setData.slug, set_name: setData.name, card_n: r.n, section: r.section, player: r.p })} style={{ background: 'none', border: '1px solid #2c2c2c', color: '#999', borderRadius: 6, width: 32, height: 32, cursor: 'pointer', fontFamily: 'inherit' }}>+</button></td>
                     </tr>
                   ))}</tbody>
@@ -922,8 +923,8 @@ export default function Home() {
                 </h2>
                 {sec.mem && <div style={{ margin: '0 0 10px' }}><MemBadge mem={sec.mem} /></div>}
                 {sec.odds && (
-                  <div style={{ display: 'flex', gap: 8, alignItems: 'flex-start', margin: '0 0 10px', padding: '8px 12px', background: '#141109', border: '1px solid ' + GOLD + '2e', borderRadius: 9 }}>
-                    <span style={{ ...condensed, fontSize: 11, fontWeight: 800, letterSpacing: '0.1em', color: GOLD, textTransform: 'uppercase', whiteSpace: 'nowrap', paddingTop: 1 }}>Pack Odds</span>
+                  <div style={{ display: 'flex', gap: 8, alignItems: 'flex-start', margin: '0 0 10px', padding: '8px 12px', background: '#141109', border: '1px solid ' + ACCENT + '2e', borderRadius: 9 }}>
+                    <span style={{ ...condensed, fontSize: 11, fontWeight: 800, letterSpacing: '0.1em', color: ACCENT, textTransform: 'uppercase', whiteSpace: 'nowrap', paddingTop: 1 }}>Pack Odds</span>
                     <span style={{ color: '#b9b9b9', fontSize: 12.5, lineHeight: 1.5 }}>{sec.odds}</span>
                   </div>
                 )}
@@ -939,8 +940,8 @@ export default function Home() {
                       display: 'flex', gap: 14, padding: '8px 16px', fontSize: 14,
                       background: i % 2 === 0 ? '#0f0f0f' : '#141414', alignItems: 'baseline'
                     }}>
-                      <span style={{ flex: '0 0 68px', color: GOLD, fontWeight: 700, fontVariantNumeric: 'tabular-nums' }}>#{c.n}</span>
-                      <button onClick={() => openPlayerByName(c.p)} title={'Open ' + c.p + "'s player page"} style={{ flex: '1 1 auto', minWidth: 0, fontWeight: 600, background: 'none', border: 'none', color: isMine(c.p) ? GOLD : '#f5f5f5', cursor: 'pointer', padding: 0, textAlign: 'left', fontFamily: 'inherit', fontSize: 14 }}>{c.p}</button>
+                      <span style={{ flex: '0 0 68px', color: ACCENT, fontWeight: 700, fontVariantNumeric: 'tabular-nums' }}>#{c.n}</span>
+                      <button onClick={() => openPlayerByName(c.p)} title={'Open ' + c.p + "'s player page"} style={{ flex: '1 1 auto', minWidth: 0, fontWeight: 600, background: 'none', border: 'none', color: isMine(c.p) ? ACCENT : '#f5f5f5', cursor: 'pointer', padding: 0, textAlign: 'left', fontFamily: 'inherit', fontSize: 14 }}>{c.p}</button>
                       <span style={{ flex: '1 1 auto', minWidth: 0, color: '#888', fontSize: 13 }}>{c.t || ''}</span>
                       <span style={{ flex: '0 0 70px', textAlign: 'right' }}>{c.x ? <Chip color={c.x === 'RC' ? '#4ade80' : '#888'}>{c.x}</Chip> : null}</span>
                       <button title="Add this card (and its parallel section) to your wantlist"
@@ -957,7 +958,7 @@ export default function Home() {
       ) : globalHits ? (
         <section>
           <button onClick={() => setGlobalHits(null)}
-            style={{ background: 'none', border: 'none', color: GOLD, fontSize: 13, fontWeight: 600, cursor: 'pointer', padding: 0, marginBottom: 14 }}>
+            style={{ background: 'none', border: 'none', color: ACCENT, fontSize: 13, fontWeight: 600, cursor: 'pointer', padding: 0, marginBottom: 14 }}>
             ← Browse sets
           </button>
           <h2 style={{ ...condensed, fontSize: 24, fontWeight: 800, textTransform: 'uppercase', margin: '0 0 14px' }}>
@@ -969,7 +970,7 @@ export default function Home() {
                 display: 'flex', gap: 12, padding: '9px 16px', fontSize: 14,
                 background: i % 2 === 0 ? '#0f0f0f' : '#141414', alignItems: 'baseline', flexWrap: 'wrap'
               }}>
-                <span style={{ color: GOLD, fontWeight: 700, minWidth: 52 }}>#{c.n}</span>
+                <span style={{ color: ACCENT, fontWeight: 700, minWidth: 52 }}>#{c.n}</span>
                 <button onClick={() => openPlayerByName(c.p)} style={{ fontWeight: 600, background: 'none', border: 'none', color: '#f5f5f5', cursor: 'pointer', padding: 0, fontFamily: 'inherit', fontSize: 14 }}>{c.p}</button>
                 {c.t && <span style={{ color: '#777', fontSize: 13 }}>{c.t}</span>}
                 {c.x && <Chip color={c.x === 'RC' ? '#4ade80' : '#888'}>{c.x}</Chip>}
@@ -992,7 +993,7 @@ export default function Home() {
           onOpenSet={openSetBySlug} />
       ) : view === 'rpa' ? (
         <section>
-          <div style={{ background: 'linear-gradient(140deg, #1a1512, #0e0e0e)', border: '1px solid ' + GOLD + '33', borderRadius: 18, padding: '30px 30px', marginBottom: 22 }}>
+          <div style={{ background: 'linear-gradient(140deg, #0f1526, #0e0e0e)', border: '1px solid ' + ACCENT + '33', borderRadius: 18, padding: '30px 30px', marginBottom: 22 }}>
             <h1 style={{ ...condensed, fontSize: 40, fontWeight: 800, textTransform: 'uppercase', margin: 0, lineHeight: 1 }}>RPA Tracker</h1>
             <p style={{ color: '#aaa', fontSize: 15, lineHeight: 1.6, maxWidth: 720, margin: '14px 0 0' }}>
               Every Rookie Patch Auto, on-card autograph, patch and relic card across {statN.sets.toLocaleString()} sets — with its serial print run — so you can track the hobby's premium hits in one place.
@@ -1004,7 +1005,7 @@ export default function Home() {
               <button key={code} onClick={() => setRpaType(code)}
                 style={{
                   padding: '6px 14px', borderRadius: 999, fontSize: 12, fontWeight: 700, cursor: 'pointer', letterSpacing: '0.04em',
-                  background: rpaType === code ? (RPA_TYPE_COLOR[code] || GOLD) : '#141414',
+                  background: rpaType === code ? (RPA_TYPE_COLOR[code] || ACCENT) : '#141414',
                   color: rpaType === code ? '#111' : '#999',
                   border: '1px solid ' + (rpaType === code ? 'transparent' : '#2a2a2a')
                 }}>{label}</button>
@@ -1015,7 +1016,7 @@ export default function Home() {
               <button key={sp} onClick={() => setSportFilter(sp)}
                 style={{
                   padding: '5px 12px', borderRadius: 999, fontSize: 11, fontWeight: 700, cursor: 'pointer', letterSpacing: '0.05em', textTransform: 'uppercase',
-                  background: sportFilter === sp ? (SPORT_COLORS[sp] || GOLD) : '#141414',
+                  background: sportFilter === sp ? (SPORT_COLORS[sp] || ACCENT) : '#141414',
                   color: sportFilter === sp ? '#111' : '#999', border: '1px solid ' + (sportFilter === sp ? 'transparent' : '#2a2a2a')
                 }}>{sp}</button>
             ))}
@@ -1037,7 +1038,7 @@ export default function Home() {
                 {rpaResults.map((c, i) => (
                   <button key={i} onClick={() => { const s = sets.find(x => x.slug === c.slug); if (s) openSet(Object.assign({}, s, classifySet(s.name))) }}
                     style={{ width: '100%', textAlign: 'left', display: 'flex', gap: 12, padding: '8px 16px', fontSize: 14, alignItems: 'baseline', background: i % 2 === 0 ? '#0f0f0f' : '#141414', border: 'none', color: '#f5f5f5', cursor: 'pointer' }}>
-                    <span style={{ flex: '0 0 56px', color: GOLD, fontWeight: 700, fontVariantNumeric: 'tabular-nums' }}>#{c.n}</span>
+                    <span style={{ flex: '0 0 56px', color: ACCENT, fontWeight: 700, fontVariantNumeric: 'tabular-nums' }}>#{c.n}</span>
                     <span style={{ flex: '1 1 auto', minWidth: 0, fontWeight: 600 }}>{c.p}</span>
                     <span style={{ flex: '0 0 88px' }}><Chip color={RPA_TYPE_COLOR[c.type]}>{c.type}</Chip></span>
                     <span style={{ flex: '0 0 64px', textAlign: 'right', color: c.serial ? '#f5f5f5' : '#555', fontWeight: 700, fontVariantNumeric: 'tabular-nums' }}>{c.serial || '—'}</span>
@@ -1051,14 +1052,14 @@ export default function Home() {
         </section>
       ) : view === 'patchswaps' ? (
         <section>
-          <div style={{ background: 'linear-gradient(140deg, #1a1512, #0e0e0e)', border: '1px solid ' + GOLD + '33', borderRadius: 18, padding: '30px 30px', marginBottom: 24 }}>
+          <div style={{ background: 'linear-gradient(140deg, #0f1526, #0e0e0e)', border: '1px solid ' + ACCENT + '33', borderRadius: 18, padding: '30px 30px', marginBottom: 24 }}>
             <h1 style={{ ...condensed, fontSize: 40, fontWeight: 800, textTransform: 'uppercase', margin: 0, lineHeight: 1 }}>Patch Swaps</h1>
             <p style={{ color: '#aaa', fontSize: 15, lineHeight: 1.6, maxWidth: 720, margin: '14px 0 0' }}>
               A running record of cards known to have had their game-used or manufactured patches swapped — with the original and the replacement patch side by side so collectors can spot altered cards before they buy.
             </p>
             <p style={{ color: '#888', fontSize: 13, margin: '16px 0 0' }}>
               Primary source:{' '}
-              <a href={(patchData && patchData.source && patchData.source.url) || 'https://www.instagram.com/fake_hockey_patches/'} target="_blank" rel="noreferrer" style={{ color: GOLD, fontWeight: 700 }}>
+              <a href={(patchData && patchData.source && patchData.source.url) || 'https://www.instagram.com/fake_hockey_patches/'} target="_blank" rel="noreferrer" style={{ color: ACCENT, fontWeight: 700 }}>
                 @fake_hockey_patches
               </a>{' '}on Instagram — the definitive community feed documenting swapped hockey patches.
             </p>
@@ -1111,16 +1112,16 @@ export default function Home() {
 
               {/* HIGHEST-RISK PRODUCTS → link into RPA tracker patch view */}
               {(patchData.watchSets || []).length > 0 && (
-                <div style={{ background: 'linear-gradient(140deg, #17140c, #0e0e0e)', border: '1px solid ' + GOLD + '2e', borderRadius: 16, padding: '22px 24px', marginBottom: 24 }}>
-                  <h2 style={{ ...condensed, fontSize: 20, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.06em', color: GOLD, margin: '0 0 6px' }}>Products most targeted</h2>
+                <div style={{ background: 'linear-gradient(140deg, #17140c, #0e0e0e)', border: '1px solid ' + ACCENT + '2e', borderRadius: 16, padding: '22px 24px', marginBottom: 24 }}>
+                  <h2 style={{ ...condensed, fontSize: 20, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.06em', color: ACCENT, margin: '0 0 6px' }}>Products most targeted</h2>
                   <p style={{ color: '#999', fontSize: 13.5, lineHeight: 1.6, margin: '0 0 14px', maxWidth: 720 }}>High-end patch and RPA products carry the most swap risk. Cross-reference any patch card against its checklist print run — browse the patch and RPA cards in the tracker.</p>
                   <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 4 }}>
                     {patchData.watchSets.map(w => (
-                      <span key={w} style={{ background: '#1c1810', border: '1px solid ' + GOLD + '33', color: '#e8d5a8', fontSize: 12.5, fontWeight: 600, padding: '6px 12px', borderRadius: 999 }}>{w}</span>
+                      <span key={w} style={{ background: '#0e1630', border: '1px solid ' + ACCENT + '33', color: '#c9d8ff', fontSize: 12.5, fontWeight: 600, padding: '6px 12px', borderRadius: 999 }}>{w}</span>
                     ))}
                   </div>
                   <button onClick={() => { setRpaType('PA'); openRpa() }}
-                    style={{ ...condensed, marginTop: 14, background: GOLD, color: '#111', border: 'none', borderRadius: 10, padding: '10px 20px', fontWeight: 800, fontSize: 14, letterSpacing: '0.06em', textTransform: 'uppercase', cursor: 'pointer' }}>
+                    style={{ ...condensed, marginTop: 14, background: ACCENT, color: '#fff', border: 'none', borderRadius: 10, padding: '10px 20px', fontWeight: 800, fontSize: 14, letterSpacing: '0.06em', textTransform: 'uppercase', cursor: 'pointer' }}>
                     Open the Patch-Auto tracker →
                   </button>
                 </div>
@@ -1143,7 +1144,7 @@ export default function Home() {
                         <p style={{ ...condensed, margin: 0, fontSize: 19, fontWeight: 800, textTransform: 'uppercase' }}>{e.player || e.card}</p>
                         <p style={{ color: '#888', fontSize: 12, margin: '4px 0 0' }}>{[e.year, e.set, e.card].filter(Boolean).join(' · ')}</p>
                         {e.summary && <p style={{ color: '#b9b9b9', fontSize: 13, lineHeight: 1.5, margin: '10px 0 0' }}>{e.summary}</p>}
-                        {e.sourceUrl && <a href={e.sourceUrl} target="_blank" rel="noreferrer" style={{ color: GOLD, fontSize: 12, fontWeight: 700, display: 'inline-block', marginTop: 10 }}>View source →</a>}
+                        {e.sourceUrl && <a href={e.sourceUrl} target="_blank" rel="noreferrer" style={{ color: ACCENT, fontSize: 12, fontWeight: 700, display: 'inline-block', marginTop: 10 }}>View source →</a>}
                       </div>
                     </div>
                   ))}
@@ -1156,7 +1157,7 @@ export default function Home() {
         <section>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', flexWrap: 'wrap', gap: 8, marginBottom: 14 }}>
             <h2 style={{ ...condensed, fontSize: 24, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em', margin: 0 }}>
-              {teamFilter} <span style={{ color: SPORT_COLORS[sportFilter] || GOLD, fontSize: 15 }}>· {sportFilter}</span>
+              {teamFilter} <span style={{ color: SPORT_COLORS[sportFilter] || ACCENT, fontSize: 15 }}>· {sportFilter}</span>
               <span style={{ color: '#555', fontSize: 15, marginLeft: 10 }}>{teamHits.length.toLocaleString()}{teamHits.length >= 2500 ? '+' : ''} cards</span>
             </h2>
           </div>
@@ -1170,7 +1171,7 @@ export default function Home() {
             {teamHits.map((c, i) => (
               <button key={i} onClick={() => { const s = sets.find(x => x.slug === c.slug); if (s) openSet(Object.assign({}, s, classifySet(s.name))) }}
                 style={{ width: '100%', textAlign: 'left', display: 'flex', gap: 12, padding: '8px 16px', fontSize: 14, alignItems: 'baseline', background: i % 2 === 0 ? '#0f0f0f' : '#141414', border: 'none', color: '#f5f5f5', cursor: 'pointer' }}>
-                <span style={{ flex: '0 0 60px', color: GOLD, fontWeight: 700, fontVariantNumeric: 'tabular-nums' }}>#{c.n}</span>
+                <span style={{ flex: '0 0 60px', color: ACCENT, fontWeight: 700, fontVariantNumeric: 'tabular-nums' }}>#{c.n}</span>
                 <span style={{ flex: '1 1 auto', minWidth: 0, fontWeight: 600 }}>{c.p}</span>
                 <span style={{ flex: '0 0 54px' }}>{c.x ? <Chip color={c.x === 'RC' ? '#4ade80' : '#888'}>{c.x}</Chip> : null}</span>
                 <span style={{ flex: '2 1 0', minWidth: 0, color: '#777', fontSize: 12.5 }}>{c.set}{c.section ? ' · ' + c.section : ''}</span>
@@ -1192,7 +1193,7 @@ export default function Home() {
               if (sortBy === 'brand') return (a.brand || 'zzz').localeCompare(b.brand || 'zzz') || (b.year - a.year) || nm()
               return (b.year - a.year) || nm() // year-desc default
             }).map((s) => {
-              const c = SPORT_COLORS[s.sport] || GOLD
+              const c = SPORT_COLORS[s.sport] || ACCENT
               return (
                 <button key={s.slug} onClick={() => openSet(s)} className="hq-setcard"
                   style={{
@@ -1210,7 +1211,7 @@ export default function Home() {
                   </div>
                   <p style={{ ...condensed, margin: '0 0 12px', fontSize: 20, fontWeight: 800, textTransform: 'uppercase', lineHeight: 1.1, minHeight: 44 }}>{s.name.replace(/^\d{4}(-\d{2})?\s*/, '')}</p>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', borderTop: '1px solid #222', paddingTop: 10 }}>
-                    <span style={{ ...condensed, fontSize: 22, fontWeight: 800, color: GOLD }}>{(s.cardCount || 0).toLocaleString()}</span>
+                    <span style={{ ...condensed, fontSize: 22, fontWeight: 800, color: ACCENT }}>{(s.cardCount || 0).toLocaleString()}</span>
                     <span style={{ color: '#777', fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase' }}>Cards</span>
                   </div>
                 </button>
