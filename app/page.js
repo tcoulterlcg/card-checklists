@@ -697,8 +697,9 @@ export default function Home() {
     openSetBySlug: (...a) => cbRef.current.openSetBySlug(...a), wantIt: (...a) => cbRef.current.wantIt(...a),
     runSearch: (...a) => cbRef.current.runSearch(...a), pickCandidate: (...a) => cbRef.current.pickCandidate(...a)
   }), [])
+  const urlApplied = useRef(false)   // don't overwrite a shared ?sport=… link before applyUrl has read it
   useEffect(() => {
-    if (!isLanding || sets.length === 0) return
+    if (!isLanding || sets.length === 0 || !urlApplied.current) return
     const sp = new URLSearchParams(location.search)
     if (sp.get('set') || sp.get('player') || sp.get('view') || sp.get('search')) return
     const q = new URLSearchParams()
@@ -722,6 +723,7 @@ export default function Home() {
   }, [activeSet, setData, view, activePlayer, globalHits])
   // Deep links and Back/Forward: ?player=Name[&q=raw] · ?set=slug · ?view=community · ?search=term
   const applyUrl = () => {
+    urlApplied.current = true
     const sp = new URLSearchParams(location.search)
     const pl = sp.get('player'), v = sp.get('view'), sr = sp.get('search')
     const st = sp.get('set') && sp.get('set').trim().toLowerCase().replace(/\/+$/, '')   // tolerate pasted links: case, trailing slash
