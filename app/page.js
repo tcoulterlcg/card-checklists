@@ -620,7 +620,7 @@ export default function Home() {
               Every Card.<br /><span style={{ color: ACCENT }}>Every Checklist.</span>
             </h1>
             <p style={{ color: '#9a9a9a', fontSize: 17, lineHeight: 1.6, maxWidth: 620, margin: '24px auto 0' }}>
-              Complete set checklists for sports cards and trading card games — Baseball, Football, Basketball, Hockey, Pokémon, Lorcana and more, indexed, sectioned, and searchable.
+              Complete set checklists for sports cards and trading card games — Baseball, Football, Basketball, Hockey, Pokémon, Lorcana, One Piece and more, indexed, sectioned, and searchable.
             </p>
 
             {/* HERO SEARCH */}
