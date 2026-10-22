@@ -3,7 +3,7 @@
 // collection tracker. Dark + electric blue to match the site shell. Data via lib/supa.
 import { loadSet } from '../lib/catalog'
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { supa, getProfile, ensureProfile, addWant, removeWant, myWantlist, toggleCollected, myCollection, uploadCardImage, setCollectionImage, forumFeed, createPost, react, comments, addComment, grailSets, notifyGrailCompletion } from '../lib/supa'
+import { collectionCardN, supa, getProfile, ensureProfile, addWant, removeWant, myWantlist, toggleCollected, myCollection, uploadCardImage, setCollectionImage, forumFeed, createPost, react, comments, addComment, grailSets, notifyGrailCompletion } from '../lib/supa'
 import { ACCENT, ACCENT_TEXT, BG, SURFACE, SURFACE_2, LINE, CHIP_LINE, TEXT, TEXT_2, LABEL, display, eyebrow, title, buttonText } from '../lib/theme'
 
 const card = { background: 'linear-gradient(155deg, #121626, #0F1320)', border: '1px solid #232A3E', borderRadius: 14 }
@@ -101,6 +101,7 @@ export function CollectionView({ account, indexSets, onOpenAuth, onOpenSet }) {
   const [wants, setWants] = useState(null)
   const [collected, setCollected] = useState(null)
   const [activeSlug, setActiveSlug] = useState(null)
+  const [secShown, setSecShown] = useState(12) // big sets have hundreds of parallel sections
   const [setData, setSetData] = useState(null)
   const [grails, setGrails] = useState([])
   const [notice, setNotice] = useState('')
@@ -115,6 +116,7 @@ export function CollectionView({ account, indexSets, onOpenAuth, onOpenSet }) {
   }, [session])
   useEffect(() => {
     if (!activeSlug) { setSetData(null); return }
+    setSecShown(12)
     loadSet(activeSlug).then(setSetData).catch(() => setSetData(null))
   }, [activeSlug])
 
@@ -126,7 +128,9 @@ export function CollectionView({ account, indexSets, onOpenAuth, onOpenSet }) {
     </div>
   )
 
-  const collectedKeys = new Set((collected || []).map(c => c.set_slug + '||' + c.card_n))
+  const ckey = (slug, section, n) => slug + '||' + (section || '') + '||' + n
+  const collectedKeys = new Set((collected || []).map(c => ckey(c.set_slug, c.section, c.card_n)))
+  const collectedRec = new Map((collected || []).map(c => [ckey(c.set_slug, c.section, c.card_n), c]))
   const wantsBySets = {}
   for (const w of wants || []) { (wantsBySets[w.set_slug] = wantsBySets[w.set_slug] || { name: w.set_name || w.set_slug, items: [] }).items.push(w) }
 
@@ -163,23 +167,25 @@ export function CollectionView({ account, indexSets, onOpenAuth, onOpenSet }) {
           <button style={{ ...btnGhost, marginBottom: 16 }} onClick={() => setActiveSlug(null)}>← Back to wantlist</button>
           <h2 style={{ ...title(24), margin: '0 0 4px' }}>{setData.name}</h2>
           <p style={{ color: '#8A8A93', fontSize: 13, margin: '0 0 16px' }}>Check off cards as you collect them. {grails.some(g => g.set_slug === activeSlug) && <span style={{ color: ACCENT_TEXT, fontWeight: 700 }}>★ GRAIL SET — completion is site-verified and celebrated.</span>}</p>
-          {setData.sections.map((sec, si) => (
+          {setData.sections.slice(0, secShown).map((sec, si) => (
             <div key={si} style={{ marginBottom: 18 }}>
               <h3 style={{ ...title(16), color: ACCENT_TEXT, margin: '0 0 8px' }}>{sec.title} <span style={{ color: '#6B7080', fontWeight: 600 }}>({sec.cards.length})</span></h3>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(260px, 100%), 1fr))', gap: 6 }}>
                 {sec.cards.map((c, ci) => {
-                  const key = activeSlug + '||' + c.n
+                  const cn = collectionCardN(c)
+                  const key = ckey(activeSlug, sec.title, cn)
                   const isC = collectedKeys.has(key)
-                  const rec = (collected || []).find(x => x.set_slug === activeSlug && x.card_n === c.n)
+                  const rec = collectedRec.get(key)
                   return (
                     <div key={ci} style={{ display: 'flex', alignItems: 'center', gap: 8, background: isC ? '#12200f' : '#121212', border: '1px solid ' + (isC ? '#2f5324' : '#222'), borderRadius: 8, padding: '7px 10px' }}>
-                      <input type="checkbox" aria-label={'Collected #' + c.n} checked={isC} onChange={async (e) => {
-                        await toggleCollected(session.user.id, { set_slug: activeSlug, card_n: c.n, section: sec.title, player: c.p }, e.target.checked)
+                      <input type="checkbox" aria-label={'Collected ' + (c.n ? '#' + c.n + ' ' : '') + c.p} checked={isC} onChange={async (e) => {
+                        const { error } = await toggleCollected(session.user.id, { set_slug: activeSlug, card_n: cn, section: sec.title, player: c.p }, e.target.checked)
+                        if (error) setNotice('Couldn’t save that change — ' + error.message)
                         const next = await myCollection(session.user.id)
                         setCollected(next)
                         if (e.target.checked) checkGrailCompletion(activeSlug, setData.name)
                       }} style={{ accentColor: ACCENT, width: 18, height: 18, flexShrink: 0 }} />
-                      <span style={{ color: '#8A8A93', fontSize: 12, minWidth: 34 }}>{c.n}</span>
+                      <span style={{ color: '#8A8A93', fontSize: 12, minWidth: 34 }}>{c.n || '—'}</span>
                       <span style={{ color: isC ? '#9fd18a' : '#D4D4D8', fontSize: 13, fontWeight: 600, flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{c.p}</span>
                       {isC && (rec?.image_url
                         ? <a href={rec.image_url} target="_blank" rel="noreferrer" style={{ fontSize: 12, color: ACCENT_TEXT }}>photo</a>
@@ -190,6 +196,11 @@ export function CollectionView({ account, indexSets, onOpenAuth, onOpenSet }) {
               </div>
             </div>
           ))}
+          {setData.sections.length > secShown && (
+            <button style={{ ...btnGhost, display: 'block', margin: '8px auto 0' }} onClick={() => setSecShown(n => n + 12)}>
+              Show {Math.min(12, setData.sections.length - secShown)} more sections ({setData.sections.length - secShown} left)
+            </button>
+          )}
         </div>
       ) : (
         <>

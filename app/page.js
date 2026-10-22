@@ -620,8 +620,11 @@ export default function Home() {
   // Wantlist add — whole set or a single card/parallel from the set page.
   const wantIt = async (item) => {
     if (!account.session) { setAuthOpen(true); return }
-    await addWant(account.session.user.id, item)
-    setWantFlash(item.card_n ? `#${item.card_n} added to your wantlist` : 'Set added to your wantlist')
+    // a single card with no number is still a single card, not the whole set
+    if (item.section && (item.card_n == null || item.card_n === '')) item = { ...item, card_n: '—' + (item.player || '') }
+    const r = await addWant(account.session.user.id, item)
+    if (r.error) setWantFlash('Couldn’t add to your wantlist — ' + r.error.message)
+    else setWantFlash(r.duplicate ? 'Already on your wantlist' : item.card_n ? (String(item.card_n).startsWith('—') ? item.player : '#' + item.card_n) + ' added to your wantlist' : 'Set added to your wantlist')
     setTimeout(() => setWantFlash(''), 2500)
   }
 
