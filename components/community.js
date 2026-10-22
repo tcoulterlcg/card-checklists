@@ -120,7 +120,7 @@ export function CollectionView({ account, indexSets, onOpenAuth, onOpenSet }) {
   }, [activeSlug])
 
   if (!session) return (
-    <div style={{ ...card, padding: 40, textAlign: 'center' }}>
+    <div className="hq-panel" style={{ ...card, padding: 40, textAlign: 'center' }}>
       <h2 style={{ ...condensed, fontSize: 32, fontWeight: 800, textTransform: 'uppercase', margin: 0, color: '#fff' }}>Track your collection</h2>
       <p style={{ color: '#999', maxWidth: 480, margin: '12px auto 20px', fontSize: 14.5, lineHeight: 1.6 }}>Build a wantlist of cards, parallels, or whole sets. Check cards off as you land them and upload photos of your copies.</p>
       <button style={btnAccent} onClick={onOpenAuth}>Sign in to start</button>
@@ -167,19 +167,19 @@ export function CollectionView({ account, indexSets, onOpenAuth, onOpenSet }) {
           {setData.sections.map((sec, si) => (
             <div key={si} style={{ marginBottom: 18 }}>
               <h3 style={{ ...condensed, fontSize: 18, fontWeight: 800, textTransform: 'uppercase', color: ACCENT, margin: '0 0 8px' }}>{sec.title} <span style={{ color: '#666', fontWeight: 600 }}>({sec.cards.length})</span></h3>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: 6 }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(260px, 100%), 1fr))', gap: 6 }}>
                 {sec.cards.map((c, ci) => {
                   const key = activeSlug + '||' + c.n
                   const isC = collectedKeys.has(key)
                   const rec = (collected || []).find(x => x.set_slug === activeSlug && x.card_n === c.n)
                   return (
                     <div key={ci} style={{ display: 'flex', alignItems: 'center', gap: 8, background: isC ? '#12200f' : '#121212', border: '1px solid ' + (isC ? '#2f5324' : '#222'), borderRadius: 8, padding: '7px 10px' }}>
-                      <input type="checkbox" checked={isC} onChange={async (e) => {
+                      <input type="checkbox" aria-label={'Collected #' + c.n} checked={isC} onChange={async (e) => {
                         await toggleCollected(session.user.id, { set_slug: activeSlug, card_n: c.n, section: sec.title, player: c.p }, e.target.checked)
                         const next = await myCollection(session.user.id)
                         setCollected(next)
                         if (e.target.checked) checkGrailCompletion(activeSlug, setData.name)
-                      }} style={{ accentColor: ACCENT, width: 15, height: 15, flexShrink: 0 }} />
+                      }} style={{ accentColor: ACCENT, width: 18, height: 18, flexShrink: 0 }} />
                       <span style={{ color: '#777', fontSize: 12, minWidth: 34 }}>{c.n}</span>
                       <span style={{ color: isC ? '#9fd18a' : '#ddd', fontSize: 13, fontWeight: 600, flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{c.p}</span>
                       {isC && (rec?.image_url
@@ -199,7 +199,7 @@ export function CollectionView({ account, indexSets, onOpenAuth, onOpenSet }) {
               <p style={{ color: '#bbb', margin: 0, fontSize: 14.5 }}>Your wantlist is empty. Browse any set and hit <b style={{ color: ACCENT }}>+ Wantlist</b> — or add whole sets, single cards, or specific parallels.</p>
             </div>
           )}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))', gap: 14 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(340px, 100%), 1fr))', gap: 14 }}>
             {Object.entries(wantsBySets).map(([slug, g]) => {
               const idx = (indexSets || []).find(s => s.slug === slug)
               const total = idx ? idx.cardCount : null
@@ -217,7 +217,7 @@ export function CollectionView({ account, indexSets, onOpenAuth, onOpenSet }) {
                       <div style={{ height: '100%', width: Math.min(100, (mine / total) * 100) + '%', background: ACCENT }} />
                     </div>
                   )}
-                  <div style={{ display: 'flex', gap: 8 }}>
+                  <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
                     <button style={btnAccent} onClick={() => setActiveSlug(slug)}>Open checklist</button>
                     {onOpenSet && <button style={btnGhost} onClick={() => onOpenSet(slug)}>View set</button>}
                     <button style={{ ...btnGhost, color: '#a55' }} onClick={async () => {
@@ -271,7 +271,7 @@ export function CommunityView({ account, indexSets, onOpenAuth }) {
 
   return (
     <section>
-      <div style={{ background: 'linear-gradient(140deg, #0f1526, #0e0e0e)', border: '1px solid ' + ACCENT + '33', borderRadius: 18, padding: 30, marginBottom: 22 }}>
+      <div style={{ background: 'linear-gradient(140deg, #0f1526, #0e0e0e)', border: '1px solid ' + ACCENT + '33', borderRadius: 18, padding: 30, marginBottom: 22 }} className="hq-panel">
         <h1 style={{ ...condensed, fontSize: 40, fontWeight: 800, textTransform: 'uppercase', margin: 0, lineHeight: 1 }}>Community</h1>
         <p style={{ color: '#aaa', fontSize: 15, lineHeight: 1.6, maxWidth: 720, margin: '14px 0 0' }}>
           Collecting accomplishments from the Checklist HQ community — completed sets, finished rainbows, grail pulls. Grail-tier completions are verified and celebrated.
@@ -327,7 +327,7 @@ export function CommunityView({ account, indexSets, onOpenAuth }) {
             return (
               <div key={p.id} style={{ ...card, padding: '20px 22px', border: isGrail ? '1px solid ' + ACCENT : card.border, boxShadow: isGrail ? '0 0 24px ' + ACCENT + '22' : 'none' }}>
                 {isGrail && <p style={{ ...condensed, margin: '0 0 8px', color: ACCENT, fontSize: 12, fontWeight: 800, letterSpacing: '0.2em', textTransform: 'uppercase' }}>★ {p.grail_tier === 'extreme' ? 'Extreme difficulty' : 'Hard'} · verified grail set</p>}
-                <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 8 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 8, flexWrap: 'wrap' }}>
                   <span style={{ width: 30, height: 30, borderRadius: '50%', background: '#2a2a2a', color: ACCENT, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, fontSize: 14 }}>{(p.profiles?.username || '?')[0].toUpperCase()}</span>
                   <span style={{ color: '#ddd', fontWeight: 700, fontSize: 14 }}>{p.profiles?.username || 'collector'}</span>
                   <span style={{ color: '#555', fontSize: 12 }}>{new Date(p.created_at).toLocaleDateString()}</span>

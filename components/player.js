@@ -119,10 +119,12 @@ export function Omnibox({ value, onChange, onSubmit, onPickPlayer, onPickSet, se
   const [dir, setDir] = useState(null)
   const [sel, setSel] = useState(0)
   const box = useRef(null)
-  useEffect(() => { loadPlayerDir().then(setDir) }, [])
+  // The player directory is ~6 MB; fetch it once the visitor starts searching, not on page load.
+  const wantDir = open || (value || '').trim().length >= 2
+  useEffect(() => { if (wantDir && !dir) loadPlayerDir().then(setDir) }, [wantDir, dir])
   useEffect(() => {
     const h = (e) => { if (box.current && !box.current.contains(e.target)) setOpen(false) }
-    document.addEventListener('mousedown', h); return () => document.removeEventListener('mousedown', h)
+    document.addEventListener('mousedown', h); document.addEventListener('touchstart', h); return () => { document.removeEventListener('mousedown', h); document.removeEventListener('touchstart', h) }
   }, [])
   const parsed = useMemo(() => parseQuery(value), [value])
   const playerHits = useMemo(() => (dir && parsed.player.length >= 2) ? matchPlayers(dir, parsed.player, 6) : [], [dir, parsed.player])
@@ -235,6 +237,7 @@ export function PlayerPage({ player, parsed, sets, onOpenSet, myPlayers, onWant,
   const [hidePlates, setHidePlates] = useState(false)
   const [mems, setMems] = useState(null) // null/empty = any; checked boxes narrow
   const [statedOnly, setStatedOnly] = useState(false)
+  const [filtersOpen, setFiltersOpen] = useState(false) // mobile only; desktop always shows filters
 
   useEffect(() => { setShard(null); loadShard(player.shard).then(setShard); setQuick('all'); setExpanded(new Set()); setLimit(40) }, [player.id, player.shard])
   // When the query itself carries filters (1/1, auto…), start from them.
@@ -368,8 +371,8 @@ export function PlayerPage({ player, parsed, sets, onOpenSet, myPlayers, onWant,
       )}
 
       {/* HERO */}
-      <div style={{ background: 'linear-gradient(140deg, #191919, #101010)', border: '1px solid #262626', borderRadius: 18, padding: '26px 28px', display: 'flex', gap: 26, flexWrap: 'wrap', alignItems: 'flex-start' }}>
-        <div style={{ flex: '1 1 400px', minWidth: 0 }}>
+      <div className="hq-panel" style={{ background: 'linear-gradient(140deg, #191919, #101010)', border: '1px solid #262626', borderRadius: 18, padding: '26px 28px', display: 'flex', gap: 26, flexWrap: 'wrap', alignItems: 'flex-start' }}>
+        <div style={{ flex: '1 1 300px', minWidth: 0 }}>
           <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 10 }}>
             <Chip color={color} solid>{player.sport}</Chip>
             {topTeam && <Chip color="#9a9a9a">{topTeam[0]}</Chip>}
@@ -389,7 +392,7 @@ export function PlayerPage({ player, parsed, sets, onOpenSet, myPlayers, onWant,
             <button onClick={() => { navigator.clipboard && navigator.clipboard.writeText(location.href) }} style={btn(false)}>Copy link</button>
           </div>
         </div>
-        <div style={{ flex: '1 1 480px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(110px, 1fr))', gap: 10 }}>
+        <div style={{ flex: '1 1 300px', minWidth: 0, display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(110px, 1fr))', gap: 10 }}>
           {[[rows.length, 'Cards', ACCENT], [facets.sets.size, 'Sets'], [facets.au, 'Autographs'], [facets.one, '1/1s'], [facets.rc, 'Rookies'], [facets.patch, 'Patches'], [facets.mem.GU || 0, 'Game-used'], [facets.seasons, 'Seasons']].map(([n, l, c]) => (
             <div key={l} style={{ background: '#0e0e0e', border: '1px solid #262626', borderRadius: 12, padding: '14px 12px' }}>
               <p style={{ ...condensed, margin: 0, fontSize: 32, fontWeight: 800, color: c || '#f2f0ec', lineHeight: 1 }}>{shard ? n.toLocaleString() : '…'}</p>
@@ -400,17 +403,21 @@ export function PlayerPage({ player, parsed, sets, onOpenSet, myPlayers, onWant,
       </div>
 
       {/* QUICK VIEWS */}
-      <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center', margin: '16px 0 0' }}>
+      <div className="hq-chiprow" style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center', margin: '16px 0 0' }}>
         <span style={{ color: '#666', fontSize: 11, fontWeight: 800, letterSpacing: '0.16em', textTransform: 'uppercase', marginRight: 4 }}>Quick views</span>
         {VIEWS.map(([k, l]) => { const n = rows.filter(r => quickFilter[k](r.raw)).length; return <button key={k} onClick={() => setQuick(k)} style={pill(quick === k)}>{l}{k !== 'all' ? ' · ' + n.toLocaleString() : ''}</button> })}
       </div>
 
       {/* BODY */}
       <div style={{ display: 'flex', gap: 20, flexWrap: 'wrap', alignItems: 'flex-start', marginTop: 18 }}>
-        <aside aria-label="Filters" style={{ flex: '1 1 240px', maxWidth: 290, background: '#101010', border: '1px solid #232323', borderRadius: 14, padding: 16, display: 'flex', flexDirection: 'column', gap: 18, position: 'sticky', top: 12 }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <aside aria-label="Filters" className={'hq-aside' + (filtersOpen ? '' : ' hq-collapsed')} style={{ flex: '0 0 280px', maxWidth: 290, boxSizing: 'border-box', background: '#101010', border: '1px solid #232323', borderRadius: 14, padding: 16, display: 'flex', flexDirection: 'column', gap: 18 }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 10 }}>
             <span style={{ ...condensed, fontSize: 16, fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase' }}>Filters</span>
-            <button onClick={resetAll} style={{ background: 'none', border: 'none', color: ACCENT, fontSize: 12, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit' }}>Reset</button>
+            <span style={{ display: 'inline-flex', gap: 14, alignItems: 'center' }}>
+              <button onClick={resetAll} style={{ background: 'none', border: 'none', color: ACCENT, fontSize: 12, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit', padding: '6px 0' }}>Reset</button>
+              <button className="hq-filters-toggle" aria-expanded={filtersOpen} onClick={() => setFiltersOpen(o => !o)}
+                style={{ background: '#1a1a1a', border: '1px solid #2c2c2c', color: '#ddd', borderRadius: 8, height: 34, padding: '0 12px', fontSize: 12.5, fontWeight: 700, cursor: 'pointer', fontFamily: 'inherit', alignItems: 'center' }}>{filtersOpen ? 'Hide ▴' : 'Show ▾'}</button>
+            </span>
           </div>
           <div>
             <p style={legend}>Season</p>
@@ -460,7 +467,7 @@ export function PlayerPage({ player, parsed, sets, onOpenSet, myPlayers, onWant,
           )}
         </aside>
 
-        <div style={{ flex: '999 1 520px', minWidth: 0, display: 'flex', flexDirection: 'column', gap: 14 }}>
+        <div style={{ flex: '999 1 320px', minWidth: 0, display: 'flex', flexDirection: 'column', gap: 14 }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
             <span style={{ ...condensed, fontSize: 22, fontWeight: 800, textTransform: 'uppercase' }}>{shard ? filtered.length.toLocaleString() : '…'} cards <span style={{ color: '#666', fontSize: 16 }}>in {new Set(filtered.map(r => r.slug)).size.toLocaleString()} sets</span></span>
             <div style={{ display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap' }}>
@@ -559,11 +566,11 @@ export function MyPlayersPanel({ myPlayers, onOpenPlayer, dirPlayers }) {
   useEffect(() => { loadPlayerDir().then(setDir) }, [])
   const resolve = (name) => dir ? dir.players.findIndex(p => p[0] === name) : -1
   return (
-    <div style={{ background: 'linear-gradient(140deg, #0f1526, #0e0e0e)', border: '1px solid ' + ACCENT + '33', borderRadius: 18, padding: '26px 28px' }}>
+    <div className="hq-panel" style={{ background: 'linear-gradient(140deg, #0f1526, #0e0e0e)', border: '1px solid ' + ACCENT + '33', borderRadius: 18, padding: '26px 28px' }}>
       <h1 style={{ ...condensed, fontSize: 36, fontWeight: 800, textTransform: 'uppercase', margin: 0, lineHeight: 1 }}>My Players</h1>
       <p style={{ color: '#aaa', fontSize: 14.5, lineHeight: 1.6, maxWidth: 680, margin: '12px 0 0' }}>The players you collect. They become a one-click filter on every set page, and each one has a full player page with every card, parallel and print run.</p>
       {myPlayers.list.length === 0 ? <p style={{ color: '#777', fontSize: 14, marginTop: 18 }}>No players yet — search for a player and hit <strong style={{ color: ACCENT }}>Collect this player</strong>.</p> : (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: 12, marginTop: 20 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(240px, 100%), 1fr))', gap: 12, marginTop: 20 }}>
           {myPlayers.list.map(name => {
             const i = resolve(name); const p = i >= 0 ? dir.players[i] : null
             const sport = p ? dir.sports[p[3]] : ''
