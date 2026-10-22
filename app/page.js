@@ -6,6 +6,8 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useAccount, AccountChip, AuthModal, CollectionView, CommunityView } from '../components/community'
 import { addWant } from '../lib/supa'
+import { Omnibox, PlayerPage, MyPlayersPanel, useMyPlayers, loadPlayerDir, seasonLabel } from '../components/player'
+import { parseQuery, matchPlayers, TYPE, typeLabel, TYPE_COLORS, serialLabel } from '../lib/query'
 
 const GOLD = '#d4a843'
 const condensed = { fontFamily: "'Barlow Condensed', 'Arial Narrow', sans-serif" }
@@ -206,6 +208,15 @@ export default function Home() {
   const [teamBrowse, setTeamBrowse] = useState(false)
   const [teamLoading, setTeamLoading] = useState(false)
   const [teamSort, setTeamSort] = useState('year-desc')
+  // Player pages + My Players
+  const myPlayers = useMyPlayers(account)
+  const [activePlayer, setActivePlayer] = useState(null)
+  const [playerParsed, setPlayerParsed] = useState(null)
+  const [playerCandidates, setPlayerCandidates] = useState([])
+  const [onlyMine, setOnlyMine] = useState(false)
+  const [setTypeFilter, setSetTypeFilter] = useState('All')
+  const [setRunFilter, setSetRunFilter] = useState('any')
+  const [setRcOnly, setSetRcOnly] = useState(false)
 
   const toggleSort = (field) => {
     if (sortField === field) setSortDir(d => (d === 'asc' ? 'desc' : 'asc'))
@@ -265,7 +276,8 @@ export default function Home() {
   }, [sets.length, totalCards])
 
   const openSet = async (s) => {
-    setActiveSet(s); setGlobalHits(null); setActiveSection('All'); setQuery('')
+    setActiveSet(s); setGlobalHits(null); setActiveSection('All'); setQuery(''); setActivePlayer(null); setView('browse'); setSetTypeFilter('All'); setSetRunFilter('any'); setSetRcOnly(false)
+    try { history.pushState(null, '', '?set=' + encodeURIComponent(s.slug)) } catch {}
     try {
       const r = await fetch('/data/' + s.slug + '.json')
       setSetData(await r.json())
@@ -275,10 +287,38 @@ export default function Home() {
 
   // One compact index (loaded once, then cached) powers instant cross-set
   // player search over every card, rather than fetching 300 set files.
-  const runGlobalSearch = async () => {
-    const term = query.trim().toLowerCase()
+  // Open a player landing page (optionally with the parsed query's filters).
+  const openPlayer = (p, parsed, candidates) => {
+    setActivePlayer(p); setPlayerParsed(parsed || null); setPlayerCandidates(candidates || [])
+    setActiveSet(null); setSetData(null); setGlobalHits(null); setView('player')
+    try { history.pushState(null, '', '?player=' + encodeURIComponent(p.name) + (parsed && parsed.raw && parseQuery(parsed.raw).player !== parsed.raw.trim().toLowerCase() ? '&q=' + encodeURIComponent(parsed.raw) : '')) } catch {}
+    window.scrollTo(0, 0)
+  }
+  const openPlayerByName = async (name, rawQuery) => {
+    const dir = await loadPlayerDir()
+    const parsed = parseQuery(rawQuery || name)
+    const hits = matchPlayers(dir, parsed.player || name, 8)
+    const exact = hits.find(h => h.name === name) || hits[0]
+    if (exact) openPlayer(exact, parsed, hits)
+  }
+  // The omnibox: understands "player + 1/1 / auto / rc / season / product".
+  const runSearch = async (raw) => {
+    const q = (raw == null ? query : raw).trim()
+    if (q.length < 2) return
+    setSearching(true)
+    const parsed = parseQuery(q)
+    if (parsed.player.length >= 2) {
+      const dir = await loadPlayerDir()
+      const hits = matchPlayers(dir, parsed.player, 8)
+      if (hits.length) { setSearching(false); openPlayer(hits[0], parsed, hits); return }
+    }
+    setSearching(false)
+    await runGlobalSearch(q)
+  }
+  const runGlobalSearch = async (raw) => {
+    const term = (raw == null ? query : raw).trim().toLowerCase()
     if (term.length < 3) return
-    setSearching(true); setActiveSet(null); setSetData(null)
+    setSearching(true); setActiveSet(null); setSetData(null); setActivePlayer(null); setView('browse')
     let idx = searchIndex
     if (!idx) {
       try {
@@ -303,20 +343,65 @@ export default function Home() {
     setGlobalHits(hits); setSearching(false)
   }
 
+  const cardSerial = (c, sec) => {
+    const t = (c.x || '') + ' ' + (sec.title || '')
+    if (/\b1\s*(\/|of)\s*1\b|printing plate/i.test(t)) return 1
+    const m = (c.x || '').match(/\/\s*(\d{1,5})/) || (sec.title || '').match(/#?\s*\/\s*(\d{1,5})\b/) || (sec.odds || '').match(/#\/\s*([\d,]+)/)
+    return m ? parseInt(String(m[1]).replace(/,/g, '')) : 0
+  }
+  const secKind = (title) => {
+    const t = (title || '').toLowerCase()
+    if (/printing plate/.test(t)) return 'PLATE'
+    const au = /\bauto|autograph|signature|signing|\bink\b|chirography|scripted|endorsement/.test(t)
+    const pa = /\bpatch|laundry tag|nameplate|logo ?man|logos\b|shield|emblem/.test(t)
+    const rel = /relic|memorabilia|material|jersey|swatch|game.?used|game.?worn|threads|fabric|foundations/.test(t)
+    if (au && pa) return 'PA'; if (au) return 'AU'; if (pa) return 'PATCH'; if (rel) return 'RELIC'
+    if (/^(base( set| cards?)?|veterans?|common|regular)$/.test(t.trim())) return 'BASE'
+    return 'OTHER'
+  }
+  const mineSet = useMemo(() => new Set(myPlayers.list.map(n => n.toLowerCase())), [myPlayers.list])
+  const isMine = (p) => { const n = (p || '').toLowerCase(); if (mineSet.has(n)) return true; for (const m of mineSet) if (n.includes(m)) return true; return false }
   const visibleSections = useMemo(() => {
     if (!setData) return []
     let secs = setData.sections || []
     if (activeSection !== 'All') secs = secs.filter(s => s.title === activeSection)
     const term = query.trim().toLowerCase()
-    if (!term) return secs
-    return secs.map(s => ({
-      ...s,
-      cards: s.cards.filter(c =>
-        (c.p || '').toLowerCase().includes(term) ||
-        (c.t || '').toLowerCase().includes(term) ||
-        String(c.n || '').toLowerCase() === term)
-    })).filter(s => s.cards.length > 0)
-  }, [setData, activeSection, query])
+    const anyFilter = term || onlyMine || setTypeFilter !== 'All' || setRunFilter !== 'any' || setRcOnly
+    if (!anyFilter) return secs
+    return secs.map(s => {
+      const kind = secKind(s.title)
+      if (setTypeFilter !== 'All' && !(setTypeFilter === 'AU' ? (kind === 'AU' || kind === 'PA') : setTypeFilter === 'PATCH' ? (kind === 'PATCH' || kind === 'PA') : kind === setTypeFilter)) return { ...s, cards: [] }
+      return {
+        ...s,
+        cards: s.cards.filter(c => {
+          if (term && !((c.p || '').toLowerCase().includes(term) || (c.t || '').toLowerCase().includes(term) || String(c.n || '').toLowerCase() === term || (s.title || '').toLowerCase().includes(term))) return false
+          if (onlyMine && !isMine(c.p)) return false
+          if (setRcOnly && !(/\bRC\b/.test(c.x || '') || /rookie|young guns|future watch|rated rookie|\brc\b/i.test(s.title || ''))) return false
+          if (setRunFilter !== 'any') {
+            const sn = cardSerial(c, s)
+            if (setRunFilter === '1' && sn !== 1) return false
+            if (setRunFilter === 'numbered' && !(sn > 0)) return false
+            if (setRunFilter === 'unnumbered' && sn > 0) return false
+            if (/^\d+$/.test(setRunFilter) && setRunFilter !== '1' && !(sn > 0 && sn <= parseInt(setRunFilter))) return false
+          }
+          return true
+        })
+      }
+    }).filter(s => s.cards.length > 0)
+  }, [setData, activeSection, query, onlyMine, setTypeFilter, setRunFilter, setRcOnly, mineSet])
+  // Group the filtered cards by player (for the "My players" view of a set).
+  const byPlayer = useMemo(() => {
+    if (!onlyMine || !setData) return []
+    const m = new Map()
+    for (const sec of visibleSections) for (const c of sec.cards) {
+      const owner = myPlayers.list.find(n => (c.p || '').toLowerCase().includes(n.toLowerCase())) || c.p
+      let g = m.get(owner); if (!g) { g = { name: owner, team: c.t || '', rows: [], au: 0, one: 0 }; m.set(owner, g) }
+      g.rows.push({ ...c, section: sec.title, serial: cardSerial(c, sec), kind: secKind(sec.title) })
+      if (g.kind === 'AU' || g.kind === 'PA') g.au++
+    }
+    for (const g of m.values()) { g.au = g.rows.filter(r => r.kind === 'AU' || r.kind === 'PA').length; g.one = g.rows.filter(r => r.serial === 1).length }
+    return [...m.values()].sort((a, b) => b.rows.length - a.rows.length)
+  }, [onlyMine, visibleSections, setData, myPlayers.list])
 
   // Every set tagged with brand + product (derived from its name).
   const taggedSets = useMemo(() => sets.map(s => Object.assign({}, s, classifySet(s.name))), [sets])
@@ -396,7 +481,7 @@ export default function Home() {
   const rcCount = (j) => (j.sections || []).reduce((s, sec) => s + sec.cards.filter(c => c.x === 'RC').length, 0)
 
   const isLanding = !activeSet && !globalHits && view === 'browse'
-  const goHome = () => { setActiveSet(null); setSetData(null); setGlobalHits(null); setQuery(''); setView('browse'); setTeamFilter('All'); setTeamInput(''); setTeamBrowse(false) }
+  const goHome = () => { setActiveSet(null); setSetData(null); setGlobalHits(null); setQuery(''); setView('browse'); setTeamFilter('All'); setTeamInput(''); setTeamBrowse(false); setActivePlayer(null); try { history.pushState(null, '', location.pathname) } catch {} }
   const openPatchSwaps = () => {
     setView('patchswaps'); setActiveSet(null); setSetData(null); setGlobalHits(null)
     if (!patchData) fetch('/data/patch-swaps.json').then(r => r.json()).then(setPatchData).catch(() => setPatchData({ entries: [] }))
@@ -407,7 +492,7 @@ export default function Home() {
     if (!rpaData) fetch('/data/rpa-index.json').then(r => r.json()).then(setRpaData).catch(() => setRpaData({ slugs: [], rows: [] }))
     window.scrollTo(0, 0)
   }
-  const openView = (v) => { setView(v); setActiveSet(null); setSetData(null); setGlobalHits(null); window.scrollTo(0, 0) }
+  const openView = (v) => { setView(v); setActiveSet(null); setSetData(null); setGlobalHits(null); setActivePlayer(null); window.scrollTo(0, 0) }
   // Wantlist add — whole set or a single card/parallel from the set page.
   const wantIt = async (item) => {
     if (!account.session) { setAuthOpen(true); return }
@@ -433,7 +518,15 @@ export default function Home() {
     out.sort((a, b) => (b.year || 0) - (a.year || 0))
     return out
   }, [rpaData, rpaType, rpaQuery, sportFilter, sets])
-  const searchFor = (name) => { setQuery(name); setTimeout(runGlobalSearch, 0) }
+  const searchFor = (name) => { setQuery(name); runSearch(name) }
+  // Deep links: ?player=Name[&q=raw query] or ?set=slug
+  useEffect(() => {
+    if (sets.length === 0) return
+    const sp = new URLSearchParams(location.search)
+    const pl = sp.get('player'), st = sp.get('set')
+    if (pl) { const q = sp.get('q'); setQuery(q || pl); openPlayerByName(pl, q) }
+    else if (st) { const s = sets.find(x => x.slug === st); if (s) openSet(s) }
+  }, [sets.length])
 
   return (
     <main style={{ maxWidth: 1180, margin: '0 auto', padding: '0 24px 90px' }}>
@@ -452,7 +545,7 @@ export default function Home() {
           </span>
         </div>
         <div style={{ display: 'flex', gap: 24, alignItems: 'center', flexWrap: 'wrap' }}>
-          {[['Sets', () => { goHome(); setSportFilter('All') }, 'browse'], ['RPA Tracker', openRpa, 'rpa'], ['Patch Swaps', openPatchSwaps, 'patchswaps'], ['Community', () => openView('community'), 'community'], ['My Collection', () => openView('collection'), 'collection']].map(([label, fn, v]) => (
+          {[['Sets', () => { goHome(); setSportFilter('All') }, 'browse'], ['Players', () => openView('myplayers'), 'myplayers'], ['RPA Tracker', openRpa, 'rpa'], ['Patch Swaps', openPatchSwaps, 'patchswaps'], ['Community', () => openView('community'), 'community'], ['My Collection', () => openView('collection'), 'collection']].map(([label, fn, v]) => (
             <button key={label} onClick={fn} style={{ background: 'none', border: 'none', cursor: 'pointer', color: view === v ? GOLD : '#bbb', fontSize: 12, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase' }}>{label}</button>
           ))}
           <AccountChip account={account} onOpenAuth={() => setAuthOpen(true)} />
@@ -504,19 +597,9 @@ export default function Home() {
             </p>
 
             {/* HERO SEARCH */}
-            <div style={{ maxWidth: 680, margin: '34px auto 0', display: 'flex', gap: 0, background: '#141414', border: '1px solid #2e2e2e', borderRadius: 14, padding: 6, boxShadow: '0 20px 50px -20px rgba(0,0,0,0.8)' }}>
-              <input
-                id="hq-search"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                onKeyDown={(e) => { if (e.key === 'Enter') runGlobalSearch() }}
-                placeholder="Search any player across every set"
-                style={{ flex: 1, background: 'transparent', border: 'none', padding: '14px 16px', color: '#f5f5f5', fontSize: 16, outline: 'none' }}
-              />
-              <button onClick={runGlobalSearch} disabled={searching || query.trim().length < 3}
-                style={{ ...condensed, background: GOLD, color: '#111', border: 'none', borderRadius: 10, padding: '0 26px', fontWeight: 800, fontSize: 16, letterSpacing: '0.08em', textTransform: 'uppercase', cursor: 'pointer', opacity: searching || query.trim().length < 3 ? 0.5 : 1 }}>
-                {searching ? '…' : 'Search'}
-              </button>
+            <div style={{ maxWidth: 720, margin: '34px auto 0', textAlign: 'left' }}>
+              <Omnibox value={query} onChange={setQuery} onSubmit={runSearch} sets={sets}
+                onPickPlayer={(p, parsed) => openPlayer(p, parsed, [])} onPickSet={(s) => openSet(s)} />
             </div>
             <p style={{ color: '#666', fontSize: 13, margin: '14px 0 0' }}>
               Try {['Michael Jordan', 'Tom Brady', 'Mickey Mantle', 'Nikita Kucherov', 'Charizard'].map((n, i) => (
@@ -666,20 +749,18 @@ export default function Home() {
             </div>
           )}
         </>
-      ) : (activeSet || globalHits) ? (
-        <div style={{ display: 'flex', gap: 10, marginBottom: 16 }}>
-          <input
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            onKeyDown={(e) => { if (e.key === 'Enter' && !activeSet) runGlobalSearch() }}
-            placeholder={activeSet ? 'Filter this set (player, team, card #)…' : 'Search players across every set…'}
-            style={{ flex: 1, background: '#141414', border: '1px solid #2a2a2a', borderRadius: 10, padding: '13px 16px', color: '#f5f5f5', fontSize: 15, outline: 'none' }}
-          />
-          {!activeSet && (
-            <button onClick={runGlobalSearch} disabled={searching || query.trim().length < 3}
-              style={{ background: GOLD, color: '#111', border: 'none', borderRadius: 10, padding: '0 22px', fontWeight: 700, fontSize: 14, cursor: 'pointer', opacity: searching || query.trim().length < 3 ? 0.5 : 1 }}>
-              {searching ? 'Searching…' : 'Player Search'}
-            </button>
+      ) : (activeSet || globalHits || view === 'player' || view === 'myplayers') ? (
+        <div style={{ marginBottom: 16 }}>
+          {activeSet ? (
+            <input
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Filter this set (player, team, card #, section)…"
+              style={{ width: '100%', boxSizing: 'border-box', background: '#141414', border: '1px solid #2a2a2a', borderRadius: 10, padding: '13px 16px', color: '#f5f5f5', fontSize: 15, outline: 'none' }}
+            />
+          ) : (
+            <Omnibox value={query} onChange={setQuery} onSubmit={runSearch} sets={sets} compact
+              onPickPlayer={(p, parsed) => openPlayer(p, parsed, [])} onPickSet={(s) => openSet(s)} />
           )}
         </div>
       ) : null}
@@ -733,7 +814,39 @@ export default function Home() {
             </div>
           )}
 
-          <div style={{ display: 'flex', gap: 8, marginBottom: 18, flexWrap: 'wrap' }}>
+          {/* FILTER BAR */}
+          <div style={{ background: '#101010', border: '1px solid #232323', borderRadius: 14, padding: '10px 12px', display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center', marginBottom: 12 }}>
+            <button aria-pressed={onlyMine} onClick={() => setOnlyMine(v => !v)} title={myPlayers.list.length ? 'Only show cards of players you collect' : 'Add players from any player page first'}
+              style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: onlyMine ? '#1c1810' : '#141414', border: '1px solid ' + (onlyMine ? GOLD : '#2a2a2a'), color: onlyMine ? '#f0c76a' : '#ddd', borderRadius: 10, padding: '0 14px', height: 38, fontSize: 13, fontWeight: 700, cursor: 'pointer', fontFamily: 'inherit' }}>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><path d="M20 21a8 8 0 0 0-16 0" /><circle cx="12" cy="8" r="4" /></svg>
+              My players <span style={{ background: onlyMine ? GOLD : '#2a2a2a', color: onlyMine ? '#111' : '#bbb', borderRadius: 999, padding: '1px 7px', fontSize: 11, fontWeight: 800 }}>{myPlayers.list.length}</span>
+            </button>
+            <select aria-label="Section" value={activeSection} onChange={(e) => setActiveSection(e.target.value)} style={{ background: '#141414', border: '1px solid #2a2a2a', borderRadius: 10, color: '#ddd', fontSize: 13, padding: '0 12px', height: 38, maxWidth: 260, cursor: 'pointer' }}>
+              <option value="All">All sections ({(setData.sections || []).length})</option>
+              {(setData.sections || []).map(s => <option key={s.title} value={s.title}>{s.title} ({s.cards.length})</option>)}
+            </select>
+            <select aria-label="Card type" value={setTypeFilter} onChange={(e) => setSetTypeFilter(e.target.value)} style={{ background: '#141414', border: '1px solid #2a2a2a', borderRadius: 10, color: '#ddd', fontSize: 13, padding: '0 12px', height: 38, cursor: 'pointer' }}>
+              <option value="All">Any type</option><option value="BASE">Base</option><option value="AU">Autographs</option><option value="PA">Patch autos</option><option value="PATCH">Patches</option><option value="RELIC">Relics</option><option value="PLATE">Printing plates</option><option value="OTHER">Inserts &amp; parallels</option>
+            </select>
+            <select aria-label="Print run" value={setRunFilter} onChange={(e) => setSetRunFilter(e.target.value)} style={{ background: '#141414', border: '1px solid #2a2a2a', borderRadius: 10, color: '#ddd', fontSize: 13, padding: '0 12px', height: 38, cursor: 'pointer' }}>
+              <option value="any">Any run</option><option value="1">1/1 only</option><option value="10">≤ /10</option><option value="25">≤ /25</option><option value="99">≤ /99</option><option value="numbered">Numbered</option><option value="unnumbered">Unnumbered</option>
+            </select>
+            <label style={{ display: 'inline-flex', alignItems: 'center', gap: 8, fontSize: 13, color: '#bbb', minHeight: 38, cursor: 'pointer' }}><input type="checkbox" checked={setRcOnly} onChange={(e) => setSetRcOnly(e.target.checked)} style={{ accentColor: GOLD, width: 16, height: 16 }} />Rookies only</label>
+            {(onlyMine || setTypeFilter !== 'All' || setRunFilter !== 'any' || setRcOnly || activeSection !== 'All' || query) && (
+              <button onClick={() => { setOnlyMine(false); setSetTypeFilter('All'); setSetRunFilter('any'); setSetRcOnly(false); setActiveSection('All'); setQuery('') }} style={{ background: 'none', border: 'none', color: GOLD, fontSize: 12.5, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit', marginLeft: 'auto' }}>Clear filters</button>
+            )}
+          </div>
+          {onlyMine && (
+            <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center', margin: '0 0 14px' }}>
+              <span style={{ color: '#666', fontSize: 11, fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase' }}>Showing cards of</span>
+              {myPlayers.list.length === 0 && <span style={{ color: '#888', fontSize: 13 }}>nobody yet — open a player page and hit “Collect this player”.</span>}
+              {byPlayer.map(g => <button key={g.name} onClick={() => openPlayerByName(g.name)} style={{ background: '#1c1810', border: '1px solid ' + GOLD + '55', color: '#e8d5a8', fontSize: 12.5, fontWeight: 600, padding: '5px 10px', borderRadius: 999, cursor: 'pointer', fontFamily: 'inherit' }}>{g.name} <span style={{ color: '#b48d33' }}>· {g.rows.length}</span></button>)}
+              {myPlayers.list.filter(n => !byPlayer.some(g => g.name === n)).map(n => <span key={n} style={{ border: '1px solid #2a2a2a', color: '#666', fontSize: 12.5, padding: '5px 10px', borderRadius: 999 }}>{n} · 0</span>)}
+              <button onClick={() => openView('myplayers')} style={{ background: 'none', border: 'none', color: GOLD, fontSize: 12.5, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit' }}>Manage my players</button>
+            </div>
+          )}
+
+          <div style={{ display: 'flex', gap: 8, marginBottom: 18, flexWrap: 'wrap', maxHeight: 92, overflow: 'auto' }}>
             {['All', ...(setData.sections || []).map(s => s.title)].map(t => (
               <button key={t} onClick={() => setActiveSection(t)}
                 style={{
@@ -745,8 +858,34 @@ export default function Home() {
             ))}
           </div>
 
-          <p style={{ color: '#666', fontSize: 12, margin: '0 0 12px' }}>Click a column header to sort.</p>
-          {visibleSections.map(sec => {
+          <p style={{ color: '#666', fontSize: 12, margin: '0 0 12px' }}>
+            {(() => { const n = visibleSections.reduce((a, x) => a + x.cards.length, 0), t = (setData.sections || []).reduce((a, x) => a + x.cards.length, 0); return n < t ? n.toLocaleString() + ' of ' + t.toLocaleString() + ' cards match' : 'Click a column header to sort.' })()}
+          </p>
+          {onlyMine ? byPlayer.map(g => (
+            <div key={g.name} style={{ border: '1px solid #262626', borderRadius: 14, overflow: 'hidden', background: '#0f0f0f', marginBottom: 12 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '12px 18px', background: '#151515', flexWrap: 'wrap' }}>
+                <div style={{ flex: 1, minWidth: 200 }}>
+                  <button onClick={() => openPlayerByName(g.name)} style={{ ...condensed, fontSize: 20, fontWeight: 800, textTransform: 'uppercase', background: 'none', border: 'none', color: '#f2f0ec', cursor: 'pointer', padding: 0, textAlign: 'left' }}>{g.name}</button>
+                  <p style={{ margin: '2px 0 0', color: '#888', fontSize: 12 }}>{g.team ? g.team + ' · ' : ''}{g.rows.length} card{g.rows.length === 1 ? '' : 's'} in this set{g.au ? ' · ' + g.au + ' autos' : ''}{g.one ? ' · ' + g.one + ' × 1/1' : ''}</p>
+                </div>
+                <button onClick={() => openPlayerByName(g.name)} style={{ background: 'none', border: 'none', color: GOLD, fontSize: 12.5, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit' }}>Player page →</button>
+              </div>
+              <div style={{ overflowX: 'auto' }}>
+                <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 13.5, minWidth: 560 }}>
+                  <thead><tr>{['Card #', 'Section', 'Type', 'Run', 'Want'].map((h, i) => <th key={h} style={{ padding: '9px 14px', fontWeight: 700, textAlign: i >= 3 ? 'right' : 'left', fontSize: 11, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#888' }}>{h}</th>)}</tr></thead>
+                  <tbody>{g.rows.map((r, i) => (
+                    <tr key={i} style={{ borderTop: '1px solid #1a1a1a', background: i % 2 ? '#131313' : 'transparent' }}>
+                      <td style={{ padding: '9px 14px', color: GOLD, fontWeight: 700, whiteSpace: 'nowrap' }}>{r.n ? '#' + r.n : '—'}</td>
+                      <td style={{ padding: '9px 14px' }}>{r.section}</td>
+                      <td style={{ padding: '9px 14px' }}><Chip color={r.kind === 'PA' ? '#e11d48' : r.kind === 'AU' ? '#60a5fa' : r.kind === 'PATCH' ? '#16a34a' : r.kind === 'RELIC' ? '#f97316' : '#9ca3af'}>{r.kind === 'PA' ? 'PATCH AUTO' : r.kind === 'AU' ? 'AUTO' : r.kind === 'OTHER' ? (r.x === 'RC' ? 'RC' : 'INSERT') : r.kind}</Chip></td>
+                      <td style={{ padding: '9px 14px', textAlign: 'right', whiteSpace: 'nowrap' }}>{r.serial === 1 ? <span style={{ background: GOLD, color: '#111', padding: '2px 8px', borderRadius: 999, fontSize: 11, fontWeight: 800 }}>1/1</span> : r.serial > 0 ? '/' + r.serial : <span style={{ color: '#555' }}>—</span>}</td>
+                      <td style={{ padding: '9px 14px', textAlign: 'right' }}><button aria-label="Add to wantlist" onClick={() => wantIt({ set_slug: setData.slug, set_name: setData.name, card_n: r.n, section: r.section, player: r.p })} style={{ background: 'none', border: '1px solid #2c2c2c', color: '#999', borderRadius: 6, width: 32, height: 32, cursor: 'pointer', fontFamily: 'inherit' }}>+</button></td>
+                    </tr>
+                  ))}</tbody>
+                </table>
+              </div>
+            </div>
+          )) : visibleSections.map(sec => {
             const sorted = sec.cards.slice().sort(makeComparator(sortField, sortDir))
             return (
               <div key={sec.title} style={{ marginBottom: 26 }}>
@@ -772,7 +911,7 @@ export default function Home() {
                       background: i % 2 === 0 ? '#0f0f0f' : '#141414', alignItems: 'baseline'
                     }}>
                       <span style={{ flex: '0 0 68px', color: GOLD, fontWeight: 700, fontVariantNumeric: 'tabular-nums' }}>#{c.n}</span>
-                      <span style={{ flex: '1 1 auto', minWidth: 0, fontWeight: 600 }}>{c.p}</span>
+                      <button onClick={() => openPlayerByName(c.p)} title={'Open ' + c.p + "'s player page"} style={{ flex: '1 1 auto', minWidth: 0, fontWeight: 600, background: 'none', border: 'none', color: isMine(c.p) ? GOLD : '#f5f5f5', cursor: 'pointer', padding: 0, textAlign: 'left', fontFamily: 'inherit', fontSize: 14 }}>{c.p}</button>
                       <span style={{ flex: '1 1 auto', minWidth: 0, color: '#888', fontSize: 13 }}>{c.t || ''}</span>
                       <span style={{ flex: '0 0 70px', textAlign: 'right' }}>{c.x ? <Chip color={c.x === 'RC' ? '#4ade80' : '#888'}>{c.x}</Chip> : null}</span>
                       <button title="Add this card (and its parallel section) to your wantlist"
@@ -784,7 +923,7 @@ export default function Home() {
               </div>
             )
           })}
-          {visibleSections.length === 0 && <p style={{ color: '#666' }}>No cards match.</p>}
+          {visibleSections.length === 0 && <p style={{ color: '#666' }}>No cards match{onlyMine ? ' for your players in this set' : ''}.</p>}
         </section>
       ) : globalHits ? (
         <section>
@@ -802,7 +941,7 @@ export default function Home() {
                 background: i % 2 === 0 ? '#0f0f0f' : '#141414', alignItems: 'baseline', flexWrap: 'wrap'
               }}>
                 <span style={{ color: GOLD, fontWeight: 700, minWidth: 52 }}>#{c.n}</span>
-                <span style={{ fontWeight: 600 }}>{c.p}</span>
+                <button onClick={() => openPlayerByName(c.p)} style={{ fontWeight: 600, background: 'none', border: 'none', color: '#f5f5f5', cursor: 'pointer', padding: 0, fontFamily: 'inherit', fontSize: 14 }}>{c.p}</button>
                 {c.t && <span style={{ color: '#777', fontSize: 13 }}>{c.t}</span>}
                 {c.x && <Chip color={c.x === 'RC' ? '#4ade80' : '#888'}>{c.x}</Chip>}
                 <span style={{ color: '#555', fontSize: 12, marginLeft: 'auto' }}>{c.set} · {c.section}</span>
@@ -811,6 +950,12 @@ export default function Home() {
             {globalHits.length === 0 && <p style={{ padding: 20, color: '#666', fontSize: 14 }}>No player matches yet — more sets import every session.</p>}
           </div>
         </section>
+      ) : view === 'player' && activePlayer ? (
+        <PlayerPage player={activePlayer} parsed={playerParsed} sets={sets} myPlayers={myPlayers}
+          onOpenSet={(slug) => { const s = sets.find(x => x.slug === slug); if (s) openSet(s) }}
+          onWant={wantIt} onSearch={runSearch} candidates={playerCandidates} onPickCandidate={(c) => openPlayer(c, playerParsed, playerCandidates)} />
+      ) : view === 'myplayers' ? (
+        <MyPlayersPanel myPlayers={myPlayers} onOpenPlayer={(name) => openPlayerByName(name)} />
       ) : view === 'community' ? (
         <CommunityView account={account} indexSets={sets} onOpenAuth={() => setAuthOpen(true)} />
       ) : view === 'collection' ? (

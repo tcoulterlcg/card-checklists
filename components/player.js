@@ -1,0 +1,537 @@
+'use client'
+// Player search: omnibox with suggestions, player landing pages with faceted
+// filters, and "My Players" (players the collector follows). Data comes from
+// public/data/players/ (built by scripts/build-player-index.mjs).
+import { useEffect, useMemo, useRef, useState } from 'react'
+import { supa } from '../lib/supa'
+import { TYPE, norm, parseQuery, matchPlayers, rowMatches, typeLabel, TYPE_COLORS, serialLabel } from '../lib/query'
+
+const GOLD = '#d4a843'
+const condensed = { fontFamily: "'Barlow Condensed', 'Arial Narrow', sans-serif" }
+const SPORT_COLORS = { Baseball: '#60a5fa', Football: '#4ade80', Basketball: '#f97316', Hockey: '#a78bfa', Soccer: '#f43f5e', UFC: '#dc2626', Boxing: '#eab308', Wrestling: '#f59e0b', Golf: '#22c55e', Tennis: '#14b8a6', Racing: '#ef4444', 'Pokémon': '#facc15', 'Yu-Gi-Oh!': '#a855f7', Magic: '#f59e0b', Lorcana: '#8b5cf6', Entertainment: '#ec4899', 'Multi-Sport': '#94a3b8' }
+const BRAND_OF = (name) => { const n = (name || '').toLowerCase(); return /upper deck|\bud\b|o-pee-chee|sp authentic|sp game|spx|the cup|ultimate collection|artifacts|black diamond|trilogy|synergy|allure|parkhurst|fleer|skybox|\bmvp\b|credentials|stature|engrained|premier hockey|ice hockey/.test(n) ? 'Upper Deck' : /topps|bowman|finest|stadium club|allen|gypsy|heritage|archives|museum|tribute|dynasty|inception|tier one|triple threads|sterling|five star|definitive|transcendent|chrome/.test(n) ? 'Topps' : /panini|prizm|select|mosaic|donruss|optic|contenders|national treasures|immaculate|flawless|obsidian|spectra|certified|absolute|phoenix|origins|noir|court kings|hoops|revolution|score|playbook|luminance|illusions|zenith|gold standard|crown royale|limited|elite|prestige|rookies|legacy|classics|chronicles|encased|eminence|impeccable|silhouette|one and one/.test(n) ? 'Panini' : /leaf|\bitg\b|in the game/.test(n) ? 'Leaf' : /pro set/.test(n) ? 'Pro Set' : 'Other' }
+
+// ---------- data hooks ----------
+let dirPromise = null
+export function loadPlayerDir() {
+  if (!dirPromise) dirPromise = fetch('/data/players/dir.json').then(r => r.json()).catch(() => ({ v: 1, shards: 0, sports: [], players: [] }))
+  return dirPromise
+}
+const shardCache = new Map()
+export function loadShard(n) {
+  if (!shardCache.has(n)) shardCache.set(n, fetch('/data/players/' + n + '.json').then(r => r.json()).catch(() => ({ slugs: [], sections: [], teams: [], rows: [] })))
+  return shardCache.get(n)
+}
+
+// ---------- My Players (followed) ----------
+const LS_KEY = 'hq.myPlayers'
+export function useMyPlayers(account) {
+  const [list, setList] = useState([])
+  const userId = account && account.session ? account.session.user.id : null
+  useEffect(() => {
+    try { const v = JSON.parse(localStorage.getItem(LS_KEY) || '[]'); if (Array.isArray(v)) setList(v) } catch {}
+  }, [])
+  useEffect(() => {
+    if (!userId) return
+    supa.from('followed_players').select('player_name').eq('user_id', userId).then(({ data }) => {
+      if (!data) return
+      setList(prev => {
+        const merged = [...new Set([...prev, ...data.map(d => d.player_name)])]
+        try { localStorage.setItem(LS_KEY, JSON.stringify(merged)) } catch {}
+        // push any local-only follows up to the account
+        const remote = new Set(data.map(d => d.player_name))
+        const missing = prev.filter(p => !remote.has(p))
+        if (missing.length) supa.from('followed_players').upsert(missing.map(player_name => ({ user_id: userId, player_name })), { onConflict: 'user_id,player_name' }).then(() => {})
+        return merged
+      })
+    })
+  }, [userId])
+  const has = (name) => list.includes(name)
+  const toggle = async (name) => {
+    const next = has(name) ? list.filter(p => p !== name) : [...list, name]
+    setList(next)
+    try { localStorage.setItem(LS_KEY, JSON.stringify(next)) } catch {}
+    if (userId) {
+      if (has(name)) await supa.from('followed_players').delete().match({ user_id: userId, player_name: name })
+      else await supa.from('followed_players').upsert({ user_id: userId, player_name: name }, { onConflict: 'user_id,player_name' })
+    }
+  }
+  return { list, has, toggle }
+}
+
+// ---------- small UI bits ----------
+function Chip({ children, color, solid, onClick, active }) {
+  const c = color || GOLD
+  const style = {
+    display: 'inline-flex', alignItems: 'center', gap: 6, padding: '4px 10px', borderRadius: 999, fontSize: 11, fontWeight: 700,
+    letterSpacing: '0.06em', textTransform: 'uppercase', whiteSpace: 'nowrap',
+    background: solid || active ? c : 'transparent', color: solid || active ? '#111' : c, border: '1px solid ' + c + (solid || active ? '' : '66'),
+    cursor: onClick ? 'pointer' : 'default', fontFamily: 'inherit'
+  }
+  return onClick ? <button onClick={onClick} style={style}>{children}</button> : <span style={style}>{children}</span>
+}
+function TypeChip({ t }) { const l = typeLabel(t); return <Chip color={TYPE_COLORS[l] || '#9ca3af'}>{l}</Chip> }
+function Serial({ s }) {
+  if (s === 1) return <span style={{ background: GOLD, color: '#111', padding: '2px 8px', borderRadius: 999, fontSize: 11, fontWeight: 800 }}>1/1</span>
+  if (s > 0) return <span style={{ fontVariantNumeric: 'tabular-nums', fontWeight: 600 }}>/{s}</span>
+  return <span style={{ color: '#555' }}>—</span>
+}
+function Initials({ name, color }) {
+  const i = name.split(/\s+/).filter(Boolean).map(w => w[0]).slice(0, 2).join('').toUpperCase()
+  return <span style={{ width: 34, height: 34, borderRadius: 999, background: color + '22', border: '1px solid ' + color + '55', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', ...condensed, fontWeight: 800, color, fontSize: 13, flexShrink: 0 }}>{i}</span>
+}
+const btn = (primary) => ({ ...condensed, background: primary ? GOLD : 'transparent', color: primary ? '#111' : '#ddd', border: primary ? 'none' : '1px solid #3a3a3a', borderRadius: 10, padding: '0 16px', height: 42, fontWeight: 800, fontSize: 14, letterSpacing: '0.06em', textTransform: 'uppercase', cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: 8 })
+const pill = (active, color) => ({ padding: '7px 12px', borderRadius: 999, fontSize: 12, fontWeight: 700, cursor: 'pointer', letterSpacing: '0.04em', textTransform: 'uppercase', fontFamily: 'inherit', background: active ? (color || GOLD) : '#141414', color: active ? '#111' : '#bbb', border: '1px solid ' + (active ? 'transparent' : '#2a2a2a'), whiteSpace: 'nowrap' })
+const selectStyle = { background: '#141414', border: '1px solid #2a2a2a', borderRadius: 8, color: '#ddd', fontSize: 13, padding: '0 12px', height: 36, fontFamily: 'inherit', cursor: 'pointer' }
+
+// ---------- Omnibox ----------
+export function Omnibox({ value, onChange, onSubmit, onPickPlayer, onPickSet, sets, autoFocus, compact }) {
+  const [open, setOpen] = useState(false)
+  const [dir, setDir] = useState(null)
+  const [sel, setSel] = useState(0)
+  const box = useRef(null)
+  useEffect(() => { loadPlayerDir().then(setDir) }, [])
+  useEffect(() => {
+    const h = (e) => { if (box.current && !box.current.contains(e.target)) setOpen(false) }
+    document.addEventListener('mousedown', h); return () => document.removeEventListener('mousedown', h)
+  }, [])
+  const parsed = useMemo(() => parseQuery(value), [value])
+  const playerHits = useMemo(() => (dir && parsed.player.length >= 2) ? matchPlayers(dir, parsed.player, 6) : [], [dir, parsed.player])
+  const setHits = useMemo(() => {
+    const t = norm(value); if (t.length < 3 || !sets) return []
+    const toks = t.split(' ')
+    return sets.filter(s => { const n = norm(s.name); return toks.every(k => n.includes(k)) }).slice(0, 3)
+  }, [value, sets])
+  const refine = useMemo(() => {
+    const p = playerHits[0]; if (!p) return []
+    const base = p.name.toLowerCase()
+    return [[base + ' 1/1', '1/1'], [base + ' rc', 'rookies'], [base + ' auto', 'autos'], [base + ' patch auto', 'patch autos'], [base + ' auto /25', 'autos ≤ /25']]
+  }, [playerHits])
+  const items = [...playerHits.map(p => ({ kind: 'player', p })), ...setHits.map(s => ({ kind: 'set', s }))]
+  const go = (i) => {
+    const it = items[i]
+    if (!it) { onSubmit(value); setOpen(false); return }
+    if (it.kind === 'player') onPickPlayer(it.p, parsed)
+    else onPickSet(it.s)
+    setOpen(false)
+  }
+  const hl = (name) => {
+    const terms = norm(parsed.player).split(' ').filter(Boolean)
+    const key = norm(name)
+    let out = [], last = 0
+    for (const t of terms) { const i = key.indexOf(t, last); if (i < 0) continue; out.push(name.slice(last, i)); out.push(<mark key={i} style={{ background: 'none', color: GOLD }}>{name.slice(i, i + t.length)}</mark>); last = i + t.length }
+    out.push(name.slice(last)); return out
+  }
+  const understood = []
+  if (parsed.serial === 1) understood.push(['print run', '1 of 1'])
+  else if (parsed.serial) understood.push(['print run', '/' + parsed.serial])
+  if (parsed.serialMax) understood.push(['print run', '≤ /' + parsed.serialMax])
+  for (const t of parsed.types) understood.push(['type', t.toLowerCase()])
+  if (parsed.sport) understood.push(['sport', parsed.sport])
+  if (parsed.season) understood.push(['season', String(parsed.season)])
+  for (const p of parsed.products) understood.push(['product', p])
+  return (
+    <div ref={box} style={{ position: 'relative' }}>
+      <form role="search" onSubmit={(e) => { e.preventDefault(); go(open && items.length ? sel : -1) }}
+        style={{ display: 'flex', alignItems: 'center', background: '#121212', border: '1px solid ' + (open ? GOLD + '66' : '#2e2e2e'), borderRadius: open && items.length ? '14px 14px 0 0' : 14, padding: 6, boxShadow: open ? '0 0 0 4px ' + GOLD + '14' : '0 20px 50px -20px rgba(0,0,0,0.8)' }}>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={open ? GOLD : '#777'} strokeWidth="2" aria-hidden="true" style={{ marginLeft: 10, flexShrink: 0 }}><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
+        <input value={value} autoFocus={autoFocus} aria-label="Search players, sets, serials"
+          onChange={(e) => { onChange(e.target.value); setOpen(true); setSel(0) }}
+          onFocus={() => setOpen(true)}
+          onKeyDown={(e) => { if (e.key === 'ArrowDown') { e.preventDefault(); setSel(s => Math.min(s + 1, items.length - 1)) } else if (e.key === 'ArrowUp') { e.preventDefault(); setSel(s => Math.max(s - 1, 0)) } else if (e.key === 'Escape') setOpen(false) }}
+          placeholder='Search a player — add "1/1", "auto", "rc", "/25", a season or a product'
+          style={{ flex: 1, minWidth: 0, background: 'transparent', border: 'none', padding: compact ? '10px 12px' : '13px 14px', color: '#f5f5f5', fontSize: compact ? 15 : 16, outline: 'none', fontFamily: 'inherit' }} />
+        <button type="submit" style={{ ...condensed, background: GOLD, color: '#111', border: 'none', borderRadius: 10, padding: '0 22px', height: compact ? 38 : 44, fontWeight: 800, fontSize: 15, letterSpacing: '0.08em', textTransform: 'uppercase', cursor: 'pointer' }}>Search</button>
+      </form>
+      {open && (items.length > 0 || understood.length > 0) && (
+        <div role="listbox" style={{ position: 'absolute', left: 0, right: 0, top: '100%', zIndex: 60, background: '#111', border: '1px solid #2a2a2a', borderTop: 'none', borderRadius: '0 0 14px 14px', overflow: 'hidden', boxShadow: '0 30px 60px -20px #000' }}>
+          {understood.length > 0 && (
+            <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', alignItems: 'center', padding: '10px 16px 6px', borderBottom: '1px solid #1e1e1e' }}>
+              <span style={{ color: '#666', fontSize: 10.5, fontWeight: 800, letterSpacing: '0.16em', textTransform: 'uppercase' }}>Understood</span>
+              {parsed.player && <span style={{ background: '#141414', border: '1px solid #2a2a2a', borderRadius: 999, padding: '4px 10px', fontSize: 12 }}><span style={{ color: '#777', fontSize: 10, fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', marginRight: 6 }}>player</span>{parsed.player}</span>}
+              {understood.map(([k, v], i) => <span key={i} style={{ background: '#1c1810', border: '1px solid ' + GOLD + '66', borderRadius: 999, padding: '4px 10px', fontSize: 12, color: '#f0c76a' }}><span style={{ color: '#b48d33', fontSize: 10, fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', marginRight: 6 }}>{k}</span>{v}</span>)}
+            </div>
+          )}
+          {playerHits.length > 0 && <p style={{ margin: 0, padding: '10px 16px 4px', color: '#666', fontSize: 10.5, fontWeight: 800, letterSpacing: '0.16em', textTransform: 'uppercase' }}>Players</p>}
+          {items.map((it, i) => it.kind === 'player' ? (
+            <button key={'p' + it.p.id} role="option" aria-selected={sel === i} onMouseEnter={() => setSel(i)} onClick={() => go(i)}
+              style={{ width: '100%', textAlign: 'left', display: 'flex', alignItems: 'center', gap: 12, padding: '9px 16px', background: sel === i ? '#1a1711' : 'transparent', border: 'none', color: '#f2f0ec', cursor: 'pointer', fontFamily: 'inherit', minHeight: 48 }}>
+              <Initials name={it.p.name} color={SPORT_COLORS[it.p.sport] || GOLD} />
+              <span style={{ flex: 1, minWidth: 0 }}>
+                <span style={{ fontWeight: 600, fontSize: 14 }}>{hl(it.p.name)}</span>
+                <span style={{ display: 'block', color: '#888', fontSize: 12 }}>{it.p.sport} · {it.p.cards.toLocaleString()} cards · {it.p.minYear}{it.p.maxYear !== it.p.minYear ? '–' + it.p.maxYear : ''}</span>
+              </span>
+              {sel === i && <span style={{ color: '#666', fontSize: 11 }}>↵</span>}
+            </button>
+          ) : (
+            <button key={'s' + it.s.slug} role="option" aria-selected={sel === i} onMouseEnter={() => setSel(i)} onClick={() => go(i)}
+              style={{ width: '100%', textAlign: 'left', display: 'flex', alignItems: 'center', gap: 12, padding: '9px 16px', background: sel === i ? '#1a1711' : 'transparent', border: 'none', borderTop: i === playerHits.length ? '1px solid #1e1e1e' : 'none', color: '#f2f0ec', cursor: 'pointer', fontFamily: 'inherit', minHeight: 44 }}>
+              <span style={{ width: 4, height: 28, background: SPORT_COLORS[it.s.sport] || GOLD, borderRadius: 2 }} />
+              <span style={{ flex: 1 }}><span style={{ fontWeight: 600, fontSize: 14 }}>{it.s.name}</span><span style={{ display: 'block', color: '#888', fontSize: 12 }}>Set · {(it.s.cardCount || 0).toLocaleString()} cards · {it.s.sections} sections</span></span>
+            </button>
+          ))}
+          {refine.length > 0 && (
+            <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', padding: '8px 16px 12px', borderTop: '1px solid #1e1e1e' }}>
+              <span style={{ color: '#666', fontSize: 10.5, fontWeight: 800, letterSpacing: '0.16em', textTransform: 'uppercase', alignSelf: 'center', marginRight: 4 }}>Refine</span>
+              {refine.map(([q, label]) => <button key={q} onClick={() => { onChange(q); onSubmit(q); setOpen(false) }} style={{ background: '#141414', color: '#ddd', border: '1px solid #2a2a2a', padding: '6px 11px', borderRadius: 999, fontSize: 12, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit' }}>{playerHits[0].name.split(' ').pop().toLowerCase()} <span style={{ color: GOLD }}>{label}</span></button>)}
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  )
+}
+
+// ---------- Player page ----------
+const VIEWS = [['all', 'All cards'], ['oneofone', '1/1s'], ['rc', 'Rookies'], ['auto', 'Autos'], ['pa', 'Patch autos'], ['base', 'Base only'], ['rare', '/25 or rarer']]
+const quickFilter = { all: () => true, oneofone: r => r[5] === 1, rc: r => r[6] & TYPE.RC, auto: r => r[6] & TYPE.AU, pa: r => (r[6] & TYPE.AU) && (r[6] & TYPE.PATCH), base: r => r[6] & TYPE.BASE, rare: r => r[5] > 0 && r[5] <= 25 }
+
+export function PlayerPage({ player, parsed, sets, onOpenSet, myPlayers, onWant, onSearch, candidates, onPickCandidate }) {
+  const [shard, setShard] = useState(null)
+  const [quick, setQuick] = useState('all')
+  const [group, setGroup] = useState('set')
+  const [sort, setSort] = useState('newest')
+  const [types, setTypes] = useState(new Set(['BASE', 'PARALLEL', 'INSERT', 'AU', 'PATCH', 'RELIC', 'PLATE']))
+  const [run, setRun] = useState('any') // any|1|10|25|99|numbered|unnumbered
+  const [brands, setBrands] = useState(null) // null = all
+  const [products, setProducts] = useState([])
+  const [prodInput, setProdInput] = useState('')
+  const [teams, setTeams] = useState(null)
+  const [yearFrom, setYearFrom] = useState(0)
+  const [yearTo, setYearTo] = useState(9999)
+  const [expanded, setExpanded] = useState(new Set())
+  const [showAll, setShowAll] = useState(new Set())
+  const [limit, setLimit] = useState(40)
+  const [hidePlates, setHidePlates] = useState(false)
+
+  useEffect(() => { setShard(null); loadShard(player.shard).then(setShard); setQuick('all'); setExpanded(new Set()); setLimit(40) }, [player.id, player.shard])
+  // When the query itself carries filters (1/1, auto…), start from them.
+  useEffect(() => {
+    if (!parsed) return
+    if (parsed.serial === 1) setRun('1'); else if (parsed.serialMax) setRun(String(parsed.serialMax)); else if (parsed.types.has('NUMBERED')) setRun('numbered'); else setRun('any')
+    setYearFrom(parsed.season || 0); setYearTo(parsed.season || 9999)
+    setProducts(parsed.products.slice())
+  }, [parsed])
+
+  const setMeta = useMemo(() => { const m = {}; for (const s of sets) m[s.slug] = s; return m }, [sets])
+
+  // All of this player's rows, enriched.
+  const rows = useMemo(() => {
+    if (!shard) return []
+    const out = []
+    for (const r of shard.rows) {
+      if (r[0] !== player.id) continue
+      const slug = shard.slugs[r[1]]
+      const m = setMeta[slug] || { name: slug, year: 0, sport: '' }
+      out.push({ slug, set: m.name, year: m.year, sport: m.sport, brand: BRAND_OF(m.name), section: shard.sections[r[2]], n: r[3], team: r[4] >= 0 ? shard.teams[r[4]] : '', serial: r[5], type: r[6], raw: r })
+    }
+    return out
+  }, [shard, player.id, setMeta])
+
+  // Facet universe (counts over the player's full catalogue).
+  const facets = useMemo(() => {
+    const f = { sets: new Set(), au: 0, one: 0, rc: 0, patch: 0, base: 0, parallel: 0, insert: 0, relic: 0, plate: 0, brands: new Map(), teams: new Map(), years: new Map(), minY: 9999, maxY: 0, seasons: 0 }
+    for (const r of rows) {
+      f.sets.add(r.slug)
+      if (r.type & TYPE.AU) f.au++; if (r.serial === 1) f.one++; if (r.type & TYPE.RC) f.rc++; if (r.type & TYPE.PATCH) f.patch++
+      if (r.type & TYPE.BASE) f.base++; if (r.type & TYPE.PARALLEL) f.parallel++; if (r.type & TYPE.INSERT) f.insert++; if (r.type & TYPE.RELIC) f.relic++; if (r.type & TYPE.PLATE) f.plate++
+      f.brands.set(r.brand, (f.brands.get(r.brand) || 0) + 1)
+      if (r.team) f.teams.set(r.team, (f.teams.get(r.team) || 0) + 1)
+      if (r.year) { f.years.set(r.year, (f.years.get(r.year) || 0) + 1); if (r.year < f.minY) f.minY = r.year; if (r.year > f.maxY) f.maxY = r.year }
+    }
+    f.seasons = f.years.size
+    return f
+  }, [rows])
+  const topTeam = useMemo(() => [...facets.teams.entries()].filter(([t]) => /[A-Za-z]{3,}/.test(t) && !/^\/|#/.test(t)).sort((a, b) => b[1] - a[1])[0], [facets])
+  const firstCard = useMemo(() => rows.filter(r => r.type & TYPE.RC).sort((a, b) => a.year - b.year)[0] || rows.slice().sort((a, b) => a.year - b.year)[0], [rows])
+
+  // Apply filters.
+  const filtered = useMemo(() => {
+    const qf = quickFilter[quick] || quickFilter.all
+    return rows.filter(r => {
+      if (!qf(r.raw)) return false
+      if (hidePlates && (r.type & TYPE.PLATE)) return false
+      const label = (r.type & TYPE.PLATE) ? 'PLATE' : (r.type & TYPE.AU) ? 'AU' : (r.type & TYPE.PATCH) ? 'PATCH' : (r.type & TYPE.RELIC) ? 'RELIC' : (r.type & TYPE.BASE) ? 'BASE' : (r.type & TYPE.PARALLEL) ? 'PARALLEL' : 'INSERT'
+      if (!types.has(label)) return false
+      if (run === '1' && r.serial !== 1) return false
+      if (run === 'numbered' && !(r.serial > 0)) return false
+      if (run === 'unnumbered' && r.serial > 0) return false
+      if (/^\d+$/.test(run) && run !== '1' && !(r.serial > 0 && r.serial <= parseInt(run))) return false
+      if (brands && !brands.has(r.brand)) return false
+      if (teams && !teams.has(r.team)) return false
+      if (r.year && (r.year < yearFrom || r.year > yearTo)) return false
+      if (products.length) { const n = r.set.toLowerCase(); if (!products.every(p => n.includes(p.toLowerCase()))) return false }
+      if (parsed && parsed.types.size) { for (const t of parsed.types) { if (t === 'RPA' && !((r.type & TYPE.AU) && (r.type & TYPE.PATCH) && (r.type & TYPE.RC))) return false; if (TYPE[t] && !(r.type & TYPE[t])) return false } }
+      if (parsed && parsed.sport && r.sport !== parsed.sport) return false
+      return true
+    })
+  }, [rows, quick, types, run, brands, teams, yearFrom, yearTo, products, hidePlates, parsed])
+
+  const sorted = useMemo(() => {
+    const out = filtered.slice()
+    const bySet = (a, b) => a.set.localeCompare(b.set)
+    if (sort === 'oldest') out.sort((a, b) => a.year - b.year || bySet(a, b))
+    else if (sort === 'rarest') out.sort((a, b) => (a.serial || 1e9) - (b.serial || 1e9) || b.year - a.year)
+    else if (sort === 'set') out.sort(bySet)
+    else out.sort((a, b) => b.year - a.year || bySet(a, b))
+    return out
+  }, [filtered, sort])
+
+  const groups = useMemo(() => {
+    if (group === 'flat') return null
+    const m = new Map()
+    for (const r of sorted) {
+      const k = group === 'season' ? String(r.year || 'Unknown') : r.slug
+      let g = m.get(k)
+      if (!g) { g = { key: k, title: group === 'season' ? seasonLabel(r.year, r.sport) : r.set, slug: r.slug, sport: r.sport, year: r.year, brand: r.brand, rows: [], au: 0, one: 0, patch: 0, rc: 0, sections: new Set() }; m.set(k, g) }
+      g.rows.push(r); g.sections.add(r.section)
+      if (r.type & TYPE.AU) g.au++; if (r.serial === 1) g.one++; if (r.type & TYPE.PATCH) g.patch++; if (r.type & TYPE.RC) g.rc++
+    }
+    return [...m.values()]
+  }, [sorted, group])
+
+  const toggleType = (t) => setTypes(prev => { const n = new Set(prev); if (n.has(t)) n.delete(t); else n.add(t); return n })
+  const toggleIn = (setter, cur, v, all) => setter(() => { const base = cur ? new Set(cur) : new Set(all); if (base.has(v)) base.delete(v); else base.add(v); return base.size === all.length ? null : base })
+  const resetAll = () => { setQuick('all'); setTypes(new Set(['BASE', 'PARALLEL', 'INSERT', 'AU', 'PATCH', 'RELIC', 'PLATE'])); setRun('any'); setBrands(null); setTeams(null); setProducts([]); setYearFrom(0); setYearTo(9999); setHidePlates(false) }
+  const color = SPORT_COLORS[player.sport] || GOLD
+  const following = myPlayers.has(player.name)
+  const years = [...facets.years.keys()].sort()
+  const maxYearCount = Math.max(1, ...facets.years.values())
+  const brandList = [...facets.brands.entries()].sort((a, b) => b[1] - a[1])
+  const teamList = [...facets.teams.entries()].filter(([t]) => /[A-Za-z]{3,}/.test(t) && !/^\/|#|\d\/\d/.test(t)).sort((a, b) => b[1] - a[1]).slice(0, 12)
+  const productOptions = useMemo(() => [...new Set(rows.map(r => r.set.replace(/^\d{4}(-\d{2})?\s*/, '').replace(/\s+(hockey|baseball|basketball|football|soccer).*$/i, '')))].sort(), [rows])
+  const titleSuffix = quick !== 'all' ? ' · ' + VIEWS.find(v => v[0] === quick)[1] : parsed && parsed.serial === 1 ? ' · 1/1s' : ''
+
+  const exportCsv = () => {
+    const lines = ['Season,Set,Card #,Section,Type,Print run,Team', ...sorted.map(r => [r.year, r.set, r.n, r.section, typeLabel(r.type), serialLabel(r.serial), r.team].map(v => '"' + String(v || '').replace(/"/g, '""') + '"').join(','))]
+    const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([lines.join('\n')], { type: 'text/csv' })); a.download = player.name.replace(/\s+/g, '-') + '-checklist.csv'; a.click()
+  }
+
+  const Row = ({ r, withSet }) => (
+    <tr style={{ borderTop: '1px solid #1a1a1a' }}>
+      {withSet && <td style={{ padding: '9px 12px', color: '#999', fontVariantNumeric: 'tabular-nums', whiteSpace: 'nowrap' }}>{seasonLabel(r.year, r.sport)}</td>}
+      {withSet && <td style={{ padding: '9px 12px' }}><button onClick={() => onOpenSet(r.slug)} style={{ background: 'none', border: 'none', color: '#f2f0ec', fontWeight: 600, cursor: 'pointer', padding: 0, textAlign: 'left', fontFamily: 'inherit', fontSize: 13.5 }}>{r.set.replace(/^\d{4}(-\d{2})?\s*/, '')}</button></td>}
+      <td style={{ padding: '9px 12px', color: GOLD, fontWeight: 700, fontVariantNumeric: 'tabular-nums', whiteSpace: 'nowrap' }}>{r.n ? '#' + r.n : '—'}</td>
+      <td style={{ padding: '9px 12px' }}>{r.section}</td>
+      <td style={{ padding: '9px 12px' }}><TypeChip t={r.type} /></td>
+      <td style={{ padding: '9px 12px', textAlign: 'right', whiteSpace: 'nowrap' }}><Serial s={r.serial} /></td>
+      <td style={{ padding: '9px 12px', textAlign: 'right' }}><button aria-label={'Add #' + r.n + ' ' + r.section + ' to wantlist'} onClick={() => onWant({ set_slug: r.slug, set_name: r.set, card_n: r.n, section: r.section, player: player.name })} style={{ background: 'none', border: '1px solid #2c2c2c', color: '#999', borderRadius: 6, width: 32, height: 32, cursor: 'pointer', fontFamily: 'inherit' }}>+</button></td>
+    </tr>
+  )
+  const th = { padding: '9px 12px', fontWeight: 700, textAlign: 'left', fontSize: 11, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#888', whiteSpace: 'nowrap' }
+
+  return (
+    <section>
+      {/* candidates when the query was ambiguous */}
+      {candidates && candidates.length > 1 && (
+        <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center', margin: '0 0 14px' }}>
+          <span style={{ color: '#666', fontSize: 11, fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase' }}>Also matches</span>
+          {candidates.filter(c => c.id !== player.id).slice(0, 6).map(c => <button key={c.id} onClick={() => onPickCandidate(c)} style={{ background: '#141414', color: '#ddd', border: '1px solid #2a2a2a', padding: '6px 11px', borderRadius: 999, fontSize: 12.5, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit' }}>{c.name} <span style={{ color: '#777' }}>· {c.cards.toLocaleString()}</span></button>)}
+        </div>
+      )}
+
+      {/* HERO */}
+      <div style={{ background: 'linear-gradient(140deg, #191919, #101010)', border: '1px solid #262626', borderRadius: 18, padding: '26px 28px', display: 'flex', gap: 26, flexWrap: 'wrap', alignItems: 'flex-start' }}>
+        <div style={{ flex: '1 1 400px', minWidth: 0 }}>
+          <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 10 }}>
+            <Chip color={color} solid>{player.sport}</Chip>
+            {topTeam && <Chip color="#9a9a9a">{topTeam[0]}</Chip>}
+            {facets.maxY > 0 && <Chip color="#9a9a9a">{seasonLabel(facets.minY, player.sport)} → {seasonLabel(facets.maxY, player.sport)}</Chip>}
+          </div>
+          <h1 style={{ ...condensed, fontSize: 'clamp(36px, 5vw, 56px)', fontWeight: 800, textTransform: 'uppercase', lineHeight: 0.95, margin: 0 }}>{player.name}{titleSuffix && <span style={{ color: GOLD }}>{titleSuffix}</span>}</h1>
+          <p style={{ color: '#8f8f8f', fontSize: 14, margin: '12px 0 0', lineHeight: 1.6 }}>
+            {firstCard ? <>First card: {firstCard.year ? seasonLabel(firstCard.year, firstCard.sport) + ' ' : ''}{firstCard.set.replace(/^\d{4}(-\d{2})?\s*/, '')}{firstCard.n ? ' #' + firstCard.n : ''} · </> : null}
+            Appears in {facets.sets.size.toLocaleString()} sets across {facets.seasons} season{facets.seasons === 1 ? '' : 's'}
+          </p>
+          <div style={{ display: 'flex', gap: 10, marginTop: 18, flexWrap: 'wrap' }}>
+            <button onClick={() => myPlayers.toggle(player.name)} style={btn(!following)} aria-pressed={following}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true">{following ? <path d="m5 12 5 5L20 7" /> : <path d="M12 5v14M5 12h14" />}</svg>
+              {following ? 'In my players' : 'Collect this player'}
+            </button>
+            <button onClick={exportCsv} style={btn(false)}>Export CSV</button>
+            <button onClick={() => { navigator.clipboard && navigator.clipboard.writeText(location.href) }} style={btn(false)}>Copy link</button>
+          </div>
+        </div>
+        <div style={{ flex: '1 1 480px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(110px, 1fr))', gap: 10 }}>
+          {[[rows.length, 'Cards', GOLD], [facets.sets.size, 'Sets'], [facets.au, 'Autographs'], [facets.one, '1/1s'], [facets.rc, 'Rookies'], [facets.patch, 'Patches'], [facets.seasons, 'Seasons'], [facets.brands.size, 'Brands']].map(([n, l, c]) => (
+            <div key={l} style={{ background: '#0e0e0e', border: '1px solid #262626', borderRadius: 12, padding: '14px 12px' }}>
+              <p style={{ ...condensed, margin: 0, fontSize: 32, fontWeight: 800, color: c || '#f2f0ec', lineHeight: 1 }}>{shard ? n.toLocaleString() : '…'}</p>
+              <p style={{ margin: '6px 0 0', color: '#888', fontSize: 11, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase' }}>{l}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* QUICK VIEWS */}
+      <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center', margin: '16px 0 0' }}>
+        <span style={{ color: '#666', fontSize: 11, fontWeight: 800, letterSpacing: '0.16em', textTransform: 'uppercase', marginRight: 4 }}>Quick views</span>
+        {VIEWS.map(([k, l]) => { const n = rows.filter(r => quickFilter[k](r.raw)).length; return <button key={k} onClick={() => setQuick(k)} style={pill(quick === k)}>{l}{k !== 'all' ? ' · ' + n.toLocaleString() : ''}</button> })}
+      </div>
+
+      {/* BODY */}
+      <div style={{ display: 'flex', gap: 20, flexWrap: 'wrap', alignItems: 'flex-start', marginTop: 18 }}>
+        <aside aria-label="Filters" style={{ flex: '1 1 240px', maxWidth: 290, background: '#101010', border: '1px solid #232323', borderRadius: 14, padding: 16, display: 'flex', flexDirection: 'column', gap: 18, position: 'sticky', top: 12 }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <span style={{ ...condensed, fontSize: 16, fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase' }}>Filters</span>
+            <button onClick={resetAll} style={{ background: 'none', border: 'none', color: GOLD, fontSize: 12, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit' }}>Reset</button>
+          </div>
+          <div>
+            <p style={legend}>Season</p>
+            <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+              <select aria-label="From season" value={yearFrom} onChange={(e) => setYearFrom(parseInt(e.target.value))} style={{ ...selectStyle, flex: 1 }}><option value={0}>Any</option>{years.map(y => <option key={y} value={y}>{seasonLabel(y, player.sport)}</option>)}</select>
+              <span style={{ color: '#666' }}>–</span>
+              <select aria-label="To season" value={yearTo} onChange={(e) => setYearTo(parseInt(e.target.value))} style={{ ...selectStyle, flex: 1 }}><option value={9999}>Any</option>{years.map(y => <option key={y} value={y}>{seasonLabel(y, player.sport)}</option>)}</select>
+            </div>
+          </div>
+          <div>
+            <p style={legend}>Card type</p>
+            {[['BASE', 'Base', facets.base], ['PARALLEL', 'Parallels', facets.parallel], ['INSERT', 'Inserts', facets.insert], ['AU', 'Autographs', facets.au], ['PATCH', 'Patches', facets.patch], ['RELIC', 'Relics', facets.relic], ['PLATE', 'Printing plates', facets.plate]].map(([k, l, n]) => (
+              <label key={k} style={lbl}><input type="checkbox" checked={types.has(k)} onChange={() => toggleType(k)} style={cb} />{l}<span style={cnt}>{n.toLocaleString()}</span></label>
+            ))}
+            <label style={lbl}><input type="checkbox" checked={hidePlates} onChange={(e) => setHidePlates(e.target.checked)} style={cb} />Hide printing plates</label>
+          </div>
+          <div>
+            <p style={legend}>Print run</p>
+            <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+              {[['any', 'Any'], ['1', '1/1'], ['10', '≤ /10'], ['25', '≤ /25'], ['99', '≤ /99'], ['numbered', 'Numbered'], ['unnumbered', 'Unnumbered']].map(([k, l]) => <button key={k} onClick={() => setRun(k)} style={{ ...pill(run === k), textTransform: 'none', padding: '6px 10px' }}>{l}</button>)}
+            </div>
+          </div>
+          <div>
+            <p style={legend}>Brand</p>
+            {brandList.map(([b, n]) => <label key={b} style={lbl}><input type="checkbox" checked={!brands || brands.has(b)} onChange={() => toggleIn(setBrands, brands, b, brandList.map(x => x[0]))} style={cb} />{b}<span style={cnt}>{n.toLocaleString()}</span></label>)}
+          </div>
+          <div>
+            <p style={legend}>Product</p>
+            <input list="hq-products" value={prodInput} onChange={(e) => setProdInput(e.target.value)} onKeyDown={(e) => { if (e.key === 'Enter' && prodInput.trim()) { setProducts(p => [...p, prodInput.trim()]); setProdInput('') } }} placeholder="The Cup, SP Authentic, Series 1…" aria-label="Product line" style={{ width: '100%', boxSizing: 'border-box', background: '#161616', border: '1px solid #2c2c2c', borderRadius: 8, color: '#ddd', padding: '9px 12px', fontSize: 13, fontFamily: 'inherit' }} />
+            <datalist id="hq-products">{productOptions.slice(0, 400).map(p => <option key={p} value={p} />)}</datalist>
+            {products.length > 0 && <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginTop: 8 }}>{products.map(p => <span key={p} style={{ background: '#1c1810', border: '1px solid ' + GOLD + '55', color: '#e8d5a8', fontSize: 12, fontWeight: 600, padding: '4px 10px', borderRadius: 999, display: 'inline-flex', gap: 6, alignItems: 'center' }}>{p}<button aria-label={'Remove ' + p} onClick={() => setProducts(ps => ps.filter(x => x !== p))} style={{ background: 'none', border: 'none', color: '#e8d5a8', cursor: 'pointer', padding: 0, fontFamily: 'inherit' }}>×</button></span>)}</div>}
+          </div>
+          {teamList.length > 0 && (
+            <div>
+              <p style={legend}>Team on card</p>
+              {teamList.map(([t, n]) => <label key={t} style={lbl}><input type="checkbox" checked={!teams || teams.has(t)} onChange={() => toggleIn(setTeams, teams, t, teamList.map(x => x[0]))} style={cb} /><span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{t}</span><span style={cnt}>{n.toLocaleString()}</span></label>)}
+            </div>
+          )}
+        </aside>
+
+        <div style={{ flex: '999 1 520px', minWidth: 0, display: 'flex', flexDirection: 'column', gap: 14 }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
+            <span style={{ ...condensed, fontSize: 22, fontWeight: 800, textTransform: 'uppercase' }}>{shard ? filtered.length.toLocaleString() : '…'} cards <span style={{ color: '#666', fontSize: 16 }}>in {new Set(filtered.map(r => r.slug)).size.toLocaleString()} sets</span></span>
+            <div style={{ display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap' }}>
+              <div role="group" aria-label="Group results" style={{ display: 'inline-flex', border: '1px solid #2a2a2a', borderRadius: 8, overflow: 'hidden' }}>
+                {[['set', 'By set'], ['season', 'By season'], ['flat', 'Flat list']].map(([k, l]) => <button key={k} onClick={() => setGroup(k)} style={{ background: group === k ? GOLD : '#141414', color: group === k ? '#111' : '#bbb', border: 'none', padding: '0 12px', height: 36, fontSize: 12, fontWeight: 700, cursor: 'pointer', fontFamily: 'inherit' }}>{l}</button>)}
+              </div>
+              <select aria-label="Sort" value={sort} onChange={(e) => setSort(e.target.value)} style={selectStyle}><option value="newest">Newest first</option><option value="oldest">Oldest first</option><option value="rarest">Rarest first</option><option value="set">Set A–Z</option></select>
+            </div>
+          </div>
+
+          {years.length > 1 && (
+            <div aria-label="Cards per season" style={{ display: 'flex', gap: 3, alignItems: 'flex-end', height: 58, padding: '0 2px' }}>
+              {years.map(y => { const n = facets.years.get(y); const active = y >= yearFrom && y <= yearTo; return (
+                <button key={y} onClick={() => { setYearFrom(y); setYearTo(y) }} title={n + ' cards'} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4, background: 'none', border: 'none', padding: 0, cursor: 'pointer', fontFamily: 'inherit' }}>
+                  <span style={{ width: '100%', height: 6 + Math.round(38 * n / maxYearCount), background: active ? (yearFrom === yearTo && yearFrom === y ? GOLD : '#3a3a3a') : '#1e1e1e', borderRadius: '3px 3px 0 0' }} />
+                  <span style={{ fontSize: 9.5, color: active ? '#999' : '#555' }}>{String(y).slice(2)}</span>
+                </button>) })}
+            </div>
+          )}
+
+          {!shard ? <p style={{ color: '#666' }}>Loading {player.name}…</p> : groups ? (
+            <>
+              {groups.slice(0, limit).map((g, gi) => {
+                const open = expanded.has(g.key) || (gi === 0 && expanded.size === 0)
+                const all = showAll.has(g.key)
+                const c = SPORT_COLORS[g.sport] || GOLD
+                return (
+                  <article key={g.key} style={{ border: '1px solid #262626', borderRadius: 14, overflow: 'hidden', background: '#0f0f0f' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 14, padding: '12px 16px', background: open ? '#151515' : '#0f0f0f', flexWrap: 'wrap' }}>
+                      <span style={{ width: 4, height: 36, background: c, borderRadius: 2 }} />
+                      <div style={{ flex: 1, minWidth: 200 }}>
+                        {group === 'set' ? <button onClick={() => onOpenSet(g.slug)} style={{ ...condensed, fontSize: 20, fontWeight: 800, textTransform: 'uppercase', background: 'none', border: 'none', color: '#f2f0ec', cursor: 'pointer', padding: 0, textAlign: 'left' }}>{g.title}</button>
+                          : <span style={{ ...condensed, fontSize: 20, fontWeight: 800, textTransform: 'uppercase' }}>{g.title}</span>}
+                        <p style={{ margin: '2px 0 0', color: '#888', fontSize: 12 }}>{group === 'set' ? g.brand + ' · ' : ''}{g.rows.length} card{g.rows.length === 1 ? '' : 's'} in {g.sections.size} section{g.sections.size === 1 ? '' : 's'}</p>
+                      </div>
+                      <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+                        {g.rc > 0 && <Chip color="#4ade80">{g.rc} RC</Chip>}
+                        {g.au > 0 && <Chip color="#9a9a9a">{g.au} auto{g.au === 1 ? '' : 's'}</Chip>}
+                        {g.patch > 0 && <Chip color="#9a9a9a">{g.patch} patch{g.patch === 1 ? '' : 'es'}</Chip>}
+                        {g.one > 0 && <Chip>{g.one} × 1/1</Chip>}
+                      </div>
+                      <button aria-label={open ? 'Collapse' : 'Expand'} aria-expanded={open} onClick={() => setExpanded(s => { const n = new Set(s); if (n.has(g.key)) n.delete(g.key); else n.add(g.key); if (gi === 0 && s.size === 0) { /* first opens by default */ n.add('__init'); if (open) n.delete(g.key) } return n })}
+                        style={{ background: 'none', border: '1px solid #2c2c2c', color: '#999', borderRadius: 8, width: 36, height: 36, cursor: 'pointer', fontSize: 16, fontFamily: 'inherit' }}>{open ? '▾' : '▸'}</button>
+                    </div>
+                    {open && (
+                      <>
+                        <div style={{ overflowX: 'auto' }}>
+                          <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 13.5, minWidth: group === 'season' ? 760 : 560 }}>
+                            <thead><tr>{group === 'season' && <><th style={th}>Season</th><th style={th}>Set</th></>}<th style={th}>Card #</th><th style={th}>Section</th><th style={th}>Type</th><th style={{ ...th, textAlign: 'right' }}>Run</th><th style={{ ...th, textAlign: 'right' }}>Want</th></tr></thead>
+                            <tbody>{(all ? g.rows : g.rows.slice(0, 12)).map((r, i) => <Row key={i} r={r} withSet={group === 'season'} />)}</tbody>
+                          </table>
+                        </div>
+                        {g.rows.length > 12 && !all && <div style={{ padding: '10px 16px', borderTop: '1px solid #1f1f1f' }}><button onClick={() => setShowAll(s => new Set([...s, g.key]))} style={{ background: 'none', border: 'none', color: GOLD, fontSize: 12.5, fontWeight: 600, cursor: 'pointer', padding: 0, fontFamily: 'inherit' }}>Show all {g.rows.length} cards →</button></div>}
+                      </>
+                    )}
+                  </article>
+                )
+              })}
+              {groups.length > limit && <div style={{ textAlign: 'center', padding: 8 }}><button onClick={() => setLimit(l => l + 40)} style={btn(false)}>Load {Math.min(40, groups.length - limit)} more {group === 'season' ? 'seasons' : 'sets'} ({groups.length - limit} left)</button></div>}
+              {groups.length === 0 && <p style={{ color: '#666' }}>No cards match these filters.</p>}
+            </>
+          ) : (
+            <div style={{ border: '1px solid #262626', borderRadius: 14, overflow: 'hidden', background: '#0f0f0f' }}>
+              <div style={{ overflowX: 'auto' }}>
+                <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 13.5, minWidth: 820 }}>
+                  <thead><tr style={{ background: '#151515' }}><th style={th}>Season</th><th style={th}>Set</th><th style={th}>Card #</th><th style={th}>Section / parallel</th><th style={th}>Type</th><th style={{ ...th, textAlign: 'right' }}>Run</th><th style={{ ...th, textAlign: 'right' }}>Want</th></tr></thead>
+                  <tbody>{sorted.slice(0, limit * 5).map((r, i) => <Row key={i} r={r} withSet />)}</tbody>
+                </table>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '12px 16px', borderTop: '1px solid #1f1f1f', flexWrap: 'wrap', gap: 8 }}>
+                <span style={{ color: '#777', fontSize: 12.5 }}>Showing {Math.min(limit * 5, sorted.length).toLocaleString()} of {sorted.length.toLocaleString()}</span>
+                {sorted.length > limit * 5 && <button onClick={() => setLimit(l => l + 40)} style={btn(false)}>Load more</button>}
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+export function seasonLabel(y, sport) {
+  if (!y) return ''
+  return /Hockey|Basketball/.test(sport || '') ? (y - 1) + '-' + String(y).slice(2) : String(y)
+}
+const legend = { color: '#777', fontSize: 11, fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase', margin: '0 0 8px' }
+const lbl = { display: 'flex', alignItems: 'center', gap: 10, fontSize: 13.5, color: '#ddd', minHeight: 30, cursor: 'pointer' }
+const cb = { accentColor: GOLD, width: 16, height: 16, flexShrink: 0 }
+const cnt = { marginLeft: 'auto', color: '#666', fontSize: 12 }
+
+// ---------- My Players panel (used from the set page + a standalone view) ----------
+export function MyPlayersPanel({ myPlayers, onOpenPlayer, dirPlayers }) {
+  const [dir, setDir] = useState(null)
+  useEffect(() => { loadPlayerDir().then(setDir) }, [])
+  const resolve = (name) => dir ? dir.players.findIndex(p => p[0] === name) : -1
+  return (
+    <div style={{ background: 'linear-gradient(140deg, #1a1512, #0e0e0e)', border: '1px solid ' + GOLD + '33', borderRadius: 18, padding: '26px 28px' }}>
+      <h1 style={{ ...condensed, fontSize: 36, fontWeight: 800, textTransform: 'uppercase', margin: 0, lineHeight: 1 }}>My Players</h1>
+      <p style={{ color: '#aaa', fontSize: 14.5, lineHeight: 1.6, maxWidth: 680, margin: '12px 0 0' }}>The players you collect. They become a one-click filter on every set page, and each one has a full player page with every card, parallel and print run.</p>
+      {myPlayers.list.length === 0 ? <p style={{ color: '#777', fontSize: 14, marginTop: 18 }}>No players yet — search for a player and hit <strong style={{ color: GOLD }}>Collect this player</strong>.</p> : (
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: 12, marginTop: 20 }}>
+          {myPlayers.list.map(name => {
+            const i = resolve(name); const p = i >= 0 ? dir.players[i] : null
+            const sport = p ? dir.sports[p[3]] : ''
+            return (
+              <div key={name} style={{ background: '#0f0f0f', border: '1px solid #262626', borderRadius: 14, padding: '14px 16px', display: 'flex', gap: 12, alignItems: 'center' }}>
+                <Initials name={name} color={SPORT_COLORS[sport] || GOLD} />
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <button onClick={() => onOpenPlayer(name)} style={{ ...condensed, fontSize: 19, fontWeight: 800, textTransform: 'uppercase', background: 'none', border: 'none', color: '#f2f0ec', cursor: 'pointer', padding: 0, textAlign: 'left', lineHeight: 1.05 }}>{name}</button>
+                  <p style={{ margin: '3px 0 0', color: '#888', fontSize: 12 }}>{p ? sport + ' · ' + p[2].toLocaleString() + ' cards' : '…'}</p>
+                </div>
+                <button aria-label={'Remove ' + name} onClick={() => myPlayers.toggle(name)} style={{ background: 'none', border: '1px solid #2c2c2c', color: '#777', borderRadius: 8, width: 32, height: 32, cursor: 'pointer', fontFamily: 'inherit' }}>×</button>
+              </div>
+            )
+          })}
+        </div>
+      )}
+    </div>
+  )
+}
