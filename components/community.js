@@ -280,6 +280,12 @@ export function CommunityView({ account, indexSets, onOpenAuth }) {
   const [grails, setGrails] = useState([])
   const [openComments, setOpenComments] = useState({})
   const [commentDraft, setCommentDraft] = useState({})
+  const [postErr, setPostErr] = useState('')
+  const [commentErr, setCommentErr] = useState({})
+  // Posts and comments need a username (forum rows reference the profile). People who
+  // sign in through GrailFindr never saw the "Pick a username" step, so ask here
+  // instead of letting the insert fail and silently throwing away their post.
+  const needName = () => { if (profile) return false; setPostErr('Pick a username first — it’s how you appear in the community. Your post is still here.'); onOpenAuth(); return true }
 
   useEffect(() => { forumFeed().then(setFeed); grailSets().then(setGrails) }, [])
   const setMatches = useMemo(() => {
@@ -289,9 +295,12 @@ export function CommunityView({ account, indexSets, onOpenAuth }) {
   }, [setQuery, indexSets])
 
   async function submit() {
-    if (!postTitle.trim()) return
+    setPostErr('')
+    if (!postTitle.trim()) { setPostErr('Add a title first.'); return }
+    if (needName()) return
     const g = chosenSet ? grails.find(x => x.set_slug === chosenSet.slug) : null
-    await createPost(session.user.id, { title: postTitle.trim(), body: body.trim() || null, set_slug: chosenSet?.slug || null, achievement: ach, grail_tier: g ? g.tier : null })
+    const r = await createPost(session.user.id, { title: postTitle.trim(), body: body.trim() || null, set_slug: chosenSet?.slug || null, achievement: ach, grail_tier: g ? g.tier : null })
+    if (r?.error) { setPostErr('Couldn’t post: ' + r.error.message + '. Your draft is still here.'); return }
     if (g && g.notify && ach === 'set-completion') await notifyGrailCompletion(session.user.id, profile?.username || 'unknown', chosenSet.slug, chosenSet.name, g.tier)
     setPostTitle(''); setBody(''); setChosenSet(null); setSetQuery(''); setComposing(false)
     forumFeed().then(setFeed)
@@ -335,6 +344,7 @@ export function CommunityView({ account, indexSets, onOpenAuth }) {
               )}
             </div>
             <textarea style={{ ...input, minHeight: 90, resize: 'vertical' }} placeholder="Tell the story — how long it took, the last card you needed…" value={body} onChange={(e) => setBody(e.target.value)} />
+            {postErr && <p role="alert" style={{ color: '#f87171', fontSize: 13, margin: 0 }}>{postErr}</p>}
             <button style={{ ...btnAccent, justifySelf: 'start' }} onClick={submit}>Post it</button>
           </div>
         </div>
@@ -387,12 +397,16 @@ export function CommunityView({ account, indexSets, onOpenAuth }) {
                         <input style={{ ...input, padding: '8px 12px' }} placeholder="Add a comment…" value={commentDraft[p.id] || ''} onChange={(e) => setCommentDraft({ ...commentDraft, [p.id]: e.target.value })} />
                         <button style={{ ...btnGhost }} onClick={async () => {
                           const t = (commentDraft[p.id] || '').trim(); if (!t) return
-                          await addComment(p.id, session.user.id, t)
+                          if (needName()) return
+                          const r = await addComment(p.id, session.user.id, t)
+                          if (r?.error) { setCommentErr(e => ({ ...e, [p.id]: 'Couldn’t comment: ' + r.error.message })); return }
+                          setCommentErr(e => ({ ...e, [p.id]: '' }))
                           setCommentDraft({ ...commentDraft, [p.id]: '' })
                           const cs = await comments(p.id); setOpenComments(o => ({ ...o, [p.id]: cs }))
                         }}>Post</button>
                       </div>
                     )}
+                    {commentErr[p.id] && <p role="alert" style={{ color: '#f87171', fontSize: 13, margin: '6px 0 0' }}>{commentErr[p.id]}</p>}
                   </div>
                 )}
               </div>
