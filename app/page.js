@@ -414,7 +414,13 @@ export default function Home() {
     const parsed = parseQueryFor(dir, q)
     if (parsed.player.length >= 2) {
       const hits = matchPlayers(dir, parsed.player, 8)
-      if (hits.length) { setSearching(false); openPlayer(hits[0], parsed, hits); return }
+      // A product word ("prizm", "gold", "topps chrome 2024") shouldn't jump to a
+      // 2-card "player": if set names match and the best player is minor or a
+      // typo guess, show the results page (players + sets) instead.
+      const toks = norm(q).split(' ').filter(Boolean)
+      const setMatch = toks.length && sets.some(x => { const n = norm(x.name); return toks.every(t => n.includes(t)) })
+      const weak = !hits.length || hits[0].fuzzy || hits[0].cards < 50
+      if (hits.length && !(setMatch && weak)) { setSearching(false); openPlayer(hits[0], parsed, hits); return }
     }
     setSearching(false)
     await runGlobalSearch(q)
@@ -652,6 +658,14 @@ export default function Home() {
     if (s) { setView('browse'); openSet(s) }
   }
   const searchFor = (name) => { setQuery(name); runSearch(name) }
+  // Tab / history title per view (shared links and browser history read better).
+  useEffect(() => {
+    const t = activeSet ? (setData ? setData.name : activeSet.name) + ' Checklist'
+      : view === 'player' && activePlayer ? activePlayer.name + ' Cards'
+      : globalHits ? 'Search: ' + query
+      : view === 'community' ? 'Community' : view === 'collection' ? 'My Collection' : view === 'myplayers' ? 'My Players' : ''
+    document.title = t ? t + ' — CardHQ' : 'CardHQ — Sports Card & TCG Checklists'
+  }, [activeSet, setData, view, activePlayer, globalHits])
   // Deep links and Back/Forward: ?player=Name[&q=raw] · ?set=slug · ?view=community · ?search=term
   const applyUrl = () => {
     const sp = new URLSearchParams(location.search)

@@ -1,6 +1,10 @@
+const DESCRIPTION = 'Complete checklists for 5,000+ sports card and TCG sets — every base card, insert, parallel and print run. Search any player, track your wantlist and collection.'
 export const metadata = {
-  title: 'Card HQ — Sports Card Checklists',
-  description: 'Searchable sports card checklist database: baseball, football, basketball, hockey and soccer sets.',
+  metadataBase: new URL('https://cardhq.vercel.app'),
+  title: 'CardHQ — Sports Card & TCG Checklists',
+  description: DESCRIPTION,
+  openGraph: { title: 'CardHQ — Sports Card & TCG Checklists', description: DESCRIPTION, siteName: 'CardHQ', type: 'website', url: '/', images: ['/apple-icon.png'] },
+  twitter: { card: 'summary', title: 'CardHQ — Sports Card & TCG Checklists', description: DESCRIPTION, images: ['/apple-icon.png'] },
 }
 
 export const viewport = {
