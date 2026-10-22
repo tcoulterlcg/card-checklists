@@ -62,7 +62,7 @@ export function useMyPlayers(account) {
 function Chip({ children, color, solid, onClick, active }) {
   const c = color || ACCENT
   const style = {
-    display: 'inline-flex', alignItems: 'center', gap: 6, padding: '4px 10px', borderRadius: 999, fontSize: 11, fontWeight: 700,
+    display: 'inline-flex', alignItems: 'center', gap: 6, padding: '4px 10px', borderRadius: 999, fontSize: 12, fontWeight: 700,
     letterSpacing: '0.06em', textTransform: 'uppercase', whiteSpace: 'nowrap',
     background: solid || active ? c : 'transparent', color: solid || active ? '#0F1320' : c, border: '1px solid ' + c + (solid || active ? '' : '66'),
     cursor: onClick ? 'pointer' : 'default', fontFamily: 'inherit'
@@ -83,7 +83,7 @@ export function MemChip({ code }) {
   const label = { GU: 'Game-used', PW: 'Player-worn', EW: 'Event-worn', MX: 'Varies', MFG: 'Manufactured', UNK: 'Unknown' }[k]
   const c = MEM_COLORS[k]
   return <span title={MEM_TIP[k] + (typical ? ' Based on the maker\'s standard practice for this line, not stated on this specific card.' : '')}
-    style={{ display: 'inline-flex', alignItems: 'center', gap: 5, padding: '3px 9px', borderRadius: 999, fontSize: 11, fontWeight: 700, whiteSpace: 'nowrap', color: c, border: '1px ' + (typical ? 'dashed ' : 'solid ') + c + (k === 'UNK' ? '55' : '99'), background: k === 'GU' ? c + '14' : 'transparent' }}>
+    style={{ display: 'inline-flex', alignItems: 'center', gap: 5, padding: '3px 9px', borderRadius: 999, fontSize: 12, fontWeight: 700, whiteSpace: 'nowrap', color: c, border: '1px ' + (typical ? 'dashed ' : 'solid ') + c + (k === 'UNK' ? '55' : '99'), background: k === 'GU' ? c + '14' : 'transparent' }}>
     {k === 'GU' && <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" aria-hidden="true"><path d="m5 12 5 5L20 7" /></svg>}
     {label}{typical ? '*' : ''}
   </span>
@@ -100,7 +100,7 @@ export function MemBadge({ mem }) {
 }
 function TypeChip({ t }) { const l = typeLabel(t); return <Chip color={TYPE_COLORS[l] || '#9ca3af'}>{l}</Chip> }
 function Serial({ s }) {
-  if (s === 1) return <span style={{ background: ACCENT, color: '#fff', padding: '2px 8px', borderRadius: 999, fontSize: 11, fontWeight: 800 }}>1/1</span>
+  if (s === 1) return <span style={{ background: ACCENT, color: '#fff', padding: '2px 8px', borderRadius: 999, fontSize: 12, fontWeight: 700 }}>1/1</span>
   if (s > 0) return <span style={{ fontVariantNumeric: 'tabular-nums', fontWeight: 600 }}>/{s}</span>
   return <span style={{ color: '#6B7080' }}>—</span>
 }
@@ -192,7 +192,7 @@ export function Omnibox({ value, onChange, onSubmit, onPickPlayer, onPickSet, se
                 <span style={{ fontWeight: 600, fontSize: 14 }}>{hl(it.p.name)}</span>
                 <span style={{ display: 'block', color: '#8A8A93', fontSize: 12 }}>{it.p.sport} · {it.p.cards.toLocaleString()} cards · {it.p.minYear}{it.p.maxYear !== it.p.minYear ? '–' + it.p.maxYear : ''}</span>
               </span>
-              {sel === i && <span style={{ color: '#6B7080', fontSize: 11 }}>↵</span>}
+              {sel === i && <span style={{ color: '#6B7080', fontSize: 12 }}>↵</span>}
             </button>
           ) : (
             <button key={'s' + it.s.slug} role="option" aria-selected={sel === i} onMouseEnter={() => setSel(i)} onClick={() => go(i)}
@@ -348,7 +348,7 @@ export function PlayerPage({ player, parsed, sets, onOpenSet, myPlayers, onWant,
   const Row = ({ r, withSet }) => (
     <tr style={{ borderTop: '1px solid #1a1a1a' }}>
       {withSet && <td style={{ padding: '9px 12px', color: '#A1A1AA', fontVariantNumeric: 'tabular-nums', whiteSpace: 'nowrap' }}>{seasonLabel(r.year, r.sport)}</td>}
-      {withSet && <td style={{ padding: '9px 12px' }}><button onClick={() => onOpenSet(r.slug)} style={{ background: 'none', border: 'none', color: '#EDEDEF', fontWeight: 600, cursor: 'pointer', padding: 0, textAlign: 'left', fontFamily: 'inherit', fontSize: 13.5 }}>{r.set.replace(/^\d{4}(-\d{2})?\s*/, '')}</button></td>}
+      {withSet && <td style={{ padding: '9px 12px' }}><button onClick={() => onOpenSet(r.slug)} style={{ background: 'none', border: 'none', color: '#EDEDEF', fontWeight: 600, cursor: 'pointer', padding: 0, textAlign: 'left', fontFamily: 'inherit', fontSize: 14 }}>{r.set.replace(/^\d{4}(-\d{2})?\s*/, '')}</button></td>}
       <td style={{ padding: '9px 12px', color: ACCENT_TEXT, fontWeight: 700, fontVariantNumeric: 'tabular-nums', whiteSpace: 'nowrap' }}>{r.n ? '#' + r.n : '—'}</td>
       <td style={{ padding: '9px 12px' }}>{r.section}</td>
       <td style={{ padding: '9px 12px' }}><TypeChip t={r.type} /></td>
@@ -357,7 +357,7 @@ export function PlayerPage({ player, parsed, sets, onOpenSet, myPlayers, onWant,
       <td style={{ padding: '9px 12px', textAlign: 'right' }}><button aria-label={'Add #' + r.n + ' ' + r.section + ' to wantlist'} onClick={() => onWant({ set_slug: r.slug, set_name: r.set, card_n: r.n, section: r.section, player: player.name })} style={{ background: 'none', border: '1px solid #232A3E', color: '#A1A1AA', borderRadius: 6, width: 32, height: 32, cursor: 'pointer', fontFamily: 'inherit' }}>+</button></td>
     </tr>
   )
-  const th = { padding: '9px 12px', fontWeight: 700, textAlign: 'left', fontSize: 11, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#8A8A93', whiteSpace: 'nowrap' }
+  const th = { padding: '9px 12px', fontWeight: 700, textAlign: 'left', fontSize: 12, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#8A8A93', whiteSpace: 'nowrap' }
 
   return (
     <section>
@@ -365,7 +365,7 @@ export function PlayerPage({ player, parsed, sets, onOpenSet, myPlayers, onWant,
       {candidates && candidates.length > 1 && (
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center', margin: '0 0 14px' }}>
           <span style={{ ...eyebrow, color: '#6B7080' }}>Also matches</span>
-          {candidates.filter(c => c.id !== player.id).slice(0, 6).map(c => <button key={c.id} onClick={() => onPickCandidate(c)} style={{ background: '#121626', color: '#D4D4D8', border: '1px solid #232A3E', padding: '6px 11px', borderRadius: 999, fontSize: 12.5, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit' }}>{c.name} <span style={{ color: '#8A8A93' }}>· {c.cards.toLocaleString()}</span></button>)}
+          {candidates.filter(c => c.id !== player.id).slice(0, 6).map(c => <button key={c.id} onClick={() => onPickCandidate(c)} style={{ background: '#121626', color: '#D4D4D8', border: '1px solid #232A3E', padding: '6px 11px', borderRadius: 999, fontSize: 13, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit' }}>{c.name} <span style={{ color: '#8A8A93' }}>· {c.cards.toLocaleString()}</span></button>)}
         </div>
       )}
 
@@ -415,7 +415,7 @@ export function PlayerPage({ player, parsed, sets, onOpenSet, myPlayers, onWant,
             <span style={{ display: 'inline-flex', gap: 14, alignItems: 'center' }}>
               <button onClick={resetAll} style={{ background: 'none', border: 'none', color: ACCENT_TEXT, fontSize: 12, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit', padding: '6px 0' }}>Reset</button>
               <button className="hq-filters-toggle" aria-expanded={filtersOpen} onClick={() => setFiltersOpen(o => !o)}
-                style={{ background: '#1a1a1a', border: '1px solid #232A3E', color: '#D4D4D8', borderRadius: 8, height: 34, padding: '0 12px', fontSize: 12.5, fontWeight: 700, cursor: 'pointer', fontFamily: 'inherit', alignItems: 'center' }}>{filtersOpen ? 'Hide ▴' : 'Show ▾'}</button>
+                style={{ background: '#1a1a1a', border: '1px solid #232A3E', color: '#D4D4D8', borderRadius: 8, height: 34, padding: '0 12px', fontSize: 13, fontWeight: 700, cursor: 'pointer', fontFamily: 'inherit', alignItems: 'center' }}>{filtersOpen ? 'Hide ▴' : 'Show ▾'}</button>
             </span>
           </div>
           <div>
@@ -482,7 +482,7 @@ export function PlayerPage({ player, parsed, sets, onOpenSet, myPlayers, onWant,
               {years.map(y => { const n = facets.years.get(y); const active = y >= yearFrom && y <= yearTo; return (
                 <button key={y} onClick={() => { setYearFrom(y); setYearTo(y) }} title={n + ' cards'} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4, background: 'none', border: 'none', padding: 0, cursor: 'pointer', fontFamily: 'inherit' }}>
                   <span style={{ width: '100%', height: 6 + Math.round(38 * n / maxYearCount), background: active ? (yearFrom === yearTo && yearFrom === y ? ACCENT : '#2E3D6B') : '#1A1F31', borderRadius: '3px 3px 0 0' }} />
-                  <span style={{ fontSize: 9.5, color: active ? '#A1A1AA' : '#6B7080' }}>{String(y).slice(2)}</span>
+                  <span style={{ fontSize: 12, color: active ? '#A1A1AA' : '#6B7080' }}>{String(y).slice(2)}</span>
                 </button>) })}
             </div>
           )}
@@ -516,12 +516,12 @@ export function PlayerPage({ player, parsed, sets, onOpenSet, myPlayers, onWant,
                     {open && (
                       <>
                         <div style={{ overflowX: 'auto' }}>
-                          <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 13.5, minWidth: group === 'season' ? 760 : 560 }}>
+                          <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14, minWidth: group === 'season' ? 760 : 560 }}>
                             <thead><tr>{group === 'season' && <><th style={th}>Season</th><th style={th}>Set</th></>}<th style={th}>Card #</th><th style={th}>Section</th><th style={th}>Type</th><th style={th}>Material</th><th style={{ ...th, textAlign: 'right' }}>Run</th><th style={{ ...th, textAlign: 'right' }}>Want</th></tr></thead>
                             <tbody>{(all ? g.rows : g.rows.slice(0, 12)).map((r, i) => <Row key={i} r={r} withSet={group === 'season'} />)}</tbody>
                           </table>
                         </div>
-                        {g.rows.length > 12 && !all && <div style={{ padding: '10px 16px', borderTop: '1px solid #1f1f1f' }}><button onClick={() => setShowAll(s => new Set([...s, g.key]))} style={{ background: 'none', border: 'none', color: ACCENT_TEXT, fontSize: 12.5, fontWeight: 600, cursor: 'pointer', padding: 0, fontFamily: 'inherit' }}>Show all {g.rows.length} cards →</button></div>}
+                        {g.rows.length > 12 && !all && <div style={{ padding: '10px 16px', borderTop: '1px solid #1f1f1f' }}><button onClick={() => setShowAll(s => new Set([...s, g.key]))} style={{ background: 'none', border: 'none', color: ACCENT_TEXT, fontSize: 13, fontWeight: 600, cursor: 'pointer', padding: 0, fontFamily: 'inherit' }}>Show all {g.rows.length} cards →</button></div>}
                       </>
                     )}
                   </article>
@@ -533,13 +533,13 @@ export function PlayerPage({ player, parsed, sets, onOpenSet, myPlayers, onWant,
           ) : (
             <div style={{ border: '1px solid #232A3E', borderRadius: 14, overflow: 'hidden', background: '#0F1320' }}>
               <div style={{ overflowX: 'auto' }}>
-                <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 13.5, minWidth: 820 }}>
+                <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14, minWidth: 820 }}>
                   <thead><tr style={{ background: '#121626' }}><th style={th}>Season</th><th style={th}>Set</th><th style={th}>Card #</th><th style={th}>Section / parallel</th><th style={th}>Type</th><th style={th}>Material</th><th style={{ ...th, textAlign: 'right' }}>Run</th><th style={{ ...th, textAlign: 'right' }}>Want</th></tr></thead>
                   <tbody>{sorted.slice(0, limit * 5).map((r, i) => <Row key={i} r={r} withSet />)}</tbody>
                 </table>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '12px 16px', borderTop: '1px solid #1f1f1f', flexWrap: 'wrap', gap: 8 }}>
-                <span style={{ color: '#8A8A93', fontSize: 12.5 }}>Showing {Math.min(limit * 5, sorted.length).toLocaleString()} of {sorted.length.toLocaleString()}</span>
+                <span style={{ color: '#8A8A93', fontSize: 13 }}>Showing {Math.min(limit * 5, sorted.length).toLocaleString()} of {sorted.length.toLocaleString()}</span>
                 {sorted.length > limit * 5 && <button onClick={() => setLimit(l => l + 40)} style={btn(false)}>Load more</button>}
               </div>
             </div>
@@ -554,8 +554,8 @@ export function seasonLabel(y, sport) {
   if (!y) return ''
   return /Hockey|Basketball/.test(sport || '') ? (y - 1) + '-' + String(y).slice(2) : String(y)
 }
-const legend = { color: '#8A8A93', fontSize: 11, fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase', margin: '0 0 8px' }
-const lbl = { display: 'flex', alignItems: 'center', gap: 10, fontSize: 13.5, color: '#D4D4D8', minHeight: 30, cursor: 'pointer' }
+const legend = { color: '#8A8A93', fontSize: 12, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', margin: '0 0 8px' }
+const lbl = { display: 'flex', alignItems: 'center', gap: 10, fontSize: 14, color: '#D4D4D8', minHeight: 30, cursor: 'pointer' }
 const cb = { accentColor: ACCENT, width: 16, height: 16, flexShrink: 0 }
 const cnt = { marginLeft: 'auto', color: '#6B7080', fontSize: 12 }
 
@@ -566,8 +566,8 @@ export function MyPlayersPanel({ myPlayers, onOpenPlayer, dirPlayers }) {
   const resolve = (name) => dir ? dir.players.findIndex(p => p[0] === name) : -1
   return (
     <div className="hq-panel" style={{ background: 'linear-gradient(140deg, #0f1526, #0F1320)', border: '1px solid ' + ACCENT + '33', borderRadius: 18, padding: '26px 28px' }}>
-      <h1 style={{ ...display, fontSize: 36, margin: 0, lineHeight: 1 }}>My Players</h1>
-      <p style={{ color: '#aaa', fontSize: 14.5, lineHeight: 1.6, maxWidth: 680, margin: '12px 0 0' }}>The players you collect. They become a one-click filter on every set page, and each one has a full player page with every card, parallel and print run.</p>
+      <h1 style={{ ...display, fontSize: 40, margin: 0, lineHeight: 1 }}>My Players</h1>
+      <p style={{ color: '#aaa', fontSize: 14, lineHeight: 1.6, maxWidth: 680, margin: '12px 0 0' }}>The players you collect. They become a one-click filter on every set page, and each one has a full player page with every card, parallel and print run.</p>
       {myPlayers.list.length === 0 ? <p style={{ color: '#8A8A93', fontSize: 14, marginTop: 18 }}>No players yet — search for a player and hit <strong style={{ color: ACCENT_TEXT }}>Collect this player</strong>.</p> : (
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(240px, 100%), 1fr))', gap: 12, marginTop: 20 }}>
           {myPlayers.list.map(name => {
@@ -577,7 +577,7 @@ export function MyPlayersPanel({ myPlayers, onOpenPlayer, dirPlayers }) {
               <div key={name} style={{ background: '#0F1320', border: '1px solid #232A3E', borderRadius: 14, padding: '14px 16px', display: 'flex', gap: 12, alignItems: 'center' }}>
                 <Initials name={name} color={SPORT_COLORS[sport] || ACCENT} />
                 <div style={{ flex: 1, minWidth: 0 }}>
-                  <button onClick={() => onOpenPlayer(name)} style={{ ...title(15), background: 'none', border: 'none', color: '#EDEDEF', cursor: 'pointer', padding: 0, textAlign: 'left', lineHeight: 1.05 }}>{name}</button>
+                  <button onClick={() => onOpenPlayer(name)} style={{ ...title(16), background: 'none', border: 'none', color: '#EDEDEF', cursor: 'pointer', padding: 0, textAlign: 'left', lineHeight: 1.05 }}>{name}</button>
                   <p style={{ margin: '3px 0 0', color: '#8A8A93', fontSize: 12 }}>{p ? sport + ' · ' + p[2].toLocaleString() + ' cards' : '…'}</p>
                 </div>
                 <button aria-label={'Remove ' + name} onClick={() => myPlayers.toggle(name)} style={{ background: 'none', border: '1px solid #232A3E', color: '#8A8A93', borderRadius: 8, width: 32, height: 32, cursor: 'pointer', fontFamily: 'inherit' }}>×</button>
