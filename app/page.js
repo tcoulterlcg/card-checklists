@@ -12,6 +12,16 @@ import { parseQuery, matchPlayers, TYPE, typeLabel, TYPE_COLORS, serialLabel } f
 const GOLD = '#d4a843'
 const condensed = { fontFamily: "'Barlow Condensed', 'Arial Narrow', sans-serif" }
 
+// Card HQ mark (logo option 7f, "Scan C"): viewfinder corner brackets framing a blue C.
+function ScanCMark({ size = 30, bracket = '#f2f0ec', accent = '#2563eb' }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 96 96" aria-hidden="true">
+      <path d="M14 32V14h18M64 14h18v18M82 64v18H64M32 82H14V64" fill="none" stroke={bracket} strokeWidth="7" strokeLinecap="square" strokeLinejoin="miter" />
+      <path d="M61.4 34.6A19 19 0 1 0 61.4 61.4" fill="none" stroke={accent} strokeWidth="12" />
+    </svg>
+  )
+}
+
 // Instagram post embeds (Patch Swaps gallery). Renders official IG blockquote
 // embeds and loads embed.js once; process() upgrades them into full post cards
 // with the actual swapped-card photos.
@@ -543,13 +553,9 @@ export default function Home() {
       <style>{'.hq-setcard:hover{transform:translateY(-4px);border-color:#3a3a3a;box-shadow:0 18px 40px -18px rgba(0,0,0,0.9)}@keyframes hqticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}.hq-track{display:inline-flex;white-space:nowrap;animation:hqticker linear infinite}.hq-track:hover{animation-play-state:paused}'}</style>
       {/* NAV */}
       <nav style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '22px 0', flexWrap: 'wrap', gap: 12 }}>
-        {/* Nav logo — matches the hero CARD HQ lockup (fanned cards + wordmark) */}
+        {/* Nav logo — Scan C mark + wordmark */}
         <div onClick={goHome} style={{ display: 'inline-flex', alignItems: 'center', gap: 10, cursor: 'pointer' }}>
-          <svg width="30" height="30" viewBox="0 0 96 96" aria-hidden="true">
-            <g transform="rotate(-14 48 84)"><rect x="29" y="16" width="38" height="56" rx="5" fill="#0a0a0a" stroke={GOLD} strokeWidth="3.5" opacity="0.4" /></g>
-            <g transform="rotate(0 48 84)"><rect x="29" y="14" width="38" height="56" rx="5" fill="#0a0a0a" stroke={GOLD} strokeWidth="3.5" opacity="0.68" /></g>
-            <g transform="rotate(14 48 84)"><rect x="29" y="12" width="38" height="56" rx="5" fill="#0f0e0c" stroke={GOLD} strokeWidth="4" /><line x1="36" y1="54" x2="60" y2="54" stroke={GOLD} strokeWidth="3" strokeLinecap="round" opacity="0.55" /></g>
-          </svg>
+          <ScanCMark size={30} />
           <span style={{ ...condensed, fontSize: 26, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.02em', lineHeight: 1 }}>
             <span style={{ color: '#f2f0ec' }}>Card</span><span style={{ color: GOLD, marginLeft: 6 }}>HQ</span>
           </span>
@@ -578,13 +584,9 @@ export default function Home() {
             borderRadius: 20, overflow: 'hidden',
             background: 'radial-gradient(120% 100% at 50% 0%, rgba(212,168,67,0.08), rgba(10,10,10,0) 60%)'
           }}>
-            {/* CARD HQ logo — three fanned cards */}
+            {/* CARD HQ logo — Scan C mark */}
             <div style={{ display: 'inline-flex', alignItems: 'center', gap: 14, marginBottom: 24 }}>
-              <svg width="46" height="46" viewBox="0 0 96 96" aria-hidden="true">
-                <g transform="rotate(-14 48 84)"><rect x="29" y="16" width="38" height="56" rx="5" fill="#0a0a0a" stroke={GOLD} strokeWidth="3.5" opacity="0.4" /></g>
-                <g transform="rotate(0 48 84)"><rect x="29" y="14" width="38" height="56" rx="5" fill="#0a0a0a" stroke={GOLD} strokeWidth="3.5" opacity="0.68" /></g>
-                <g transform="rotate(14 48 84)"><rect x="29" y="12" width="38" height="56" rx="5" fill="#0f0e0c" stroke={GOLD} strokeWidth="4" /><line x1="36" y1="54" x2="60" y2="54" stroke={GOLD} strokeWidth="3" strokeLinecap="round" opacity="0.55" /></g>
-              </svg>
+              <ScanCMark size={46} />
               <div style={{ textAlign: 'left', lineHeight: 1 }}>
                 <div style={{ ...condensed, fontSize: 36, fontWeight: 800, letterSpacing: '1.5px', textTransform: 'uppercase' }}><span style={{ color: '#f2f0ec' }}>Card</span><span style={{ color: GOLD, marginLeft: 8 }}>HQ</span></div>
                 <div style={{ ...condensed, fontSize: 11, fontWeight: 600, letterSpacing: '5px', color: '#6f6c63', textTransform: 'uppercase', marginTop: 5 }}>Checklist Database</div>
