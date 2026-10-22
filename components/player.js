@@ -222,11 +222,14 @@ const quickFilter = { all: () => true, oneofone: r => r[5] === 1, rc: r => r[6] 
 export const PlayerPage = memo(PlayerPageInner, (a, b) => a.player === b.player && a.parsed === b.parsed && a.sets === b.sets && a.candidates === b.candidates && a.myPlayers.list === b.myPlayers.list && a.onWant === b.onWant)
 function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, onSearch, candidates, onPickCandidate }) {
   const [shard, setShard] = useState(null)
-  const [quick, setQuick] = useState('all')
-  const [group, setGroup] = useState('set')
-  const [sort, setSort] = useState('newest')
+  // View choices round-trip through the URL (?qv=rookies&group=season&sort=rarest&run=25),
+  // so Back from a set returns to the same view.
+  const urlp = () => { try { return new URLSearchParams(location.search) } catch { return new URLSearchParams() } }
+  const [quick, setQuick] = useState(() => urlp().get('qv') || 'all')
+  const [group, setGroup] = useState(() => urlp().get('group') || 'set')
+  const [sort, setSort] = useState(() => urlp().get('sort') || 'newest')
   const [types, setTypes] = useState(new Set()) // empty = any; checked boxes narrow
-  const [run, setRun] = useState('any') // any|1|10|25|99|numbered|unnumbered
+  const [run, setRun] = useState(() => urlp().get('run') || 'any') // any|1|10|25|99|numbered|unnumbered
   const [brands, setBrands] = useState(null) // null = all
   const [products, setProducts] = useState([])
   const [prodInput, setProdInput] = useState('')
@@ -241,11 +244,18 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
   const [statedOnly, setStatedOnly] = useState(false)
   const [filtersOpen, setFiltersOpen] = useState(false) // mobile only; desktop always shows filters
 
-  useEffect(() => { setShard(null); loadShard(player.shard).then(setShard); setQuick('all'); setExpanded(new Set()); setLimit(40) }, [player.id, player.shard])
+  useEffect(() => { setShard(null); loadShard(player.shard).then(setShard); setExpanded(new Set()); setLimit(40) }, [player.id, player.shard])
+  useEffect(() => {
+    const sp = urlp(); if (!sp.get('player')) return
+    const set = (k, v, dflt) => { if (v && v !== dflt) sp.set(k, v); else sp.delete(k) }
+    set('qv', quick, 'all'); set('group', group, 'set'); set('sort', sort, 'newest'); set('run', run, 'any')
+    const url = location.pathname + '?' + sp.toString()
+    if (url !== location.pathname + location.search) { try { history.replaceState(null, '', url) } catch {} }
+  }, [quick, group, sort, run])
   // When the query itself carries filters (1/1, auto…), start from them.
   useEffect(() => {
     if (!parsed) return
-    if (parsed.serial === 1) setRun('1'); else if (parsed.serialMax) setRun(String(parsed.serialMax)); else if (parsed.types.has('NUMBERED')) setRun('numbered'); else setRun('any')
+    if (parsed.serial === 1) setRun('1'); else if (parsed.serialMax) setRun(String(parsed.serialMax)); else if (parsed.types.has('NUMBERED')) setRun('numbered')
     setYearFrom(parsed.season || 0); setYearTo(parsed.season || 9999)
     setProducts(parsed.products.slice())
     setMems(parsed.mem ? new Set([parsed.mem]) : null)
