@@ -50,10 +50,13 @@ function InstagramEmbeds({ urls }) {
 const SPORT_COLORS = {
   Baseball: '#60a5fa', Football: '#4ade80', Basketball: '#f97316', Hockey: '#a78bfa', Soccer: '#f43f5e',
   UFC: '#dc2626', Boxing: '#eab308',
-  'Pokémon': '#facc15', 'Yu-Gi-Oh!': '#a855f7', Magic: '#f59e0b', Lorcana: '#8b5cf6', 'One Piece': '#ef4444', Disney: '#ec4899'
+  'Pokémon': '#facc15', 'Yu-Gi-Oh!': '#a855f7', Magic: '#f59e0b', Lorcana: '#8b5cf6', 'One Piece': '#ef4444', Disney: '#ec4899',
+  Entertainment: '#ec4899', 'Non-Sport': '#fb923c'
 }
 // Which categories are trading card games (vs traditional sports cards).
 const TCG_SET = new Set(['Pokémon', 'Yu-Gi-Oh!', 'Magic', 'Lorcana', 'One Piece', 'Disney'])
+// Non-sports, non-TCG cards (movies, TV, comics, toys, music, history…).
+const OTHER_SET = new Set(['Entertainment', 'Non-Sport'])
 const TCG_EXAMPLE = { 'Pokémon': 'Charizard', 'Yu-Gi-Oh!': 'Dark Magician', Magic: 'Lightning Bolt', Lorcana: 'Stitch', 'One Piece': 'Monkey.D.Luffy' }
 // "Stitch — Rock Star" / "Sanji (SP)" / "A-Ancestral Katana" -> base card name.
 const tcgBaseName = (p) => String(p || '').replace(/\s+[—–-]\s+.*$/, '').replace(/\s*\([^)]*\)\s*$/, '').replace(/^A-(?=\S)/, '').trim()
@@ -492,7 +495,8 @@ export default function Home() {
   const filteredSets = useMemo(() => {
     let list = taggedSets
     if (sportFilter === 'TCG') list = list.filter(s => TCG_SET.has(s.sport))
-    else if (sportFilter === 'Sports') list = list.filter(s => !TCG_SET.has(s.sport))
+    else if (sportFilter === 'Other') list = list.filter(s => OTHER_SET.has(s.sport))
+    else if (sportFilter === 'Sports') list = list.filter(s => !TCG_SET.has(s.sport) && !OTHER_SET.has(s.sport))
     else if (sportFilter !== 'All') list = list.filter(s => s.sport === sportFilter)
     if (brandFilter !== 'All') list = list.filter(s => s.brand === brandFilter)
     if (productFilter !== 'All') list = list.filter(s => s.product === productFilter)
@@ -501,7 +505,7 @@ export default function Home() {
     return list
   }, [taggedSets, sportFilter, brandFilter, productFilter, query, activeSet])
 
-  const oneSport = sportFilter !== 'All' && sportFilter !== 'Sports' && sportFilter !== 'TCG'
+  const oneSport = sportFilter !== 'All' && sportFilter !== 'Sports' && sportFilter !== 'TCG' && sportFilter !== 'Other'
 
   const isTcg = TCG_SET.has(sportFilter)
   const setIsTcg = !!(activeSet && TCG_SET.has(activeSet.sport))
@@ -756,7 +760,8 @@ export default function Home() {
 
           {/* FILTERS */}
           {(() => {
-            const sportCats = sports.filter(s => s !== 'All' && !TCG_SET.has(s))
+            const sportCats = sports.filter(s => s !== 'All' && !TCG_SET.has(s) && !OTHER_SET.has(s))
+            const otherCats = sports.filter(s => OTHER_SET.has(s))
             const tcgCats = sports.filter(s => TCG_SET.has(s))
             const pick = (v) => { setSportFilter(v); setBrandFilter('All'); setProductFilter('All'); setTeamFilter('All'); setTeamInput(''); setTeamBrowse(false); setTcgRarity('All'); setTcgType('All') }
             const chip = (label, value, color) => (
@@ -776,7 +781,7 @@ export default function Home() {
               <div style={{ margin: '38px 0 18px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', flexWrap: 'wrap', gap: 10, marginBottom: 16 }}>
                   <h2 style={{ ...title(20), margin: 0 }}>
-                    {productFilter !== 'All' ? productFilter + ' Sets' : sportFilter === 'All' ? 'Featured Sets' : sportFilter === 'TCG' ? 'Trading Card Games' : sportFilter === 'Sports' ? 'Sports Cards' : sportFilter + ' Sets'}
+                    {productFilter !== 'All' ? productFilter + ' Sets' : sportFilter === 'All' ? 'Featured Sets' : sportFilter === 'TCG' ? 'Trading Card Games' : sportFilter === 'Other' ? 'Other Cards' : sportFilter === 'Sports' ? 'Sports Cards' : sportFilter + ' Sets'}
                     {sets.length > 0 && <span style={{ color: LABEL, fontSize: 16, fontWeight: 500, marginLeft: 10 }}>{filteredSets.length.toLocaleString()}</span>}
                   </h2>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
@@ -804,6 +809,13 @@ export default function Home() {
                     <span style={{ ...eyebrow, color: '#6B7080', width: 42 }}>TCG</span>
                     {chip('All TCG', 'TCG', '#e879f9')}
                     {tcgCats.map(sp => chip(sp, sp, SPORT_COLORS[sp]))}
+                  </div>
+                )}
+                {otherCats.length > 0 && (
+                  <div className="hq-chiprow" style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap', paddingTop: 10, marginTop: 10, borderTop: '1px solid #1A1F31' }}>
+                    <span style={{ ...eyebrow, color: '#6B7080', width: 42 }}>Other</span>
+                    {chip('All Other', 'Other', '#fb923c')}
+                    {otherCats.map(sp => chip(sp, sp, SPORT_COLORS[sp]))}
                   </div>
                 )}
               </div>
@@ -880,7 +892,7 @@ export default function Home() {
             </div>
           )}
           {/* TEAM FILTER + SORT (after a specific sport is selected) */}
-          {oneSport && !isTcg && (
+          {oneSport && !isTcg && !OTHER_SET.has(sportFilter) && (
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap', marginBottom: 22 }}>
               <span style={{ ...eyebrow, color: '#6B7080' }}>Team</span>
               {!teamBrowse ? (
