@@ -1,1 +1,12 @@
-{"sports":{},"sets":0,"cards":0}
+{
+ "sports": {
+  "Non-Sport": {
+   "file": "index/non-sport.json",
+   "sets": 6,
+   "cards": 4237
+  }
+ },
+ "sets": 6,
+ "cards": 4237,
+ "updated": "2026-10-22T23:45:20.278Z"
+}
