@@ -224,6 +224,8 @@ export function Omnibox({ value, onChange, onSubmit, onPickPlayer, onPickSet, se
 }
 
 // ---------- Player page ----------
+// Games and non-sport categories: no autos/rookies/game-used to speak of.
+const NON_SPORTS = new Set(['Pokémon', 'Yu-Gi-Oh!', 'Magic', 'Lorcana', 'One Piece', 'Disney', 'Entertainment', 'Non-Sport', 'Other'])
 const VIEWS = [['all', 'All cards'], ['oneofone', '1/1s'], ['rc', 'Rookies'], ['auto', 'Autos'], ['pa', 'Patch autos'], ['gu', 'Game-used'], ['base', 'Base only'], ['rare', '/25 or rarer']]
 const quickFilter = { all: () => true, oneofone: r => r[5] === 1, rc: r => r[6] & TYPE.RC, auto: r => r[6] & TYPE.AU, pa: r => (r[6] & TYPE.AU) && (r[6] & TYPE.PATCH), gu: r => (r[7] & 7) === 1, base: r => r[6] & TYPE.BASE, rare: r => r[5] > 0 && r[5] <= 25 }
 
@@ -361,6 +363,7 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
   const resetAll = () => { setMems(null); setStatedOnly(false); setQuick('all'); setTypes(new Set()); setRun('any'); setBrands(null); setTeams(null); setProducts([]); setYearFrom(0); setYearTo(9999); setHidePlates(false) }
   const color = SPORT_COLORS[player.sport] || ACCENT
   const following = myPlayers.has(player.name)
+  const nonSports = NON_SPORTS.has(player.sport)
   const years = [...facets.years.keys()].sort()
   const maxYearCount = Math.max(1, ...facets.years.values())
   const brandList = [...facets.brands.entries()].sort((a, b) => b[1] - a[1])
@@ -404,6 +407,7 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
       )}
 
       {/* HERO */}
+      {/* TCG / non-sport cards have no autos, rookies or game-used: hide those empty tiles and views */}
       <div className="hq-panel" style={{ background: 'linear-gradient(140deg, #191919, #0F1320)', border: '1px solid #232A3E', borderRadius: 18, padding: '26px 28px', display: 'flex', gap: 26, flexWrap: 'wrap', alignItems: 'flex-start' }}>
         <div style={{ flex: '1 1 300px', minWidth: 0 }}>
           <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 10 }}>
@@ -426,7 +430,7 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
           </div>
         </div>
         <div style={{ flex: '1 1 300px', minWidth: 0, display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(110px, 1fr))', gap: 10 }}>
-          {[[rows.length, 'Cards', ACCENT], [facets.sets.size, 'Sets'], [facets.au, 'Autographs'], [facets.one, '1/1s'], [facets.rc, 'Rookies'], [facets.patch, 'Patches'], [facets.mem.GU || 0, 'Game-used'], [facets.seasons, 'Seasons']].map(([n, l, c]) => (
+          {[[rows.length, 'Cards', ACCENT], [facets.sets.size, 'Sets'], [facets.au, 'Autographs'], [facets.one, '1/1s'], [facets.rc, 'Rookies'], [facets.patch, 'Patches'], [facets.mem.GU || 0, 'Game-used'], [facets.seasons, 'Seasons']].filter(([n, l]) => !(nonSports && shard && !n && l !== 'Cards' && l !== 'Sets')).map(([n, l, c]) => (
             <div key={l} style={{ background: '#0F1320', border: '1px solid #232A3E', borderRadius: 12, padding: '14px 12px' }}>
               <p style={{ ...display, margin: 0, fontSize: 32, color: c || '#EDEDEF', lineHeight: 1 }}>{shard ? n.toLocaleString() : '…'}</p>
               <p style={{ ...eyebrow, margin: '6px 0 0', color: '#8A8A93' }}>{l}</p>
@@ -438,7 +442,7 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
       {/* QUICK VIEWS */}
       <div className="hq-chiprow" style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center', margin: '16px 0 0' }}>
         <span style={{ ...eyebrow, color: '#6B7080', marginRight: 4 }}>Quick views</span>
-        {VIEWS.map(([k, l]) => { const n = rows.filter(r => quickFilter[k](r.raw)).length; return <button key={k} onClick={() => setQuick(k)} style={pill(quick === k)}>{l}{k !== 'all' ? ' · ' + n.toLocaleString() : ''}</button> })}
+        {VIEWS.map(([k, l]) => { const n = rows.filter(r => quickFilter[k](r.raw)).length; if (nonSports && shard && k !== 'all' && !n && quick !== k) return null; return <button key={k} onClick={() => setQuick(k)} style={pill(quick === k)}>{l}{k !== 'all' ? ' · ' + n.toLocaleString() : ''}</button> })}
       </div>
 
       {/* BODY */}
