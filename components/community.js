@@ -55,7 +55,7 @@ export function AuthModal({ open, onClose, account }) {
       <div onClick={(e) => e.stopPropagation()} style={{ ...card, width: 'min(420px, 92vw)', padding: 28 }}>
         {!session ? (
           <>
-            <h3 style={{ ...condensed, margin: 0, fontSize: 26, fontWeight: 800, textTransform: 'uppercase', color: '#fff' }}>Join Checklist HQ</h3>
+            <h3 style={{ ...condensed, margin: 0, fontSize: 26, fontWeight: 800, textTransform: 'uppercase', color: '#fff' }}>Join CardHQ</h3>
             <p style={{ color: '#999', fontSize: 13.5, lineHeight: 1.6, margin: '10px 0 18px' }}>Track your wantlist, check off cards as you collect them, upload photos, and share accomplishments. We email you a magic sign-in link — no password.</p>
             {sent ? (
               <p style={{ color: ACCENT, fontSize: 14, fontWeight: 600 }}>Check your email — the sign-in link is on its way.</p>
@@ -274,7 +274,7 @@ export function CommunityView({ account, indexSets, onOpenAuth }) {
       <div style={{ background: 'linear-gradient(140deg, #0f1526, #0e0e0e)', border: '1px solid ' + ACCENT + '33', borderRadius: 18, padding: 30, marginBottom: 22 }} className="hq-panel">
         <h1 style={{ ...condensed, fontSize: 40, fontWeight: 800, textTransform: 'uppercase', margin: 0, lineHeight: 1 }}>Community</h1>
         <p style={{ color: '#aaa', fontSize: 15, lineHeight: 1.6, maxWidth: 720, margin: '14px 0 0' }}>
-          Collecting accomplishments from the Checklist HQ community — completed sets, finished rainbows, grail pulls. Grail-tier completions are verified and celebrated.
+          Collecting accomplishments from the CardHQ community — completed sets, finished rainbows, grail pulls. Grail-tier completions are verified and celebrated.
         </p>
         <div style={{ marginTop: 18 }}>
           {session
