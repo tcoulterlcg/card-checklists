@@ -96,7 +96,7 @@ function repair(p) {
   repairCache.set(p, hit); return hit
 }
 
-const stats = { team: 0, junk: 0, tidied: 0, repaired: 0, unrepaired: new Set(), unified: 0, files: 0 }
+const stats = { merged: 0, team: 0, junk: 0, tidied: 0, repaired: 0, unrepaired: new Set(), unified: 0, files: 0 }
 for (const [f, s] of sets) {
   let changed = false
   for (const sec of s.sections || []) {
@@ -122,13 +122,31 @@ for (const [f, s] of sets) {
       if (p !== raw) { const k2 = raw + ' -> ' + p; renames.set(k2, (renames.get(k2) || 0) + 1); c.p = p; changed = true }
       keep.push(c)
     }
-    if (keep.length !== (sec.cards || []).length) sec.cards = keep
+    // Break Ninja lists a card again from its "One Of Ones"/"All Rookies" pages; the copy
+    // differs only by a flag and a tag-as-team. Merge same number + player, union the flags.
+    const byKey = new Map(), merged = []
+    for (const c of keep) {
+      const tagged = !!(c.t && TEAM_TAG.test(c.t.trim()))
+      if (tagged) { delete c.t; c._tag = 1; changed = true }
+      const k = (c.n || '') + '|' + c.p
+      const prev = c.n ? byKey.get(k) : null
+      // only when one copy came from a tag page; a photo variation sharing the number stays
+      if (prev && (c._tag || prev._tag) && (!prev.t || !c.t || key(prev.t) === key(c.t))) {
+        const fx = new Set((prev.x || '').split(/\s+/).filter(Boolean)); for (const f of (c.x || '').split(/\s+/).filter(Boolean)) fx.add(f)
+        prev.x = [...fx].join(' '); if (!prev.x) delete prev.x
+        if (!prev.t && c.t) prev.t = c.t
+        stats.merged++; changed = true; continue
+      }
+      byKey.set(k, c); merged.push(c)
+    }
+    for (const c of merged) delete c._tag
+    if (merged.length !== (sec.cards || []).length) sec.cards = merged
   }
   const before = (s.sections || []).length
   s.sections = (s.sections || []).filter(x => (x.cards || []).length)
   if (s.sections.length !== before) changed = true
   if (changed) { stats.files++; if (!DRY) writeFileSync(new URL(f, dataDir), JSON.stringify(s)) }
 }
-console.log(`team fields cleaned ${stats.team}, junk rows dropped ${stats.junk}, names tidied ${stats.tidied}, encoding repaired ${stats.repaired}, spellings unified ${stats.unified}, files changed ${stats.files}${DRY ? ' (dry run)' : ''}`)
+console.log(`duplicate rows merged ${stats.merged}, team fields cleaned ${stats.team}, junk rows dropped ${stats.junk}, names tidied ${stats.tidied}, encoding repaired ${stats.repaired}, spellings unified ${stats.unified}, files changed ${stats.files}${DRY ? ' (dry run)' : ''}`)
 if (REPORT) writeFileSync(REPORT.slice(9), [...renames.entries()].sort((a, b) => b[1] - a[1]).map(([k, n]) => n + '\t' + k).join('\n'))
 if (stats.unrepaired.size) console.log(`unrepaired (${stats.unrepaired.size}):`, [...stats.unrepaired].slice(0, 40).join(' | '))
