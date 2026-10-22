@@ -929,6 +929,7 @@ export default function Home() {
                       <option value="name-desc">Name (Z–A)</option>
                       <option value="cards-desc">Most cards</option>
                       <option value="cards-asc">Fewest cards</option>
+                      <option value="category">Category</option>
                       <option value="brand">Brand</option>
                     </select>
                     {chip('All', 'All', ACCENT)}
@@ -1521,6 +1522,11 @@ export default function Home() {
               if (sortBy === 'name-desc') return -nm()
               if (sortBy === 'cards-desc') return (b.cardCount - a.cardCount) || nm()
               if (sortBy === 'cards-asc') return (a.cardCount - b.cardCount) || nm()
+              if (sortBy === 'category') {
+                // Sports → TCGs → Other, then by sport/game name, newest first within each.
+                const grp = (x) => (TCG_SET.has(x.sport) ? 1 : OTHER_SET.has(x.sport) ? 2 : 0)
+                return (grp(a) - grp(b)) || (a.sport || '').localeCompare(b.sport || '') || ((b.year || 0) - (a.year || 0)) || nm()
+              }
               if (sortBy === 'brand') return (a.brand || 'zzz').localeCompare(b.brand || 'zzz') || (b.year - a.year) || nm()
               return (b.year - a.year) || nm() // year-desc default
             }).slice(0, setLimit).map((s) => {
