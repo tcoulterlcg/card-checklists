@@ -73,6 +73,9 @@ for (const f of files) {
         if (c.t && /\s*\(eBay\)$/i.test(c.t)) { c.t = c.t.replace(/\s*\(eBay\)$/i, ''); ch = true; shopFixed++ }
       }
     }
+    // dead pointers to Cardboard Connection's spreadsheets/guides ("View the full spreadsheet for specific print runs.")
+    const CTA = /(?:^|(?<=[.!?:]\s))(?:View|See|Click here)\b[^.!?]{0,110}?(?:spreadsheet|excel|checklist at the bottom|guide|gallery|tab above|click here|for (?:full|complete|specific) (?:details|variation details|breakdowns?))[^.!?]*[.!?]?\s*/gi
+    if (x.odds && x.odds.match(CTA)) { const o = x.odds.replace(CTA, '').replace(/\s*·\s*$/, '').replace(/^\s*·\s*/, '').replace(/\s{2,}/g, ' ').trim(); if (o !== x.odds) { x.odds = o; ch = true; shopFixed++ } }
     if (x.odds && /eBay/i.test(x.odds) && x.odds.match(SHOP)) { x.odds = x.odds.replace(SHOP, '').replace(/\s+·\s*$/, '').replace(/\s{2,}/g, ' ').trim(); ch = true; shopFixed++ }
     for (const c of x.cards || []) if (c.t && /eBay/i.test(c.t) && c.t.match(SHOP)) {
       let t = c.t.replace(SHOP, '').trim().replace(/\s*[-*]$/, '').trim()
