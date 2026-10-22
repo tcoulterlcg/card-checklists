@@ -3,7 +3,7 @@
 // collection tracker. Dark + electric blue to match the site shell. Data via lib/supa.
 import { loadSet } from '../lib/catalog'
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { collectionCardN, supa, grailfindrConnectUrl, grailfindrSignupUrl, grailfindrForgotUrl, GRAILFINDR_URL, getProfile, ensureProfile, addWant, removeWant, myWantlist, toggleCollected, myCollection, uploadCardImage, setCollectionImage, forumFeed, createPost, react, comments, addComment, grailSets, notifyGrailCompletion } from '../lib/supa'
+import { collectionCardN, supa, grailfindrConnectUrl, grailfindrSignupUrl, grailfindrForgotUrl, GRAILFINDR_URL, getProfile, ensureProfile, addWant, removeWant, deletePost, myWantlist, toggleCollected, myCollection, uploadCardImage, setCollectionImage, forumFeed, createPost, react, comments, addComment, grailSets, notifyGrailCompletion } from '../lib/supa'
 import { ACCENT, ACCENT_TEXT, BG, SURFACE, SURFACE_2, LINE, CHIP_LINE, TEXT, TEXT_2, LABEL, display, eyebrow, title, buttonText } from '../lib/theme'
 
 const card = { background: 'linear-gradient(155deg, #121626, #0F1320)', border: '1px solid #232A3E', borderRadius: 14 }
@@ -282,6 +282,8 @@ export function CommunityView({ account, indexSets, onOpenAuth }) {
   const [commentDraft, setCommentDraft] = useState({})
   const [postErr, setPostErr] = useState('')
   const [commentErr, setCommentErr] = useState({})
+  const [confirmDel, setConfirmDel] = useState(null)
+  useEffect(() => { if (profile) setPostErr(e => e.startsWith('Pick a username') ? '' : e) }, [profile])
   // Posts and comments need a username (forum rows reference the profile). People who
   // sign in through GrailFindr never saw the "Pick a username" step, so ask here
   // instead of letting the insert fail and silently throwing away their post.
@@ -385,7 +387,16 @@ export function CommunityView({ account, indexSets, onOpenAuth }) {
                     const open = !openComments[p.id]
                     setOpenComments({ ...openComments, [p.id]: open })
                     if (open) { const cs = await comments(p.id); setOpenComments(o => ({ ...o, [p.id]: cs })) }
-                  }} style={{ background: 'none', border: 'none', color: '#8A8A93', fontSize: 13, cursor: 'pointer' }}>💬 {nComments} comments</button>
+                  }} style={{ background: 'none', border: 'none', color: '#8A8A93', fontSize: 13, cursor: 'pointer' }}>💬 {nComments} comment{nComments === 1 ? '' : 's'}</button>
+                  {session && p.user_id === session.user.id && (confirmDel === p.id ? (
+                    <span style={{ marginLeft: 'auto', display: 'inline-flex', gap: 8, alignItems: 'center', fontSize: 13 }}>
+                      <span style={{ color: '#A1A1AA' }}>Delete this post?</span>
+                      <button onClick={async () => { const r = await deletePost(p.id); setConfirmDel(null); if (!r.error) forumFeed().then(setFeed) }} style={{ background: '#7f1d1d', border: 'none', color: '#fff', borderRadius: 6, padding: '5px 10px', fontSize: 13, cursor: 'pointer', fontFamily: 'inherit' }}>Delete</button>
+                      <button onClick={() => setConfirmDel(null)} style={{ background: 'none', border: '1px solid #232A3E', color: '#A1A1AA', borderRadius: 6, padding: '5px 10px', fontSize: 13, cursor: 'pointer', fontFamily: 'inherit' }}>Cancel</button>
+                    </span>
+                  ) : (
+                    <button onClick={() => setConfirmDel(p.id)} style={{ marginLeft: 'auto', background: 'none', border: 'none', color: '#6B7080', fontSize: 13, cursor: 'pointer', fontFamily: 'inherit' }}>Delete</button>
+                  ))}
                 </div>
                 {Array.isArray(openComments[p.id]) && (
                   <div style={{ marginTop: 12, borderTop: '1px solid #222', paddingTop: 12 }}>
@@ -400,7 +411,7 @@ export function CommunityView({ account, indexSets, onOpenAuth }) {
                           if (needName()) return
                           const r = await addComment(p.id, session.user.id, t)
                           if (r?.error) { setCommentErr(e => ({ ...e, [p.id]: 'Couldn’t comment: ' + r.error.message })); return }
-                          setCommentErr(e => ({ ...e, [p.id]: '' }))
+                          setCommentErr(e => ({ ...e, [p.id]: '' })); forumFeed().then(setFeed)   // refresh the comment count
                           setCommentDraft({ ...commentDraft, [p.id]: '' })
                           const cs = await comments(p.id); setOpenComments(o => ({ ...o, [p.id]: cs }))
                         }}>Post</button>
