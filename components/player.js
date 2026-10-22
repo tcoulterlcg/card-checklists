@@ -221,7 +221,7 @@ export function PlayerPage({ player, parsed, sets, onOpenSet, myPlayers, onWant,
   const [quick, setQuick] = useState('all')
   const [group, setGroup] = useState('set')
   const [sort, setSort] = useState('newest')
-  const [types, setTypes] = useState(new Set(['BASE', 'PARALLEL', 'INSERT', 'AU', 'PATCH', 'RELIC', 'PLATE']))
+  const [types, setTypes] = useState(new Set()) // empty = any; checked boxes narrow
   const [run, setRun] = useState('any') // any|1|10|25|99|numbered|unnumbered
   const [brands, setBrands] = useState(null) // null = all
   const [products, setProducts] = useState([])
@@ -233,7 +233,7 @@ export function PlayerPage({ player, parsed, sets, onOpenSet, myPlayers, onWant,
   const [showAll, setShowAll] = useState(new Set())
   const [limit, setLimit] = useState(40)
   const [hidePlates, setHidePlates] = useState(false)
-  const [mems, setMems] = useState(null) // null = any; Set of GU/PW/EW/MX/MFG/UNK
+  const [mems, setMems] = useState(null) // null/empty = any; checked boxes narrow
   const [statedOnly, setStatedOnly] = useState(false)
 
   useEffect(() => { setShard(null); loadShard(player.shard).then(setShard); setQuick('all'); setExpanded(new Set()); setLimit(40) }, [player.id, player.shard])
@@ -277,7 +277,7 @@ export function PlayerPage({ player, parsed, sets, onOpenSet, myPlayers, onWant,
     return f
   }, [rows])
   const topTeam = useMemo(() => [...facets.teams.entries()].filter(([t]) => /[A-Za-z]{3,}/.test(t) && !/^\/|#/.test(t)).sort((a, b) => b[1] - a[1])[0], [facets])
-  const firstCard = useMemo(() => rows.filter(r => r.type & TYPE.RC).sort((a, b) => a.year - b.year)[0] || rows.slice().sort((a, b) => a.year - b.year)[0], [rows])
+  const firstCard = useMemo(() => { const real = rows.filter(r => /^\d{4}/.test(r.set || '') && r.year); return real.filter(r => r.type & TYPE.RC).sort((a, b) => a.year - b.year)[0] || real.slice().sort((a, b) => a.year - b.year)[0] }, [rows])
 
   // Apply filters.
   const filtered = useMemo(() => {
@@ -285,19 +285,18 @@ export function PlayerPage({ player, parsed, sets, onOpenSet, myPlayers, onWant,
     return rows.filter(r => {
       if (!qf(r.raw)) return false
       if (hidePlates && (r.type & TYPE.PLATE)) return false
-      const label = (r.type & TYPE.PLATE) ? 'PLATE' : (r.type & TYPE.AU) ? 'AU' : (r.type & TYPE.PATCH) ? 'PATCH' : (r.type & TYPE.RELIC) ? 'RELIC' : (r.type & TYPE.BASE) ? 'BASE' : (r.type & TYPE.PARALLEL) ? 'PARALLEL' : 'INSERT'
-      if (!types.has(label)) return false
+      if (types.size && ![...types].some(k => r.type & TYPE[k])) return false
       if (run === '1' && r.serial !== 1) return false
       if (run === 'numbered' && !(r.serial > 0)) return false
       if (run === 'unnumbered' && r.serial > 0) return false
       if (/^\d+$/.test(run) && run !== '1' && !(r.serial > 0 && r.serial <= parseInt(run))) return false
-      if (brands && !brands.has(r.brand)) return false
-      if (teams && !teams.has(r.team)) return false
+      if (brands && brands.size && !brands.has(r.brand)) return false
+      if (teams && teams.size && !teams.has(r.team)) return false
       if (r.year && (r.year < yearFrom || r.year > yearTo)) return false
       if (products.length) { const n = r.set.toLowerCase(); if (!products.every(p => n.includes(p.toLowerCase()))) return false }
       if (parsed && parsed.types.size) { for (const t of parsed.types) { if (t === 'RPA' && !((r.type & TYPE.AU) && (r.type & TYPE.PATCH) && (r.type & TYPE.RC))) return false; if (TYPE[t] && !(r.type & TYPE[t])) return false } }
       if (parsed && parsed.sport && r.sport !== parsed.sport) return false
-      if (mems && !(r.mem && mems.has(memKind(r.mem)))) return false
+      if (mems && mems.size && !(r.mem && mems.has(memKind(r.mem)))) return false
       if (statedOnly && r.mem && memTypical(r.mem)) return false
       return true
     })
@@ -327,8 +326,9 @@ export function PlayerPage({ player, parsed, sets, onOpenSet, myPlayers, onWant,
   }, [sorted, group])
 
   const toggleType = (t) => setTypes(prev => { const n = new Set(prev); if (n.has(t)) n.delete(t); else n.add(t); return n })
-  const toggleIn = (setter, cur, v, all) => setter(() => { const base = cur ? new Set(cur) : new Set(all); if (base.has(v)) base.delete(v); else base.add(v); return base.size === all.length ? null : base })
-  const resetAll = () => { setMems(null); setStatedOnly(false); setQuick('all'); setTypes(new Set(['BASE', 'PARALLEL', 'INSERT', 'AU', 'PATCH', 'RELIC', 'PLATE'])); setRun('any'); setBrands(null); setTeams(null); setProducts([]); setYearFrom(0); setYearTo(9999); setHidePlates(false) }
+  // Facet checkboxes: nothing checked = any; checking narrows to the checked values.
+  const toggleIn = (setter, cur, v) => setter(() => { const n = new Set(cur || []); if (n.has(v)) n.delete(v); else n.add(v); return n.size ? n : null })
+  const resetAll = () => { setMems(null); setStatedOnly(false); setQuick('all'); setTypes(new Set()); setRun('any'); setBrands(null); setTeams(null); setProducts([]); setYearFrom(0); setYearTo(9999); setHidePlates(false) }
   const color = SPORT_COLORS[player.sport] || GOLD
   const following = myPlayers.has(player.name)
   const years = [...facets.years.keys()].sort()
@@ -421,7 +421,7 @@ export function PlayerPage({ player, parsed, sets, onOpenSet, myPlayers, onWant,
             </div>
           </div>
           <div>
-            <p style={legend}>Card type</p>
+            <p style={legend}>Card type <span style={{ color: '#555', fontWeight: 600, letterSpacing: 0, textTransform: 'none' }}>· tick to narrow</span></p>
             {[['BASE', 'Base', facets.base], ['PARALLEL', 'Parallels', facets.parallel], ['INSERT', 'Inserts', facets.insert], ['AU', 'Autographs', facets.au], ['PATCH', 'Patches', facets.patch], ['RELIC', 'Relics', facets.relic], ['PLATE', 'Printing plates', facets.plate]].map(([k, l, n]) => (
               <label key={k} style={lbl}><input type="checkbox" checked={types.has(k)} onChange={() => toggleType(k)} style={cb} />{l}<span style={cnt}>{n.toLocaleString()}</span></label>
             ))}
@@ -431,7 +431,7 @@ export function PlayerPage({ player, parsed, sets, onOpenSet, myPlayers, onWant,
             <div>
               <p style={legend}>Memorabilia</p>
               {[['GU', 'Game-used'], ['PW', 'Player-worn'], ['EW', 'Event-worn'], ['MX', 'Varies by card'], ['MFG', 'Manufactured'], ['UNK', 'Unknown']].filter(([k]) => facets.mem[k]).map(([k, l]) => (
-                <label key={k} style={lbl}><input type="checkbox" checked={!mems || mems.has(k)} onChange={() => toggleIn(setMems, mems, k, Object.keys(facets.mem))} style={cb} /><span style={{ width: 8, height: 8, borderRadius: 999, background: MEM_COLORS[k], flexShrink: 0 }} />{l}<span style={cnt}>{facets.mem[k].toLocaleString()}</span></label>
+                <label key={k} style={lbl}><input type="checkbox" checked={!!mems && mems.has(k)} onChange={() => toggleIn(setMems, mems, k)} style={cb} /><span style={{ width: 8, height: 8, borderRadius: 999, background: MEM_COLORS[k], flexShrink: 0 }} />{l}<span style={cnt}>{facets.mem[k].toLocaleString()}</span></label>
               ))}
               <label style={lbl} title="Hide tags based on the maker's usual practice; keep only ones stated for that card or insert"><input type="checkbox" checked={statedOnly} onChange={(e) => setStatedOnly(e.target.checked)} style={cb} />Stated only (hide *)</label>
             </div>
@@ -444,7 +444,7 @@ export function PlayerPage({ player, parsed, sets, onOpenSet, myPlayers, onWant,
           </div>
           <div>
             <p style={legend}>Brand</p>
-            {brandList.map(([b, n]) => <label key={b} style={lbl}><input type="checkbox" checked={!brands || brands.has(b)} onChange={() => toggleIn(setBrands, brands, b, brandList.map(x => x[0]))} style={cb} />{b}<span style={cnt}>{n.toLocaleString()}</span></label>)}
+            {brandList.map(([b, n]) => <label key={b} style={lbl}><input type="checkbox" checked={!!brands && brands.has(b)} onChange={() => toggleIn(setBrands, brands, b)} style={cb} />{b}<span style={cnt}>{n.toLocaleString()}</span></label>)}
           </div>
           <div>
             <p style={legend}>Product</p>
@@ -455,7 +455,7 @@ export function PlayerPage({ player, parsed, sets, onOpenSet, myPlayers, onWant,
           {teamList.length > 0 && (
             <div>
               <p style={legend}>Team on card</p>
-              {teamList.map(([t, n]) => <label key={t} style={lbl}><input type="checkbox" checked={!teams || teams.has(t)} onChange={() => toggleIn(setTeams, teams, t, teamList.map(x => x[0]))} style={cb} /><span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{t}</span><span style={cnt}>{n.toLocaleString()}</span></label>)}
+              {teamList.map(([t, n]) => <label key={t} style={lbl}><input type="checkbox" checked={!!teams && teams.has(t)} onChange={() => toggleIn(setTeams, teams, t)} style={cb} /><span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{t}</span><span style={cnt}>{n.toLocaleString()}</span></label>)}
             </div>
           )}
         </aside>
@@ -522,7 +522,7 @@ export function PlayerPage({ player, parsed, sets, onOpenSet, myPlayers, onWant,
                 )
               })}
               {groups.length > limit && <div style={{ textAlign: 'center', padding: 8 }}><button onClick={() => setLimit(l => l + 40)} style={btn(false)}>Load {Math.min(40, groups.length - limit)} more {group === 'season' ? 'seasons' : 'sets'} ({groups.length - limit} left)</button></div>}
-              {groups.length === 0 && <p style={{ color: '#666' }}>No cards match these filters.</p>}
+              {groups.length === 0 && <div style={{ border: '1px dashed #2a2a2a', borderRadius: 14, padding: '22px 20px', color: '#888' }}>No cards match these filters. <button onClick={resetAll} style={{ background: 'none', border: 'none', color: GOLD, fontWeight: 700, cursor: 'pointer', fontFamily: 'inherit', fontSize: 14 }}>Clear all filters</button></div>}
             </>
           ) : (
             <div style={{ border: '1px solid #262626', borderRadius: 14, overflow: 'hidden', background: '#0f0f0f' }}>
