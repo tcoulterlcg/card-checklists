@@ -3,7 +3,7 @@
 // Checklist HQ v2 — sectioned checklist database (Base / Inserts / Autos …)
 // imported from cardboardconnection.com. Static JSON under /public/data:
 // index.json lists sets; each set file carries sections -> cards.
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { useAccount, AccountChip, AuthModal, CollectionView, CommunityView } from '../components/community'
 import { addWant } from '../lib/supa'
 import { Omnibox, PlayerPage, MyPlayersPanel, useMyPlayers, loadPlayerDir, seasonLabel, MemBadge, MemChip, memCodeOf } from '../components/player'
@@ -171,48 +171,56 @@ function SortHeader({ label, field, sortField, sortDir, onClick, align, grow }) 
   )
 }
 
-// ESPN-style bottom line: one league at a time, headlines rotate in place.
-// Each headline holds for HOLD ms, then the next slides up; after the last
-// headline of a segment it moves to the next league. Hover pauses it.
-const HOLD = 6000
+// ESPN-style bottom line: the league label holds on the left while that
+// league's headlines crawl right-to-left at a constant speed. When the last
+// headline clears the screen, the label flips to the next league and its
+// headlines start crawling. Hover pauses; clicking the label skips ahead.
+const CRAWL_PX_PER_SEC = 90
 function BottomLine({ segments }) {
   const [seg, setSeg] = useState(0)
-  const [idx, setIdx] = useState(0)
-  const [paused, setPaused] = useState(false)
-  useEffect(() => {
-    if (!segments.length || paused) return
-    const t = setTimeout(() => {
-      const cur = segments[seg % segments.length]
-      if (idx + 1 < cur.items.length) setIdx(idx + 1)
-      else { setSeg((seg + 1) % segments.length); setIdx(0) }
-    }, HOLD)
-    return () => clearTimeout(t)
-  }, [segments, seg, idx, paused])
-  if (!segments.length) return null
-  const cur = segments[seg % segments.length]
-  const it = cur.items[idx] || cur.items[0]
-  const jump = (n) => { setSeg((n + segments.length) % segments.length); setIdx(0) }
+  const [run, setRun] = useState(null) // { from, to, dur } for the current crawl
+  const viewport = useRef(null)
+  const track = useRef(null)
+  const cur = segments.length ? segments[seg % segments.length] : null
+  useLayoutEffect(() => {
+    if (!cur || !viewport.current || !track.current) return
+    const from = viewport.current.offsetWidth
+    const to = -track.current.scrollWidth
+    setRun({ from, to, dur: (from - to) / CRAWL_PX_PER_SEC })
+  }, [seg, segments.length])
+  if (!cur) return null
+  const next = () => { setRun(null); setSeg(n => (n + 1) % segments.length) }
+  const jump = (i) => { setRun(null); setSeg(i) }
+  const anim = run ? 'hqcrawl ' + run.dur + 's linear forwards' : 'none'
   return (
-    <div className="hq-bottomline" role="region" aria-label="Sports and card news" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
-      <button onClick={() => jump(seg + 1)} title="Next league"
-        style={{ ...eyebrow, flexShrink: 0, display: 'inline-flex', alignItems: 'center', gap: 8, padding: '0 16px', minWidth: 112, justifyContent: 'center', background: cur.color, color: '#0B0E17', border: 0, cursor: 'pointer', fontSize: 14 }}>
+    <div className="hq-bottomline" role="region" aria-label="Sports and card news">
+      <button key={'l' + cur.key} className="hq-bl-label" onClick={next} title="Next"
+        style={{ ...eyebrow, flexShrink: 0, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', padding: '0 16px', minWidth: 124, background: cur.color, color: '#0B0E17', border: 0, cursor: 'pointer', fontSize: 14 }}>
         {cur.label}
       </button>
-      <div style={{ position: 'relative', flex: 1, minWidth: 0, overflow: 'hidden', display: 'flex', alignItems: 'center' }}>
-        <a key={cur.key + idx} className="hq-bl-item" href={it.link} target="_blank" rel="noreferrer"
-          style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '0 18px', minWidth: 0, width: '100%', textDecoration: 'none', color: TEXT, fontSize: 14, fontWeight: 500 }}>
-          <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{it.title}</span>
-          <span className="hq-bl-source" style={{ ...eyebrow, fontSize: 12, color: LABEL, flexShrink: 0, marginLeft: 'auto' }}>{it.source}</span>
-        </a>
-        {!paused && <span key={'p' + cur.key + idx} style={{ position: 'absolute', left: 0, right: 0, bottom: 0, height: 2, background: cur.color, opacity: 0.55, transformOrigin: 'left', animation: 'hqprog ' + HOLD + 'ms linear' }} />}
+      <div ref={viewport} className="hq-bl-viewport" style={{ position: 'relative', flex: 1, minWidth: 0, overflow: 'hidden' }}>
+        <div ref={track} key={'t' + cur.key + seg} className="hq-bl-track" onAnimationEnd={next}
+          style={{ position: 'absolute', top: 0, bottom: 0, left: 0, display: 'flex', alignItems: 'center', whiteSpace: 'nowrap', willChange: 'transform',
+            transform: 'translateX(' + (run ? run.from : 10000) + 'px)', '--from': (run ? run.from : 0) + 'px', '--to': (run ? run.to : 0) + 'px', animation: anim }}>
+          {cur.items.map((it, i) => (
+            <a key={i} href={it.link} target="_blank" rel="noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '0 22px', textDecoration: 'none', color: TEXT, fontSize: 14, fontWeight: 500 }}>
+              <span style={{ width: 6, height: 6, borderRadius: 999, background: cur.color, flexShrink: 0 }} />
+              {it.title}
+              <span style={{ ...eyebrow, fontSize: 11, color: LABEL }}>{it.source}</span>
+            </a>
+          ))}
+        </div>
       </div>
-      <div style={{ flexShrink: 0, display: 'flex', alignItems: 'center', gap: 2, padding: '0 10px', borderLeft: '1px solid #1C2233' }}>
-        {segments.map((sg, i) => (
-          <button key={sg.key} onClick={() => jump(i)} title={sg.label} aria-label={sg.label}
-            style={{ width: 18, height: 18, padding: 0, background: 'none', border: 0, cursor: 'pointer', display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}>
-            <span style={{ width: i === seg % segments.length ? 8 : 5, height: i === seg % segments.length ? 8 : 5, borderRadius: 999, background: i === seg % segments.length ? sg.color : '#3A4562' }} />
-          </button>
-        ))}
+      <div style={{ flexShrink: 0, display: 'flex', alignItems: 'center', gap: 2, padding: '0 10px', borderLeft: '1px solid #1C2233', background: '#0B0E17' }}>
+        {segments.map((sg, i) => {
+          const on = i === seg % segments.length
+          return (
+            <button key={sg.key} onClick={() => jump(i)} title={sg.label} aria-label={sg.label}
+              style={{ width: 18, height: 18, padding: 0, background: 'none', border: 0, cursor: 'pointer', display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}>
+              <span style={{ width: on ? 8 : 5, height: on ? 8 : 5, borderRadius: 999, background: on ? sg.color : '#3A4562' }} />
+            </button>
+          )
+        })}
       </div>
     </div>
   )
