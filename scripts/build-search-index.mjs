@@ -23,6 +23,7 @@ for (const f of readdirSync(dataDir)) {
   if (!f.endsWith('.json') || skip.has(f)) continue
   let s
   try { s = JSON.parse(readFileSync(new URL(f, dataDir), 'utf8')) } catch (e) { continue }
+  if (!s.slug || s.incomplete) continue
   const sid = intern(s.slug, slugs, slugId)
   // Parallel-heavy sources (Break Ninja) repeat the same card across hundreds
   // of parallel sections; collapse to one search row per (set, number, player)

@@ -90,7 +90,7 @@ for (const f of readdirSync(dataDir)) {
   if (!f.endsWith('.json') || SKIP.test(f)) continue
   let s
   try { s = JSON.parse(readFileSync(new URL(f, dataDir), 'utf8')) } catch { continue }
-  if (!s.slug || !Array.isArray(s.sections)) continue
+  if (!s.slug || !Array.isArray(s.sections) || s.incomplete) continue
   files++
   const sp = intern(s.sport || '', sportsPool, sportIdx)
   const seen = new Set()

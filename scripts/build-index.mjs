@@ -10,6 +10,7 @@ const dataDir = new URL('../public/data/', import.meta.url)
 const GENERATED = new Set(['index.json', 'search-index.json', 'rpa-index.json', 'patch-swaps.json'])
 
 const sets = []
+let hidden = 0
 for (const f of readdirSync(dataDir)) {
   if (!f.endsWith('.json') || GENERATED.has(f)) continue
   try {
@@ -17,9 +18,11 @@ for (const f of readdirSync(dataDir)) {
     if (!s.slug || !s.sport || !Array.isArray(s.sections)) continue
     const cardCount = s.sections.reduce((n, sec) => n + (sec.cards ? sec.cards.length : 0), 0)
     if (cardCount === 0) continue
+    // Partial scrapes (< 10 cards, flagged by cleanup-data.mjs) stay on disk but are not listed.
+    if (s.incomplete) { hidden++; continue }
     sets.push({ slug: s.slug, name: s.name, year: s.year, sport: s.sport, cardCount, sections: s.sections.length, source: s.source })
   } catch (e) { /* skip malformed */ }
 }
 sets.sort((a, b) => (b.year - a.year) || a.name.localeCompare(b.name))
 writeFileSync(new URL('index.json', dataDir), JSON.stringify({ sets }))
-console.log('index:', sets.length, 'sets,', sets.reduce((n, s) => n + s.cardCount, 0).toLocaleString(), 'cards total')
+console.log('index:', sets.length, 'sets (' + hidden + ' incomplete hidden),', sets.reduce((n, s) => n + s.cardCount, 0).toLocaleString(), 'cards total')

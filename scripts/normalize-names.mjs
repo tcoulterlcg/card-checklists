@@ -15,7 +15,9 @@ const SPORT_WORD = { Hockey: 'Hockey', Basketball: 'Basketball', Football: 'Foot
 // Hockey-only aliases are prefixed with "Hockey|".
 const ALIASES = [
   ['Hockey|^(?:upper deck |ud )?ultimate(?: collection)?$', 'Upper Deck Ultimate Collection'],
-  ['Hockey|^(?:upper deck |ud )?(?:spgu|sp game used)(?: edition)?$', 'SP Game Used'],
+  ['^(?:upper deck |ud )?(?:spgu|sp game used)(?: edition)?$', 'SP Game Used'],
+  ['^(?:upper deck |ud )(sp (?:signature|authentic|game used).*)$', '$1'],
+  ['^(?:upper deck |ud )(skybox .*)$', '$1'],
   ['Hockey|^(?:upper deck |ud )?sp game used chl(?: canadian hockey league)?$', 'SP Game Used CHL'],
   ['Hockey|^(?:upper deck |ud )?sp authentic$', 'SP Authentic'],
   ['Hockey|^(?:upper deck |ud )?spx$', 'SPx'],
@@ -73,7 +75,11 @@ function cleanProduct(name, sport, year = 0) {
     .replace(/^and\s+/i, '')
     .replace(/^(?:\d{4}(?:-\d{2,4})?|\d\d[- ]\d\d)\s+/, '')       // leading season/year
     .replace(/^\d\d\s+/, '')                                         // stray "22 " left from "2021-22 22 …"
-    .replace(/\s+[–—-]\s+(checklist added|full|basic|out now|official|updated?.*|final.*list|.*list added|.*e-?pack release)\s*$/i, '')
+    .replace(/\s+[–—-]\s+(checklist added|full|basic|out now|official|updated?.*|final.*list|.*list added|.*e-?pack release|review added|.*info added|.*\badded)\s*$/i, '')
+    .replace(/\s+checklist e-?pack$/i, '')
+    .replace(/\s+(?:database\s+)?full$/i, '').replace(/\s+&\s+checklists?$/i, '').replace(/\s+(?:card\s+)?checklists?$/i, '')
+    .replace(/\s+exclusives guide and$/i, ' Exclusives').replace(/\s+cards(?=\s|$)/gi, '')
+    .replace(/\s+[–—-]\s+(factory set|hobby edition|wave \d+|wave one|series \d+|rookie redemptions?.*|final rookie redemptions?.*)\s*$/i, ' $1')
     .replace(/\s+[–—-]\s*$/, '')
     .replace(/\s+\d[\d,]*\s+total(\s+cards)?\s*$/i, '')
     .replace(/\s+[–—-]\s+multi-sport$/i, '')
@@ -84,7 +90,15 @@ function cleanProduct(name, sport, year = 0) {
   // drop the sport word wherever it sits at the end (re-added later)
   const sw = SPORT_WORD[sport]
   if (sw) p = p.replace(new RegExp('\\s*[–—-]?\\s*\\b' + sw + '\\b(\\s+(nhl|nba|nfl|mlb))?\\s*$', 'i'), '')
-  p = p.replace(/\bUD Upper Deck\b/i, 'Upper Deck').replace(/\s+/g, ' ').trim()
+  // second pass: junk suffixes that sat before the sport word, then keep any other " – X" as " X"
+  p = p.replace(/\s+[–—-]\s+(?:checklist added|review added|product review.*|.*\badded.*|.*print runs?.*|sp odds.*|.*info)\s*$/i, '')
+  p = p.replace(/\s+[–—]\s+/g, ' ')
+  p = p.replace(/\s+(?:database\s+)?full$/i, '').replace(/\s+&\s+checklists?$/i, '').replace(/\s+(?:card\s+)?checklists?$/i, '')
+  // a sport word in the middle of the product ("Topps Baseball Japan Edition") moves to the end (re-added later)
+  if (sw && !/World Baseball|National Hockey|Hockey Card|Football Nation|Baseball Nation|Hockey Night|Baseball Heroes|Football League|Hockey League/i.test(p)) p = p.replace(new RegExp('\\s+' + sw + '\\b(?=\\s+\\S)', 'i'), '')
+  p = p.replace(/\bMega Boxl\b/, 'Mega Box')
+  p = p.replace(/\bUD Upper Deck\b/i, 'Upper Deck').replace(/\bCurrated\b/i, 'Curated').replace(/\s+/g, ' ').trim()
+  p = p.replace(/\s+(NFL|NBA|MLB|NHL)$/i, '').replace(/\s+(American|Canadian) Hockey League$/i, '').replace(/\s+Canadian Football League$/i, '')
     for (const [pat, canon] of ALIASES) {
     let re = pat, onlySport = null
     if (/^(?:[A-Z][a-z]+|Y\d+)\|/.test(pat)) { onlySport = pat.split('|')[0]; re = pat.slice(onlySport.length + 1) }
@@ -108,7 +122,21 @@ const files = readdirSync(dataDir).filter(f => f.endsWith('.json') && !SKIP.test
 const cleaned = []
 const sportFixes = []
 const spellings = new Map()
-const keyOf = (sport, p) => sport + '|' + p.toLowerCase().replace(/&/g, ' and ').replace(/\bvol(ume)?\b\.?/g, 'volume').replace(/[^a-z0-9]+/g, ' ').trim()
+// Cluster key ignores word order and filler that sources add or drop
+// ("Update Series"/"Update", "Sapphire Edition"/"Sapphire", "Immaculate Collection"/"Immaculate").
+const FILLER = /\b(and|the|of)\b/g
+const keyOf = (sport, p) => {
+  let t = p.toLowerCase().replace(/&/g, ' and ').replace(/\bvol(ume)?\b\.?/g, 'volume')
+    .replace(/\bupdate series\b/g, 'update')
+    .replace(sport === 'Soccer' ? /\bteam set\b/g : /^$/, '')
+    .replace(/\b(sapphire|ben baller|hall of fame|japan|uk|captain'?s) edition\b/g, '$1')
+    .replace(/\b(immaculate|transcendent|quarterback) collection\b/g, '$1')
+    .replace(/\bworld baseball classic\b/g, 'world classic')
+    .replace(/\bfootball nation\b/g, 'nation').replace(/\bbaseball nation\b/g, 'nation')
+    .replace(/[^a-z0-9]+/g, ' ').replace(FILLER, ' ')
+    .replace(/\b(hockey|basketball|football|baseball|soccer|nhl|nba|nfl|mlb)\b/g, ' ')
+  return sport + '|' + [...new Set(t.split(' ').filter(Boolean))].sort().join(' ')
+}
 for (const f of files) {
   let s
   try { s = JSON.parse(readFileSync(new URL(f, dataDir), 'utf8')) } catch { continue }
@@ -127,7 +155,8 @@ const canon = new Map()
 for (const [k, m] of spellings) {
   // most common; ties -> fewer Capitalised Small Words ("x", "of", "the"), then keeps punctuation, then more capitals (acronyms)
   const smallCaps = (t) => (t.match(/\s(?:X|Of|The|And|In|To|A)\b/g) || []).length
-  const best = [...m.entries()].sort((a, b) => b[1] - a[1] || smallCaps(a[0]) - smallCaps(b[0]) || (/[:']/.test(b[0]) - /[:']/.test(a[0])) || (b[0].match(/[A-Z]/g) || []).length - (a[0].match(/[A-Z]/g) || []).length)[0][0]
+  const inner = (t) => /\b(Hockey|Basketball|Football|Baseball|NHL|NBA|NFL|MLB)\b/.test(t) && !/^(NBA|NFL|NHL) |World Baseball|National Hockey|Football Nation|Baseball Nation|Hockey Card|Hockey Day/.test(t) ? 1 : 0
+  const best = [...m.entries()].sort((a, b) => inner(a[0]) - inner(b[0]) || b[1] - a[1] || smallCaps(a[0]) - smallCaps(b[0]) || (/[:']/.test(b[0]) - /[:']/.test(a[0])) || (b[0].match(/[A-Z]/g) || []).length - (a[0].match(/[A-Z]/g) || []).length)[0][0]
   canon.set(k, best)
 }
 
