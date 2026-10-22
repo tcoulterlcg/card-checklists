@@ -29,14 +29,13 @@ export function useAccount() {
 export function AccountChip({ account, onOpenAuth }) {
   const { session, profile } = account
   if (!session) return (
-    <button onClick={onOpenAuth} style={{ ...btnGhost, borderColor: ACCENT + '55', color: ACCENT_TEXT, display: 'inline-flex', alignItems: 'center', height: 36, boxSizing: 'border-box', padding: '0 16px', whiteSpace: 'nowrap' }}>Sign in</button>
+    <button className="hq-signin" onClick={onOpenAuth}>Sign in</button>
   )
   const name = profile?.username || session.user.email?.split('@')[0] || 'collector'
   return (
-    <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}>
-      <span style={{ width: 26, height: 26, borderRadius: '50%', background: ACCENT, color: '#fff', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, fontSize: 13 }}>{name[0].toUpperCase()}</span>
-      <span style={{ color: '#D4D4D8', fontSize: 13, fontWeight: 600 }}>{name}</span>
-      <button onClick={() => supa.auth.signOut()} style={{ background: 'none', border: 'none', color: '#6B7080', fontSize: 11, cursor: 'pointer' }}>sign out</button>
+    <span className="hq-account" style={{ display: 'inline-flex', alignItems: 'center', gap: 10 }}>
+      <span title={name} style={{ width: 32, height: 32, boxSizing: 'border-box', borderRadius: '50%', background: '#1E2A4A', border: '1px solid #2E3E6B', color: '#C9D6FF', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontWeight: 600, fontSize: 12 }}>{name.slice(0, 2).toUpperCase()}</span>
+      <button onClick={() => supa.auth.signOut()} style={{ background: 'none', border: 'none', color: '#8A93A8', fontSize: 12, cursor: 'pointer', fontFamily: 'inherit' }}>Sign out</button>
     </span>
   )
 }

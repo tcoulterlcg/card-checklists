@@ -3,7 +3,7 @@
 // Checklist HQ v2 — sectioned checklist database (Base / Inserts / Autos …)
 // imported from cardboardconnection.com. Static JSON under /public/data:
 // index.json lists sets; each set file carries sections -> cards.
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { useAccount, AccountChip, AuthModal, CollectionView, CommunityView } from '../components/community'
 import { addWant } from '../lib/supa'
 import { Omnibox, PlayerPage, MyPlayersPanel, useMyPlayers, loadPlayerDir, seasonLabel, MemBadge, MemChip, memCodeOf } from '../components/player'
@@ -11,8 +11,6 @@ import { parseQuery, matchPlayers, TYPE, typeLabel, TYPE_COLORS, serialLabel } f
 import { ACCENT, ACCENT_TEXT, BG, SURFACE, SURFACE_2, LINE, CHIP_LINE, TEXT, TEXT_2, LABEL, display, eyebrow, title, buttonText } from '../lib/theme'
 
 
-// Wordmark from the logo lockup: heavy Inter, mixed case, tight tracking.
-const wordmark = (size) => ({ fontFamily: "'Inter', system-ui, sans-serif", fontSize: size, fontWeight: 800, letterSpacing: '-0.03em', lineHeight: 1, color: '#fff' })
 
 // Card HQ mark (logo option 7f, "Scan C"): viewfinder corner brackets framing a blue C.
 function ScanCMark({ size = 30, bracket = '#EDEDEF', accent = ACCENT }) {
@@ -173,25 +171,48 @@ function SortHeader({ label, field, sortField, sortDir, onClick, align, grow }) 
   )
 }
 
-function NewsTicker({ label, color, items, speed }) {
-  if (!items || items.length === 0) return null
-  const row = items.concat(items) // duplicate for seamless loop
+// ESPN-style bottom line: one league at a time, headlines rotate in place.
+// Each headline holds for HOLD ms, then the next slides up; after the last
+// headline of a segment it moves to the next league. Hover pauses it.
+const HOLD = 6000
+function BottomLine({ segments }) {
+  const [seg, setSeg] = useState(0)
+  const [idx, setIdx] = useState(0)
+  const [paused, setPaused] = useState(false)
+  useEffect(() => {
+    if (!segments.length || paused) return
+    const t = setTimeout(() => {
+      const cur = segments[seg % segments.length]
+      if (idx + 1 < cur.items.length) setIdx(idx + 1)
+      else { setSeg((seg + 1) % segments.length); setIdx(0) }
+    }, HOLD)
+    return () => clearTimeout(t)
+  }, [segments, seg, idx, paused])
+  if (!segments.length) return null
+  const cur = segments[seg % segments.length]
+  const it = cur.items[idx] || cur.items[0]
+  const jump = (n) => { setSeg((n + segments.length) % segments.length); setIdx(0) }
   return (
-    <div style={{ display: 'flex', alignItems: 'stretch', border: '1px solid #222', borderRadius: 10, overflow: 'hidden', background: '#0F1320' }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 7, padding: '0 14px', background: color, color: '#0B0E17', flexShrink: 0 }}>
-        <span style={{ width: 7, height: 7, borderRadius: 999, background: '#0B0E17', opacity: 0.55 }} />
-        <span style={{ ...eyebrow }}>{label}</span>
+    <div className="hq-bottomline" role="region" aria-label="Sports and card news" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
+      <button onClick={() => jump(seg + 1)} title="Next league"
+        style={{ ...eyebrow, flexShrink: 0, display: 'inline-flex', alignItems: 'center', gap: 8, padding: '0 16px', minWidth: 112, justifyContent: 'center', background: cur.color, color: '#0B0E17', border: 0, cursor: 'pointer', fontSize: 14 }}>
+        {cur.label}
+      </button>
+      <div style={{ position: 'relative', flex: 1, minWidth: 0, overflow: 'hidden', display: 'flex', alignItems: 'center' }}>
+        <a key={cur.key + idx} className="hq-bl-item" href={it.link} target="_blank" rel="noreferrer"
+          style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '0 18px', minWidth: 0, width: '100%', textDecoration: 'none', color: TEXT, fontSize: 14, fontWeight: 500 }}>
+          <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{it.title}</span>
+          <span className="hq-bl-source" style={{ ...eyebrow, fontSize: 12, color: LABEL, flexShrink: 0, marginLeft: 'auto' }}>{it.source}</span>
+        </a>
+        {!paused && <span key={'p' + cur.key + idx} style={{ position: 'absolute', left: 0, right: 0, bottom: 0, height: 2, background: cur.color, opacity: 0.55, transformOrigin: 'left', animation: 'hqprog ' + HOLD + 'ms linear' }} />}
       </div>
-      <div style={{ overflow: 'hidden', flex: 1, position: 'relative' }}>
-        <div className="hq-track" style={{ animationDuration: (speed || 80) + 's' }}>
-          {row.map((it, i) => (
-            <a key={i} href={it.link || '#'} target="_blank" rel="noreferrer"
-              style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '10px 22px', textDecoration: 'none', borderRight: '1px solid #1A1F31' }}>
-              <span style={{ width: 4, height: 4, borderRadius: 999, background: color, flexShrink: 0 }} />
-              <span style={{ color: '#c4c4c4', fontSize: 13 }}>{it.title}</span>
-            </a>
-          ))}
-        </div>
+      <div style={{ flexShrink: 0, display: 'flex', alignItems: 'center', gap: 2, padding: '0 10px', borderLeft: '1px solid #1C2233' }}>
+        {segments.map((sg, i) => (
+          <button key={sg.key} onClick={() => jump(i)} title={sg.label} aria-label={sg.label}
+            style={{ width: 18, height: 18, padding: 0, background: 'none', border: 0, cursor: 'pointer', display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}>
+            <span style={{ width: i === seg % segments.length ? 8 : 5, height: i === seg % segments.length ? 8 : 5, borderRadius: 999, background: i === seg % segments.length ? sg.color : '#3A4562' }} />
+          </button>
+        ))}
       </div>
     </div>
   )
@@ -277,9 +298,9 @@ export default function Home() {
 
   // Count-up animation for the hero stat cards.
   const [statN, setStatN] = useState({ sets: 0, cards: 0 })
-  const [news, setNews] = useState({ sports: [], tcg: [] })
+  const [news, setNews] = useState({ segments: [] })
   useEffect(() => {
-    fetch('/api/hobby-news').then(r => r.json()).then(setNews).catch(() => {})
+    fetch('/api/hobby-news').then(r => r.json()).then(j => setNews({ segments: j.segments || [] })).catch(() => {})
   }, [])
 
   useEffect(() => {
@@ -606,29 +627,83 @@ export default function Home() {
     }
   }, [sets.length])
 
+  const NAV_ITEMS = [['Sets', () => { goHome(); setSportFilter('All') }, 'browse'], ['Players', () => openView('myplayers'), 'myplayers'], ['Community', () => openView('community'), 'community'], ['My Collection', () => openView('collection'), 'collection']]
+  const [scrolled, setScrolled] = useState(false)
+  const [pastHero, setPastHero] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
+  const [headerQ, setHeaderQ] = useState('')
+  const headerInput = useRef(null)
+  useEffect(() => {
+    const onScroll = () => { setScrolled(window.scrollY > 8); setPastHero(window.scrollY > 460) }
+    const onKey = (e) => {
+      if (e.key === 'Escape') setMenuOpen(false)
+      if (e.key === '/' && !/^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement?.tagName || '')) {
+        e.preventDefault()
+        if (window.innerWidth < 640) return
+        if (isLandingRef.current && window.scrollY <= 460) document.querySelector('.hq-hero input')?.focus()
+        else headerInput.current?.focus()
+      }
+    }
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('keydown', onKey)
+    return () => { window.removeEventListener('scroll', onScroll); window.removeEventListener('keydown', onKey) }
+  }, [])
+  const isLandingRef = useRef(isLanding)
+  isLandingRef.current = isLanding
+  useEffect(() => { document.body.style.overflow = menuOpen ? 'hidden' : ''; return () => { document.body.style.overflow = '' } }, [menuOpen])
+
   return (
+    <>
+      {/* HEADER — spec from Claude Design "CardHQ Header" */}
+      <header className={'hq-header' + (scrolled ? ' hq-scrolled' : '')}>
+        <div className="hq-header-inner">
+          <a className="hq-lockup" href="/" onClick={(e) => { e.preventDefault(); setMenuOpen(false); goHome(); window.scrollTo(0, 0) }} aria-label="CardHQ home">
+            <ScanCMark size={26} bracket="#ECEEF3" accent="#7FA2FF" />
+            <span className="hq-wordmark">CardHQ</span>
+          </a>
+          <nav className="hq-navlinks" aria-label="Main">
+            {NAV_ITEMS.map(([label, fn, v]) => (
+              <button key={label} className="hq-navlink" onClick={fn} aria-current={view === v ? 'page' : undefined}>{label}</button>
+            ))}
+          </nav>
+          <div className="hq-header-right">
+            <form className={'hq-hsearch' + (isLanding && !pastHero ? ' hq-hidden' : '')} role="search"
+              onSubmit={(e) => { e.preventDefault(); const v = headerQ.trim(); if (v) { searchFor(v); setHeaderQ(''); headerInput.current?.blur(); window.scrollTo(0, 0) } }}>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6F788C" strokeWidth="2.2" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
+              <input ref={headerInput} value={headerQ} onChange={(e) => setHeaderQ(e.target.value)} placeholder="Search sets, players..." aria-label="Search sets and players" />
+              <kbd>/</kbd>
+            </form>
+            <AccountChip account={account} onOpenAuth={() => setAuthOpen(true)} />
+            <button className="hq-iconbtn" aria-label="Search" onClick={() => { setMenuOpen(false); goHome(); window.scrollTo(0, 0); setTimeout(() => document.querySelector('.hq-hero input')?.focus(), 50) }}>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
+            </button>
+            <button className="hq-iconbtn" aria-label={menuOpen ? 'Close menu' : 'Open menu'} aria-expanded={menuOpen} onClick={() => setMenuOpen(o => !o)}>
+              {menuOpen
+                ? <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" /></svg>
+                : <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" /></svg>}
+            </button>
+          </div>
+        </div>
+      </header>
+      {menuOpen && (
+        <div className="hq-sheet" role="dialog" aria-label="Menu">
+          {NAV_ITEMS.map(([label, fn, v]) => (
+            <button key={label} className="hq-sheet-row" aria-current={view === v ? 'page' : undefined} onClick={() => { setMenuOpen(false); fn() }}>{label}</button>
+          ))}
+          {!account.session && (
+            <div className="hq-sheet-foot">
+              <button className="hq-signin" onClick={() => { setMenuOpen(false); setAuthOpen(true) }}>Sign in</button>
+            </div>
+          )}
+        </div>
+      )}
     <main className="hq-main" style={{ maxWidth: 1180, margin: '0 auto', padding: '0 24px 90px' }}>
       <style>{'.hq-setcard:hover{transform:translateY(-4px);border-color:#2E3D6B;box-shadow:0 18px 40px -18px rgba(0,0,0,0.9)}@keyframes hqticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}.hq-track{display:inline-flex;white-space:nowrap;animation:hqticker linear infinite}.hq-track:hover{animation-play-state:paused}'}</style>
-      {/* NAV */}
-      <nav className="hq-nav" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', minHeight: 72, padding: '12px 0', boxSizing: 'border-box', flexWrap: 'wrap', columnGap: 40, rowGap: 12 }}>
-        {/* Nav logo — Scan C mark + wordmark */}
-        <div onClick={goHome} style={{ display: 'inline-flex', alignItems: 'center', gap: 12, cursor: 'pointer' }}>
-          <ScanCMark size={30} />
-          <span style={wordmark(24)}>CardHQ</span>
-        </div>
-        <div className="hq-navright" style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', columnGap: 40, rowGap: 12 }}>
-          <div className="hq-navlinks" style={{ display: 'flex', gap: 32, alignItems: 'center', flexWrap: 'wrap' }}>
-            {[['Sets', () => { goHome(); setSportFilter('All') }, 'browse'], ['Players', () => openView('myplayers'), 'myplayers'], /* RPA Tracker + Patch Swaps hidden until ready */ ['Community', () => openView('community'), 'community'], ['My Collection', () => openView('collection'), 'collection']].map(([label, fn, v]) => (
-              <button key={label} onClick={fn} style={{ background: 'none', border: 'none', borderTop: '2px solid transparent', borderBottom: '2px solid ' + (view === v ? ACCENT : 'transparent'), cursor: 'pointer', color: view === v ? '#fff' : '#A1A1AA', fontSize: 14, fontWeight: 600, height: 36, padding: 0, display: 'inline-flex', alignItems: 'center' }}>{label}</button>
-            ))}
-          </div>
-          <AccountChip account={account} onOpenAuth={() => setAuthOpen(true)} />
-        </div>
-      </nav>
 
       <AuthModal open={authOpen} onClose={() => setAuthOpen(false)} account={account} />
       {wantFlash && (
-        <div style={{ position: 'fixed', bottom: 24, right: 24, zIndex: 95, background: ACCENT, color: '#fff', fontWeight: 800, fontSize: 14, padding: '12px 20px', borderRadius: 12, boxShadow: '0 8px 30px #000a' }}>{wantFlash}</div>
+        <div style={{ position: 'fixed', bottom: 56, right: 24, zIndex: 95, background: ACCENT, color: '#fff', fontWeight: 800, fontSize: 14, padding: '12px 20px', borderRadius: 12, boxShadow: '0 8px 30px #000a' }}>{wantFlash}</div>
       )}
 
       {isLanding ? (
@@ -670,15 +745,6 @@ export default function Home() {
               ))}
             </div>
           </section>
-
-          {/* HOBBY WIRE — Sports + TCG news tickers */}
-          {(news.sports.length > 0 || news.tcg.length > 0) && (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 8, margin: '30px 0 8px' }}>
-              <p style={{ ...eyebrow, margin: 0, color: '#8A8A93' }}>Hobby Wire</p>
-              <NewsTicker label="Sports" color="#60a5fa" items={news.sports} speed={90} />
-              <NewsTicker label="TCG" color="#e879f9" items={news.tcg} speed={80} />
-            </div>
-          )}
 
           {/* FILTERS */}
           {(() => {
@@ -1333,5 +1399,7 @@ export default function Home() {
         <span style={{ color: '#6B7080', fontSize: 12 }}>a Coulter Companies product</span>
       </footer>
     </main>
+    <BottomLine segments={news.segments} />
+    </>
   )
 }
