@@ -577,12 +577,7 @@ export default function Home() {
               <button key={label} onClick={fn} style={{ background: 'none', border: 'none', borderTop: '2px solid transparent', borderBottom: '2px solid ' + (view === v ? ACCENT : 'transparent'), cursor: 'pointer', color: view === v ? '#fff' : '#9a9ba3', fontSize: 14, fontWeight: 600, height: 36, padding: 0, display: 'inline-flex', alignItems: 'center' }}>{label}</button>
             ))}
           </div>
-          <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
-            <AccountChip account={account} onOpenAuth={() => setAuthOpen(true)} />
-            <span style={{ ...condensed, display: 'inline-flex', alignItems: 'center', height: 36, boxSizing: 'border-box', padding: '0 16px', fontSize: 13, fontWeight: 700, color: ACCENT, border: '1px solid ' + ACCENT + '55', borderRadius: 10, letterSpacing: '0.05em', whiteSpace: 'nowrap' }}>
-              {statN.sets} SETS
-            </span>
-          </div>
+          <AccountChip account={account} onOpenAuth={() => setAuthOpen(true)} />
         </div>
       </nav>
 
