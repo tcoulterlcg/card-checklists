@@ -379,14 +379,20 @@ export default function Home() {
   }, [sets.length, totalCards])
 
   // push=false when the change comes from Back/Forward (the URL is already right).
-  const nav = (url, push) => { if (push === false) return; try { history.pushState(null, '', url) } catch {} }
+  // Every navigation bumps navSeq; slow loads from an earlier navigation check it and drop their result
+  // (otherwise a late set/player load could replace the page you've since moved to).
+  const navSeq = useRef(0)
+  const nav = (url, push) => { navSeq.current++; if (push === false) return; try { history.pushState(null, '', url) } catch {} }
   const openSet = async (s, push) => {
     setNotice('')
     setActiveSet(s); setGlobalHits(null); setActiveSection('All'); setQuery(''); setActivePlayer(null); setView('browse'); setSetTypeFilter('All'); setSetRunFilter('any'); setSetRcOnly(false); setSetMemFilter('any'); setSecLimit(20); setOpenSecs(new Set())
     nav('?set=' + encodeURIComponent(s.slug), push)
-    try {
-      setSetData(await loadSet(s.slug))
-    } catch (e) { setSetData(null) }
+    const my = navSeq.current
+    setSetData(null)
+    let data = null
+    try { data = await loadSet(s.slug) } catch (e) {}
+    if (my !== navSeq.current) return
+    setSetData(data)
     window.scrollTo(0, 0)
   }
 
@@ -401,12 +407,14 @@ export default function Home() {
     window.scrollTo(0, 0)
   }
   const openPlayerByName = async (name, rawQuery, push) => {
+    const my = ++navSeq.current
     const dir = await loadPlayerDir()
+    if (my !== navSeq.current) return
     const parsed = parseQueryFor(dir, rawQuery || name)
     const hits = matchPlayers(dir, parsed.player || name, 8)
     const exact = hits.find(h => h.name === name) || hits[0]
     if (exact) openPlayer(exact, parsed, hits, push)
-    else setNotice('No player called “' + name + '” in the database.')
+    else { goHome(false); setNotice('No player called “' + name + '” in the database. Try the search below.') }
   }
   // The omnibox: understands "player + 1/1 / auto / rc / season / product".
   const runSearch = async (raw) => {
@@ -442,7 +450,7 @@ export default function Home() {
       if (p[0].toLowerCase().includes(term)) players.push({ id: i, name: p[0], cards: p[2], sport: dir.sports[p[3]], minYear: p[4], maxYear: p[5], shard: p[1] })
     }
     players.sort((a, b) => b.cards - a.cards)
-    const toks = term.split(/\s+/).filter(Boolean)
+    const toks = norm(term).split(' ').filter(Boolean)
     const setHits = sets.filter(x => { const n = x.name.toLowerCase(); return toks.every(t => n.includes(t)) }).sort((a, b) => (b.year || 0) - (a.year || 0)).slice(0, 60)
     setGlobalHits({ players, sets: setHits }); setSearching(false); setQuery(raw == null ? query : raw)
     nav('?search=' + encodeURIComponent(term), push)
@@ -680,7 +688,8 @@ export default function Home() {
   // Deep links and Back/Forward: ?player=Name[&q=raw] · ?set=slug · ?view=community · ?search=term
   const applyUrl = () => {
     const sp = new URLSearchParams(location.search)
-    const pl = sp.get('player'), st = sp.get('set'), v = sp.get('view'), sr = sp.get('search')
+    const pl = sp.get('player'), v = sp.get('view'), sr = sp.get('search')
+    const st = sp.get('set') && sp.get('set').trim().toLowerCase().replace(/\/+$/, '')   // tolerate pasted links: case, trailing slash
     if (pl) { const q = sp.get('q'); setQuery(q || pl); openPlayerByName(pl, q, false) }
     else if (st) {
       const s = sets.find(x => x.slug === st)
@@ -1014,7 +1023,9 @@ export default function Home() {
         </div>
       ) : null}
 
-      {activeSet && setData ? (
+      {activeSet && !setData ? (
+        <p style={{ color: '#8A8A93', fontSize: 14, padding: '24px 0' }}>Loading {activeSet.name}…</p>
+      ) : activeSet && setData ? (
         <section>
           <button onClick={() => goHome()}
             style={{ background: 'none', border: 'none', color: ACCENT_TEXT, fontSize: 13, fontWeight: 600, cursor: 'pointer', padding: 0, marginBottom: 14 }}>

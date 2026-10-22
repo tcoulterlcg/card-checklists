@@ -19,7 +19,7 @@ const renames = new Map()
 const SKIP = /^(index|search-index|rpa-index|patch-swaps|redirects)\.json$/
 const SPORTS = new Set(['Baseball', 'Football', 'Basketball', 'Hockey', 'Soccer', 'UFC', 'Boxing', 'Wrestling', 'Racing', 'Golf', 'Tennis', 'Lacrosse', 'Bowling', 'Cricket', 'Multi-Sport'])
 
-const JUNK = /adsbygoogle|window\.|\.push\(\{|^(toploaders?.*|sleeves|piece wall display)$/i
+const JUNK = /adsbygoogle|window\.|\.push\(\{|^(toploaders?.*|sleeves|piece wall display)$|\beBay\b/i   // eBay listing titles scraped as cards
 const TEAM_TAG = /^(one of ones|all rookies|top rookies|retired players|no team|rookies|veterans|legends)$/i
 const key = (s) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9 ]+/g, '').replace(/\s+/g, ' ').trim()
 
@@ -46,6 +46,26 @@ const files = readdirSync(dataDir).filter(f => f.endsWith('.json') && !SKIP.test
 const sets = []
 for (const f of files) {
   try { const s = JSON.parse(readFileSync(new URL(f, dataDir), 'utf8')); if (SPORTS.has(s.sport)) sets.push([f, s]) } catch {}
+}
+
+// Affiliate text scraped from Cardboard Connection ("Shop parallels on eBay.") in pack-odds
+// notes and team fields, every sport.
+const SHOP = /\s*[-*·]?\s*(?:Shop|Buy)(?: [A-Za-z0-9'.]+){0,3}? (?:on )?eBay\.?/gi
+let shopFixed = 0
+for (const f of files) {
+  const fp = new URL(f, dataDir); let s2; try { s2 = JSON.parse(readFileSync(fp, 'utf8')) } catch { continue }
+  let ch = false
+  for (const x of s2.sections || []) {
+    if (x.odds && /eBay/i.test(x.odds) && x.odds.match(SHOP)) { x.odds = x.odds.replace(SHOP, '').replace(/\s+·\s*$/, '').replace(/\s{2,}/g, ' ').trim(); ch = true; shopFixed++ }
+    for (const c of x.cards || []) if (c.t && /eBay/i.test(c.t) && c.t.match(SHOP)) {
+      let t = c.t.replace(SHOP, '').trim().replace(/\s*[-*]$/, '').trim()
+      const pr = t.match(/^(.*?\S)\s+#?\/\s*(\d{1,5})$/); if (pr) { t = pr[1]; const fx = new Set((c.x || '').split(/\s+/).filter(Boolean)); fx.add('/' + pr[2]); c.x = [...fx].join(' ') }
+      t = t.replace(/\s+RC$/, (m) => { const fx = new Set((c.x || '').split(/\s+/).filter(Boolean)); fx.add('RC'); c.x = [...fx].join(' '); return '' })
+      c.t = t; ch = true; shopFixed++
+    }
+  }
+  if (ch && !DRY) writeFileSync(fp, JSON.stringify(s2))
+  const k = sets.findIndex(([ff]) => ff === f); if (ch && k >= 0) sets[k][1] = s2
 }
 
 // Pass 1: spelling counts of clean names.
@@ -147,6 +167,6 @@ for (const [f, s] of sets) {
   if (s.sections.length !== before) changed = true
   if (changed) { stats.files++; if (!DRY) writeFileSync(new URL(f, dataDir), JSON.stringify(s)) }
 }
-console.log(`duplicate rows merged ${stats.merged}, team fields cleaned ${stats.team}, junk rows dropped ${stats.junk}, names tidied ${stats.tidied}, encoding repaired ${stats.repaired}, spellings unified ${stats.unified}, files changed ${stats.files}${DRY ? ' (dry run)' : ''}`)
+console.log(`affiliate text removed ${shopFixed}, duplicate rows merged ${stats.merged}, team fields cleaned ${stats.team}, junk rows dropped ${stats.junk}, names tidied ${stats.tidied}, encoding repaired ${stats.repaired}, spellings unified ${stats.unified}, files changed ${stats.files}${DRY ? ' (dry run)' : ''}`)
 if (REPORT) writeFileSync(REPORT.slice(9), [...renames.entries()].sort((a, b) => b[1] - a[1]).map(([k, n]) => n + '\t' + k).join('\n'))
 if (stats.unrepaired.size) console.log(`unrepaired (${stats.unrepaired.size}):`, [...stats.unrepaired].slice(0, 40).join(' | '))
