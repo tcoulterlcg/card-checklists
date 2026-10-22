@@ -563,7 +563,8 @@ const cnt = { marginLeft: 'auto', color: '#6B7080', fontSize: 12 }
 export function MyPlayersPanel({ myPlayers, onOpenPlayer, dirPlayers }) {
   const [dir, setDir] = useState(null)
   useEffect(() => { loadPlayerDir().then(setDir) }, [])
-  const resolve = (name) => dir ? dir.players.findIndex(p => p[0] === name) : -1
+  // exact name, else the same name spelled differently (saved before a data clean-up: "Shaquille ONeal")
+  const resolve = (name) => { if (!dir) return -1; const i = dir.players.findIndex(p => p[0] === name); if (i >= 0) return i; const k = norm(name); return dir.players.findIndex(p => norm(p[0]) === k) }
   return (
     <div className="hq-panel" style={{ background: 'linear-gradient(140deg, #0f1526, #0F1320)', border: '1px solid ' + ACCENT + '33', borderRadius: 18, padding: '26px 28px' }}>
       <h1 style={{ ...display, fontSize: 36, margin: 0, lineHeight: 1 }}>My Players</h1>
@@ -578,7 +579,7 @@ export function MyPlayersPanel({ myPlayers, onOpenPlayer, dirPlayers }) {
                 <Initials name={name} color={SPORT_COLORS[sport] || ACCENT} />
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <button onClick={() => onOpenPlayer(name)} style={{ ...title(15), background: 'none', border: 'none', color: '#EDEDEF', cursor: 'pointer', padding: 0, textAlign: 'left', lineHeight: 1.05 }}>{name}</button>
-                  <p style={{ margin: '3px 0 0', color: '#8A8A93', fontSize: 12 }}>{p ? sport + ' · ' + p[2].toLocaleString() + ' cards' : '…'}</p>
+                  <p style={{ margin: '3px 0 0', color: '#8A8A93', fontSize: 12 }}>{p ? sport + ' · ' + p[2].toLocaleString() + ' cards' : dir ? 'Not found in the database' : '…'}</p>
                 </div>
                 <button aria-label={'Remove ' + name} onClick={() => myPlayers.toggle(name)} style={{ background: 'none', border: '1px solid #232A3E', color: '#8A8A93', borderRadius: 8, width: 32, height: 32, cursor: 'pointer', fontFamily: 'inherit' }}>×</button>
               </div>

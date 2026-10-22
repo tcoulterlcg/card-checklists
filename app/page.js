@@ -266,16 +266,40 @@ export default function Home() {
     else { setSortField(field); setSortDir(field === 'n' ? 'asc' : 'asc') }
   }
 
-  // Load the compact card index once (shared by player search + team browse).
+  // Browse filters load small slices built by build-search-index.mjs instead of
+  // the full 94 MB card index (which crashes phones):
+  //   TCG game  -> /data/teams/<game>.json (all of that game's cards)
+  //   team sport -> /data/teams/<sport>.json (team list), then one file per team
+  // searchIndex holds whichever slice is current, in the same shape as before.
+  const sportFile = (sp) => sp.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
+  const EMPTY_IDX = { slugs: [], sections: [], teams: [], rows: [] }
+  const [teamList, setTeamList] = useState(null) // { sport, teams: [[name, cards]] }
+  const [sliceLoading, setSliceLoading] = useState(false)
+  const getJson = async (url) => { try { const r = await fetch(url); if (!r.ok) throw 0; return await r.json() } catch { return null } }
   const ensureSearchIndex = async () => {
-    if (searchIndex) return searchIndex
-    try {
-      const r = await fetch('/data/search-index.json')
-      const idx = await r.json()
-      setSearchIndex(idx); return idx
-    } catch { const empty = { slugs: [], sections: [], teams: [], rows: [] }; setSearchIndex(empty); return empty }
+    const sp = sportFilter
+    if (TCG_SET.has(sp)) {
+      if (searchIndex && searchIndex.__key === sp) return searchIndex
+      const j = (await getJson('/data/teams/' + sportFile(sp) + '.json')) || { ...EMPTY_IDX }
+      j.__key = sp; setSearchIndex(j); return j
+    }
+    if (!teamList || teamList.sport !== sp) {
+      const j = await getJson('/data/teams/' + sportFile(sp) + '.json')
+      setTeamList({ sport: sp, teams: (j && j.teams) || [] })
+    }
+    return searchIndex
   }
   const openTeamBrowse = async () => { setTeamBrowse(true); setTeamLoading(true); await ensureSearchIndex(); setTeamLoading(false) }
+  // Load one team's slice when a team is picked (team sports only).
+  useEffect(() => {
+    if (TCG_SET.has(sportFilter) || teamFilter === 'All' || !teamList || teamList.sport !== sportFilter) return
+    const i = teamList.teams.findIndex(([t]) => t === teamFilter)
+    if (i < 0) return
+    const key = sportFilter + '|' + teamFilter
+    if (searchIndex && searchIndex.__key === key) return
+    setSliceLoading(true)
+    getJson('/data/teams/' + sportFile(sportFilter) + '/' + i + '.json').then(j => { const x = j || { ...EMPTY_IDX }; x.__key = key; setSearchIndex(x); setSliceLoading(false) })
+  }, [sportFilter, teamFilter, teamList])
 
   // Count-up animation for the hero stat cards.
   const [statN, setStatN] = useState({ sets: 0, cards: 0 })
@@ -497,25 +521,15 @@ export default function Home() {
   // field sometimes holds print-run/parallel junk ("#/6", "/199"), so keep only
   // strings that read like a real team name and appear on at least a few cards.
   const teamsForSport = useMemo(() => {
-    if (!searchIndex || !oneSport || isTcg) return []
-    const { slugs, teams, rows } = searchIndex
-    const count = new Map()
-    for (const row of rows) {
-      const tid = row[4]
-      if (tid < 0) continue
-      if (slugSport[slugs[row[1]]] === sportFilter) count.set(tid, (count.get(tid) || 0) + 1)
-    }
-    const isTeam = (t) => t && /[A-Za-z]{3,}/.test(t) && !/^#/.test(t) && !/\d\s*\/\s*\d/.test(t) && !/^\/?\s*\d/.test(t) && t.length >= 4
-    const out = []
-    for (const [tid, n] of count) { const t = teams[tid]; if (n >= 3 && isTeam(t)) out.push(t) }
-    return out.sort((a, b) => a.localeCompare(b))
-  }, [searchIndex, oneSport, sportFilter, slugSport, isTcg])
+    if (!teamList || teamList.sport !== sportFilter || !oneSport || isTcg) return []
+    return teamList.teams.map(([t]) => t)
+  }, [teamList, oneSport, sportFilter, isTcg])
 
   // TCG filter options for the selected game: card names (base name, version
   // suffixes dropped), rarities and card types, most common first.
   const tcgOptions = useMemo(() => {
     const empty = { names: [], rarities: [], types: [] }
-    if (!searchIndex || !isTcg) return empty
+    if (!searchIndex || !isTcg || searchIndex.__key !== sportFilter) return empty
     const { slugs, teams, rows } = searchIndex
     const names = new Map(), rar = new Map(), typ = new Map()
     const bump = (m, k) => { if (k) m.set(k, (m.get(k) || 0) + 1) }
@@ -529,7 +543,7 @@ export default function Home() {
 
   // Every card of the selected team within the selected sport, sorted.
   const teamHits = useMemo(() => {
-    if (!searchIndex || !browseActive) return []
+    if (!searchIndex || !browseActive || searchIndex.__key !== (isTcg ? sportFilter : sportFilter + '|' + teamFilter)) return []
     const { slugs, sections, teams, rows } = searchIndex
     const setMeta = {}; for (const s of sets) setMeta[s.slug] = s
     const out = []
@@ -1300,7 +1314,8 @@ export default function Home() {
                 <span style={{ flex: '2 1 0', minWidth: 0, color: '#8A8A93', fontSize: 12.5 }}>{c.set}{c.section ? ' · ' + c.section : ''}</span>
               </button>
             ))}
-            {teamHits.length === 0 && <p style={{ padding: 20, color: '#6B7080', fontSize: 14 }}>No {isTcg ? 'matching cards' : 'cards found for ' + teamFilter} in {sportFilter}.</p>}
+            {sliceLoading && <p style={{ padding: 20, color: '#6B7080', fontSize: 14 }}>Loading {teamFilter} cards…</p>}
+            {!sliceLoading && teamHits.length === 0 && <p style={{ padding: 20, color: '#6B7080', fontSize: 14 }}>No {isTcg ? 'matching cards' : 'cards found for ' + teamFilter} in {sportFilter}.</p>}
           </div>
         </section>
       ) : (
