@@ -5,7 +5,7 @@
 // index.json lists sets; each set file carries sections -> cards.
 import { useDeferredValue, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { useAccount, AccountChip, AuthModal, CollectionView, CommunityView } from '../components/community'
-import { addWant } from '../lib/supa'
+import { addWant, removeWant, myWantlist } from '../lib/supa'
 import { Omnibox, PlayerPage, MyPlayersPanel, useMyPlayers, loadPlayerDir, loadTopPlayers, seasonLabel, MemBadge, MemChip, memCodeOf } from '../components/player'
 import { norm, parseQuery, parseQueryFor, matchPlayers, TYPE, typeLabel, TYPE_COLORS, serialLabel } from '../lib/query'
 import { loadSet, loadIndex } from '../lib/catalog'
@@ -655,13 +655,28 @@ export default function Home() {
   }
   const openView = (v, push) => { setNotice(''); nav('?view=' + v, push); setView(v); setActiveSet(null); setSetData(null); setGlobalHits(null); setActivePlayer(null); window.scrollTo(0, 0) }
   // Wantlist add — whole set or a single card/parallel from the set page.
+  // What's already on the signed-in user's wantlist, so card rows can show ✓ (and toggle off).
+  const [wanted, setWanted] = useState(() => new Map())   // key -> row id
+  const wantKey = (it) => [it.set_slug, it.card_n == null ? '' : String(it.card_n), it.section || ''].join('|')
+  const loadWanted = async (uid) => { const rows = await myWantlist(uid); setWanted(new Map(rows.map(r => [wantKey(r), r.id]))) }
+  useEffect(() => { if (account.session?.user?.id) loadWanted(account.session.user.id); else setWanted(new Map()) }, [account.session?.user?.id])
+  const normWant = (item) => (item.section && (item.card_n == null || item.card_n === '')) ? { ...item, card_n: '—' + (item.player || '') } : item
+  const isWanted = (item) => wanted.has(wantKey(normWant(item)))
   const wantIt = async (item) => {
     if (!account.session) { setAuthOpen(true); return }
     // a single card with no number is still a single card, not the whole set
-    if (item.section && (item.card_n == null || item.card_n === '')) item = { ...item, card_n: '—' + (item.player || '') }
-    const r = await addWant(account.session.user.id, item)
-    if (r.error) setWantFlash('Couldn’t add to your wantlist — ' + r.error.message)
-    else setWantFlash(r.duplicate ? 'Already on your wantlist' : item.card_n ? (String(item.card_n).startsWith('—') ? item.player : '#' + item.card_n) + ' added to your wantlist' : 'Set added to your wantlist')
+    item = normWant(item)
+    const label = item.card_n ? (String(item.card_n).startsWith('—') ? item.player : '#' + item.card_n) : 'Set'
+    const id = wanted.get(wantKey(item))
+    if (id != null && item.card_n) {
+      const r = await removeWant(id)
+      if (r.error) setWantFlash('Couldn’t remove — ' + r.error.message)
+      else { setWanted(m => { const n = new Map(m); n.delete(wantKey(item)); return n }); setWantFlash(label + ' removed from your wantlist') }
+    } else {
+      const r = await addWant(account.session.user.id, item)
+      if (r.error) setWantFlash('Couldn’t add to your wantlist — ' + r.error.message)
+      else { setWantFlash(r.duplicate ? 'Already on your wantlist' : label + ' added to your wantlist'); loadWanted(account.session.user.id) }
+    }
     setTimeout(() => setWantFlash(''), 2500)
   }
 
@@ -1192,7 +1207,7 @@ export default function Home() {
                       <td style={{ padding: '9px 14px' }}><Chip color={r.kind === 'PA' ? '#e11d48' : r.kind === 'AU' ? '#60a5fa' : r.kind === 'PATCH' ? '#16a34a' : r.kind === 'RELIC' ? '#f97316' : '#9ca3af'}>{r.kind === 'PA' ? 'PATCH AUTO' : r.kind === 'AU' ? 'AUTO' : r.kind === 'OTHER' ? (r.x === 'RC' ? 'RC' : 'INSERT') : r.kind}</Chip></td>
                       <td style={{ padding: '9px 14px' }}>{r.memc ? <MemChip code={r.memc} /> : <span style={{ color: '#444' }}>—</span>}</td>
                       <td style={{ padding: '9px 14px', textAlign: 'right', whiteSpace: 'nowrap' }}>{r.serial === 1 ? <span style={{ background: ACCENT, color: '#fff', padding: '2px 8px', borderRadius: 999, fontSize: 12, fontWeight: 700 }}>1/1</span> : r.serial > 0 ? '/' + r.serial : <span style={{ color: '#6B7080' }}>—</span>}</td>
-                      <td style={{ padding: '9px 14px', textAlign: 'right' }}><button aria-label="Add to wantlist" onClick={() => wantIt({ set_slug: setData.slug, set_name: setData.name, card_n: r.n, section: r.section, player: r.p })} style={{ background: 'none', border: '1px solid #232A3E', color: '#A1A1AA', borderRadius: 6, width: 32, height: 32, cursor: 'pointer', fontFamily: 'inherit' }}>+</button></td>
+                      <td style={{ padding: '9px 14px', textAlign: 'right' }}>{(() => { const it = { set_slug: setData.slug, set_name: setData.name, card_n: r.n, section: r.section, player: r.p }, on = isWanted(it); return <button aria-label={on ? 'On your wantlist — remove' : 'Add to wantlist'} aria-pressed={on} onClick={() => wantIt(it)} style={{ background: on ? ACCENT : 'none', border: '1px solid ' + (on ? ACCENT : '#232A3E'), color: on ? '#fff' : '#A1A1AA', borderRadius: 6, width: 32, height: 32, cursor: 'pointer', fontFamily: 'inherit' }}>{on ? '✓' : '+'}</button> })()}</td>
                     </tr>
                   ))}</tbody>
                 </table>
@@ -1232,9 +1247,10 @@ export default function Home() {
                       </span>
                       <span className="hq-col-team" style={{ flex: '1 1 auto', minWidth: 0, color: '#8A8A93', fontSize: 13 }}>{c.t || ''}</span>
                       <span className="hq-col-flag" style={{ flex: setIsTcg ? '0 0 110px' : '0 0 70px', textAlign: 'right' }}>{c.x ? <Chip color={c.x === 'RC' ? '#4ade80' : '#8A8A93'}>{c.x}</Chip> : null}</span>
-                      <button title="Add this card (and its parallel section) to your wantlist"
-                        onClick={() => wantIt({ set_slug: setData.slug, set_name: setData.name, card_n: c.n, section: sec.title, player: c.p })}
-                        aria-label="Add to wantlist" style={{ flex: '0 0 32px', height: 32, background: 'none', border: '1px solid #232A3E', color: '#7a7a7a', borderRadius: 6, fontSize: 14, cursor: 'pointer', padding: 0 }}>+</button>
+                      {(() => { const it = { set_slug: setData.slug, set_name: setData.name, card_n: c.n, section: sec.title, player: c.p }, on = isWanted(it); return (
+                      <button title={on ? 'On your wantlist — click to remove' : 'Add this card (and its parallel section) to your wantlist'}
+                        onClick={() => wantIt(it)} aria-pressed={on}
+                        aria-label={on ? 'On your wantlist — remove' : 'Add to wantlist'} style={{ flex: '0 0 32px', height: 32, background: on ? ACCENT : 'none', border: '1px solid ' + (on ? ACCENT : '#232A3E'), color: on ? '#fff' : '#7a7a7a', borderRadius: 6, fontSize: 14, cursor: 'pointer', padding: 0 }}>{on ? '✓' : '+'}</button>) })()}
                     </div>
                   ))}
                   {sorted.length > 200 && !openSecs.has(sec.title) && (
