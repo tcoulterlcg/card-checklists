@@ -53,14 +53,14 @@ export function AuthModal({ open, onClose, account }) {
       <div onClick={(e) => e.stopPropagation()} style={{ ...card, width: 'min(420px, 92vw)', padding: 28 }}>
         {!session ? (
           <>
-            <h3 style={{ ...title(21), margin: 0, color: '#fff' }}>Join CardHQ</h3>
-            <p style={{ color: '#A1A1AA', fontSize: 13.5, lineHeight: 1.6, margin: '10px 0 18px' }}>Track your wantlist, check off cards as you collect them, upload photos, and share accomplishments. We email you a magic sign-in link — no password.</p>
+            <h3 style={{ ...title(24), margin: 0, color: '#fff' }}>Join CardHQ</h3>
+            <p style={{ color: '#A1A1AA', fontSize: 14, lineHeight: 1.6, margin: '10px 0 18px' }}>Track your wantlist, check off cards as you collect them, upload photos, and share accomplishments. We email you a magic sign-in link — no password.</p>
             {sent ? (
               <p style={{ color: ACCENT_TEXT, fontSize: 14, fontWeight: 600 }}>Check your email — the sign-in link is on its way.</p>
             ) : (
               <>
                 <input style={input} type="email" placeholder="you@email.com" value={email} onChange={(e) => setEmail(e.target.value)} />
-                {err && <p style={{ color: '#f87171', fontSize: 12.5, margin: '8px 0 0' }}>{err}</p>}
+                {err && <p style={{ color: '#f87171', fontSize: 13, margin: '8px 0 0' }}>{err}</p>}
                 <button style={{ ...btnAccent, width: '100%', marginTop: 12 }} onClick={async () => {
                   setErr('')
                   const { error } = await supa.auth.signInWithOtp({ email, options: { emailRedirectTo: typeof window !== 'undefined' ? window.location.origin : undefined } })
@@ -71,10 +71,10 @@ export function AuthModal({ open, onClose, account }) {
           </>
         ) : needsProfile ? (
           <>
-            <h3 style={{ ...title(21), margin: 0, color: '#fff' }}>Pick a username</h3>
-            <p style={{ color: '#A1A1AA', fontSize: 13.5, margin: '10px 0 16px' }}>This is how you appear on wantlists and in the community.</p>
+            <h3 style={{ ...title(24), margin: 0, color: '#fff' }}>Pick a username</h3>
+            <p style={{ color: '#A1A1AA', fontSize: 14, margin: '10px 0 16px' }}>This is how you appear on wantlists and in the community.</p>
             <input style={input} placeholder="e.g. patchhunter99" value={username} onChange={(e) => setUsername(e.target.value.replace(/[^a-zA-Z0-9_]/g, ''))} />
-            {err && <p style={{ color: '#f87171', fontSize: 12.5, margin: '8px 0 0' }}>{err}</p>}
+            {err && <p style={{ color: '#f87171', fontSize: 13, margin: '8px 0 0' }}>{err}</p>}
             <button style={{ ...btnAccent, width: '100%', marginTop: 12 }} onClick={async () => {
               setErr('')
               if (username.length < 3) { setErr('At least 3 characters.'); return }
@@ -85,7 +85,7 @@ export function AuthModal({ open, onClose, account }) {
           </>
         ) : (
           <>
-            <h3 style={{ ...title(19), margin: 0, color: '#fff' }}>You're signed in</h3>
+            <h3 style={{ ...title(20), margin: 0, color: '#fff' }}>You're signed in</h3>
             <button style={{ ...btnAccent, width: '100%', marginTop: 16 }} onClick={onClose}>Start collecting</button>
           </>
         )}
@@ -119,8 +119,8 @@ export function CollectionView({ account, indexSets, onOpenAuth, onOpenSet }) {
 
   if (!session) return (
     <div className="hq-panel" style={{ ...card, padding: 40, textAlign: 'center' }}>
-      <h2 style={{ ...title(26), margin: 0, color: '#fff' }}>Track your collection</h2>
-      <p style={{ color: '#A1A1AA', maxWidth: 480, margin: '12px auto 20px', fontSize: 14.5, lineHeight: 1.6 }}>Build a wantlist of cards, parallels, or whole sets. Check cards off as you land them and upload photos of your copies.</p>
+      <h2 style={{ ...title(32), margin: 0, color: '#fff' }}>Track your collection</h2>
+      <p style={{ color: '#A1A1AA', maxWidth: 480, margin: '12px auto 20px', fontSize: 14, lineHeight: 1.6 }}>Build a wantlist of cards, parallels, or whole sets. Check cards off as you land them and upload photos of your copies.</p>
       <button style={btnAccent} onClick={onOpenAuth}>Sign in to start</button>
     </div>
   )
@@ -153,18 +153,18 @@ export function CollectionView({ account, indexSets, onOpenAuth, onOpenSet }) {
       }} />
       {notice && <div style={{ ...card, borderColor: ACCENT, padding: '14px 18px', marginBottom: 18, color: ACCENT_TEXT, fontWeight: 600, fontSize: 14 }}>{notice}</div>}
       <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', flexWrap: 'wrap', gap: 10, marginBottom: 18 }}>
-        <h1 style={{ ...display, fontSize: 38, margin: 0 }}>My Collection</h1>
+        <h1 style={{ ...display, fontSize: 40, margin: 0 }}>My Collection</h1>
         <span style={{ color: '#8A8A93', fontSize: 13 }}>{(wants || []).length} wantlist items · {(collected || []).length} cards collected</span>
       </div>
 
       {activeSlug && setData ? (
         <div>
           <button style={{ ...btnGhost, marginBottom: 16 }} onClick={() => setActiveSlug(null)}>← Back to wantlist</button>
-          <h2 style={{ ...title(21), margin: '0 0 4px' }}>{setData.name}</h2>
+          <h2 style={{ ...title(24), margin: '0 0 4px' }}>{setData.name}</h2>
           <p style={{ color: '#8A8A93', fontSize: 13, margin: '0 0 16px' }}>Check off cards as you collect them. {grails.some(g => g.set_slug === activeSlug) && <span style={{ color: ACCENT_TEXT, fontWeight: 700 }}>★ GRAIL SET — completion is site-verified and celebrated.</span>}</p>
           {setData.sections.map((sec, si) => (
             <div key={si} style={{ marginBottom: 18 }}>
-              <h3 style={{ ...title(15), color: ACCENT_TEXT, margin: '0 0 8px' }}>{sec.title} <span style={{ color: '#6B7080', fontWeight: 600 }}>({sec.cards.length})</span></h3>
+              <h3 style={{ ...title(16), color: ACCENT_TEXT, margin: '0 0 8px' }}>{sec.title} <span style={{ color: '#6B7080', fontWeight: 600 }}>({sec.cards.length})</span></h3>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(260px, 100%), 1fr))', gap: 6 }}>
                 {sec.cards.map((c, ci) => {
                   const key = activeSlug + '||' + c.n
@@ -181,8 +181,8 @@ export function CollectionView({ account, indexSets, onOpenAuth, onOpenSet }) {
                       <span style={{ color: '#8A8A93', fontSize: 12, minWidth: 34 }}>{c.n}</span>
                       <span style={{ color: isC ? '#9fd18a' : '#D4D4D8', fontSize: 13, fontWeight: 600, flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{c.p}</span>
                       {isC && (rec?.image_url
-                        ? <a href={rec.image_url} target="_blank" rel="noreferrer" style={{ fontSize: 11, color: ACCENT_TEXT }}>photo</a>
-                        : <button onClick={() => { setUploadTarget(rec?.id); fileRef.current?.click() }} style={{ background: 'none', border: '1px solid #232A3E', color: '#8A8A93', fontSize: 10.5, borderRadius: 6, padding: '2px 7px', cursor: 'pointer' }}>+ photo</button>)}
+                        ? <a href={rec.image_url} target="_blank" rel="noreferrer" style={{ fontSize: 12, color: ACCENT_TEXT }}>photo</a>
+                        : <button onClick={() => { setUploadTarget(rec?.id); fileRef.current?.click() }} style={{ background: 'none', border: '1px solid #232A3E', color: '#8A8A93', fontSize: 12, borderRadius: 6, padding: '2px 7px', cursor: 'pointer' }}>+ photo</button>)}
                     </div>
                   )
                 })}
@@ -194,7 +194,7 @@ export function CollectionView({ account, indexSets, onOpenAuth, onOpenSet }) {
         <>
           {(wants || []).length === 0 && (
             <div style={{ ...card, padding: 28, marginBottom: 18 }}>
-              <p style={{ color: '#A1A1AA', margin: 0, fontSize: 14.5 }}>Your wantlist is empty. Browse any set and hit <b style={{ color: ACCENT_TEXT }}>+ Wantlist</b> — or add whole sets, single cards, or specific parallels.</p>
+              <p style={{ color: '#A1A1AA', margin: 0, fontSize: 14 }}>Your wantlist is empty. Browse any set and hit <b style={{ color: ACCENT_TEXT }}>+ Wantlist</b> — or add whole sets, single cards, or specific parallels.</p>
             </div>
           )}
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(340px, 100%), 1fr))', gap: 14 }}>
@@ -204,8 +204,8 @@ export function CollectionView({ account, indexSets, onOpenAuth, onOpenSet }) {
               const mine = (collected || []).filter(c => c.set_slug === slug).length
               return (
                 <div key={slug} style={{ ...card, padding: '18px 20px' }}>
-                  <p style={{ ...title(15), margin: 0, color: '#fff' }}>{g.name}</p>
-                  <p style={{ color: '#8A8A93', fontSize: 12.5, margin: '4px 0 10px' }}>
+                  <p style={{ ...title(16), margin: 0, color: '#fff' }}>{g.name}</p>
+                  <p style={{ color: '#8A8A93', fontSize: 13, margin: '4px 0 10px' }}>
                     {g.items.some(i => !i.card_n) ? 'Full set wanted' : `${g.items.length} card${g.items.length === 1 ? '' : 's'} wanted`}
                     {total ? ` · ${mine}/${total} collected` : ''}
                     {grails.some(x => x.set_slug === slug) && <span style={{ color: ACCENT_TEXT, fontWeight: 700 }}> · ★ GRAIL</span>}
@@ -271,7 +271,7 @@ export function CommunityView({ account, indexSets, onOpenAuth }) {
     <section>
       <div style={{ background: 'linear-gradient(140deg, #0f1526, #0F1320)', border: '1px solid ' + ACCENT + '33', borderRadius: 18, padding: 30, marginBottom: 22 }} className="hq-panel">
         <h1 style={{ ...display, fontSize: 40, margin: 0, lineHeight: 1 }}>Community</h1>
-        <p style={{ color: '#aaa', fontSize: 15, lineHeight: 1.6, maxWidth: 720, margin: '14px 0 0' }}>
+        <p style={{ color: '#aaa', fontSize: 16, lineHeight: 1.6, maxWidth: 720, margin: '14px 0 0' }}>
           Collecting accomplishments from the CardHQ community — completed sets, finished rainbows, grail pulls. Grail-tier completions are verified and celebrated.
         </p>
         <div style={{ marginTop: 18 }}>
@@ -326,12 +326,12 @@ export function CommunityView({ account, indexSets, onOpenAuth }) {
               <div key={p.id} style={{ ...card, padding: '20px 22px', border: isGrail ? '1px solid ' + ACCENT : card.border, boxShadow: isGrail ? '0 0 24px ' + ACCENT + '22' : 'none' }}>
                 {isGrail && <p style={{ ...eyebrow, margin: '0 0 8px', color: ACCENT_TEXT }}>★ {p.grail_tier === 'extreme' ? 'Extreme difficulty' : 'Hard'} · verified grail set</p>}
                 <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 8, flexWrap: 'wrap' }}>
-                  <span style={{ width: 30, height: 30, borderRadius: '50%', background: '#232A3E', color: ACCENT_TEXT, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, fontSize: 14 }}>{(p.profiles?.username || '?')[0].toUpperCase()}</span>
+                  <span style={{ width: 30, height: 30, borderRadius: '50%', background: '#232A3E', color: ACCENT_TEXT, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: 14 }}>{(p.profiles?.username || '?')[0].toUpperCase()}</span>
                   <span style={{ color: '#D4D4D8', fontWeight: 700, fontSize: 14 }}>{p.profiles?.username || 'collector'}</span>
                   <span style={{ color: '#6B7080', fontSize: 12 }}>{new Date(p.created_at).toLocaleDateString()}</span>
                   {achLabel && <span style={{ ...eyebrow, marginLeft: 'auto', background: isGrail ? ACCENT : '#1A1F31', color: isGrail ? '#fff' : '#A1A1AA', padding: '4px 10px', borderRadius: 999, fontSize: 12 }}>{achLabel}</span>}
                 </div>
-                <h3 style={{ ...title(19), margin: 0, color: '#fff', lineHeight: 1.15 }}>{p.title}</h3>
+                <h3 style={{ ...title(20), margin: 0, color: '#fff', lineHeight: 1.15 }}>{p.title}</h3>
                 {p.body && <p style={{ color: '#b5b5b5', fontSize: 14, lineHeight: 1.6, margin: '8px 0 0' }}>{p.body}</p>}
                 <div style={{ display: 'flex', gap: 14, marginTop: 14, alignItems: 'center' }}>
                   <button onClick={async () => { if (!session) { onOpenAuth(); return } await react(p.id, session.user.id, 'fire'); forumFeed().then(setFeed) }}

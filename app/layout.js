@@ -33,7 +33,7 @@ body { overflow-x: clip; }
 .hq-hsearch:focus-within { border-color: #3B6EF5; }
 .hq-hsearch input { flex: 1; min-width: 0; background: none; border: 0; outline: none; color: #ECEEF3; font: 400 13px 'Inter', system-ui, sans-serif; }
 .hq-hsearch input::placeholder { color: #6F788C; }
-.hq-hsearch kbd { font: 500 11px 'IBM Plex Mono', ui-monospace, monospace; color: #8A93A8; border: 1px solid #2A3247; border-radius: 4px; padding: 1px 5px; }
+.hq-hsearch kbd { font: 500 12px 'Inter', system-ui, sans-serif; color: #8A93A8; border: 1px solid #2A3247; border-radius: 4px; padding: 1px 5px; }
 .hq-hsearch.hq-hidden { opacity: 0; pointer-events: none; }
 .hq-signin { height: 42px; padding: 0 18px; box-sizing: border-box; background: #151A27; border: 1px solid #2A3247; border-radius: 8px; color: #ECEEF3; font: 700 16px 'Barlow Condensed', 'Arial Narrow', sans-serif; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; white-space: nowrap; transition: background 120ms, border-color 120ms; }
 .hq-signin:hover { background: #1C2233; border-color: #3A4562; }
@@ -98,7 +98,7 @@ export default function RootLayout({ children }) {
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
-          href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=IBM+Plex+Mono:wght@500&family=Inter:wght@400;500;600;700;800&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Inter:wght@400;500;600;700;800&display=swap"
           rel="stylesheet"
         />
         <style dangerouslySetInnerHTML={{ __html: RESPONSIVE_CSS }} />

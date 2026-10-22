@@ -166,7 +166,7 @@ function SortHeader({ label, field, sortField, sortDir, onClick, align, grow }) 
                   fontSize: 13,
                   fontWeight: 600
                 }}>
-      {label}<span style={{ opacity: active ? 1 : 0.35, fontSize: 9 }}>{active ? (sortDir === 'asc' ? '▲' : '▼') : '↕'}</span>
+      {label}<span style={{ opacity: active ? 1 : 0.35, fontSize: 12 }}>{active ? (sortDir === 'asc' ? '▲' : '▼') : '↕'}</span>
     </button>
   )
 }
@@ -206,7 +206,7 @@ function BottomLine({ segments }) {
             <a key={i} href={it.link} target="_blank" rel="noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '0 22px', textDecoration: 'none', color: TEXT, fontSize: 14, fontWeight: 500 }}>
               <span style={{ width: 6, height: 6, borderRadius: 999, background: cur.color, flexShrink: 0 }} />
               {it.title}
-              <span style={{ ...eyebrow, fontSize: 11, color: LABEL }}>{it.source}</span>
+              <span style={{ ...eyebrow, fontSize: 12, color: LABEL }}>{it.source}</span>
             </a>
           ))}
         </div>
@@ -711,7 +711,7 @@ export default function Home() {
 
       <AuthModal open={authOpen} onClose={() => setAuthOpen(false)} account={account} />
       {wantFlash && (
-        <div style={{ position: 'fixed', bottom: 56, right: 24, zIndex: 95, background: ACCENT, color: '#fff', fontWeight: 800, fontSize: 14, padding: '12px 20px', borderRadius: 12, boxShadow: '0 8px 30px #000a' }}>{wantFlash}</div>
+        <div style={{ position: 'fixed', bottom: 56, right: 24, zIndex: 95, background: ACCENT, color: '#fff', fontWeight: 700, fontSize: 14, padding: '12px 20px', borderRadius: 12, boxShadow: '0 8px 30px #000a' }}>{wantFlash}</div>
       )}
 
       {isLanding ? (
@@ -775,9 +775,9 @@ export default function Home() {
             return (
               <div style={{ margin: '38px 0 18px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', flexWrap: 'wrap', gap: 10, marginBottom: 16 }}>
-                  <h2 style={{ ...title(19), margin: 0 }}>
+                  <h2 style={{ ...title(20), margin: 0 }}>
                     {productFilter !== 'All' ? productFilter + ' Sets' : sportFilter === 'All' ? 'Featured Sets' : sportFilter === 'TCG' ? 'Trading Card Games' : sportFilter === 'Sports' ? 'Sports Cards' : sportFilter + ' Sets'}
-                    {sets.length > 0 && <span style={{ color: LABEL, fontSize: 15, fontWeight: 500, marginLeft: 10 }}>{filteredSets.length.toLocaleString()}</span>}
+                    {sets.length > 0 && <span style={{ color: LABEL, fontSize: 16, fontWeight: 500, marginLeft: 10 }}>{filteredSets.length.toLocaleString()}</span>}
                   </h2>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                     <span style={{ ...eyebrow, color: '#6B7080' }}>Sort</span>
@@ -872,7 +872,7 @@ export default function Home() {
                         <option value="set">Set name</option>
                       </select>
                       <button onClick={() => { setTeamFilter('All'); setTeamInput(''); setTcgRarity('All'); setTcgType('All') }}
-                        style={{ background: 'none', border: 'none', color: ACCENT_TEXT, fontSize: 12.5, fontWeight: 600, cursor: 'pointer' }}>Clear</button>
+                        style={{ background: 'none', border: 'none', color: ACCENT_TEXT, fontSize: 13, fontWeight: 600, cursor: 'pointer' }}>Clear</button>
                     </>
                   )}
                 </>
@@ -914,7 +914,7 @@ export default function Home() {
                         <option value="set">Set name</option>
                       </select>
                       <button onClick={() => { setTeamFilter('All'); setTeamInput('') }}
-                        style={{ background: 'none', border: 'none', color: ACCENT_TEXT, fontSize: 12.5, fontWeight: 600, cursor: 'pointer' }}>Clear</button>
+                        style={{ background: 'none', border: 'none', color: ACCENT_TEXT, fontSize: 13, fontWeight: 600, cursor: 'pointer' }}>Clear</button>
                     </>
                   )}
                 </>
@@ -929,7 +929,7 @@ export default function Home() {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder={TCG_SET.has(activeSet.sport) ? 'Filter this set (card, type, rarity, card #, section)…' : 'Filter this set (player, team, card #, section)…'}
-              style={{ width: '100%', boxSizing: 'border-box', background: '#121626', border: '1px solid #232A3E', borderRadius: 10, padding: '13px 16px', color: '#EDEDEF', fontSize: 15, outline: 'none' }}
+              style={{ width: '100%', boxSizing: 'border-box', background: '#121626', border: '1px solid #232A3E', borderRadius: 10, padding: '13px 16px', color: '#EDEDEF', fontSize: 16, outline: 'none' }}
             />
           ) : (
             <Omnibox value={query} onChange={setQuery} onSubmit={runSearch} sets={sets} compact
@@ -951,7 +951,7 @@ export default function Home() {
               <Chip>{(setData.sections || []).length} sections</Chip>
               {(setData.sections || []).some(s => s.odds) && <Chip>Pack odds</Chip>}
             </div>
-            <h1 style={{ ...display, fontSize: 34, margin: 0, lineHeight: 1.05 }}>{setData.name}</h1>
+            <h1 style={{ ...display, fontSize: 40, margin: 0, lineHeight: 1.05 }}>{setData.name}</h1>
             <p style={{ color: '#8a8a8a', fontSize: 13, margin: '10px 0 0' }}>
               {(setData.sections || []).reduce((s, x) => s + x.cards.length, 0).toLocaleString()} cards
               {rcCount(setData) > 0 ? ' · ' + rcCount(setData) + ' rookies flagged' : ''} · source: {setData.source}
@@ -962,7 +962,7 @@ export default function Home() {
                 + Wantlist this set
               </button>
               <button onClick={() => { openView('collection') }}
-                style={{ ...buttonText, background: 'transparent', color: '#A1A1AA', border: '1px solid #232A3E', borderRadius: 9, padding: '8px 15px', cursor: 'pointer', fontSize: 12.5 }}>
+                style={{ ...buttonText, background: 'transparent', color: '#A1A1AA', border: '1px solid #232A3E', borderRadius: 9, padding: '8px 15px', cursor: 'pointer', fontSize: 13 }}>
                 Track in My Collection
               </button>
             </div>
@@ -992,7 +992,7 @@ export default function Home() {
             <button aria-pressed={onlyMine} onClick={() => setOnlyMine(v => !v)} title={myPlayers.list.length ? 'Only show cards of players you collect' : 'Add players from any player page first'}
               style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: onlyMine ? '#0e1630' : '#121626', border: '1px solid ' + (onlyMine ? ACCENT : '#232A3E'), color: onlyMine ? '#8fb0ff' : '#D4D4D8', borderRadius: 10, padding: '0 14px', height: 38, fontSize: 13, fontWeight: 700, cursor: 'pointer', fontFamily: 'inherit' }}>
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><path d="M20 21a8 8 0 0 0-16 0" /><circle cx="12" cy="8" r="4" /></svg>
-              My players <span style={{ background: onlyMine ? ACCENT : '#232A3E', color: onlyMine ? '#fff' : '#A1A1AA', borderRadius: 999, padding: '1px 7px', fontSize: 11, fontWeight: 800 }}>{myPlayers.list.length}</span>
+              My players <span style={{ background: onlyMine ? ACCENT : '#232A3E', color: onlyMine ? '#fff' : '#A1A1AA', borderRadius: 999, padding: '1px 7px', fontSize: 12, fontWeight: 700 }}>{myPlayers.list.length}</span>
             </button>
             <select aria-label="Section" value={activeSection} onChange={(e) => setActiveSection(e.target.value)} style={{ background: '#121626', border: '1px solid #232A3E', borderRadius: 10, color: '#D4D4D8', fontSize: 13, padding: '0 12px', height: 38, maxWidth: '100%', cursor: 'pointer' }}>
               <option value="All">All sections ({(setData.sections || []).length})</option>
@@ -1011,16 +1011,16 @@ export default function Home() {
             )}
             <label style={{ display: 'inline-flex', alignItems: 'center', gap: 8, fontSize: 13, color: '#A1A1AA', minHeight: 38, cursor: 'pointer' }}><input type="checkbox" checked={setRcOnly} onChange={(e) => setSetRcOnly(e.target.checked)} style={{ accentColor: ACCENT, width: 16, height: 16 }} />Rookies only</label>
             {(onlyMine || setTypeFilter !== 'All' || setRunFilter !== 'any' || setRcOnly || setMemFilter !== 'any' || activeSection !== 'All' || query) && (
-              <button onClick={() => { setSetMemFilter('any'); setOnlyMine(false); setSetTypeFilter('All'); setSetRunFilter('any'); setSetRcOnly(false); setActiveSection('All'); setQuery('') }} style={{ background: 'none', border: 'none', color: ACCENT_TEXT, fontSize: 12.5, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit', marginLeft: 'auto' }}>Clear filters</button>
+              <button onClick={() => { setSetMemFilter('any'); setOnlyMine(false); setSetTypeFilter('All'); setSetRunFilter('any'); setSetRcOnly(false); setActiveSection('All'); setQuery('') }} style={{ background: 'none', border: 'none', color: ACCENT_TEXT, fontSize: 13, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit', marginLeft: 'auto' }}>Clear filters</button>
             )}
           </div>
           {onlyMine && (
             <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center', margin: '0 0 14px' }}>
               <span style={{ ...eyebrow, color: '#6B7080' }}>Showing cards of</span>
               {myPlayers.list.length === 0 && <span style={{ color: '#8A8A93', fontSize: 13 }}>nobody yet — open a player page and hit “Collect this player”.</span>}
-              {byPlayer.map(g => <button key={g.name} onClick={() => openPlayerByName(g.name)} style={{ background: '#0e1630', border: '1px solid ' + ACCENT + '55', color: '#c9d8ff', fontSize: 12.5, fontWeight: 600, padding: '5px 10px', borderRadius: 999, cursor: 'pointer', fontFamily: 'inherit' }}>{g.name} <span style={{ color: '#5b82e8' }}>· {g.rows.length}</span></button>)}
-              {myPlayers.list.filter(n => !byPlayer.some(g => g.name === n)).map(n => <span key={n} style={{ border: '1px solid #232A3E', color: '#6B7080', fontSize: 12.5, padding: '5px 10px', borderRadius: 999 }}>{n} · 0</span>)}
-              <button onClick={() => openView('myplayers')} style={{ background: 'none', border: 'none', color: ACCENT_TEXT, fontSize: 12.5, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit' }}>Manage my players</button>
+              {byPlayer.map(g => <button key={g.name} onClick={() => openPlayerByName(g.name)} style={{ background: '#0e1630', border: '1px solid ' + ACCENT + '55', color: '#c9d8ff', fontSize: 13, fontWeight: 600, padding: '5px 10px', borderRadius: 999, cursor: 'pointer', fontFamily: 'inherit' }}>{g.name} <span style={{ color: '#5b82e8' }}>· {g.rows.length}</span></button>)}
+              {myPlayers.list.filter(n => !byPlayer.some(g => g.name === n)).map(n => <span key={n} style={{ border: '1px solid #232A3E', color: '#6B7080', fontSize: 13, padding: '5px 10px', borderRadius: 999 }}>{n} · 0</span>)}
+              <button onClick={() => openView('myplayers')} style={{ background: 'none', border: 'none', color: ACCENT_TEXT, fontSize: 13, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit' }}>Manage my players</button>
             </div>
           )}
 
@@ -1046,10 +1046,10 @@ export default function Home() {
                   <button onClick={() => openPlayerByName(g.name)} style={{ ...title(16), background: 'none', border: 'none', color: '#EDEDEF', cursor: 'pointer', padding: 0, textAlign: 'left' }}>{g.name}</button>
                   <p style={{ margin: '2px 0 0', color: '#8A8A93', fontSize: 12 }}>{g.team ? g.team + ' · ' : ''}{g.rows.length} card{g.rows.length === 1 ? '' : 's'} in this set{g.au ? ' · ' + g.au + ' autos' : ''}{g.one ? ' · ' + g.one + ' × 1/1' : ''}</p>
                 </div>
-                <button onClick={() => openPlayerByName(g.name)} style={{ background: 'none', border: 'none', color: ACCENT_TEXT, fontSize: 12.5, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit' }}>Player page →</button>
+                <button onClick={() => openPlayerByName(g.name)} style={{ background: 'none', border: 'none', color: ACCENT_TEXT, fontSize: 13, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit' }}>Player page →</button>
               </div>
               <div style={{ overflowX: 'auto' }}>
-                <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 13.5, minWidth: 560 }}>
+                <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14, minWidth: 560 }}>
                   <thead><tr>{['Card #', 'Section', 'Type', 'Material', 'Run', 'Want'].map((h, i) => <th key={h} style={{ ...eyebrow, padding: '9px 14px', textAlign: i >= 4 ? 'right' : 'left', color: '#8A8A93' }}>{h}</th>)}</tr></thead>
                   <tbody>{g.rows.map((r, i) => (
                     <tr key={i} style={{ borderTop: '1px solid #1a1a1a', background: i % 2 ? '#131313' : 'transparent' }}>
@@ -1057,7 +1057,7 @@ export default function Home() {
                       <td style={{ padding: '9px 14px' }}>{r.section}</td>
                       <td style={{ padding: '9px 14px' }}><Chip color={r.kind === 'PA' ? '#e11d48' : r.kind === 'AU' ? '#60a5fa' : r.kind === 'PATCH' ? '#16a34a' : r.kind === 'RELIC' ? '#f97316' : '#9ca3af'}>{r.kind === 'PA' ? 'PATCH AUTO' : r.kind === 'AU' ? 'AUTO' : r.kind === 'OTHER' ? (r.x === 'RC' ? 'RC' : 'INSERT') : r.kind}</Chip></td>
                       <td style={{ padding: '9px 14px' }}>{r.memc ? <MemChip code={r.memc} /> : <span style={{ color: '#444' }}>—</span>}</td>
-                      <td style={{ padding: '9px 14px', textAlign: 'right', whiteSpace: 'nowrap' }}>{r.serial === 1 ? <span style={{ background: ACCENT, color: '#fff', padding: '2px 8px', borderRadius: 999, fontSize: 11, fontWeight: 800 }}>1/1</span> : r.serial > 0 ? '/' + r.serial : <span style={{ color: '#6B7080' }}>—</span>}</td>
+                      <td style={{ padding: '9px 14px', textAlign: 'right', whiteSpace: 'nowrap' }}>{r.serial === 1 ? <span style={{ background: ACCENT, color: '#fff', padding: '2px 8px', borderRadius: 999, fontSize: 12, fontWeight: 700 }}>1/1</span> : r.serial > 0 ? '/' + r.serial : <span style={{ color: '#6B7080' }}>—</span>}</td>
                       <td style={{ padding: '9px 14px', textAlign: 'right' }}><button aria-label="Add to wantlist" onClick={() => wantIt({ set_slug: setData.slug, set_name: setData.name, card_n: r.n, section: r.section, player: r.p })} style={{ background: 'none', border: '1px solid #232A3E', color: '#A1A1AA', borderRadius: 6, width: 32, height: 32, cursor: 'pointer', fontFamily: 'inherit' }}>+</button></td>
                     </tr>
                   ))}</tbody>
@@ -1068,14 +1068,14 @@ export default function Home() {
             const sorted = sec.cards.slice().sort(makeComparator(sortField, sortDir))
             return (
               <div key={sec.title} style={{ marginBottom: 26 }}>
-                <h2 style={{ ...title(17), margin: '0 0 6px' }}>
-                  {sec.title} <span style={{ color: '#6B7080', fontSize: 15 }}>· {sec.cards.length}</span>
+                <h2 style={{ ...title(18), margin: '0 0 6px' }}>
+                  {sec.title} <span style={{ color: '#6B7080', fontSize: 16 }}>· {sec.cards.length}</span>
                 </h2>
                 {sec.mem && <div style={{ margin: '0 0 10px' }}><MemBadge mem={sec.mem} /></div>}
                 {sec.odds && (
                   <div style={{ display: 'flex', gap: 8, alignItems: 'flex-start', margin: '0 0 10px', padding: '8px 12px', background: '#141109', border: '1px solid ' + ACCENT + '2e', borderRadius: 9 }}>
                     <span style={{ ...eyebrow, color: ACCENT_TEXT, whiteSpace: 'nowrap', paddingTop: 1 }}>Pack Odds</span>
-                    <span style={{ color: '#A1A1AA', fontSize: 12.5, lineHeight: 1.5 }}>{sec.odds}</span>
+                    <span style={{ color: '#A1A1AA', fontSize: 13, lineHeight: 1.5 }}>{sec.odds}</span>
                   </div>
                 )}
                 <div style={{ border: '1px solid #222', borderRadius: 12, overflow: 'hidden' }}>
@@ -1123,7 +1123,7 @@ export default function Home() {
             style={{ background: 'none', border: 'none', color: ACCENT_TEXT, fontSize: 13, fontWeight: 600, cursor: 'pointer', padding: 0, marginBottom: 14 }}>
             ← Browse sets
           </button>
-          <h2 style={{ ...title(19), margin: '0 0 14px' }}>
+          <h2 style={{ ...title(20), margin: '0 0 14px' }}>
             {globalHits.players.length + globalHits.sets.length} results for “{query}”
           </h2>
           {globalHits.players.length > 0 && (
@@ -1132,7 +1132,7 @@ export default function Home() {
                 <button key={p.id} onClick={() => openPlayer(p, parseQuery(p.name), [])}
                   style={{ width: '100%', textAlign: 'left', display: 'flex', gap: 12, padding: '11px 16px', fontSize: 14, alignItems: 'baseline', flexWrap: 'wrap', background: i % 2 === 0 ? '#0F1320' : '#121626', border: 'none', color: '#EDEDEF', cursor: 'pointer', fontFamily: 'inherit' }}>
                   <span style={{ fontWeight: 600 }}>{p.name}</span>
-                  <span style={{ color: '#8A8A93', fontSize: 12.5 }}>{p.sport} · {p.cards.toLocaleString()} cards</span>
+                  <span style={{ color: '#8A8A93', fontSize: 13 }}>{p.sport} · {p.cards.toLocaleString()} cards</span>
                 </button>
               ))}
             </div>
@@ -1143,7 +1143,7 @@ export default function Home() {
                 <button key={x.slug} onClick={() => openSet(x)}
                   style={{ width: '100%', textAlign: 'left', display: 'flex', gap: 12, padding: '11px 16px', fontSize: 14, alignItems: 'baseline', flexWrap: 'wrap', background: i % 2 === 0 ? '#0F1320' : '#121626', border: 'none', color: '#EDEDEF', cursor: 'pointer', fontFamily: 'inherit' }}>
                   <span style={{ fontWeight: 600 }}>{x.name}</span>
-                  <span style={{ color: '#8A8A93', fontSize: 12.5 }}>Set · {(x.cardCount || 0).toLocaleString()} cards</span>
+                  <span style={{ color: '#8A8A93', fontSize: 13 }}>Set · {(x.cardCount || 0).toLocaleString()} cards</span>
                 </button>
               ))}
             </div>
@@ -1165,7 +1165,7 @@ export default function Home() {
         <section>
           <div style={{ background: 'linear-gradient(140deg, #0f1526, #0F1320)', border: '1px solid ' + ACCENT + '33', borderRadius: 18, padding: '30px 30px', marginBottom: 22 }}>
             <h1 style={{ ...display, fontSize: 40, margin: 0, lineHeight: 1 }}>RPA Tracker</h1>
-            <p style={{ color: '#aaa', fontSize: 15, lineHeight: 1.6, maxWidth: 720, margin: '14px 0 0' }}>
+            <p style={{ color: '#aaa', fontSize: 16, lineHeight: 1.6, maxWidth: 720, margin: '14px 0 0' }}>
               Every Rookie Patch Auto, on-card autograph, patch and relic card across {statN.sets.toLocaleString()} sets — with its serial print run — so you can track the hobby's premium hits in one place.
             </p>
           </div>
@@ -1197,7 +1197,7 @@ export default function Home() {
             ))}
           </div>
           <input value={rpaQuery} onChange={(e) => setRpaQuery(e.target.value)} placeholder="Filter by player…"
-            style={{ width: '100%', boxSizing: 'border-box', background: '#121626', border: '1px solid #232A3E', borderRadius: 10, padding: '12px 16px', color: '#EDEDEF', fontSize: 15, outline: 'none', marginBottom: 16 }} />
+            style={{ width: '100%', boxSizing: 'border-box', background: '#121626', border: '1px solid #232A3E', borderRadius: 10, padding: '12px 16px', color: '#EDEDEF', fontSize: 16, outline: 'none', marginBottom: 16 }} />
 
           {!rpaData ? <p style={{ color: '#6B7080' }}>Loading RPA database…</p> : (
             <>
@@ -1217,7 +1217,7 @@ export default function Home() {
                     <span style={{ flex: '1 1 auto', minWidth: 0, fontWeight: 600 }}>{c.p}</span>
                     <span style={{ flex: '0 0 88px' }}><Chip color={RPA_TYPE_COLOR[c.type]}>{c.type}</Chip></span>
                     <span style={{ flex: '0 0 64px', textAlign: 'right', color: c.serial ? '#EDEDEF' : '#6B7080', fontWeight: 700, fontVariantNumeric: 'tabular-nums' }}>{c.serial || '—'}</span>
-                    <span style={{ flex: '2 1 0', minWidth: 0, color: '#8A8A93', fontSize: 12.5, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{c.year} {c.set}</span>
+                    <span style={{ flex: '2 1 0', minWidth: 0, color: '#8A8A93', fontSize: 13, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{c.year} {c.set}</span>
                   </button>
                 ))}
                 {rpaResults.length === 0 && <p style={{ padding: 20, color: '#6B7080', fontSize: 14 }}>No hits match.</p>}
@@ -1229,7 +1229,7 @@ export default function Home() {
         <section>
           <div style={{ background: 'linear-gradient(140deg, #0f1526, #0F1320)', border: '1px solid ' + ACCENT + '33', borderRadius: 18, padding: '30px 30px', marginBottom: 24 }}>
             <h1 style={{ ...display, fontSize: 40, margin: 0, lineHeight: 1 }}>Patch Swaps</h1>
-            <p style={{ color: '#aaa', fontSize: 15, lineHeight: 1.6, maxWidth: 720, margin: '14px 0 0' }}>
+            <p style={{ color: '#aaa', fontSize: 16, lineHeight: 1.6, maxWidth: 720, margin: '14px 0 0' }}>
               A running record of cards known to have had their game-used or manufactured patches swapped — with the original and the replacement patch side by side so collectors can spot altered cards before they buy.
             </p>
             <p style={{ color: '#8A8A93', fontSize: 13, margin: '16px 0 0' }}>
@@ -1243,7 +1243,7 @@ export default function Home() {
           {!patchData ? <p style={{ color: '#6B7080' }}>Loading…</p> : (
             <>
               {patchData.intro && (
-                <p style={{ color: '#c9c9c9', fontSize: 15, lineHeight: 1.7, maxWidth: 820, margin: '0 0 26px' }}>{patchData.intro}</p>
+                <p style={{ color: '#c9c9c9', fontSize: 16, lineHeight: 1.7, maxWidth: 820, margin: '0 0 26px' }}>{patchData.intro}</p>
               )}
 
               {/* LIVE COMMUNITY FEED CTA */}
@@ -1252,7 +1252,7 @@ export default function Home() {
                   background: 'linear-gradient(120deg, #2a1a2e, #14101a)', border: '1px solid #4a2f52', borderRadius: 16, padding: '20px 24px', marginBottom: 30 }}>
                 <div>
                   <p style={{ ...eyebrow, margin: 0, color: '#e879f9' }}>● Live community feed</p>
-                  <p style={{ ...display, margin: '6px 0 0', fontSize: 26, color: '#fff' }}>{patchData.source.name}</p>
+                  <p style={{ ...display, margin: '6px 0 0', fontSize: 24, color: '#fff' }}>{patchData.source.name}</p>
                   <p style={{ color: '#b9a9c0', fontSize: 13, margin: '4px 0 0', maxWidth: 560 }}>{patchData.source.note}</p>
                 </div>
                 <span style={{ ...eyebrow, background: '#e879f9', color: '#1a0f1e', padding: '12px 22px', borderRadius: 10, whiteSpace: 'nowrap', fontSize: 12 }}>Open on Instagram →</span>
@@ -1261,8 +1261,8 @@ export default function Home() {
               {/* DOCUMENTED SWAPS — actual posts from the feed */}
               {(patchData.posts || []).length > 0 && (
                 <>
-                  <h2 style={{ ...title(21), margin: '0 0 6px' }}>Documented swaps</h2>
-                  <p style={{ color: '#A1A1AA', fontSize: 13.5, lineHeight: 1.6, margin: '0 0 18px', maxWidth: 760 }}>
+                  <h2 style={{ ...title(24), margin: '0 0 6px' }}>Documented swaps</h2>
+                  <p style={{ color: '#A1A1AA', fontSize: 14, lineHeight: 1.6, margin: '0 0 18px', maxWidth: 760 }}>
                     Individual cases from @fake_hockey_patches — each post shows the actual card before and after its patch was swapped. Tap any post to see every photo and the community discussion.
                   </p>
                   <div style={{ marginBottom: 34 }}>
@@ -1272,15 +1272,15 @@ export default function Home() {
               )}
 
               {/* HOW TO SPOT A SWAP */}
-              <h2 style={{ ...title(21), margin: '0 0 16px' }}>How to spot a swap</h2>
+              <h2 style={{ ...title(24), margin: '0 0 16px' }}>How to spot a swap</h2>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(300px, 100%), 1fr))', gap: 14, marginBottom: 34 }}>
                 {(patchData.redFlags || []).map((f, i) => (
                   <div key={i} style={{ background: 'linear-gradient(155deg, #121626, #0F1320)', border: '1px solid #232A3E', borderRadius: 14, padding: '18px 20px' }}>
                     <div style={{ display: 'flex', alignItems: 'baseline', gap: 10, marginBottom: 8 }}>
                       <span style={{ ...display, color: '#e11d48', fontSize: 20 }}>{String(i + 1).padStart(2, '0')}</span>
-                      <p style={{ ...title(15), margin: 0, lineHeight: 1.15 }}>{f.title}</p>
+                      <p style={{ ...title(16), margin: 0, lineHeight: 1.15 }}>{f.title}</p>
                     </div>
-                    <p style={{ color: '#a9a9a9', fontSize: 13.5, lineHeight: 1.55, margin: 0 }}>{f.detail}</p>
+                    <p style={{ color: '#a9a9a9', fontSize: 14, lineHeight: 1.55, margin: 0 }}>{f.detail}</p>
                   </div>
                 ))}
               </div>
@@ -1289,10 +1289,10 @@ export default function Home() {
               {(patchData.watchSets || []).length > 0 && (
                 <div style={{ background: 'linear-gradient(140deg, #17140c, #0F1320)', border: '1px solid ' + ACCENT + '2e', borderRadius: 16, padding: '22px 24px', marginBottom: 24 }}>
                   <h2 style={{ ...title(16), color: ACCENT_TEXT, margin: '0 0 6px' }}>Products most targeted</h2>
-                  <p style={{ color: '#A1A1AA', fontSize: 13.5, lineHeight: 1.6, margin: '0 0 14px', maxWidth: 720 }}>High-end patch and RPA products carry the most swap risk. Cross-reference any patch card against its checklist print run — browse the patch and RPA cards in the tracker.</p>
+                  <p style={{ color: '#A1A1AA', fontSize: 14, lineHeight: 1.6, margin: '0 0 14px', maxWidth: 720 }}>High-end patch and RPA products carry the most swap risk. Cross-reference any patch card against its checklist print run — browse the patch and RPA cards in the tracker.</p>
                   <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 4 }}>
                     {patchData.watchSets.map(w => (
-                      <span key={w} style={{ background: '#0e1630', border: '1px solid ' + ACCENT + '33', color: '#c9d8ff', fontSize: 12.5, fontWeight: 600, padding: '6px 12px', borderRadius: 999 }}>{w}</span>
+                      <span key={w} style={{ background: '#0e1630', border: '1px solid ' + ACCENT + '33', color: '#c9d8ff', fontSize: 13, fontWeight: 600, padding: '6px 12px', borderRadius: 999 }}>{w}</span>
                     ))}
                   </div>
                   <button onClick={() => { setRpaType('PA'); openRpa() }}
@@ -1316,7 +1316,7 @@ export default function Home() {
                         ))}
                       </div>
                       <div style={{ padding: '16px 18px' }}>
-                        <p style={{ ...title(15), margin: 0 }}>{e.player || e.card}</p>
+                        <p style={{ ...title(16), margin: 0 }}>{e.player || e.card}</p>
                         <p style={{ color: '#8A8A93', fontSize: 12, margin: '4px 0 0' }}>{[e.year, e.set, e.card].filter(Boolean).join(' · ')}</p>
                         {e.summary && <p style={{ color: '#A1A1AA', fontSize: 13, lineHeight: 1.5, margin: '10px 0 0' }}>{e.summary}</p>}
                         {e.sourceUrl && <a href={e.sourceUrl} target="_blank" rel="noreferrer" style={{ color: ACCENT_TEXT, fontSize: 12, fontWeight: 700, display: 'inline-block', marginTop: 10 }}>View source →</a>}
@@ -1331,9 +1331,9 @@ export default function Home() {
       ) : browseActive ? (
         <section>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', flexWrap: 'wrap', gap: 8, marginBottom: 14 }}>
-            <h2 style={{ ...title(19), margin: 0 }}>
-              {isTcg ? ([teamFilter !== 'All' ? '“' + teamFilter + '”' : null, tcgRarity !== 'All' ? tcgRarity : null, tcgType !== 'All' ? tcgType : null].filter(Boolean).join(' · ')) : teamFilter} <span style={{ color: SPORT_COLORS[sportFilter] || ACCENT_TEXT, fontSize: 15 }}>· {sportFilter}</span>
-              <span style={{ color: '#6B7080', fontSize: 15, marginLeft: 10 }}>{teamHits.length.toLocaleString()}{teamHits.length >= 2500 ? '+' : ''} cards</span>
+            <h2 style={{ ...title(20), margin: 0 }}>
+              {isTcg ? ([teamFilter !== 'All' ? '“' + teamFilter + '”' : null, tcgRarity !== 'All' ? tcgRarity : null, tcgType !== 'All' ? tcgType : null].filter(Boolean).join(' · ')) : teamFilter} <span style={{ color: SPORT_COLORS[sportFilter] || ACCENT_TEXT, fontSize: 16 }}>· {sportFilter}</span>
+              <span style={{ color: '#6B7080', fontSize: 16, marginLeft: 10 }}>{teamHits.length.toLocaleString()}{teamHits.length >= 2500 ? '+' : ''} cards</span>
             </h2>
           </div>
           <div style={{ border: '1px solid #222', borderRadius: 12, overflow: 'hidden' }}>
@@ -1347,9 +1347,9 @@ export default function Home() {
               <button key={i} onClick={() => { const s = sets.find(x => x.slug === c.slug); if (s) openSet(Object.assign({}, s, classifySet(s.name))) }}
                 style={{ width: '100%', textAlign: 'left', display: 'flex', gap: 12, padding: '8px 16px', fontSize: 14, alignItems: 'baseline', background: i % 2 === 0 ? '#0F1320' : '#121626', border: 'none', color: '#EDEDEF', cursor: 'pointer' }}>
                 <span style={{ flex: '0 0 60px', color: ACCENT_TEXT, fontWeight: 700, fontVariantNumeric: 'tabular-nums' }}>#{c.n}</span>
-                <span style={{ flex: '1 1 auto', minWidth: 0, fontWeight: 600 }}>{c.p}{isTcg && c.t ? <span style={{ color: '#8A8A93', fontWeight: 400, fontSize: 12.5 }}> · {c.t}</span> : null}</span>
+                <span style={{ flex: '1 1 auto', minWidth: 0, fontWeight: 600 }}>{c.p}{isTcg && c.t ? <span style={{ color: '#8A8A93', fontWeight: 400, fontSize: 13 }}> · {c.t}</span> : null}</span>
                 <span style={{ flex: isTcg ? '0 0 120px' : '0 0 54px' }}>{c.x ? <Chip color={c.x === 'RC' ? '#4ade80' : '#8A8A93'}>{c.x}</Chip> : null}</span>
-                <span style={{ flex: '2 1 0', minWidth: 0, color: '#8A8A93', fontSize: 12.5 }}>{c.set}{c.section ? ' · ' + c.section : ''}</span>
+                <span style={{ flex: '2 1 0', minWidth: 0, color: '#8A8A93', fontSize: 13 }}>{c.set}{c.section ? ' · ' + c.section : ''}</span>
               </button>
             ))}
             {teamHits.length === 0 && <p style={{ padding: 20, color: '#6B7080', fontSize: 14 }}>No {isTcg ? 'matching cards' : 'cards found for ' + teamFilter} in {sportFilter}.</p>}
@@ -1382,11 +1382,11 @@ export default function Home() {
                   <span style={{ position: 'absolute', inset: 0, background: 'linear-gradient(120deg, transparent 40%, ' + c + '10 50%, transparent 60%)', pointerEvents: 'none' }} />
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>
                     <span style={{ ...eyebrow, color: c }}>{s.sport} · {yearLabel(s)}</span>
-                    <span style={{ color: '#6B7080', fontSize: 11 }}>{(s.sections || 0)} sec</span>
+                    <span style={{ color: '#6B7080', fontSize: 12 }}>{(s.sections || 0)} sec</span>
                   </div>
                   <p style={{ ...title(16), margin: '0 0 12px', lineHeight: 1.1, minHeight: 44 }}>{s.name.replace(/^\d{4}(-\d{2})?\s*/, '')}</p>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', borderTop: '1px solid #222', paddingTop: 10 }}>
-                    <span style={{ ...display, fontSize: 22, color: ACCENT_TEXT }}>{(s.cardCount || 0).toLocaleString()}</span>
+                    <span style={{ ...display, fontSize: 24, color: ACCENT_TEXT }}>{(s.cardCount || 0).toLocaleString()}</span>
                     <span style={{ ...eyebrow, color: '#8A8A93' }}>Cards</span>
                   </div>
                 </button>
