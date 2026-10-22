@@ -50,12 +50,29 @@ for (const f of files) {
 
 // Affiliate text scraped from Cardboard Connection ("Shop parallels on eBay.") in pack-odds
 // notes and team fields, every sport.
-const SHOP = /\s*[-*·]?\s*(?:Shop|Buy)(?: [A-Za-z0-9'.]+){0,3}? (?:on )?eBay\.?/gi
+const SHOP = /\s*[-*·]?\s*(?:Shop|Buy)(?: [A-Za-z0-9'.]+){0,6}? (?:on )?eBay\.?/gi
 let shopFixed = 0
 for (const f of files) {
   const fp = new URL(f, dataDir); let s2; try { s2 = JSON.parse(readFileSync(fp, 'utf8')) } catch { continue }
   let ch = false
   for (const x of s2.sections || []) {
+    // HTML numeric entities left in titles/names ("Fro &#x1f440;") -> the characters
+    const ent = (v) => v.replace(/&#x([0-9a-f]{1,6});/gi, (_, h) => String.fromCodePoint(parseInt(h, 16))).replace(/&#(\d{1,7});/g, (_, d) => String.fromCodePoint(+d))
+    if (x.title && /&#x?[0-9a-f]+;/i.test(x.title)) { x.title = ent(x.title); ch = true; shopFixed++ }
+    if (x.cards) {
+      const before = x.cards.length
+      // marketplace listing titles scraped as cards ("... -Free Shipping!", "Factory Sealed Set Box ... Mint")
+      x.cards = x.cards.filter(c => !/free shipping!?|factory sealed .*\bmint$/i.test(c.p || ''))
+      if (x.cards.length !== before) { ch = true; shopFixed += before - x.cards.length }
+      for (const c of x.cards) {
+        if (c.p && /&#x?[0-9a-f]+;/i.test(c.p)) { c.p = ent(c.p); ch = true; shopFixed++ }
+        if (c.t && /&#x?[0-9a-f]+;/i.test(c.t)) { c.t = ent(c.t); ch = true; shopFixed++ }
+        // trademark marks from licensor copy ("Los Angeles Dodgers®", "Braves™") split teams in filters
+        if (c.t && /[\u2122\u00AE]/.test(c.t)) { c.t = c.t.replace(/\s*[\u2122\u00AE]/g, ''); ch = true; shopFixed++ }
+        if (c.p && /[\u2122\u00AE]/.test(c.p)) { c.p = c.p.replace(/\s*[\u2122\u00AE]/g, ''); ch = true; shopFixed++ }
+        if (c.t && /\s*\(eBay\)$/i.test(c.t)) { c.t = c.t.replace(/\s*\(eBay\)$/i, ''); ch = true; shopFixed++ }
+      }
+    }
     if (x.odds && /eBay/i.test(x.odds) && x.odds.match(SHOP)) { x.odds = x.odds.replace(SHOP, '').replace(/\s+·\s*$/, '').replace(/\s{2,}/g, ' ').trim(); ch = true; shopFixed++ }
     for (const c of x.cards || []) if (c.t && /eBay/i.test(c.t) && c.t.match(SHOP)) {
       let t = c.t.replace(SHOP, '').trim().replace(/\s*[-*]$/, '').trim()
