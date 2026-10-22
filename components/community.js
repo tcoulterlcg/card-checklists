@@ -3,7 +3,7 @@
 // collection tracker. Dark + electric blue to match the site shell. Data via lib/supa.
 import { loadSet } from '../lib/catalog'
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { collectionCardN, supa, getProfile, ensureProfile, addWant, removeWant, myWantlist, toggleCollected, myCollection, uploadCardImage, setCollectionImage, forumFeed, createPost, react, comments, addComment, grailSets, notifyGrailCompletion } from '../lib/supa'
+import { collectionCardN, supa, grailfindrConnectUrl, grailfindrSignupUrl, grailfindrForgotUrl, GRAILFINDR_URL, getProfile, ensureProfile, addWant, removeWant, myWantlist, toggleCollected, myCollection, uploadCardImage, setCollectionImage, forumFeed, createPost, react, comments, addComment, grailSets, notifyGrailCompletion } from '../lib/supa'
 import { ACCENT, ACCENT_TEXT, BG, SURFACE, SURFACE_2, LINE, CHIP_LINE, TEXT, TEXT_2, LABEL, display, eyebrow, title, buttonText } from '../lib/theme'
 
 const card = { background: 'linear-gradient(155deg, #121626, #0F1320)', border: '1px solid #232A3E', borderRadius: 14 }
@@ -36,6 +36,7 @@ export function AccountChip({ account, onOpenAuth }) {
   return (
     <span className="hq-account" style={{ display: 'inline-flex', alignItems: 'center', gap: 10 }}>
       <span title={name} style={{ width: 32, height: 32, boxSizing: 'border-box', borderRadius: '50%', background: '#1E2A4A', border: '1px solid #2E3E6B', color: '#C9D6FF', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontWeight: 600, fontSize: 12 }}>{name.slice(0, 2).toUpperCase()}</span>
+      <a href={GRAILFINDR_URL} title="Your account also works on GrailFindr" style={{ color: '#8A93A8', fontSize: 12, textDecoration: 'none' }}>GrailFindr ↗</a>
       <button onClick={() => supa.auth.signOut()} style={{ background: 'none', border: 'none', color: '#8A93A8', fontSize: 12, cursor: 'pointer', fontFamily: 'inherit' }}>Sign out</button>
     </span>
   )
@@ -43,7 +44,8 @@ export function AccountChip({ account, onOpenAuth }) {
 
 export function AuthModal({ open, onClose, account }) {
   const [email, setEmail] = useState('')
-  const [sent, setSent] = useState(false)
+  const [password, setPassword] = useState('')
+  const [busy, setBusy] = useState(false)
   const [username, setUsername] = useState('')
   const [err, setErr] = useState('')
   const { session, profile, setProfile } = account
@@ -59,25 +61,32 @@ export function AuthModal({ open, onClose, account }) {
   const needsProfile = session && !profile
   return (
     <div onClick={onClose} style={{ position: 'fixed', inset: 0, background: '#000a', zIndex: 90, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      <div role="dialog" aria-modal="true" aria-label="Sign in to CardHQ" onClick={(e) => e.stopPropagation()} style={{ ...card, width: 'min(420px, 92vw)', padding: 28, position: 'relative' }}>
+      <div role="dialog" aria-modal="true" aria-label="Sign in to Card HQ" onClick={(e) => e.stopPropagation()} style={{ ...card, width: 'min(420px, 92vw)', padding: 28, position: 'relative' }}>
         <button aria-label="Close" onClick={onClose} style={{ position: 'absolute', top: 10, right: 10, width: 36, height: 36, background: 'none', border: 'none', color: '#8A8A93', fontSize: 20, cursor: 'pointer', borderRadius: 8 }}>×</button>
         {!session ? (
           <>
-            <h3 style={{ ...title(24), margin: 0, color: '#fff' }}>Join CardHQ</h3>
-            <p style={{ color: '#A1A1AA', fontSize: 14, lineHeight: 1.6, margin: '10px 0 18px' }}>Track your wantlist, check off cards as you collect them, upload photos, and share accomplishments. We email you a magic sign-in link — no password.</p>
-            {sent ? (
-              <p style={{ color: ACCENT_TEXT, fontSize: 14, fontWeight: 600 }}>Check your email — the sign-in link is on its way.</p>
-            ) : (
-              <>
-                <input style={input} type="email" autoFocus aria-label="Email address" placeholder="you@email.com" value={email} onChange={(e) => setEmail(e.target.value)} onKeyDown={(e) => { if (e.key === 'Enter') e.currentTarget.parentElement.querySelector('button[data-send]')?.click() }} />
-                {err && <p style={{ color: '#f87171', fontSize: 13, margin: '8px 0 0' }}>{err}</p>}
-                <button data-send style={{ ...btnAccent, width: '100%', marginTop: 12 }} onClick={async () => {
-                  setErr('')
-                  const { error } = await supa.auth.signInWithOtp({ email, options: { emailRedirectTo: typeof window !== 'undefined' ? window.location.origin : undefined } })
-                  if (error) setErr(error.message); else setSent(true)
-                }}>Email me a sign-in link</button>
-              </>
-            )}
+            <h3 style={{ ...title(24), margin: 0, color: '#fff' }}>Sign in to Card HQ</h3>
+            <p style={{ color: '#A1A1AA', fontSize: 14, lineHeight: 1.6, margin: '10px 0 18px' }}>Card HQ uses your GrailFindr account — one login for both. Track your wantlist, check off cards as you collect them, and share accomplishments.</p>
+            <a href={grailfindrConnectUrl()} style={{ ...btnAccent, display: 'block', textAlign: 'center', textDecoration: 'none', boxSizing: 'border-box', width: '100%' }}>Continue with GrailFindr</a>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10, margin: '16px 0', color: '#5B6478', fontSize: 12 }}>
+              <span style={{ flex: 1, height: 1, background: '#232A3E' }} />or sign in here<span style={{ flex: 1, height: 1, background: '#232A3E' }} />
+            </div>
+            <form onSubmit={async (e) => {
+              e.preventDefault()
+              setErr(''); setBusy(true)
+              const { error } = await supa.auth.signInWithPassword({ email, password })
+              setBusy(false)
+              if (error) setErr(error.message === 'Invalid login credentials' ? 'Wrong email or password.' : error.message)
+            }}>
+              <input style={input} type="email" required autoFocus autoComplete="email" aria-label="Email address" placeholder="you@email.com" value={email} onChange={(e) => setEmail(e.target.value)} />
+              <input style={{ ...input, marginTop: 10 }} type="password" required autoComplete="current-password" aria-label="Password" placeholder="GrailFindr password" value={password} onChange={(e) => setPassword(e.target.value)} />
+              {err && <p style={{ color: '#f87171', fontSize: 13, margin: '8px 0 0' }}>{err}</p>}
+              <button type="submit" disabled={busy} style={{ ...btnGhost, width: '100%', marginTop: 12, color: '#EDEDEF' }}>{busy ? '…' : 'Sign in'}</button>
+            </form>
+            <p style={{ display: 'flex', justifyContent: 'space-between', margin: '14px 0 0', fontSize: 13 }}>
+              <a href={grailfindrSignupUrl()} style={{ color: ACCENT_TEXT, textDecoration: 'none', fontWeight: 600 }}>Create an account</a>
+              <a href={grailfindrForgotUrl()} style={{ color: '#8A93A8', textDecoration: 'none' }}>Forgot password?</a>
+            </p>
           </>
         ) : needsProfile ? (
           <>

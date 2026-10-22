@@ -38,7 +38,7 @@ export function useMyPlayers(account) {
   }, [])
   useEffect(() => {
     if (!userId) return
-    supa.from('followed_players').select('player_name').eq('user_id', userId).then(({ data }) => {
+    supa.from('cardhq_followed_players').select('player_name').eq('user_id', userId).then(({ data }) => {
       if (!data) return
       setList(prev => {
         const merged = [...new Set([...prev, ...data.map(d => d.player_name)])]
@@ -46,7 +46,7 @@ export function useMyPlayers(account) {
         // push any local-only follows up to the account
         const remote = new Set(data.map(d => d.player_name))
         const missing = prev.filter(p => !remote.has(p))
-        if (missing.length) supa.from('followed_players').upsert(missing.map(player_name => ({ user_id: userId, player_name })), { onConflict: 'user_id,player_name' }).then(() => {})
+        if (missing.length) supa.from('cardhq_followed_players').upsert(missing.map(player_name => ({ user_id: userId, player_name })), { onConflict: 'user_id,player_name' }).then(() => {})
         return merged
       })
     })
@@ -57,8 +57,8 @@ export function useMyPlayers(account) {
     setList(next)
     try { localStorage.setItem(LS_KEY, JSON.stringify(next)) } catch {}
     if (userId) {
-      if (has(name)) await supa.from('followed_players').delete().match({ user_id: userId, player_name: name })
-      else await supa.from('followed_players').upsert({ user_id: userId, player_name: name }, { onConflict: 'user_id,player_name' })
+      if (has(name)) await supa.from('cardhq_followed_players').delete().match({ user_id: userId, player_name: name })
+      else await supa.from('cardhq_followed_players').upsert({ user_id: userId, player_name: name }, { onConflict: 'user_id,player_name' })
     }
   }
   return { list, has, toggle }
