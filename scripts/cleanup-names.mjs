@@ -20,6 +20,7 @@ const SKIP = /^(index|search-index|rpa-index|patch-swaps|redirects)\.json$/
 const SPORTS = new Set(['Baseball', 'Football', 'Basketball', 'Hockey', 'Soccer', 'UFC', 'Boxing', 'Wrestling', 'Racing', 'Golf', 'Tennis', 'Lacrosse', 'Bowling', 'Cricket', 'Multi-Sport'])
 
 const JUNK = /adsbygoogle|window\.|\.push\(\{|^(toploaders?.*|sleeves|piece wall display)$/i
+const TEAM_TAG = /^(one of ones|all rookies|top rookies|retired players|no team|rookies|veterans|legends)$/i
 const key = (s) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9 ]+/g, '').replace(/\s+/g, ' ').trim()
 
 function tidy(p) {
@@ -27,6 +28,10 @@ function tidy(p) {
   s = s.replace(/^[-\u2013\u2014]\s+/, '').replace(/\s+[-\u2013\u2014]$/, '').replace(/\*+$/, '').trim()
   // TCDB editor notes glued on: "Carey Price AUWhere does this belong?", "... AU, SN10Was this issued here?"
   s = s.replace(/\s*(?:AUR?|MEM|SN\d+)?(?:,\s*(?:AUR?|MEM|SN\d+))*\s*(?:Where (?:does|was) this|Was this issued).*$/, '').replace(/\?{2,}$/, '').trim()
+  // TCDB flag tails: "Brayden Point AU, SN1Trilogy", "X AU, MEM, SN25"
+  s = s.replace(/^(\S+(?:\s+\S+)+?)\s+(?:AUR?|MEM)(?:,\s*(?:AUR?|MEM|SN\d+[A-Za-z' ]*))+$/, '$1')
+  // card-variation letter or "Auto" glued to a full name: "Wayne Gretzky A", "Wayne Gretzky Auto"
+  s = s.replace(/^([A-Z][\w'.-]+(?:\s+[A-Z][\w'.-]+)+)\s+(?:[A-F]|Auto|Autograph)$/, '$1')
   s = s.replace(/\s+(UR|RAP|ROO|PROS|FY)\s*,?$/, '')   // subset tags glued to names ("UR" = Ultimate Rookie)
   s = s.replace(/,\s*$/, '')
   s = s.replace(/\s*\(R\)$/, '')                     // "(R)" marker
@@ -91,7 +96,7 @@ function repair(p) {
   repairCache.set(p, hit); return hit
 }
 
-const stats = { junk: 0, tidied: 0, repaired: 0, unrepaired: new Set(), unified: 0, files: 0 }
+const stats = { team: 0, junk: 0, tidied: 0, repaired: 0, unrepaired: new Set(), unified: 0, files: 0 }
 for (const [f, s] of sets) {
   let changed = false
   for (const sec of s.sections || []) {
@@ -107,6 +112,13 @@ for (const [f, s] of sets) {
       }
       const b = best.get(key(p))
       if (b && b !== p && !/[?�]/.test(p)) { p = b; stats.unified++ }
+      // team field: Break Ninja tags merged in ("Anaheim Ducks / All Rookies / One Of Ones"), repeated teams
+      if (c.t && c.t.includes('/')) {
+        const segs = c.t.split(/\s+\/\s+/).map(x => x.trim()).filter(x => x && !TEAM_TAG.test(x))
+        const uniq = []; for (const x of segs) if (!uniq.some(u => key(u) === key(x))) uniq.push(x)
+        const t = uniq.length ? uniq.join(' / ') : (segs[0] || c.t)
+        if (t !== c.t) { c.t = t; stats.team++; changed = true }
+      }
       if (p !== raw) { const k2 = raw + ' -> ' + p; renames.set(k2, (renames.get(k2) || 0) + 1); c.p = p; changed = true }
       keep.push(c)
     }
@@ -117,6 +129,6 @@ for (const [f, s] of sets) {
   if (s.sections.length !== before) changed = true
   if (changed) { stats.files++; if (!DRY) writeFileSync(new URL(f, dataDir), JSON.stringify(s)) }
 }
-console.log(`junk rows dropped ${stats.junk}, names tidied ${stats.tidied}, encoding repaired ${stats.repaired}, spellings unified ${stats.unified}, files changed ${stats.files}${DRY ? ' (dry run)' : ''}`)
+console.log(`team fields cleaned ${stats.team}, junk rows dropped ${stats.junk}, names tidied ${stats.tidied}, encoding repaired ${stats.repaired}, spellings unified ${stats.unified}, files changed ${stats.files}${DRY ? ' (dry run)' : ''}`)
 if (REPORT) writeFileSync(REPORT.slice(9), [...renames.entries()].sort((a, b) => b[1] - a[1]).map(([k, n]) => n + '\t' + k).join('\n'))
 if (stats.unrepaired.size) console.log(`unrepaired (${stats.unrepaired.size}):`, [...stats.unrepaired].slice(0, 40).join(' | '))
