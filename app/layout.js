@@ -57,7 +57,7 @@ export default function RootLayout({ children }) {
         />
         <style dangerouslySetInnerHTML={{ __html: RESPONSIVE_CSS }} />
       </head>
-      <body style={{ margin: 0, fontFamily: "'Inter', system-ui, sans-serif", background: '#0a0a0a', color: '#f5f5f5' }}>
+      <body style={{ margin: 0, fontFamily: "'Inter', system-ui, sans-serif", background: '#0B0E17', color: '#EDEDEF' }}>
         {children}
       </body>
     </html>
