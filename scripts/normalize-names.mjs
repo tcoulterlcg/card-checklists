@@ -41,7 +41,10 @@ const ALIASES = [
   ['^panini donruss elite$', 'Donruss Elite'],
   ['^panini clearly donruss$', 'Clearly Donruss'],
   ['^panini score$', 'Score'],
-  ['^(select|prestige|flawless collegiate|nba hoops(?: premium.*)?)$', 'Panini $1'],
+  // Select was Pinnacle's (1993-98) and Prestige was Playoff / Donruss-Playoff's until Panini
+  // bought Donruss-Playoff in March 2009 — only Panini-era sets get the Panini name.
+  ['Y2010|^(select|prestige|flawless collegiate|nba hoops(?: premium.*)?)$', 'Panini $1'],
+  ['Y0|^(?:panini )?prestige$', 'Playoff Prestige'],
   ['^(?:panini )?immaculate(?: collection)? collegiate$', 'Panini Immaculate Collection Collegiate'],
   ['^(.*) vol\\.? (\\d+)$', '$1 Volume $2'],
   ['^presidents? choice (.+)$', "President's Choice $1"],
@@ -63,7 +66,7 @@ function seasonOf(s) {
   return m ? m[1] : (s.year ? String(s.year) : '')
 }
 
-function cleanProduct(name, sport) {
+function cleanProduct(name, sport, year = 0) {
   let p = name
     .replace(/^(?:ninja update|breaking news|checklist revealed)\s*:\s*/i, '')
     .replace(/^\/?\s*/, '')
@@ -84,7 +87,8 @@ function cleanProduct(name, sport) {
   p = p.replace(/\bUD Upper Deck\b/i, 'Upper Deck').replace(/\s+/g, ' ').trim()
     for (const [pat, canon] of ALIASES) {
     let re = pat, onlySport = null
-    if (pat.includes('|') && /^[A-Z][a-z]+\|/.test(pat)) { onlySport = pat.split('|')[0]; re = pat.slice(onlySport.length + 1) }
+    if (/^(?:[A-Z][a-z]+|Y\d+)\|/.test(pat)) { onlySport = pat.split('|')[0]; re = pat.slice(onlySport.length + 1) }
+    if (/^Y\d+$/.test(onlySport || '')) { const minY = +onlySport.slice(1); onlySport = null; if (minY === 0 ? year >= 2010 : year < minY) continue }
     if (onlySport && onlySport !== sport) continue
     const m = p.match(new RegExp(re, 'i'))
     if (m) { p = canon.replace(/\$(\d)/g, (x, i) => keepCase(m[+i] || '')); break }
@@ -112,7 +116,7 @@ for (const f of files) {
   // The name's own sport word beats a mis-filed sport field ("1948 Leaf Football" filed as Baseball).
   const named = (s.name.match(/\b(Hockey|Basketball|Football|Baseball)\b/g) || [])
   if (named.length === 1 && named[0] !== s.sport && ['Hockey', 'Basketball', 'Football', 'Baseball'].includes(s.sport) && !/multi|soccer|futbol|fútbol/i.test(s.name)) { sportFixes.push(s.name + ': ' + s.sport + ' -> ' + named[0]); s.sport = named[0]; s.__dirty = true }
-  const product = cleanProduct(s.name, s.sport)
+  const product = cleanProduct(s.name, s.sport, parseInt(seasonOf(s)) || s.year || 0)
   if (!product) continue
   const k = keyOf(s.sport, product)
   const m = spellings.get(k) || new Map(); m.set(product, (m.get(product) || 0) + 1); spellings.set(k, m)
@@ -121,7 +125,9 @@ for (const f of files) {
 // Pick the canonical spelling: the most common; ties -> the one with more capitals/ampersand-free
 const canon = new Map()
 for (const [k, m] of spellings) {
-  const best = [...m.entries()].sort((a, b) => b[1] - a[1] || (b[0].match(/[A-Z]/g) || []).length - (a[0].match(/[A-Z]/g) || []).length)[0][0]
+  // most common; ties -> fewer Capitalised Small Words ("x", "of", "the"), then keeps punctuation, then more capitals (acronyms)
+  const smallCaps = (t) => (t.match(/\s(?:X|Of|The|And|In|To|A)\b/g) || []).length
+  const best = [...m.entries()].sort((a, b) => b[1] - a[1] || smallCaps(a[0]) - smallCaps(b[0]) || (/[:']/.test(b[0]) - /[:']/.test(a[0])) || (b[0].match(/[A-Z]/g) || []).length - (a[0].match(/[A-Z]/g) || []).length)[0][0]
   canon.set(k, best)
 }
 

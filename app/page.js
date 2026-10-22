@@ -634,7 +634,7 @@ export default function Home() {
 
             {/* STAT CARDS */}
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 14, maxWidth: 680, margin: '38px auto 0' }}>
-              {[[statN.sets.toLocaleString(), 'Sets Indexed'], [(statN.cards >= 1000000 ? (statN.cards / 1000000).toFixed(1) + 'M+' : statN.cards >= 1000 ? Math.round(statN.cards / 1000) + 'K+' : String(statN.cards)), 'Cards incl. Parallels'], [String(Math.max(sports.length - 1, 0)), 'Categories']].map(([n, label]) => (
+              {[[statN.sets.toLocaleString(), 'Sets Indexed'], [(statN.cards >= 1000000 ? (statN.cards / 1000000).toFixed(1) + 'M+' : statN.cards >= 1000 ? Math.round(statN.cards / 1000) + 'K+' : String(statN.cards)), 'Cards + Parallels'], [String(Math.max(sports.length - 1, 0)), 'Categories']].map(([n, label]) => (
                 <div key={label} style={{ background: 'linear-gradient(160deg, #171717, #0e0e0e)', border: '1px solid #262626', borderRadius: 14, padding: '22px 14px' }}>
                   <p style={{ ...condensed, margin: 0, fontSize: 40, fontWeight: 800, color: GOLD, lineHeight: 1 }}>{n}</p>
                   <p style={{ margin: '8px 0 0', color: '#888', fontSize: 11, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase' }}>{label}</p>
