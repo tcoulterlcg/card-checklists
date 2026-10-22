@@ -6,7 +6,7 @@
 import { useDeferredValue, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { useAccount, AccountChip, AuthModal, CollectionView, CommunityView } from '../components/community'
 import { addWant } from '../lib/supa'
-import { Omnibox, PlayerPage, MyPlayersPanel, useMyPlayers, loadPlayerDir, seasonLabel, MemBadge, MemChip, memCodeOf } from '../components/player'
+import { Omnibox, PlayerPage, MyPlayersPanel, useMyPlayers, loadPlayerDir, loadTopPlayers, seasonLabel, MemBadge, MemChip, memCodeOf } from '../components/player'
 import { norm, parseQuery, parseQueryFor, matchPlayers, TYPE, typeLabel, TYPE_COLORS, serialLabel } from '../lib/query'
 import { loadSet, loadIndex } from '../lib/catalog'
 import { ACCENT, ACCENT_TEXT, BG, SURFACE, SURFACE_2, LINE, CHIP_LINE, TEXT, TEXT_2, LABEL, display, eyebrow, title, buttonText } from '../lib/theme'
@@ -408,11 +408,20 @@ export default function Home() {
   }
   const openPlayerByName = async (name, rawQuery, push) => {
     const my = ++navSeq.current
+    // Most shared links are for well-known players: try the 100 KB top list before the full directory.
+    const top = await loadTopPlayers()
+    if (my !== navSeq.current) return
+    if (top) {
+      const tp = parseQueryFor(top, rawQuery || name)
+      const th = matchPlayers(top, tp.player || name, 8)
+      const hit = th.find(h => h.name === name)
+      if (hit) { openPlayer(hit, tp, th, push); return }
+    }
     const dir = await loadPlayerDir()
     if (my !== navSeq.current) return
     const parsed = parseQueryFor(dir, rawQuery || name)
     const hits = matchPlayers(dir, parsed.player || name, 8)
-    const exact = hits.find(h => h.name === name) || hits[0]
+    const exact = hits.find(h => h.name === name) || (hits[0] && !hits[0].partial ? hits[0] : null)   // a partial (dropped-words) guess is not this link's player
     if (exact) openPlayer(exact, parsed, hits, push)
     else { goHome(false); setNotice('No player called “' + name + '” in the database. Try the search below.') }
   }
@@ -622,6 +631,17 @@ export default function Home() {
   const rcCount = (j) => (j.sections || []).reduce((s, sec) => s + sec.cards.filter(c => c.x === 'RC').length, 0)
 
   const isLanding = !activeSet && !globalHits && view === 'browse'
+  // A shared link (?set= / ?player= / ?search=) shows a loading screen, not the
+  // home page, while the index and player list download on a slow connection.
+  const [deepLoading, setDeepLoading] = useState(false)
+  useEffect(() => {
+    const unhide = () => document.documentElement.classList.remove('hq-deep')   // set by the inline script in layout.js
+    if (!/[?&](set|player|search)=/.test(window.location.search)) { unhide(); return }
+    setDeepLoading(true); unhide()
+    const t = setTimeout(() => setDeepLoading(false), 25000)
+    return () => clearTimeout(t)
+  }, [])
+  useEffect(() => { if (deepLoading && (activeSet || globalHits || notice || view !== 'browse')) setDeepLoading(false) }, [deepLoading, activeSet, globalHits, notice, view])
   const goHome = (push) => { setNotice(''); setActiveSet(null); setSetData(null); setGlobalHits(null); setQuery(''); setView('browse'); setTeamFilter('All'); setTeamInput(''); setTeamBrowse(false); setTcgRarity('All'); setTcgType('All'); setActivePlayer(null); nav(location.pathname, push) }
   const openPatchSwaps = () => {
     setView('patchswaps'); setActiveSet(null); setSetData(null); setGlobalHits(null)
@@ -814,7 +834,9 @@ export default function Home() {
         <div style={{ position: 'fixed', bottom: 56, right: 24, zIndex: 95, background: ACCENT, color: '#fff', fontWeight: 700, fontSize: 14, padding: '12px 20px', borderRadius: 12, boxShadow: '0 8px 30px #000a' }}>{wantFlash}</div>
       )}
 
-      {isLanding ? (
+      {isLanding && deepLoading ? (
+        <div role="status" aria-live="polite" style={{ padding: '96px 0', textAlign: 'center', color: TEXT_2, fontSize: 15 }}>Loading…</div>
+      ) : isLanding ? (
         <>
           {/* HERO */}
           <section className="hq-hero" style={{ padding: '72px 0 48px', marginBottom: 8, borderBottom: '1px solid ' + LINE }}>

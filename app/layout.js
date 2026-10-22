@@ -60,6 +60,9 @@ body { overflow-x: clip; }
 @keyframes hqflip { from { transform: rotateX(90deg); opacity: 0 } to { transform: rotateX(0); opacity: 1 } }
 .hq-bl-label { animation: hqflip 260ms ease-out; transform-origin: 50% 50%; }
 
+html.hq-deep .hq-main > * { display: none !important; }
+html.hq-deep .hq-main::before { content: 'Loading…'; display: block; text-align: center; padding: 96px 0; color: #A3ABBD; font-size: 15px; }
+
 @media (max-width: 760px) {
   .hq-main { padding: 0 14px 70px !important; }
   .hq-header-inner { padding: 0 14px !important; }
@@ -106,6 +109,8 @@ export default function RootLayout({ children }) {
           rel="stylesheet"
         />
         <style dangerouslySetInnerHTML={{ __html: RESPONSIVE_CSS }} />
+        {/* Shared links (?set= / ?player= / ?search=): hide the prerendered home page until the app opens the page */}
+        <script dangerouslySetInnerHTML={{ __html: "try{if(/[?&](set|player|search)=/.test(location.search))document.documentElement.classList.add('hq-deep')}catch(e){}" }} />
       </head>
       <body style={{ margin: 0, fontFamily: "'Inter', system-ui, sans-serif", background: '#0B0E17', color: '#EDEDEF' }}>
         {children}
