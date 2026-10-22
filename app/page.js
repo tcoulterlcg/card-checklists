@@ -7,7 +7,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { useAccount, AccountChip, AuthModal, CollectionView, CommunityView } from '../components/community'
 import { addWant } from '../lib/supa'
 import { Omnibox, PlayerPage, MyPlayersPanel, useMyPlayers, loadPlayerDir, seasonLabel, MemBadge, MemChip, memCodeOf } from '../components/player'
-import { parseQuery, matchPlayers, TYPE, typeLabel, TYPE_COLORS, serialLabel } from '../lib/query'
+import { norm, parseQuery, parseQueryFor, matchPlayers, TYPE, typeLabel, TYPE_COLORS, serialLabel } from '../lib/query'
 import { ACCENT, ACCENT_TEXT, BG, SURFACE, SURFACE_2, LINE, CHIP_LINE, TEXT, TEXT_2, LABEL, display, eyebrow, title, buttonText } from '../lib/theme'
 
 
@@ -332,12 +332,12 @@ export default function Home() {
   const openPlayer = (p, parsed, candidates) => {
     setActivePlayer(p); setPlayerParsed(parsed || null); setPlayerCandidates(candidates || [])
     setActiveSet(null); setSetData(null); setGlobalHits(null); setView('player')
-    try { history.pushState(null, '', '?player=' + encodeURIComponent(p.name) + (parsed && parsed.raw && parseQuery(parsed.raw).player !== parsed.raw.trim().toLowerCase() ? '&q=' + encodeURIComponent(parsed.raw) : '')) } catch {}
+    try { history.pushState(null, '', '?player=' + encodeURIComponent(p.name) + (parsed && parsed.raw && norm(parsed.raw) !== parsed.player ? '&q=' + encodeURIComponent(parsed.raw) : '')) } catch {}
     window.scrollTo(0, 0)
   }
   const openPlayerByName = async (name, rawQuery) => {
     const dir = await loadPlayerDir()
-    const parsed = parseQuery(rawQuery || name)
+    const parsed = parseQueryFor(dir, rawQuery || name)
     const hits = matchPlayers(dir, parsed.player || name, 8)
     const exact = hits.find(h => h.name === name) || hits[0]
     if (exact) openPlayer(exact, parsed, hits)
@@ -347,9 +347,9 @@ export default function Home() {
     const q = (raw == null ? query : raw).trim()
     if (q.length < 2) return
     setSearching(true)
-    const parsed = parseQuery(q)
+    const dir = await loadPlayerDir()
+    const parsed = parseQueryFor(dir, q)
     if (parsed.player.length >= 2) {
-      const dir = await loadPlayerDir()
       const hits = matchPlayers(dir, parsed.player, 8)
       if (hits.length) { setSearching(false); openPlayer(hits[0], parsed, hits); return }
     }
@@ -1055,7 +1055,7 @@ export default function Home() {
           {globalHits.players.length > 0 && (
             <div style={{ border: '1px solid #222', borderRadius: 12, overflow: 'hidden', marginBottom: 18 }}>
               {globalHits.players.map((p, i) => (
-                <button key={p.id} onClick={() => openPlayer(p, parseQuery(p.name), [])}
+                <button key={p.id} onClick={() => openPlayer(p, null, [])}
                   style={{ width: '100%', textAlign: 'left', display: 'flex', gap: 12, padding: '11px 16px', fontSize: 14, alignItems: 'baseline', flexWrap: 'wrap', background: i % 2 === 0 ? '#0F1320' : '#121626', border: 'none', color: '#EDEDEF', cursor: 'pointer', fontFamily: 'inherit' }}>
                   <span style={{ fontWeight: 600 }}>{p.name}</span>
                   <span style={{ color: '#8A8A93', fontSize: 12.5 }}>{p.sport} · {p.cards.toLocaleString()} cards</span>
@@ -1077,7 +1077,7 @@ export default function Home() {
           {globalHits.players.length + globalHits.sets.length === 0 && <p style={{ padding: 20, color: '#6B7080', fontSize: 14 }}>No players or sets match.</p>}
         </section>
       ) : view === 'player' && activePlayer ? (
-        <PlayerPage player={activePlayer} parsed={playerParsed} sets={sets} myPlayers={myPlayers}
+        <PlayerPage key={activePlayer.id + '|' + ((playerParsed && playerParsed.raw) || '')} player={activePlayer} parsed={playerParsed} sets={sets} myPlayers={myPlayers}
           onOpenSet={openSetBySlug}
           onWant={wantIt} onSearch={runSearch} candidates={playerCandidates} onPickCandidate={(c) => openPlayer(c, playerParsed, playerCandidates)} />
       ) : view === 'myplayers' ? (

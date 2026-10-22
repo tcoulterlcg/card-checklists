@@ -41,9 +41,23 @@ function splitPlayers(raw) {
     .replace(/\s+:\s+.*$/, '')
     .replace(/\s+(CL|SP|SSP|RC|AU|VAR|HOF|UER|COR|ERR|Gold|Silver|Black|Red|Blue|Green|Orange|Purple|Pink|Variation|Refractor|Checklist)$/i, '')
     .trim()
+  // memorabilia piece glued to the name: "Austin Jackson (Pants)", "Eddie Murray #/ 25 Pants", "Don Mattingly (Jacket)"
+  p = p.replace(/\s*\(?\s*(?:#?\s*\/\s*\d+\s*)?\b(?:jersey|jerseys|pants|jacket|bat|bats|shoes?|gloves?|helmet|cap|hat|socks?|wristband|fabric|swatch|button|jersey number|jersey auto)\s*\)?$/i, (m) => /\S+\s+\S+/.test(p.slice(0, p.length - m.length).trim()) ? '' : m).trim()
+  // "Best There Is...Best There Was (Mike Piazza/Josh Gibson)" -> the players in the parentheses
+  const inner = p.match(/^[^()]+\(([^()]*\/[^()]*)\)$/)
+  if (inner) p = inner[1]
   if (!p) return []
-  const parts = p.split(/\s*\/\s*|\s+\|\s+/).map(x => x.trim()).filter(x => x.length > 1)
-  return parts.length ? parts : [p]
+  const parts = p.split(/\s*\/\s*|\s+\|\s+/)
+    .map(x => {
+      x = x.trim()
+      if (x.endsWith(')') && !x.includes('(')) x = x.slice(0, -1).trim()     // "Josh Gibson)"
+      if (x.startsWith('(') && !x.includes(')')) x = x.slice(1).trim()
+      if (x.includes('(') && !x.includes(')')) x = x.replace(/\s*\(.*$/, '') // "5 (Jersey"
+      return x
+    })
+    // drop bare numbers and piece counts: "25", "10)", "25 Jersey", "15\""
+    .filter(x => x.length > 1 && /[A-Za-z\u00C0-\u024F]{2}/.test(x) && !/^\d+["']?\s*\(?(jersey|jerseys|pants|jacket|bat|shoes?|gloves?|helmet|cap|hat|socks?|patch|auto)\b/i.test(x))
+  return parts
 }
 
 const PARALLEL_WORDS = /\b(gold|silver|black|red|blue|green|orange|purple|pink|teal|white|bronze|platinum|rainbow|refractor|prizm|prizms|holo|foil|spectrum|mojo|wave|cracked ice|shimmer|disco|velocity|hyper|camo|tie-dye|laser|pulsar|mosaic|optic|chrome|sapphire|x-fractor|xfractor|atomic|superfractor|printing plate|emerald|ruby|sepia|canvas|exclusives|high gloss|rookie exclusives|artist proof|press proof|die cut|die-cut|vintage stock|independence day|memorial day|mothers day|fathers day|rainbow foil|clear cut|outburst|magenta|cyan|yellow)\b/i

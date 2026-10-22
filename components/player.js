@@ -4,7 +4,7 @@
 // public/data/players/ (built by scripts/build-player-index.mjs).
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { supa } from '../lib/supa'
-import { TYPE, norm, parseQuery, matchPlayers, rowMatches, typeLabel, TYPE_COLORS, serialLabel, MEM_LABEL, MEM_COLORS, memKind, memTypical } from '../lib/query'
+import { TYPE, norm, parseQuery, parseQueryFor, matchPlayers, rowMatches, typeLabel, TYPE_COLORS, serialLabel, MEM_LABEL, MEM_COLORS, memKind, memTypical } from '../lib/query'
 import { ACCENT, ACCENT_TEXT, BG, SURFACE, SURFACE_2, LINE, CHIP_LINE, TEXT, TEXT_2, LABEL, display, eyebrow, title, buttonText } from '../lib/theme'
 
 const SPORT_COLORS = { Baseball: '#60a5fa', Football: '#4ade80', Basketball: '#f97316', Hockey: '#a78bfa', Soccer: '#f43f5e', UFC: '#dc2626', Boxing: '#eab308', Wrestling: '#f59e0b', Golf: '#22c55e', Tennis: '#14b8a6', Racing: '#ef4444', 'Pokémon': '#facc15', 'Yu-Gi-Oh!': '#a855f7', Magic: '#f59e0b', Lorcana: '#8b5cf6', 'One Piece': '#ef4444', Entertainment: '#ec4899', 'Multi-Sport': '#94a3b8' }
@@ -125,7 +125,7 @@ export function Omnibox({ value, onChange, onSubmit, onPickPlayer, onPickSet, se
     const h = (e) => { if (box.current && !box.current.contains(e.target)) setOpen(false) }
     document.addEventListener('mousedown', h); document.addEventListener('touchstart', h); return () => { document.removeEventListener('mousedown', h); document.removeEventListener('touchstart', h) }
   }, [])
-  const parsed = useMemo(() => parseQuery(value), [value])
+  const parsed = useMemo(() => parseQueryFor(dir, value), [value, dir])
   const playerHits = useMemo(() => (dir && parsed.player.length >= 2) ? matchPlayers(dir, parsed.player, 6) : [], [dir, parsed.player])
   const setHits = useMemo(() => {
     const t = norm(value); if (t.length < 3 || !sets) return []
