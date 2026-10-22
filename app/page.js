@@ -830,7 +830,7 @@ export default function Home() {
 
             {/* HERO SEARCH */}
             <div style={{ maxWidth: 640, margin: '32px 0 0', textAlign: 'left' }}>
-              <Omnibox value={query} onChange={setQuery} onSubmit={runSearch} sets={sets}
+              <Omnibox value={query} onChange={setQuery} onSubmit={runSearch} sets={sets} busy={searching}
                 onPickPlayer={(p, parsed) => openPlayer(p, parsed, [])} onPickSet={(s) => openSet(s)} />
             </div>
             <p style={{ color: LABEL, fontSize: 14, margin: '14px 0 0' }}>
@@ -1040,7 +1040,7 @@ export default function Home() {
               style={{ width: '100%', boxSizing: 'border-box', background: '#121626', border: '1px solid #232A3E', borderRadius: 10, padding: '13px 16px', color: '#EDEDEF', fontSize: 16, outline: 'none' }}
             />
           ) : (
-            <Omnibox value={query} onChange={setQuery} onSubmit={runSearch} sets={sets} compact
+            <Omnibox value={query} onChange={setQuery} onSubmit={runSearch} sets={sets} busy={searching} compact
               onPickPlayer={(p, parsed) => openPlayer(p, parsed, [])} onPickSet={(s) => openSet(s)} />
           )}
         </div>

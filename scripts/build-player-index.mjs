@@ -158,4 +158,8 @@ shards.forEach((sh, i) => {
   writeFileSync(new URL(i + '.json', outDir), JSON.stringify({ slugs: sh.slugs, sections: sh.sections, teams: sh.teams, rows: sh.rows }))
 })
 writeFileSync(new URL('dir.json', outDir), JSON.stringify({ v: 1, shards: SHARDS, sports: sportsPool, players: dir }))
+// top.json: the 5,000 most-carded players with their directory index at [6], so the
+// search box can suggest instantly while the full directory (~2 MB gzipped) loads.
+const top = dir.map((p, i) => [...p.slice(0, 6), i]).sort((a, b) => b[2] - a[2]).slice(0, 5000)
+writeFileSync(new URL('top.json', outDir), JSON.stringify({ v: 1, shards: SHARDS, sports: sportsPool, players: top, partial: true }))
 console.log('player index:', dir.length.toLocaleString(), 'players,', total.toLocaleString(), 'card rows across', SHARDS, 'shards from', files, 'sets')

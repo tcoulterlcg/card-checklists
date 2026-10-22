@@ -16,6 +16,12 @@ export function loadPlayerDir() {
   if (!dirPromise) dirPromise = fetch('/data/players/dir.json').then(r => r.json()).catch(() => ({ v: 1, shards: 0, sports: [], players: [] }))
   return dirPromise
 }
+// The 5,000 most-carded players (~100 KB) for instant first suggestions.
+let topPromise = null
+export function loadTopPlayers() {
+  if (!topPromise) topPromise = fetch('/data/players/top.json').then(r => r.json()).catch(() => null)
+  return topPromise
+}
 const shardCache = new Map()
 export function loadShard(n) {
   if (!shardCache.has(n)) shardCache.set(n, fetch('/data/players/' + n + '.json').then(r => r.json()).catch(() => ({ slugs: [], sections: [], teams: [], rows: [] })))
@@ -113,22 +119,24 @@ const pill = (active, color) => ({ padding: '7px 12px', borderRadius: 999, fontS
 const selectStyle = { background: '#121626', border: '1px solid #232A3E', borderRadius: 8, color: '#D4D4D8', fontSize: 13, padding: '0 12px', height: 36, fontFamily: 'inherit', cursor: 'pointer' }
 
 // ---------- Omnibox ----------
-export function Omnibox({ value, onChange, onSubmit, onPickPlayer, onPickSet, sets, autoFocus, compact }) {
+export function Omnibox({ value, onChange, onSubmit, onPickPlayer, onPickSet, sets, autoFocus, compact, busy }) {
   const [open, setOpen] = useState(false)
   const [dir, setDir] = useState(null)
   const [sel, setSel] = useState(0)
   const box = useRef(null)
   // The player directory is ~6 MB; fetch it once the visitor starts searching, not on page load.
   const wantDir = open || (value || '').trim().length >= 2
-  useEffect(() => { if (wantDir && !dir) loadPlayerDir().then(setDir) }, [wantDir, dir])
+  const [topDir, setTopDir] = useState(null)
+  useEffect(() => { if (wantDir && !dir) { loadTopPlayers().then(t => t && setTopDir(t)); loadPlayerDir().then(setDir) } }, [wantDir, dir])
+  const sdir = dir || topDir   // suggest from the top-players list until the full directory arrives
   useEffect(() => {
     const h = (e) => { if (box.current && !box.current.contains(e.target)) setOpen(false) }
     document.addEventListener('mousedown', h); document.addEventListener('touchstart', h); return () => { document.removeEventListener('mousedown', h); document.removeEventListener('touchstart', h) }
   }, [])
   // Suggestions follow the input a beat behind (the directory scan is ~160k names).
   const dValue = useDeferredValue(value)
-  const parsed = useMemo(() => parseQueryFor(dir, dValue), [dValue, dir])
-  const playerHits = useMemo(() => (dir && parsed.player.length >= 2) ? matchPlayers(dir, parsed.player, 6, { fuzzy: parsed.player.length >= 5 }) : [], [dir, parsed.player])
+  const parsed = useMemo(() => parseQueryFor(sdir, dValue), [dValue, sdir])
+  const playerHits = useMemo(() => (sdir && parsed.player.length >= 2) ? matchPlayers(sdir, parsed.player, 6, { fuzzy: !!dir && parsed.player.length >= 5 }) : [], [sdir, dir, parsed.player])
   const setHits = useMemo(() => {
     const t = norm(dValue); if (t.length < 3 || !sets) return []
     const toks = t.split(' ')
@@ -174,7 +182,7 @@ export function Omnibox({ value, onChange, onSubmit, onPickPlayer, onPickSet, se
           onKeyDown={(e) => { if (e.key === 'ArrowDown') { e.preventDefault(); setSel(s => Math.min(s + 1, items.length - 1)) } else if (e.key === 'ArrowUp') { e.preventDefault(); setSel(s => Math.max(s - 1, 0)) } else if (e.key === 'Escape') setOpen(false) }}
           placeholder='Search any player, e.g. "Tom Brady Auto" or "Connor McDavid Game-Used 1/1"'
           style={{ flex: 1, minWidth: 0, background: 'transparent', border: 'none', padding: compact ? '10px 12px' : '13px 14px', color: '#EDEDEF', fontSize: compact ? 15 : 16, outline: 'none', fontFamily: 'inherit' }} />
-        <button type="submit" style={{ ...buttonText, background: ACCENT, color: '#fff', border: 'none', borderRadius: 10, padding: '0 22px', height: compact ? 38 : 44, cursor: 'pointer', fontSize: 14 }}>Search</button>
+        <button type="submit" style={{ ...buttonText, background: ACCENT, color: '#fff', border: 'none', borderRadius: 10, padding: '0 22px', height: compact ? 38 : 44, cursor: 'pointer', fontSize: 14, opacity: busy ? 0.75 : 1 }} aria-busy={busy ? 'true' : undefined}>{busy ? 'Searching…' : 'Search'}</button>
       </form>
       {open && (items.length > 0 || understood.length > 0) && (
         <div role="listbox" style={{ position: 'absolute', left: 0, right: 0, top: '100%', zIndex: 60, background: '#0F1320', border: '1px solid #232A3E', borderTop: 'none', borderRadius: '0 0 14px 14px', overflow: 'hidden', boxShadow: '0 30px 60px -20px #000' }}>
