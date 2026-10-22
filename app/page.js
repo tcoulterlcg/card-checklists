@@ -8,6 +8,7 @@ import { useAccount, AccountChip, AuthModal, CollectionView, CommunityView } fro
 import { addWant } from '../lib/supa'
 import { Omnibox, PlayerPage, MyPlayersPanel, useMyPlayers, loadPlayerDir, seasonLabel, MemBadge, MemChip, memCodeOf } from '../components/player'
 import { norm, parseQuery, parseQueryFor, matchPlayers, TYPE, typeLabel, TYPE_COLORS, serialLabel } from '../lib/query'
+import { loadSet, loadIndex } from '../lib/catalog'
 import { ACCENT, ACCENT_TEXT, BG, SURFACE, SURFACE_2, LINE, CHIP_LINE, TEXT, TEXT_2, LABEL, display, eyebrow, title, buttonText } from '../lib/theme'
 
 
@@ -341,7 +342,7 @@ export default function Home() {
   }, [])
 
   useEffect(() => {
-    fetch('/data/index.json').then(r => r.json()).then(j => setSets(j.sets || [])).catch(() => {})
+    loadIndex().then(setSets).catch(() => {})
   }, [])
 
   const totalCards = useMemo(() => sets.reduce((s, x) => s + (x.cardCount || 0), 0), [sets])
@@ -381,8 +382,7 @@ export default function Home() {
     setActiveSet(s); setGlobalHits(null); setActiveSection('All'); setQuery(''); setActivePlayer(null); setView('browse'); setSetTypeFilter('All'); setSetRunFilter('any'); setSetRcOnly(false); setSetMemFilter('any'); setSecLimit(20)
     nav('?set=' + encodeURIComponent(s.slug), push)
     try {
-      const r = await fetch('/data/' + s.slug + '.json')
-      setSetData(await r.json())
+      setSetData(await loadSet(s.slug))
     } catch (e) { setSetData(null) }
     window.scrollTo(0, 0)
   }

@@ -1,6 +1,7 @@
 'use client'
 // Community + Collection features: auth chip, achievement forum, wantlist /
 // collection tracker. Dark + electric blue to match the site shell. Data via lib/supa.
+import { loadSet } from '../lib/catalog'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { supa, getProfile, ensureProfile, addWant, removeWant, myWantlist, toggleCollected, myCollection, uploadCardImage, setCollectionImage, forumFeed, createPost, react, comments, addComment, grailSets, notifyGrailCompletion } from '../lib/supa'
 import { ACCENT, ACCENT_TEXT, BG, SURFACE, SURFACE_2, LINE, CHIP_LINE, TEXT, TEXT_2, LABEL, display, eyebrow, title, buttonText } from '../lib/theme'
@@ -114,7 +115,7 @@ export function CollectionView({ account, indexSets, onOpenAuth, onOpenSet }) {
   }, [session])
   useEffect(() => {
     if (!activeSlug) { setSetData(null); return }
-    fetch('/data/' + activeSlug + '.json').then(r => r.json()).then(setSetData).catch(() => setSetData(null))
+    loadSet(activeSlug).then(setSetData).catch(() => setSetData(null))
   }, [activeSlug])
 
   if (!session) return (
@@ -132,7 +133,7 @@ export function CollectionView({ account, indexSets, onOpenAuth, onOpenSet }) {
   async function checkGrailCompletion(slug, name) {
     const g = grails.find(x => x.set_slug === slug)
     if (!g || !g.notify) return
-    const data = setData && setData.slug === slug ? setData : await fetch('/data/' + slug + '.json').then(r => r.json()).catch(() => null)
+    const data = setData && setData.slug === slug ? setData : await loadSet(slug)
     if (!data) return
     const total = data.sections.reduce((n, s) => n + s.cards.length, 0)
     const mine = (await myCollection(session.user.id, slug)).length
