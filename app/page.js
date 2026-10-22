@@ -612,7 +612,7 @@ export default function Home() {
                 onPickPlayer={(p, parsed) => openPlayer(p, parsed, [])} onPickSet={(s) => openSet(s)} />
             </div>
             <p style={{ color: '#666', fontSize: 13, margin: '14px 0 0' }}>
-              Try {['Nikita Kucherov 1/1', 'Connor McDavid The Cup'].map((n, i) => (
+              Try {['Tom Brady Auto', 'Connor McDavid Game-Used 1/1'].map((n, i) => (
                 <span key={n}>
                   {i > 0 ? ' · ' : ' '}
                   <button onClick={() => searchFor(n)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: GOLD, fontSize: 13, padding: 0 }}>{n}</button>

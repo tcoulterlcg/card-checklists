@@ -169,7 +169,7 @@ export function Omnibox({ value, onChange, onSubmit, onPickPlayer, onPickSet, se
           onChange={(e) => { onChange(e.target.value); setOpen(true); setSel(0) }}
           onFocus={() => setOpen(true)}
           onKeyDown={(e) => { if (e.key === 'ArrowDown') { e.preventDefault(); setSel(s => Math.min(s + 1, items.length - 1)) } else if (e.key === 'ArrowUp') { e.preventDefault(); setSel(s => Math.max(s - 1, 0)) } else if (e.key === 'Escape') setOpen(false) }}
-          placeholder='Search any player, e.g. "Connor McDavid The Cup" or "Nikita Kucherov 1/1"'
+          placeholder='Search any player, e.g. "Tom Brady Auto" or "Connor McDavid Game-Used 1/1"'
           style={{ flex: 1, minWidth: 0, background: 'transparent', border: 'none', padding: compact ? '10px 12px' : '13px 14px', color: '#f5f5f5', fontSize: compact ? 15 : 16, outline: 'none', fontFamily: 'inherit' }} />
         <button type="submit" style={{ ...condensed, background: GOLD, color: '#111', border: 'none', borderRadius: 10, padding: '0 22px', height: compact ? 38 : 44, fontWeight: 800, fontSize: 15, letterSpacing: '0.08em', textTransform: 'uppercase', cursor: 'pointer' }}>Search</button>
       </form>
