@@ -350,8 +350,14 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
   const productOptions = useMemo(() => [...new Set(rows.map(r => r.set.replace(/^\d{4}(-\d{2})?\s*/, '').replace(/\s+(hockey|baseball|basketball|football|soccer).*$/i, '')))].sort(), [rows])
   const titleSuffix = quick !== 'all' ? ' · ' + VIEWS.find(v => v[0] === quick)[1] : parsed && parsed.serial === 1 ? ' · 1/1s' : ''
 
+  const [copied, setCopied] = useState('')
+  const copyLink = async () => {
+    try { await navigator.clipboard.writeText(location.href); setCopied('Link copied ✓') }
+    catch { window.prompt('Copy this link:', location.href); setCopied('') }   // clipboard blocked (some phones / unfocused tab)
+    setTimeout(() => setCopied(''), 2000)
+  }
   const exportCsv = () => {
-    const lines = ['Season,Set,Card #,Section,Type,Material,Print run,Team', ...sorted.map(r => [r.year, r.set, r.n, r.section, typeLabel(r.type), r.mem ? MEM_LABEL[r.mem & 7] + (memTypical(r.mem) ? ' (typical)' : '') : '', serialLabel(r.serial), r.team].map(v => '"' + String(v || '').replace(/"/g, '""') + '"').join(','))]
+    const lines = ['Player,Season,Set,Card #,Section,Type,Material,Print run,Team', ...sorted.map(r => [player.name, seasonLabel(r.year, r.sport), r.set, r.n, r.section, typeLabel(r.type), r.mem ? MEM_LABEL[r.mem & 7] + (memTypical(r.mem) ? ' (typical)' : '') : '', serialLabel(r.serial), r.team].map(v => '"' + String(v || '').replace(/"/g, '""') + '"').join(','))]
     const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([lines.join('\n')], { type: 'text/csv' })); a.download = player.name.replace(/\s+/g, '-') + '-checklist.csv'; a.click()
   }
 
@@ -398,7 +404,7 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
               {following ? 'In my players' : 'Collect this player'}
             </button>
             <button onClick={exportCsv} style={btn(false)}>Export CSV</button>
-            <button onClick={() => { navigator.clipboard && navigator.clipboard.writeText(location.href) }} style={btn(false)}>Copy link</button>
+            <button onClick={copyLink} style={btn(false)}>{copied || 'Copy link'}</button>
           </div>
         </div>
         <div style={{ flex: '1 1 300px', minWidth: 0, display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(110px, 1fr))', gap: 10 }}>
