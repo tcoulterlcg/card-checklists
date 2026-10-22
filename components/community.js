@@ -340,7 +340,12 @@ export function CommunityView({ account, indexSets, onOpenAuth }) {
         </div>
       )}
 
-      {!feed ? <p style={{ color: '#6B7080' }}>Loading feed…</p> : feed.length === 0 ? (
+      {!feed ? <p style={{ color: '#6B7080' }}>Loading feed…</p> : feed.failed ? (
+        <div style={{ ...card, padding: 24, textAlign: 'center' }}>
+          <p style={{ color: '#A1A1AA', fontSize: 14, margin: 0 }}>Couldn't load the community feed. Check your connection.</p>
+          <button onClick={() => { setFeed(null); forumFeed().then(setFeed) }} style={{ marginTop: 12, background: 'none', border: '1px solid #2A3247', color: '#ECEEF3', borderRadius: 8, padding: '8px 16px', cursor: 'pointer', fontFamily: 'inherit', fontWeight: 600 }}>Try again</button>
+        </div>
+      ) : feed.length === 0 ? (
         <div style={{ ...card, padding: 32, textAlign: 'center' }}>
           <p style={{ ...title(18), color: '#fff', margin: 0 }}>Be the first to post</p>
           <p style={{ color: '#A1A1AA', fontSize: 14, margin: '8px 0 0' }}>Complete a set, share the story, claim the flex.</p>
