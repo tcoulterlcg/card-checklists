@@ -21,7 +21,7 @@ body { overflow-x: clip; }
 /* Header (spec: CardHQ Header, Claude Design) */
 .hq-header { position: sticky; top: 0; z-index: 50; background: rgba(11,14,23,0.85); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); border-bottom: 1px solid transparent; transition: border-color 150ms; }
 .hq-header.hq-scrolled { border-bottom-color: #1C2233; }
-.hq-header-inner { max-width: 1180px; margin: 0 auto; padding: 0 24px; height: 64px; display: flex; align-items: center; box-sizing: border-box; }
+.hq-header-inner { max-width: 1228px; margin: 0 auto; padding: 0 24px; height: 64px; display: flex; align-items: center; box-sizing: border-box; }
 .hq-lockup { display: inline-flex; align-items: center; gap: 10px; cursor: pointer; text-decoration: none; border-radius: 6px; }
 .hq-wordmark { font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 800; font-size: 26px; line-height: 1; letter-spacing: 0.01em; color: #ECEEF3; padding-top: 2px; }
 .hq-navlinks { display: flex; align-items: stretch; gap: 4px; height: 64px; margin-left: 40px; }
@@ -59,6 +59,7 @@ body { overflow-x: clip; }
 
 @media (max-width: 760px) {
   .hq-main { padding: 0 14px 70px !important; }
+  .hq-header-inner { padding: 0 14px !important; }
   .hq-hero { padding: 30px 0 26px !important; }
   .hq-stats { gap: 16px 28px !important; }
   .hq-stats > div > p:first-child { font-size: 30px !important; }
@@ -79,7 +80,7 @@ body { overflow-x: clip; }
 }
 @media (max-width: 639px) {
   .hq-header { border-bottom-color: #1C2233; }
-  .hq-header-inner { height: 56px; padding: 0 8px 0 16px; }
+  .hq-header-inner { height: 56px; padding: 0 6px 0 14px !important; }
   .hq-lockup { gap: 8px; }
   .hq-lockup svg { width: 22px; height: 22px; }
   .hq-wordmark { font-size: 22px; }
