@@ -11,7 +11,9 @@ const dataDir = new URL('../public/data/', import.meta.url)
 const sets = (await (await fetch(API + '/sets', { headers: H })).json()).results
 console.log('Lorcana sets:', sets.length)
 
-const order = ['Common', 'Uncommon', 'Rare', 'Super Rare', 'Legendary', 'Enchanted', 'Special', 'Promo']
+const order = ['Common', 'Uncommon', 'Rare', 'Super Rare', 'Legendary', 'Epic', 'Enchanted', 'Iconic', 'Special', 'Promo']
+// API rarities come as 'Super_rare' etc.
+const label = (r) => String(r || '').replace(/_/g, ' ').replace(/\b\w/g, ch => ch.toUpperCase())
 let ok = 0, total = 0
 for (const set of sets) {
   const r = await fetch(API + '/sets/' + set.id + '/cards', { headers: H })
@@ -21,12 +23,12 @@ for (const set of sets) {
 
   const groups = {}
   for (const c of cards) {
-    const rarity = c.rarity || 'Unlisted'
+    const rarity = label(c.rarity) || 'Unlisted'
     ;(groups[rarity] = groups[rarity] || []).push({
       n: c.collector_number || c.number || '',
       p: c.name + (c.version ? ' — ' + c.version : ''),
       t: Array.isArray(c.type) ? c.type.join('/') : (c.type || ''),
-      x: c.rarity || undefined
+      x: label(c.rarity) || undefined
     })
   }
   const sections = Object.keys(groups)

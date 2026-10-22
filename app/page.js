@@ -56,6 +56,9 @@ const SPORT_COLORS = {
 }
 // Which categories are trading card games (vs traditional sports cards).
 const TCG_SET = new Set(['Pokémon', 'Yu-Gi-Oh!', 'Magic', 'Lorcana', 'One Piece', 'Disney'])
+const TCG_EXAMPLE = { 'Pokémon': 'Charizard', 'Yu-Gi-Oh!': 'Dark Magician', Magic: 'Lightning Bolt', Lorcana: 'Stitch', 'One Piece': 'Monkey.D.Luffy' }
+// "Stitch — Rock Star" / "Sanji (SP)" / "A-Ancestral Katana" -> base card name.
+const tcgBaseName = (p) => String(p || '').replace(/\s+[—–-]\s+.*$/, '').replace(/\s*\([^)]*\)\s*$/, '').replace(/^A-(?=\S)/, '').trim()
 
 const BRAND_COLORS = { Panini: '#e11d48', Topps: '#ef8c1c', 'Upper Deck': '#2563eb', Leaf: '#16a34a', Other: '#8A8A93' }
 
@@ -239,6 +242,10 @@ export default function Home() {
   const [teamBrowse, setTeamBrowse] = useState(false)
   const [teamLoading, setTeamLoading] = useState(false)
   const [teamSort, setTeamSort] = useState('year-desc')
+  // TCG browse: teams don't exist in TCGs, so TCG tabs filter by card name,
+  // rarity and card type across every set instead (same card index).
+  const [tcgRarity, setTcgRarity] = useState('All')
+  const [tcgType, setTcgType] = useState('All')
   // Player pages + My Players
   const myPlayers = useMyPlayers(account)
   const [activePlayer, setActivePlayer] = useState(null)
@@ -467,6 +474,11 @@ export default function Home() {
 
   const oneSport = sportFilter !== 'All' && sportFilter !== 'Sports' && sportFilter !== 'TCG'
 
+  const isTcg = TCG_SET.has(sportFilter)
+  const setIsTcg = !!(activeSet && TCG_SET.has(activeSet.sport))
+  const tcgActive = isTcg && (teamFilter !== 'All' || tcgRarity !== 'All' || tcgType !== 'All')
+  const browseActive = oneSport && (isTcg ? tcgActive : teamFilter !== 'All')
+
   // slug -> sport, so teams can be scoped to the selected sport.
   const slugSport = useMemo(() => {
     const m = {}; for (const s of sets) m[s.slug] = s.sport; return m
@@ -476,7 +488,7 @@ export default function Home() {
   // field sometimes holds print-run/parallel junk ("#/6", "/199"), so keep only
   // strings that read like a real team name and appear on at least a few cards.
   const teamsForSport = useMemo(() => {
-    if (!searchIndex || !oneSport) return []
+    if (!searchIndex || !oneSport || isTcg) return []
     const { slugs, teams, rows } = searchIndex
     const count = new Map()
     for (const row of rows) {
@@ -488,20 +500,41 @@ export default function Home() {
     const out = []
     for (const [tid, n] of count) { const t = teams[tid]; if (n >= 3 && isTeam(t)) out.push(t) }
     return out.sort((a, b) => a.localeCompare(b))
-  }, [searchIndex, oneSport, sportFilter, slugSport])
+  }, [searchIndex, oneSport, sportFilter, slugSport, isTcg])
+
+  // TCG filter options for the selected game: card names (base name, version
+  // suffixes dropped), rarities and card types, most common first.
+  const tcgOptions = useMemo(() => {
+    const empty = { names: [], rarities: [], types: [] }
+    if (!searchIndex || !isTcg) return empty
+    const { slugs, teams, rows } = searchIndex
+    const names = new Map(), rar = new Map(), typ = new Map()
+    const bump = (m, k) => { if (k) m.set(k, (m.get(k) || 0) + 1) }
+    for (const row of rows) {
+      if (slugSport[slugs[row[1]]] !== sportFilter) continue
+      bump(names, tcgBaseName(row[0])); bump(rar, row[5]); bump(typ, row[4] >= 0 ? teams[row[4]] : '')
+    }
+    const top = (m, min) => [...m].filter(([, n]) => n >= min).sort((a, b) => b[1] - a[1]).map(([k]) => k)
+    return { names: top(names, 2).slice(0, 4000).sort((a, b) => a.localeCompare(b)), rarities: top(rar, 1), types: top(typ, 3) }
+  }, [searchIndex, isTcg, sportFilter, slugSport])
 
   // Every card of the selected team within the selected sport, sorted.
   const teamHits = useMemo(() => {
-    if (!searchIndex || teamFilter === 'All' || !oneSport) return []
+    if (!searchIndex || !browseActive) return []
     const { slugs, sections, teams, rows } = searchIndex
     const setMeta = {}; for (const s of sets) setMeta[s.slug] = s
     const out = []
+    const needle = teamFilter === 'All' ? '' : teamFilter.toLowerCase()
     for (const row of rows) {
-      if (row[4] < 0 || teams[row[4]] !== teamFilter) continue
+      if (isTcg) {
+        if (needle && !String(row[0]).toLowerCase().includes(needle)) continue
+        if (tcgRarity !== 'All' && row[5] !== tcgRarity) continue
+        if (tcgType !== 'All' && (row[4] < 0 || teams[row[4]] !== tcgType)) continue
+      } else if (row[4] < 0 || teams[row[4]] !== teamFilter) continue
       const slug = slugs[row[1]]
       if (slugSport[slug] !== sportFilter) continue
       const m = setMeta[slug] || {}
-      out.push({ p: row[0], slug, n: row[2], section: sections[row[3]] || '', x: row[5], set: m.name, year: m.year, sport: m.sport })
+      out.push({ p: row[0], slug, n: row[2], section: sections[row[3]] || '', x: row[5], t: row[4] >= 0 ? teams[row[4]] : '', set: m.name, year: m.year, sport: m.sport })
     }
     const bySet = (a, b) => (a.set || '').localeCompare(b.set || '')
     out.sort((a, b) => {
@@ -511,12 +544,12 @@ export default function Home() {
       return (b.year - a.year) || bySet(a, b) // year-desc
     })
     return out.slice(0, 2500)
-  }, [searchIndex, teamFilter, oneSport, sportFilter, slugSport, sets, teamSort])
+  }, [searchIndex, teamFilter, oneSport, sportFilter, slugSport, sets, teamSort, isTcg, browseActive, tcgRarity, tcgType])
 
   const rcCount = (j) => (j.sections || []).reduce((s, sec) => s + sec.cards.filter(c => c.x === 'RC').length, 0)
 
   const isLanding = !activeSet && !globalHits && view === 'browse'
-  const goHome = () => { setActiveSet(null); setSetData(null); setGlobalHits(null); setQuery(''); setView('browse'); setTeamFilter('All'); setTeamInput(''); setTeamBrowse(false); setActivePlayer(null); try { history.pushState(null, '', location.pathname) } catch {} }
+  const goHome = () => { setActiveSet(null); setSetData(null); setGlobalHits(null); setQuery(''); setView('browse'); setTeamFilter('All'); setTeamInput(''); setTeamBrowse(false); setTcgRarity('All'); setTcgType('All'); setActivePlayer(null); try { history.pushState(null, '', location.pathname) } catch {} }
   const openPatchSwaps = () => {
     setView('patchswaps'); setActiveSet(null); setSetData(null); setGlobalHits(null)
     if (!patchData) fetch('/data/patch-swaps.json').then(r => r.json()).then(setPatchData).catch(() => setPatchData({ entries: [] }))
@@ -651,7 +684,7 @@ export default function Home() {
           {(() => {
             const sportCats = sports.filter(s => s !== 'All' && !TCG_SET.has(s))
             const tcgCats = sports.filter(s => TCG_SET.has(s))
-            const pick = (v) => { setSportFilter(v); setBrandFilter('All'); setProductFilter('All'); setTeamFilter('All'); setTeamInput(''); setTeamBrowse(false) }
+            const pick = (v) => { setSportFilter(v); setBrandFilter('All'); setProductFilter('All'); setTeamFilter('All'); setTeamInput(''); setTeamBrowse(false); setTcgRarity('All'); setTcgType('All') }
             const chip = (label, value, color) => (
               <button key={label} onClick={() => pick(value)}
                 style={{
@@ -726,8 +759,54 @@ export default function Home() {
             )}
           </div>
           )}
+          {/* TCG FILTERS: card name / rarity / type across every set of the game */}
+          {oneSport && isTcg && (
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap', marginBottom: 22 }}>
+              <span style={{ ...eyebrow, color: '#6B7080' }}>Find</span>
+              {!teamBrowse ? (
+                <button onClick={openTeamBrowse}
+                  style={{ background: '#121626', border: '1px solid #232A3E', borderRadius: 8, color: '#D4D4D8', fontSize: 13, fontWeight: 600, padding: '8px 14px', cursor: 'pointer' }}>
+                  Search cards, rarities &amp; types ▾
+                </button>
+              ) : teamLoading ? (
+                <span style={{ color: '#8A8A93', fontSize: 13 }}>Loading cards…</span>
+              ) : (
+                <>
+                  <input list="tcg-card-options" value={teamInput}
+                    placeholder={'Card name… e.g. ' + (TCG_EXAMPLE[sportFilter] || 'any card')}
+                    onChange={(e) => { const v = e.target.value; setTeamInput(v); const t = v.trim(); setTeamFilter(t.length >= 2 ? t : 'All') }}
+                    style={{ background: '#121626', border: '1px solid ' + (teamFilter !== 'All' ? ACCENT : '#232A3E'), borderRadius: 8, color: '#D4D4D8', fontSize: 13, padding: '8px 12px', minWidth: 0, width: 230, maxWidth: '100%', outline: 'none' }} />
+                  <datalist id="tcg-card-options">{tcgOptions.names.map(t => <option key={t} value={t} />)}</datalist>
+                  <select value={tcgRarity} onChange={(e) => setTcgRarity(e.target.value)} aria-label="Rarity"
+                    style={{ background: '#121626', border: '1px solid ' + (tcgRarity !== 'All' ? ACCENT : '#232A3E'), borderRadius: 8, color: '#D4D4D8', fontSize: 13, padding: '8px 12px', cursor: 'pointer', maxWidth: '100%' }}>
+                    <option value="All">All rarities</option>
+                    {tcgOptions.rarities.map(r => <option key={r} value={r}>{r}</option>)}
+                  </select>
+                  <select value={tcgType} onChange={(e) => setTcgType(e.target.value)} aria-label="Card type"
+                    style={{ background: '#121626', border: '1px solid ' + (tcgType !== 'All' ? ACCENT : '#232A3E'), borderRadius: 8, color: '#D4D4D8', fontSize: 13, padding: '8px 12px', cursor: 'pointer', maxWidth: '100%' }}>
+                    <option value="All">All types</option>
+                    {tcgOptions.types.map(t => <option key={t} value={t}>{t}</option>)}
+                  </select>
+                  {tcgActive && (
+                    <>
+                      <span style={{ ...eyebrow, color: '#6B7080', marginLeft: 4 }}>Sort</span>
+                      <select value={teamSort} onChange={(e) => setTeamSort(e.target.value)}
+                        style={{ background: '#121626', border: '1px solid #232A3E', borderRadius: 8, color: '#D4D4D8', fontSize: 13, padding: '8px 12px', cursor: 'pointer' }}>
+                        <option value="year-desc">Newest first</option>
+                        <option value="year-asc">Oldest first</option>
+                        <option value="player">Card name (A–Z)</option>
+                        <option value="set">Set name</option>
+                      </select>
+                      <button onClick={() => { setTeamFilter('All'); setTeamInput(''); setTcgRarity('All'); setTcgType('All') }}
+                        style={{ background: 'none', border: 'none', color: ACCENT_TEXT, fontSize: 12.5, fontWeight: 600, cursor: 'pointer' }}>Clear</button>
+                    </>
+                  )}
+                </>
+              )}
+            </div>
+          )}
           {/* TEAM FILTER + SORT (after a specific sport is selected) */}
-          {oneSport && (
+          {oneSport && !isTcg && (
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap', marginBottom: 22 }}>
               <span style={{ ...eyebrow, color: '#6B7080' }}>Team</span>
               {!teamBrowse ? (
@@ -775,7 +854,7 @@ export default function Home() {
             <input
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Filter this set (player, team, card #, section)…"
+              placeholder={TCG_SET.has(activeSet.sport) ? 'Filter this set (card, type, rarity, card #, section)…' : 'Filter this set (player, team, card #, section)…'}
               style={{ width: '100%', boxSizing: 'border-box', background: '#121626', border: '1px solid #232A3E', borderRadius: 10, padding: '13px 16px', color: '#EDEDEF', fontSize: 15, outline: 'none' }}
             />
           ) : (
@@ -928,9 +1007,9 @@ export default function Home() {
                 <div style={{ border: '1px solid #222', borderRadius: 12, overflow: 'hidden' }}>
                   <div className="hq-setrow" style={{ display: 'flex', gap: 14, padding: '9px 16px', background: '#121626', borderBottom: '1px solid #232A3E', alignItems: 'center' }}>
                     <div className="hq-col-num" style={{ flex: '0 0 68px' }}><SortHeader label="Card #" field="n" sortField={sortField} sortDir={sortDir} onClick={toggleSort} /></div>
-                    <div style={{ flex: '1 1 auto', minWidth: 0 }}><SortHeader label="Player" field="p" sortField={sortField} sortDir={sortDir} onClick={toggleSort} grow /></div>
-                    <div className="hq-col-team" style={{ flex: '1 1 auto', minWidth: 0 }}><SortHeader label="Team" field="t" sortField={sortField} sortDir={sortDir} onClick={toggleSort} grow /></div>
-                    <div className="hq-col-flag" style={{ flex: '0 0 70px' }}><SortHeader label="Flag" field="x" sortField={sortField} sortDir={sortDir} onClick={toggleSort} align="right" /></div>
+                    <div style={{ flex: '1 1 auto', minWidth: 0 }}><SortHeader label={setIsTcg ? 'Card' : 'Player'} field="p" sortField={sortField} sortDir={sortDir} onClick={toggleSort} grow /></div>
+                    <div className="hq-col-team" style={{ flex: '1 1 auto', minWidth: 0 }}><SortHeader label={setIsTcg ? 'Type' : 'Team'} field="t" sortField={sortField} sortDir={sortDir} onClick={toggleSort} grow /></div>
+                    <div className="hq-col-flag" style={{ flex: setIsTcg ? '0 0 110px' : '0 0 70px' }}><SortHeader label={setIsTcg ? 'Rarity' : 'Flag'} field="x" sortField={sortField} sortDir={sortDir} onClick={toggleSort} align="right" /></div>
                     <span aria-hidden="true" style={{ flex: '0 0 32px' }} />
                   </div>
                   {sorted.slice(0, 1000).map((c, i) => (
@@ -944,7 +1023,7 @@ export default function Home() {
                         {c.t && <span className="hq-mobile-only" style={{ color: '#8A8A93', fontSize: 12, marginTop: 2 }}>{c.t}</span>}
                       </span>
                       <span className="hq-col-team" style={{ flex: '1 1 auto', minWidth: 0, color: '#8A8A93', fontSize: 13 }}>{c.t || ''}</span>
-                      <span className="hq-col-flag" style={{ flex: '0 0 70px', textAlign: 'right' }}>{c.x ? <Chip color={c.x === 'RC' ? '#4ade80' : '#8A8A93'}>{c.x}</Chip> : null}</span>
+                      <span className="hq-col-flag" style={{ flex: setIsTcg ? '0 0 110px' : '0 0 70px', textAlign: 'right' }}>{c.x ? <Chip color={c.x === 'RC' ? '#4ade80' : '#8A8A93'}>{c.x}</Chip> : null}</span>
                       <button title="Add this card (and its parallel section) to your wantlist"
                         onClick={() => wantIt({ set_slug: setData.slug, set_name: setData.name, card_n: c.n, section: sec.title, player: c.p })}
                         aria-label="Add to wantlist" style={{ flex: '0 0 32px', height: 32, background: 'none', border: '1px solid #232A3E', color: '#7a7a7a', borderRadius: 6, fontSize: 14, cursor: 'pointer', padding: 0 }}>+</button>
@@ -1175,31 +1254,31 @@ export default function Home() {
             </>
           )}
         </section>
-      ) : (oneSport && teamFilter !== 'All') ? (
+      ) : browseActive ? (
         <section>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', flexWrap: 'wrap', gap: 8, marginBottom: 14 }}>
             <h2 style={{ ...title(19), margin: 0 }}>
-              {teamFilter} <span style={{ color: SPORT_COLORS[sportFilter] || ACCENT_TEXT, fontSize: 15 }}>· {sportFilter}</span>
+              {isTcg ? ([teamFilter !== 'All' ? '“' + teamFilter + '”' : null, tcgRarity !== 'All' ? tcgRarity : null, tcgType !== 'All' ? tcgType : null].filter(Boolean).join(' · ')) : teamFilter} <span style={{ color: SPORT_COLORS[sportFilter] || ACCENT_TEXT, fontSize: 15 }}>· {sportFilter}</span>
               <span style={{ color: '#6B7080', fontSize: 15, marginLeft: 10 }}>{teamHits.length.toLocaleString()}{teamHits.length >= 2500 ? '+' : ''} cards</span>
             </h2>
           </div>
           <div style={{ border: '1px solid #222', borderRadius: 12, overflow: 'hidden' }}>
             <div style={{ ...eyebrow, display: 'flex', gap: 12, padding: '9px 16px', background: '#121626', borderBottom: '1px solid #232A3E', color: '#8A8A93' }}>
               <span style={{ flex: '0 0 60px' }}>Card</span>
-              <span style={{ flex: '1 1 auto', minWidth: 0 }}>Player</span>
-              <span style={{ flex: '0 0 54px' }}>Flag</span>
+              <span style={{ flex: '1 1 auto', minWidth: 0 }}>{isTcg ? 'Card' : 'Player'}</span>
+              <span style={{ flex: isTcg ? '0 0 120px' : '0 0 54px' }}>{isTcg ? 'Rarity' : 'Flag'}</span>
               <span style={{ flex: '2 1 0', minWidth: 0 }}>Set · Section</span>
             </div>
             {teamHits.map((c, i) => (
               <button key={i} onClick={() => { const s = sets.find(x => x.slug === c.slug); if (s) openSet(Object.assign({}, s, classifySet(s.name))) }}
                 style={{ width: '100%', textAlign: 'left', display: 'flex', gap: 12, padding: '8px 16px', fontSize: 14, alignItems: 'baseline', background: i % 2 === 0 ? '#0F1320' : '#121626', border: 'none', color: '#EDEDEF', cursor: 'pointer' }}>
                 <span style={{ flex: '0 0 60px', color: ACCENT_TEXT, fontWeight: 700, fontVariantNumeric: 'tabular-nums' }}>#{c.n}</span>
-                <span style={{ flex: '1 1 auto', minWidth: 0, fontWeight: 600 }}>{c.p}</span>
-                <span style={{ flex: '0 0 54px' }}>{c.x ? <Chip color={c.x === 'RC' ? '#4ade80' : '#8A8A93'}>{c.x}</Chip> : null}</span>
+                <span style={{ flex: '1 1 auto', minWidth: 0, fontWeight: 600 }}>{c.p}{isTcg && c.t ? <span style={{ color: '#8A8A93', fontWeight: 400, fontSize: 12.5 }}> · {c.t}</span> : null}</span>
+                <span style={{ flex: isTcg ? '0 0 120px' : '0 0 54px' }}>{c.x ? <Chip color={c.x === 'RC' ? '#4ade80' : '#8A8A93'}>{c.x}</Chip> : null}</span>
                 <span style={{ flex: '2 1 0', minWidth: 0, color: '#8A8A93', fontSize: 12.5 }}>{c.set}{c.section ? ' · ' + c.section : ''}</span>
               </button>
             ))}
-            {teamHits.length === 0 && <p style={{ padding: 20, color: '#6B7080', fontSize: 14 }}>No cards found for {teamFilter} in {sportFilter}.</p>}
+            {teamHits.length === 0 && <p style={{ padding: 20, color: '#6B7080', fontSize: 14 }}>No {isTcg ? 'matching cards' : 'cards found for ' + teamFilter} in {sportFilter}.</p>}
           </div>
         </section>
       ) : (
