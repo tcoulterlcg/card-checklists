@@ -162,8 +162,8 @@ export function Popover({ open, onClose, anchorRef, width = 320, maxHeight = 440
 
 // A simple single-choice dropdown: Select({ value, onChange, options }).
 // options: [{ value, label }] or [value, label] pairs. Long lists get a search box.
-export function Select({ value, onChange, options, label, ariaLabel, defaultValue, width = 280, searchAbove = 15, style }) {
-  const [open, setOpen] = useState(false)
+export function Select({ value, onChange, options, label, ariaLabel, defaultValue, width = 280, searchAbove = 15, style, initialOpen = false }) {
+  const [open, setOpen] = useState(initialOpen)   // initialOpen: mounted by a click that should open it (lazy-loaded lists)
   const [q, setQ] = useState('')
   const [focus, setFocus] = useState(-1)
   const ref = useRef(null)

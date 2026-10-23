@@ -61,12 +61,12 @@ export function AuthModal({ open, onClose, account }) {
   const needsProfile = session && !profile
   return (
     <div onClick={onClose} style={{ position: 'fixed', inset: 0, background: '#000a', zIndex: 90, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      <div role="dialog" aria-modal="true" aria-label={session ? "Your profile" : "Sign in to Card HQ"} onClick={(e) => e.stopPropagation()} style={{ ...card, width: 'min(420px, 92vw)', padding: 28, position: 'relative' }}>
+      <div role="dialog" aria-modal="true" aria-label={session ? "Your profile" : "Sign in to CardHQ"} onClick={(e) => e.stopPropagation()} style={{ ...card, width: 'min(420px, 92vw)', padding: 28, position: 'relative' }}>
         <button aria-label="Close" onClick={onClose} style={{ position: 'absolute', top: 10, right: 10, width: 36, height: 36, background: 'none', border: 'none', color: '#8A93A8', fontSize: 20, cursor: 'pointer', borderRadius: 8 }}>×</button>
         {!session ? (
           <>
-            <h3 style={{ ...title(24), margin: 0, color: '#fff' }}>Sign in to Card HQ</h3>
-            <p style={{ color: '#A1A1AA', fontSize: 14, lineHeight: 1.6, margin: '10px 0 18px' }}>Card HQ uses your GrailFindr account — one login for both. Track your wantlist, check off cards as you collect them, and share accomplishments.</p>
+            <h3 style={{ ...title(24), margin: 0, color: '#fff' }}>Sign in to CardHQ</h3>
+            <p style={{ color: '#A1A1AA', fontSize: 14, lineHeight: 1.6, margin: '10px 0 18px' }}>CardHQ uses your GrailFindr account — one login for both. Track your wantlist, check off cards as you collect them, and share accomplishments.</p>
             <a href={grailfindrConnectUrl()} style={{ ...btnAccent, display: 'block', textAlign: 'center', textDecoration: 'none', boxSizing: 'border-box', width: '100%' }}>Continue with GrailFindr</a>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, margin: '16px 0', color: '#5B6478', fontSize: 12 }}>
               <span style={{ flex: 1, height: 1, background: '#232A3E' }} />or sign in here<span style={{ flex: 1, height: 1, background: '#232A3E' }} />

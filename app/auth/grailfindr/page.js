@@ -38,7 +38,7 @@ export default function GrailFindrHandoff() {
             <p style={{ fontSize: 16, margin: '0 0 16px' }}>{error}</p>
             <a href={grailfindrConnectUrl('/')} style={{ color: '#7FA2FF', fontWeight: 600 }}>Continue with GrailFindr</a>
             <span style={{ color: '#8A93A8' }}> · </span>
-            <a href="/" style={{ color: '#8A93A8' }}>Back to Card HQ</a>
+            <a href="/" style={{ color: '#8A93A8' }}>Back to CardHQ</a>
           </>
         ) : (
           <p style={{ fontSize: 16, color: '#A1A1AA' }}>Signing you in with GrailFindr…</p>

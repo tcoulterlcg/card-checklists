@@ -93,7 +93,7 @@ export function FeedbackModal({ open, onClose, account, context = {}, onOpenAuth
     missing_parallel: 'e.g. Black Foil Shield parallel, /1 — exists for every Rookie Patch Auto',
     duplicate_set: 'Which other set is the same product?',
     other_data: 'What did you notice?',
-    feature: 'What would make Card HQ better for you?',
+    feature: 'What would make CardHQ better for you?',
   }[kind]
 
   return (

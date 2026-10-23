@@ -423,6 +423,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
   const sportFile = (sp) => sp.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
   const EMPTY_IDX = { slugs: [], sections: [], teams: [], rows: [] }
   const [teamList, setTeamList] = useState(null) // { sport, teams: [[name, cards]] }
+  const teamOpenOnLoad = useRef(false)   // the "Team" button was clicked: open the list once it has loaded
   const [sliceLoading, setSliceLoading] = useState(false)
   const getJson = async (url) => { try { const r = await fetch(url); if (!r.ok) throw 0; return await r.json() } catch { return null } }
   const ensureSearchIndex = async (forSport) => {
@@ -438,7 +439,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
     }
     return searchIndex
   }
-  const openTeamBrowse = async (forSport) => { setTeamBrowse(true); setTeamLoading(true); await ensureSearchIndex(typeof forSport === 'string' ? forSport : undefined); setTeamLoading(false) }
+  const openTeamBrowse = async (forSport) => { setTeamBrowse(true); setTeamLoading(true); await ensureSearchIndex(typeof forSport === 'string' ? forSport : undefined); setTeamLoading(false); setTimeout(() => { teamOpenOnLoad.current = false }, 0) }
   // Load one team's slice when a team is picked (team sports only).
   useEffect(() => {
     if (TCG_SET.has(sportFilter) || teamFilter === 'All' || !teamList || teamList.sport !== sportFilter) return
@@ -1118,12 +1119,12 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
           {oneSport && !isTcg && !OTHER_SET.has(sportFilter) && (
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap', marginBottom: 22 }}>
               {!teamBrowse ? (
-                <Trigger label="Team" value="Any team" onClick={openTeamBrowse} ariaLabel="Filter by team" />
+                <Trigger label="Team" value="Any team" onClick={() => { teamOpenOnLoad.current = true; openTeamBrowse() }} ariaLabel="Filter by team" />
               ) : teamLoading ? (
                 <span style={{ color: '#8A93A8', fontSize: 13 }}>Loading teams…</span>
               ) : (
                 <>
-                  <Select label="Team" ariaLabel="Filter by team" value={teamFilter} width={280} searchAbove={8}
+                  <Select label="Team" ariaLabel="Filter by team" value={teamFilter} width={280} searchAbove={8} initialOpen={teamOpenOnLoad.current}
                     onChange={(v) => { setTeamFilter(v); setTeamInput(v === 'All' ? '' : v) }}
                     options={[['All', 'Any team'], ...teamsForSport.map(t => [t, t])]} />
                   {teamFilter !== 'All' && (
