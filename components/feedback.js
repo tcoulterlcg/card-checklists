@@ -192,14 +192,14 @@ export function useFeedbackAdmin(account) {
 }
 
 // ?view=feedback — admins: the triage queue. Everyone else: their own reports.
-export function FeedbackView({ account, admin, onOpenAuth, onOpenSet, onNew, onChanged }) {
+export function FeedbackView({ account, admin, onOpenAuth, onOpenSet, onNew, onChanged, onFix, version }) {
   const [status, setStatus] = useState(admin ? 'new' : 'all')
   const [kind, setKind] = useState('all')
   const [rows, setRows] = useState(null)
   const uid = account.session?.user?.id
   useEffect(() => { setStatus(admin ? 'new' : 'all') }, [admin])
   const load = () => { setRows(null); listFeedback({ status }).then(setRows) }
-  useEffect(() => { if (uid) load() }, [uid, status])
+  useEffect(() => { if (uid) load() }, [uid, status, version])
 
   if (!account.session) return (
     <section style={{ ...card, padding: 28, textAlign: 'center' }}>
@@ -271,6 +271,9 @@ export function FeedbackView({ account, admin, onOpenAuth, onOpenSet, onNew, onC
                 {r.admin_note && <p style={{ margin: '8px 0 0', fontSize: 13, color: SECONDARY }}>Note: {r.admin_note}</p>}
                 {admin && (
                   <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginTop: 12 }}>
+                    {r.set_slug && r.kind !== 'feature' && onFix && (
+                      <button onClick={() => onFix(r)} style={{ ...btnGhost, padding: '6px 12px', fontSize: 12, background: ACCENT, color: '#fff', border: 'none' }}>Fix it</button>
+                    )}
                     {STATUSES.filter(([s]) => s !== r.status).map(([s, l]) => (
                       <button key={s} onClick={() => update(r, s)} style={{ ...btnGhost, padding: '6px 12px', fontSize: 12, color: s === 'applied' ? '#4ade80' : TEXT_2 }}>{l}</button>
                     ))}

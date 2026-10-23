@@ -8,6 +8,7 @@ import { Select, Popover, Trigger, Chevron, Check, menuItem, menuHeading, trigge
 import { useAccount, AccountChip, AuthModal, CollectionView, CommunityView } from '../components/community'
 import { supa, addWant, removeWant, myWantlist, grailfindrFindUrl } from '../lib/supa'
 import { FeedbackModal, FeedbackView, useFeedbackAdmin } from '../components/feedback'
+import { FixEditor } from '../components/fix-editor'
 import { Omnibox, PlayerPage, MyPlayersPanel, useMyPlayers, loadPlayerDir, loadTopPlayers, seasonLabel, MemBadge, MemChip, memCodeOf } from '../components/player'
 import { ComparePage } from '../components/compare'
 import { norm, parseQuery, parseQueryFor, matchPlayers, TYPE, typeLabel, TYPE_COLORS, serialLabel } from '../lib/query'
@@ -364,6 +365,8 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
   const [authOpen, setAuthOpen] = useState(false)
   const [feedback, setFeedback] = useState(null)   // context of the open report form, or null
   const fbAdmin = useFeedbackAdmin(account)
+  const [fixing, setFixing] = useState(null)   // { slug, feedback? } while the admin fix editor is open
+  const [fixVersion, setFixVersion] = useState(0)
   const [wantFlash, setWantFlash] = useState('')
   const [patchData, setPatchData] = useState(null)
   const [rpaData, setRpaData] = useState(null)
@@ -975,6 +978,10 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
       {notice && <div role="status" style={{ background: SURFACE, border: '1px solid ' + LINE, borderRadius: 12, padding: '12px 16px', margin: '0 0 16px', color: TEXT_2, fontSize: 14 }}>{notice}</div>}
       <FeedbackModal open={!!feedback} context={feedback || {}} onClose={() => setFeedback(null)} account={account} onOpenAuth={() => setAuthOpen(true)} />
       <AuthModal open={authOpen} onClose={() => setAuthOpen(false)} account={account} />
+      {fbAdmin.admin && (
+        <FixEditor open={!!fixing} slug={fixing?.slug} feedback={fixing?.feedback} onClose={() => setFixing(null)}
+          onSaved={() => { fbAdmin.refresh(); setFixVersion(v => v + 1); if (setData && fixing?.slug === setData.slug) loadSet(setData.slug).then(d => d && setSetData(d)) }} />
+      )}
       {wantFlash && (
         <div style={{ position: 'fixed', bottom: 56, right: 24, zIndex: 95, background: ACCENT, color: '#fff', fontWeight: 700, fontSize: 14, padding: '12px 20px', borderRadius: 12, boxShadow: '0 8px 30px #000a' }}>{wantFlash}</div>
       )}
@@ -1158,6 +1165,12 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
                 style={{ ...buttonText, background: 'transparent', color: '#A1A1AA', border: '1px solid #232A3E', borderRadius: 9, padding: '8px 15px', cursor: 'pointer', fontSize: 13 }}>
                 Report a problem
               </button>
+              {fbAdmin.admin && (
+                <button onClick={() => setFixing({ slug: setData.slug })}
+                  style={{ ...buttonText, background: 'transparent', color: ACCENT_TEXT, border: '1px solid #2E3D6B', borderRadius: 9, padding: '8px 15px', cursor: 'pointer', fontSize: 13 }}>
+                  Fix data
+                </button>
+              )}
             </div>
           </div>
 
@@ -1371,7 +1384,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
         <MyPlayersPanel myPlayers={myPlayers} onOpenPlayer={(name) => openPlayerByName(name)} onOpenSet={(slug) => openSetBySlug(slug)} />
       ) : view === 'feedback' ? (
         <FeedbackView account={account} admin={fbAdmin.admin} onOpenAuth={() => setAuthOpen(true)} onOpenSet={openSetBySlug}
-          onNew={(ctx) => setFeedback(ctx)} onChanged={fbAdmin.refresh} />
+          onNew={(ctx) => setFeedback(ctx)} onChanged={fbAdmin.refresh} onFix={(r) => setFixing({ slug: r.set_slug, feedback: r })} version={fixVersion} />
       ) : view === 'community' ? (
         <CommunityView account={account} indexSets={sets} onOpenAuth={() => setAuthOpen(true)} />
       ) : view === 'collection' ? (
