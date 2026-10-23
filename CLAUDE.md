@@ -15,5 +15,11 @@
   merge with `node scripts/tcdb-repair-merge.mjs <dump>` — it only replaces a set when TCDB has ≥ the cards and covers
   ≥95% of the current ones, and marks the job. TCDB's rate limit is shared by every agent on this computer: run ONE
   TCDB scraper at a time, and commit job-status changes promptly so other agents skip finished sets.
+- **Parallel / patch tags** (Shield, SuperFractor, Logoman…) come from section titles via `lib/parallels.js`; it only tags
+  names Trevor has verified or that name patch material. Unverified look-alikes are held, not guessed. Never infer a
+  SuperFractor or shield from a 1/1 print run.
+- **SuperFractor rows:** `node scripts/add-superfractors.mjs` adds them only where the set's checklist notes or
+  `scripts/data/superfractor-research.json` (sourced) state them. Re-run it after any TCDB repair merge or re-import,
+  since replacing a set drops these derived sections.
 - **Colors:** small secondary text uses `#8A93A8` (passes WCAG AA on the dark background); avoid darker greys for text.
 - **Grails:** collectors define their own grails; the site does not mark sets as grails.
