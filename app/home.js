@@ -1070,7 +1070,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
               <div style={{ margin: '38px 0 22px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', flexWrap: 'wrap', gap: 10, marginBottom: 16 }}>
                   <h2 style={{ ...title(20), margin: 0 }}>
-                    {productFilter !== 'All' ? productFilter + ' Sets' : sportFilter === 'All' ? 'Featured Sets' : sportFilter === 'TCG' ? 'Trading Card Games' : sportFilter === 'Other' ? 'Other Cards' : sportFilter === 'Sports' ? 'Sports Cards' : sportFilter + ' Sets'}
+                    {productFilter !== 'All' ? productFilter + ' Sets' : sportFilter === 'All' ? 'All Sets' : sportFilter === 'TCG' ? 'Trading Card Games' : sportFilter === 'Other' ? 'Other Cards' : sportFilter === 'Sports' ? 'Sports Cards' : sportFilter + ' Sets'}
                     {sets.length > 0 && <span style={{ color: LABEL, fontSize: 16, fontWeight: 500, marginLeft: 10 }}>{filteredSets.length.toLocaleString()}</span>}
                   </h2>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
