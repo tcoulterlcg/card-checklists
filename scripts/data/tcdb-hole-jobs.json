@@ -85,8 +85,8 @@
    "missing inserts: 1991 buybacks, 70th, ascent, chrome 70th, high tek, high tek bashers, high tek foundations franchise, holiday",
    "269 players sold on SCP not on checklist"
   ],
-  "status": "review",
-  "note": "2017-bowman-baseball-cards: 12591 -> 12589 cards, 224 -> 224 sections, covers 100.0% of current",
+  "status": "done",
+  "note": "already repaired from TCDB earlier; later re-scrape differs only by SuperFractor rows added afterwards",
   "at": "2026-10-23",
   "tcdbSid": 139472
  },
@@ -177,8 +177,8 @@
    "missing inserts: 1st, 2014 draft picks, draft pick, draft scouts fantasy impact, draft teams tomorrow die cut, haze, prime position, recollections",
    "183 players sold on SCP not on checklist"
   ],
-  "status": "review",
-  "note": "2015-bowman-chrome-baseball-cards: 6177 -> 6145 cards, 92 -> 92 sections, covers 100.0% of current",
+  "status": "done",
+  "note": "already repaired from TCDB earlier; later re-scrape differs only by SuperFractor rows added afterwards",
   "at": "2026-10-23",
   "tcdbSid": 111049
  },
