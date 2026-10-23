@@ -10,7 +10,9 @@
    "missing inserts: about to throw, about to throw xfractor, batting, batting pose, batting wave, batting xfractor, catcher equipment, cream crop",
    "234 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2013-bowman-chrome-baseball-cards: 363 -> 6680 cards, 5 -> 61 sections, covers 100.0% of current",
+  "at": "2026-10-23"
  },
  {
   "slug": "2017-topps-wwe-wrestling-checklist-added",
@@ -23,7 +25,9 @@
    "missing inserts: 2017 top, bizarre summerslam matches, heritage bizarre summerslam matches, heritage commemorative patches, heritage john cena tribute, heritage roster updates, heritage shirt relics, heritage summerslam stars",
    "193 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "review",
+  "note": "2017-topps-wwe-wrestling-checklist-added: 187 -> 1743 cards, 8 -> 56 sections, covers 87.6% of current",
+  "tcdbSid": 142170
  },
  {
   "slug": "2018-panini-contenders-draft-picks-baseball-cards",
@@ -35,7 +39,9 @@
   "why": [
    "missing inserts: ball prospect ticket, batting, batting cracked ice, batting playoff ticket, batting prospect ticket, both feet ground playoff ticket, both feet ground prospect ticket, catching prospect ticket"
   ],
-  "status": "todo"
+  "status": "review",
+  "note": "2018-panini-contenders-draft-picks-baseball-cards: 261 -> 1968 cards, 13 -> 74 sections, covers 82.5% of current",
+  "tcdbSid": 181044
  },
  {
   "slug": "2018-topps-chrome-baseball-cards",
@@ -4434,7 +4440,7 @@
  },
  {
   "slug": "2020-topps-wwe-womens-division-wrestling",
-  "name": "2020 Topps WWE Women\u2019s Division Wrestling",
+  "name": "2020 Topps WWE Women’s Division Wrestling",
   "year": 2020,
   "sport": "Wrestling",
   "cards": 176,
@@ -4727,9 +4733,9 @@
  },
  {
   "slug": "1999-topps-pokemon-the-first-movie",
-  "name": "1999 Topps Pok\u00e9mon The First Movie",
+  "name": "1999 Topps Pokémon The First Movie",
   "year": 1999,
-  "sport": "Pok\u00e9mon",
+  "sport": "Pokémon",
   "cards": 504,
   "source": "tcdb.com",
   "why": [
