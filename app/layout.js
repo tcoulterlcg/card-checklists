@@ -61,6 +61,7 @@ body { overflow-x: clip; }
 .hq-bl-label { animation: hqflip 260ms ease-out; transform-origin: 50% 50%; }
 
 html.hq-deep .hq-main > * { display: none !important; }
+@media (max-width: 640px) { .hq-cmp-chip { display: none !important; } .hq-cmp-sub { display: block !important; } }
 html.hq-deep .hq-main::before { content: 'Loading…'; display: block; text-align: center; padding: 96px 0; color: #A3ABBD; font-size: 15px; }
 
 @media (max-width: 760px) {

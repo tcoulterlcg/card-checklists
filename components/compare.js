@@ -1,20 +1,23 @@
 'use client'
 // Player vs player: two players' card catalogues side by side.
 //   ?compare=Nikita+Kucherov&vs=Jack+Hughes
-// Diverging bars per stat (totals or per season), season-by-season counts,
+// Layout follows the player page: hero with chips and display names, then one stat tile
+// per row (big numbers at both ends, a short bar under the label), then season counts,
 // the sets both players appear in, and cards that feature both of them.
 // Data: the same player directory + shards as the player page (components/player.js).
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { TYPE, norm, matchPlayers, memKind } from '../lib/query'
+import { TYPE, matchPlayers, memKind } from '../lib/query'
 import { PAR, parallelKinds } from '../lib/parallels'
 import { loadPlayerDir, loadTopPlayers, loadShard, seasonLabel } from './player'
 import { ACCENT, ACCENT_TEXT, display, eyebrow, buttonText } from '../lib/theme'
 
-const SIDE = ['#F97316', '#3B82F6']        // left player orange, right player blue
-const SIDE_TEXT = ['#FB923C', '#7FA2FF']
+// Player 1 cobalt, player 2 silver (they differ in lightness, not only hue).
+const TXT = ['#7FA2FF', '#EDEDEF']
+const BAR = ['#3B6EF5', '#A3ABBD']
+const DIM = '#8A93A8', DIM_BAR = '#2A3247'
+const SPORT_COLORS = { Baseball: '#60a5fa', Football: '#4ade80', Basketball: '#f97316', Hockey: '#a78bfa', Soccer: '#f43f5e', UFC: '#dc2626', Boxing: '#eab308', Wrestling: '#f59e0b', Golf: '#22c55e', Tennis: '#14b8a6', Racing: '#ef4444' }
 
-// Name from a shared link -> directory entry. Same lookup as the player page:
-// the 100 KB top list first, then the full directory.
+// Name from a shared link -> directory entry (top list first, then the full directory).
 async function resolvePlayer(name) {
   if (!name) return null
   const is = (h) => h.name === name || h.via === name
@@ -36,14 +39,14 @@ function useRows(player, setMeta) {
       if (r[0] !== player.id) continue
       const slug = shard.slugs[r[1]], section = shard.sections[r[2]]
       const m = setMeta[slug] || { name: slug, year: 0, sport: '' }
-      out.push({ slug, set: m.name, year: m.year, sport: m.sport, section, n: r[3], serial: r[5], type: r[6], mem: r[7] || 0, par: parallelKinds(section, m.sport, m.name, m.year) })
+      out.push({ slug, set: m.name, year: m.year, sport: m.sport, section, n: r[3], team: r[4] >= 0 ? shard.teams[r[4]] : '', serial: r[5], type: r[6], mem: r[7] || 0, par: parallelKinds(section, m.sport, m.name, m.year) })
     }
     return out
   }, [player, shard, setMeta])
 }
 
 function statsOf(rows) {
-  const s = { cards: rows.length, sets: new Set(), au: 0, one: 0, rc: 0, patch: 0, pa: 0, rpa: 0, gu: 0, rare: 0, shield: 0, years: new Map() }
+  const s = { cards: rows.length, sets: new Set(), au: 0, one: 0, rc: 0, patch: 0, pa: 0, rpa: 0, gu: 0, rare: 0, shield: 0, years: new Map(), teams: new Map() }
   for (const r of rows) {
     s.sets.add(r.slug)
     const au = r.type & TYPE.AU, pt = r.type & TYPE.PATCH, rc = r.type & TYPE.RC
@@ -57,44 +60,52 @@ function statsOf(rows) {
     if (r.serial > 0 && r.serial <= 25) s.rare++
     if (r.par & PAR.SHIELD) s.shield++
     if (r.year) s.years.set(r.year, (s.years.get(r.year) || 0) + 1)
+    if (r.team && /[A-Za-z]{3,}/.test(r.team) && !/^\/|#|\d\/\d/.test(r.team)) s.teams.set(r.team, (s.teams.get(r.team) || 0) + 1)
   }
   s.setCount = s.sets.size
   s.seasons = s.years.size
+  s.topTeam = [...s.teams.entries()].sort((a, b) => b[1] - a[1])[0]?.[0] || ''
   return s
 }
 
 const METRICS = [
   ['cards', 'Cards'], ['setCount', 'Sets'], ['au', 'Autographs'], ['one', '1/1s'], ['rc', 'Rookie cards'],
-  ['patch', 'Patches'], ['pa', 'Patch autos'], ['rpa', 'RPAs'], ['gu', 'Game-used'], ['rare', '/25 or rarer'], ['shield', 'Shields']
+  ['patch', 'Patches'], ['pa', 'Patch autos'], ['rpa', 'RPAs'], ['gu', 'Game-used'], ['rare', '/25 or rarer'], ['shield', 'Shields'], ['seasons', 'Seasons']
 ]
 const fmt = (v, perSeason) => perSeason ? (v >= 100 ? Math.round(v).toLocaleString() : v.toFixed(1)) : Math.round(v).toLocaleString()
-const short = (name) => name.split(/\s+/).slice(-1)[0]
+const lastName = (name) => name.split(/\s+/).slice(-1)[0]
 
-// One stat row: numbers at both ends, bars growing out from the centre line.
-function Diverge({ label, a, b, names, perSeason, sub }) {
+const chip = (solid) => ({ display: 'inline-flex', alignItems: 'center', padding: '4px 10px', borderRadius: 999, fontSize: 12, fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', whiteSpace: 'nowrap', background: solid || 'transparent', color: solid ? '#0F1320' : '#A1A1AA', border: solid ? '1px solid ' + solid : '1px solid #A1A1AA66' })
+const pill = (on) => ({ padding: '7px 12px', borderRadius: 999, fontSize: 12, fontWeight: 700, letterSpacing: '0.04em', textTransform: 'uppercase', fontFamily: 'inherit', cursor: 'pointer', background: on ? ACCENT : '#121626', color: on ? '#fff' : '#A1A1AA', border: '1px solid ' + (on ? 'transparent' : '#232A3E'), whiteSpace: 'nowrap' })
+const tile = { background: '#0F1320', border: '1px solid #232A3E', borderRadius: 12 }
+const label = { ...eyebrow, fontSize: 14, color: '#A3ABBD' }
+const bigNum = { ...display, fontSize: 'clamp(30px, 6.5vw, 46px)', lineHeight: 1, fontVariantNumeric: 'tabular-nums' }
+const linkBtn = { background: 'none', border: 'none', padding: 0, color: '#EDEDEF', fontWeight: 600, cursor: 'pointer', textAlign: 'left', fontFamily: 'inherit', fontSize: 14 }
+
+// One stat: big numbers at both ends, a short split bar and the edge under the label.
+function StatRow({ title, a, b, names, perSeason }) {
   const max = Math.max(a, b, 1e-9)
-  const diff = a - b, lead = diff > 0 ? 0 : diff < 0 ? 1 : -1
+  const lead = a > b ? 0 : b > a ? 1 : -1
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: 'minmax(64px, 96px) 1fr minmax(64px, 96px)', alignItems: 'center', gap: 12, padding: '10px 0', borderTop: '1px solid #1A1F31' }}>
-      <span style={{ ...display, fontSize: 'clamp(22px, 4vw, 32px)', color: lead === 0 ? SIDE_TEXT[0] : '#A1A1AA', fontVariantNumeric: 'tabular-nums' }}>{fmt(a, perSeason)}</span>
-      <div>
-        <p style={{ ...eyebrow, margin: '0 0 6px', textAlign: 'center', color: '#D4D4D8' }}>{label}</p>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 2px 1fr', alignItems: 'center', height: 8 }} aria-hidden="true">
-          <div style={{ display: 'flex', justifyContent: 'flex-end' }}><div style={{ width: (a / max * 100) + '%', height: 6, borderRadius: '3px 0 0 3px', background: SIDE[0], opacity: lead === 1 ? 0.45 : 1, transition: 'width .3s' }} /></div>
-          <div style={{ height: 14, background: '#8A93A8' }} />
-          <div><div style={{ width: (b / max * 100) + '%', height: 6, borderRadius: '0 3px 3px 0', background: SIDE[1], opacity: lead === 0 ? 0.45 : 1, transition: 'width .3s' }} /></div>
+    <div style={{ ...tile, padding: '12px clamp(14px, 3vw, 22px)', display: 'grid', gridTemplateColumns: 'minmax(64px, 1fr) minmax(0, 220px) minmax(64px, 1fr)', alignItems: 'center', gap: 'clamp(8px, 2vw, 16px)' }}>
+      <span style={{ ...bigNum, color: lead === 1 ? DIM : TXT[0] }}>{fmt(a, perSeason)}</span>
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 7, minWidth: 0 }}>
+        <span style={{ ...label, textAlign: 'center' }}>{title}</span>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 3, width: '100%', height: 4 }} aria-hidden="true">
+          <div style={{ display: 'flex', justifyContent: 'flex-end', background: '#1A1F31', borderRadius: 2 }}><div style={{ width: (a / max * 100) + '%', background: lead === 1 ? DIM_BAR : BAR[0], borderRadius: 2, transition: 'width .3s' }} /></div>
+          <div style={{ display: 'flex', background: '#1A1F31', borderRadius: 2 }}><div style={{ width: (b / max * 100) + '%', background: lead === 0 ? DIM_BAR : BAR[1], borderRadius: 2, transition: 'width .3s' }} /></div>
         </div>
-        <p style={{ margin: '6px 0 0', textAlign: 'center', color: '#8A93A8', fontSize: 12, fontVariantNumeric: 'tabular-nums' }}>
-          {lead < 0 ? 'Even' : '+' + fmt(Math.abs(diff), perSeason) + ' · ' + short(names[lead])}{sub ? ' · ' + sub : ''}
-        </p>
+        <span style={{ fontSize: 12, fontWeight: 600, color: lead < 0 ? DIM : TXT[lead], fontVariantNumeric: 'tabular-nums', textAlign: 'center' }}>
+          {lead < 0 ? 'Even' : '+' + fmt(Math.abs(a - b), perSeason) + ' ' + lastName(names[lead])}
+        </span>
       </div>
-      <span style={{ ...display, fontSize: 'clamp(22px, 4vw, 32px)', color: lead === 1 ? SIDE_TEXT[1] : '#A1A1AA', textAlign: 'right', fontVariantNumeric: 'tabular-nums' }}>{fmt(b, perSeason)}</span>
+      <span style={{ ...bigNum, color: lead === 0 ? DIM : TXT[1], textAlign: 'right' }}>{fmt(b, perSeason)}</span>
     </div>
   )
 }
 
-// Player slot: shows the chosen player, or a search box to pick one.
-function Slot({ side, player, onPick, other }) {
+// Hero column for one player: chips + display name, or a search box to pick one.
+function Slot({ side, player, stats, onPick, other }) {
   const [editing, setEditing] = useState(!player)
   const [q, setQ] = useState('')
   const [dir, setDir] = useState(null)
@@ -106,28 +117,37 @@ function Slot({ side, player, onPick, other }) {
     document.addEventListener('mousedown', h); return () => document.removeEventListener('mousedown', h)
   }, [player])
   const hits = useMemo(() => dir && q.trim().length >= 2 ? matchPlayers(dir, q, 6, { fuzzy: q.trim().length >= 5 }).filter(h => !other || h.id !== other.id) : [], [dir, q, other])
-  const c = SIDE[side]
+  const right = side === 1
+  const words = player ? player.name.split(/\s+/) : []
+  const first = words.length > 1 ? words.slice(0, -1).join(' ') : '', last = words[words.length - 1] || ''
+  const span = player ? seasonLabel(player.minYear, player.sport) + (player.maxYear !== player.minYear ? ' → ' + seasonLabel(player.maxYear, player.sport) : '') : ''
   return (
-    <div ref={box} style={{ flex: '1 1 0', minWidth: 0, position: 'relative', textAlign: side ? 'right' : 'left' }}>
+    <div ref={box} style={{ minWidth: 0, position: 'relative', textAlign: right ? 'right' : 'left' }}>
       {player && !editing ? (
         <>
-          <p style={{ ...eyebrow, margin: '0 0 6px', color: '#8A93A8' }}>{player.sport} · {seasonLabel(player.minYear, player.sport)}{player.maxYear !== player.minYear ? ' → ' + seasonLabel(player.maxYear, player.sport) : ''}</p>
-          <h2 style={{ ...display, fontSize: 'clamp(22px, 4.5vw, 44px)', margin: 0, color: c, overflowWrap: 'break-word', hyphens: 'none' }}>{player.name}</h2>
-          <button onClick={() => { setQ(''); setEditing(true) }} style={{ ...buttonText, marginTop: 8, background: 'none', border: '1px solid #2E3D6B', color: '#D4D4D8', borderRadius: 8, padding: '6px 12px', fontSize: 13, cursor: 'pointer' }}>Change</button>
+          <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 12, justifyContent: right ? 'flex-end' : 'flex-start' }}>
+            <span style={chip(SPORT_COLORS[player.sport] || ACCENT)}>{player.sport}</span>
+            {stats && stats.topTeam && <span className="hq-cmp-chip" style={chip()}>{stats.topTeam}</span>}
+            {span && <span className="hq-cmp-chip" style={chip()}>{span}</span>}
+          </div>
+          <h2 style={{ ...display, fontSize: 'clamp(22px, 5.5vw, 56px)', lineHeight: 0.92, margin: 0, color: TXT[side], overflowWrap: 'normal' }}>{first}{first && <br />}{last}</h2>
+          {/* on phones the team / season chips are too wide for half the hero: show them as a line instead */}
+          <p className="hq-cmp-sub" style={{ display: 'none', margin: '6px 0 0', color: DIM, fontSize: 12, lineHeight: 1.4 }}>{[stats && stats.topTeam, span].filter(Boolean).join(' · ')}</p>
+          <button onClick={() => { setQ(''); setEditing(true) }} style={{ ...buttonText, marginTop: 12, background: 'transparent', border: '1px solid #2E3D6B', color: '#D4D4D8', borderRadius: 10, padding: '0 14px', height: 36, fontSize: 13, cursor: 'pointer' }}>Change</button>
         </>
       ) : (
         <>
-          <label style={{ ...eyebrow, display: 'block', margin: '0 0 6px', color: c }}>{side ? 'Player 2' : 'Player 1'}</label>
-          <input autoFocus={!!player || side === 1} value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search a player…"
+          <label htmlFor={'cmp-' + side} style={{ ...eyebrow, display: 'block', margin: '0 0 8px', color: TXT[side] }}>{right ? 'Player 2' : 'Player 1'}</label>
+          <input id={'cmp-' + side} autoFocus={!!player || right} value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search a player…"
             onKeyDown={(e) => { if (e.key === 'Enter' && hits[0]) { onPick(hits[0]); setQ('') } if (e.key === 'Escape' && player) setEditing(false) }}
-            style={{ width: '100%', boxSizing: 'border-box', background: '#121626', border: '1px solid ' + c + '88', borderRadius: 10, padding: '12px 14px', color: '#EDEDEF', fontSize: 16, fontFamily: 'inherit', outline: 'none', textAlign: 'left' }} />
+            style={{ width: '100%', boxSizing: 'border-box', background: '#121626', border: '1px solid #2E3D6B', borderRadius: 10, padding: '12px 14px', color: '#EDEDEF', fontSize: 16, fontFamily: 'inherit', outline: 'none', textAlign: 'left' }} />
           {hits.length > 0 && (
             <div role="listbox" style={{ position: 'absolute', left: 0, right: 0, top: '100%', marginTop: 4, zIndex: 40, background: '#0F1320', border: '1px solid #232A3E', borderRadius: 10, overflow: 'hidden', textAlign: 'left', boxShadow: '0 20px 40px -12px #000' }}>
               {hits.map(h => (
                 <button key={h.id} role="option" onClick={() => { onPick(h); setQ('') }}
                   style={{ display: 'block', width: '100%', textAlign: 'left', background: 'none', border: 'none', borderTop: '1px solid #1A1F31', padding: '9px 12px', color: '#EDEDEF', cursor: 'pointer', fontFamily: 'inherit', minHeight: 44 }}>
                   <span style={{ fontWeight: 600, fontSize: 14 }}>{h.name}</span>
-                  <span style={{ display: 'block', color: '#8A93A8', fontSize: 12 }}>{h.sport} · {h.cards.toLocaleString()} cards · {h.minYear}{h.maxYear !== h.minYear ? '–' + h.maxYear : ''}</span>
+                  <span style={{ display: 'block', color: DIM, fontSize: 12 }}>{h.sport} · {h.cards.toLocaleString()} cards · {h.minYear}{h.maxYear !== h.minYear ? '–' + h.maxYear : ''}</span>
                 </button>
               ))}
             </div>
@@ -138,15 +158,11 @@ function Slot({ side, player, onPick, other }) {
   )
 }
 
-const card = { background: '#0F1320', border: '1px solid #232A3E', borderRadius: 16, padding: '20px 22px', marginTop: 18 }
-const pill = (on) => ({ ...buttonText, padding: '7px 12px', borderRadius: 999, fontSize: 13, cursor: 'pointer', background: on ? ACCENT : '#121626', color: on ? '#fff' : '#A1A1AA', border: '1px solid ' + (on ? 'transparent' : '#232A3E') })
-const linkBtn = { background: 'none', border: 'none', padding: 0, color: '#EDEDEF', fontWeight: 600, cursor: 'pointer', textAlign: 'left', fontFamily: 'inherit', fontSize: 14 }
-
 export function ComparePage({ names, sets, onChange, onOpenSet, onOpenPlayer }) {
   const [players, setPlayers] = useState([null, null])
   const [missing, setMissing] = useState([])
   const [perSeason, setPerSeason] = useState(false)
-  const [sharedLimit, setSharedLimit] = useState(10)
+  const [sharedLimit, setSharedLimit] = useState(8)
   const [copied, setCopied] = useState('')
 
   // URL names -> players (only re-resolve names that changed).
@@ -163,16 +179,25 @@ export function ComparePage({ names, sets, onChange, onOpenSet, onOpenPlayer }) 
   const setMeta = useMemo(() => { const m = {}; for (const s of sets) m[s.slug] = s; return m }, [sets])
   const rowsA = useRows(players[0], setMeta), rowsB = useRows(players[1], setMeta)
   const ready = rowsA && rowsB
-  const st = useMemo(() => ready ? [statsOf(rowsA), statsOf(rowsB)] : null, [rowsA, rowsB, ready])
+  const sA = useMemo(() => rowsA ? statsOf(rowsA) : null, [rowsA])
+  const sB = useMemo(() => rowsB ? statsOf(rowsB) : null, [rowsB])
   const pick = (i, p) => { const n = players.map(x => x && x.name); n[i] = p.name; onChange(n) }
   const swap = () => onChange([players[1] && players[1].name, players[0] && players[0].name])
+
+  const metrics = useMemo(() => ready ? METRICS.filter(([k]) => k !== 'shield' || sA.shield || sB.shield) : [], [ready, sA, sB])
+  const val = (s, k) => perSeason && k !== 'seasons' ? s[k] / Math.max(1, s.seasons) : s[k]
+  const wins = useMemo(() => {
+    const w = [0, 0]
+    for (const [k] of metrics) { if (sA[k] > sB[k]) w[0]++; else if (sB[k] > sA[k]) w[1]++ }
+    return w
+  }, [metrics, sA, sB])
 
   // Sets both players appear in, biggest overlap first.
   const shared = useMemo(() => {
     if (!ready) return []
     const count = (rows) => { const m = new Map(); for (const r of rows) m.set(r.slug, (m.get(r.slug) || 0) + 1); return m }
     const ca = count(rowsA), cb = count(rowsB)
-    return [...ca.keys()].filter(k => cb.has(k)).map(slug => ({ slug, name: (setMeta[slug] || {}).name || slug, year: (setMeta[slug] || {}).year || 0, sport: (setMeta[slug] || {}).sport, a: ca.get(slug), b: cb.get(slug) }))
+    return [...ca.keys()].filter(k => cb.has(k)).map(slug => ({ slug, name: (setMeta[slug] || {}).name || slug, year: (setMeta[slug] || {}).year || 0, a: ca.get(slug), b: cb.get(slug) }))
       .sort((x, y) => (y.a + y.b) - (x.a + x.b) || y.year - x.year)
   }, [rowsA, rowsB, ready, setMeta])
   // Cards printed with both players on them (dual autos, combo inserts).
@@ -184,8 +209,8 @@ export function ComparePage({ names, sets, onChange, onOpenSet, onOpenPlayer }) 
     for (const r of rowsA) { if (!(r.type & TYPE.MULTI)) continue; const k = key(r); if (b.has(k) && !seen.has(k)) { seen.add(k); out.push(r) } }
     return out.sort((x, y) => (x.serial || 1e9) - (y.serial || 1e9) || y.year - x.year)
   }, [rowsA, rowsB, ready])
-  const years = useMemo(() => st ? [...new Set([...st[0].years.keys(), ...st[1].years.keys()])].sort((a, b) => a - b) : [], [st])
-  const yearMax = useMemo(() => st ? Math.max(1, ...st[0].years.values(), ...st[1].years.values()) : 1, [st])
+  const years = useMemo(() => ready ? [...new Set([...sA.years.keys(), ...sB.years.keys()])].sort((a, b) => a - b) : [], [ready, sA, sB])
+  const yearMax = useMemo(() => ready ? Math.max(1, ...sA.years.values(), ...sB.years.values()) : 1, [ready, sA, sB])
 
   const nm = players.map(p => p ? p.name : '')
   const sportOf = (players[0] || players[1] || {}).sport
@@ -194,112 +219,113 @@ export function ComparePage({ names, sets, onChange, onOpenSet, onOpenPlayer }) 
     try { await navigator.clipboard.writeText(location.href); setCopied('Link copied ✓') } catch { window.prompt('Copy this link:', location.href) }
     setTimeout(() => setCopied(''), 2000)
   }
+  const leader = wins[0] === wins[1] ? null : wins[0] > wins[1] ? 0 : 1
 
   return (
-    <section>
-      <div className="hq-panel" style={{ background: 'linear-gradient(140deg, #191919, #0F1320)', border: '1px solid #232A3E', borderRadius: 18, padding: '22px 24px' }}>
-        <p style={{ ...eyebrow, margin: '0 0 14px', color: '#8A93A8', textAlign: 'center' }}>Player comparison</p>
-        <div style={{ display: 'flex', gap: 14, alignItems: 'flex-start' }}>
-          <Slot side={0} player={players[0]} other={players[1]} onPick={(p) => pick(0, p)} />
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8, paddingTop: 26, flexShrink: 0 }}>
-            <span style={{ ...display, fontSize: 24, color: '#EDEDEF' }}>VS</span>
-            {players[0] && players[1] && <button onClick={swap} aria-label="Swap players" title="Swap sides" style={{ background: 'none', border: '1px solid #232A3E', color: '#A1A1AA', borderRadius: 8, width: 34, height: 34, cursor: 'pointer' }}>⇄</button>}
-          </div>
-          <Slot side={1} player={players[1]} other={players[0]} onPick={(p) => pick(1, p)} />
+    <section style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+      {/* HERO */}
+      <div className="hq-panel" style={{ background: 'linear-gradient(140deg, #191919, #0F1320)', border: '1px solid #232A3E', borderRadius: 18, padding: 'clamp(18px, 3vw, 26px) clamp(16px, 3vw, 28px)', display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) auto minmax(0, 1fr)', gap: 'clamp(10px, 2vw, 20px)', alignItems: 'end' }}>
+        <Slot side={0} player={players[0]} stats={sA} other={players[1]} onPick={(p) => pick(0, p)} />
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10, alignSelf: 'center' }}>
+          <span style={{ ...display, fontSize: 'clamp(26px, 4vw, 40px)', color: ACCENT_TEXT }}>VS</span>
+          {players[0] && players[1] && <button onClick={swap} aria-label="Swap players" title="Swap sides" style={{ background: 'transparent', border: '1px solid #232A3E', color: '#A1A1AA', borderRadius: 10, width: 44, height: 44, cursor: 'pointer', fontSize: 16 }}>⇄</button>}
         </div>
-        {missing.length > 0 && <p style={{ color: '#FCA5A5', fontSize: 13, margin: '14px 0 0', textAlign: 'center' }}>No player called “{missing.join('”, “')}” in the database.</p>}
+        <Slot side={1} player={players[1]} stats={sB} other={players[0]} onPick={(p) => pick(1, p)} />
       </div>
+      {missing.length > 0 && <p style={{ color: '#FCA5A5', fontSize: 13, margin: 0, textAlign: 'center' }}>No player called “{missing.join('”, “')}” in the database.</p>}
+      {players[0] && players[1] && !ready && <p style={{ color: DIM, fontSize: 14, margin: '20px 0', textAlign: 'center' }}>Loading cards…</p>}
 
-      {players[0] && players[1] && !ready && <p style={{ color: '#8A93A8', fontSize: 14, margin: '20px 0', textAlign: 'center' }}>Loading cards…</p>}
-
-      {st && (
+      {ready && (
         <>
-          <div style={card}>
-            <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', marginBottom: 6 }}>
-              <div style={{ display: 'flex', gap: 6 }} role="group" aria-label="Show totals or per season">
-                <button onClick={() => setPerSeason(false)} style={pill(!perSeason)} aria-pressed={!perSeason}>Totals</button>
-                <button onClick={() => setPerSeason(true)} style={pill(perSeason)} aria-pressed={perSeason}>Per season</button>
-              </div>
-              <div style={{ display: 'flex', gap: 8 }}>
-                <button onClick={copyLink} style={{ ...pill(false), color: '#D4D4D8' }}>{copied || 'Copy link'}</button>
-              </div>
+          {/* CONTROLS */}
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 10 }}>
+            <div style={{ display: 'flex', gap: 8 }} role="group" aria-label="Show totals or per season">
+              <button onClick={() => setPerSeason(false)} style={pill(!perSeason)} aria-pressed={!perSeason}>Totals</button>
+              <button onClick={() => setPerSeason(true)} style={pill(perSeason)} aria-pressed={perSeason}>Per season</button>
+              <button onClick={copyLink} style={pill(false)}>{copied || 'Copy link'}</button>
             </div>
-            {perSeason && <p style={{ color: '#8A93A8', fontSize: 12, margin: '0 0 6px' }}>Averages per season with cards: {st[0].seasons} for {short(nm[0])}, {st[1].seasons} for {short(nm[1])}. Evens out career length.</p>}
-            {crossSport && <p style={{ color: '#8A93A8', fontSize: 12, margin: '0 0 6px' }}>Different sports: hobby sizes differ, so read the gap with that in mind.</p>}
-            {METRICS.filter(([k]) => k !== 'shield' || st[0].shield || st[1].shield).map(([k, label]) => {
-              const div = (s) => perSeason ? s[k] / Math.max(1, s.seasons) : s[k]
-              return <Diverge key={k} label={label} a={div(st[0])} b={div(st[1])} names={nm} perSeason={perSeason} />
-            })}
-            <Diverge label="Seasons with cards" a={st[0].seasons} b={st[1].seasons} names={nm} perSeason={false} />
-            <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 10 }}>
-              <button onClick={() => onOpenPlayer(nm[0])} style={{ ...linkBtn, color: SIDE_TEXT[0], fontSize: 13 }}>All {nm[0]} cards →</button>
-              <button onClick={() => onOpenPlayer(nm[1])} style={{ ...linkBtn, color: SIDE_TEXT[1], fontSize: 13 }}>All {nm[1]} cards →</button>
-            </div>
+            <p style={{ ...eyebrow, fontSize: 15, margin: 0, color: DIM }}>
+              {leader == null ? <>Even · <span style={{ color: '#EDEDEF' }}>{wins[0]}</span> each</>
+                : <>{lastName(nm[leader])} leads <span style={{ color: '#EDEDEF' }}>{wins[leader]}</span> of {metrics.length} · {lastName(nm[1 - leader])} <span style={{ color: '#EDEDEF' }}>{wins[1 - leader]}</span></>}
+            </p>
+          </div>
+          {perSeason && <p style={{ color: DIM, fontSize: 13, margin: 0 }}>Averages per season with cards ({sA.seasons} for {lastName(nm[0])}, {sB.seasons} for {lastName(nm[1])}), which evens out career length.</p>}
+          {crossSport && <p style={{ color: DIM, fontSize: 13, margin: 0 }}>Different sports: hobby sizes differ, so read the gaps with that in mind.</p>}
+
+          {/* STAT ROWS */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+            {metrics.map(([k, t]) => <StatRow key={k} title={t} a={val(sA, k)} b={val(sB, k)} names={nm} perSeason={perSeason && k !== 'seasons'} />)}
+          </div>
+          <div style={{ display: 'flex', justifyContent: 'space-between', gap: 12, flexWrap: 'wrap' }}>
+            <button onClick={() => onOpenPlayer(nm[0])} style={{ ...linkBtn, color: TXT[0], fontSize: 13 }}>All {nm[0]} cards →</button>
+            <button onClick={() => onOpenPlayer(nm[1])} style={{ ...linkBtn, color: TXT[1], fontSize: 13 }}>All {nm[1]} cards →</button>
           </div>
 
+          {/* SHARED SETS + CARDS WITH BOTH */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(300px, 100%), 1fr))', gap: 14, alignItems: 'start' }}>
+            <section style={{ ...tile, padding: '18px 20px' }}>
+              <p style={{ ...display, margin: 0, fontSize: 40, lineHeight: 1 }}>{shared.length.toLocaleString()}</p>
+              <p style={{ ...eyebrow, margin: '6px 0 14px', color: DIM }}>Sets with both</p>
+              {shared.length === 0 ? <p style={{ color: DIM, fontSize: 14, margin: 0 }}>They don’t share any sets.</p> : (
+                <>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) 76px 76px', gap: 8, padding: '0 0 6px', ...eyebrow, fontSize: 12 }}>
+                    <span style={{ color: DIM }}>Set</span>
+                    <span style={{ textAlign: 'right', color: TXT[0] }}>{lastName(nm[0])}</span>
+                    <span style={{ textAlign: 'right', color: TXT[1] }}>{lastName(nm[1])}</span>
+                  </div>
+                  {shared.slice(0, sharedLimit).map(s => (
+                    <div key={s.slug} style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) 76px 76px', gap: 8, padding: '9px 0', borderTop: '1px solid #1A1F31', fontSize: 14, alignItems: 'center' }}>
+                      <button onClick={() => onOpenSet(s.slug)} style={{ ...linkBtn, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} title={s.name}>{s.name}</button>
+                      <span style={{ textAlign: 'right', color: TXT[0], fontWeight: 700, fontVariantNumeric: 'tabular-nums' }}>{s.a.toLocaleString()}</span>
+                      <span style={{ textAlign: 'right', color: TXT[1], fontWeight: 700, fontVariantNumeric: 'tabular-nums' }}>{s.b.toLocaleString()}</span>
+                    </div>
+                  ))}
+                  {shared.length > sharedLimit && <button onClick={() => setSharedLimit(l => l + 25)} style={{ ...pill(false), marginTop: 10 }}>Show more · {(shared.length - sharedLimit).toLocaleString()}</button>}
+                </>
+              )}
+            </section>
+            <section style={{ ...tile, padding: '18px 20px' }}>
+              <p style={{ ...display, margin: 0, fontSize: 40, lineHeight: 1 }}>{together.length.toLocaleString()}</p>
+              <p style={{ ...eyebrow, margin: '6px 0 14px', color: DIM }}>Cards featuring both</p>
+              {together.length === 0 ? <p style={{ color: DIM, fontSize: 14, margin: 0 }}>No cards list both players.</p> : (
+                <>
+                  {together.slice(0, 40).map((r, i) => (
+                    <div key={i} style={{ display: 'flex', justifyContent: 'space-between', gap: 10, padding: '9px 0', borderTop: '1px solid #1A1F31', fontSize: 14 }}>
+                      <span style={{ minWidth: 0 }}>
+                        <button onClick={() => onOpenSet(r.slug)} style={linkBtn}>{seasonLabel(r.year, r.sport)} {r.set.replace(/^\d{4}(-\d{2})?\s*/, '')}</button>
+                        <span style={{ display: 'block', color: DIM, fontSize: 12 }}>{r.section}</span>
+                      </span>
+                      <span style={{ textAlign: 'right', whiteSpace: 'nowrap' }}>
+                        <span style={{ color: ACCENT_TEXT, fontWeight: 700 }}>{r.n ? '#' + r.n : ''}</span>
+                        {r.serial > 0 && <span style={{ display: 'block', fontSize: 12, fontWeight: 700, color: r.serial === 1 ? '#fff' : '#D4D4D8' }}>{r.serial === 1 ? '1/1' : '/' + r.serial}</span>}
+                      </span>
+                    </div>
+                  ))}
+                  {together.length > 40 && <p style={{ color: DIM, fontSize: 12, margin: '8px 0 0' }}>The 40 rarest of {together.length.toLocaleString()}.</p>}
+                </>
+              )}
+            </section>
+          </div>
+
+          {/* CARDS BY SEASON */}
           {years.length > 0 && (
-            <div style={card}>
-              <h3 style={{ ...eyebrow, margin: '0 0 4px', color: '#D4D4D8' }}>Cards by season</h3>
-              <p style={{ color: '#8A93A8', fontSize: 12, margin: '0 0 10px' }}>Bars scale to the busiest season either player had.</p>
+            <section style={{ ...tile, padding: '18px 20px' }}>
+              <p style={{ ...eyebrow, margin: '0 0 12px', color: DIM }}>Cards by season</p>
               {years.map(y => {
-                const a = st[0].years.get(y) || 0, b = st[1].years.get(y) || 0
+                const a = sA.years.get(y) || 0, b = sB.years.get(y) || 0
                 return (
-                  <div key={y} style={{ display: 'grid', gridTemplateColumns: '56px 1fr 72px 1fr 56px', alignItems: 'center', gap: 8, padding: '3px 0', fontSize: 13, fontVariantNumeric: 'tabular-nums' }}>
-                    <span style={{ color: a ? SIDE_TEXT[0] : '#3F4659' }}>{a ? a.toLocaleString() : '—'}</span>
-                    <div style={{ display: 'flex', justifyContent: 'flex-end' }}><div style={{ width: (a / yearMax * 100) + '%', height: 10, borderRadius: '3px 0 0 3px', background: SIDE[0] }} /></div>
-                    <span style={{ color: '#A1A1AA', textAlign: 'center' }}>{seasonLabel(y, sportOf)}</span>
-                    <div><div style={{ width: (b / yearMax * 100) + '%', height: 10, borderRadius: '0 3px 3px 0', background: SIDE[1] }} /></div>
-                    <span style={{ color: b ? SIDE_TEXT[1] : '#3F4659', textAlign: 'right' }}>{b ? b.toLocaleString() : '—'}</span>
+                  <div key={y} style={{ display: 'grid', gridTemplateColumns: '52px 1fr 64px 1fr 52px', alignItems: 'center', gap: 8, padding: '3px 0', fontSize: 13, fontVariantNumeric: 'tabular-nums' }}>
+                    <span style={{ color: a ? TXT[0] : DIM, fontWeight: 600 }}>{a ? a.toLocaleString() : '—'}</span>
+                    <div style={{ display: 'flex', justifyContent: 'flex-end' }}><div style={{ width: (a / yearMax * 100) + '%', height: 8, borderRadius: 2, background: BAR[0] }} /></div>
+                    <span style={{ ...eyebrow, fontSize: 13, color: '#A3ABBD', textAlign: 'center' }}>{seasonLabel(y, sportOf)}</span>
+                    <div><div style={{ width: (b / yearMax * 100) + '%', height: 8, borderRadius: 2, background: BAR[1] }} /></div>
+                    <span style={{ color: b ? TXT[1] : DIM, textAlign: 'right', fontWeight: 600 }}>{b ? b.toLocaleString() : '—'}</span>
                   </div>
                 )
               })}
-            </div>
+            </section>
           )}
-
-          <div style={card}>
-            <h3 style={{ ...eyebrow, margin: '0 0 4px', color: '#D4D4D8' }}>Sets with both players · {shared.length.toLocaleString()}</h3>
-            <p style={{ color: '#8A93A8', fontSize: 12, margin: '0 0 10px' }}>Products where one box gives you a shot at either.</p>
-            {shared.length === 0 ? <p style={{ color: '#8A93A8', fontSize: 14, margin: 0 }}>They don’t share any sets.</p> : (
-              <div style={{ overflowX: 'auto' }}>
-                <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14 }}>
-                  <thead><tr style={{ color: '#8A8A93', fontSize: 12, textTransform: 'uppercase', letterSpacing: '0.08em' }}>
-                    <th style={{ textAlign: 'left', padding: '6px 8px', fontWeight: 700 }}>Set</th>
-                    <th style={{ textAlign: 'right', padding: '6px 8px', fontWeight: 700, color: SIDE_TEXT[0] }}>{short(nm[0])}</th>
-                    <th style={{ textAlign: 'right', padding: '6px 8px', fontWeight: 700, color: SIDE_TEXT[1] }}>{short(nm[1])}</th>
-                  </tr></thead>
-                  <tbody>{shared.slice(0, sharedLimit).map(s => (
-                    <tr key={s.slug} style={{ borderTop: '1px solid #1A1F31' }}>
-                      <td style={{ padding: '8px' }}><button onClick={() => onOpenSet(s.slug)} style={linkBtn}>{s.name}</button></td>
-                      <td style={{ padding: '8px', textAlign: 'right', fontVariantNumeric: 'tabular-nums' }}>{s.a.toLocaleString()}</td>
-                      <td style={{ padding: '8px', textAlign: 'right', fontVariantNumeric: 'tabular-nums' }}>{s.b.toLocaleString()}</td>
-                    </tr>
-                  ))}</tbody>
-                </table>
-                {shared.length > sharedLimit && <button onClick={() => setSharedLimit(l => l + 25)} style={{ ...pill(false), marginTop: 10 }}>Show more ({(shared.length - sharedLimit).toLocaleString()} left)</button>}
-              </div>
-            )}
-          </div>
-
-          <div style={card}>
-            <h3 style={{ ...eyebrow, margin: '0 0 4px', color: '#D4D4D8' }}>Cards featuring both · {together.length.toLocaleString()}</h3>
-            <p style={{ color: '#8A93A8', fontSize: 12, margin: '0 0 10px' }}>Dual autos, dual patches and combo cards, rarest first.</p>
-            {together.length === 0 ? <p style={{ color: '#8A93A8', fontSize: 14, margin: 0 }}>No cards list both players.</p> : (
-              <div style={{ overflowX: 'auto' }}>
-                <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14 }}>
-                  <tbody>{together.slice(0, 60).map((r, i) => (
-                    <tr key={i} style={{ borderTop: i ? '1px solid #1A1F31' : 'none' }}>
-                      <td style={{ padding: '8px', color: '#A1A1AA', whiteSpace: 'nowrap' }}>{seasonLabel(r.year, r.sport)}</td>
-                      <td style={{ padding: '8px' }}><button onClick={() => onOpenSet(r.slug)} style={linkBtn}>{r.set.replace(/^\d{4}(-\d{2})?\s*/, '')}</button><span style={{ display: 'block', color: '#8A93A8', fontSize: 12 }}>{r.section}</span></td>
-                      <td style={{ padding: '8px', color: ACCENT_TEXT, fontWeight: 700, whiteSpace: 'nowrap' }}>{r.n ? '#' + r.n : '—'}</td>
-                      <td style={{ padding: '8px', textAlign: 'right', whiteSpace: 'nowrap', fontWeight: 600 }}>{r.serial === 1 ? '1/1' : r.serial > 0 ? '/' + r.serial : ''}</td>
-                    </tr>
-                  ))}</tbody>
-                </table>
-                {together.length > 60 && <p style={{ color: '#8A93A8', fontSize: 12, margin: '8px 0 0' }}>Showing the 60 rarest of {together.length.toLocaleString()}.</p>}
-              </div>
-            )}
-          </div>
-          <p style={{ color: '#8A93A8', fontSize: 12, margin: '14px 0 0' }}>Counts come from the checklists on CardHQ; sets still being repaired can undercount a player.</p>
+          <p style={{ color: DIM, fontSize: 12, margin: 0 }}>Counts come from the checklists on CardHQ; sets still being repaired can undercount a player.</p>
         </>
       )}
     </section>
