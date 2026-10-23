@@ -5,7 +5,7 @@
 // index.json lists sets; each set file carries sections -> cards.
 import { useDeferredValue, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { useAccount, AccountChip, AuthModal, CollectionView, CommunityView } from '../components/community'
-import { addWant, removeWant, myWantlist } from '../lib/supa'
+import { supa, addWant, removeWant, myWantlist } from '../lib/supa'
 import { Omnibox, PlayerPage, MyPlayersPanel, useMyPlayers, loadPlayerDir, loadTopPlayers, seasonLabel, MemBadge, MemChip, memCodeOf } from '../components/player'
 import { norm, parseQuery, parseQueryFor, matchPlayers, TYPE, typeLabel, TYPE_COLORS, serialLabel } from '../lib/query'
 import { loadSet, loadIndex } from '../lib/catalog'
@@ -387,6 +387,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
   const [activeSet, setActiveSet] = useState(null)
   const [setData, setSetData] = useState(null)
   const [activeSection, setActiveSection] = useState('All')
+  const [showAllSecs, setShowAllSecs] = useState(false)
   const [query, setQuery] = useState('')
   // Heavy filtering follows the query a beat behind so typing stays instant.
   const dQuery = useDeferredValue(query)
@@ -522,7 +523,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
   const nav = (url, push) => { navSeq.current++; if (push === false) return; try { history.pushState(null, '', url) } catch {} }
   const openSet = async (s, push) => {
     setNotice('')
-    setActiveSet(s); setGlobalHits(null); setActiveSection('All'); setQuery(''); setActivePlayer(null); setView('browse'); setSetTypeFilter('All'); setSetRunFilter('any'); setSetRcOnly(false); setSetMemFilter('any'); setSecLimit(20); setOpenSecs(new Set())
+    setActiveSet(s); setGlobalHits(null); setActiveSection('All'); setShowAllSecs(false); setQuery(''); setActivePlayer(null); setView('browse'); setSetTypeFilter('All'); setSetRunFilter('any'); setSetRcOnly(false); setSetMemFilter('any'); setSecLimit(20); setOpenSecs(new Set())
     nav('?set=' + encodeURIComponent(s.slug), push)
     const my = navSeq.current
     setSetData(null)
@@ -972,9 +973,14 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
           {NAV_ITEMS.map(([label, fn, v]) => (
             <button key={label} className="hq-sheet-row" aria-current={view === v ? 'page' : undefined} onClick={() => { setMenuOpen(false); fn() }}>{label}</button>
           ))}
-          {!account.session && (
+          {!account.session ? (
             <div className="hq-sheet-foot">
               <button className="hq-signin" onClick={() => { setMenuOpen(false); setAuthOpen(true) }}>Sign in</button>
+            </div>
+          ) : (
+            <div className="hq-sheet-foot" style={{ display: 'grid', gap: 8 }}>
+              <button className="hq-signin" onClick={() => { setMenuOpen(false); setAuthOpen(true) }}>Your profile{account.profile?.username ? ' · ' + account.profile.username : ''}</button>
+              <button className="hq-signin" style={{ background: 'none' }} onClick={() => { setMenuOpen(false); supa.auth.signOut() }}>Sign out</button>
             </div>
           )}
         </div>
@@ -1255,8 +1261,9 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
             </div>
           )}
 
-          <div style={{ display: 'flex', gap: 8, marginBottom: 18, flexWrap: 'wrap', maxHeight: 92, overflow: 'auto' }}>
-            {['All', ...(setData.sections || []).map(s => s.title)].map(t => (
+          {/* big sets have hundreds of sections: show the first few as chips (the Section menu above lists all) */}
+          <div style={{ display: 'flex', gap: 8, marginBottom: 18, flexWrap: 'wrap' }}>
+            {(() => { const all = ['All', ...(setData.sections || []).map(s => s.title)]; const LIMIT = 12; const shown = showAllSecs || all.length <= LIMIT + 2 ? all : [...all.slice(0, LIMIT), ...(all.indexOf(activeSection) >= LIMIT ? [activeSection] : [])]; return shown })().map(t => (
               <button key={t} onClick={() => setActiveSection(t)}
                 style={{
                   padding: '6px 13px', borderRadius: 8, fontSize: 12, fontWeight: 700, cursor: 'pointer',
@@ -1265,6 +1272,12 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
                   border: '1px solid ' + (activeSection === t ? 'transparent' : '#232A3E')
                 }}>{t}</button>
             ))}
+            {(setData.sections || []).length + 1 > 14 && (
+              <button onClick={() => setShowAllSecs(v => !v)} aria-expanded={showAllSecs}
+                style={{ padding: '6px 13px', borderRadius: 8, fontSize: 12, fontWeight: 700, cursor: 'pointer', background: 'none', color: ACCENT_TEXT, border: '1px dashed #2E3852' }}>
+                {showAllSecs ? 'Fewer sections' : 'All ' + (setData.sections || []).length + ' sections ▾'}
+              </button>
+            )}
           </div>
 
           <p style={{ color: '#8A93A8', fontSize: 12, margin: '0 0 12px' }}>
@@ -1390,7 +1403,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
           onOpenSet={stableCb.openSetBySlug}
           onWant={stableCb.wantIt} onSearch={stableCb.runSearch} candidates={playerCandidates} onPickCandidate={stableCb.pickCandidate} />
       ) : view === 'myplayers' ? (
-        <MyPlayersPanel myPlayers={myPlayers} onOpenPlayer={(name) => openPlayerByName(name)} />
+        <MyPlayersPanel myPlayers={myPlayers} onOpenPlayer={(name) => openPlayerByName(name)} onOpenSet={(slug) => openSetBySlug(slug)} />
       ) : view === 'community' ? (
         <CommunityView account={account} indexSets={sets} onOpenAuth={() => setAuthOpen(true)} />
       ) : view === 'collection' ? (

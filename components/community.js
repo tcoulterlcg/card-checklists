@@ -3,7 +3,7 @@
 // collection tracker. Dark + electric blue to match the site shell. Data via lib/supa.
 import { loadSet } from '../lib/catalog'
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { collectionCardN, supa, grailfindrConnectUrl, grailfindrSignupUrl, grailfindrForgotUrl, GRAILFINDR_URL, getProfile, ensureProfile, addWant, removeWant, deletePost, myWantlist, toggleCollected, myCollection, uploadCardImage, setCollectionImage, forumFeed, createPost, react, comments, addComment } from '../lib/supa'
+import { collectionCardN, supa, grailfindrConnectUrl, grailfindrSignupUrl, grailfindrForgotUrl, GRAILFINDR_URL, getProfile, ensureProfile, updateProfile, addWant, removeWant, deletePost, myWantlist, toggleCollected, myCollection, uploadCardImage, setCollectionImage, forumFeed, createPost, react, comments, addComment } from '../lib/supa'
 import { ACCENT, ACCENT_TEXT, BG, SURFACE, SURFACE_2, LINE, CHIP_LINE, TEXT, TEXT_2, LABEL, display, eyebrow, title, buttonText } from '../lib/theme'
 
 const card = { background: 'linear-gradient(155deg, #121626, #0F1320)', border: '1px solid #232A3E', borderRadius: 14 }
@@ -35,7 +35,7 @@ export function AccountChip({ account, onOpenAuth }) {
   const name = profile?.username || session.user.email?.split('@')[0] || 'collector'
   return (
     <span className="hq-account" style={{ display: 'inline-flex', alignItems: 'center', gap: 10 }}>
-      <span title={name} style={{ width: 32, height: 32, boxSizing: 'border-box', borderRadius: '50%', background: '#1E2A4A', border: '1px solid #2E3E6B', color: '#C9D6FF', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontWeight: 600, fontSize: 12 }}>{name.slice(0, 2).toUpperCase()}</span>
+      <button onClick={onOpenAuth} title={'Your profile (' + name + ')'} aria-label="Your profile" style={{ width: 32, height: 32, boxSizing: 'border-box', borderRadius: '50%', background: '#1E2A4A', border: '1px solid #2E3E6B', color: '#C9D6FF', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontWeight: 600, fontSize: 12, cursor: 'pointer', padding: 0, fontFamily: 'inherit' }}>{name.slice(0, 2).toUpperCase()}</button>
       <a href={GRAILFINDR_URL} title="Your account also works on GrailFindr" style={{ color: '#8A93A8', fontSize: 12, textDecoration: 'none' }}>GrailFindr ↗</a>
       <button onClick={() => supa.auth.signOut()} style={{ background: 'none', border: 'none', color: '#8A93A8', fontSize: 12, cursor: 'pointer', fontFamily: 'inherit' }}>Sign out</button>
     </span>
@@ -61,7 +61,7 @@ export function AuthModal({ open, onClose, account }) {
   const needsProfile = session && !profile
   return (
     <div onClick={onClose} style={{ position: 'fixed', inset: 0, background: '#000a', zIndex: 90, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      <div role="dialog" aria-modal="true" aria-label="Sign in to Card HQ" onClick={(e) => e.stopPropagation()} style={{ ...card, width: 'min(420px, 92vw)', padding: 28, position: 'relative' }}>
+      <div role="dialog" aria-modal="true" aria-label={session ? "Your profile" : "Sign in to Card HQ"} onClick={(e) => e.stopPropagation()} style={{ ...card, width: 'min(420px, 92vw)', padding: 28, position: 'relative' }}>
         <button aria-label="Close" onClick={onClose} style={{ position: 'absolute', top: 10, right: 10, width: 36, height: 36, background: 'none', border: 'none', color: '#8A8A93', fontSize: 20, cursor: 'pointer', borderRadius: 8 }}>×</button>
         {!session ? (
           <>
@@ -103,13 +103,41 @@ export function AuthModal({ open, onClose, account }) {
             }}>Create profile</button>
           </>
         ) : (
-          <>
-            <h3 style={{ ...title(20), margin: 0, color: '#fff' }}>You're signed in</h3>
-            <button style={{ ...btnAccent, width: '100%', marginTop: 16 }} onClick={onClose}>Start collecting</button>
-          </>
+          <ProfileEditor session={session} profile={profile} setProfile={setProfile} onClose={onClose} />
         )}
       </div>
     </div>
+  )
+}
+
+// Signed-in view of the account dialog: change username / display name.
+function ProfileEditor({ session, profile, setProfile, onClose }) {
+  const [username, setUsername] = useState(profile?.username || '')
+  const [display, setDisplay] = useState(profile?.display_name || '')
+  const [msg, setMsg] = useState('')
+  const [err, setErr] = useState('')
+  const save = async () => {
+    setErr(''); setMsg('')
+    if (username.length < 3 || username.length > 24) { setErr('Username must be 3–24 characters.'); return }
+    const { data, error } = await updateProfile(session.user.id, { username, display_name: display.trim() || null })
+    if (error) setErr(/duplicate|unique/i.test(error.message) ? 'That username is taken — try another.' : error.message)
+    else { setProfile(data); setMsg('Saved.') }
+  }
+  return (
+    <>
+      <h3 style={{ ...title(22), margin: 0, color: '#fff' }}>Your profile</h3>
+      <p style={{ color: '#8A93A8', fontSize: 13, margin: '6px 0 16px' }}>Signed in as {session.user.email}</p>
+      <label style={{ display: 'block', color: '#A1A1AA', fontSize: 12, fontWeight: 600, marginBottom: 6 }} htmlFor="hq-username">Username (shown on posts)</label>
+      <input id="hq-username" style={input} value={username} onChange={(e) => setUsername(e.target.value.replace(/[^a-zA-Z0-9_]/g, ''))} />
+      <label style={{ display: 'block', color: '#A1A1AA', fontSize: 12, fontWeight: 600, margin: '12px 0 6px' }} htmlFor="hq-display">Display name (optional)</label>
+      <input id="hq-display" style={input} value={display} maxLength={40} onChange={(e) => setDisplay(e.target.value)} />
+      {err && <p role="alert" style={{ color: '#f87171', fontSize: 13, margin: '8px 0 0' }}>{err}</p>}
+      {msg && <p role="status" style={{ color: '#4ade80', fontSize: 13, margin: '8px 0 0' }}>{msg}</p>}
+      <div style={{ display: 'flex', gap: 10, marginTop: 16 }}>
+        <button style={{ ...btnAccent, flex: 1 }} onClick={save}>Save</button>
+        <button style={{ ...btnGhost, flex: 1 }} onClick={onClose}>Close</button>
+      </div>
+    </>
   )
 }
 
@@ -224,16 +252,19 @@ export function CollectionView({ account, indexSets, onOpenAuth, onOpenSet }) {
               const idx = (indexSets || []).find(s => s.slug === slug)
               const total = idx ? idx.cardCount : null
               const mine = (collected || []).filter(c => c.set_slug === slug).length
+              // base-set progress (what "completing a set" usually means) next to the master set (every parallel)
+              const baseTotal = idx?.baseCount || 0
+              const baseMine = baseTotal ? (collected || []).filter(c => c.set_slug === slug && c.section === idx.baseTitle).length : 0
               return (
                 <div key={slug} style={{ ...card, padding: '18px 20px' }}>
                   <p style={{ ...title(16), margin: 0, color: '#fff' }}>{g.name}</p>
                   <p style={{ color: '#8A8A93', fontSize: 13, margin: '4px 0 10px' }}>
                     {g.items.some(i => !i.card_n) ? 'Full set wanted' : `${g.items.length} card${g.items.length === 1 ? '' : 's'} wanted`}
-                    {total ? ` · ${mine}/${total} collected` : ''}
+                    {baseTotal ? ` · base ${baseMine}/${baseTotal}` : ''}{total ? ` · master ${mine}/${total}` : ''}
                   </p>
                   {total > 0 && (
                     <div style={{ height: 6, background: '#222', borderRadius: 4, overflow: 'hidden', marginBottom: 12 }}>
-                      <div style={{ height: '100%', width: Math.min(100, (mine / total) * 100) + '%', background: ACCENT }} />
+                      <div style={{ height: '100%', width: Math.min(100, (baseTotal ? baseMine / baseTotal : mine / total) * 100) + '%', background: ACCENT }} />
                     </div>
                   )}
                   {/* the actual cards wanted, each removable */}

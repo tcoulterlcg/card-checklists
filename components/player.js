@@ -611,9 +611,35 @@ const cb = { accentColor: ACCENT, width: 16, height: 16, flexShrink: 0 }
 const cnt = { marginLeft: 'auto', color: '#8A93A8', fontSize: 12 }
 
 // ---------- My Players panel (used from the set page + a standalone view) ----------
-export function MyPlayersPanel({ myPlayers, onOpenPlayer, dirPlayers }) {
+export function MyPlayersPanel({ myPlayers, onOpenPlayer, onOpenSet, dirPlayers }) {
   const [dir, setDir] = useState(null)
   useEffect(() => { loadPlayerDir().then(setDir) }, [])
+  // "New for your players": this season's sets that include each followed player
+  const [fresh, setFresh] = useState(null)
+  useEffect(() => {
+    if (!dir || !myPlayers.list.length) return
+    let live = true
+    ;(async () => {
+      const idx = await fetch('/data/index.json').then(r => r.json()).catch(() => ({ sets: [] }))
+      const meta = new Map(idx.sets.map(x => [x.slug, x]))
+      const latest = {}   // newest season present per sport
+      for (const x of idx.sets) if (x.year && (!latest[x.sport] || x.year > latest[x.sport])) latest[x.sport] = x.year
+      const out = []
+      for (const name of myPlayers.list) {
+        const i = resolve(name); if (i < 0) continue
+        const p = dir.players[i], sh = await loadShard(p[1])
+        const per = new Map()
+        for (const r of sh.rows) if (r[0] === i) { const slug = sh.slugs[r[1]]; per.set(slug, (per.get(slug) || 0) + 1) }
+        for (const [slug, n] of per) {
+          const m = meta.get(slug); if (!m || !m.year || m.year < (latest[m.sport] || 0)) continue
+          out.push({ player: name, slug, set: m.name, year: m.year, sport: m.sport, cards: n })
+        }
+      }
+      out.sort((a, b) => b.year - a.year || b.cards - a.cards)
+      if (live) setFresh(out)
+    })()
+    return () => { live = false }
+  }, [dir, myPlayers.list.join('|')])
   // exact name, else the same name spelled differently (saved before a data clean-up: "Shaquille ONeal")
   const resolve = (name) => {
     if (!dir) return -1
@@ -642,6 +668,22 @@ export function MyPlayersPanel({ myPlayers, onOpenPlayer, dirPlayers }) {
               </div>
             )
           })}
+        </div>
+      )}
+      {fresh && fresh.length > 0 && (
+        <div style={{ marginTop: 24 }}>
+          <h2 style={{ ...title(18), margin: '0 0 4px', color: '#EDEDEF' }}>New for your players</h2>
+          <p style={{ color: '#8A93A8', fontSize: 13, margin: '0 0 12px' }}>This season's sets that include the players you collect.</p>
+          <div style={{ display: 'grid', gap: 6 }}>
+            {fresh.slice(0, 30).map(f => (
+              <button key={f.player + f.slug} onClick={() => onOpenSet && onOpenSet(f.slug)}
+                style={{ display: 'flex', gap: 12, alignItems: 'baseline', flexWrap: 'wrap', textAlign: 'left', background: '#0F1320', border: '1px solid #232A3E', borderRadius: 10, padding: '10px 14px', cursor: 'pointer', fontFamily: 'inherit', color: '#D4D4D8' }}>
+                <span style={{ fontWeight: 700, minWidth: 140 }}>{f.player}</span>
+                <span style={{ flex: 1, minWidth: 0 }}>{f.set}</span>
+                <span style={{ color: '#8A93A8', fontSize: 13, whiteSpace: 'nowrap' }}>{f.cards.toLocaleString()} card{f.cards === 1 ? '' : 's'}</span>
+              </button>
+            ))}
+          </div>
         </div>
       )}
     </div>

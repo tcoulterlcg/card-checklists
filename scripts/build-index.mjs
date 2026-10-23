@@ -20,7 +20,11 @@ for (const f of readdirSync(dataDir)) {
     if (cardCount === 0) continue
     // Partial scrapes (< 10 cards, flagged by cleanup-data.mjs) stay on disk but are not listed.
     if (s.incomplete) { hidden++; continue }
-    sets.push({ slug: s.slug, name: s.name, year: s.year, sport: s.sport, cardCount, sections: s.sections.length, source: s.source })
+    // the base set (not parallels/inserts): what most collectors mean by "completing" a set
+    const base = s.sections.find(sec => /^\s*(base|base set|base cards?|base checklist)\s*$/i.test(sec.title || '') || /[–-]\s*base set\s*$/i.test(sec.title || ''))
+    const entry = { slug: s.slug, name: s.name, year: s.year, sport: s.sport, cardCount, sections: s.sections.length, source: s.source }
+    if (base && base.cards?.length) { entry.baseCount = base.cards.length; entry.baseTitle = base.title }
+    sets.push(entry)
   } catch (e) { /* skip malformed */ }
 }
 sets.sort((a, b) => (b.year - a.year) || a.name.localeCompare(b.name))
