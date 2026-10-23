@@ -35,6 +35,10 @@ create trigger cardhq_posts_rate before insert on public.cardhq_forum_posts for 
 drop trigger if exists cardhq_comments_rate on public.cardhq_forum_comments;
 create trigger cardhq_comments_rate before insert on public.cardhq_forum_comments for each row execute function public.cardhq_forum_rate_limit();
 
+-- Trigger functions aren't API endpoints (triggers still run without EXECUTE for these roles).
+revoke execute on function public.cardhq_feedback_rate_limit() from anon, authenticated, public;
+revoke execute on function public.cardhq_forum_rate_limit() from anon, authenticated, public;
+
 -- Defense in depth: the public API never needs TRUNCATE.
 revoke truncate on all tables in schema public from anon, authenticated;
 commit;
