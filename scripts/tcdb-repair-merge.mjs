@@ -23,6 +23,16 @@ const load = (f) => {
   if (raw.startsWith('[') || raw.startsWith('{')) return JSON.parse(raw)
   return JSON.parse(gunzipSync(Buffer.from(raw, 'base64')).toString('utf8'))
 }
+// Expand the scraper's compact export: rows are [n, p, t, x]; { same: i, x } repeats section i.
+const expand = (set) => {
+  if (!set.compact) return set
+  const out = []
+  for (const sec of set.sections) {
+    if (sec.same !== undefined) out.push({ title: sec.title, cards: out[sec.same].cards.map(c => { const o = { n: c.n, p: c.p }; if (c.t) o.t = c.t; if (sec.x) o.x = sec.x; return o }) })
+    else out.push({ title: sec.title, cards: sec.cards.map(([n, p, t, x]) => { const o = { n, p }; if (t) o.t = t; if (x) o.x = x; return o }) })
+  }
+  return { ...set, sections: out }
+}
 const surname = (p) => {
   const w = String(p || '').normalize('NFKD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z ]/g, ' ').trim().split(/\s+/)
   while (w.length > 1 && /^(jr|sr|ii|iii|iv)$/.test(w[w.length - 1])) w.pop()
@@ -33,7 +43,7 @@ const count = (set) => (set.sections || []).reduce((a, s) => a + s.cards.length,
 
 let replaced = 0, review = 0
 for (const f of files) {
-  for (const s of [].concat(load(f))) {
+  for (const s of [].concat(load(f)).map(expand)) {
     const path = new URL(s.slug + '.json', dataDir)
     const job = jobBySlug.get(s.slug)
     const sections = (s.sections || []).map(x => ({ title: x.title, cards: x.cards.filter(c => c.p) })).filter(x => x.cards.length)

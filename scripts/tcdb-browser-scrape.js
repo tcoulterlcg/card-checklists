@@ -9,7 +9,8 @@
 // `path` is TCDB's name slug from the set's link ("2018-Topps-Chrome"): TCDB serves a
 // 404 page (with HTTP 200) for /Checklist.cfm/sid/N without it.
 //   __tcdb.status()                                 -> progress summary
-//   await __tcdb.take(maxChars)                     -> gzip+base64 chunk of finished sets (removes them)
+//   __tcdb.stageJson() -> length; __tcdb.sliceJson(i) -> 40k-char slices of one finished set
+//                     (compact JSON; base64 output is blocked by the browser tool)
 //
 // One parent set -> one site set: the parent's checklist becomes "Base" and every
 // insert/parallel TCDB lists under "Inserts & Related Sets" becomes its own section.
@@ -157,7 +158,30 @@
   }
   const slice = (i, size = 40000) => st.staged ? st.staged.b64.slice(i * size, (i + 1) * size) : ''
 
+  // Plain-JSON export (the browser tool blocks base64 output). Parallels that repeat an
+  // earlier section card-for-card become { title, same: <section index>, x } — most of
+  // a modern checklist's volume. scripts/tcdb-repair-merge.mjs expands them.
+  function compact(set) {
+    const sig = (c) => c.n + '\u0001' + c.p + '\u0001' + (c.t || '')
+    const keys = [], sections = []
+    for (const sec of set.sections) {
+      const k = sec.cards.map(sig).join('\u0002')
+      const xs = [...new Set(sec.cards.map(c => c.x || ''))]
+      const j = keys.indexOf(k)
+      if (j >= 0 && xs.length === 1) sections.push({ title: sec.title, same: j, x: xs[0] })
+      else sections.push({ title: sec.title, cards: sec.cards.map(c => [c.n, c.p, c.t || '', c.x || '']) })
+      keys.push(k)
+    }
+    return { ...set, sections, compact: 1 }
+  }
+  function stageJson() {
+    const set = st.done.shift(); if (!set) return 0
+    st.staged = { slug: set.slug, json: JSON.stringify(compact(set)) }
+    return st.staged.json.length
+  }
+  const sliceJson = (i, size = 40000) => st.staged ? st.staged.json.slice(i * size, (i + 1) * size) : ''
+
   const status = () => ({ gap: st.gap, requests: st.requests, throttled: st.throttled, running: st.running, todo: st.todo.length, done: st.done.length, failed: st.failed.map(f => f.slug + ': ' + f.error), current: st.current && { slug: st.current.slug, ...st.current.progress, mins: Math.round((Date.now() - st.current.started) / 60000) } })
 
-  window.__tcdb = { version: 2, st, find, queue: (jobs) => { st.todo.push(...jobs); run(); return st.todo.length }, status, take, stage, slice, checklist, rowsOf, flagsToX }
+  window.__tcdb = { version: 2, st, find, queue: (jobs) => { st.todo.push(...jobs); run(); return st.todo.length }, status, take, stage, slice, stageJson, sliceJson, compact, checklist, rowsOf, flagsToX }
 })()
