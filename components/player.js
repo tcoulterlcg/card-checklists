@@ -4,7 +4,7 @@
 // public/data/players/ (built by scripts/build-player-index.mjs).
 import { memo, useDeferredValue, useEffect, useMemo, useRef, useState } from 'react'
 import { supa } from '../lib/supa'
-import { TYPE, norm, parseQuery, parseQueryFor, matchPlayers, rowMatches, typeLabel, TYPE_COLORS, serialLabel, MEM_LABEL, MEM_COLORS, memKind, memTypical } from '../lib/query'
+import { TYPE, norm, parseQuery, parseQueryFor, matchPlayers, akaOf, rowMatches, typeLabel, TYPE_COLORS, serialLabel, MEM_LABEL, MEM_COLORS, memKind, memTypical } from '../lib/query'
 import { brandOf } from '../lib/brands'
 import { ACCENT, ACCENT_TEXT, BG, SURFACE, SURFACE_2, LINE, CHIP_LINE, TEXT, TEXT_2, LABEL, display, eyebrow, title, buttonText } from '../lib/theme'
 
@@ -199,7 +199,8 @@ export function Omnibox({ value, onChange, onSubmit, onPickPlayer, onPickSet, se
               style={{ width: '100%', textAlign: 'left', display: 'flex', alignItems: 'center', gap: 12, padding: '9px 16px', background: sel === i ? '#111a30' : 'transparent', border: 'none', color: '#EDEDEF', cursor: 'pointer', fontFamily: 'inherit', minHeight: 48 }}>
               <Initials name={it.p.name} color={SPORT_COLORS[it.p.sport] || ACCENT} />
               <span style={{ flex: 1, minWidth: 0 }}>
-                <span style={{ fontWeight: 600, fontSize: 14 }}>{hl(it.p.name)}</span>
+                <span style={{ fontWeight: 600, fontSize: 14 }}>{it.p.via ? it.p.name : hl(it.p.name)}</span>
+                {it.p.via && <span style={{ display: 'block', color: '#8A93A8', fontSize: 12 }}>incl. {hl(it.p.via)}</span>}
                 <span style={{ display: 'block', color: '#8A8A93', fontSize: 12 }}>{it.p.sport} · {it.p.cards.toLocaleString()} cards · {it.p.minYear}{it.p.maxYear !== it.p.minYear ? '–' + it.p.maxYear : ''}</span>
               </span>
               {sel === i && <span style={{ color: '#8A93A8', fontSize: 12 }}>↵</span>}
@@ -244,6 +245,7 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
   const [products, setProducts] = useState([])
   const [prodInput, setProdInput] = useState('')
   const [teams, setTeams] = useState(null)
+  const [labels, setLabels] = useState(null) // "Appears as": null = every name the player is printed under
   const [yearFrom, setYearFrom] = useState(0)
   const [yearTo, setYearTo] = useState(9999)
   const [expanded, setExpanded] = useState(new Set())
@@ -254,7 +256,7 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
   const [statedOnly, setStatedOnly] = useState(false)
   const [filtersOpen, setFiltersOpen] = useState(false) // mobile only; desktop always shows filters
 
-  useEffect(() => { setShard(null); loadShard(player.shard).then(setShard); setExpanded(new Set()); setLimit(40) }, [player.id, player.shard])
+  useEffect(() => { setShard(null); loadShard(player.shard).then(setShard); setExpanded(new Set()); setLimit(40); setLabels(null) }, [player.id, player.shard])
   useEffect(() => {
     const sp = urlp(); if (!sp.get('player')) return
     const set = (k, v, dflt) => { if (v && v !== dflt) sp.set(k, v); else sp.delete(k) }
@@ -281,14 +283,14 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
       if (r[0] !== player.id) continue
       const slug = shard.slugs[r[1]]
       const m = setMeta[slug] || { name: slug, year: 0, sport: '' }
-      out.push({ slug, set: m.name, year: m.year, sport: m.sport, brand: brandOf(m.name, m.year), section: shard.sections[r[2]], n: r[3], team: r[4] >= 0 ? shard.teams[r[4]] : '', serial: r[5], type: r[6], mem: r[7] || 0, raw: r })
+      out.push({ slug, set: m.name, year: m.year, sport: m.sport, brand: brandOf(m.name, m.year), section: shard.sections[r[2]], n: r[3], team: r[4] >= 0 ? shard.teams[r[4]] : '', serial: r[5], type: r[6], mem: r[7] || 0, label: r.length > 8 && shard.labels ? shard.labels[r[8]] : player.name, raw: r })
     }
     return out
   }, [shard, player.id, setMeta])
 
   // Facet universe (counts over the player's full catalogue).
   const facets = useMemo(() => {
-    const f = { mem: {}, sets: new Set(), au: 0, one: 0, rc: 0, patch: 0, base: 0, parallel: 0, insert: 0, relic: 0, plate: 0, brands: new Map(), teams: new Map(), years: new Map(), minY: 9999, maxY: 0, seasons: 0 }
+    const f = { mem: {}, sets: new Set(), au: 0, one: 0, rc: 0, patch: 0, base: 0, parallel: 0, insert: 0, relic: 0, plate: 0, brands: new Map(), teams: new Map(), labels: new Map(), years: new Map(), minY: 9999, maxY: 0, seasons: 0 }
     for (const r of rows) {
       f.sets.add(r.slug)
       if (r.type & TYPE.AU) f.au++; if (r.serial === 1) f.one++; if (r.type & TYPE.RC) f.rc++; if (r.type & TYPE.PATCH) f.patch++
@@ -296,6 +298,7 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
       f.brands.set(r.brand, (f.brands.get(r.brand) || 0) + 1)
       if (r.mem) { const k = memKind(r.mem); f.mem[k] = (f.mem[k] || 0) + 1 }
       if (r.team) f.teams.set(r.team, (f.teams.get(r.team) || 0) + 1)
+      f.labels.set(r.label, (f.labels.get(r.label) || 0) + 1)
       if (r.year) { f.years.set(r.year, (f.years.get(r.year) || 0) + 1); if (r.year < f.minY) f.minY = r.year; if (r.year > f.maxY) f.maxY = r.year }
     }
     f.seasons = f.years.size
@@ -324,6 +327,7 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
       if (/^\d+$/.test(run) && run !== '1' && !(r.serial > 0 && r.serial <= parseInt(run))) return false
       if (brands && brands.size && !brands.has(r.brand)) return false
       if (teams && teams.size && !teams.has(r.team)) return false
+      if (labels && labels.size && !labels.has(r.label)) return false
       if (r.year && (r.year < yearFrom || r.year > yearTo)) return false
       if (products.length) { const n = r.set.toLowerCase(); if (!products.every(p => n.includes(p.toLowerCase()))) return false }
       if (parsed && parsed.types.size) { for (const t of parsed.types) { if (t === 'RPA' && !((r.type & TYPE.AU) && (r.type & TYPE.PATCH) && (r.type & TYPE.RC))) return false; if (TYPE[t] && !(r.type & TYPE[t])) return false } }
@@ -332,7 +336,7 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
       if (statedOnly && r.mem && memTypical(r.mem)) return false
       return true
     })
-  }, [rows, quick, types, run, brands, teams, yearFrom, yearTo, products, hidePlates, parsed, mems, statedOnly])
+  }, [rows, quick, types, run, brands, teams, labels, yearFrom, yearTo, products, hidePlates, parsed, mems, statedOnly])
 
   const sorted = useMemo(() => {
     const out = filtered.slice()
@@ -360,13 +364,15 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
   const toggleType = (t) => setTypes(prev => { const n = new Set(prev); if (n.has(t)) n.delete(t); else n.add(t); return n })
   // Facet checkboxes: nothing checked = any; checking narrows to the checked values.
   const toggleIn = (setter, cur, v) => setter(() => { const n = new Set(cur || []); if (n.has(v)) n.delete(v); else n.add(v); return n.size ? n : null })
-  const resetAll = () => { setMems(null); setStatedOnly(false); setQuick('all'); setTypes(new Set()); setRun('any'); setBrands(null); setTeams(null); setProducts([]); setYearFrom(0); setYearTo(9999); setHidePlates(false) }
+  const resetAll = () => { setMems(null); setStatedOnly(false); setQuick('all'); setTypes(new Set()); setRun('any'); setBrands(null); setTeams(null); setLabels(null); setProducts([]); setYearFrom(0); setYearTo(9999); setHidePlates(false) }
   const color = SPORT_COLORS[player.sport] || ACCENT
   const following = myPlayers.has(player.name)
   const nonSports = NON_SPORTS.has(player.sport)
   const years = [...facets.years.keys()].sort()
   const maxYearCount = Math.max(1, ...facets.years.values())
   const brandList = [...facets.brands.entries()].sort((a, b) => b[1] - a[1])
+  // Every name this player is printed under, biggest first (the page's own name leads).
+  const labelList = [...facets.labels.entries()].sort((a, b) => (b[0] === player.name) - (a[0] === player.name) || b[1] - a[1])
   const teamList = [...facets.teams.entries()].filter(([t]) => /[A-Za-z]{3,}/.test(t) && !/^\/|#|\d\/\d/.test(t)).sort((a, b) => b[1] - a[1]).slice(0, 12)
   const productOptions = useMemo(() => [...new Set(rows.map(r => r.set.replace(/^\d{4}(-\d{2})?\s*/, '').replace(/\s+(hockey|baseball|basketball|football|soccer).*$/i, '')))].sort(), [rows])
   const titleSuffix = quick !== 'all' ? ' · ' + VIEWS.find(v => v[0] === quick)[1] : parsed && parsed.serial === 1 ? ' · 1/1s' : ''
@@ -387,11 +393,11 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
       {withSet && <td style={{ padding: '9px 12px', color: '#A1A1AA', fontVariantNumeric: 'tabular-nums', whiteSpace: 'nowrap' }}>{seasonLabel(r.year, r.sport)}</td>}
       {withSet && <td style={{ padding: '9px 12px' }}><button onClick={() => onOpenSet(r.slug)} style={{ background: 'none', border: 'none', color: '#EDEDEF', fontWeight: 600, cursor: 'pointer', padding: 0, textAlign: 'left', fontFamily: 'inherit', fontSize: 14 }}>{r.set.replace(/^\d{4}(-\d{2})?\s*/, '')}</button></td>}
       <td style={{ padding: '9px 12px', color: ACCENT_TEXT, fontWeight: 700, fontVariantNumeric: 'tabular-nums', whiteSpace: 'nowrap' }}>{r.n ? '#' + r.n : '—'}</td>
-      <td style={{ padding: '9px 12px' }}>{r.section}</td>
+      <td style={{ padding: '9px 12px' }}>{r.section}{r.label !== player.name && <span style={{ display: 'block', color: '#8A93A8', fontSize: 12 }}>as {r.label}</span>}</td>
       <td style={{ padding: '9px 12px' }}><TypeChip t={r.type} /></td>
       <td style={{ padding: '9px 12px' }}>{r.mem ? <MemChip code={r.mem} /> : <span style={{ color: '#444' }}>—</span>}</td>
       <td style={{ padding: '9px 12px', textAlign: 'right', whiteSpace: 'nowrap' }}><Serial s={r.serial} /></td>
-      <td style={{ padding: '9px 12px', textAlign: 'right' }}><button aria-label={'Add #' + r.n + ' ' + r.section + ' to wantlist'} onClick={() => onWant({ set_slug: r.slug, set_name: r.set, card_n: r.n, section: r.section, player: player.name })} style={{ background: 'none', border: '1px solid #232A3E', color: '#A1A1AA', borderRadius: 6, width: 32, height: 32, cursor: 'pointer', fontFamily: 'inherit' }}>+</button></td>
+      <td style={{ padding: '9px 12px', textAlign: 'right' }}><button aria-label={'Add #' + r.n + ' ' + r.section + ' to wantlist'} onClick={() => onWant({ set_slug: r.slug, set_name: r.set, card_n: r.n, section: r.section, player: r.label || player.name })} style={{ background: 'none', border: '1px solid #232A3E', color: '#A1A1AA', borderRadius: 6, width: 32, height: 32, cursor: 'pointer', fontFamily: 'inherit' }}>+</button></td>
     </tr>
   )
   const th = { padding: '9px 12px', fontWeight: 700, textAlign: 'left', fontSize: 12, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#8A8A93', whiteSpace: 'nowrap' }
@@ -420,6 +426,7 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
             {!shard ? 'Loading cards…' : firstCard ? <>First card: {firstCard.year ? seasonLabel(firstCard.year, firstCard.sport) + ' ' : ''}{firstCard.set.replace(/^\d{4}(-\d{2})?\s*/, '')}{firstCard.n ? ' #' + firstCard.n : ''} · </> : null}
             {shard && <>Appears in {facets.sets.size.toLocaleString()} sets across {facets.seasons} season{facets.seasons === 1 ? '' : 's'}</>}
           </p>
+          {labelList.length > 1 && <p style={{ color: '#8A93A8', fontSize: 13, margin: '6px 0 0', lineHeight: 1.5 }}>Also listed as {labelList.filter(([l]) => l !== player.name).slice(0, 4).map(([l]) => l).join(', ')}{labelList.length > 5 ? ' and ' + (labelList.length - 5) + ' more' : ''}</p>}
           <div style={{ display: 'flex', gap: 10, marginTop: 18, flexWrap: 'wrap' }}>
             <button onClick={() => myPlayers.toggle(player.name)} style={btn(!following)} aria-pressed={following}>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true">{following ? <path d="m5 12 5 5L20 7" /> : <path d="M12 5v14M5 12h14" />}</svg>
@@ -496,6 +503,12 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
             <datalist id="hq-products">{productOptions.slice(0, 400).map(p => <option key={p} value={p} />)}</datalist>
             {products.length > 0 && <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginTop: 8 }}>{products.map(p => <span key={p} style={{ background: '#0e1630', border: '1px solid ' + ACCENT + '55', color: '#c9d8ff', fontSize: 12, fontWeight: 600, padding: '4px 10px', borderRadius: 999, display: 'inline-flex', gap: 6, alignItems: 'center' }}>{p}<button aria-label={'Remove ' + p} onClick={() => setProducts(ps => ps.filter(x => x !== p))} style={{ background: 'none', border: 'none', color: '#c9d8ff', cursor: 'pointer', padding: 0, fontFamily: 'inherit' }}>×</button></span>)}</div>}
           </div>
+          {labelList.length > 1 && (
+            <div>
+              <p style={legend}>Appears as</p>
+              {labelList.slice(0, 30).map(([l, n]) => <label key={l} style={lbl}><input type="checkbox" checked={!!labels && labels.has(l)} onChange={() => toggleIn(setLabels, labels, l)} style={cb} /><span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{l}</span><span style={cnt}>{n.toLocaleString()}</span></label>)}
+            </div>
+          )}
           {teamList.length > 0 && (
             <div>
               <p style={legend}>Team on card</p>
@@ -602,7 +615,13 @@ export function MyPlayersPanel({ myPlayers, onOpenPlayer, dirPlayers }) {
   const [dir, setDir] = useState(null)
   useEffect(() => { loadPlayerDir().then(setDir) }, [])
   // exact name, else the same name spelled differently (saved before a data clean-up: "Shaquille ONeal")
-  const resolve = (name) => { if (!dir) return -1; const i = dir.players.findIndex(p => p[0] === name); if (i >= 0) return i; const k = norm(name); return dir.players.findIndex(p => norm(p[0]) === k) }
+  const resolve = (name) => {
+    if (!dir) return -1
+    const i = dir.players.findIndex(p => p[0] === name); if (i >= 0) return i
+    const k = norm(name), j = dir.players.findIndex(p => norm(p[0]) === k); if (j >= 0) return j
+    // a name that has since been rolled into another page ("Shoeless Joe Jackson" -> Joe Jackson)
+    return dir.players.findIndex((p, x) => (akaOf(dir, x) || []).some(([a]) => a === k))
+  }
   return (
     <div className="hq-panel" style={{ background: 'linear-gradient(140deg, #0f1526, #0F1320)', border: '1px solid ' + ACCENT + '33', borderRadius: 18, padding: '26px 28px' }}>
       <h1 style={{ ...display, fontSize: 40, margin: 0, lineHeight: 1 }}>My Players</h1>

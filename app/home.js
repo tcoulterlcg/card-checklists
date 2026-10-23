@@ -546,7 +546,9 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
     window.scrollTo(0, 0)
   }
   const openPlayerByName = async (name, rawQuery, push, sport) => {
-    const pick = (hs) => hs.find(h => h.name === name && (!sport || h.sport === sport)) || hs.find(h => h.name === name)
+    // exact name, or a name rolled into another page ("Shoeless Joe Jackson" -> Joe Jackson)
+    const is = (h) => h.name === name || h.via === name
+    const pick = (hs) => hs.find(h => is(h) && (!sport || h.sport === sport)) || hs.find(is)
     const my = ++navSeq.current
     // Most shared links are for well-known players: try the 100 KB top list before the full directory.
     const top = await loadTopPlayers()

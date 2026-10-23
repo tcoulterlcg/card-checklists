@@ -1,10 +1,19 @@
 // Build the player search index that powers the omnibox and player pages.
 //
 //   public/data/players/dir.json            — the player directory
-//     { v, shards, sports: [...], players: [[name, shard, cards, sportIdx, minYear, maxYear], ...] }
+//     { v, shards, sports: [...], players: [[name, shard, cards, sportIdx, minYear, maxYear], ...],
+//       aka: [[playerIdx, "Other name"], ...] }
 //   public/data/players/<shard>.json        — one shard (0..shards-1) of card rows
-//     { slugs: [...], sections: [...], teams: [...],
-//       rows: [[pid, slugId, sectionId, number, teamId, serial, type], ...] }
+//     { slugs: [...], sections: [...], teams: [...], labels: [...],
+//       rows: [[pid, slugId, sectionId, number, teamId, serial, type, mem, labelId?], ...] }
+//
+// One player = one page (except one name that is two people in two sports, see pass 0).
+// Different spellings of the same person or character
+// ("Shoeless Joe Jackson" / "Joe Jackson", "Elsa — Snow Queen" / "Elsa",
+// "Charizard ex" / "Charizard") roll up into a single entry; see scripts/player-names.mjs.
+// Rows printed under another name carry labelId (index into `labels`) so the
+// player page can narrow to that variant; `aka` lets search find the page by
+// any of its names.
 //
 // Unlike search-index.json (which collapses parallels so the file stays small),
 // every parallel row is kept here — "Kucherov 1/1" needs every one-of-one.
@@ -15,11 +24,12 @@
 //
 //   node scripts/build-player-index.mjs
 import { readFileSync, writeFileSync, readdirSync, mkdirSync, existsSync } from 'node:fs'
+import { splitPlayers, subjects, mergePlayers, norm } from './player-names.mjs'
 
 const dataDir = new URL('../public/data/', import.meta.url)
 const outDir = new URL('../public/data/players/', import.meta.url)
 if (!existsSync(outDir)) mkdirSync(outDir, { recursive: true })
-const SKIP = /^(index|search-index|rpa-index|patch-swaps)\.json$/
+const SKIP = /^(index|search-index|rpa-index|patch-swaps|redirects)\.json$/
 const SHARDS = 512
 
 // Memorabilia code: low 3 bits kind, +8 when it is the maker's typical practice rather than stated.
@@ -27,38 +37,7 @@ const MEM_K = { GU: 1, PW: 2, EW: 3, MX: 4, MFG: 5, UNK: 6 }
 const memCode = (m) => (MEM_K[m.k] || 6) + (m.src === 'typical' ? 8 : 0)
 export const TYPE = { BASE: 1, PARALLEL: 2, INSERT: 4, AU: 8, PATCH: 16, RELIC: 32, RC: 64, PLATE: 128, MULTI: 256 }
 
-const norm = (s) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9 ]+/g, ' ').trim().replace(/\s+/g, ' ')
 function hash(s) { let h = 2166136261; for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619) } return (h >>> 0) % SHARDS }
-
-// Clean a raw player string from the scrapes: drop trailing flag junk some TCDB
-// pages carry ("AU, MEM, SN10MEM: Game-Used Memorabilia"), parenthetical
-// variants and stray asterisks, then split multi-player cards.
-function splitPlayers(raw) {
-  let p = String(raw || '')
-    .replace(/\s+(AU|MEM|SN\d+)(,\s*(AU|MEM|SN\d+))*\s*MEM:.*$/i, '')
-    .replace(/\s*\((foil|gold|silver|black|variation|sp|ssp|rc)\)\s*$/i, '')
-    .replace(/\s*\*+\s*$/, '')
-    .replace(/\s+:\s+.*$/, '')
-    .replace(/\s+(CL|SP|SSP|RC|AU|VAR|HOF|UER|COR|ERR|Gold|Silver|Black|Red|Blue|Green|Orange|Purple|Pink|Variation|Refractor|Checklist)$/i, '')
-    .trim()
-  // memorabilia piece glued to the name: "Austin Jackson (Pants)", "Eddie Murray #/ 25 Pants", "Don Mattingly (Jacket)"
-  p = p.replace(/\s*\(?\s*(?:#?\s*\/\s*\d+\s*)?\b(?:jersey|jerseys|pants|jacket|bat|bats|shoes?|gloves?|helmet|cap|hat|socks?|wristband|fabric|swatch|button|jersey number|jersey auto)\s*\)?$/i, (m) => /\S+\s+\S+/.test(p.slice(0, p.length - m.length).trim()) ? '' : m).trim()
-  // "Best There Is...Best There Was (Mike Piazza/Josh Gibson)" -> the players in the parentheses
-  const inner = p.match(/^[^()]+\(([^()]*\/[^()]*)\)$/)
-  if (inner) p = inner[1]
-  if (!p) return []
-  const parts = p.split(/\s*\/\s*|\s+\|\s+/)
-    .map(x => {
-      x = x.trim()
-      if (x.endsWith(')') && !x.includes('(')) x = x.slice(0, -1).trim()     // "Josh Gibson)"
-      if (x.startsWith('(') && !x.includes(')')) x = x.slice(1).trim()
-      if (x.includes('(') && !x.includes(')')) x = x.replace(/\s*\(.*$/, '') // "5 (Jersey"
-      return x
-    })
-    // drop bare numbers and piece counts: "25", "10)", "25 Jersey", "15\""
-    .filter(x => x.length > 1 && /[A-Za-z\u00C0-\u024F]{2}/.test(x) && !/^\d+["']?\s*\(?(jersey|jerseys|pants|jacket|bat|shoes?|gloves?|helmet|cap|hat|socks?|patch|auto)\b/i.test(x))
-  return parts
-}
 
 const PARALLEL_WORDS = /\b(gold|silver|black|red|blue|green|orange|purple|pink|teal|white|bronze|platinum|rainbow|refractor|prizm|prizms|holo|foil|spectrum|mojo|wave|cracked ice|shimmer|disco|velocity|hyper|camo|tie-dye|laser|pulsar|mosaic|optic|chrome|sapphire|x-fractor|xfractor|atomic|superfractor|printing plate|emerald|ruby|sepia|canvas|exclusives|high gloss|rookie exclusives|artist proof|press proof|die cut|die-cut|vintage stock|independence day|memorial day|mothers day|fathers day|rainbow foil|clear cut|outburst|magenta|cyan|yellow)\b/i
 
@@ -93,6 +72,9 @@ function sectionType(title) {
   return type
 }
 
+const intern = (v, pool, map) => { if (map.has(v)) return map.get(v); const id = pool.length; pool.push(v); map.set(v, id); return id }
+const newShard = () => ({ slugs: [], slugId: new Map(), sections: [], secId: new Map(), teams: [], teamId: new Map(), labels: [], labelId: new Map(), rows: [] })
+
 // ---- pass 0: who is who ----
 // One name can be two people. Cards are keyed by normalized name, except:
 //  * a name with 30+ cards in a second sport is a different person there
@@ -103,7 +85,7 @@ function sectionType(title) {
 //    form exists in that sport and their card years overlap — merged under the
 //    suffixed name. Jr./Sr. pairs (Ken Griffey) are never merged.
 const SPLIT_MIN = 30
-const NON_PERSON_SPORTS = new Set(['', 'Multi-Sport', 'Entertainment', 'Non-Sport'])
+const NON_PERSON_SPORTS = new Set(['', 'Multi-Sport', 'Entertainment', 'Non-Sport', 'Lorcana', 'Disney', 'Pokémon', 'Magic', 'One Piece', 'Yu-Gi-Oh!'])
 const SUFFIX = / (jr|sr|ii|iii|iv)$/
 const stats = new Map() // key -> { sports: Map(sport -> n), min, max }
 const setFiles = []
@@ -113,8 +95,8 @@ for (const f of readdirSync(dataDir)) {
   try { s = JSON.parse(readFileSync(new URL(f, dataDir), 'utf8')) } catch { continue }
   if (!s.slug || !Array.isArray(s.sections) || s.incomplete) continue
   setFiles.push(f)
-  for (const sec of s.sections) for (const c of sec.cards || []) for (const name of splitPlayers(c.p)) {
-    const k = norm(name); if (!k || k.length < 2) continue
+  for (const sec of s.sections) for (const c of sec.cards || []) for (const name of splitPlayers(c.p)) for (const { base } of subjects(name, s.sport)) {
+    const k = norm(base); if (!k || k.length < 2) continue
     let st = stats.get(k); if (!st) stats.set(k, st = { sports: new Map(), min: 9999, max: 0 })
     st.sports.set(s.sport || '', (st.sports.get(s.sport || '') || 0) + 1)
     if (s.year) { st.min = Math.min(st.min, s.year); st.max = Math.max(st.max, s.year) }
@@ -127,7 +109,7 @@ for (const [k, st] of stats) {
   const others = [...st.sports.entries()].filter(([sp, n]) => sp !== main && !NON_PERSON_SPORTS.has(sp) && n >= SPLIT_MIN).map(([sp]) => sp)
   if (others.length) splitSports.set(k, new Set(others))
 }
-const mergeInto = new Map() // plain key -> suffixed key
+const suffixInto = new Map() // plain key -> suffixed key
 for (const [k, st] of stats) {
   if (SUFFIX.test(k)) continue
   const forms = ['jr', 'sr', 'ii', 'iii', 'iv'].map(x => k + ' ' + x).filter(x => stats.has(x))
@@ -135,18 +117,19 @@ for (const [k, st] of stats) {
   const t = stats.get(forms[0])
   if (primarySport(t) !== primarySport(st)) continue
   if (st.min > t.max + 1 || t.min > st.max + 1) continue   // different eras: different people
-  mergeInto.set(k, forms[0])
+  suffixInto.set(k, forms[0])
 }
-const keyFor = (name, sport) => {
-  let k = norm(name)
+stats.clear()
+const keyFor = (base, sport) => {
+  const k = norm(base)
   if (splitSports.get(k)?.has(sport)) return k + '|' + sport
-  return mergeInto.get(k) || k
+  return suffixInto.get(k) || k
 }
 
-// ---- pass 1: build rows per shard ----
-const shards = Array.from({ length: SHARDS }, () => ({ slugs: [], slugId: new Map(), sections: [], secId: new Map(), teams: [], teamId: new Map(), rows: [] }))
-const intern = (v, pool, map) => { if (map.has(v)) return map.get(v); const id = pool.length; pool.push(v); map.set(v, id); return id }
-const players = new Map() // normName -> { name, shard, cards, sports:Map, minYear, maxYear }
+// ---- pass 1: read every set; rows bucketed by the printed name's key ----
+const shards = Array.from({ length: SHARDS }, newShard)
+// key -> { cards, sports:Map, teams:Map, base:Map(name->n), labels:Map(label->n), minYear, maxYear }
+const players = new Map()
 const sportsPool = [], sportIdx = new Map()
 
 let files = 0
@@ -165,55 +148,118 @@ for (const f of setFiles) {
       const names = splitPlayers(c.p)
       if (!names.length) continue
       const flag = c.x || ''
-      let serial = serialFromText(flag) || secSerial
+      const serial = serialFromText(flag) || secSerial
       let type = stype
       if (/\bRC\b/.test(flag)) type |= TYPE.RC
       if (/\bAU\b/.test(flag)) type |= TYPE.AU
       if (/\bMEM\b/.test(flag) && !(type & TYPE.PATCH)) type |= TYPE.RELIC
       if (names.length > 1) type |= TYPE.MULTI
       for (const name of names) {
-        if (norm(name).length < 2) continue
-        const key = keyFor(name, s.sport || '')
-        // Break Ninja team pages sometimes list the same card twice.
-        const dk = key + '|' + sec.title + '|' + c.n + '|' + serial
-        if (seen.has(dk)) continue
-        seen.add(dk)
-        let pl = players.get(key)
-        if (!pl) { pl = { name, names: new Map(), shard: hash(key), cards: 0, sports: new Map(), minYear: s.year || 0, maxYear: s.year || 0 }; players.set(key, pl) }
-        pl.names.set(name, (pl.names.get(name) || 0) + 1)
-        pl.cards++
-        pl.sports.set(sp, (pl.sports.get(sp) || 0) + 1)
-        if (s.year) { if (!pl.minYear || s.year < pl.minYear) pl.minYear = s.year; if (s.year > pl.maxYear) pl.maxYear = s.year }
-        const sh = shards[pl.shard]
-        let mem = c.m ? memCode(c.m) : secMem
-        if (!c.m && sec.mem && sec.mem.rk && (type & TYPE.RC)) mem = memCode({ k: sec.mem.rk, src: sec.mem.src })
-        sh.rows.push([key, intern(s.slug, sh.slugs, sh.slugId), intern(sec.title || '', sh.sections, sh.secId), c.n == null ? '' : String(c.n), c.t ? intern(c.t, sh.teams, sh.teamId) : -1, serial, type, mem])
+        for (const { label, base } of subjects(name, s.sport)) {
+          if (norm(base).length < 2) continue
+          const key = keyFor(base, s.sport || '')
+          // Break Ninja team pages sometimes list the same card twice.
+          const dk = key + '|' + sec.title + '|' + c.n + '|' + serial
+          if (seen.has(dk)) continue
+          seen.add(dk)
+          let pl = players.get(key)
+          if (!pl) { pl = { cards: 0, sports: new Map(), teams: new Map(), base: new Map(), labels: new Map(), minYear: s.year || 0, maxYear: s.year || 0 }; players.set(key, pl) }
+          pl.cards++
+          pl.sports.set(sp, (pl.sports.get(sp) || 0) + 1)
+          pl.base.set(base, (pl.base.get(base) || 0) + 1)
+          pl.labels.set(label, (pl.labels.get(label) || 0) + 1)
+          if (c.t) pl.teams.set(c.t, (pl.teams.get(c.t) || 0) + 1)
+          if (s.year) { if (!pl.minYear || s.year < pl.minYear) pl.minYear = s.year; if (s.year > pl.maxYear) pl.maxYear = s.year }
+          const sh = shards[hash(key)]
+          let mem = c.m ? memCode(c.m) : secMem
+          if (!c.m && sec.mem && sec.mem.rk && (type & TYPE.RC)) mem = memCode({ k: sec.mem.rk, src: sec.mem.src })
+          sh.rows.push([key, intern(s.slug, sh.slugs, sh.slugId), intern(sec.title || '', sh.sections, sh.secId), c.n == null ? '' : String(c.n), c.t ? intern(c.t, sh.teams, sh.teamId) : -1, serial, type, mem, intern(label, sh.labels, sh.labelId)])
+        }
       }
     }
   }
 }
 
-// ---- pass 2: directory + shard files ----
-const dir = [], pid = new Map()
-const sorted = [...players.entries()].sort((a, b) => b[1].cards - a[1].cards)
-for (const [key, pl] of sorted) {
-  const topSport = [...pl.sports.entries()].sort((a, b) => b[1] - a[1])[0][0]
-  pid.set(key, dir.length)
-  const shown = [...pl.names.entries()].sort((a, b) => b[1] - a[1])[0][0]   // the spelling used most
-  dir.push([shown, pl.shard, pl.cards, topSport, pl.minYear, pl.maxYear])
+// ---- pass 2: roll spellings of one person / character into one player ----
+const moved = mergePlayers(players, sportsPool)
+const canon = (k) => moved.get(k) || k
+const groups = new Map() // canonical key -> { cards, sports, minYear, maxYear, base:Map, labels:Map }
+for (const [k, pl] of players) {
+  const c = canon(k)
+  let g = groups.get(c)
+  if (!g) { g = { cards: 0, sports: new Map(), base: new Map(), labels: new Map(), names: new Set(), minYear: 0, maxYear: 0 }; groups.set(c, g) }
+  g.cards += pl.cards
+  for (const [s, n] of pl.sports) g.sports.set(s, (g.sports.get(s) || 0) + n)
+  for (const [b, n] of pl.base) g.base.set(b, (g.base.get(b) || 0) + n)
+  for (const [l, n] of pl.labels) g.labels.set(l, (g.labels.get(l) || 0) + n)
+  if (pl.minYear && (!g.minYear || pl.minYear < g.minYear)) g.minYear = pl.minYear
+  if (pl.maxYear > g.maxYear) g.maxYear = pl.maxYear
 }
+// Display name: the canonical page's most-printed spelling; prefer one without quoted
+// nicknames or scrape codes when it is close in volume.
+function displayName(c) {
+  const own = [...players.get(c).base.entries()].sort((a, b) => b[1] - a[1])
+  const clean = own.find(([n, k]) => !/["“”]/.test(n) && k * 3 >= own[0][1])
+  return (clean || own[0])[0]
+}
+
+// ---- pass 3: directory + shard files (rows re-bucketed under the canonical player) ----
+const dir = [], pid = new Map(), names = new Map()
+const sorted = [...groups.entries()].sort((a, b) => b[1].cards - a[1].cards)
+for (const [key, g] of sorted) {
+  const topSport = [...g.sports.entries()].sort((a, b) => b[1] - a[1])[0][0]
+  const name = displayName(key)
+  names.set(key, name)
+  pid.set(key, dir.length)
+  dir.push([name, hash(key), 0, topSport, g.minYear, g.maxYear])
+}
+// Other names search should find each page by (spellings that differ in more than spacing/case).
+const aka = []
+for (const [key, g] of sorted) {
+  const i = pid.get(key), own = norm(names.get(key)), seenAka = new Set([own, own.replace(/ /g, '')])
+  const alts = [...g.base.entries(), ...g.labels.entries()].sort((a, b) => b[1] - a[1])
+  for (const [n] of alts) {
+    const k = norm(n)
+    if (!k || seenAka.has(k) || seenAka.has(k.replace(/ /g, ''))) continue
+    seenAka.add(k); seenAka.add(k.replace(/ /g, ''))
+    aka.push([i, n])
+    if (seenAka.size > 24) break
+  }
+}
+
+const out = Array.from({ length: SHARDS }, newShard)
+const dedupe = new Set(), mergedInto = new Set(moved.values())
 let total = 0
-shards.forEach((sh, i) => {
-  for (const r of sh.rows) r[0] = pid.get(r[0])
-  total += sh.rows.length
-  writeFileSync(new URL(i + '.json', outDir), JSON.stringify({ slugs: sh.slugs, sections: sh.sections, teams: sh.teams, rows: sh.rows }))
+for (let si = 0; si < SHARDS; si++) {
+  const sh = shards[si]
+  for (const r of sh.rows) {
+    const c = canon(r[0])
+    const slug = sh.slugs[r[1]], section = sh.sections[r[2]], label = sh.labels[r[8]]
+    // the same card listed under two spellings in one set counts once
+    if (mergedInto.has(c)) {
+      const dk = c + '|' + slug + '|' + section + '|' + r[3] + '|' + r[5]
+      if (dedupe.has(dk)) continue
+      dedupe.add(dk)
+    }
+    const id = pid.get(c), o = out[dir[id][1]]
+    const row = [id, intern(slug, o.slugs, o.slugId), intern(section, o.sections, o.secId), r[3], r[4] >= 0 ? intern(sh.teams[r[4]], o.teams, o.teamId) : -1, r[5], r[6], r[7]]
+    if (norm(label) !== norm(names.get(c))) row.push(intern(label, o.labels, o.labelId))
+    o.rows.push(row)
+    dir[id][2]++
+  }
+  shards[si] = null
+}
+out.forEach((o, i) => {
+  total += o.rows.length
+  writeFileSync(new URL(i + '.json', outDir), JSON.stringify({ slugs: o.slugs, sections: o.sections, teams: o.teams, labels: o.labels, rows: o.rows }))
 })
-writeFileSync(new URL('dir.json', outDir), JSON.stringify({ v: 1, shards: SHARDS, sports: sportsPool, players: dir }))
+writeFileSync(new URL('dir.json', outDir), JSON.stringify({ v: 2, shards: SHARDS, sports: sportsPool, players: dir, aka }))
 // top.json: the 5,000 most-carded players with their directory index at [6], so the
 // search box can suggest instantly while the full directory (~2 MB gzipped) loads.
 // Plus all-time icons whose checklists are thin (Michael Jordan, Tiger Woods), so "jordan" suggests MJ instantly.
 const { ICONS } = await import('../lib/query.js')
 const ranked = dir.map((p, i) => [...p.slice(0, 6), i]).sort((a, b) => b[2] - a[2])
 const top = ranked.slice(0, 5000).concat(ranked.slice(5000).filter(p => ICONS.has(norm(p[0]))))
-writeFileSync(new URL('top.json', outDir), JSON.stringify({ v: 1, shards: SHARDS, sports: sportsPool, players: top, partial: true }))
-console.log('player index:', dir.length.toLocaleString(), 'players,', total.toLocaleString(), 'card rows across', SHARDS, 'shards from', files, 'sets')
+const inTop = new Set(top.map(p => p[6]))
+writeFileSync(new URL('top.json', outDir), JSON.stringify({ v: 2, shards: SHARDS, sports: sportsPool, players: top, aka: aka.filter(a => inTop.has(a[0])), partial: true }))
+console.log('player index:', dir.length.toLocaleString(), 'players (' + moved.size.toLocaleString() + ' spellings merged),', total.toLocaleString(), 'card rows across', SHARDS, 'shards from', files, 'sets')
