@@ -46,7 +46,20 @@ function tidy(p) {
 const files = readdirSync(dataDir).filter(f => f.endsWith('.json') && !SKIP.test(f))
 const sets = []
 for (const f of files) {
-  try { const s = JSON.parse(readFileSync(new URL(f, dataDir), 'utf8')); if (SPORTS.has(s.sport)) sets.push([f, s]) } catch {}
+  try {
+    const s = JSON.parse(readFileSync(new URL(f, dataDir), 'utf8'))
+    if (SPORTS.has(s.sport)) { sets.push([f, s]); continue }
+    // Non-sport sets keep their names as-is, but TCDB flag notes in the team column ("SN25",
+    // "AU, MEM") are fixed here too — they show as a "team" otherwise.
+    let ch = false
+    for (const sec of s.sections || []) for (const c of sec.cards || []) {
+      if (!c.t || !/^(?:(?:URA?|AUR?|MEM|RC|SP|SSP|SN\d+)(?:,\s*|$))+$/.test(c.t.trim())) continue
+      const x = (c.x || '').split(/\s+/).filter(Boolean)
+      for (const g of c.t.trim().split(/,\s*/)) { const v = /^SN(\d+)$/.test(g) ? '/' + g.slice(2) : (g === 'URA' || g === 'AUR') ? 'AU' : g; if (!x.includes(v)) x.push(v) }
+      c.x = x.join(' '); delete c.t; ch = true
+    }
+    if (ch && !DRY) writeFileSync(new URL(f, dataDir), JSON.stringify(s))
+  } catch {}
 }
 
 // Affiliate text scraped from Cardboard Connection ("Shop parallels on eBay.") in pack-odds
