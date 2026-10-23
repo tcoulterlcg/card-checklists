@@ -4708,6 +4708,55 @@
    "single fighter signature swatches relic"
   ]
  },
+ "1992-wwf-series": {
+  "missingPlayers": [
+   "arena",
+   "bearer",
+   "berzerker",
+   "boys",
+   "brothers",
+   "bulldog",
+   "bushwhackers",
+   "checklist",
+   "crush",
+   "dibiase",
+   "disasters",
+   "doom",
+   "duggan",
+   "energy",
+   "fans",
+   "flair",
+   "genius",
+   "hart",
+   "heenan",
+   "inc",
+   "kamala",
+   "man",
+   "martel",
+   "matador",
+   "michaels",
+   "mountie",
+   "nailz",
+   "perfect",
+   "piper",
+   "ramon",
+   "savage",
+   "schyster",
+   "shango",
+   "sherri",
+   "skinner",
+   "slaughter",
+   "stadium",
+   "tatanka",
+   "tornado",
+   "undertaker",
+   "virgil",
+   "warrior"
+  ],
+  "missingInserts": [
+   "merlin"
+  ]
+ },
  "2018-topps-opening-day-baseball-mlb-cards": {
   "missingPlayers": [
    "angels",
@@ -5063,27 +5112,6 @@
   ],
   "missingInserts": [
    "framed"
-  ]
- },
- "2015-16-o-pee-chee-platinum-hockey-cards": {
-  "missingPlayers": [
-   "box",
-   "cup",
-   "david",
-   "ehrhoff",
-   "ference",
-   "moore",
-   "mouillierat",
-   "pearson"
-  ],
-  "missingInserts": [
-   "cubes",
-   "emerald surge",
-   "ice",
-   "prism",
-   "seismic",
-   "traxx",
-   "trophied talent die cut"
   ]
  },
  "2014-bowman-sterling-football-cards": {
@@ -7425,6 +7453,40 @@
    "pulsar"
   ]
  },
+ "2002-fleer-wwe-absolute-divas": {
+  "missingPlayers": [
+   "championship",
+   "competition",
+   "cs",
+   "kotr",
+   "match",
+   "team",
+   "threat"
+  ],
+  "missingInserts": [
+   "pants",
+   "top"
+  ]
+ },
+ "1998-topps-wcw-nwo": {
+  "missingPlayers": [
+   "bigelow",
+   "checklist",
+   "dandy",
+   "finley",
+   "iaukea",
+   "king",
+   "onoo",
+   "parka",
+   "patrick",
+   "robertson",
+   "silverman",
+   "storm"
+  ],
+  "missingInserts": [
+   "unreleased"
+  ]
+ },
  "2019-panini-prizm-draft-picks-baseball-cards": {
   "missingPlayers": [
    "opitz"
@@ -7800,6 +7862,21 @@
    "future watch ink"
   ]
  },
+ "2015-16-o-pee-chee-platinum-hockey-cards": {
+  "missingPlayers": [
+   "box",
+   "cup",
+   "david",
+   "ehrhoff",
+   "ference",
+   "moore",
+   "mouillierat",
+   "pearson"
+  ],
+  "missingInserts": [
+   "trophied talent die cut"
+  ]
+ },
  "2014-15-sp-game-used-hockey-cards": {
   "missingPlayers": [
    "fraser",
@@ -7831,6 +7908,17 @@
   "missingInserts": [
    "7x champ",
    "jj"
+  ]
+ },
+ "2001-fleer-wwf-raw-is-war": {
+  "missingPlayers": [
+   "fn",
+   "guerrero",
+   "michaels"
+  ],
+  "missingInserts": [
+   "kane",
+   "triple h"
   ]
  },
  "2017-donruss-optic-baseball-cards": {
@@ -8112,11 +8200,18 @@
    "xs os"
   ]
  },
- "2016-bowman-platinum-baseball-cards": {
+ "2002-fleer-wwe-raw-vs-smackdown": {
   "missingPlayers": [],
   "missingInserts": [
-   "batting",
-   "catcher gear"
+   "swimsuit",
+   "top"
+  ]
+ },
+ "2001-fleer-wwf-wrestlemania": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "shirt",
+   "t shirt"
   ]
  },
  "2018-topps-fire-baseball-mlb-cards": {
@@ -9155,6 +9250,17 @@
    "anderson silva chael sonnen"
   ]
  },
+ "2001-fleer-wwf-the-ultimate-diva-collection": {
+  "missingPlayers": [
+   "apa",
+   "bradshaw",
+   "hardy",
+   "mcmahon",
+   "saturn",
+   "show"
+  ],
+  "missingInserts": []
+ },
  "2016-topps-gypsy-queen-baseball-cards": {
   "missingPlayers": [
    "buxton",
@@ -9214,6 +9320,18 @@
    "sahlawi"
   ],
   "missingInserts": []
+ },
+ "2002-fleer-wwf-all-access": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "event worn relic"
+  ]
+ },
+ "1994-action-packed-wwf": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "promo"
+  ]
  },
  "2018-19-panini-contenders-draft-picks-basketball": {
   "missingPlayers": [
@@ -10399,6 +10517,12 @@
  "2009-topps-ufc-round-2": {
   "missingPlayers": [
    "pierre"
+  ],
+  "missingInserts": []
+ },
+ "2001-fleer-wwf-championship-clash": {
+  "missingPlayers": [
+   "farooq"
   ],
   "missingInserts": []
  }
