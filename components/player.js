@@ -2,7 +2,7 @@
 // Player search: omnibox with suggestions, player landing pages with faceted
 // filters, and "My Players" (players the collector follows). Data comes from
 // public/data/players/ (built by scripts/build-player-index.mjs).
-import { memo, useDeferredValue, useEffect, useMemo, useRef, useState } from 'react'
+import { memo, useDeferredValue, useEffect, useId, useMemo, useRef, useState } from 'react'
 import { supa } from '../lib/supa'
 import { Select, useIsMobile } from './dropdown'
 import { TYPE, norm, parseQuery, parseQueryFor, matchPlayers, akaOf, rowMatches, typeLabel, TYPE_COLORS, serialLabel, MEM_LABEL, MEM_COLORS, memKind, memTypical } from '../lib/query'
@@ -176,13 +176,16 @@ export function Omnibox({ value, onChange, onSubmit, onPickPlayer, onPickSet, se
   if (parsed.season) understood.push(['season', String(parsed.season)])
   for (const p of parsed.products) understood.push(['product', p])
   if (parsed.mem) understood.push(['material', { GU: 'game-used', PW: 'player-worn', EW: 'event-worn', MFG: 'manufactured' }[parsed.mem]])
-  const narrow = useIsMobile()   // the long example placeholder is cut off mid-word on phones
+  const narrow = useIsMobile()
+  const listId = useId()   // the long example placeholder is cut off mid-word on phones
   return (
     <div ref={box} style={{ position: 'relative' }}>
       <form role="search" onSubmit={(e) => { e.preventDefault(); go(open && items.length ? sel : -1) }}
         style={{ display: 'flex', alignItems: 'center', background: '#121626', border: '1px solid ' + (open ? ACCENT + '66' : '#232A3E'), borderRadius: open && items.length ? '14px 14px 0 0' : 14, padding: 6, boxShadow: open ? '0 0 0 4px ' + ACCENT + '14' : '0 20px 50px -20px rgba(0,0,0,0.8)' }}>
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={open ? ACCENT : '#8A93A8'} strokeWidth="2" aria-hidden="true" style={{ marginLeft: 10, flexShrink: 0 }}><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
         <input value={value} autoFocus={autoFocus} aria-label="Search players, sets, serials"
+          role="combobox" aria-autocomplete="list" aria-controls={listId} aria-expanded={!!(open && items.length)}
+          aria-activedescendant={open && items[sel] ? listId + '-' + sel : undefined}
           onChange={(e) => { onChange(e.target.value); setOpen(true); setSel(0) }}
           onFocus={() => setOpen(true)}
           onKeyDown={(e) => { if (e.key === 'ArrowDown') { e.preventDefault(); setSel(s => Math.min(s + 1, items.length - 1)) } else if (e.key === 'ArrowUp') { e.preventDefault(); setSel(s => Math.max(s - 1, 0)) } else if (e.key === 'Escape') setOpen(false) }}
@@ -191,7 +194,7 @@ export function Omnibox({ value, onChange, onSubmit, onPickPlayer, onPickSet, se
         <button type="submit" style={{ ...buttonText, background: ACCENT, color: '#fff', border: 'none', borderRadius: 10, padding: '0 22px', height: compact ? 38 : 44, cursor: 'pointer', fontSize: 14, opacity: busy ? 0.75 : 1 }} aria-busy={busy ? 'true' : undefined}>{busy ? 'Searching…' : 'Search'}</button>
       </form>
       {open && (items.length > 0 || understood.length > 0) && (
-        <div role="listbox" style={{ position: 'absolute', left: 0, right: 0, top: '100%', zIndex: 60, background: '#0F1320', border: '1px solid #232A3E', borderTop: 'none', borderRadius: '0 0 14px 14px', overflow: 'hidden', boxShadow: '0 30px 60px -20px #000' }}>
+        <div role="listbox" id={listId} style={{ position: 'absolute', left: 0, right: 0, top: '100%', zIndex: 60, background: '#0F1320', border: '1px solid #232A3E', borderTop: 'none', borderRadius: '0 0 14px 14px', overflow: 'hidden', boxShadow: '0 30px 60px -20px #000' }}>
           {understood.length > 0 && (
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', alignItems: 'center', padding: '10px 16px 6px', borderBottom: '1px solid #1A1F31' }}>
               <span style={{ ...eyebrow, color: '#8A93A8' }}>Understood</span>
@@ -201,7 +204,7 @@ export function Omnibox({ value, onChange, onSubmit, onPickPlayer, onPickSet, se
           )}
           {playerHits.length > 0 && <p style={{ ...eyebrow, margin: 0, padding: '10px 16px 4px', color: '#8A93A8' }}>Players</p>}
           {items.map((it, i) => it.kind === 'player' ? (
-            <button key={'p' + it.p.id} role="option" aria-selected={sel === i} onMouseEnter={() => setSel(i)} onClick={() => go(i)}
+            <button key={'p' + it.p.id} id={listId + '-' + i} role="option" aria-selected={sel === i} onMouseEnter={() => setSel(i)} onClick={() => go(i)}
               style={{ width: '100%', textAlign: 'left', display: 'flex', alignItems: 'center', gap: 12, padding: '9px 16px', background: sel === i ? '#111a30' : 'transparent', border: 'none', color: '#EDEDEF', cursor: 'pointer', fontFamily: 'inherit', minHeight: 48 }}>
               <Initials name={it.p.name} color={SPORT_COLORS[it.p.sport] || ACCENT} />
               <span style={{ flex: 1, minWidth: 0 }}>
@@ -212,7 +215,7 @@ export function Omnibox({ value, onChange, onSubmit, onPickPlayer, onPickSet, se
               {sel === i && <span style={{ color: '#8A93A8', fontSize: 12 }}>↵</span>}
             </button>
           ) : (
-            <button key={'s' + it.s.slug} role="option" aria-selected={sel === i} onMouseEnter={() => setSel(i)} onClick={() => go(i)}
+            <button key={'s' + it.s.slug} id={listId + '-' + i} role="option" aria-selected={sel === i} onMouseEnter={() => setSel(i)} onClick={() => go(i)}
               style={{ width: '100%', textAlign: 'left', display: 'flex', alignItems: 'center', gap: 12, padding: '9px 16px', background: sel === i ? '#111a30' : 'transparent', border: 'none', borderTop: i === playerHits.length ? '1px solid #1A1F31' : 'none', color: '#EDEDEF', cursor: 'pointer', fontFamily: 'inherit', minHeight: 44 }}>
               <span style={{ width: 4, height: 28, background: SPORT_COLORS[it.s.sport] || ACCENT, borderRadius: 2 }} />
               <span style={{ flex: 1 }}><span style={{ fontWeight: 600, fontSize: 14 }}>{it.s.name}</span><span style={{ display: 'block', color: '#8A93A8', fontSize: 12 }}>Set · {(it.s.cardCount || 0).toLocaleString()} cards · {it.s.sections} sections</span></span>

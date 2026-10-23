@@ -1275,7 +1275,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
           {/* big sets have hundreds of sections: show the first few as chips (the Section menu above lists all) */}
           <div style={{ display: 'flex', gap: 8, marginBottom: 18, flexWrap: 'wrap' }}>
             {(() => { const all = ['All', ...(setData.sections || []).map(s => s.title)]; const LIMIT = 12; const shown = showAllSecs || all.length <= LIMIT + 2 ? all : [...all.slice(0, LIMIT), ...(all.indexOf(activeSection) >= LIMIT ? [activeSection] : [])]; return shown })().map(t => (
-              <button key={t} onClick={() => setActiveSection(t)}
+              <button key={t} onClick={() => setActiveSection(t)} aria-pressed={activeSection === t}
                 style={{
                   padding: '6px 13px', borderRadius: 8, fontSize: 12, fontWeight: 700, cursor: 'pointer',
                   background: activeSection === t ? ACCENT : '#121626',
