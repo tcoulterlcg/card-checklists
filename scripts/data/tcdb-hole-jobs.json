@@ -11623,5 +11623,1541 @@
    "5 players sold on SCP not on checklist"
   ],
   "status": "todo"
+ },
+ {
+  "slug": "1955-topps-baseball-cards",
+  "name": "1955 Topps Baseball",
+  "year": 1955,
+  "sport": "Baseball",
+  "cards": 0,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "1959-topps-baseball-cards",
+  "name": "1959 Topps Baseball",
+  "year": 1959,
+  "sport": "Baseball",
+  "cards": 0,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "1961-topps-baseball-cards",
+  "name": "1961 Topps Baseball",
+  "year": 1961,
+  "sport": "Baseball",
+  "cards": 0,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "1962-topps-baseball-cards",
+  "name": "1962 Topps Baseball",
+  "year": 1962,
+  "sport": "Baseball",
+  "cards": 1,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 1 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "1963-topps-baseball-cards",
+  "name": "1963 Topps Baseball",
+  "year": 1963,
+  "sport": "Baseball",
+  "cards": 0,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "1972-topps-baseball-cards",
+  "name": "1972 Topps Baseball",
+  "year": 1972,
+  "sport": "Baseball",
+  "cards": 8,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 8 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "1990-topps-mylar-stickers-test-issue-baseball",
+  "name": "1990 Topps Mylar Stickers Test Issue Baseball",
+  "year": 1990,
+  "sport": "Baseball",
+  "cards": 6,
+  "source": "tcdb.com",
+  "why": [
+   "only 6 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "1993-topps-brookshire-brothers-nolan-ryan-reprints-stickers-baseball",
+  "name": "1993 Topps Brookshire Brothers Nolan Ryan Reprints Stickers Baseball",
+  "year": 1993,
+  "sport": "Baseball",
+  "cards": 1,
+  "source": "tcdb.com",
+  "why": [
+   "only 1 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "1997-topps-create-a-card-vinyl-stickers-basketball",
+  "name": "1997 Topps Create a Card Vinyl Stickers Basketball",
+  "year": 1997,
+  "sport": "Basketball",
+  "cards": 5,
+  "source": "tcdb.com",
+  "why": [
+   "only 5 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2010-11-upper-deck-series-1-hockey-review",
+  "name": "2010-11 Upper Deck Series 1 Hockey",
+  "year": 2011,
+  "sport": "Hockey",
+  "cards": 1,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 1 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2010-bowman-baseball-cards",
+  "name": "2010 Bowman Baseball",
+  "year": 2010,
+  "sport": "Baseball",
+  "cards": 2,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 2 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2011-topps-ufc-title-shot",
+  "name": "2011 Topps Title Shot UFC",
+  "year": 2011,
+  "sport": "UFC",
+  "cards": 0,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2012-13-leaf-metal-basketball-cards",
+  "name": "2012-13 Leaf Metal Basketball",
+  "year": 2013,
+  "sport": "Basketball",
+  "cards": 1,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 1 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2013-leaf-autographed-helmet-football",
+  "name": "2013 Leaf Autographed Helmet Football",
+  "year": 2013,
+  "sport": "Football",
+  "cards": 1,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 1 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2013-leaf-memories-baseball-cards",
+  "name": "2013 Leaf Memories Baseball",
+  "year": 2013,
+  "sport": "Baseball",
+  "cards": 9,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 9 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2013-topps-mlb-chipz",
+  "name": "2013 Topps MLB Chipz Baseball",
+  "year": 2013,
+  "sport": "Baseball",
+  "cards": 0,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2014-topps-dynasty-baseball-cards",
+  "name": "2014 Topps Dynasty Baseball",
+  "year": 2014,
+  "sport": "Baseball",
+  "cards": 4,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 4 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2014-topps-mlb-chipz",
+  "name": "2014 Topps MLB Chipz Baseball",
+  "year": 2014,
+  "sport": "Baseball",
+  "cards": 0,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2015-16-upper-deck-connor-mcdavid-collection-hockey",
+  "name": "2015-16 Upper Deck Connor McDavid Collection Hockey",
+  "year": 2016,
+  "sport": "Hockey",
+  "cards": 1,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 1 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2015-leaf-metal-draft-baseball-cards",
+  "name": "2015 Leaf Metal Draft Baseball",
+  "year": 2015,
+  "sport": "Baseball",
+  "cards": 0,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2015-leaf-metal-hockey-cards",
+  "name": "2015-16 Leaf Metal Hockey",
+  "year": 2016,
+  "sport": "Hockey",
+  "cards": 4,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 4 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2015-leaf-trinity-baseball-cards",
+  "name": "2015 Leaf Trinity Baseball",
+  "year": 2015,
+  "sport": "Baseball",
+  "cards": 2,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 2 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2015-topps-archives-signature-series-baseball",
+  "name": "2015 Topps Archives Signature Series Baseball",
+  "year": 2015,
+  "sport": "Baseball",
+  "cards": 0,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2015-topps-dynasty-baseball-cards",
+  "name": "2015 Topps Dynasty Baseball",
+  "year": 2015,
+  "sport": "Baseball",
+  "cards": 0,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2015-topps-mlb-chipz",
+  "name": "2015 Topps MLB Chipz Baseball",
+  "year": 2015,
+  "sport": "Baseball",
+  "cards": 1,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 1 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2015-topps-tier-one-baseball-cards",
+  "name": "2015 Topps Tier One Baseball",
+  "year": 2015,
+  "sport": "Baseball",
+  "cards": 0,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2016-fanatics-authentic-under-wraps-series-1",
+  "name": "2016 Fanatics Authentic Under Wraps Series 1 Autographed Baseball",
+  "year": 2016,
+  "sport": "Baseball",
+  "cards": 7,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 7 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2016-leaf-jack-eichel-collection-hockey",
+  "name": "2016 Leaf Jack Eichel Collection Hockey",
+  "year": 2016,
+  "sport": "Hockey",
+  "cards": 1,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 1 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2016-leaf-trinity-baseball",
+  "name": "2016 Leaf Trinity Baseball",
+  "year": 2016,
+  "sport": "Baseball",
+  "cards": 0,
+  "source": "checklistcenter.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2016-signature-series",
+  "name": "2016 Topps Archives Signature Series All-Star Baseball",
+  "year": 2016,
+  "sport": "Baseball",
+  "cards": 1,
+  "source": "checklistcenter.com",
+  "why": [
+   "only 1 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2016-topps-dynasty-baseball-cards",
+  "name": "2016 Topps Dynasty Baseball",
+  "year": 2016,
+  "sport": "Baseball",
+  "cards": 0,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2017-18-fanatics-under-wraps-nhl-series-1",
+  "name": "2017-18 Fanatics Under Wraps NHL Series 1 Autographed Puck Hockey",
+  "year": 2018,
+  "sport": "Hockey",
+  "cards": 0,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2017-bowman-chrome-national-convention-baseball",
+  "name": "2017 Bowman Chrome National Convention Baseball",
+  "year": 2017,
+  "sport": "Baseball",
+  "cards": 0,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2017-fanatics-authentic-under-wraps-nxt-lvl",
+  "name": "2017 Fanatics Authentic Under Wraps NXT LVL Autographed Baseball",
+  "year": 2017,
+  "sport": "Baseball",
+  "cards": 1,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 1 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2017-leaf-trinity-baseball-checklist-added",
+  "name": "2017 Leaf Trinity Baseball",
+  "year": 2017,
+  "sport": "Baseball",
+  "cards": 0,
+  "source": "checklistcenter.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2017-panini-nba-finals-private-signings-basketball",
+  "name": "2017 Panini NBA Finals Private Signings Basketball",
+  "year": 2017,
+  "sport": "Basketball",
+  "cards": 0,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2017-topps-archives-signature-series-baseball",
+  "name": "2017 Topps Archives Signature Series Active Player Edition Baseball",
+  "year": 2017,
+  "sport": "Baseball",
+  "cards": 0,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2017-topps-archives-signature-series-postseason",
+  "name": "2017 Topps Archives Signature Series Postseason Edition Baseball",
+  "year": 2017,
+  "sport": "Baseball",
+  "cards": 0,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2017-topps-dynasty-baseball-cards",
+  "name": "2017 Topps Dynasty Baseball",
+  "year": 2017,
+  "sport": "Baseball",
+  "cards": 0,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2017-topps-luminaries-baseball-cards",
+  "name": "2017 Topps Luminaries Baseball",
+  "year": 2017,
+  "sport": "Baseball",
+  "cards": 2,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 2 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2017-topps-now-mlb-players-weekend",
+  "name": "2017 Topps Now MLB Players Weekend Baseball",
+  "year": 2017,
+  "sport": "Baseball",
+  "cards": 0,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2017-upper-deck-grandeur-hockey-coins",
+  "name": "2017 Upper Deck Grandeur Coins Hockey",
+  "year": 2017,
+  "sport": "Hockey",
+  "cards": 0,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2018-19-upper-deck-game-dated-moments-hockey-cards",
+  "name": "2018-19 Upper Deck Game Dated Moments Hockey",
+  "year": 2019,
+  "sport": "Hockey",
+  "cards": 3,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 3 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2018-baseball-treasure-mlb-coins",
+  "name": "2018 Baseball Treasure MLB Coins",
+  "year": 2018,
+  "sport": "Baseball",
+  "cards": 0,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2018-leaf-history-of-baseball-cut-signature-edition-cards",
+  "name": "2018 Leaf History of Cut Signature Edition Baseball",
+  "year": 2018,
+  "sport": "Baseball",
+  "cards": 0,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2018-leaf-trinity-baseball-cards",
+  "name": "2018 Leaf Trinity Baseball",
+  "year": 2018,
+  "sport": "Baseball",
+  "cards": 1,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 1 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2018-leaf-trinity-football-cards",
+  "name": "2018 Leaf Trinity Football",
+  "year": 2018,
+  "sport": "Football",
+  "cards": 0,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2018-leaf-ultimate-draft-baseball-cards",
+  "name": "2018 Leaf Ultimate Draft Baseball",
+  "year": 2018,
+  "sport": "Baseball",
+  "cards": 3,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 3 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2018-leaf-valiant-baseball-baseball",
+  "name": "2018 Leaf Valiant Baseball",
+  "year": 2018,
+  "sport": "Baseball",
+  "cards": 0,
+  "source": "checklistcenter.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2018-leaf-valiant-football-cards",
+  "name": "2018 Leaf Valiant Football",
+  "year": 2018,
+  "sport": "Football",
+  "cards": 0,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2018-topps-archives-signature-series-active-baseball-cards",
+  "name": "2018 Topps Archives Signature Series Active Player Edition Baseball",
+  "year": 2018,
+  "sport": "Baseball",
+  "cards": 0,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2018-topps-archives-signature-series-retired-baseball-cards",
+  "name": "2018 Topps Archives Signature Series Retired Player Edition Baseball",
+  "year": 2018,
+  "sport": "Baseball",
+  "cards": 0,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2018-topps-luminaries-baseball-cards",
+  "name": "2018 Topps Luminaries Baseball",
+  "year": 2018,
+  "sport": "Baseball",
+  "cards": 2,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 2 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2019-20-panini-chronicles-hockey-cards",
+  "name": "2019-20 Panini Chronicles Hockey",
+  "year": 2020,
+  "sport": "Hockey",
+  "cards": 0,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2019-20-panini-immaculate-collection-hockey-cards",
+  "name": "2019-20 Panini Immaculate Collection Hockey",
+  "year": 2020,
+  "sport": "Hockey",
+  "cards": 0,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2019-20-panini-prime-hockey-cards",
+  "name": "2019-20 Panini Prime Hockey",
+  "year": 2020,
+  "sport": "Hockey",
+  "cards": 0,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2019-leaf-metal-draft-baseball-baseball",
+  "name": "2019 Leaf Metal Draft Baseball",
+  "year": 2019,
+  "sport": "Baseball",
+  "cards": 0,
+  "source": "checklistcenter.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2019-leaf-ultimate-draft-baseball",
+  "name": "2019 Leaf Ultimate Draft Baseball",
+  "year": 2019,
+  "sport": "Baseball",
+  "cards": 0,
+  "source": "checklistcenter.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2019-leaf-valiant-baseball-baseball",
+  "name": "2019 Leaf Valiant Baseball",
+  "year": 2019,
+  "sport": "Baseball",
+  "cards": 0,
+  "source": "checklistcenter.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2019-onyx-vintage-collection-baseball-cards",
+  "name": "2019 Onyx Vintage Collection Baseball",
+  "year": 2019,
+  "sport": "Baseball",
+  "cards": 0,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2019-panini-toronto-raptors-nba-champions-basketball-cards",
+  "name": "2019 Panini Toronto Raptors NBA Champions Basketball",
+  "year": 2019,
+  "sport": "Basketball",
+  "cards": 7,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 7 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2019-topps-archives-signature-series-active-baseball-cards",
+  "name": "2019 Topps Archives Signature Series Active Player Edition Baseball",
+  "year": 2019,
+  "sport": "Baseball",
+  "cards": 0,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2019-topps-archives-signature-series-retired-baseball-cards",
+  "name": "2019 Topps Archives Signature Series Retired Player Edition Baseball",
+  "year": 2019,
+  "sport": "Baseball",
+  "cards": 0,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2019-topps-baseball-silver-pack-1984-chrome-promo-cards",
+  "name": "2019 Topps Silver Pack 1984 Chrome Baseball",
+  "year": 2019,
+  "sport": "Baseball",
+  "cards": 0,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2019-topps-now-road-to-opening-day-baseball-cards",
+  "name": "2019 Topps Now Road to Opening Day Baseball",
+  "year": 2019,
+  "sport": "Baseball",
+  "cards": 0,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2019-topps-nscc-bowman-chrome-national-convention-cards",
+  "name": "2019 Topps NSCC Bowman Chrome National Convention Baseball",
+  "year": 2019,
+  "sport": "Baseball",
+  "cards": 0,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2019-upper-deck-winter-classic-hockey-cards",
+  "name": "2019 Upper Deck Winter Classic Hockey",
+  "year": 2019,
+  "sport": "Hockey",
+  "cards": 6,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 6 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2020-21-topps-uefa-champions-league-sticker-collection",
+  "name": "2020-21 Topps UEFA Champions League Sticker Collection Soccer",
+  "year": 2021,
+  "sport": "Soccer",
+  "cards": 6,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 6 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2020-leaf-hall-of-fame-baseball-cut-signatures-baseball",
+  "name": "2020 Leaf Hall of Fame Cut Signatures Baseball",
+  "year": 2020,
+  "sport": "Baseball",
+  "cards": 0,
+  "source": "checklistcenter.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2020-leaf-metal-draft-baseball",
+  "name": "2020 Leaf Metal Draft Baseball",
+  "year": 2020,
+  "sport": "Baseball",
+  "cards": 0,
+  "source": "checklistcenter.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2020-leaf-metal-perfect-game-all-american-baseball",
+  "name": "2020 Leaf Metal Perfect Game All-American Baseball",
+  "year": 2020,
+  "sport": "Baseball",
+  "cards": 0,
+  "source": "checklistcenter.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2020-leaf-metal-quarterback-collection-football-cards",
+  "name": "2020 Leaf Metal Quarterback Collection Football",
+  "year": 2020,
+  "sport": "Football",
+  "cards": 6,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 6 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2020-leaf-ultimate-draft-baseball",
+  "name": "2020 Leaf Ultimate Draft Baseball",
+  "year": 2020,
+  "sport": "Baseball",
+  "cards": 0,
+  "source": "checklistcenter.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2020-onyx-nimbus-baseball",
+  "name": "2020 Onyx Nimbus Baseball",
+  "year": 2020,
+  "sport": "Baseball",
+  "cards": 0,
+  "source": "checklistcenter.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2020-onyx-vintage-baseball",
+  "name": "2020 Onyx Vintage Baseball",
+  "year": 2020,
+  "sport": "Baseball",
+  "cards": 0,
+  "source": "checklistcenter.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2020-onyx-vintage-extended-baseball",
+  "name": "2020 Onyx Vintage Extended Baseball",
+  "year": 2020,
+  "sport": "Baseball",
+  "cards": 0,
+  "source": "checklistcenter.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2020-topps-archives-signature-series-active-baseball-card-checklist-2",
+  "name": "2021 Topps Archives Signature Series Active Player Edition Baseball",
+  "year": 2021,
+  "sport": "Baseball",
+  "cards": 0,
+  "source": "checklistcenter.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2020-topps-archives-signature-series-active-baseball-cards",
+  "name": "2020 Topps Archives Signature Series Active Player Edition Baseball",
+  "year": 2020,
+  "sport": "Baseball",
+  "cards": 0,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2020-topps-silver-packs-series-2-baseball",
+  "name": "2020 Topps Silver Packs Series 2 Baseball",
+  "year": 2020,
+  "sport": "Baseball",
+  "cards": 0,
+  "source": "checklistcenter.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2020-topps-transcendent-the-captains-collection-baseball-cards",
+  "name": "2020 Topps Transcendent The Captain’s Collection Baseball",
+  "year": 2020,
+  "sport": "Baseball",
+  "cards": 1,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 1 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2020-topps-x-cal-ripken-2131-cards",
+  "name": "2020 Topps X Cal Ripken Jr. 2131 Baseball",
+  "year": 2020,
+  "sport": "Baseball",
+  "cards": 1,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 1 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2020-ud-sibling-sensations-hockey-card-promo",
+  "name": "2020 Upper Deck Sibling Sensations Hockey Card Promo",
+  "year": 2020,
+  "sport": "Hockey",
+  "cards": 8,
+  "source": "checklistcenter.com",
+  "why": [
+   "only 8 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2021-22-2022-23-upper-deck-clear-cut-hockey",
+  "name": "2021-22 2021-22/2022-23 Upper Deck Clear Cut Hockey",
+  "year": 2022,
+  "sport": "Hockey",
+  "cards": 0,
+  "source": "checklistcenter.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2021-leaf-joe-montana-buyback-edition-cards",
+  "name": "2021 Leaf Joe Montana Buyback Edition Football",
+  "year": 2021,
+  "sport": "Football",
+  "cards": 0,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2021-topps-alphonso-davies-my-journey-uefa-cards",
+  "name": "2021 Topps Alphonso Davies My Journey Curated UEFA Champions League Soccer",
+  "year": 2021,
+  "sport": "Soccer",
+  "cards": 0,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2021-topps-archives-signature-series-retired-player-edition-baseball",
+  "name": "2021 Topps Archives Signature Series Retired Player Edition Baseball",
+  "year": 2021,
+  "sport": "Baseball",
+  "cards": 1,
+  "source": "checklistcenter.com",
+  "why": [
+   "only 1 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2021-topps-now-road-to-opening-day-baseball-cards",
+  "name": "2021 Topps Now Road to Opening Day Baseball",
+  "year": 2021,
+  "sport": "Baseball",
+  "cards": 4,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 4 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2021-topps-weston-mckennie-soccer",
+  "name": "2021 Topps Weston McKennie Curated UEFA Champions League Soccer",
+  "year": 2021,
+  "sport": "Soccer",
+  "cards": 3,
+  "source": "checklistcenter.com",
+  "why": [
+   "only 3 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2021-upper-deck-rookie-watch-football-cards",
+  "name": "2021 Upper Deck Rookie Watch Football",
+  "year": 2021,
+  "sport": "Football",
+  "cards": 0,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2022-23-topps-dynasty-uefa-champions-league-soccer",
+  "name": "2022-23 Topps Dynasty UEFA Champions League Soccer",
+  "year": 2023,
+  "sport": "Soccer",
+  "cards": 0,
+  "source": "checklistcenter.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2022-fanatics-under-wraps-series-2-signed-baseball",
+  "name": "2022 Fanatics Under Wraps Series 2 Signed Baseball",
+  "year": 2022,
+  "sport": "Baseball",
+  "cards": 6,
+  "source": "checklistcenter.com",
+  "why": [
+   "only 6 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2022-leaf-metal-perfect-game-all-american-classic-baseball",
+  "name": "2022 Leaf Metal Perfect Game All-American Classic Baseball",
+  "year": 2022,
+  "sport": "Baseball",
+  "cards": 0,
+  "source": "checklistcenter.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2022-leaf-ultimate-draft-football-rookies-box-set-cards",
+  "name": "2022 Leaf Ultimate Draft Rookies Box Set Football",
+  "year": 2022,
+  "sport": "Football",
+  "cards": 0,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2022-topps-archives-signature-series-active-baseball",
+  "name": "2022 Topps Archives Signature Series Active Player Edition Baseball",
+  "year": 2022,
+  "sport": "Baseball",
+  "cards": 0,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2022-topps-archives-signature-series-retired-cards",
+  "name": "2022 Topps Archives Signature Series Retired Player Edition Baseball",
+  "year": 2022,
+  "sport": "Baseball",
+  "cards": 0,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2022-topps-f1-lights-out-formula-1-racing",
+  "name": "2022 Topps F1 Lights Out Formula 1 Racing",
+  "year": 2022,
+  "sport": "Racing",
+  "cards": 2,
+  "source": "checklistcenter.com",
+  "why": [
+   "only 2 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2022-topps-mlb-all-star-art-collection-baseball-cards",
+  "name": "2022 Topps MLB All-Star Art Collection Baseball",
+  "year": 2022,
+  "sport": "Baseball",
+  "cards": 5,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 5 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2022-topps-now-road-to-opening-day-baseball-cards",
+  "name": "2022 Topps Now Road to Opening Day Baseball",
+  "year": 2022,
+  "sport": "Baseball",
+  "cards": 0,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2022-topps-renaissance-mls-soccer-cards",
+  "name": "2022 Topps Renaissance MLS Major League Soccer",
+  "year": 2022,
+  "sport": "Soccer",
+  "cards": 0,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2022-topps-shaquille-oneal-art-collection-basketball-cards",
+  "name": "2022 Topps Shaquille O’Neal Art Collection Basketball",
+  "year": 2022,
+  "sport": "Basketball",
+  "cards": 6,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 6 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2022-topps-stadium-club-members-only-derek-jeter-baseball-cards",
+  "name": "2022 Topps Stadium Club Members Only Derek Jeter Baseball",
+  "year": 2022,
+  "sport": "Baseball",
+  "cards": 0,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2023-24-topps-focus-fc-barcelona-soccer",
+  "name": "2023-24 Topps Focus FC Barcelona Soccer",
+  "year": 2024,
+  "sport": "Soccer",
+  "cards": 0,
+  "source": "checklistcenter.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2023-24-topps-impact-uefa-club-competitions-soccer",
+  "name": "2023-24 Topps Impact UEFA Club Competitions Soccer",
+  "year": 2024,
+  "sport": "Soccer",
+  "cards": 0,
+  "source": "checklistcenter.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2023-24-topps-selecao-uefa-champions-league-soccer",
+  "name": "2023-24 Topps Seleção UEFA Champions League Soccer",
+  "year": 2024,
+  "sport": "Soccer",
+  "cards": 0,
+  "source": "checklistcenter.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2023-24-topps-stars-of-the-season-bundesliga-soccer",
+  "name": "2023-24 Topps Stars of the Season Bundesliga Soccer",
+  "year": 2024,
+  "sport": "Soccer",
+  "cards": 0,
+  "source": "checklistcenter.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2023-fanatics-under-wraps-autographed-mlb-jerseys",
+  "name": "2023 Fanatics Under Wraps Autographed MLB Jerseys Baseball",
+  "year": 2023,
+  "sport": "Baseball",
+  "cards": 0,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2023-fanatics-under-wraps-nfl-draft-mini-helmets-football",
+  "name": "2023 Fanatics Under Wraps NFL Draft Mini Helmets Football",
+  "year": 2023,
+  "sport": "Football",
+  "cards": 0,
+  "source": "checklistcenter.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2023-leaf-metal-ebay-exclusive-multi-sport",
+  "name": "2023 Leaf Metal eBay Exclusive Baseball",
+  "year": 2023,
+  "sport": "Baseball",
+  "cards": 0,
+  "source": "checklistcenter.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2023-panini-instant-us-womens-national-team-soccer-cards",
+  "name": "2023 Panini Instant US Women’s National Team Soccer",
+  "year": 2023,
+  "sport": "Soccer",
+  "cards": 0,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2023-sp-game-used-cfl-football",
+  "name": "2023 SP Game Used CFL Football",
+  "year": 2023,
+  "sport": "Football",
+  "cards": 0,
+  "source": "checklistcenter.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2023-topps-archives-signature-series-active-baseball-cards",
+  "name": "2023 Topps Archives Signature Series Active Player Edition Baseball",
+  "year": 2023,
+  "sport": "Baseball",
+  "cards": 0,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2023-topps-archives-signature-series-retired-player-edition-baseball",
+  "name": "2023 Topps Archives Signature Series Retired Player Edition Baseball",
+  "year": 2023,
+  "sport": "Baseball",
+  "cards": 0,
+  "source": "checklistcenter.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2023-topps-now-football-cards",
+  "name": "2023 Topps Now Draft Football",
+  "year": 2023,
+  "sport": "Football",
+  "cards": 3,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 3 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2023-topps-now-road-to-opening-day-baseball-cards",
+  "name": "2023 Topps Now Road to Opening Day Baseball",
+  "year": 2023,
+  "sport": "Baseball",
+  "cards": 0,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2023-topps-now-texas-rangers-world-series-champions-cards",
+  "name": "2023 Topps Now Texas Rangers World Series Champions Baseball",
+  "year": 2023,
+  "sport": "Baseball",
+  "cards": 0,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2024-25-topps-deco-uefa-club-competitions-soccer",
+  "name": "2024-25 Topps Deco UEFA Club Competitions Soccer",
+  "year": 2025,
+  "sport": "Soccer",
+  "cards": 0,
+  "source": "checklistcenter.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2024-leaf-joe-montana-legacy-collection-football",
+  "name": "2024 Leaf Joe Montana Legacy Collection Football",
+  "year": 2024,
+  "sport": "Football",
+  "cards": 0,
+  "source": "checklistcenter.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2024-topps-206-baseball",
+  "name": "2024 Topps 206 Baseball",
+  "year": 2024,
+  "sport": "Baseball",
+  "cards": 0,
+  "source": "checklistcenter.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2024-topps-five-star-baseball",
+  "name": "2024 Topps Five Star Baseball",
+  "year": 2024,
+  "sport": "Baseball",
+  "cards": 0,
+  "source": "checklistcenter.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2024-topps-lineage-argentina-soccer",
+  "name": "2024 Topps Lineage Argentina Soccer",
+  "year": 2024,
+  "sport": "Soccer",
+  "cards": 0,
+  "source": "checklistcenter.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2024-topps-luminaries-baseball",
+  "name": "2024 Topps Luminaries Baseball",
+  "year": 2024,
+  "sport": "Baseball",
+  "cards": 0,
+  "source": "checklistcenter.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2024-topps-sterling-baseball",
+  "name": "2024 Topps Sterling Baseball",
+  "year": 2024,
+  "sport": "Baseball",
+  "cards": 0,
+  "source": "checklistcenter.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2026-topps-atlassian-williams-racing-formula-1",
+  "name": "2026 Topps Atlassian Williams Formula 1 Racing",
+  "year": 2026,
+  "sport": "Racing",
+  "cards": 5,
+  "source": "checklistcenter.com",
+  "why": [
+   "only 5 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "archives-snapshots-baseball",
+  "name": "2016 Topps Archives Snapshots Baseball",
+  "year": 2016,
+  "sport": "Baseball",
+  "cards": 0,
+  "source": "checklistcenter.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "leaf-metal-draft-baseball-full",
+  "name": "2016 Leaf Metal Draft Baseball",
+  "year": 2016,
+  "sport": "Baseball",
+  "cards": 0,
+  "source": "checklistcenter.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "t205-gold-border",
+  "name": "1911 T205 Baseball",
+  "year": 1911,
+  "sport": "Baseball",
+  "cards": 0,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "t206-white-border",
+  "name": "1909-11 T206 Baseball",
+  "year": 1910,
+  "sport": "Baseball",
+  "cards": 0,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "t207-brown-background",
+  "name": "1912 T207 Baseball",
+  "year": 1912,
+  "sport": "Baseball",
+  "cards": 0,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
  }
 ]
