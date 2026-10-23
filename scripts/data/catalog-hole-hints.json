@@ -3323,79 +3323,6 @@
    "path to cup stanley winner"
   ]
  },
- "2014-topps-chrome-baseball-cards": {
-  "missingPlayers": [
-   "abreu",
-   "anderson",
-   "arruebarrena",
-   "beltre",
-   "betts",
-   "box",
-   "braun",
-   "burton",
-   "cabrera",
-   "cano",
-   "castellanos",
-   "cron",
-   "darvish",
-   "davis",
-   "degrom",
-   "ellsbury",
-   "fernandez",
-   "fielder",
-   "freese",
-   "goldschmidt",
-   "gonzalez",
-   "griffey",
-   "hamilton",
-   "harper",
-   "henderson",
-   "hernandez",
-   "jeter",
-   "jones",
-   "kemp",
-   "kershaw",
-   "kinsler",
-   "kipnis",
-   "mccarthy",
-   "mccutchen",
-   "montero",
-   "morneau",
-   "odor",
-   "ortiz",
-   "pedroia",
-   "polanco",
-   "posey",
-   "puig",
-   "pujols",
-   "ramirez",
-   "ray",
-   "ripken",
-   "sanchez",
-   "singleton",
-   "solarte",
-   "springer",
-   "stella",
-   "strasburg",
-   "stroman",
-   "tanaka",
-   "taveras",
-   "trout",
-   "trumbo",
-   "tulowitzki",
-   "upton",
-   "verlander",
-   "walker",
-   "wright"
-  ],
-  "missingInserts": [
-   "1989",
-   "connections die cuts",
-   "shelf",
-   "update",
-   "update star stitches relics"
-  ]
- },
  "13-14-panini-totally-certified-basketball": {
   "missingPlayers": [
    "aguirre",
@@ -3761,58 +3688,6 @@
    "piece puzzle 58 59 60"
   ]
  },
- "2016-17-o-pee-chee-hockey-cards": {
-  "missingPlayers": [
-   "abdelkadar",
-   "aho",
-   "baptiste",
-   "barzal",
-   "beauvillier",
-   "buchnevich",
-   "caggiula",
-   "carlo",
-   "chabot",
-   "chychrun",
-   "clubs",
-   "connor",
-   "deangelo",
-   "dvorak",
-   "ek",
-   "greer",
-   "guentzel",
-   "heinen",
-   "honka",
-   "konecny",
-   "kuhnhackl",
-   "labanc",
-   "laine",
-   "lappin",
-   "lehkonen",
-   "malgin",
-   "marner",
-   "matthews",
-   "motte",
-   "point",
-   "provorov",
-   "puljujarvi",
-   "sanford",
-   "schmaltz",
-   "sergachev",
-   "stecher",
-   "tkachuk",
-   "vesey",
-   "werenski",
-   "zaitsev"
-  ],
-  "missingInserts": [
-   "border",
-   "league leaders",
-   "retro",
-   "retro blank back",
-   "update",
-   "update glossy"
-  ]
- },
  "2013-bowman-baseball-cards": {
   "missingPlayers": [
    "aaron",
@@ -4146,6 +4021,55 @@
    "scarlet signatures relics"
   ]
  },
+ "2016-17-o-pee-chee-hockey-cards": {
+  "missingPlayers": [
+   "abdelkadar",
+   "aho",
+   "baptiste",
+   "barzal",
+   "beauvillier",
+   "buchnevich",
+   "caggiula",
+   "carlo",
+   "chabot",
+   "chychrun",
+   "clubs",
+   "connor",
+   "deangelo",
+   "dvorak",
+   "ek",
+   "greer",
+   "guentzel",
+   "heinen",
+   "honka",
+   "konecny",
+   "kuhnhackl",
+   "labanc",
+   "laine",
+   "lappin",
+   "lehkonen",
+   "malgin",
+   "marner",
+   "matthews",
+   "motte",
+   "point",
+   "provorov",
+   "puljujarvi",
+   "sanford",
+   "schmaltz",
+   "sergachev",
+   "stecher",
+   "tkachuk",
+   "vesey",
+   "werenski",
+   "zaitsev"
+  ],
+  "missingInserts": [
+   "league leaders",
+   "update",
+   "update glossy"
+  ]
+ },
  "2017-bowman-baseball-cards": {
   "missingPlayers": [
    "box",
@@ -4369,36 +4293,6 @@
    "unity relic"
   ]
  },
- "2016-bowman-baseball-cards": {
-  "missingPlayers": [
-   "adams",
-   "biggio",
-   "burns",
-   "cole",
-   "confor",
-   "guzman",
-   "hurt",
-   "matheny",
-   "nevin",
-   "oneill",
-   "ozuna",
-   "rivera",
-   "sadzeck",
-   "sims",
-   "soto",
-   "taveras",
-   "vargas"
-  ],
-  "missingInserts": [
-   "chrome",
-   "family tree",
-   "inception",
-   "inception prospect",
-   "international ink",
-   "prospect",
-   "under armour american"
-  ]
- },
  "2017-18-leaf-masked-men-hockey-cards": {
   "missingPlayers": [
    "brathwaite",
@@ -4476,31 +4370,6 @@
    "65th anniversary update",
    "fan favorites",
    "snapshots"
-  ]
- },
- "2016-17-panini-revolution-basketball": {
-  "missingPlayers": [
-   "astro",
-   "box",
-   "cabarrot",
-   "cosmic",
-   "futura",
-   "galactic",
-   "gilchrist",
-   "infinite",
-   "nance",
-   "pope",
-   "stein"
-  ],
-  "missingInserts": [
-   "astro",
-   "cosmic",
-   "fractal",
-   "futura",
-   "galactic",
-   "infinite",
-   "starburst",
-   "sunburst"
   ]
  },
  "2018-19-topps-chrome-uefa-champions-league-cards": {
@@ -6665,6 +6534,24 @@
    "framed crowning moment"
   ]
  },
+ "2014-topps-chrome-baseball-cards": {
+  "missingPlayers": [
+   "anderson",
+   "betts",
+   "box",
+   "burton",
+   "degrom",
+   "mccarthy",
+   "morneau",
+   "ray",
+   "stella"
+  ],
+  "missingInserts": [
+   "relic",
+   "update",
+   "update star stitches relics"
+  ]
+ },
  "1985-donruss-baseball-cards": {
   "missingPlayers": [
    "coleman",
@@ -7011,6 +6898,20 @@
   "missingInserts": [
    "fan favorites",
    "snapshots"
+  ]
+ },
+ "2016-bowman-baseball-cards": {
+  "missingPlayers": [
+   "adams",
+   "burns",
+   "cole",
+   "confor",
+   "hurt"
+  ],
+  "missingInserts": [
+   "inception",
+   "inception prospect",
+   "under armour american"
   ]
  },
  "2017-18-panini-essentials-basketball-nba-cards": {
@@ -7453,21 +7354,6 @@
    "pulsar"
   ]
  },
- "2002-fleer-wwe-absolute-divas": {
-  "missingPlayers": [
-   "championship",
-   "competition",
-   "cs",
-   "kotr",
-   "match",
-   "team",
-   "threat"
-  ],
-  "missingInserts": [
-   "pants",
-   "top"
-  ]
- },
  "1998-topps-wcw-nwo": {
   "missingPlayers": [
    "bigelow",
@@ -7509,6 +7395,24 @@
   "missingInserts": [
    "dealing aces",
    "glove stories"
+  ]
+ },
+ "2016-17-panini-revolution-basketball": {
+  "missingPlayers": [
+   "astro",
+   "box",
+   "cabarrot",
+   "cosmic",
+   "futura",
+   "galactic",
+   "gilchrist",
+   "infinite",
+   "nance",
+   "pope",
+   "stein"
+  ],
+  "missingInserts": [
+   "starburst"
   ]
  },
  "2012-13-nba-hoops-basketball-cards": {
@@ -7910,17 +7814,6 @@
    "jj"
   ]
  },
- "2001-fleer-wwf-raw-is-war": {
-  "missingPlayers": [
-   "fn",
-   "guerrero",
-   "michaels"
-  ],
-  "missingInserts": [
-   "kane",
-   "triple h"
-  ]
- },
  "2017-donruss-optic-baseball-cards": {
   "missingPlayers": [
    "crawford",
@@ -7989,16 +7882,6 @@
   "missingInserts": [
    "draft picks stained glass",
    "violet"
-  ]
- },
- "2000-bowman-chrome-football": {
-  "missingPlayers": [
-   "lewis",
-   "rhet"
-  ],
-  "missingInserts": [
-   "by selection",
-   "ground breakers"
   ]
  },
  "2017-18-leaf-hockey-cards": {
@@ -8143,6 +8026,15 @@
    "prism"
   ]
  },
+ "2000-bowman-chrome-football": {
+  "missingPlayers": [
+   "rhet"
+  ],
+  "missingInserts": [
+   "by selection",
+   "ground breakers"
+  ]
+ },
  "2018-19-sp-hockey-cards": {
   "missingPlayers": [
    "mittelstadt"
@@ -8159,6 +8051,15 @@
   "missingInserts": [
    "front",
    "variant back"
+  ]
+ },
+ "2006-topps-heritage-ii-wwe": {
+  "missingPlayers": [
+   "booker"
+  ],
+  "missingInserts": [
+   "hat",
+   "shirt"
   ]
  },
  "2016-17-panini-grand-reserve-basketball": {
@@ -8198,20 +8099,6 @@
   ],
   "missingInserts": [
    "xs os"
-  ]
- },
- "2002-fleer-wwe-raw-vs-smackdown": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "swimsuit",
-   "top"
-  ]
- },
- "2001-fleer-wwf-wrestlemania": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "shirt",
-   "t shirt"
   ]
  },
  "2018-topps-fire-baseball-mlb-cards": {
@@ -8346,20 +8233,6 @@
    "irving",
    "shaw",
    "zolnierczyk"
-  ],
-  "missingInserts": []
- },
- "1979-80-o-pee-chee-hockey": {
-  "missingPlayers": [
-   "barber",
-   "gillies",
-   "mccourt",
-   "pierce",
-   "ramsay",
-   "robinson",
-   "ruskowski",
-   "salming",
-   "team"
   ],
   "missingInserts": []
  },
@@ -8757,6 +8630,18 @@
   "missingInserts": [
    "relics"
   ]
+ },
+ "2002-fleer-wwe-absolute-divas": {
+  "missingPlayers": [
+   "championship",
+   "competition",
+   "cs",
+   "kotr",
+   "match",
+   "team",
+   "threat"
+  ],
+  "missingInserts": []
  },
  "2018-panini-diamond-kings-baseball-cards": {
   "missingPlayers": [
@@ -9226,6 +9111,17 @@
    "authentic fabrics"
   ]
  },
+ "1979-80-o-pee-chee-hockey": {
+  "missingPlayers": [
+   "barber",
+   "gillies",
+   "mccourt",
+   "robinson",
+   "salming",
+   "team"
+  ],
+  "missingInserts": []
+ },
  "2018-19-topps-uefa-champions-league-match-attax-cards": {
   "missingPlayers": [
    "juventus"
@@ -9248,6 +9144,14 @@
   ],
   "missingInserts": [
    "anderson silva chael sonnen"
+  ]
+ },
+ "2006-topps-wwe-insider": {
+  "missingPlayers": [
+   "warrior"
+  ],
+  "missingInserts": [
+   "restricted access"
   ]
  },
  "2001-fleer-wwf-the-ultimate-diva-collection": {
@@ -9321,16 +9225,10 @@
   ],
   "missingInserts": []
  },
- "2002-fleer-wwf-all-access": {
+ "2008-tristar-tna-impact": {
   "missingPlayers": [],
   "missingInserts": [
-   "event worn relic"
-  ]
- },
- "1994-action-packed-wwf": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "promo"
+   "game"
   ]
  },
  "2018-19-panini-contenders-draft-picks-basketball": {
@@ -9522,6 +9420,14 @@
    "ambrose",
    "bayley",
    "lerea"
+  ],
+  "missingInserts": []
+ },
+ "2001-fleer-wwf-raw-is-war": {
+  "missingPlayers": [
+   "fn",
+   "guerrero",
+   "michaels"
   ],
   "missingInserts": []
  },
@@ -9767,6 +9673,13 @@
   "missingPlayers": [
    "box",
    "team"
+  ],
+  "missingInserts": []
+ },
+ "2006-topps-heritage-chrome-wwe": {
+  "missingPlayers": [
+   "hardy",
+   "umaga"
   ],
   "missingInserts": []
  },
@@ -10517,6 +10430,24 @@
  "2009-topps-ufc-round-2": {
   "missingPlayers": [
    "pierre"
+  ],
+  "missingInserts": []
+ },
+ "2007-topps-heritage-iii-wwe": {
+  "missingPlayers": [
+   "t"
+  ],
+  "missingInserts": []
+ },
+ "2004-pacific-tna": {
+  "missingPlayers": [
+   "babes"
+  ],
+  "missingInserts": []
+ },
+ "2003-fleer-wwe-wrestlemania-xix": {
+  "missingPlayers": [
+   "lesner"
   ],
   "missingInserts": []
  },
