@@ -917,7 +917,9 @@
   "why": [
    "base skips 38 numbers in #1-300 (e.g. 10, 22, 42, 46, 59)"
   ],
-  "status": "todo"
+  "status": "review",
+  "note": "2020-topps-allen-and-ginter-chrome-baseball: 3690 -> 3166 cards, 17 -> 17 sections, covers 46.3% of current",
+  "tcdbSid": 236705
  },
  {
   "slug": "2018-bowman-baseball-cards",
@@ -930,7 +932,9 @@
    "missing inserts: camo, festive, holiday, snow, trending, turkey, year favorites",
    "42 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2018-bowman-baseball-cards: 855 -> 10690 cards, 9 -> 168 sections, covers 100.0% of current",
+  "at": "2026-10-23"
  },
  {
   "slug": "2014-topps-prime-football-cards",
@@ -943,7 +947,9 @@
    "missing inserts: autographed relics level, dual relics, patches, performance, primed, quad relics, timers",
    "37 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2014-topps-prime-football-cards: 318 -> 2796 cards, 6 -> 59 sections, covers 100.0% of current",
+  "at": "2026-10-23"
  },
  {
   "slug": "2014-bowman-platinum-baseball-cards",
