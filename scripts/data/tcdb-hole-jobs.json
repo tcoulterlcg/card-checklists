@@ -189,7 +189,9 @@
    "missing inserts: 1968 3d, 1968 bazooka, 1968 discs, 1968 game, award winners, bat, bat ink, bat shoulder",
    "48 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "review",
+  "note": "2017-topps-heritage-baseball-cards: 953 -> 17788 cards, 8 -> 257 sections, covers 87.5% of current",
+  "tcdbSid": 134721
  },
  {
   "slug": "2012-bowman-chrome-baseball",
