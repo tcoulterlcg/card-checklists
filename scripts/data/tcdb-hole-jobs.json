@@ -442,7 +442,9 @@
   "why": [
    "base skips 57 numbers in #1-300 (e.g. 93, 108, 109, 112, 116)"
   ],
-  "status": "todo"
+  "status": "review",
+  "note": "2022-topps-allen-and-ginter-chrome-baseball: 5563 -> 5047 cards, 59 -> 25 sections, covers 18.3% of current",
+  "tcdbSid": 349752
  },
  {
   "slug": "2018-panini-prizm-football",
@@ -455,7 +457,9 @@
    "missing inserts: apex, camo, crystals, disco, lazer, mojo, neon pulsar, power",
    "30 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "review",
+  "note": "2018-panini-prizm-football: 731 -> 9538 cards, 16 -> 86 sections, covers 55.0% of current",
+  "tcdbSid": 182811
  },
  {
   "slug": "21-22-panini-nba-g-league-box-basketball",
@@ -467,7 +471,9 @@
   "why": [
    "base skips 56 numbers in #1-103 (e.g. 3, 4, 5, 6, 7)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "21-22-panini-nba-g-league-box-basketball: 250 -> 537 cards, 5 -> 5 sections, covers 100.0% of current",
+  "at": "2026-10-23"
  },
  {
   "slug": "2014-bowman-draft-baseball-cards",
@@ -480,7 +486,9 @@
    "missing inserts: 1989 is back diamond, asia, chorme, chrome draft pick, chrome ice, chrome shimmer, chrome wave, future franchise",
    "27 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2014-bowman-draft-baseball-cards: 436 -> 8874 cards, 4 -> 107 sections, covers 100.0% of current",
+  "at": "2026-10-23"
  },
  {
   "slug": "2009-10-upper-deck-ultimate-collection-hockey",
@@ -493,7 +501,9 @@
    "missing inserts: duo jerseys",
    "base skips 52 numbers in #1-153 (e.g. 61, 62, 63, 64, 65)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2009-10-upper-deck-ultimate-collection-hockey: 740 -> 740 cards, 23 -> 23 sections, covers 100.0% of current",
+  "at": "2026-10-23"
  },
  {
   "slug": "2014-topps-finest-football-cards",
@@ -506,7 +516,9 @@
    "missing inserts: atomic, bca patch, camo, camo patch, patch, pulsar, pulsar patch, relic",
    "55 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2014-topps-finest-football-cards: 380 -> 3577 cards, 4 -> 61 sections, covers 100.0% of current",
+  "at": "2026-10-23"
  },
  {
   "slug": "2020-topps-now-turn-back-the-clock-baseball-cards",
@@ -518,7 +530,9 @@
   "why": [
    "base skips 55 numbers in #1-198 (e.g. 11, 18, 19, 23, 24)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2020-topps-now-turn-back-the-clock-baseball-cards: 153 -> 623 cards, 1 -> 4 sections, covers 99.3% of current",
+  "at": "2026-10-23"
  },
  {
   "slug": "2012-13-panini-certified-hockey-cards",
@@ -531,7 +545,9 @@
    "missing inserts: dual jersey prime, fabric game, junior class signature, mirror emerald patch, mirror jersey team die cut, mirror prime, path to cup quarter finals, path to cup semifinals",
    "61 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "review",
+  "note": "2012-13-panini-certified-hockey-cards: 916 -> 2737 cards, 22 -> 50 sections, covers 41.4% of current",
+  "tcdbSid": 72730
  },
  {
   "slug": "2014-topps-heritage-baseball-cards",
@@ -544,7 +560,9 @@
    "missing inserts: 1965 draft, clubhouse collection relics, flashbacks, ink, new age performers, news flashbacks, real one, then now",
    "71 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2014-topps-heritage-baseball-cards: 825 -> 3304 cards, 10 -> 45 sections, covers 100.0% of current",
+  "at": "2026-10-23"
  },
  {
   "slug": "2015-bowman-baseball-cards",
@@ -557,7 +575,9 @@
    "missing inserts: chrome asia, chrome asia wave, chrome twitter, chrome wave, crackle, ice, inception, inception prospect",
    "29 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2015-bowman-baseball-cards: 642 -> 11204 cards, 7 -> 122 sections, covers 99.8% of current",
+  "at": "2026-10-23"
  },
  {
   "slug": "2013-topps-heritage-baseball-cards",
