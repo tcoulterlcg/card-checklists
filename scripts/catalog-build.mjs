@@ -17,6 +17,9 @@
 // Sets already on the site as static files (same slug, or the same product by
 // merge-browser-dump's year+name key) are skipped: the static versions are the
 // curated ones (Break Ninja parallels, print runs).
+//
+// After every build, run scripts/catalog-prune.mjs: it removes price-guide
+// fragments (one insert listed as its own "set") of sets the site already has.
 import { readFileSync, writeFileSync, mkdirSync, existsSync, readdirSync, unlinkSync } from 'node:fs'
 import { join } from 'node:path'
 
@@ -31,11 +34,16 @@ const sportFile = (sp) => slugify(sp) || 'other'
 // Same product key as merge-browser-dump.mjs, so "2024 Topps Chrome Disney" from
 // TCDB matches a static "2024-topps-chrome-disney-entertainment".
 const STOP = new Set(['and', 'the', 'card', 'cards', 'trading', 'checklist', 'checklists', 'x', 'edition', 'series', 'set', 'mlb', 'nba', 'nfl', 'nhl', 'mma', 'autographed', 'photo', 'box', 'ud', 'upper', 'deck', 'panini', 'topps', 'hobby', 'entertainment', 'baseball', 'basketball', 'football', 'hockey', 'soccer', 'racing', 'wrestling', 'golf', 'tennis', 'boxing', 'ufc', 'non', 'sport', 'scp'])
-const key = (slug) => slug.toLowerCase().replace(/^(\d{2})-(\d{2})-/, '20$1-$2-').split('-').filter(t => t && !STOP.has(t)).sort().join('-')
+// Seasons key on their first year ("2005-06" and SportsCardsPro's "2005" are the
+// same product), and the sport is part of the key so "2006 Topps Baseball" never
+// matches "2006-07 Topps Basketball".
+const key = (slug, sport) => (sport || '') + '|' + slug.toLowerCase()
+  .replace(/^(\d{2})-(\d{2})-/, '20$1-').replace(/(^|-)((?:19|20)\d{2})-\d{2}(?=-)/, '$1$2')
+  .split('-').filter(t => t && !STOP.has(t)).sort().join('-')
 
 const staticIndex = JSON.parse(readFileSync(new URL('../public/data/index.json', import.meta.url), 'utf8')).sets || []
 const staticSlugs = new Set(staticIndex.map(s => s.slug))
-const staticKeys = new Set(staticIndex.map(s => key(s.slug)))
+const staticKeys = new Set(staticIndex.map(s => key(s.slug, s.sport)))
 
 mkdirSync(join(root, 'sets'), { recursive: true })
 mkdirSync(join(root, 'index'), { recursive: true })
@@ -56,7 +64,7 @@ const loadIndex = (sp) => {
 const catKey = new Map()
 for (const f of existsSync(join(root, 'index')) ? readdirSync(join(root, 'index')) : []) {
   const sp = JSON.parse(readFileSync(join(root, 'index', f), 'utf8')).sets || []
-  for (const s of sp) catKey.set(key(s.slug), { slug: s.slug, sport: s.sport, n: s.cardCount || 0 })
+  for (const s of sp) catKey.set(key(s.slug, s.sport), { slug: s.slug, sport: s.sport, n: s.cardCount || 0 })
 }
 let added = 0, updated = 0, skippedStatic = 0, empty = 0, cards = 0, replaced = 0, skippedDup = 0
 for (const file of dumps) {
@@ -67,9 +75,9 @@ for (const file of dumps) {
       .filter(sec => sec.cards.length)
     if (!sections.length) { empty++; continue }
     const slug = raw.slug || slugify(raw.name)
-    if (staticSlugs.has(slug) || staticKeys.has(key(slug))) { skippedStatic++; continue }
+    if (staticSlugs.has(slug) || staticKeys.has(key(slug, raw.sport))) { skippedStatic++; continue }
     const n0 = sections.reduce((a, s) => a + s.cards.length, 0)
-    const prev = catKey.get(key(slug))
+    const prev = catKey.get(key(slug, raw.sport))
     if (prev && prev.slug !== slug) {
       if (prev.n >= n0) { skippedDup++; continue }
       const pf = join(root, 'sets', shard(prev.slug), prev.slug + '.json')
@@ -77,7 +85,7 @@ for (const file of dumps) {
       loadIndex(prev.sport).map.delete(prev.slug)
       replaced++
     }
-    catKey.set(key(slug), { slug, sport: raw.sport, n: n0 })
+    catKey.set(key(slug, raw.sport), { slug, sport: raw.sport, n: n0 })
     const set = { slug, name: String(raw.name).replace(/^\s*prices for\s*/i, '').replace(/\s+cards?$/i, '').trim(), year: raw.year ?? null, sport: raw.sport, source: raw.source || 'tcdb.com', sections }
     const dir = join(root, 'sets', shard(slug))
     mkdirSync(dir, { recursive: true })
