@@ -118,7 +118,12 @@ export function CollectionView({ account, indexSets, onOpenAuth, onOpenSet }) {
   const { session, profile } = account
   const [wants, setWants] = useState(null)
   const [collected, setCollected] = useState(null)
-  const [activeSlug, setActiveSlug] = useState(null)
+  // ?view=collection&cset=<slug> keeps the open checklist across reloads and shared links
+  const [activeSlug, setActiveSlugState] = useState(() => { try { return new URLSearchParams(window.location.search).get('cset') } catch { return null } })
+  const setActiveSlug = (slug) => {
+    setActiveSlugState(slug)
+    try { const u = new URL(window.location.href); if (slug) u.searchParams.set('cset', slug); else u.searchParams.delete('cset'); window.history.replaceState(window.history.state, '', u) } catch {}
+  }
   const [wantOpen, setWantOpen] = useState({})     // wantlist cards: show all for a set
   const [confirmRm, setConfirmRm] = useState(null)  // set slug whose whole wantlist is about to be removed
   const [secShown, setSecShown] = useState(12) // big sets have hundreds of parallel sections
@@ -392,6 +397,7 @@ export function CommunityView({ account, indexSets, onOpenAuth }) {
           {feed.map(p => {
             const isGrail = !!p.grail_tier
             const fires = (p.forum_reactions || []).length
+            const myFire = !!session && (p.forum_reactions || []).some(r => r.user_id === session.user.id)
             const nComments = (p.forum_comments || []).length
             const achLabel = (ACHIEVEMENTS.find(a => a[0] === p.achievement) || [])[1]
             return (
@@ -406,8 +412,8 @@ export function CommunityView({ account, indexSets, onOpenAuth }) {
                 <h3 style={{ ...title(20), margin: 0, color: '#fff', lineHeight: 1.15 }}>{p.title}</h3>
                 {p.body && <p style={{ color: '#b5b5b5', fontSize: 14, lineHeight: 1.6, margin: '8px 0 0' }}>{p.body}</p>}
                 <div style={{ display: 'flex', gap: 14, marginTop: 14, alignItems: 'center' }}>
-                  <button onClick={async () => { if (!session) { onOpenAuth(); return } await react(p.id, session.user.id, 'fire'); forumFeed().then(setFeed) }}
-                    style={{ background: 'none', border: '1px solid #232A3E', color: '#D4D4D8', borderRadius: 999, padding: '5px 12px', fontSize: 13, cursor: 'pointer' }}>🔥 {fires || ''}</button>
+                  <button onClick={async () => { if (!session) { onOpenAuth(); return } await react(p.id, session.user.id, 'fire', !myFire); forumFeed().then(setFeed) }} aria-pressed={myFire} title={myFire ? 'Remove your 🔥' : 'Give this a 🔥'}
+                    style={{ background: myFire ? 'rgba(249,115,22,0.15)' : 'none', border: '1px solid ' + (myFire ? '#f97316' : '#232A3E'), color: '#D4D4D8', borderRadius: 999, padding: '5px 12px', fontSize: 13, cursor: 'pointer' }}>🔥 {fires || ''}</button>
                   <button onClick={async () => {
                     const open = !openComments[p.id]
                     setOpenComments({ ...openComments, [p.id]: open })

@@ -653,7 +653,7 @@ export default function Home() {
     if (!rpaData) fetch('/data/rpa-index.json').then(r => r.json()).then(setRpaData).catch(() => setRpaData({ slugs: [], rows: [] }))
     window.scrollTo(0, 0)
   }
-  const openView = (v, push) => { setNotice(''); nav('?view=' + v, push); setView(v); setActiveSet(null); setSetData(null); setGlobalHits(null); setActivePlayer(null); window.scrollTo(0, 0) }
+  const openView = (v, push, extra = '') => { setNotice(''); nav('?view=' + v + extra, push); setView(v); setActiveSet(null); setSetData(null); setGlobalHits(null); setActivePlayer(null); window.scrollTo(0, 0) }
   // Wantlist add — whole set or a single card/parallel from the set page.
   // What's already on the signed-in user's wantlist, so card rows can show ✓ (and toggle off).
   const [wanted, setWanted] = useState(() => new Map())   // key -> row id
@@ -752,7 +752,7 @@ export default function Home() {
       }).catch(() => { goHome(false); setNotice('That set isn’t in the database (the link may be old). Browse or search below.') })
     }
     else if (sr) runGlobalSearch(sr, false)
-    else if (v && ['myplayers', 'community', 'collection'].includes(v)) openView(v, false)
+    else if (v && ['myplayers', 'community', 'collection'].includes(v)) openView(v, false, v === 'collection' && sp.get('cset') ? '&cset=' + encodeURIComponent(sp.get('cset')) : '')
     else {
       goHome(false)
       // browse filters live in the URL too (?sport=Hockey&team=...), so Back and shared links restore them
