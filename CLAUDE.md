@@ -14,6 +14,8 @@
 - **After any catalog build:** run `node scripts/catalog-prune.mjs ../catalog --write`. SportsCardsPro (`scp-*`) entries are
   price-guide pages (only cards that have sold, one insert per "set"); this drops the ones already covered by a real set,
   adds redirects, and writes `scripts/data/catalog-hole-hints.json` — players/inserts the real sets are missing.
+  Both scripts also rewrite `index/visible.json` (the only catalog index the site loads — shown sets only), so pull
+  `main` before a catalog run; an old script leaves new catalog sets off the site until the next run.
 - **Repairing sets with holes:** `scripts/data/tcdb-hole-jobs.json` is the shared to-do list (status todo/done/review),
   highest priority first. Scrape in a tcdb.com tab with `scripts/tcdb-browser-scrape.js` (inject, then `__tcdb.queue`),
   merge with `node scripts/tcdb-repair-merge.mjs <dump>` — it only replaces a set when TCDB has ≥ the cards and covers
