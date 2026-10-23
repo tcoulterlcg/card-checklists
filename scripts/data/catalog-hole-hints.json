@@ -643,208 +643,6 @@
    "xfractor"
   ]
  },
- "2018-topps-wwe-wrestling": {
-  "missingPlayers": [
-   "aichner",
-   "ambrose",
-   "amore",
-   "anderson",
-   "andrews",
-   "backlund",
-   "balor",
-   "banks",
-   "baszler",
-   "batista",
-   "bayley",
-   "beefcake",
-   "belair",
-   "bigelow",
-   "blayze",
-   "bliss",
-   "bononi",
-   "borne",
-   "box",
-   "boys",
-   "boyz",
-   "breezango",
-   "breeze",
-   "brothers",
-   "bulldog",
-   "burch",
-   "cesaro",
-   "champion",
-   "coachman",
-   "contender",
-   "conti",
-   "contract",
-   "corbin",
-   "cross",
-   "dain",
-   "dawson",
-   "day",
-   "debut",
-   "debuts",
-   "dibiase",
-   "dillinger",
-   "division",
-   "dorado",
-   "dozovic",
-   "draft",
-   "dream",
-   "duggan",
-   "ec",
-   "edge",
-   "era",
-   "erich",
-   "evans",
-   "exch",
-   "fame",
-   "family",
-   "fandango",
-   "gallows",
-   "goldberg",
-   "guerrero",
-   "hall",
-   "hanson",
-   "hardy",
-   "harper",
-   "hart",
-   "hayes",
-   "iconics",
-   "iiconics",
-   "in",
-   "joe",
-   "jordan",
-   "jose",
-   "joseph",
-   "kai",
-   "kalisto",
-   "knight",
-   "ladders",
-   "lashley",
-   "lerae",
-   "live",
-   "lorcan",
-   "luger",
-   "lynch",
-   "machinery",
-   "malenko",
-   "man",
-   "manager",
-   "maverick",
-   "mendoza",
-   "miller",
-   "miztourage",
-   "morgan",
-   "moss",
-   "nakamura",
-   "nash",
-   "neidhart",
-   "notice",
-   "nwo",
-   "official",
-   "ohno",
-   "orndorff",
-   "otunga",
-   "page",
-   "perfect",
-   "phoenix",
-   "piper",
-   "premieres",
-   "race",
-   "raw",
-   "rawley",
-   "reeves",
-   "reigns",
-   "reunite",
-   "revealed",
-   "revival",
-   "ricochet",
-   "ride",
-   "riot",
-   "riott",
-   "rollins",
-   "rose",
-   "rousey",
-   "rowan",
-   "rowe",
-   "royal",
-   "rude",
-   "rusev",
-   "sabbatelli",
-   "sammartino",
-   "savage",
-   "schyster",
-   "shamrock",
-   "sheamus",
-   "sheik",
-   "shield",
-   "simmons",
-   "slaughter",
-   "sn",
-   "son",
-   "stanford",
-   "steamboat",
-   "steele",
-   "sting",
-   "storm",
-   "stratus",
-   "strowman",
-   "studd",
-   "table",
-   "thorne",
-   "tribute",
-   "truth",
-   "twins",
-   "up",
-   "usos",
-   "valentine",
-   "vicious",
-   "volkoff",
-   "warrior",
-   "wcw",
-   "wilder",
-   "wolfe",
-   "write",
-   "wyatt",
-   "x",
-   "xii",
-   "yokozuna",
-   "zayn",
-   "zbyszko",
-   "ziggler"
-  ],
-  "missingInserts": [
-   "2017",
-   "defeats triple h an unsanctioned street fight",
-   "heritage",
-   "heritage big legends",
-   "heritage kiss",
-   "heritage shawn michaels tribute",
-   "heritage tag teams stables",
-   "heritage top 10",
-   "kiss",
-   "now",
-   "retires macho king randy savage at wrestlemania vii",
-   "road to wrestlemania",
-   "road to wrestlemania 34",
-   "road to wrestlemania 34 roster",
-   "roster updates",
-   "shirt relics",
-   "summerslam mat relics",
-   "then now forever",
-   "then now forever 25 years raw",
-   "then now forever hall fame tribute rowdy roddy piper",
-   "then now forever mat relic royal rumble",
-   "then now forever roster update",
-   "undisputed",
-   "undisputed 30 years royal rumble",
-   "undisputed 30 years survivor series",
-   "undisputed relic",
-   "undisputed relics",
-   "wins united states championship"
-  ]
- },
  "2019-topps-holiday-baseball": {
   "missingPlayers": [
    "box"
@@ -4341,6 +4139,39 @@
    "single fighter signature swatches relic"
   ]
  },
+ "2018-topps-wwe-wrestling": {
+  "missingPlayers": [
+   "ambrose",
+   "balor",
+   "banks",
+   "bliss",
+   "cesaro",
+   "corbin",
+   "cross",
+   "dawson",
+   "joe",
+   "morgan",
+   "nakamura",
+   "nwo",
+   "reigns",
+   "rollins",
+   "sheamus",
+   "strowman",
+   "truth",
+   "warrior",
+   "wilder",
+   "wolfe",
+   "wyatt",
+   "xii"
+  ],
+  "missingInserts": [
+   "kiss",
+   "retires macho king randy savage at wrestlemania vii",
+   "roster updates",
+   "shirt relics",
+   "summerslam mat relics"
+  ]
+ },
  "1992-wwf-series": {
   "missingPlayers": [
    "arena",
@@ -4388,86 +4219,6 @@
   ],
   "missingInserts": [
    "merlin"
-  ]
- },
- "2018-topps-opening-day-baseball-mlb-cards": {
-  "missingPlayers": [
-   "angels",
-   "apple",
-   "arcia",
-   "astros",
-   "ballgame",
-   "belt",
-   "brewers",
-   "cardinals",
-   "caroline",
-   "castellanos",
-   "court",
-   "cove",
-   "cubs",
-   "dance",
-   "day",
-   "dodgers",
-   "dozier",
-   "gonzalez",
-   "harrison",
-   "horses",
-   "indians",
-   "mahtook",
-   "marlins",
-   "nationals",
-   "parade",
-   "pedroia",
-   "pirates",
-   "presidents",
-   "reds",
-   "sales",
-   "slide"
-  ],
-  "missingInserts": [
-   "before",
-   "stadium",
-   "team traditions celebrations"
-  ]
- },
- "2015-topps-archives-baseball-cards": {
-  "missingPlayers": [
-   "abernathy",
-   "alfonzo",
-   "anderson",
-   "baines",
-   "boone",
-   "bordick",
-   "bream",
-   "conine",
-   "dent",
-   "fingers",
-   "gamble",
-   "grace",
-   "green",
-   "grissom",
-   "hatteberg",
-   "incaviglia",
-   "karros",
-   "kendall",
-   "klesko",
-   "leiter",
-   "oliver",
-   "perry",
-   "prior",
-   "rijo",
-   "russell",
-   "snow",
-   "stanley",
-   "tekulve",
-   "vina",
-   "viola",
-   "willis"
-  ],
-  "missingInserts": [
-   "fan favorites",
-   "originals buybacks",
-   "signature series"
   ]
  },
  "1983-donruss-baseball-cards": {
@@ -5006,28 +4757,6 @@
    "f w",
    "f w ink",
    "sign times"
-  ]
- },
- "2018-topps-pro-debut-baseball-milb-cards": {
-  "missingPlayers": [
-   "binford",
-   "box",
-   "game",
-   "guillorme",
-   "mountcastle",
-   "night",
-   "pack",
-   "tellez",
-   "voth",
-   "ward",
-   "young"
-  ],
-  "missingInserts": [
-   "foilfractor",
-   "fragments farm relic",
-   "milb leaps bounds",
-   "promo night uniforms",
-   "promo night uniforms relic"
   ]
  },
  "2018-19-panini-revolution-basketball-cards": {
@@ -6654,6 +6383,24 @@
    "scarlet signatures"
   ]
  },
+ "2018-topps-wwe-then-now-forever": {
+  "missingPlayers": [
+   "angle",
+   "batista",
+   "goldberg",
+   "hall",
+   "henry",
+   "piper",
+   "rock",
+   "sn",
+   "stratus",
+   "truth"
+  ],
+  "missingInserts": [
+   "mat relic royal rumble",
+   "wins united states championship"
+  ]
+ },
  "2018-topps-tribute-baseball-cards": {
   "missingPlayers": [
    "carew",
@@ -7312,6 +7059,17 @@
    "star patches"
   ]
  },
+ "2015-topps-archives-baseball-cards": {
+  "missingPlayers": [
+   "abernathy",
+   "fingers",
+   "stanley"
+  ],
+  "missingInserts": [
+   "originals buybacks",
+   "signature series"
+  ]
+ },
  "2013-topps-museum-collection-baseball-cards": {
   "missingPlayers": [
    "loney",
@@ -7486,6 +7244,16 @@
    "jj"
   ]
  },
+ "2018-topps-pro-debut-baseball-milb-cards": {
+  "missingPlayers": [
+   "box",
+   "pack"
+  ],
+  "missingInserts": [
+   "fragments farm relic",
+   "promo night uniforms relic"
+  ]
+ },
  "2017-donruss-optic-baseball-cards": {
   "missingPlayers": [
    "crawford",
@@ -7597,15 +7365,6 @@
   "missingInserts": [
    "ice",
    "sky"
-  ]
- },
- "2017-topps-gypsy-queen-baseball-cards": {
-  "missingPlayers": [
-   "snydergaard"
-  ],
-  "missingInserts": [
-   "missing blackplate",
-   "portrait art reproduction"
   ]
  },
  "2017-topps-tribute-baseball-cards": {
@@ -7765,20 +7524,6 @@
   ],
   "missingInserts": [
    "1965 tall boy"
-  ]
- },
- "2013-topps-archives-baseball-cards": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "1983 star",
-   "tall boy"
-  ]
- },
- "2013-topps-platinum-football-cards": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "military die cut ribbon",
-   "prism"
   ]
  },
  "2018-topps-fire-baseball-mlb-cards": {
@@ -8098,6 +7843,16 @@
    "1996 97 skybox autographics"
   ]
  },
+ "2018-topps-wwe-heritage": {
+  "missingPlayers": [
+   "exch",
+   "iconics",
+   "tribute"
+  ],
+  "missingInserts": [
+   "defeats triple h an unsanctioned street fight"
+  ]
+ },
  "2018-topps-big-league-baseball-cards": {
   "missingPlayers": [
    "minter",
@@ -8362,6 +8117,14 @@
   ],
   "missingInserts": [
    "bat material"
+  ]
+ },
+ "2017-topps-gypsy-queen-baseball-cards": {
+  "missingPlayers": [
+   "snydergaard"
+  ],
+  "missingInserts": [
+   "portrait art reproduction"
   ]
  },
  "2016-bowman-draft-baseball-cards": {
@@ -8843,22 +8606,6 @@
    "anderson silva chael sonnen"
   ]
  },
- "2016-topps-then-now-forever-wwe": {
-  "missingPlayers": [
-   "truth"
-  ],
-  "missingInserts": [
-   "promo coupon"
-  ]
- },
- "2016-topps-undisputed-wwe": {
-  "missingPlayers": [
-   "rko"
-  ],
-  "missingInserts": [
-   "relics"
-  ]
- },
  "2009-topps-wwe": {
   "missingPlayers": [
    "truth"
@@ -9020,6 +8767,15 @@
   ],
   "missingInserts": []
  },
+ "2018-topps-wwe-road-to-wrestlemania": {
+  "missingPlayers": [
+   "division",
+   "official",
+   "rusev",
+   "truth"
+  ],
+  "missingInserts": []
+ },
  "2009-tristar-tna-knockouts": {
   "missingPlayers": [
    "abyss",
@@ -9176,6 +8932,13 @@
   "missingPlayers": [
    "gold",
    "kelper"
+  ],
+  "missingInserts": []
+ },
+ "2018-topps-opening-day-baseball-mlb-cards": {
+  "missingPlayers": [
+   "marlins",
+   "sales"
   ],
   "missingInserts": []
  },
@@ -10204,6 +9967,18 @@
  "2017-leaf-originals": {
   "missingPlayers": [
    "samoans"
+  ],
+  "missingInserts": []
+ },
+ "2016-topps-then-now-forever-wwe": {
+  "missingPlayers": [
+   "truth"
+  ],
+  "missingInserts": []
+ },
+ "2016-topps-undisputed-wwe": {
+  "missingPlayers": [
+   "rko"
   ],
   "missingInserts": []
  },
