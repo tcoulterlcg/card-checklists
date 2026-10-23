@@ -93,6 +93,56 @@ function sectionType(title) {
   return type
 }
 
+// ---- pass 0: who is who ----
+// One name can be two people. Cards are keyed by normalized name, except:
+//  * a name with 30+ cards in a second sport is a different person there
+//    (Larry Johnson basketball vs football; Ace Bailey hockey vs basketball):
+//    that sport gets its own key "<name>|<sport>". Smaller counts in other sports
+//    (Magic Johnson in a baseball product) stay with the main player.
+//  * "Allen Robinson" and "Allen Robinson II" are one person when only one suffixed
+//    form exists in that sport and their card years overlap — merged under the
+//    suffixed name. Jr./Sr. pairs (Ken Griffey) are never merged.
+const SPLIT_MIN = 30
+const NON_PERSON_SPORTS = new Set(['', 'Multi-Sport', 'Entertainment', 'Non-Sport'])
+const SUFFIX = / (jr|sr|ii|iii|iv)$/
+const stats = new Map() // key -> { sports: Map(sport -> n), min, max }
+const setFiles = []
+for (const f of readdirSync(dataDir)) {
+  if (!f.endsWith('.json') || SKIP.test(f)) continue
+  let s
+  try { s = JSON.parse(readFileSync(new URL(f, dataDir), 'utf8')) } catch { continue }
+  if (!s.slug || !Array.isArray(s.sections) || s.incomplete) continue
+  setFiles.push(f)
+  for (const sec of s.sections) for (const c of sec.cards || []) for (const name of splitPlayers(c.p)) {
+    const k = norm(name); if (!k || k.length < 2) continue
+    let st = stats.get(k); if (!st) stats.set(k, st = { sports: new Map(), min: 9999, max: 0 })
+    st.sports.set(s.sport || '', (st.sports.get(s.sport || '') || 0) + 1)
+    if (s.year) { st.min = Math.min(st.min, s.year); st.max = Math.max(st.max, s.year) }
+  }
+}
+const primarySport = (st) => [...st.sports.entries()].filter(([sp]) => !NON_PERSON_SPORTS.has(sp)).sort((a, b) => b[1] - a[1])[0]?.[0] ?? ''
+const splitSports = new Map() // key -> Set(sports that are a different person)
+for (const [k, st] of stats) {
+  const main = primarySport(st)
+  const others = [...st.sports.entries()].filter(([sp, n]) => sp !== main && !NON_PERSON_SPORTS.has(sp) && n >= SPLIT_MIN).map(([sp]) => sp)
+  if (others.length) splitSports.set(k, new Set(others))
+}
+const mergeInto = new Map() // plain key -> suffixed key
+for (const [k, st] of stats) {
+  if (SUFFIX.test(k)) continue
+  const forms = ['jr', 'sr', 'ii', 'iii', 'iv'].map(x => k + ' ' + x).filter(x => stats.has(x))
+  if (forms.length !== 1 || forms[0].endsWith(' sr')) continue
+  const t = stats.get(forms[0])
+  if (primarySport(t) !== primarySport(st)) continue
+  if (st.min > t.max + 1 || t.min > st.max + 1) continue   // different eras: different people
+  mergeInto.set(k, forms[0])
+}
+const keyFor = (name, sport) => {
+  let k = norm(name)
+  if (splitSports.get(k)?.has(sport)) return k + '|' + sport
+  return mergeInto.get(k) || k
+}
+
 // ---- pass 1: build rows per shard ----
 const shards = Array.from({ length: SHARDS }, () => ({ slugs: [], slugId: new Map(), sections: [], secId: new Map(), teams: [], teamId: new Map(), rows: [] }))
 const intern = (v, pool, map) => { if (map.has(v)) return map.get(v); const id = pool.length; pool.push(v); map.set(v, id); return id }
@@ -100,8 +150,7 @@ const players = new Map() // normName -> { name, shard, cards, sports:Map, minYe
 const sportsPool = [], sportIdx = new Map()
 
 let files = 0
-for (const f of readdirSync(dataDir)) {
-  if (!f.endsWith('.json') || SKIP.test(f)) continue
+for (const f of setFiles) {
   let s
   try { s = JSON.parse(readFileSync(new URL(f, dataDir), 'utf8')) } catch { continue }
   if (!s.slug || !Array.isArray(s.sections) || s.incomplete) continue
@@ -123,14 +172,15 @@ for (const f of readdirSync(dataDir)) {
       if (/\bMEM\b/.test(flag) && !(type & TYPE.PATCH)) type |= TYPE.RELIC
       if (names.length > 1) type |= TYPE.MULTI
       for (const name of names) {
-        const key = norm(name)
-        if (!key || key.length < 2) continue
+        if (norm(name).length < 2) continue
+        const key = keyFor(name, s.sport || '')
         // Break Ninja team pages sometimes list the same card twice.
         const dk = key + '|' + sec.title + '|' + c.n + '|' + serial
         if (seen.has(dk)) continue
         seen.add(dk)
         let pl = players.get(key)
-        if (!pl) { pl = { name, shard: hash(key), cards: 0, sports: new Map(), minYear: s.year || 0, maxYear: s.year || 0 }; players.set(key, pl) }
+        if (!pl) { pl = { name, names: new Map(), shard: hash(key), cards: 0, sports: new Map(), minYear: s.year || 0, maxYear: s.year || 0 }; players.set(key, pl) }
+        pl.names.set(name, (pl.names.get(name) || 0) + 1)
         pl.cards++
         pl.sports.set(sp, (pl.sports.get(sp) || 0) + 1)
         if (s.year) { if (!pl.minYear || s.year < pl.minYear) pl.minYear = s.year; if (s.year > pl.maxYear) pl.maxYear = s.year }
@@ -149,7 +199,8 @@ const sorted = [...players.entries()].sort((a, b) => b[1].cards - a[1].cards)
 for (const [key, pl] of sorted) {
   const topSport = [...pl.sports.entries()].sort((a, b) => b[1] - a[1])[0][0]
   pid.set(key, dir.length)
-  dir.push([pl.name, pl.shard, pl.cards, topSport, pl.minYear, pl.maxYear])
+  const shown = [...pl.names.entries()].sort((a, b) => b[1] - a[1])[0][0]   // the spelling used most
+  dir.push([shown, pl.shard, pl.cards, topSport, pl.minYear, pl.maxYear])
 }
 let total = 0
 shards.forEach((sh, i) => {

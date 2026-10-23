@@ -350,10 +350,13 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
     setNotice('')
     setActivePlayer(p); setPlayerParsed(parsed || null); setPlayerCandidates(candidates || [])
     setActiveSet(null); setSetData(null); setGlobalHits(null); setView('player')
-    nav('?player=' + encodeURIComponent(p.name) + (parsed && parsed.raw && norm(parsed.raw) !== parsed.player ? '&q=' + encodeURIComponent(parsed.raw) : ''), push)
+    // two different people can share a name (Larry Johnson, basketball / football): the sport tells them apart
+    const twin = (candidates || []).some(c => c !== p && c.name === p.name && c.sport !== p.sport)
+    nav('?player=' + encodeURIComponent(p.name) + (twin && p.sport ? '&sport=' + encodeURIComponent(p.sport) : '') + (parsed && parsed.raw && norm(parsed.raw) !== parsed.player ? '&q=' + encodeURIComponent(parsed.raw) : ''), push)
     window.scrollTo(0, 0)
   }
-  const openPlayerByName = async (name, rawQuery, push) => {
+  const openPlayerByName = async (name, rawQuery, push, sport) => {
+    const pick = (hs) => hs.find(h => h.name === name && (!sport || h.sport === sport)) || hs.find(h => h.name === name)
     const my = ++navSeq.current
     // Most shared links are for well-known players: try the 100 KB top list before the full directory.
     const top = await loadTopPlayers()
@@ -361,14 +364,14 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
     if (top) {
       const tp = parseQueryFor(top, rawQuery || name)
       const th = matchPlayers(top, tp.player || name, 8)
-      const hit = th.find(h => h.name === name)
-      if (hit) { openPlayer(hit, tp, th, push); return }
+      const hit = pick(th)
+      if (hit && (!sport || hit.sport === sport)) { openPlayer(hit, tp, th, push); return }
     }
     const dir = await loadPlayerDir()
     if (my !== navSeq.current) return
     const parsed = parseQueryFor(dir, rawQuery || name)
     const hits = matchPlayers(dir, parsed.player || name, 8)
-    const exact = hits.find(h => h.name === name) || (hits[0] && !hits[0].partial ? hits[0] : null)   // a partial (dropped-words) guess is not this link's player
+    const exact = pick(hits) || (hits[0] && !hits[0].partial ? hits[0] : null)   // a partial (dropped-words) guess is not this link's player
     if (exact) openPlayer(exact, parsed, hits, push)
     else { goHome(false); setNotice('No player called “' + name + '” in the database. Try the search below.') }
   }
@@ -689,7 +692,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
     const sp = new URLSearchParams(location.search)
     const pl = sp.get('player'), v = sp.get('view'), sr = sp.get('search')
     const st = sp.get('set') && sp.get('set').trim().toLowerCase().replace(/\/+$/, '')   // tolerate pasted links: case, trailing slash
-    if (pl) { const q = sp.get('q'); setQuery(q || pl); openPlayerByName(pl, q, false) }
+    if (pl) { const q = sp.get('q'); setQuery(q || pl); openPlayerByName(pl, q, false, sp.get('sport') || undefined) }
     else if (st) {
       const s = sets.find(x => x.slug === st)
       if (s) openSet(s, false)
@@ -1115,7 +1118,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
             <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center', margin: '0 0 14px' }}>
               <span style={{ ...eyebrow, color: '#8A93A8' }}>Showing cards of</span>
               {myPlayers.list.length === 0 && <span style={{ color: '#8A8A93', fontSize: 13 }}>nobody yet — open a player page and hit “Collect this player”.</span>}
-              {byPlayer.map(g => <button key={g.name} onClick={() => openPlayerByName(g.name)} style={{ background: '#0e1630', border: '1px solid ' + ACCENT + '55', color: '#c9d8ff', fontSize: 13, fontWeight: 600, padding: '5px 10px', borderRadius: 999, cursor: 'pointer', fontFamily: 'inherit' }}>{g.name} <span style={{ color: '#5b82e8' }}>· {g.rows.length}</span></button>)}
+              {byPlayer.map(g => <button key={g.name} onClick={() => openPlayerByName(g.name, null, true, setData?.sport)} style={{ background: '#0e1630', border: '1px solid ' + ACCENT + '55', color: '#c9d8ff', fontSize: 13, fontWeight: 600, padding: '5px 10px', borderRadius: 999, cursor: 'pointer', fontFamily: 'inherit' }}>{g.name} <span style={{ color: '#5b82e8' }}>· {g.rows.length}</span></button>)}
               {myPlayers.list.filter(n => !byPlayer.some(g => g.name === n)).map(n => <span key={n} style={{ border: '1px solid #232A3E', color: '#8A93A8', fontSize: 13, padding: '5px 10px', borderRadius: 999 }}>{n} · 0</span>)}
               <button onClick={() => openView('myplayers')} style={{ background: 'none', border: 'none', color: ACCENT_TEXT, fontSize: 13, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit' }}>Manage my players</button>
             </div>
@@ -1140,10 +1143,10 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
             <div key={g.name} style={{ border: '1px solid #232A3E', borderRadius: 14, overflow: 'hidden', background: '#0F1320', marginBottom: 12 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '12px 18px', background: '#121626', flexWrap: 'wrap' }}>
                 <div style={{ flex: 1, minWidth: 200 }}>
-                  <button onClick={() => openPlayerByName(g.name)} style={{ ...title(16), background: 'none', border: 'none', color: '#EDEDEF', cursor: 'pointer', padding: 0, textAlign: 'left' }}>{g.name}</button>
+                  <button onClick={() => openPlayerByName(g.name, null, true, setData?.sport)} style={{ ...title(16), background: 'none', border: 'none', color: '#EDEDEF', cursor: 'pointer', padding: 0, textAlign: 'left' }}>{g.name}</button>
                   <p style={{ margin: '2px 0 0', color: '#8A8A93', fontSize: 12 }}>{g.team ? g.team + ' · ' : ''}{g.rows.length} card{g.rows.length === 1 ? '' : 's'} in this set{g.au ? ' · ' + g.au + ' autos' : ''}{g.one ? ' · ' + g.one + ' × 1/1' : ''}</p>
                 </div>
-                <button onClick={() => openPlayerByName(g.name)} style={{ background: 'none', border: 'none', color: ACCENT_TEXT, fontSize: 13, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit' }}>Player page →</button>
+                <button onClick={() => openPlayerByName(g.name, null, true, setData?.sport)} style={{ background: 'none', border: 'none', color: ACCENT_TEXT, fontSize: 13, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit' }}>Player page →</button>
               </div>
               <div style={{ overflowX: 'auto' }}>
                 <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14, minWidth: 560 }}>
@@ -1190,7 +1193,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
                     }}>
                       <span className="hq-col-num" style={{ flex: '0 0 68px', color: ACCENT_TEXT, fontWeight: 700, fontVariantNumeric: 'tabular-nums', overflowWrap: 'anywhere' }}>{c.n ? '#' + c.n : '—'}</span>
                       <span style={{ flex: '1 1 auto', minWidth: 0 }}>
-                        <button onClick={() => openPlayerByName(c.p)} title={'Open ' + c.p + "'s player page"} style={{ fontWeight: 600, background: 'none', border: 'none', color: isMine(c.p) ? ACCENT_TEXT : '#EDEDEF', cursor: 'pointer', padding: 0, textAlign: 'left', fontFamily: 'inherit', fontSize: 14 }}>{c.p}</button>
+                        <button onClick={() => openPlayerByName(c.p, null, true, setData?.sport)} title={'Open ' + c.p + "'s player page"} style={{ fontWeight: 600, background: 'none', border: 'none', color: isMine(c.p) ? ACCENT_TEXT : '#EDEDEF', cursor: 'pointer', padding: 0, textAlign: 'left', fontFamily: 'inherit', fontSize: 14 }}>{c.p}</button>
                         {c.t && <span className="hq-mobile-only" style={{ color: '#8A8A93', fontSize: 12, marginTop: 2 }}>{c.t}</span>}
                       </span>
                       <span className="hq-col-team" style={{ flex: '1 1 auto', minWidth: 0, color: '#8A8A93', fontSize: 13 }}>{c.t || ''}</span>
