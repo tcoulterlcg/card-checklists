@@ -4487,6 +4487,53 @@
    "supplemental"
   ]
  },
+ "2010-topps-wwe": {
+  "missingPlayers": [
+   "backlash",
+   "bash",
+   "batista",
+   "box",
+   "burchill",
+   "carlito",
+   "champions",
+   "chimel",
+   "cole",
+   "day",
+   "dreamer",
+   "duggan",
+   "festus",
+   "funaki",
+   "grisham",
+   "haas",
+   "hawkins",
+   "hurricane",
+   "j",
+   "james",
+   "knox",
+   "maria",
+   "match",
+   "mathews",
+   "michaels",
+   "noble",
+   "out",
+   "ross",
+   "rules",
+   "rumble",
+   "savannah",
+   "series",
+   "slam",
+   "striker",
+   "tiffany",
+   "truth",
+   "washington",
+   "wrestlemania",
+   "yang"
+  ],
+  "missingInserts": [
+   "slam attax",
+   "town"
+  ]
+ },
  "2012-bowman-sterling-baseball-cards": {
   "missingPlayers": [
    "almora",
@@ -4804,6 +4851,22 @@
    "error photo actually gary hogeboom",
    "franco harris",
    "trivia quiz"
+  ]
+ },
+ "2009-topps-wwe": {
+  "missingPlayers": [
+   "truth"
+  ],
+  "missingInserts": [
+   "hands apart",
+   "hands clasped",
+   "hat",
+   "judgement day mat relic",
+   "looking left",
+   "looking right",
+   "tin lid bonus",
+   "town",
+   "with hat"
   ]
  },
  "2018-19-panini-prizm-basketball-nba-cards": {
@@ -6534,24 +6597,6 @@
    "framed crowning moment"
   ]
  },
- "2014-topps-chrome-baseball-cards": {
-  "missingPlayers": [
-   "anderson",
-   "betts",
-   "box",
-   "burton",
-   "degrom",
-   "mccarthy",
-   "morneau",
-   "ray",
-   "stella"
-  ],
-  "missingInserts": [
-   "relic",
-   "update",
-   "update star stitches relics"
-  ]
- },
  "1985-donruss-baseball-cards": {
   "missingPlayers": [
    "coleman",
@@ -7549,6 +7594,22 @@
    "sepia"
   ]
  },
+ "2014-topps-chrome-baseball-cards": {
+  "missingPlayers": [
+   "anderson",
+   "betts",
+   "box",
+   "burton",
+   "degrom",
+   "mccarthy",
+   "morneau",
+   "ray",
+   "stella"
+  ],
+  "missingInserts": [
+   "update"
+  ]
+ },
  "2013-topps-finest-baseball-cards": {
   "missingPlayers": [
    "hoes",
@@ -8017,24 +8078,6 @@
    "honors update"
   ]
  },
- "2013-topps-chrome-football-cards": {
-  "missingPlayers": [
-   "refractor"
-  ],
-  "missingInserts": [
-   "1959",
-   "prism"
-  ]
- },
- "2000-bowman-chrome-football": {
-  "missingPlayers": [
-   "rhet"
-  ],
-  "missingInserts": [
-   "by selection",
-   "ground breakers"
-  ]
- },
  "2018-19-sp-hockey-cards": {
   "missingPlayers": [
    "mittelstadt"
@@ -8051,15 +8094,6 @@
   "missingInserts": [
    "front",
    "variant back"
-  ]
- },
- "2006-topps-heritage-ii-wwe": {
-  "missingPlayers": [
-   "booker"
-  ],
-  "missingInserts": [
-   "hat",
-   "shirt"
   ]
  },
  "2016-17-panini-grand-reserve-basketball": {
@@ -8999,6 +9033,14 @@
    "performance"
   ]
  },
+ "2000-bowman-chrome-football": {
+  "missingPlayers": [
+   "rhet"
+  ],
+  "missingInserts": [
+   "ground breakers"
+  ]
+ },
  "18-19-ud-upper-deck-ultimate-collection-hockey": {
   "missingPlayers": [
    "clifton"
@@ -9146,14 +9188,6 @@
    "anderson silva chael sonnen"
   ]
  },
- "2006-topps-wwe-insider": {
-  "missingPlayers": [
-   "warrior"
-  ],
-  "missingInserts": [
-   "restricted access"
-  ]
- },
  "2001-fleer-wwf-the-ultimate-diva-collection": {
   "missingPlayers": [
    "apa",
@@ -9225,10 +9259,10 @@
   ],
   "missingInserts": []
  },
- "2008-tristar-tna-impact": {
+ "2009-topps-slam-attax-wwe": {
   "missingPlayers": [],
   "missingInserts": [
-   "game"
+   "limited"
   ]
  },
  "2018-19-panini-contenders-draft-picks-basketball": {
@@ -9300,6 +9334,15 @@
    "nogue",
    "pierre",
    "white"
+  ],
+  "missingInserts": []
+ },
+ "2009-tristar-tna-knockouts": {
+  "missingPlayers": [
+   "abyss",
+   "roode",
+   "steiner",
+   "styles"
   ],
   "missingInserts": []
  },
@@ -9673,6 +9716,13 @@
   "missingPlayers": [
    "box",
    "team"
+  ],
+  "missingInserts": []
+ },
+ "2011-topps-wwe-classic": {
+  "missingPlayers": [
+   "j",
+   "truth"
   ],
   "missingInserts": []
  },
@@ -10289,6 +10339,12 @@
   ],
   "missingInserts": []
  },
+ "2013-topps-chrome-football-cards": {
+  "missingPlayers": [
+   "refractor"
+  ],
+  "missingInserts": []
+ },
  "2013-topps-museum-collection-football-cards": {
   "missingPlayers": [
    "cobb"
@@ -10433,9 +10489,45 @@
   ],
   "missingInserts": []
  },
+ "2012-topps-heritage-wwe": {
+  "missingPlayers": [
+   "fuji"
+  ],
+  "missingInserts": []
+ },
+ "2012-topps-wwe": {
+  "missingPlayers": [
+   "truth"
+  ],
+  "missingInserts": []
+ },
+ "2011-topps-wwe": {
+  "missingPlayers": [
+   "truth"
+  ],
+  "missingInserts": []
+ },
+ "2011-topps-wwe-power-chipz": {
+  "missingPlayers": [
+   "truth"
+  ],
+  "missingInserts": []
+ },
  "2007-topps-heritage-iii-wwe": {
   "missingPlayers": [
    "t"
+  ],
+  "missingInserts": []
+ },
+ "2006-topps-heritage-ii-wwe": {
+  "missingPlayers": [
+   "booker"
+  ],
+  "missingInserts": []
+ },
+ "2006-topps-wwe-insider": {
+  "missingPlayers": [
+   "warrior"
   ],
   "missingInserts": []
  },
