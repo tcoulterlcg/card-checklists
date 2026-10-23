@@ -52,9 +52,51 @@ for (const f of files) {
 // notes and team fields, every sport.
 const SHOP = /\s*[-*·]?\s*(?:Shop|Buy)(?: [A-Za-z0-9'.]+){0,6}? (?:on )?eBay\.?/gi
 let shopFixed = 0
+
+// Cardboard Connection page widgets scraped as cards:
+//  - the eBay listing strip under a checklist ("1965 Topps Joe Morgan RC SGC 6 EXMT ... #16"):
+//    the year lands in the number field, the listing title in the name. It shows up as a run of
+//    year-numbered rows at the end of a section (or filling a whole section on pages with no list).
+//  - the box-price tables ("Count 6 Boxes", "Heritage Blaster"), in sections titled "<file>.xlsx".
+// A run is dropped only when it reads like listings, so real year-numbered lists
+// (Recollection Collection buybacks, Under Wraps team baseballs, "1953 World Series") stay.
+const WIDGET_N = /^(?:1[89]\d\d|20[0-3]\d|\d{7,})$/
+const LISTING = /\b(?:PSA|SGC|BGS|BVG|CGC|CSG|HGA|GMA|RC|Rookie|Auto|Autograph|Refractor|Parallel|Lot|Box|Blaster|Hobby|Hanger|Tin|Pack|Sealed|Card|Cards|Free|Rare|NM|EX|SP|HOF|Vintage|Poster|Puck|Jacket|Photo|Pokemon|Signed)\b|#\s?\w*\d|\/\s?\d/i
+const GRADED = /\b(?:PSA|SGC|BGS|BVG|CGC|CSG|HGA|GMA)\s?(?:GRADED\s)?(?:10|[1-9](?:\.5)?)\b/i
+const looksListing = (c) => { const s = (c.p || '') + ' ' + (c.t || ''); return LISTING.test(s) || s.length > 46 }
+const STRONG = /\b(?:Box|Blaster|Hobby|Hanger|Tin|Mega|Lot|Free Ship\w*|in hand|Pick)\b|#\s?\d|\bPR:/i
+const strongListing = (c) => { const s = (c.p || '') + ' ' + (c.t || ''); return GRADED.test(s) || STRONG.test(s) || s.length > 46 }
+let widgetDropped = 0
+function dropWidgets(set) {
+  let n = 0
+  const secs = []
+  for (const x of set.sections || []) {
+    if (/\.xlsx?$/i.test(String(x.title || ''))) { n += (x.cards || []).length || 1; continue }
+    const cs = x.cards || []
+    let i = cs.length
+    while (i > 0 && WIDGET_N.test(String(cs[i - 1].n || ''))) i--
+    const run = cs.slice(i)
+    let keep = cs
+    // Panini "Update" lists (year of the original product, insert name, "1 Troy Polamalu - USC Trojans / ...") are real
+    const panUpdate = (c) => /^\d+ [^/]+ - /.test(c.t || '')
+    // a short run (1-3 rows) after a real list is often a real tail card ("2016 Chicago Cubs Team Signed",
+    // "2015 Rookie Set /10"), so every row must read like an eBay listing or a box-price row
+    const ok = run.length >= 4 ? run.filter(looksListing).length / run.length >= 0.5 : run.length > 0 && run.every(strongListing)
+    if (ok) keep = cs.slice(0, i).concat(run.filter(panUpdate))
+    // a graded-copy listing anywhere else (number is a year, an eBay item id, or blank)
+    const kept = keep.filter(c => !(GRADED.test((c.p || '') + ' ' + (c.t || '')) && (!c.n || WIDGET_N.test(String(c.n)))))
+    n += cs.length - kept.length
+    if (kept.length !== cs.length) x.cards = kept
+    if (!x.cards || x.cards.length || !cs.length) secs.push(x)
+  }
+  if (n) set.sections = secs
+  return n
+}
+
 for (const f of files) {
   const fp = new URL(f, dataDir); let s2; try { s2 = JSON.parse(readFileSync(fp, 'utf8')) } catch { continue }
   let ch = false
+  if (Array.isArray(s2.sections)) { const w = dropWidgets(s2); if (w) { widgetDropped += w; ch = true } }
   // "22 23 Panini Revolution Basketball" (year 22) -> "2022-23 Panini Revolution Basketball" (year 2023)
   // import-name leftovers: "2023 Upper Deck Marvel Platinum Checklist" / "… Trading"
   if (/\s+(Checklist|Trading)$/.test(s2.name || '')) { s2.name = s2.name.replace(/\s+(Checklist|Trading)$/, ''); ch = true; shopFixed++ }
@@ -193,6 +235,6 @@ for (const [f, s] of sets) {
   if (s.sections.length !== before) changed = true
   if (changed) { stats.files++; if (!DRY) writeFileSync(new URL(f, dataDir), JSON.stringify(s)) }
 }
-console.log(`affiliate text removed ${shopFixed}, duplicate rows merged ${stats.merged}, team fields cleaned ${stats.team}, junk rows dropped ${stats.junk}, names tidied ${stats.tidied}, encoding repaired ${stats.repaired}, spellings unified ${stats.unified}, files changed ${stats.files}${DRY ? ' (dry run)' : ''}`)
+console.log(`widget listings dropped ${widgetDropped}, affiliate text removed ${shopFixed}, duplicate rows merged ${stats.merged}, team fields cleaned ${stats.team}, junk rows dropped ${stats.junk}, names tidied ${stats.tidied}, encoding repaired ${stats.repaired}, spellings unified ${stats.unified}, files changed ${stats.files}${DRY ? ' (dry run)' : ''}`)
 if (REPORT) writeFileSync(REPORT.slice(9), [...renames.entries()].sort((a, b) => b[1] - a[1]).map(([k, n]) => n + '\t' + k).join('\n'))
 if (stats.unrepaired.size) console.log(`unrepaired (${stats.unrepaired.size}):`, [...stats.unrepaired].slice(0, 40).join(' | '))
