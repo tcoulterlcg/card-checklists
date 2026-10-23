@@ -180,7 +180,7 @@ export function CollectionView({ account, indexSets, onOpenAuth, onOpenSet }) {
           <p style={{ color: '#8A8A93', fontSize: 13, margin: '0 0 16px' }}>Check off cards as you collect them.</p>
           {setData.sections.slice(0, secShown).map((sec, si) => (
             <div key={si} style={{ marginBottom: 18 }}>
-              <h3 style={{ ...title(16), color: ACCENT_TEXT, margin: '0 0 8px' }}>{sec.title} <span style={{ color: '#6B7080', fontWeight: 600 }}>({sec.cards.length})</span></h3>
+              <h3 style={{ ...title(16), color: ACCENT_TEXT, margin: '0 0 8px' }}>{sec.title} <span style={{ color: '#8A93A8', fontWeight: 600 }}>({sec.cards.length})</span></h3>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(260px, 100%), 1fr))', gap: 6 }}>
                 {sec.cards.map((c, ci) => {
                   const cn = collectionCardN(c)
@@ -242,9 +242,9 @@ export function CollectionView({ account, indexSets, onOpenAuth, onOpenSet }) {
                       {g.items.filter(i => i.card_n).slice(0, wantOpen[slug] ? undefined : 6).map(i => (
                         <li key={i.id} style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 13, color: '#D4D4D8' }}>
                           <span style={{ color: ACCENT_TEXT, fontWeight: 700, minWidth: 44 }}>{String(i.card_n).startsWith('—') ? '—' : '#' + i.card_n}</span>
-                          <span style={{ flex: 1, minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{i.player || ''}{i.section && i.section !== 'Base' ? <span style={{ color: '#6B7080' }}> · {i.section}</span> : null}</span>
+                          <span style={{ flex: 1, minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{i.player || ''}{i.section && i.section !== 'Base' ? <span style={{ color: '#8A93A8' }}> · {i.section}</span> : null}</span>
                           <button aria-label={'Remove ' + (i.player || 'card') + ' from wantlist'} onClick={async () => { await removeWant(i.id); myWantlist(session.user.id).then(setWants) }}
-                            style={{ background: 'none', border: 'none', color: '#6B7080', cursor: 'pointer', fontSize: 14, padding: '2px 6px' }}>✕</button>
+                            style={{ background: 'none', border: 'none', color: '#8A93A8', cursor: 'pointer', fontSize: 14, padding: '2px 6px' }}>✕</button>
                         </li>
                       ))}
                       {g.items.filter(i => i.card_n).length > 6 && !wantOpen[slug] && (
@@ -349,7 +349,7 @@ export function CommunityView({ account, indexSets, onOpenAuth }) {
                 <div style={{ position: 'absolute', top: '100%', left: 0, right: 0, zIndex: 5, background: '#121626', border: '1px solid #232A3E', borderRadius: 10, overflow: 'hidden' }}>
                   {setMatches.map(s => (
                     <div key={s.slug} onClick={() => { setChosenSet(s); setSetQuery('') }} style={{ padding: '9px 13px', fontSize: 13, color: '#ccc', cursor: 'pointer', borderBottom: '1px solid #222' }}>
-                      {s.name} <span style={{ color: '#6B7080' }}>({s.cardCount} cards)</span>
+                      {s.name} <span style={{ color: '#8A93A8' }}>({s.cardCount} cards)</span>
                     </div>
                   ))}
                 </div>
@@ -362,7 +362,7 @@ export function CommunityView({ account, indexSets, onOpenAuth }) {
         </div>
       )}
 
-      {!feed ? <p style={{ color: '#6B7080' }}>Loading feed…</p> : feed.failed ? (
+      {!feed ? <p style={{ color: '#8A93A8' }}>Loading feed…</p> : feed.failed ? (
         <div style={{ ...card, padding: 24, textAlign: 'center' }}>
           <p style={{ color: '#A1A1AA', fontSize: 14, margin: 0 }}>Couldn't load the community feed. Check your connection.</p>
           <button onClick={() => { setFeed(null); forumFeed().then(setFeed) }} style={{ marginTop: 12, background: 'none', border: '1px solid #2A3247', color: '#ECEEF3', borderRadius: 8, padding: '8px 16px', cursor: 'pointer', fontFamily: 'inherit', fontWeight: 600 }}>Try again</button>
@@ -384,7 +384,7 @@ export function CommunityView({ account, indexSets, onOpenAuth }) {
                 <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 8, flexWrap: 'wrap' }}>
                   <span style={{ width: 30, height: 30, borderRadius: '50%', background: '#232A3E', color: ACCENT_TEXT, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: 14 }}>{(p.profiles?.username || '?')[0].toUpperCase()}</span>
                   <span style={{ color: '#D4D4D8', fontWeight: 700, fontSize: 14 }}>{p.profiles?.username || 'collector'}</span>
-                  <span style={{ color: '#6B7080', fontSize: 12 }}>{new Date(p.created_at).toLocaleDateString()}</span>
+                  <span style={{ color: '#8A93A8', fontSize: 12 }}>{new Date(p.created_at).toLocaleDateString()}</span>
                   {achLabel && <span style={{ ...eyebrow, marginLeft: 'auto', background: '#1A1F31', color: '#A1A1AA', padding: '4px 10px', borderRadius: 999, fontSize: 12 }}>{achLabel}</span>}
                 </div>
                 <h3 style={{ ...title(20), margin: 0, color: '#fff', lineHeight: 1.15 }}>{p.title}</h3>
@@ -404,7 +404,7 @@ export function CommunityView({ account, indexSets, onOpenAuth }) {
                       <button onClick={() => setConfirmDel(null)} style={{ background: 'none', border: '1px solid #232A3E', color: '#A1A1AA', borderRadius: 6, padding: '5px 10px', fontSize: 13, cursor: 'pointer', fontFamily: 'inherit' }}>Cancel</button>
                     </span>
                   ) : (
-                    <button onClick={() => setConfirmDel(p.id)} style={{ marginLeft: 'auto', background: 'none', border: 'none', color: '#6B7080', fontSize: 13, cursor: 'pointer', fontFamily: 'inherit' }}>Delete</button>
+                    <button onClick={() => setConfirmDel(p.id)} style={{ marginLeft: 'auto', background: 'none', border: 'none', color: '#8A93A8', fontSize: 13, cursor: 'pointer', fontFamily: 'inherit' }}>Delete</button>
                   ))}
                 </div>
                 {Array.isArray(openComments[p.id]) && (

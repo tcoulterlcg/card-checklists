@@ -108,7 +108,7 @@ function TypeChip({ t }) { const l = typeLabel(t); return <Chip color={TYPE_COLO
 function Serial({ s }) {
   if (s === 1) return <span style={{ background: ACCENT, color: '#fff', padding: '2px 8px', borderRadius: 999, fontSize: 12, fontWeight: 700 }}>1/1</span>
   if (s > 0) return <span style={{ fontVariantNumeric: 'tabular-nums', fontWeight: 600 }}>/{s}</span>
-  return <span style={{ color: '#6B7080' }}>—</span>
+  return <span style={{ color: '#8A93A8' }}>—</span>
 }
 function Initials({ name, color }) {
   const i = name.split(/\s+/).filter(Boolean).map(w => w[0]).slice(0, 2).join('').toUpperCase()
@@ -188,12 +188,12 @@ export function Omnibox({ value, onChange, onSubmit, onPickPlayer, onPickSet, se
         <div role="listbox" style={{ position: 'absolute', left: 0, right: 0, top: '100%', zIndex: 60, background: '#0F1320', border: '1px solid #232A3E', borderTop: 'none', borderRadius: '0 0 14px 14px', overflow: 'hidden', boxShadow: '0 30px 60px -20px #000' }}>
           {understood.length > 0 && (
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', alignItems: 'center', padding: '10px 16px 6px', borderBottom: '1px solid #1A1F31' }}>
-              <span style={{ ...eyebrow, color: '#6B7080' }}>Understood</span>
+              <span style={{ ...eyebrow, color: '#8A93A8' }}>Understood</span>
               {parsed.player && <span style={{ background: '#121626', border: '1px solid #232A3E', borderRadius: 999, padding: '4px 10px', fontSize: 12 }}><span style={{ ...eyebrow, color: '#8A8A93', marginRight: 6 }}>player</span>{parsed.player}</span>}
               {understood.map(([k, v], i) => <span key={i} style={{ background: '#0e1630', border: '1px solid ' + ACCENT + '66', borderRadius: 999, padding: '4px 10px', fontSize: 12, color: '#8fb0ff' }}><span style={{ ...eyebrow, color: '#5b82e8', marginRight: 6 }}>{k}</span>{v}</span>)}
             </div>
           )}
-          {playerHits.length > 0 && <p style={{ ...eyebrow, margin: 0, padding: '10px 16px 4px', color: '#6B7080' }}>Players</p>}
+          {playerHits.length > 0 && <p style={{ ...eyebrow, margin: 0, padding: '10px 16px 4px', color: '#8A93A8' }}>Players</p>}
           {items.map((it, i) => it.kind === 'player' ? (
             <button key={'p' + it.p.id} role="option" aria-selected={sel === i} onMouseEnter={() => setSel(i)} onClick={() => go(i)}
               style={{ width: '100%', textAlign: 'left', display: 'flex', alignItems: 'center', gap: 12, padding: '9px 16px', background: sel === i ? '#111a30' : 'transparent', border: 'none', color: '#EDEDEF', cursor: 'pointer', fontFamily: 'inherit', minHeight: 48 }}>
@@ -202,7 +202,7 @@ export function Omnibox({ value, onChange, onSubmit, onPickPlayer, onPickSet, se
                 <span style={{ fontWeight: 600, fontSize: 14 }}>{hl(it.p.name)}</span>
                 <span style={{ display: 'block', color: '#8A8A93', fontSize: 12 }}>{it.p.sport} · {it.p.cards.toLocaleString()} cards · {it.p.minYear}{it.p.maxYear !== it.p.minYear ? '–' + it.p.maxYear : ''}</span>
               </span>
-              {sel === i && <span style={{ color: '#6B7080', fontSize: 12 }}>↵</span>}
+              {sel === i && <span style={{ color: '#8A93A8', fontSize: 12 }}>↵</span>}
             </button>
           ) : (
             <button key={'s' + it.s.slug} role="option" aria-selected={sel === i} onMouseEnter={() => setSel(i)} onClick={() => go(i)}
@@ -213,7 +213,7 @@ export function Omnibox({ value, onChange, onSubmit, onPickPlayer, onPickSet, se
           ))}
           {refine.length > 0 && (
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', padding: '8px 16px 12px', borderTop: '1px solid #1A1F31' }}>
-              <span style={{ ...eyebrow, color: '#6B7080', alignSelf: 'center', marginRight: 4 }}>Refine</span>
+              <span style={{ ...eyebrow, color: '#8A93A8', alignSelf: 'center', marginRight: 4 }}>Refine</span>
               {refine.map(([q, label]) => <button key={q} onClick={() => { onChange(q); onSubmit(q); setOpen(false) }} style={{ background: '#121626', color: '#D4D4D8', border: '1px solid #232A3E', padding: '6px 11px', borderRadius: 999, fontSize: 12, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit' }}>{playerHits[0].name.split(' ').pop().toLowerCase()} <span style={{ color: ACCENT_TEXT }}>{label}</span></button>)}
             </div>
           )}
@@ -401,7 +401,7 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
       {/* candidates when the query was ambiguous */}
       {candidates && candidates.length > 1 && (
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center', margin: '0 0 14px' }}>
-          <span style={{ ...eyebrow, color: '#6B7080' }}>Also matches</span>
+          <span style={{ ...eyebrow, color: '#8A93A8' }}>Also matches</span>
           {candidates.filter(c => c.id !== player.id).slice(0, 6).map(c => <button key={c.id} onClick={() => onPickCandidate(c)} style={{ background: '#121626', color: '#D4D4D8', border: '1px solid #232A3E', padding: '6px 11px', borderRadius: 999, fontSize: 13, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit' }}>{c.name} <span style={{ color: '#8A8A93' }}>· {c.cards.toLocaleString()}</span></button>)}
         </div>
       )}
@@ -441,7 +441,7 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
 
       {/* QUICK VIEWS */}
       <div className="hq-chiprow" style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center', margin: '16px 0 0' }}>
-        <span style={{ ...eyebrow, color: '#6B7080', marginRight: 4 }}>Quick views</span>
+        <span style={{ ...eyebrow, color: '#8A93A8', marginRight: 4 }}>Quick views</span>
         {VIEWS.map(([k, l]) => { const n = rows.filter(r => quickFilter[k](r.raw)).length; if (nonSports && shard && k !== 'all' && !n && quick !== k) return null; return <button key={k} onClick={() => setQuick(k)} style={pill(quick === k)}>{l}{k !== 'all' ? ' · ' + n.toLocaleString() : ''}</button> })}
       </div>
 
@@ -460,12 +460,12 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
             <p style={legend}>Season</p>
             <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
               <select aria-label="From season" value={yearFrom} onChange={(e) => setYearFrom(parseInt(e.target.value))} style={{ ...selectStyle, flex: 1 }}><option value={0}>Any</option>{years.map(y => <option key={y} value={y}>{seasonLabel(y, player.sport)}</option>)}</select>
-              <span style={{ color: '#6B7080' }}>–</span>
+              <span style={{ color: '#8A93A8' }}>–</span>
               <select aria-label="To season" value={yearTo} onChange={(e) => setYearTo(parseInt(e.target.value))} style={{ ...selectStyle, flex: 1 }}><option value={9999}>Any</option>{years.map(y => <option key={y} value={y}>{seasonLabel(y, player.sport)}</option>)}</select>
             </div>
           </div>
           <div>
-            <p style={legend}>Card type <span style={{ color: '#6B7080', fontWeight: 600, letterSpacing: 0, textTransform: 'none' }}>· tick to narrow</span></p>
+            <p style={legend}>Card type <span style={{ color: '#8A93A8', fontWeight: 600, letterSpacing: 0, textTransform: 'none' }}>· tick to narrow</span></p>
             {[['BASE', 'Base', facets.base], ['PARALLEL', 'Parallels', facets.parallel], ['INSERT', 'Inserts', facets.insert], ['AU', 'Autographs', facets.au], ['PATCH', 'Patches', facets.patch], ['RELIC', 'Relics', facets.relic], ['PLATE', 'Printing plates', facets.plate]].map(([k, l, n]) => (
               <label key={k} style={lbl}><input type="checkbox" checked={types.has(k)} onChange={() => toggleType(k)} style={cb} />{l}<span style={cnt}>{n.toLocaleString()}</span></label>
             ))}
@@ -506,7 +506,7 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
 
         <div style={{ flex: '999 1 320px', minWidth: 0, display: 'flex', flexDirection: 'column', gap: 14 }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
-            <span style={{ ...title(18) }}>{shard ? filtered.length.toLocaleString() : '…'} cards <span style={{ color: '#6B7080', fontSize: 16 }}>in {new Set(filtered.map(r => r.slug)).size.toLocaleString()} sets</span></span>
+            <span style={{ ...title(18) }}>{shard ? filtered.length.toLocaleString() : '…'} cards <span style={{ color: '#8A93A8', fontSize: 16 }}>in {new Set(filtered.map(r => r.slug)).size.toLocaleString()} sets</span></span>
             <div style={{ display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap' }}>
               <div role="group" aria-label="Group results" style={{ display: 'inline-flex', border: '1px solid #232A3E', borderRadius: 8, overflow: 'hidden' }}>
                 {[['set', 'By set'], ['season', 'By season'], ['flat', 'Flat list']].map(([k, l]) => <button key={k} onClick={() => setGroup(k)} style={{ background: group === k ? ACCENT : '#121626', color: group === k ? '#fff' : '#A1A1AA', border: 'none', padding: '0 12px', height: 36, fontSize: 12, fontWeight: 700, cursor: 'pointer', fontFamily: 'inherit' }}>{l}</button>)}
@@ -520,13 +520,13 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
               {years.map(y => { const n = facets.years.get(y); const active = y >= yearFrom && y <= yearTo; return (
                 <button key={y} onClick={() => { setYearFrom(y); setYearTo(y) }} title={n + ' cards'} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4, background: 'none', border: 'none', padding: 0, cursor: 'pointer', fontFamily: 'inherit' }}>
                   <span style={{ width: '100%', height: 6 + Math.round(38 * n / maxYearCount), background: active ? (yearFrom === yearTo && yearFrom === y ? ACCENT : '#2E3D6B') : '#1A1F31', borderRadius: '3px 3px 0 0' }} />
-                  <span style={{ fontSize: 12, color: active ? '#A1A1AA' : '#6B7080' }}>{String(y).slice(2)}</span>
+                  <span style={{ fontSize: 12, color: active ? '#A1A1AA' : '#8A93A8' }}>{String(y).slice(2)}</span>
                 </button>) })}
             </div>
           )}
 
-          {Object.keys(facets.mem).length > 0 && <p style={{ color: '#6B7080', fontSize: 12, margin: 0 }}>* Material based on the maker's standard practice for that product line (hover for the source); no asterisk = stated for that card or insert.</p>}
-          {!shard ? <p style={{ color: '#6B7080' }}>Loading {player.name}…</p> : groups ? (
+          {Object.keys(facets.mem).length > 0 && <p style={{ color: '#8A93A8', fontSize: 12, margin: 0 }}>* Material based on the maker's standard practice for that product line (hover for the source); no asterisk = stated for that card or insert.</p>}
+          {!shard ? <p style={{ color: '#8A93A8' }}>Loading {player.name}…</p> : groups ? (
             <>
               {groups.slice(0, limit).map((g, gi) => {
                 const open = expanded.has(g.key) || (gi === 0 && expanded.size === 0)
@@ -595,7 +595,7 @@ export function seasonLabel(y, sport) {
 const legend = { color: '#8A8A93', fontSize: 12, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', margin: '0 0 8px' }
 const lbl = { display: 'flex', alignItems: 'center', gap: 10, fontSize: 14, color: '#D4D4D8', minHeight: 30, cursor: 'pointer' }
 const cb = { accentColor: ACCENT, width: 16, height: 16, flexShrink: 0 }
-const cnt = { marginLeft: 'auto', color: '#6B7080', fontSize: 12 }
+const cnt = { marginLeft: 'auto', color: '#8A93A8', fontSize: 12 }
 
 // ---------- My Players panel (used from the set page + a standalone view) ----------
 export function MyPlayersPanel({ myPlayers, onOpenPlayer, dirPlayers }) {
