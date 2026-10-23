@@ -51,7 +51,19 @@ for (const f of files) {
     if (!existsSync(path)) { if (job) Object.assign(job, { status: 'review', note: 'no curated file with this slug' }); review++; continue }
     const old = JSON.parse(readFileSync(path, 'utf8'))
     const oldKeys = keys(old), newKeys = keys(fresh)
-    let inside = 0; for (const k of oldKeys) if (newKeys.has(k)) inside++
+    // A current card also counts as covered when TCDB has the same number and its name is
+    // the start of ours — older imports glued the team onto the name ("Xander Bogaerts Boston Red Sox").
+    const norm = (x) => String(x || '').normalize('NFKD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9 ]/g, ' ').replace(/\s+/g, ' ').trim()
+    const byNum = new Map()
+    for (const sec of sections) for (const c of sec.cards) { const k = norm(c.n); if (!byNum.has(k)) byNum.set(k, []); byNum.get(k).push(norm(c.p)) }
+    const oldCards = new Map()
+    for (const sec of old.sections || []) for (const c of sec.cards) oldCards.set(String(c.n || '').trim().replace(/^#/, '').toLowerCase() + '|' + surname(c.p), c)
+    let inside = 0
+    for (const k of oldKeys) {
+      if (newKeys.has(k)) { inside++; continue }
+      const c = oldCards.get(k), p = c && norm(c.p)
+      if (p && (byNum.get(norm(c.n)) || []).some(q => q && (p === q || p.startsWith(q + ' ')))) inside++
+    }
     const cover = oldKeys.size ? inside / oldKeys.size : 1
     const nOld = count(old), nNew = count(fresh)
     const line = `${s.slug}: ${nOld} -> ${nNew} cards, ${old.sections.length} -> ${sections.length} sections, covers ${(cover * 100).toFixed(1)}% of current`

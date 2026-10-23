@@ -26,7 +26,7 @@
    "193 players sold on SCP not on checklist"
   ],
   "status": "review",
-  "note": "2017-topps-wwe-wrestling-checklist-added: 187 -> 1726 cards, 8 -> 56 sections, covers 87.6% of current",
+  "note": "2017-topps-wwe-wrestling-checklist-added: 187 -> 1743 cards, 8 -> 56 sections, covers 87.6% of current",
   "tcdbSid": 142170
  },
  {
@@ -144,9 +144,10 @@
    "missing inserts: 1989 is back diamond, atomic, bubbles, carbon fiber, draft scouts breakout die cut, dualing die cut, fire die cut, social media",
    "227 players sold on SCP not on checklist"
   ],
-  "status": "review",
-  "note": "2014-bowman-chrome-baseball-cards: 650 -> 8350 cards, 5 -> 108 sections, covers 0.0% of current",
-  "tcdbSid": 90974
+  "status": "done",
+  "note": "2014-bowman-chrome-baseball-cards: 650 -> 8350 cards, 5 -> 108 sections, covers 100.0% of current",
+  "tcdbSid": 90974,
+  "at": "2026-10-23"
  },
  {
   "slug": "2016-topps-opening-baseball-cards",
