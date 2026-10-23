@@ -8,3 +8,4 @@ public/data/rpa-index.json
 pipeline.log*
 public/data/players/
 public/data/teams/
+public/verify-hints.json

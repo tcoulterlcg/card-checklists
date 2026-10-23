@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev -p 3005",
-    "prebuild": "node scripts/apply-corrections.mjs && node scripts/build-index.mjs && node scripts/build-search-index.mjs && node scripts/build-rpa-index.mjs && node --max-old-space-size=6000 scripts/build-player-index.mjs",
+    "prebuild": "node scripts/apply-corrections.mjs && node scripts/build-verify-hints.mjs && node scripts/build-index.mjs && node scripts/build-search-index.mjs && node scripts/build-rpa-index.mjs && node --max-old-space-size=6000 scripts/build-player-index.mjs",
     "build": "next build",
     "start": "next start"
   },

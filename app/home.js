@@ -367,6 +367,9 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
   const fbAdmin = useFeedbackAdmin(account)
   const [fixing, setFixing] = useState(null)   // { slug, feedback? } while the admin fix editor is open
   const [fixVersion, setFixVersion] = useState(0)
+  // "Help verify" notes for sets the data audit thinks have gaps (scripts/build-verify-hints.mjs)
+  const [verifyHints, setVerifyHints] = useState(null)
+  useEffect(() => { if (activeSet && !verifyHints) fetch('/verify-hints.json').then(r => r.ok ? r.json() : {}).catch(() => ({})).then(setVerifyHints) }, [activeSet])
   const [wantFlash, setWantFlash] = useState('')
   const [patchData, setPatchData] = useState(null)
   const [rpaData, setRpaData] = useState(null)
@@ -1173,6 +1176,22 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
               )}
             </div>
           </div>
+
+          {verifyHints && verifyHints[setData.slug] && (
+            <div role="note" style={{ background: 'linear-gradient(140deg, #101a33, #0F1320)', border: '1px solid #2E3D6B', borderRadius: 14, padding: '16px 20px', marginBottom: 20, display: 'flex', gap: 16, alignItems: 'center', flexWrap: 'wrap' }}>
+              <div style={{ flex: '1 1 320px', minWidth: 0 }}>
+                <p style={{ ...eyebrow, color: ACCENT_TEXT, margin: '0 0 6px' }}>Help verify this set</p>
+                <p style={{ color: '#D4D4D8', fontSize: 14, lineHeight: 1.55, margin: 0 }}>This checklist may not be complete yet. Know this product? Tell us what’s missing.</p>
+                <ul style={{ color: '#8A93A8', fontSize: 13, lineHeight: 1.5, margin: '8px 0 0', paddingLeft: 18 }}>
+                  {verifyHints[setData.slug].map((l, i) => <li key={i}>{l}</li>)}
+                </ul>
+              </div>
+              <button onClick={() => setFeedback({ set_slug: setData.slug, set_name: setData.name, sections: (setData.sections || []).map(x => x.title), kind: 'missing_card' })}
+                style={{ ...buttonText, background: ACCENT, color: '#fff', border: 'none', borderRadius: 9, padding: '9px 16px', cursor: 'pointer', fontSize: 13, flexShrink: 0 }}>
+                Report what’s missing
+              </button>
+            </div>
+          )}
 
           {setData.boxBreak && setData.boxBreak.length > 0 && (
             <div style={{ background: 'linear-gradient(140deg, #17140c, #0F1320)', border: '1px solid ' + ACCENT + '33', borderRadius: 14, padding: '18px 22px', marginBottom: 20 }}>
