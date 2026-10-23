@@ -7,6 +7,7 @@ import { useCallback, useDeferredValue, useEffect, useLayoutEffect, useMemo, use
 import { Select, Popover, Trigger, Chevron, Check, menuItem, menuHeading, triggerStyle, useIsMobile } from '../components/dropdown'
 import { useAccount, AccountChip, AuthModal, CollectionView, CommunityView } from '../components/community'
 import { supa, addWant, removeWant, myWantlist, grailfindrFindUrl } from '../lib/supa'
+import { FeedbackModal, FeedbackView, useFeedbackAdmin } from '../components/feedback'
 import { Omnibox, PlayerPage, MyPlayersPanel, useMyPlayers, loadPlayerDir, loadTopPlayers, seasonLabel, MemBadge, MemChip, memCodeOf } from '../components/player'
 import { norm, parseQuery, parseQueryFor, matchPlayers, TYPE, typeLabel, TYPE_COLORS, serialLabel } from '../lib/query'
 import { loadSet, loadIndex } from '../lib/catalog'
@@ -360,6 +361,8 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
   const [view, setView] = useState('browse') // browse | patchswaps | rpa | community | collection
   const account = useAccount()
   const [authOpen, setAuthOpen] = useState(false)
+  const [feedback, setFeedback] = useState(null)   // context of the open report form, or null
+  const fbAdmin = useFeedbackAdmin(account)
   const [wantFlash, setWantFlash] = useState('')
   const [patchData, setPatchData] = useState(null)
   const [rpaData, setRpaData] = useState(null)
@@ -833,7 +836,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
     const t = activeSet ? (setData ? setData.name : activeSet.name) + ' Checklist'
       : view === 'player' && activePlayer ? activePlayer.name + ' Cards'
       : globalHits ? 'Search: ' + query
-      : view === 'community' ? 'Community' : view === 'collection' ? 'My Collection' : view === 'myplayers' ? 'My Players' : ''
+      : view === 'community' ? 'Community' : view === 'collection' ? 'My Collection' : view === 'myplayers' ? 'My Players' : view === 'feedback' ? 'Feedback' : ''
     document.title = t ? t + ' — CardHQ' : 'CardHQ — Sports Card & TCG Checklists'
   }, [activeSet, setData, view, activePlayer, globalHits])
   // Deep links and Back/Forward: ?player=Name[&q=raw] · ?set=slug · ?view=community · ?search=term
@@ -852,7 +855,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
       }).catch(() => { goHome(false); setNotice('That set isn’t in the database (the link may be old). Browse or search below.') })
     }
     else if (sr) runGlobalSearch(sr, false)
-    else if (v && ['myplayers', 'community', 'collection'].includes(v)) openView(v, false, v === 'collection' && sp.get('cset') ? '&cset=' + encodeURIComponent(sp.get('cset')) : '')
+    else if (v && ['myplayers', 'community', 'collection', 'feedback'].includes(v)) openView(v, false, v === 'collection' && sp.get('cset') ? '&cset=' + encodeURIComponent(sp.get('cset')) : '')
     else {
       goHome(false)
       // browse filters live in the URL too (?sport=Hockey&team=...), so Back and shared links restore them
@@ -918,6 +921,10 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
               <input ref={headerInput} value={headerQ} onChange={(e) => setHeaderQ(e.target.value)} placeholder="Search sets, players..." aria-label="Search sets and players" />
               <kbd>/</kbd>
             </form>
+            {fbAdmin.admin && fbAdmin.count > 0 && (
+              <button className="hq-navlink" onClick={() => openView('feedback')} title="New community feedback" aria-label={fbAdmin.count + ' new feedback reports'}
+                style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>Inbox<span style={{ background: ACCENT, color: '#fff', borderRadius: 999, padding: '1px 7px', fontSize: 12, fontWeight: 700 }}>{fbAdmin.count}</span></button>
+            )}
             <AccountChip account={account} onOpenAuth={() => setAuthOpen(true)} />
             <button className="hq-iconbtn" aria-label="Search" onClick={() => { setMenuOpen(false); goHome(); window.scrollTo(0, 0); setTimeout(() => document.querySelector('.hq-hero input')?.focus(), 50) }}>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
@@ -935,6 +942,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
           {NAV_ITEMS.map(([label, fn, v]) => (
             <button key={label} className="hq-sheet-row" aria-current={view === v ? 'page' : undefined} onClick={() => { setMenuOpen(false); fn() }}>{label}</button>
           ))}
+          <button className="hq-sheet-row" aria-current={view === 'feedback' ? 'page' : undefined} onClick={() => { setMenuOpen(false); openView('feedback') }}>{fbAdmin.admin ? 'Feedback inbox' + (fbAdmin.count ? ' (' + fbAdmin.count + ')' : '') : 'Feedback'}</button>
           {!account.session ? (
             <div className="hq-sheet-foot">
               <button className="hq-signin" onClick={() => { setMenuOpen(false); setAuthOpen(true) }}>Sign in</button>
@@ -951,6 +959,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
       <style>{'.hq-setcard:hover{transform:translateY(-4px);border-color:#2E3D6B;box-shadow:0 18px 40px -18px rgba(0,0,0,0.9)}@keyframes hqticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}.hq-track{display:inline-flex;white-space:nowrap;animation:hqticker linear infinite}.hq-track:hover{animation-play-state:paused}'}</style>
 
       {notice && <div role="status" style={{ background: SURFACE, border: '1px solid ' + LINE, borderRadius: 12, padding: '12px 16px', margin: '0 0 16px', color: TEXT_2, fontSize: 14 }}>{notice}</div>}
+      <FeedbackModal open={!!feedback} context={feedback || {}} onClose={() => setFeedback(null)} account={account} onOpenAuth={() => setAuthOpen(true)} />
       <AuthModal open={authOpen} onClose={() => setAuthOpen(false)} account={account} />
       {wantFlash && (
         <div style={{ position: 'fixed', bottom: 56, right: 24, zIndex: 95, background: ACCENT, color: '#fff', fontWeight: 700, fontSize: 14, padding: '12px 20px', borderRadius: 12, boxShadow: '0 8px 30px #000a' }}>{wantFlash}</div>
@@ -1129,6 +1138,11 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
               <button onClick={() => { openView('collection') }}
                 style={{ ...buttonText, background: 'transparent', color: '#A1A1AA', border: '1px solid #232A3E', borderRadius: 9, padding: '8px 15px', cursor: 'pointer', fontSize: 13 }}>
                 Track in My Collection
+              </button>
+              <button onClick={() => setFeedback({ set_slug: setData.slug, set_name: setData.name, sections: (setData.sections || []).map(x => x.title), section: activeSection !== 'All' ? activeSection : '' })}
+                title="Missing card, wrong info, missing parallel (shield, SuperFractor, game-used…)? Tell us."
+                style={{ ...buttonText, background: 'transparent', color: '#A1A1AA', border: '1px solid #232A3E', borderRadius: 9, padding: '8px 15px', cursor: 'pointer', fontSize: 13 }}>
+                Report a problem
               </button>
             </div>
           </div>
@@ -1327,11 +1341,20 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
           {globalHits.players.length + globalHits.sets.length === 0 && <p style={{ padding: 20, color: '#8A93A8', fontSize: 14 }}>No players or sets match.</p>}
         </section>
       ) : view === 'player' && activePlayer ? (
+        <>
         <PlayerPage key={activePlayer.id + '|' + ((playerParsed && playerParsed.raw) || '')} player={activePlayer} parsed={playerParsed} sets={sets} myPlayers={myPlayers}
           onOpenSet={stableCb.openSetBySlug}
           onWant={stableCb.wantIt} onSearch={stableCb.runSearch} candidates={playerCandidates} onPickCandidate={stableCb.pickCandidate} />
+        <p style={{ color: '#8A93A8', fontSize: 13, margin: '18px 0 0' }}>
+          Missing a card or parallel for {activePlayer.name}?{' '}
+          <button onClick={() => setFeedback({ player: activePlayer.name })} style={{ background: 'none', border: 'none', padding: 0, color: ACCENT_TEXT, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit', fontSize: 13 }}>Report it</button>
+        </p>
+        </>
       ) : view === 'myplayers' ? (
         <MyPlayersPanel myPlayers={myPlayers} onOpenPlayer={(name) => openPlayerByName(name)} onOpenSet={(slug) => openSetBySlug(slug)} />
+      ) : view === 'feedback' ? (
+        <FeedbackView account={account} admin={fbAdmin.admin} onOpenAuth={() => setAuthOpen(true)} onOpenSet={openSetBySlug}
+          onNew={(ctx) => setFeedback(ctx)} onChanged={fbAdmin.refresh} />
       ) : view === 'community' ? (
         <CommunityView account={account} indexSets={sets} onOpenAuth={() => setAuthOpen(true)} />
       ) : view === 'collection' ? (
@@ -1596,6 +1619,13 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
 
       <footer style={{ marginTop: 60, borderTop: '1px solid #1A1F31', paddingTop: 18, display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: 8 }}>
         <span style={{ color: '#8A93A8', fontSize: 12 }}>Checklist data sourced from The Cardboard Connection.</span>
+        <span style={{ display: 'inline-flex', gap: 14, flexWrap: 'wrap' }}>
+          {[['Report a problem', () => setFeedback(activeSet && setData ? { set_slug: setData.slug, set_name: setData.name, sections: (setData.sections || []).map(x => x.title) } : { kind: 'other_data' })],
+            ['Suggest a feature', () => setFeedback({ kind: 'feature' })],
+            [fbAdmin.admin ? 'Feedback inbox' + (fbAdmin.count ? ' (' + fbAdmin.count + ')' : '') : 'My reports', () => openView('feedback')]].map(([l, fn]) => (
+            <button key={l} onClick={fn} style={{ background: 'none', border: 'none', padding: 0, color: '#8A93A8', fontSize: 12, cursor: 'pointer', fontFamily: 'inherit', textDecoration: 'underline', textUnderlineOffset: 3 }}>{l}</button>
+          ))}
+        </span>
         <span style={{ color: '#8A93A8', fontSize: 12 }}>a Coulter Companies product</span>
       </footer>
     </main>
