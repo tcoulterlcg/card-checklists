@@ -84,7 +84,9 @@
    "missing inserts: 1991 buybacks, 70th, ascent, chrome 70th, high tek, high tek bashers, high tek foundations franchise, holiday",
    "269 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2017-bowman-baseball-cards: 851 -> 12591 cards, 11 -> 224 sections, covers 99.8% of current",
+  "at": "2026-10-23"
  },
  {
   "slug": "1935-goudey-baseball-cards",
@@ -111,7 +113,7 @@
    "198 players sold on SCP not on checklist"
   ],
   "status": "review",
-  "note": "2018-topps-heritage-baseball-cards: 976 -> 6906 cards, 9 -> 81 sections, covers 88.0% of current",
+  "note": "2018-topps-heritage-baseball-cards: 976 -> 6907 cards, 9 -> 81 sections, covers 88.0% of current",
   "tcdbSid": 157374
  },
  {
@@ -126,7 +128,7 @@
    "323 players sold on SCP not on checklist"
   ],
   "status": "done",
-  "note": "2002-bowman-chrome-baseball: 43 -> 1876 cards, 2 -> 8 sections, covers 95.3% of current",
+  "note": "2002-bowman-chrome-baseball: 1876 -> 1876 cards, 8 -> 8 sections, covers 100.0% of current",
   "at": "2026-10-23"
  },
  {
