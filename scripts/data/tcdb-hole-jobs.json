@@ -3569,7 +3569,9 @@
   "why": [
    "base skips 38 numbers in #1-300 (e.g. 10, 22, 42, 46, 59)"
   ],
-  "status": "todo"
+  "status": "review",
+  "note": "2020-topps-allen-and-ginter-baseball: 6855 -> 7131 cards, 74 -> 63 sections, covers 79.9% of current",
+  "tcdbSid": 224020
  },
  {
   "slug": "2020-topps-allen-and-ginter-chrome-baseball",
@@ -3626,7 +3628,9 @@
    "missing inserts: 1989 is back diamond, atomic, camo, canary, cutting edge stars, relic, toolsy die cuts, top prospects",
    "27 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2014-bowman-platinum-baseball-cards: 300 -> 4253 cards, 3 -> 84 sections, covers 99.5% of current",
+  "at": "2026-10-23"
  },
  {
   "slug": "2016-bowman-platinum-baseball-cards",
