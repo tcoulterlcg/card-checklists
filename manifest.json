@@ -2,13 +2,13 @@
  "sports": {
   "Non-Sport": {
    "file": "index/non-sport.json",
-   "sets": 6,
-   "cards": 4237
+   "sets": 10,
+   "cards": 17080
   },
   "Baseball": {
    "file": "index/baseball.json",
-   "sets": 696,
-   "cards": 67086
+   "sets": 698,
+   "cards": 67246
   },
   "Basketball": {
    "file": "index/basketball.json",
@@ -56,7 +56,7 @@
    "cards": 539
   }
  },
- "sets": 1276,
- "cards": 127730,
- "updated": "2026-10-23T00:54:44.286Z"
+ "sets": 1282,
+ "cards": 140733,
+ "updated": "2026-10-23T00:55:33.071Z"
 }
