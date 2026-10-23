@@ -3,7 +3,7 @@
 // collection tracker. Dark + electric blue to match the site shell. Data via lib/supa.
 import { loadSet } from '../lib/catalog'
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { collectionCardN, supa, grailfindrConnectUrl, grailfindrSignupUrl, grailfindrForgotUrl, GRAILFINDR_URL, getProfile, ensureProfile, addWant, removeWant, deletePost, myWantlist, toggleCollected, myCollection, uploadCardImage, setCollectionImage, forumFeed, createPost, react, comments, addComment, grailSets, notifyGrailCompletion } from '../lib/supa'
+import { collectionCardN, supa, grailfindrConnectUrl, grailfindrSignupUrl, grailfindrForgotUrl, GRAILFINDR_URL, getProfile, ensureProfile, addWant, removeWant, deletePost, myWantlist, toggleCollected, myCollection, uploadCardImage, setCollectionImage, forumFeed, createPost, react, comments, addComment } from '../lib/supa'
 import { ACCENT, ACCENT_TEXT, BG, SURFACE, SURFACE_2, LINE, CHIP_LINE, TEXT, TEXT_2, LABEL, display, eyebrow, title, buttonText } from '../lib/theme'
 
 const card = { background: 'linear-gradient(155deg, #121626, #0F1320)', border: '1px solid #232A3E', borderRadius: 14 }
@@ -128,12 +128,10 @@ export function CollectionView({ account, indexSets, onOpenAuth, onOpenSet }) {
   const [confirmRm, setConfirmRm] = useState(null)  // set slug whose whole wantlist is about to be removed
   const [secShown, setSecShown] = useState(12) // big sets have hundreds of parallel sections
   const [setData, setSetData] = useState(null)
-  const [grails, setGrails] = useState([])
   const [notice, setNotice] = useState('')
   const fileRef = useRef(null)
   const [uploadTarget, setUploadTarget] = useState(null)
 
-  useEffect(() => { grailSets().then(setGrails) }, [])
   useEffect(() => {
     if (!session?.user) return
     myWantlist(session.user.id).then(setWants)
@@ -159,18 +157,6 @@ export function CollectionView({ account, indexSets, onOpenAuth, onOpenSet }) {
   const wantsBySets = {}
   for (const w of wants || []) { (wantsBySets[w.set_slug] = wantsBySets[w.set_slug] || { name: w.set_name || w.set_slug, items: [] }).items.push(w) }
 
-  async function checkGrailCompletion(slug, name) {
-    const g = grails.find(x => x.set_slug === slug)
-    if (!g || !g.notify) return
-    const data = setData && setData.slug === slug ? setData : await loadSet(slug)
-    if (!data) return
-    const total = data.sections.reduce((n, s) => n + s.cards.length, 0)
-    const mine = (await myCollection(session.user.id, slug)).length
-    if (total > 0 && mine >= total) {
-      await notifyGrailCompletion(session.user.id, profile?.username || 'unknown', slug, name, g.tier)
-      setNotice('Grail completion recorded — the site manager has been notified. Post it in the Community tab!')
-    }
-  }
 
   return (
     <section>
@@ -191,7 +177,7 @@ export function CollectionView({ account, indexSets, onOpenAuth, onOpenSet }) {
         <div>
           <button style={{ ...btnGhost, marginBottom: 16 }} onClick={() => setActiveSlug(null)}>← Back to wantlist</button>
           <h2 style={{ ...title(24), margin: '0 0 4px' }}>{setData.name}</h2>
-          <p style={{ color: '#8A8A93', fontSize: 13, margin: '0 0 16px' }}>Check off cards as you collect them. {grails.some(g => g.set_slug === activeSlug) && <span style={{ color: ACCENT_TEXT, fontWeight: 700 }}>★ GRAIL SET — completion is site-verified and celebrated.</span>}</p>
+          <p style={{ color: '#8A8A93', fontSize: 13, margin: '0 0 16px' }}>Check off cards as you collect them.</p>
           {setData.sections.slice(0, secShown).map((sec, si) => (
             <div key={si} style={{ marginBottom: 18 }}>
               <h3 style={{ ...title(16), color: ACCENT_TEXT, margin: '0 0 8px' }}>{sec.title} <span style={{ color: '#6B7080', fontWeight: 600 }}>({sec.cards.length})</span></h3>
@@ -208,7 +194,6 @@ export function CollectionView({ account, indexSets, onOpenAuth, onOpenSet }) {
                         if (error) setNotice('Couldn’t save that change — ' + error.message)
                         const next = await myCollection(session.user.id)
                         setCollected(next)
-                        if (e.target.checked) checkGrailCompletion(activeSlug, setData.name)
                       }} style={{ accentColor: ACCENT, width: 18, height: 18, flexShrink: 0 }} />
                       <span style={{ color: '#8A8A93', fontSize: 12, minWidth: 34 }}>{c.n || '—'}</span>
                       <span style={{ color: isC ? '#9fd18a' : '#D4D4D8', fontSize: 13, fontWeight: 600, flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{c.p}</span>
@@ -245,7 +230,6 @@ export function CollectionView({ account, indexSets, onOpenAuth, onOpenSet }) {
                   <p style={{ color: '#8A8A93', fontSize: 13, margin: '4px 0 10px' }}>
                     {g.items.some(i => !i.card_n) ? 'Full set wanted' : `${g.items.length} card${g.items.length === 1 ? '' : 's'} wanted`}
                     {total ? ` · ${mine}/${total} collected` : ''}
-                    {grails.some(x => x.set_slug === slug) && <span style={{ color: ACCENT_TEXT, fontWeight: 700 }}> · ★ GRAIL</span>}
                   </p>
                   {total > 0 && (
                     <div style={{ height: 6, background: '#222', borderRadius: 4, overflow: 'hidden', marginBottom: 12 }}>
@@ -307,7 +291,6 @@ export function CommunityView({ account, indexSets, onOpenAuth }) {
   const [ach, setAch] = useState('set-completion')
   const [setQuery, setSetQuery] = useState('')
   const [chosenSet, setChosenSet] = useState(null)
-  const [grails, setGrails] = useState([])
   const [openComments, setOpenComments] = useState({})
   const [commentDraft, setCommentDraft] = useState({})
   const [postErr, setPostErr] = useState('')
@@ -319,7 +302,7 @@ export function CommunityView({ account, indexSets, onOpenAuth }) {
   // instead of letting the insert fail and silently throwing away their post.
   const needName = () => { if (profile) return false; setPostErr('Pick a username first — it’s how you appear in the community. Your post is still here.'); onOpenAuth(); return true }
 
-  useEffect(() => { forumFeed().then(setFeed); grailSets().then(setGrails) }, [])
+  useEffect(() => { forumFeed().then(setFeed) }, [])
   const setMatches = useMemo(() => {
     const q = setQuery.trim().toLowerCase()
     if (q.length < 2) return []
@@ -330,10 +313,8 @@ export function CommunityView({ account, indexSets, onOpenAuth }) {
     setPostErr('')
     if (!postTitle.trim()) { setPostErr('Add a title first.'); return }
     if (needName()) return
-    const g = chosenSet ? grails.find(x => x.set_slug === chosenSet.slug) : null
-    const r = await createPost(session.user.id, { title: postTitle.trim(), body: body.trim() || null, set_slug: chosenSet?.slug || null, achievement: ach, grail_tier: g ? g.tier : null })
+    const r = await createPost(session.user.id, { title: postTitle.trim(), body: body.trim() || null, set_slug: chosenSet?.slug || null, achievement: ach })
     if (r?.error) { setPostErr('Couldn’t post: ' + r.error.message + '. Your draft is still here.'); return }
-    if (g && g.notify && ach === 'set-completion') await notifyGrailCompletion(session.user.id, profile?.username || 'unknown', chosenSet.slug, chosenSet.name, g.tier)
     setPostTitle(''); setBody(''); setChosenSet(null); setSetQuery(''); setComposing(false)
     forumFeed().then(setFeed)
   }
@@ -343,7 +324,7 @@ export function CommunityView({ account, indexSets, onOpenAuth }) {
       <div style={{ background: 'linear-gradient(140deg, #0f1526, #0F1320)', border: '1px solid ' + ACCENT + '33', borderRadius: 18, padding: 30, marginBottom: 22 }} className="hq-panel">
         <h1 style={{ ...display, fontSize: 40, margin: 0, lineHeight: 1 }}>Community</h1>
         <p style={{ color: '#aaa', fontSize: 16, lineHeight: 1.6, maxWidth: 720, margin: '14px 0 0' }}>
-          Collecting accomplishments from the CardHQ community — completed sets, finished rainbows, grail pulls. Grail-tier completions are verified and celebrated.
+          Collecting accomplishments from the CardHQ community — completed sets, finished rainbows, grail pulls.
         </p>
         <div style={{ marginTop: 18 }}>
           {session
@@ -369,7 +350,6 @@ export function CommunityView({ account, indexSets, onOpenAuth }) {
                   {setMatches.map(s => (
                     <div key={s.slug} onClick={() => { setChosenSet(s); setSetQuery('') }} style={{ padding: '9px 13px', fontSize: 13, color: '#ccc', cursor: 'pointer', borderBottom: '1px solid #222' }}>
                       {s.name} <span style={{ color: '#6B7080' }}>({s.cardCount} cards)</span>
-                      {grails.some(g => g.set_slug === s.slug) && <span style={{ color: ACCENT_TEXT, fontWeight: 700 }}> ★ GRAIL</span>}
                     </div>
                   ))}
                 </div>
@@ -395,19 +375,17 @@ export function CommunityView({ account, indexSets, onOpenAuth }) {
       ) : (
         <div style={{ display: 'grid', gap: 14 }}>
           {feed.map(p => {
-            const isGrail = !!p.grail_tier
             const fires = (p.forum_reactions || []).length
             const myFire = !!session && (p.forum_reactions || []).some(r => r.user_id === session.user.id)
             const nComments = (p.forum_comments || []).length
             const achLabel = (ACHIEVEMENTS.find(a => a[0] === p.achievement) || [])[1]
             return (
-              <div key={p.id} style={{ ...card, padding: '20px 22px', border: isGrail ? '1px solid ' + ACCENT : card.border, boxShadow: isGrail ? '0 0 24px ' + ACCENT + '22' : 'none' }}>
-                {isGrail && <p style={{ ...eyebrow, margin: '0 0 8px', color: ACCENT_TEXT }}>★ {p.grail_tier === 'extreme' ? 'Extreme difficulty' : 'Hard'} · verified grail set</p>}
+              <div key={p.id} style={{ ...card, padding: '20px 22px' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 8, flexWrap: 'wrap' }}>
                   <span style={{ width: 30, height: 30, borderRadius: '50%', background: '#232A3E', color: ACCENT_TEXT, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: 14 }}>{(p.profiles?.username || '?')[0].toUpperCase()}</span>
                   <span style={{ color: '#D4D4D8', fontWeight: 700, fontSize: 14 }}>{p.profiles?.username || 'collector'}</span>
                   <span style={{ color: '#6B7080', fontSize: 12 }}>{new Date(p.created_at).toLocaleDateString()}</span>
-                  {achLabel && <span style={{ ...eyebrow, marginLeft: 'auto', background: isGrail ? ACCENT : '#1A1F31', color: isGrail ? '#fff' : '#A1A1AA', padding: '4px 10px', borderRadius: 999, fontSize: 12 }}>{achLabel}</span>}
+                  {achLabel && <span style={{ ...eyebrow, marginLeft: 'auto', background: '#1A1F31', color: '#A1A1AA', padding: '4px 10px', borderRadius: 999, fontSize: 12 }}>{achLabel}</span>}
                 </div>
                 <h3 style={{ ...title(20), margin: 0, color: '#fff', lineHeight: 1.15 }}>{p.title}</h3>
                 {p.body && <p style={{ color: '#b5b5b5', fontSize: 14, lineHeight: 1.6, margin: '8px 0 0' }}>{p.body}</p>}
