@@ -3,7 +3,8 @@
 // Checklist HQ v2 — sectioned checklist database (Base / Inserts / Autos …)
 // imported from cardboardconnection.com. Static JSON under /public/data:
 // index.json lists sets; each set file carries sections -> cards.
-import { useDeferredValue, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
+import { useCallback, useDeferredValue, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
+import { Select, Popover, Trigger, Chevron, Check, menuItem, menuHeading, triggerStyle, useIsMobile } from '../components/dropdown'
 import { useAccount, AccountChip, AuthModal, CollectionView, CommunityView } from '../components/community'
 import { supa, addWant, removeWant, myWantlist } from '../lib/supa'
 import { Omnibox, PlayerPage, MyPlayersPanel, useMyPlayers, loadPlayerDir, loadTopPlayers, seasonLabel, MemBadge, MemChip, memCodeOf } from '../components/player'
@@ -208,12 +209,6 @@ const MAIN_SPORTS = ['Baseball', 'Football', 'Basketball', 'Hockey', 'Soccer']
 const POPULAR_BRANDS = ['Topps', 'Panini', 'Upper Deck', 'Bowman', 'Donruss', 'Fleer']
 const SECONDARY = '#8A93A8'
 
-const Chevron = () => (
-  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6" /></svg>
-)
-const Check = () => (
-  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={ACCENT_TEXT} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10" /></svg>
-)
 const XIcon = () => (
   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
 )
@@ -224,34 +219,19 @@ const pill = (on) => ({
   background: on ? ACCENT : SURFACE, color: on ? '#fff' : '#C9CCD6',
   border: '1px solid ' + (on ? ACCENT : LINE)
 })
-const menuItem = (on) => ({
-  minHeight: 40, padding: '0 12px', borderRadius: 8, cursor: 'pointer', textAlign: 'left',
-  display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8, fontSize: 14,
-  fontWeight: on ? 600 : 500, background: on ? SURFACE_2 : 'transparent', color: on ? '#fff' : '#D4D4D8', border: 'none'
-})
-const popover = {
-  position: 'absolute', top: 'calc(100% + 8px)', zIndex: 40, background: SURFACE, border: '1px solid ' + LINE,
-  borderRadius: 14, padding: 8, boxShadow: '0 20px 40px rgba(0,0,0,0.5)', boxSizing: 'border-box'
-}
 
 // Category tabs (All / Sports / TCG / Other), one row of chips for the active
-// tab, a "More sports" menu, a searchable Brand menu, the Product select and a
-// strip of active filters with one-click removal.
+// tab, a "More sports" menu, a searchable Brand menu, the Product menu and a
+// strip of active filters with one-click removal. All menus use the shared
+// dropdown in components/dropdown.js.
 function SetFilters({ sports, sportFilter, onPick, showBrand, brands, brandFilter, onBrand, products, productFilter, onProduct }) {
   const [menu, setMenu] = useState(null)          // 'more' | 'brand' | null
   const [brandQ, setBrandQ] = useState('')
-  const [moreLeft, setMoreLeft] = useState(0)
-  const wrapRef = useRef(null)
   const moreBtn = useRef(null)
+  const brandBtn = useRef(null)
+  const mobile = useIsMobile()
+  const closeMenu = useCallback(() => setMenu(null), [])
 
-  useEffect(() => {
-    if (!menu) return
-    const down = (e) => { if (wrapRef.current && !wrapRef.current.contains(e.target)) setMenu(null) }
-    const key = (e) => { if (e.key === 'Escape') setMenu(null) }
-    document.addEventListener('mousedown', down)
-    document.addEventListener('keydown', key)
-    return () => { document.removeEventListener('mousedown', down); document.removeEventListener('keydown', key) }
-  }, [menu])
   useEffect(() => { if (menu !== 'brand') setBrandQ('') }, [menu])
 
   const group = groupOf(sportFilter)
@@ -266,16 +246,6 @@ function SetFilters({ sports, sportFilter, onPick, showBrand, brands, brandFilte
     : group === 'Other' ? [['All other', 'Other'], ...otherCats.map(s => [s, s])] : []
   const moreSel = moreSports.includes(sportFilter)
 
-  const toggleMore = () => {
-    if (menu === 'more') return setMenu(null)
-    const w = wrapRef.current, b = moreBtn.current
-    if (w && b) {
-      const wr = w.getBoundingClientRect(), br = b.getBoundingClientRect()
-      setMoreLeft(Math.max(0, Math.min(br.left - wr.left, wr.width - 320)))
-    }
-    setMenu('more')
-  }
-
   const brandList = brands.slice(1)
   const q = brandQ.trim().toLowerCase()
   const shown = q ? brandList.filter(b => b.toLowerCase().includes(q)) : brandList
@@ -289,11 +259,14 @@ function SetFilters({ sports, sportFilter, onPick, showBrand, brands, brandFilte
   if (productFilter !== 'All') active.push([productFilter, () => onProduct('All')])
 
   const brandItems = (list) => list.map(b => (
-    <button key={b} onClick={() => pickBrand(b)} style={menuItem(brandFilter === b)}>{b}{brandFilter === b && <Check />}</button>
+    <button key={b} type="button" onClick={() => pickBrand(b)} style={menuItem(brandFilter === b)}>
+      <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{b}</span>{brandFilter === b && <Check />}
+    </button>
   ))
+  const grid2 = { display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: 2 }
 
   return (
-    <div ref={wrapRef} style={{ position: 'relative' }}>
+    <div>
       <div role="tablist" aria-label="Category" className="hq-chiprow" style={{ display: 'flex', gap: 32, borderBottom: '1px solid ' + LINE }}>
         {tabs.map(([label, value]) => {
           const on = group === value
@@ -311,60 +284,49 @@ function SetFilters({ sports, sportFilter, onPick, showBrand, brands, brandFilte
             <button key={value} onClick={() => { setMenu(null); onPick(value) }} style={pill(sportFilter === value)}>{label}</button>
           ))}
           {group === 'Sports' && moreSports.length > 0 && (
-            <button ref={moreBtn} aria-haspopup="true" aria-expanded={menu === 'more'} onClick={toggleMore}
+            <button ref={moreBtn} type="button" aria-haspopup="listbox" aria-expanded={menu === 'more'} onClick={() => setMenu(menu === 'more' ? null : 'more')}
               style={{ ...pill(moreSel), paddingRight: 12, ...(moreSel ? {} : { border: '1px dashed #3A4260' }) }}>
               {moreSel ? sportFilter : 'More sports'}<Chevron />
             </button>
           )}
         </div>
 
-        <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 8 }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 8, minWidth: 0, maxWidth: '100%' }}>
           {showBrand && brandList.length > 0 && (
-            <div style={{ position: 'relative' }}>
-              <button aria-haspopup="true" aria-expanded={menu === 'brand'} onClick={() => setMenu(menu === 'brand' ? null : 'brand')}
-                style={{ minHeight: 40, padding: '0 12px', borderRadius: 10, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 8, fontSize: 14, ...buttonText,
-                  background: brandFilter !== 'All' ? SURFACE_2 : SURFACE, color: TEXT, border: '1px solid ' + (brandFilter !== 'All' ? ACCENT : LINE) }}>
-                <span style={{ color: brandFilter !== 'All' ? ACCENT_TEXT : SECONDARY, fontWeight: 500 }}>Brand</span>
-                {brandFilter === 'All' ? 'Any' : brandFilter}<Chevron />
-              </button>
-              {menu === 'brand' && (
-                <div style={{ ...popover, right: 0, width: 'min(360px, calc(100vw - 28px))', maxHeight: 440, overflowY: 'auto', padding: 12, display: 'flex', flexDirection: 'column', gap: 10 }}>
-                  <label style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-                    <span style={{ fontSize: 12, color: SECONDARY }}>Find a brand</span>
-                    <input type="search" autoFocus value={brandQ} onChange={(e) => setBrandQ(e.target.value)} placeholder="e.g. SkyBox"
-                      style={{ height: 40, padding: '0 12px', background: BG, color: TEXT, border: '1px solid ' + LINE, borderRadius: 8, fontSize: 14, boxSizing: 'border-box' }} />
-                  </label>
-                  {!q && <button onClick={() => pickBrand('All')} style={menuItem(brandFilter === 'All')}>Any brand{brandFilter === 'All' && <Check />}</button>}
-                  {popular.length > 0 && <>
-                    <span style={{ ...eyebrow, fontSize: 12, color: SECONDARY, padding: '4px 4px 0' }}>Popular</span>
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: 2 }}>{brandItems(popular)}</div>
-                  </>}
-                  {rest.length > 0 && <>
-                    {!q && <span style={{ ...eyebrow, fontSize: 12, color: SECONDARY, padding: '4px 4px 0' }}>All brands A–Z</span>}
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: 2 }}>{brandItems(rest)}</div>
-                  </>}
-                  {q && shown.length === 0 && <span style={{ fontSize: 13, color: SECONDARY, padding: '4px' }}>No brand matches “{brandQ}”.</span>}
-                </div>
-              )}
-            </div>
+            <Trigger triggerRef={brandBtn} label="Brand" value={brandFilter === 'All' ? 'Any' : brandFilter}
+              active={brandFilter !== 'All'} open={menu === 'brand'} onClick={() => setMenu(menu === 'brand' ? null : 'brand')} />
           )}
           {showBrand && products.length > 1 && (
-            <select aria-label="Product line" value={productFilter} onChange={(e) => onProduct(e.target.value)}
-              style={{ minHeight: 40, background: productFilter !== 'All' ? SURFACE_2 : SURFACE, border: '1px solid ' + (productFilter !== 'All' ? ACCENT : LINE), borderRadius: 10, color: TEXT, fontSize: 14, fontWeight: 600, padding: '0 12px', cursor: 'pointer' }}>
-              <option value="All">All products ({products.length - 1})</option>
-              {products.slice(1).map(p => <option key={p} value={p}>{p}</option>)}
-            </select>
+            <Select label="Product" ariaLabel="Product line" value={productFilter} onChange={onProduct} defaultValue="All" width={300}
+              options={[['All', 'All (' + (products.length - 1) + ')'], ...products.slice(1).map(p => [p, p])]} />
           )}
         </div>
       </div>
 
-      {menu === 'more' && (
-        <div style={{ ...popover, top: 'auto', marginTop: 8, left: moreLeft, width: 'min(320px, calc(100vw - 28px))', display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: 2 }}>
+      <Popover open={menu === 'more'} onClose={closeMenu} anchorRef={moreBtn} width={320} title="More sports">
+        <div style={grid2}>
           {moreSports.map(s => (
-            <button key={s} onClick={() => { onPick(s); setMenu(null) }} style={menuItem(sportFilter === s)}>{s}{sportFilter === s && <Check />}</button>
+            <button key={s} type="button" onClick={() => { onPick(s); setMenu(null) }} style={menuItem(sportFilter === s)}>{s}{sportFilter === s && <Check />}</button>
           ))}
         </div>
-      )}
+      </Popover>
+
+      <Popover open={menu === 'brand'} onClose={closeMenu} anchorRef={brandBtn} width={360} title="Brand" padding={12}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+          <input type="search" autoFocus={!mobile} value={brandQ} onChange={(e) => setBrandQ(e.target.value)} placeholder="Find a brand, e.g. SkyBox" aria-label="Find a brand"
+            style={{ height: 40, padding: '0 12px', background: BG, color: TEXT, border: '1px solid ' + LINE, borderRadius: 8, fontSize: 16, boxSizing: 'border-box' }} />
+          {!q && <button type="button" onClick={() => pickBrand('All')} style={menuItem(brandFilter === 'All')}>Any brand{brandFilter === 'All' && <Check />}</button>}
+          {popular.length > 0 && <>
+            <span style={menuHeading}>Popular</span>
+            <div style={grid2}>{brandItems(popular)}</div>
+          </>}
+          {rest.length > 0 && <>
+            {!q && <span style={menuHeading}>All brands A–Z</span>}
+            <div style={grid2}>{brandItems(rest)}</div>
+          </>}
+          {q && shown.length === 0 && <span style={{ fontSize: 13, color: SECONDARY, padding: 4 }}>No brand matches “{brandQ}”.</span>}
+        </div>
+      </Popover>
 
       {active.length > 0 && (
         <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 8, marginTop: 14 }}>
@@ -1047,18 +1009,8 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
                     {sets.length > 0 && <span style={{ color: LABEL, fontSize: 16, fontWeight: 500, marginLeft: 10 }}>{filteredSets.length.toLocaleString()}</span>}
                   </h2>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                    <span style={{ ...eyebrow, color: '#8A93A8' }}>Sort</span>
-                    <select aria-label="Sort sets" value={sortBy} onChange={(e) => setSortBy(e.target.value)}
-                      style={{ background: '#121626', border: '1px solid #232A3E', borderRadius: 8, color: '#D4D4D8', fontSize: 13, padding: '8px 12px', cursor: 'pointer' }}>
-                      <option value="year-desc">Newest first</option>
-                      <option value="year-asc">Oldest first</option>
-                      <option value="name-asc">Name (A–Z)</option>
-                      <option value="name-desc">Name (Z–A)</option>
-                      <option value="cards-desc">Most cards</option>
-                      <option value="cards-asc">Fewest cards</option>
-                      <option value="category">Category</option>
-                      <option value="brand">Brand</option>
-                    </select>
+                    <Select label="Sort" ariaLabel="Sort sets" value={sortBy} onChange={setSortBy} width={220}
+                      options={[['year-desc', 'Newest first'], ['year-asc', 'Oldest first'], ['name-asc', 'Name (A–Z)'], ['name-desc', 'Name (Z–A)'], ['cards-desc', 'Most cards'], ['cards-asc', 'Fewest cards'], ['category', 'Category'], ['brand', 'Brand']]} />
                   </div>
                 </div>
                 <SetFilters sports={sports} sportFilter={sportFilter} onPick={pick}
@@ -1073,10 +1025,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap', marginBottom: 22 }}>
               <span style={{ ...eyebrow, color: '#8A93A8' }}>Find</span>
               {!teamBrowse ? (
-                <button onClick={openTeamBrowse}
-                  style={{ background: '#121626', border: '1px solid #232A3E', borderRadius: 8, color: '#D4D4D8', fontSize: 13, fontWeight: 600, padding: '8px 14px', cursor: 'pointer' }}>
-                  Search cards, rarities &amp; types ▾
-                </button>
+                <button type="button" onClick={openTeamBrowse} style={triggerStyle(false)}>Search cards, rarities &amp; types<Chevron /></button>
               ) : teamLoading ? (
                 <span style={{ color: '#8A8A93', fontSize: 13 }}>Loading cards…</span>
               ) : (
@@ -1084,28 +1033,16 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
                   <input list="tcg-card-options" value={teamInput}
                     placeholder={'Card name… e.g. ' + (TCG_EXAMPLE[sportFilter] || 'any card')}
                     onChange={(e) => { const v = e.target.value; setTeamInput(v); const t = v.trim(); setTeamFilter(t.length >= 2 ? t : 'All') }}
-                    style={{ background: '#121626', border: '1px solid ' + (teamFilter !== 'All' ? ACCENT : '#232A3E'), borderRadius: 8, color: '#D4D4D8', fontSize: 13, padding: '8px 12px', minWidth: 0, width: 230, maxWidth: '100%', outline: 'none' }} />
+                    style={{ background: '#121626', border: '1px solid ' + (teamFilter !== 'All' ? ACCENT : '#232A3E'), borderRadius: 10, color: TEXT, fontSize: 16, height: 40, boxSizing: 'border-box', padding: '0 12px', minWidth: 0, width: 230, maxWidth: '100%', outline: 'none' }} />
                   <datalist id="tcg-card-options">{tcgOptions.names.map(t => <option key={t} value={t} />)}</datalist>
-                  <select value={tcgRarity} onChange={(e) => setTcgRarity(e.target.value)} aria-label="Rarity"
-                    style={{ background: '#121626', border: '1px solid ' + (tcgRarity !== 'All' ? ACCENT : '#232A3E'), borderRadius: 8, color: '#D4D4D8', fontSize: 13, padding: '8px 12px', cursor: 'pointer', maxWidth: '100%' }}>
-                    <option value="All">All rarities</option>
-                    {tcgOptions.rarities.map(r => <option key={r} value={r}>{r}</option>)}
-                  </select>
-                  <select value={tcgType} onChange={(e) => setTcgType(e.target.value)} aria-label="Card type"
-                    style={{ background: '#121626', border: '1px solid ' + (tcgType !== 'All' ? ACCENT : '#232A3E'), borderRadius: 8, color: '#D4D4D8', fontSize: 13, padding: '8px 12px', cursor: 'pointer', maxWidth: '100%' }}>
-                    <option value="All">All types</option>
-                    {tcgOptions.types.map(t => <option key={t} value={t}>{t}</option>)}
-                  </select>
+                  <Select ariaLabel="Rarity" value={tcgRarity} onChange={setTcgRarity} defaultValue="All"
+                    options={[['All', 'All rarities'], ...tcgOptions.rarities.map(r => [r, r])]} />
+                  <Select ariaLabel="Card type" value={tcgType} onChange={setTcgType} defaultValue="All"
+                    options={[['All', 'All types'], ...tcgOptions.types.map(t => [t, t])]} />
                   {tcgActive && (
                     <>
-                      <span style={{ ...eyebrow, color: '#8A93A8', marginLeft: 4 }}>Sort</span>
-                      <select value={teamSort} onChange={(e) => setTeamSort(e.target.value)}
-                        style={{ background: '#121626', border: '1px solid #232A3E', borderRadius: 8, color: '#D4D4D8', fontSize: 13, padding: '8px 12px', cursor: 'pointer' }}>
-                        <option value="year-desc">Newest first</option>
-                        <option value="year-asc">Oldest first</option>
-                        <option value="player">Card name (A–Z)</option>
-                        <option value="set">Set name</option>
-                      </select>
+                      <Select label="Sort" ariaLabel="Sort cards" value={teamSort} onChange={setTeamSort} width={220}
+                        options={[['year-desc', 'Newest first'], ['year-asc', 'Oldest first'], ['player', 'Card name (A–Z)'], ['set', 'Set name']]} />
                       <button onClick={() => { setTeamFilter('All'); setTeamInput(''); setTcgRarity('All'); setTcgType('All') }}
                         style={{ background: 'none', border: 'none', color: ACCENT_TEXT, fontSize: 13, fontWeight: 600, cursor: 'pointer' }}>Clear</button>
                     </>
@@ -1119,10 +1056,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap', marginBottom: 22 }}>
               <span style={{ ...eyebrow, color: '#8A93A8' }}>Team</span>
               {!teamBrowse ? (
-                <button onClick={openTeamBrowse}
-                  style={{ background: '#121626', border: '1px solid #232A3E', borderRadius: 8, color: '#D4D4D8', fontSize: 13, fontWeight: 600, padding: '8px 14px', cursor: 'pointer' }}>
-                  Filter by team ▾
-                </button>
+                <button type="button" onClick={openTeamBrowse} style={triggerStyle(false)}>Filter by team<Chevron /></button>
               ) : teamLoading ? (
                 <span style={{ color: '#8A8A93', fontSize: 13 }}>Loading teams…</span>
               ) : (
@@ -1136,18 +1070,12 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
                       if (!t) setTeamFilter('All')
                       else if (teamsForSport.includes(t)) setTeamFilter(t)
                     }}
-                    style={{ background: '#121626', border: '1px solid ' + (teamFilter !== 'All' ? ACCENT : '#232A3E'), borderRadius: 8, color: '#D4D4D8', fontSize: 13, padding: '8px 12px', minWidth: 0, width: 230, maxWidth: '100%', outline: 'none' }} />
+                    style={{ background: '#121626', border: '1px solid ' + (teamFilter !== 'All' ? ACCENT : '#232A3E'), borderRadius: 10, color: TEXT, fontSize: 16, height: 40, boxSizing: 'border-box', padding: '0 12px', minWidth: 0, width: 230, maxWidth: '100%', outline: 'none' }} />
                   <datalist id="team-options">{teamsForSport.map(t => <option key={t} value={t} />)}</datalist>
                   {teamFilter !== 'All' && (
                     <>
-                      <span style={{ ...eyebrow, color: '#8A93A8', marginLeft: 4 }}>Sort</span>
-                      <select value={teamSort} onChange={(e) => setTeamSort(e.target.value)}
-                        style={{ background: '#121626', border: '1px solid #232A3E', borderRadius: 8, color: '#D4D4D8', fontSize: 13, padding: '8px 12px', cursor: 'pointer' }}>
-                        <option value="year-desc">Newest first</option>
-                        <option value="year-asc">Oldest first</option>
-                        <option value="player">Player (A–Z)</option>
-                        <option value="set">Set name</option>
-                      </select>
+                      <Select label="Sort" ariaLabel="Sort cards" value={teamSort} onChange={setTeamSort} width={220}
+                        options={[['year-desc', 'Newest first'], ['year-asc', 'Oldest first'], ['player', 'Player (A–Z)'], ['set', 'Set name']]} />
                       <button onClick={() => { setTeamFilter('All'); setTeamInput('') }}
                         style={{ background: 'none', border: 'none', color: ACCENT_TEXT, fontSize: 13, fontWeight: 600, cursor: 'pointer' }}>Clear</button>
                     </>
@@ -1227,26 +1155,21 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
           {/* FILTER BAR */}
           <div style={{ background: '#0F1320', border: '1px solid #232323', borderRadius: 14, padding: '10px 12px', display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center', marginBottom: 12 }}>
             <button aria-pressed={onlyMine} onClick={() => setOnlyMine(v => !v)} title={myPlayers.list.length ? 'Only show cards of players you collect' : 'Add players from any player page first'}
-              style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: onlyMine ? '#0e1630' : '#121626', border: '1px solid ' + (onlyMine ? ACCENT : '#232A3E'), color: onlyMine ? '#8fb0ff' : '#D4D4D8', borderRadius: 10, padding: '0 14px', height: 38, fontSize: 13, fontWeight: 700, cursor: 'pointer', fontFamily: 'inherit' }}>
+              style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: onlyMine ? '#0e1630' : '#121626', border: '1px solid ' + (onlyMine ? ACCENT : '#232A3E'), color: onlyMine ? '#8fb0ff' : '#D4D4D8', borderRadius: 10, padding: '0 14px', height: 40, fontSize: 14, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit' }}>
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><path d="M20 21a8 8 0 0 0-16 0" /><circle cx="12" cy="8" r="4" /></svg>
               My players <span style={{ background: onlyMine ? ACCENT : '#232A3E', color: onlyMine ? '#fff' : '#A1A1AA', borderRadius: 999, padding: '1px 7px', fontSize: 12, fontWeight: 700 }}>{myPlayers.list.length}</span>
             </button>
-            <select aria-label="Section" value={activeSection} onChange={(e) => setActiveSection(e.target.value)} style={{ background: '#121626', border: '1px solid #232A3E', borderRadius: 10, color: '#D4D4D8', fontSize: 13, padding: '0 12px', height: 38, maxWidth: '100%', cursor: 'pointer' }}>
-              <option value="All">All sections ({(setData.sections || []).length})</option>
-              {(setData.sections || []).map(s => <option key={s.title} value={s.title}>{s.title} ({s.cards.length})</option>)}
-            </select>
-            <select aria-label="Card type" value={setTypeFilter} onChange={(e) => setSetTypeFilter(e.target.value)} style={{ background: '#121626', border: '1px solid #232A3E', borderRadius: 10, color: '#D4D4D8', fontSize: 13, padding: '0 12px', height: 38, cursor: 'pointer' }}>
-              <option value="All">Any type</option><option value="BASE">Base</option><option value="AU">Autographs</option><option value="PA">Patch autos</option><option value="PATCH">Patches</option><option value="RELIC">Relics</option><option value="PLATE">Printing plates</option><option value="OTHER">Inserts &amp; parallels</option>
-            </select>
-            <select aria-label="Print run" value={setRunFilter} onChange={(e) => setSetRunFilter(e.target.value)} style={{ background: '#121626', border: '1px solid #232A3E', borderRadius: 10, color: '#D4D4D8', fontSize: 13, padding: '0 12px', height: 38, cursor: 'pointer' }}>
-              <option value="any">Any run</option><option value="1">1/1 only</option><option value="10">≤ /10</option><option value="25">≤ /25</option><option value="99">≤ /99</option><option value="numbered">Numbered</option><option value="unnumbered">Unnumbered</option>
-            </select>
+            <Select ariaLabel="Section" value={activeSection} onChange={setActiveSection} defaultValue="All" width={340}
+              options={[['All', 'All sections (' + (setData.sections || []).length + ')'], ...(setData.sections || []).map(s => [s.title, s.title + ' (' + s.cards.length + ')'])]} />
+            <Select ariaLabel="Card type" value={setTypeFilter} onChange={setSetTypeFilter} defaultValue="All" width={240}
+              options={[['All', 'Any type'], ['BASE', 'Base'], ['AU', 'Autographs'], ['PA', 'Patch autos'], ['PATCH', 'Patches'], ['RELIC', 'Relics'], ['PLATE', 'Printing plates'], ['OTHER', 'Inserts & parallels']]} />
+            <Select ariaLabel="Print run" value={setRunFilter} onChange={setSetRunFilter} defaultValue="any" width={220}
+              options={[['any', 'Any run'], ['1', '1/1 only'], ['10', '≤ /10'], ['25', '≤ /25'], ['99', '≤ /99'], ['numbered', 'Numbered'], ['unnumbered', 'Unnumbered']]} />
             {(setData.sections || []).some(x => x.mem) && (
-              <select aria-label="Memorabilia" value={setMemFilter} onChange={(e) => setSetMemFilter(e.target.value)} style={{ background: setMemFilter !== 'any' ? '#0f1a12' : '#121626', border: '1px solid ' + (setMemFilter !== 'any' ? '#22c55e' : '#232A3E'), borderRadius: 10, color: '#D4D4D8', fontSize: 13, padding: '0 12px', height: 38, cursor: 'pointer' }}>
-                <option value="any">Any material</option><option value="MEMO">Memorabilia only</option><option value="GU">Game-used</option><option value="PW">Player-worn</option><option value="EW">Event-worn</option><option value="MX">Varies by card</option><option value="MFG">Manufactured</option><option value="UNK">Unknown</option><option value="STATED">Stated by maker/source only</option>
-              </select>
+              <Select ariaLabel="Memorabilia" value={setMemFilter} onChange={setSetMemFilter} defaultValue="any" width={280}
+                options={[['any', 'Any material'], ['MEMO', 'Memorabilia only'], ['GU', 'Game-used'], ['PW', 'Player-worn'], ['EW', 'Event-worn'], ['MX', 'Varies by card'], ['MFG', 'Manufactured'], ['UNK', 'Unknown'], ['STATED', 'Stated by maker/source only']]} />
             )}
-            <label style={{ display: 'inline-flex', alignItems: 'center', gap: 8, fontSize: 13, color: '#A1A1AA', minHeight: 38, cursor: 'pointer' }}><input type="checkbox" checked={setRcOnly} onChange={(e) => setSetRcOnly(e.target.checked)} style={{ accentColor: ACCENT, width: 16, height: 16 }} />Rookies only</label>
+            <label style={{ display: 'inline-flex', alignItems: 'center', gap: 8, fontSize: 14, color: '#A1A1AA', minHeight: 40, cursor: 'pointer' }}><input type="checkbox" checked={setRcOnly} onChange={(e) => setSetRcOnly(e.target.checked)} style={{ accentColor: ACCENT, width: 16, height: 16 }} />Rookies only</label>
             {(onlyMine || setTypeFilter !== 'All' || setRunFilter !== 'any' || setRcOnly || setMemFilter !== 'any' || activeSection !== 'All' || query) && (
               <button onClick={() => { setSetMemFilter('any'); setOnlyMine(false); setSetTypeFilter('All'); setSetRunFilter('any'); setSetRcOnly(false); setActiveSection('All'); setQuery('') }} style={{ background: 'none', border: 'none', color: ACCENT_TEXT, fontSize: 13, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit', marginLeft: 'auto' }}>Clear filters</button>
             )}

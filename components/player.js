@@ -4,6 +4,7 @@
 // public/data/players/ (built by scripts/build-player-index.mjs).
 import { memo, useDeferredValue, useEffect, useMemo, useRef, useState } from 'react'
 import { supa } from '../lib/supa'
+import { Select } from './dropdown'
 import { TYPE, norm, parseQuery, parseQueryFor, matchPlayers, akaOf, rowMatches, typeLabel, TYPE_COLORS, serialLabel, MEM_LABEL, MEM_COLORS, memKind, memTypical } from '../lib/query'
 import { brandOf } from '../lib/brands'
 import { ACCENT, ACCENT_TEXT, BG, SURFACE, SURFACE_2, LINE, CHIP_LINE, TEXT, TEXT_2, LABEL, display, eyebrow, title, buttonText } from '../lib/theme'
@@ -116,7 +117,6 @@ function Initials({ name, color }) {
 }
 const btn = (primary) => ({ ...buttonText, background: primary ? ACCENT : 'transparent', color: primary ? '#fff' : '#D4D4D8', border: primary ? 'none' : '1px solid #2E3D6B', borderRadius: 10, padding: '0 16px', height: 42, cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: 8, fontSize: 14 })
 const pill = (active, color) => ({ padding: '7px 12px', borderRadius: 999, fontSize: 12, fontWeight: 700, cursor: 'pointer', letterSpacing: '0.04em', textTransform: 'uppercase', fontFamily: 'inherit', background: active ? (color || ACCENT) : '#121626', color: active ? '#fff' : '#A1A1AA', border: '1px solid ' + (active ? 'transparent' : '#232A3E'), whiteSpace: 'nowrap' })
-const selectStyle = { background: '#121626', border: '1px solid #232A3E', borderRadius: 8, color: '#D4D4D8', fontSize: 13, padding: '0 12px', height: 36, fontFamily: 'inherit', cursor: 'pointer' }
 
 // ---------- Omnibox ----------
 export function Omnibox({ value, onChange, onSubmit, onPickPlayer, onPickSet, sets, autoFocus, compact, busy }) {
@@ -466,9 +466,9 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
           <div>
             <p style={legend}>Season</p>
             <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-              <select aria-label="From season" value={yearFrom} onChange={(e) => setYearFrom(parseInt(e.target.value))} style={{ ...selectStyle, flex: 1 }}><option value={0}>Any</option>{years.map(y => <option key={y} value={y}>{seasonLabel(y, player.sport)}</option>)}</select>
+              <Select ariaLabel="From season" value={yearFrom} onChange={(v) => setYearFrom(parseInt(v))} defaultValue={0} width={220} style={{ flex: 1, justifyContent: 'space-between' }} options={[[0, 'Any'], ...years.map(y => [y, seasonLabel(y, player.sport)])]} />
               <span style={{ color: '#8A93A8' }}>–</span>
-              <select aria-label="To season" value={yearTo} onChange={(e) => setYearTo(parseInt(e.target.value))} style={{ ...selectStyle, flex: 1 }}><option value={9999}>Any</option>{years.map(y => <option key={y} value={y}>{seasonLabel(y, player.sport)}</option>)}</select>
+              <Select ariaLabel="To season" value={yearTo} onChange={(v) => setYearTo(parseInt(v))} defaultValue={9999} width={220} style={{ flex: 1, justifyContent: 'space-between' }} options={[[9999, 'Any'], ...years.map(y => [y, seasonLabel(y, player.sport)])]} />
             </div>
           </div>
           <div>
@@ -524,7 +524,7 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
               <div role="group" aria-label="Group results" style={{ display: 'inline-flex', border: '1px solid #232A3E', borderRadius: 8, overflow: 'hidden' }}>
                 {[['set', 'By set'], ['season', 'By season'], ['flat', 'Flat list']].map(([k, l]) => <button key={k} onClick={() => setGroup(k)} style={{ background: group === k ? ACCENT : '#121626', color: group === k ? '#fff' : '#A1A1AA', border: 'none', padding: '0 12px', height: 36, fontSize: 12, fontWeight: 700, cursor: 'pointer', fontFamily: 'inherit' }}>{l}</button>)}
               </div>
-              <select aria-label="Sort" value={sort} onChange={(e) => setSort(e.target.value)} style={selectStyle}><option value="newest">Newest first</option><option value="oldest">Oldest first</option><option value="rarest">Rarest first</option><option value="set">Set A–Z</option></select>
+              <Select label="Sort" ariaLabel="Sort" value={sort} onChange={setSort} width={220} options={[['newest', 'Newest first'], ['oldest', 'Oldest first'], ['rarest', 'Rarest first'], ['set', 'Set A–Z']]} />
             </div>
           </div>
 
