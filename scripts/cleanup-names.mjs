@@ -65,6 +65,8 @@ for (const f of files) {
     // "AU, MEM") are fixed here too — they show as a "team" otherwise.
     let ch = false
     for (const sec of s.sections || []) for (const c of sec.cards || []) {
+      // TCDB variation / error notes in the team column ("VARVAR: Black hair", "UERUER: name misspelled")
+      if (c.t && /^(VAR|UER)\1:?/.test(c.t)) { const k = c.t.slice(0, 3); const x = (c.x || '').split(/\s+/).filter(Boolean); if (!x.includes(k)) x.push(k); c.x = x.join(' '); delete c.t; ch = true; continue }
       if (!c.t || !/^(?:(?:URA?|AUR?|MEM|RC|SP|SSP|SN\d+)(?:,\s*|$))+$/.test(c.t.trim())) continue
       const x = (c.x || '').split(/\s+/).filter(Boolean)
       for (const g of c.t.trim().split(/,\s*/)) { const v = /^SN(\d+)$/.test(g) ? '/' + g.slice(2) : (g === 'URA' || g === 'AUR') ? 'AU' : g; if (!x.includes(v)) x.push(v) }
@@ -231,7 +233,8 @@ for (const [f, s] of sets) {
       if (c.t) {
         const flag = (f) => { const x = (c.x || '').split(/\s+/).filter(Boolean); for (const t of f.split(/\s+/)) if (t && !x.includes(t)) x.push(t); c.x = x.join(' ') }
         let t = c.t.trim()
-        if (/^(?:(?:URA?|AUR?|MEM|RC|SP|SSP|SN\d+)(?:,\s*|$))+$/.test(t)) {   // flags, not a team
+        if (/^(VAR|UER)\1:?/.test(t)) { flag(t.slice(0, 3)); t = '' }   // TCDB variation / error note, not a team
+        else if (/^(?:(?:URA?|AUR?|MEM|RC|SP|SSP|SN\d+)(?:,\s*|$))+$/.test(t)) {   // flags, not a team
           for (const f of t.split(/,\s*/)) flag(/^SN(\d+)$/.test(f) ? '/' + f.slice(2) : f === 'URA' || f === 'AUR' ? 'AU' : f)
           t = ''
         }
