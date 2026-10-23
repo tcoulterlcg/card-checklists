@@ -47,8 +47,8 @@
   },
   "Tennis": {
    "file": "index/tennis.json",
-   "sets": 62,
-   "cards": 2854
+   "sets": 97,
+   "cards": 5602
   },
   "Boxing": {
    "file": "index/boxing.json",
@@ -57,8 +57,8 @@
   },
   "UFC": {
    "file": "index/ufc.json",
-   "sets": 247,
-   "cards": 36648
+   "sets": 218,
+   "cards": 45548
   },
   "Multi-Sport": {
    "file": "index/multi-sport.json",
@@ -71,7 +71,7 @@
    "cards": 195
   }
  },
- "sets": 19449,
- "cards": 1901552,
- "updated": "2026-10-23T15:35:33.716Z"
+ "sets": 19455,
+ "cards": 1913200,
+ "updated": "2026-10-23T15:53:36.031Z"
 }
