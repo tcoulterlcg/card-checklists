@@ -4077,7 +4077,9 @@
   "why": [
    "base skips 29 numbers in #1-88 (e.g. 7, 9, 10, 14, 18)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "25-26-upper-deck-chicago-blackhawks-100th-anniversary-hockey: 250 -> 2026 cards, 7 -> 43 sections, covers 100.0% of current",
+  "at": "2026-10-23"
  },
  {
   "slug": "2016-topps-archives-baseball-cards",
@@ -4090,7 +4092,9 @@
    "missing inserts: 1969 super, 1985 father son recreate, 65th anniversary update, fan favorites, snapshots",
    "36 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2016-topps-archives-baseball-cards: 313 -> 3274 cards, 1 -> 48 sections, covers 99.0% of current",
+  "at": "2026-10-23"
  },
  {
   "slug": "2013-bowman-platinum-baseball-cards",
@@ -4103,7 +4107,9 @@
    "missing inserts: atomic, cutting edge stars, dual, ice, relics, top prospects",
    "26 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2013-bowman-platinum-baseball-cards: 401 -> 4171 cards, 5 -> 80 sections, covers 100.0% of current",
+  "at": "2026-10-23"
  },
  {
   "slug": "2014-topps-chrome-football-cards",
@@ -4116,7 +4122,9 @@
    "missing inserts: 1965 tall boy, 4000 yard club, die cut, fantasy focus, pulsar, pulsar die cut, relics, wave",
    "6 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2014-topps-chrome-football-cards: 768 -> 6583 cards, 16 -> 75 sections, covers 100.0% of current",
+  "at": "2026-10-23"
  },
  {
   "slug": "2013-topps-platinum-football-cards",
