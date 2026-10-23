@@ -3,7 +3,7 @@
 // collection tracker. Dark + electric blue to match the site shell. Data via lib/supa.
 import { loadSet } from '../lib/catalog'
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { collectionCardN, supa, grailfindrConnectUrl, grailfindrSignupUrl, grailfindrForgotUrl, GRAILFINDR_URL, getProfile, ensureProfile, updateProfile, addWant, removeWant, deletePost, myWantlist, toggleCollected, myCollection, uploadCardImage, setCollectionImage, forumFeed, createPost, react, comments, addComment } from '../lib/supa'
+import { collectionCardN, supa, grailfindrConnectUrl, grailfindrSignupUrl, grailfindrForgotUrl, grailfindrFindUrl, GRAILFINDR_URL, getProfile, ensureProfile, updateProfile, addWant, removeWant, deletePost, myWantlist, toggleCollected, myCollection, uploadCardImage, setCollectionImage, forumFeed, createPost, react, comments, addComment } from '../lib/supa'
 import { ACCENT, ACCENT_TEXT, BG, SURFACE, SURFACE_2, LINE, CHIP_LINE, TEXT, TEXT_2, LABEL, display, eyebrow, title, buttonText } from '../lib/theme'
 
 const card = { background: 'linear-gradient(155deg, #121626, #0F1320)', border: '1px solid #232A3E', borderRadius: 14 }
@@ -274,6 +274,7 @@ export function CollectionView({ account, indexSets, onOpenAuth, onOpenSet }) {
                         <li key={i.id} style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 13, color: '#D4D4D8' }}>
                           <span style={{ color: ACCENT_TEXT, fontWeight: 700, minWidth: 44 }}>{String(i.card_n).startsWith('—') ? '—' : '#' + i.card_n}</span>
                           <span style={{ flex: 1, minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{i.player || ''}{i.section && i.section !== 'Base' ? <span style={{ color: '#8A93A8' }}> · {i.section}</span> : null}</span>
+                          <a href={grailfindrFindUrl({ setName: g.name, player: i.player, n: i.card_n, section: i.section })} target="_blank" rel="noreferrer" title="Find it on GrailFindr" style={{ color: ACCENT_TEXT, fontSize: 12, fontWeight: 600, textDecoration: 'none', whiteSpace: 'nowrap' }}>Find ↗</a>
                           <button aria-label={'Remove ' + (i.player || 'card') + ' from wantlist'} onClick={async () => { await removeWant(i.id); myWantlist(session.user.id).then(setWants) }}
                             style={{ background: 'none', border: 'none', color: '#8A93A8', cursor: 'pointer', fontSize: 14, padding: '2px 6px' }}>✕</button>
                         </li>

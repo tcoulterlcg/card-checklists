@@ -6,7 +6,7 @@
 import { useCallback, useDeferredValue, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { Select, Popover, Trigger, Chevron, Check, menuItem, menuHeading, triggerStyle, useIsMobile } from '../components/dropdown'
 import { useAccount, AccountChip, AuthModal, CollectionView, CommunityView } from '../components/community'
-import { supa, addWant, removeWant, myWantlist } from '../lib/supa'
+import { supa, addWant, removeWant, myWantlist, grailfindrFindUrl } from '../lib/supa'
 import { Omnibox, PlayerPage, MyPlayersPanel, useMyPlayers, loadPlayerDir, loadTopPlayers, seasonLabel, MemBadge, MemChip, memCodeOf } from '../components/player'
 import { norm, parseQuery, parseQueryFor, matchPlayers, TYPE, typeLabel, TYPE_COLORS, serialLabel } from '../lib/query'
 import { loadSet, loadIndex } from '../lib/catalog'
@@ -1265,6 +1265,11 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
                       </span>
                       <span className="hq-col-team" style={{ flex: '1 1 auto', minWidth: 0, color: '#8A8A93', fontSize: 13 }}>{c.t || ''}</span>
                       <span className="hq-col-flag" style={{ flex: setIsTcg ? '0 0 110px' : '0 0 70px', textAlign: 'right' }}>{c.x ? <Chip color={c.x === 'RC' ? '#4ade80' : '#8A8A93'}>{c.x}</Chip> : null}</span>
+                      <a href={grailfindrFindUrl({ setName: setData.name, player: c.p, n: c.n, section: sec.title })} target="_blank" rel="noreferrer"
+                        title="Find this card for sale on GrailFindr (every marketplace)" aria-label={'Find ' + (c.p || 'this card') + ' on GrailFindr'}
+                        style={{ flex: '0 0 32px', height: 32, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', border: '1px solid #232A3E', borderRadius: 6, color: '#8A93A8', textDecoration: 'none' }}>
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
+                      </a>
                       {(() => { const it = { set_slug: setData.slug, set_name: setData.name, card_n: c.n, section: sec.title, player: c.p }, on = isWanted(it); return (
                       <button title={on ? 'On your wantlist — click to remove' : 'Add this card (and its parallel section) to your wantlist'}
                         onClick={() => wantIt(it)} aria-pressed={on}
