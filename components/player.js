@@ -4,6 +4,7 @@
 // public/data/players/ (built by scripts/build-player-index.mjs).
 import { memo, useDeferredValue, useEffect, useMemo, useRef, useState } from 'react'
 import { supa } from '../lib/supa'
+import { Select } from './dropdown'
 import { TYPE, norm, parseQuery, parseQueryFor, matchPlayers, akaOf, rowMatches, typeLabel, TYPE_COLORS, serialLabel, MEM_LABEL, MEM_COLORS, memKind, memTypical } from '../lib/query'
 import { brandOf } from '../lib/brands'
 import { PAR, PAR_LABEL, parallelKinds } from '../lib/parallels'
@@ -117,7 +118,6 @@ function Initials({ name, color }) {
 }
 const btn = (primary) => ({ ...buttonText, background: primary ? ACCENT : 'transparent', color: primary ? '#fff' : '#D4D4D8', border: primary ? 'none' : '1px solid #2E3D6B', borderRadius: 10, padding: '0 16px', height: 42, cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: 8, fontSize: 14 })
 const pill = (active, color) => ({ padding: '7px 12px', borderRadius: 999, fontSize: 12, fontWeight: 700, cursor: 'pointer', letterSpacing: '0.04em', textTransform: 'uppercase', fontFamily: 'inherit', background: active ? (color || ACCENT) : '#121626', color: active ? '#fff' : '#A1A1AA', border: '1px solid ' + (active ? 'transparent' : '#232A3E'), whiteSpace: 'nowrap' })
-const selectStyle = { background: '#121626', border: '1px solid #232A3E', borderRadius: 8, color: '#D4D4D8', fontSize: 13, padding: '0 12px', height: 36, fontFamily: 'inherit', cursor: 'pointer' }
 
 // ---------- Omnibox ----------
 export function Omnibox({ value, onChange, onSubmit, onPickPlayer, onPickSet, sets, autoFocus, compact, busy }) {
@@ -472,9 +472,9 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
           <div>
             <p style={legend}>Season</p>
             <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-              <select aria-label="From season" value={yearFrom} onChange={(e) => setYearFrom(parseInt(e.target.value))} style={{ ...selectStyle, flex: 1 }}><option value={0}>Any</option>{years.map(y => <option key={y} value={y}>{seasonLabel(y, player.sport)}</option>)}</select>
+              <Select ariaLabel="From season" value={yearFrom} onChange={(v) => setYearFrom(parseInt(v))} defaultValue={0} width={220} style={{ flex: 1, justifyContent: 'space-between' }} options={[[0, 'Any'], ...years.map(y => [y, seasonLabel(y, player.sport)])]} />
               <span style={{ color: '#8A93A8' }}>–</span>
-              <select aria-label="To season" value={yearTo} onChange={(e) => setYearTo(parseInt(e.target.value))} style={{ ...selectStyle, flex: 1 }}><option value={9999}>Any</option>{years.map(y => <option key={y} value={y}>{seasonLabel(y, player.sport)}</option>)}</select>
+              <Select ariaLabel="To season" value={yearTo} onChange={(v) => setYearTo(parseInt(v))} defaultValue={9999} width={220} style={{ flex: 1, justifyContent: 'space-between' }} options={[[9999, 'Any'], ...years.map(y => [y, seasonLabel(y, player.sport)])]} />
             </div>
           </div>
           <div>
@@ -538,7 +538,7 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
               <div role="group" aria-label="Group results" style={{ display: 'inline-flex', border: '1px solid #232A3E', borderRadius: 8, overflow: 'hidden' }}>
                 {[['set', 'By set'], ['season', 'By season'], ['flat', 'Flat list']].map(([k, l]) => <button key={k} onClick={() => setGroup(k)} style={{ background: group === k ? ACCENT : '#121626', color: group === k ? '#fff' : '#A1A1AA', border: 'none', padding: '0 12px', height: 36, fontSize: 12, fontWeight: 700, cursor: 'pointer', fontFamily: 'inherit' }}>{l}</button>)}
               </div>
-              <select aria-label="Sort" value={sort} onChange={(e) => setSort(e.target.value)} style={selectStyle}><option value="newest">Newest first</option><option value="oldest">Oldest first</option><option value="rarest">Rarest first</option><option value="set">Set A–Z</option></select>
+              <Select label="Sort" ariaLabel="Sort" value={sort} onChange={setSort} width={220} options={[['newest', 'Newest first'], ['oldest', 'Oldest first'], ['rarest', 'Rarest first'], ['set', 'Set A–Z']]} />
             </div>
           </div>
 
@@ -625,9 +625,35 @@ const cb = { accentColor: ACCENT, width: 16, height: 16, flexShrink: 0 }
 const cnt = { marginLeft: 'auto', color: '#8A93A8', fontSize: 12 }
 
 // ---------- My Players panel (used from the set page + a standalone view) ----------
-export function MyPlayersPanel({ myPlayers, onOpenPlayer, dirPlayers }) {
+export function MyPlayersPanel({ myPlayers, onOpenPlayer, onOpenSet, dirPlayers }) {
   const [dir, setDir] = useState(null)
   useEffect(() => { loadPlayerDir().then(setDir) }, [])
+  // "New for your players": this season's sets that include each followed player
+  const [fresh, setFresh] = useState(null)
+  useEffect(() => {
+    if (!dir || !myPlayers.list.length) return
+    let live = true
+    ;(async () => {
+      const idx = await fetch('/data/index.json').then(r => r.json()).catch(() => ({ sets: [] }))
+      const meta = new Map(idx.sets.map(x => [x.slug, x]))
+      const latest = {}   // newest season present per sport
+      for (const x of idx.sets) if (x.year && (!latest[x.sport] || x.year > latest[x.sport])) latest[x.sport] = x.year
+      const out = []
+      for (const name of myPlayers.list) {
+        const i = resolve(name); if (i < 0) continue
+        const p = dir.players[i], sh = await loadShard(p[1])
+        const per = new Map()
+        for (const r of sh.rows) if (r[0] === i) { const slug = sh.slugs[r[1]]; per.set(slug, (per.get(slug) || 0) + 1) }
+        for (const [slug, n] of per) {
+          const m = meta.get(slug); if (!m || !m.year || m.year < (latest[m.sport] || 0)) continue
+          out.push({ player: name, slug, set: m.name, year: m.year, sport: m.sport, cards: n })
+        }
+      }
+      out.sort((a, b) => b.year - a.year || b.cards - a.cards)
+      if (live) setFresh(out)
+    })()
+    return () => { live = false }
+  }, [dir, myPlayers.list.join('|')])
   // exact name, else the same name spelled differently (saved before a data clean-up: "Shaquille ONeal")
   const resolve = (name) => {
     if (!dir) return -1
@@ -656,6 +682,22 @@ export function MyPlayersPanel({ myPlayers, onOpenPlayer, dirPlayers }) {
               </div>
             )
           })}
+        </div>
+      )}
+      {fresh && fresh.length > 0 && (
+        <div style={{ marginTop: 24 }}>
+          <h2 style={{ ...title(18), margin: '0 0 4px', color: '#EDEDEF' }}>New for your players</h2>
+          <p style={{ color: '#8A93A8', fontSize: 13, margin: '0 0 12px' }}>This season's sets that include the players you collect.</p>
+          <div style={{ display: 'grid', gap: 6 }}>
+            {fresh.slice(0, 30).map(f => (
+              <button key={f.player + f.slug} onClick={() => onOpenSet && onOpenSet(f.slug)}
+                style={{ display: 'flex', gap: 12, alignItems: 'baseline', flexWrap: 'wrap', textAlign: 'left', background: '#0F1320', border: '1px solid #232A3E', borderRadius: 10, padding: '10px 14px', cursor: 'pointer', fontFamily: 'inherit', color: '#D4D4D8' }}>
+                <span style={{ fontWeight: 700, minWidth: 140 }}>{f.player}</span>
+                <span style={{ flex: 1, minWidth: 0 }}>{f.set}</span>
+                <span style={{ color: '#8A93A8', fontSize: 13, whiteSpace: 'nowrap' }}>{f.cards.toLocaleString()} card{f.cards === 1 ? '' : 's'}</span>
+              </button>
+            ))}
+          </div>
         </div>
       )}
     </div>
