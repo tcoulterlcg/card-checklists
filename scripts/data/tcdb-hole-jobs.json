@@ -99,7 +99,9 @@
    "missing inserts: comorosky piet, cronin reynolds, earnshaw sewell, frisch orsatti, gehringer rogell, grimes klein, hayes lyons, hemsley weiland",
    "67 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "review",
+  "note": "1935-goudey-baseball-cards: 114 -> 151 cards, 1 -> 1 sections, covers 0.0% of current",
+  "tcdbSid": 8766
  },
  {
   "slug": "2018-topps-heritage-baseball-cards",
@@ -142,7 +144,9 @@
    "missing inserts: 1989 is back diamond, atomic, bubbles, carbon fiber, draft scouts breakout die cut, dualing die cut, fire die cut, social media",
    "227 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "review",
+  "note": "2014-bowman-chrome-baseball-cards: 650 -> 8350 cards, 5 -> 108 sections, covers 0.0% of current",
+  "tcdbSid": 90974
  },
  {
   "slug": "2016-topps-opening-baseball-cards",
@@ -169,7 +173,9 @@
    "missing inserts: 1st, 2014 draft picks, draft pick, draft scouts fantasy impact, draft teams tomorrow die cut, haze, prime position, recollections",
    "183 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2015-bowman-chrome-baseball-cards: 648 -> 6177 cards, 6 -> 92 sections, covers 100.0% of current",
+  "at": "2026-10-23"
  },
  {
   "slug": "2017-topps-heritage-baseball-cards",
