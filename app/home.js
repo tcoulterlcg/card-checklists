@@ -929,7 +929,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
   const [scrolled, setScrolled] = useState(false)
   const [pastHero, setPastHero] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
-  const [headerQ, setHeaderQ] = useState('')
+  // uncontrolled: typing here must not re-render the whole page (a set page can hold thousands of rows)
   const headerInput = useRef(null)
   useEffect(() => {
     const onScroll = () => { setScrolled(window.scrollY > 8); setPastHero(window.scrollY > 460) }
@@ -967,9 +967,9 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
           </nav>
           <div className="hq-header-right">
             <form className={'hq-hsearch' + (isLanding && !pastHero ? ' hq-hidden' : '')} role="search"
-              onSubmit={(e) => { e.preventDefault(); const v = headerQ.trim(); if (v) { searchFor(v); setHeaderQ(''); headerInput.current?.blur(); window.scrollTo(0, 0) } }}>
+              onSubmit={(e) => { e.preventDefault(); const el = headerInput.current; const v = (el?.value || '').trim(); if (v) { searchFor(v); el.value = ''; el.blur(); window.scrollTo(0, 0) } }}>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6F788C" strokeWidth="2.2" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
-              <input ref={headerInput} value={headerQ} onChange={(e) => setHeaderQ(e.target.value)} placeholder="Search sets, players..." aria-label="Search sets and players" />
+              <input ref={headerInput} enterKeyHint="search" placeholder="Search sets, players..." aria-label="Search sets and players" />
               <kbd>/</kbd>
             </form>
             {fbAdmin.admin && fbAdmin.count > 0 && (
@@ -1094,11 +1094,10 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
                 <span style={{ color: '#8A93A8', fontSize: 13 }}>Loading cards…</span>
               ) : (
                 <>
-                  <input list="tcg-card-options" value={teamInput}
+                  <input type="search" value={teamInput}
                     aria-label="Filter by card name" placeholder={'Card name… e.g. ' + (TCG_EXAMPLE[sportFilter] || 'any card')}
                     onChange={(e) => { const v = e.target.value; setTeamInput(v); const t = v.trim(); setTeamFilter(t.length >= 2 ? t : 'All') }}
                     style={{ background: '#121626', border: '1px solid ' + (teamFilter !== 'All' ? ACCENT : '#232A3E'), borderRadius: 10, color: TEXT, fontSize: 16, height: 40, boxSizing: 'border-box', padding: '0 12px', minWidth: 0, width: 230, maxWidth: '100%', outline: 'none' }} />
-                  <datalist id="tcg-card-options">{tcgOptions.names.map(t => <option key={t} value={t} />)}</datalist>
                   <Select ariaLabel="Rarity" value={tcgRarity} onChange={setTcgRarity} defaultValue="All"
                     options={[['All', 'All rarities'], ...tcgOptions.rarities.map(r => [r, r])]} />
                   <Select ariaLabel="Card type" value={tcgType} onChange={setTcgType} defaultValue="All"
@@ -1118,24 +1117,15 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
           {/* TEAM FILTER + SORT (after a specific sport is selected) */}
           {oneSport && !isTcg && !OTHER_SET.has(sportFilter) && (
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap', marginBottom: 22 }}>
-              <span style={{ ...eyebrow, color: '#8A93A8' }}>Team</span>
               {!teamBrowse ? (
-                <button type="button" onClick={openTeamBrowse} style={triggerStyle(false)}>Filter by team<Chevron /></button>
+                <Trigger label="Team" value="Any team" onClick={openTeamBrowse} ariaLabel="Filter by team" />
               ) : teamLoading ? (
                 <span style={{ color: '#8A93A8', fontSize: 13 }}>Loading teams…</span>
               ) : (
                 <>
-                  <input list="team-options" value={teamInput}
-                    aria-label="Filter by team" placeholder={'Type a team… (' + teamsForSport.length.toLocaleString() + ')'}
-                    onChange={(e) => {
-                      const v = e.target.value
-                      setTeamInput(v)
-                      const t = v.trim()
-                      if (!t) setTeamFilter('All')
-                      else if (teamsForSport.includes(t)) setTeamFilter(t)
-                    }}
-                    style={{ background: '#121626', border: '1px solid ' + (teamFilter !== 'All' ? ACCENT : '#232A3E'), borderRadius: 10, color: TEXT, fontSize: 16, height: 40, boxSizing: 'border-box', padding: '0 12px', minWidth: 0, width: 230, maxWidth: '100%', outline: 'none' }} />
-                  <datalist id="team-options">{teamsForSport.map(t => <option key={t} value={t} />)}</datalist>
+                  <Select label="Team" ariaLabel="Filter by team" value={teamFilter} width={280} searchAbove={8}
+                    onChange={(v) => { setTeamFilter(v); setTeamInput(v === 'All' ? '' : v) }}
+                    options={[['All', 'Any team'], ...teamsForSport.map(t => [t, t])]} />
                   {teamFilter !== 'All' && (
                     <>
                       <Select label="Sort" ariaLabel="Sort cards" value={teamSort} onChange={setTeamSort} width={220}

@@ -249,7 +249,6 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
   const [run, setRun] = useState(() => urlp().get('run') || 'any') // any|1|10|25|99|numbered|unnumbered
   const [brands, setBrands] = useState(null) // null = all
   const [products, setProducts] = useState([])
-  const [prodInput, setProdInput] = useState('')
   const [teams, setTeams] = useState(null)
   const [labels, setLabels] = useState(null) // "Appears as": null = every name the player is printed under
   const [yearFrom, setYearFrom] = useState(0)
@@ -410,8 +409,9 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
     const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([lines.join('\n')], { type: 'text/csv' })); a.download = player.name.replace(/\s+/g, '-') + '-checklist.csv'; a.click()
   }
 
-  const Row = ({ r, withSet }) => (
-    <tr style={{ borderTop: '1px solid #1a1a1a' }}>
+  // a plain render function, not a component defined in render (that remounted every row on each update)
+  const row = (r, withSet, key) => (
+    <tr key={key} style={{ borderTop: '1px solid #1a1a1a' }}>
       {withSet && <td style={{ padding: '9px 12px', color: '#A1A1AA', fontVariantNumeric: 'tabular-nums', whiteSpace: 'nowrap' }}>{seasonLabel(r.year, r.sport)}</td>}
       {withSet && <td style={{ padding: '9px 12px' }}><button onClick={() => onOpenSet(r.slug)} style={{ background: 'none', border: 'none', color: '#EDEDEF', fontWeight: 600, cursor: 'pointer', padding: 0, textAlign: 'left', fontFamily: 'inherit', fontSize: 14 }}>{r.set.replace(/^\d{4}(-\d{2})?\s*/, '')}</button></td>}
       <td style={{ padding: '9px 12px', color: ACCENT_TEXT, fontWeight: 700, fontVariantNumeric: 'tabular-nums', whiteSpace: 'nowrap' }}>{r.n ? '#' + r.n : '—'}</td>
@@ -530,8 +530,9 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
           </div>
           <div>
             <p style={legend}>Product</p>
-            <input list="hq-products" value={prodInput} onChange={(e) => setProdInput(e.target.value)} onKeyDown={(e) => { if (e.key === 'Enter' && prodInput.trim()) { setProducts(p => [...p, prodInput.trim()]); setProdInput('') } }} placeholder="The Cup, SP Authentic, Series 1…" aria-label="Product line" style={{ width: '100%', boxSizing: 'border-box', background: '#121626', border: '1px solid #232A3E', borderRadius: 8, color: '#D4D4D8', padding: '9px 12px', fontSize: 13, fontFamily: 'inherit' }} />
-            <datalist id="hq-products">{productOptions.slice(0, 400).map(p => <option key={p} value={p} />)}</datalist>
+            <Select ariaLabel="Add a product line" value="" width={300} style={{ width: '100%' }} searchAbove={8}
+              onChange={(v) => { if (v && !products.includes(v)) setProducts(p => [...p, v]) }}
+              options={[['', 'Add a product…'], ...productOptions.filter(p => !products.includes(p)).map(p => [p, p])]} />
             {products.length > 0 && <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginTop: 8 }}>{products.map(p => <span key={p} style={{ background: '#0e1630', border: '1px solid ' + ACCENT + '55', color: '#c9d8ff', fontSize: 12, fontWeight: 600, padding: '4px 10px', borderRadius: 999, display: 'inline-flex', gap: 6, alignItems: 'center' }}>{p}<button aria-label={'Remove ' + p} onClick={() => setProducts(ps => ps.filter(x => x !== p))} style={{ background: 'none', border: 'none', color: '#c9d8ff', cursor: 'pointer', padding: 0, fontFamily: 'inherit' }}>×</button></span>)}</div>}
           </div>
           {labelList.length > 1 && (
@@ -600,7 +601,7 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
                         <div style={{ overflowX: 'auto' }}>
                           <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14, minWidth: group === 'season' ? 760 : 560 }}>
                             <thead><tr>{group === 'season' && <><th style={th}>Season</th><th style={th}>Set</th></>}<th style={th}>Card #</th><th style={th}>Section</th><th style={th}>Type</th><th style={th}>Material</th><th style={{ ...th, textAlign: 'right' }}>Run</th><th style={{ ...th, textAlign: 'right' }}>Want</th></tr></thead>
-                            <tbody>{(all ? g.rows : g.rows.slice(0, 12)).map((r, i) => <Row key={i} r={r} withSet={group === 'season'} />)}</tbody>
+                            <tbody>{(all ? g.rows : g.rows.slice(0, 12)).map((r, i) => row(r, group === 'season', i))}</tbody>
                           </table>
                         </div>
                         {g.rows.length > 12 && !all && <div style={{ padding: '10px 16px', borderTop: '1px solid #1f1f1f' }}><button onClick={() => setShowAll(s => new Set([...s, g.key]))} style={{ background: 'none', border: 'none', color: ACCENT_TEXT, fontSize: 13, fontWeight: 600, cursor: 'pointer', padding: 0, fontFamily: 'inherit' }}>Show all {g.rows.length} cards →</button></div>}
@@ -617,7 +618,7 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
               <div style={{ overflowX: 'auto' }}>
                 <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14, minWidth: 820 }}>
                   <thead><tr style={{ background: '#121626' }}><th style={th}>Season</th><th style={th}>Set</th><th style={th}>Card #</th><th style={th}>Section / parallel</th><th style={th}>Type</th><th style={th}>Material</th><th style={{ ...th, textAlign: 'right' }}>Run</th><th style={{ ...th, textAlign: 'right' }}>Want</th></tr></thead>
-                  <tbody>{sorted.slice(0, limit * 5).map((r, i) => <Row key={i} r={r} withSet />)}</tbody>
+                  <tbody>{sorted.slice(0, limit * 5).map((r, i) => row(r, true, i))}</tbody>
                 </table>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '12px 16px', borderTop: '1px solid #1f1f1f', flexWrap: 'wrap', gap: 8 }}>
