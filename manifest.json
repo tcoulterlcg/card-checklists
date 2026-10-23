@@ -7,43 +7,43 @@
   },
   "Baseball": {
    "file": "index/baseball.json",
-   "sets": 6139,
-   "cards": 470478
+   "sets": 6378,
+   "cards": 487846
   },
   "Basketball": {
    "file": "index/basketball.json",
-   "sets": 2914,
-   "cards": 122251
+   "sets": 3077,
+   "cards": 132592
   },
   "Football": {
    "file": "index/football.json",
-   "sets": 3994,
-   "cards": 445911
+   "sets": 4224,
+   "cards": 483569
   },
   "Hockey": {
    "file": "index/hockey.json",
-   "sets": 1873,
-   "cards": 211906
+   "sets": 1926,
+   "cards": 217554
   },
   "Racing": {
    "file": "index/racing.json",
-   "sets": 291,
-   "cards": 18039
+   "sets": 295,
+   "cards": 18061
   },
   "Soccer": {
    "file": "index/soccer.json",
-   "sets": 182,
-   "cards": 22083
+   "sets": 188,
+   "cards": 25333
   },
   "Wrestling": {
    "file": "index/wrestling.json",
-   "sets": 333,
-   "cards": 18493
+   "sets": 356,
+   "cards": 20224
   },
   "Golf": {
    "file": "index/golf.json",
-   "sets": 32,
-   "cards": 1750
+   "sets": 35,
+   "cards": 2000
   },
   "Tennis": {
    "file": "index/tennis.json",
@@ -57,8 +57,8 @@
   },
   "UFC": {
    "file": "index/ufc.json",
-   "sets": 88,
-   "cards": 9850
+   "sets": 110,
+   "cards": 11303
   },
   "Multi-Sport": {
    "file": "index/multi-sport.json",
@@ -67,11 +67,11 @@
   },
   "Cricket": {
    "file": "index/cricket.json",
-   "sets": 4,
-   "cards": 102
+   "sets": 9,
+   "cards": 195
   }
  },
- "sets": 15922,
- "cards": 1348113,
- "updated": "2026-10-23T09:48:40.677Z"
+ "sets": 16670,
+ "cards": 1425927,
+ "updated": "2026-10-23T10:21:04.147Z"
 }
