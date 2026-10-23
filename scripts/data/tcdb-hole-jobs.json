@@ -1662,7 +1662,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2025-panini-university-of-texas-nil-multiple-sport",
@@ -1674,7 +1675,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2025-topps-chrome-bundesliga-soccer-card",
@@ -1686,7 +1688,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2025-topps-decades-1990s-uefa-club-competitions-soccer-card",
@@ -1698,7 +1701,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2025-topps-decades-premier-league-90s-edition-soccer-card",
@@ -1710,7 +1714,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2025-topps-mlb-mvp-collection-baseball-card",
@@ -1722,7 +1727,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2025-upper-deck-allure-se-multiple-sport",
@@ -1734,7 +1740,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2025-upper-deck-goodwin-champions-card",
@@ -1746,7 +1753,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2025-upper-deck-sp-signature-edition-aew-wrestling-card",
@@ -1758,7 +1766,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2026-donruss-nwsl-soccer-card",
@@ -1770,7 +1779,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2026-donruss-wnba-basketball-card",
@@ -1782,7 +1792,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2026-leaf-art-of-sport-multiple-sport",
@@ -1794,7 +1805,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2026-leaf-autograph-collection-football-card",
@@ -1806,7 +1818,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2026-leaf-city-of-champions-multiple-sport",
@@ -1818,7 +1831,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2026-leaf-decadence-multiple-sport",
@@ -1830,7 +1844,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2026-leaf-magnificence-multiple-sport",
@@ -4385,7 +4400,9 @@
    "missing inserts: canary diamond, japan fractor, ruby",
    "50 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2013-bowman-sterling-baseball-cards: 200 -> 3063 cards, 4 -> 79 sections, covers 100.0% of current",
+  "at": "2026-10-23"
  },
  {
   "slug": "2014-bowman-chrome-football-cards",
@@ -4398,7 +4415,9 @@
    "missing inserts: bordered, bubbles, franchise futures die cut, prism, pulsar, shelf, xfractor",
    "10 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2014-bowman-chrome-football-cards: 490 -> 4775 cards, 3 -> 40 sections, covers 99.5% of current",
+  "at": "2026-10-23"
  },
  {
   "slug": "2017-18-panini-prizm-basketball-nba-cards",
@@ -4410,7 +4429,9 @@
   "why": [
    "missing inserts: fastbreak, hyper, mojo, sensational signature, sensational swatch, shimmer, signature, sparkle"
   ],
-  "status": "todo"
+  "status": "review",
+  "note": "2017-18-panini-prizm-basketball-nba-cards: 1079 -> 9974 cards, 12 -> 76 sections, covers 64.5% of current",
+  "tcdbSid": 157371
  },
  {
   "slug": "2016-panini-certified-football-cards",
