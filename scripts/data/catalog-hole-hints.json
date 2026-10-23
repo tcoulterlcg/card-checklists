@@ -2495,6 +2495,105 @@
    "xfractor"
   ]
  },
+ "2016-panini-prizm-football-cards": {
+  "missingPlayers": [
+   "addison",
+   "aguayo",
+   "atkins",
+   "billings",
+   "boddycalhoun",
+   "boykin",
+   "brothers",
+   "bush",
+   "cajuste",
+   "calhoun",
+   "canady",
+   "canzeri",
+   "carson",
+   "cash",
+   "chancellor",
+   "coker",
+   "conklin",
+   "crawley",
+   "drango",
+   "dumervil",
+   "engram",
+   "everett",
+   "fackrell",
+   "fanaika",
+   "ferguson",
+   "foles",
+   "fournette",
+   "garoppolo",
+   "garrett",
+   "haden",
+   "houston",
+   "houstoncarson",
+   "ifedi",
+   "kamara",
+   "kizer",
+   "kuechly",
+   "lattimore",
+   "lawrencestample",
+   "lomax",
+   "mack",
+   "madden",
+   "maddy",
+   "mahomes",
+   "martinez",
+   "mccaffrey",
+   "mcgee",
+   "mckay",
+   "mickens",
+   "mills",
+   "mixon",
+   "morris",
+   "morrison",
+   "nassib",
+   "nicolas",
+   "njoku",
+   "norris",
+   "oakman",
+   "ochi",
+   "perry",
+   "q",
+   "reddick",
+   "redmond",
+   "rogers",
+   "ross",
+   "samuel",
+   "scheu",
+   "shaheen",
+   "sharp",
+   "spriggs",
+   "spruce",
+   "stample",
+   "striker",
+   "suh",
+   "trubisky",
+   "tuerk",
+   "tunsil",
+   "wake",
+   "waller",
+   "watson",
+   "webb",
+   "whitehair",
+   "zettel"
+  ],
+  "missingInserts": [
+   "camo",
+   "die cut",
+   "disco",
+   "draft picks",
+   "draft picks stained glass",
+   "flash",
+   "mojo",
+   "select draft xrc redemption",
+   "select swatch",
+   "tie dyed",
+   "wave"
+  ]
+ },
  "2018-bowman-chrome-baseball-cards": {
   "missingPlayers": [
    "aaron",
@@ -2611,110 +2710,10 @@
    "wright"
   ],
   "missingInserts": [
-   "2017 arizona fall league stars",
    "draft 1998 20th anniversary",
    "mega box mojo",
    "national convention",
    "national convention prism"
-  ]
- },
- "2016-panini-prizm-football-cards": {
-  "missingPlayers": [
-   "addison",
-   "aguayo",
-   "atkins",
-   "billings",
-   "boddycalhoun",
-   "boykin",
-   "brothers",
-   "bush",
-   "cajuste",
-   "calhoun",
-   "canady",
-   "canzeri",
-   "carson",
-   "cash",
-   "chancellor",
-   "coker",
-   "conklin",
-   "crawley",
-   "drango",
-   "dumervil",
-   "engram",
-   "everett",
-   "fackrell",
-   "fanaika",
-   "ferguson",
-   "foles",
-   "fournette",
-   "garoppolo",
-   "garrett",
-   "haden",
-   "houston",
-   "houstoncarson",
-   "ifedi",
-   "kamara",
-   "kizer",
-   "kuechly",
-   "lattimore",
-   "lawrencestample",
-   "lomax",
-   "mack",
-   "madden",
-   "maddy",
-   "mahomes",
-   "martinez",
-   "mccaffrey",
-   "mcgee",
-   "mckay",
-   "mickens",
-   "mills",
-   "mixon",
-   "morris",
-   "morrison",
-   "nassib",
-   "nicolas",
-   "njoku",
-   "norris",
-   "oakman",
-   "ochi",
-   "perry",
-   "q",
-   "reddick",
-   "redmond",
-   "rogers",
-   "ross",
-   "samuel",
-   "scheu",
-   "shaheen",
-   "sharp",
-   "spriggs",
-   "spruce",
-   "stample",
-   "striker",
-   "suh",
-   "trubisky",
-   "tuerk",
-   "tunsil",
-   "wake",
-   "waller",
-   "watson",
-   "webb",
-   "whitehair",
-   "zettel"
-  ],
-  "missingInserts": [
-   "camo",
-   "die cut",
-   "disco",
-   "draft picks",
-   "draft picks stained glass",
-   "flash",
-   "mojo",
-   "select draft xrc redemption",
-   "select swatch",
-   "tie dyed",
-   "wave"
   ]
  },
  "2019-bowman-chrome-baseball": {
@@ -3739,59 +3738,6 @@
    "frozen"
   ]
  },
- "2017-topps-heritage-minor-league-baseball": {
-  "missingPlayers": [
-   "beaver",
-   "bernie",
-   "bison",
-   "blooper",
-   "bolt",
-   "brinson",
-   "bull",
-   "castillo",
-   "dewd",
-   "dragon",
-   "fang",
-   "gator",
-   "gizmo",
-   "heater",
-   "homer",
-   "hornsby",
-   "jeter",
-   "kaboom",
-   "lug",
-   "machado",
-   "martes",
-   "marty",
-   "mason",
-   "newcomb",
-   "paw",
-   "rascal",
-   "redbird",
-   "riverdog",
-   "sale",
-   "sasquatch",
-   "shelldon",
-   "skipper",
-   "slugger",
-   "sluggo",
-   "splash",
-   "striker",
-   "stu",
-   "tourist",
-   "webbly"
-  ],
-  "missingInserts": [
-   "1968 discs",
-   "1968 mint relics",
-   "america stars",
-   "first name omission",
-   "gray border",
-   "looming legacy",
-   "mascots 1968",
-   "real one"
-  ]
- },
  "2014-bowman-chrome-baseball-cards": {
   "missingPlayers": [
    "aliotti",
@@ -4086,66 +4032,6 @@
    "primed",
    "quad relics",
    "timers"
-  ]
- },
- "2017-topps-archives-baseball-cards": {
-  "missingPlayers": [
-   "ankiel",
-   "avery",
-   "baerga",
-   "bayless",
-   "bean",
-   "bell",
-   "box",
-   "brennaman",
-   "castiglione",
-   "cey",
-   "cohen",
-   "edmonds",
-   "epstein",
-   "gammons",
-   "gourriel",
-   "guillen",
-   "hample",
-   "hirschbeck",
-   "jordan",
-   "joyce",
-   "kaline",
-   "kuntz",
-   "langston",
-   "lasorda",
-   "lee",
-   "maas",
-   "magadan",
-   "mcewing",
-   "moon",
-   "mota",
-   "mulder",
-   "mulholland",
-   "pena",
-   "randle",
-   "ray",
-   "renteria",
-   "rosenthal",
-   "scott",
-   "seitzer",
-   "smiley",
-   "sterling",
-   "stieb",
-   "teufel",
-   "thigpen",
-   "tiant",
-   "vinny",
-   "wakefield",
-   "wallach",
-   "wendell",
-   "womack"
-  ],
-  "missingInserts": [
-   "1959 bazooka",
-   "fan favorites",
-   "signatures series",
-   "snapshots"
   ]
  },
  "2014-topps-tribute-baseball-cards": {
@@ -4526,28 +4412,6 @@
    "prospects"
   ]
  },
- "2017-18-topps-chrome-uefa-champions-league-soccer-cards": {
-  "missingPlayers": [
-   "arnold",
-   "box",
-   "modri",
-   "rashford",
-   "shaarawy"
-  ],
-  "missingInserts": [
-   "ball at chest",
-   "celebrating",
-   "dribbling",
-   "future stars",
-   "kicking",
-   "kneeling",
-   "portrait",
-   "right leg forward",
-   "running",
-   "thumb up",
-   "with ball"
-  ]
- },
  "2019-topps-opening-day-baseball": {
   "missingPlayers": [
    "allard",
@@ -4788,6 +4652,26 @@
    "paper prospect",
    "turkey",
    "winter wonderland"
+  ]
+ },
+ "2017-18-topps-chrome-uefa-champions-league-soccer-cards": {
+  "missingPlayers": [
+   "arnold",
+   "box",
+   "elshaarawy",
+   "modri"
+  ],
+  "missingInserts": [
+   "ball at chest",
+   "celebrating",
+   "dribbling",
+   "kicking",
+   "kneeling",
+   "portrait",
+   "right leg forward",
+   "running",
+   "thumb up",
+   "with ball"
   ]
  },
  "2019-topps-chrome-baseball": {
@@ -5842,24 +5726,6 @@
    "signature"
   ]
  },
- "2015-bowman-baseball-cards": {
-  "missingPlayers": [
-   "ajcole",
-   "chapman",
-   "coyle",
-   "feliz",
-   "thompson"
-  ],
-  "missingInserts": [
-   "chrome asia",
-   "chrome asia wave",
-   "crackle",
-   "inception prospect",
-   "inception relic",
-   "paper prospect",
-   "production error"
-  ]
- },
  "2013-14-fleer-showcase-hockey-cards": {
   "missingPlayers": [
    "bancks",
@@ -6513,6 +6379,22 @@
    "retro blank back",
    "signatures",
    "stickers"
+  ]
+ },
+ "2015-bowman-baseball-cards": {
+  "missingPlayers": [
+   "ajcole",
+   "chapman",
+   "coyle",
+   "feliz",
+   "thompson"
+  ],
+  "missingInserts": [
+   "chrome asia",
+   "chrome asia wave",
+   "crackle",
+   "inception relic",
+   "production error"
   ]
  },
  "2014-15-panini-nba-hoops-basketball-cards": {
@@ -8045,6 +7927,19 @@
    "signature"
   ]
  },
+ "2017-topps-archives-baseball-cards": {
+  "missingPlayers": [
+   "baerga",
+   "box",
+   "guillen",
+   "ray",
+   "tiant"
+  ],
+  "missingInserts": [
+   "signatures series",
+   "snapshots"
+  ]
+ },
  "2018-19-panini-select-basketball-nba-cards": {
   "missingPlayers": [
    "alexander",
@@ -9046,15 +8941,6 @@
    "major league"
   ]
  },
- "2014-topps-heritage-baseball-cards": {
-  "missingPlayers": [
-   "lindor",
-   "severino"
-  ],
-  "missingInserts": [
-   "1965 draft"
-  ]
- },
  "2013-panini-golden-age-baseball-cards": {
   "missingPlayers": [
    "clubs",
@@ -9983,6 +9869,13 @@
   "missingPlayers": [
    "blue",
    "rizzto"
+  ],
+  "missingInserts": []
+ },
+ "2014-topps-heritage-baseball-cards": {
+  "missingPlayers": [
+   "lindor",
+   "severino"
   ],
   "missingInserts": []
  },
