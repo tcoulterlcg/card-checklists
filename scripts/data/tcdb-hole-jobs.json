@@ -1467,7 +1467,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2025-bowmans-best-university-football-card",
@@ -1479,7 +1480,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2025-leaf-15tth-anniversary-multiple-sport",
@@ -1491,7 +1493,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2025-leaf-electrum-multiple-sport",
@@ -1503,7 +1506,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2025-leaf-history-book-sports-edition-chapter-2-multiple-sport",
@@ -1515,7 +1519,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2025-leaf-in-the-game-used-sports-multiple-sport",
@@ -1527,7 +1532,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2025-leaf-metal-authentics-volume-2-multiple-sport",
@@ -1539,7 +1545,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2025-leaf-metal-halloween-multiple-sport",
@@ -1551,7 +1558,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2025-leaf-metal-independence-day-multiple-sport",
@@ -1563,7 +1571,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2025-leaf-metal-sports-heroes-multisport",
@@ -1575,7 +1584,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2025-leaf-metal-women-of-sport-multiple-sport",
@@ -1587,7 +1597,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2025-leaf-pearl-multiple-sport",
@@ -1599,7 +1610,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2025-leaf-signature-series-multiple-sport",
@@ -1611,7 +1623,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2025-panini-combat-anthology-card",
@@ -1623,7 +1636,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2025-panini-contenders-premier-fighters-league-mma-card",
@@ -1635,7 +1649,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2025-panini-national-convention-silver-packs-multiple-sport",
@@ -4137,7 +4152,9 @@
    "missing inserts: bca die cut ribbon, camo, frost, military die cut ribbon, patch, prism, relics",
    "16 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2013-topps-platinum-football-cards: 200 -> 2656 cards, 3 -> 61 sections, covers 100.0% of current",
+  "at": "2026-10-23"
  },
  {
   "slug": "13-14-panini-totally-certified-basketball",
@@ -4149,7 +4166,8 @@
   "why": [
    "85 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "review",
+  "note": "pre-check: TCDB set 84611 base covers 0% of ours (likely different numbering/set)"
  },
  {
   "slug": "2011-12-upper-deck-artifacts-hockey-2",
@@ -4162,7 +4180,9 @@
    "missing inserts: frozen",
    "75 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2011-12-upper-deck-artifacts-hockey-2: 142 -> 2830 cards, 4 -> 35 sections, covers 98.6% of current",
+  "at": "2026-10-23"
  },
  {
   "slug": "2017-topps-gypsy-queen-baseball-cards",
@@ -4175,7 +4195,9 @@
    "missing inserts: back content, chewing gum, fortune teller, garments, missing blackplate, missing nameplate, portrait art reproduction",
    "15 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2017-topps-gypsy-queen-baseball-cards: 350 -> 4049 cards, 3 -> 38 sections, covers 100.0% of current",
+  "at": "2026-10-23"
  },
  {
   "slug": "2015-topps-fire-football-cards",
@@ -4188,7 +4210,8 @@
    "missing inserts: fired up, flame, forces nature, into wild, onyx, patches, relics, transcendent touchdowns",
    "5 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "review",
+  "note": "pre-check: TCDB set 115438 base covers 67% of ours"
  },
  {
   "slug": "2017-topps-museum-collection-baseball",
@@ -4201,7 +4224,9 @@
    "missing inserts: archival, canvas reprints, framed, meaningful material, memorabilia, primary pieces quad relics, primary pieces single player quad relic, signature swatches triple relic",
    "5 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2017-topps-museum-collection-baseball: 100 -> 3701 cards, 1 -> 62 sections, covers 100.0% of current",
+  "at": "2026-10-23"
  },
  {
   "slug": "2014-topps-fire-football-cards",
@@ -4214,7 +4239,9 @@
    "missing inserts: autographed patches, competitive, dual combo patch relics, forged by die cut, out world, relics, ring",
    "base skips 5 numbers in #1-155 (e.g. 101, 102, 103, 104, 105)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2014-topps-fire-football-cards: 194 -> 2525 cards, 2 -> 46 sections, covers 100.0% of current",
+  "at": "2026-10-23"
  },
  {
   "slug": "20222-topps-x-juan-soto-curated-baseball",
@@ -4239,7 +4266,9 @@
    "missing inserts: 1960 relics, 1969 stickers, 1972 design inserts, 1983 star, dual fan favorites, gallery heroes, tall boy",
    "13 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2013-topps-archives-baseball-cards: 254 -> 2416 cards, 3 -> 40 sections, covers 98.4% of current",
+  "at": "2026-10-23"
  },
  {
   "slug": "2018-topps-opening-day-baseball-mlb-cards",
