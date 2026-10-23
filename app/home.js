@@ -795,7 +795,10 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
   // Wantlist add — whole set or a single card/parallel from the set page.
   // What's already on the signed-in user's wantlist, so card rows can show ✓ (and toggle off).
   const [wanted, setWanted] = useState(() => new Map())   // key -> row id
-  const wantKey = (it) => [it.set_slug, it.card_n == null ? '' : String(it.card_n), it.section || ''].join('|')
+  // Section titles shift when a checklist is re-imported ("Base" / "Base Set", case, a repeated set name),
+  // so wantlist matching compares a normalized title — saved cards keep their check mark after data updates.
+  const secKey = (t) => String(t || '').toLowerCase().replace(/\s+(set|cards?)$/, '').replace(/[^a-z0-9/]+/g, ' ').trim()
+  const wantKey = (it) => [it.set_slug, it.card_n == null ? '' : String(it.card_n).replace(/^#/, ''), secKey(it.section)].join('|')
   const loadWanted = async (uid) => { const rows = await myWantlist(uid); setWanted(new Map(rows.map(r => [wantKey(r), r.id]))) }
   useEffect(() => { if (account.session?.user?.id) loadWanted(account.session.user.id); else setWanted(new Map()) }, [account.session?.user?.id])
   const normWant = (item) => (item.section && (item.card_n == null || item.card_n === '')) ? { ...item, card_n: '—' + (item.player || '') } : item
