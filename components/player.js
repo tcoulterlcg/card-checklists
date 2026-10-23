@@ -5,10 +5,10 @@
 import { memo, useDeferredValue, useEffect, useMemo, useRef, useState } from 'react'
 import { supa } from '../lib/supa'
 import { TYPE, norm, parseQuery, parseQueryFor, matchPlayers, rowMatches, typeLabel, TYPE_COLORS, serialLabel, MEM_LABEL, MEM_COLORS, memKind, memTypical } from '../lib/query'
+import { brandOf } from '../lib/brands'
 import { ACCENT, ACCENT_TEXT, BG, SURFACE, SURFACE_2, LINE, CHIP_LINE, TEXT, TEXT_2, LABEL, display, eyebrow, title, buttonText } from '../lib/theme'
 
 const SPORT_COLORS = { Baseball: '#60a5fa', Football: '#4ade80', Basketball: '#f97316', Hockey: '#a78bfa', Soccer: '#f43f5e', UFC: '#dc2626', Boxing: '#eab308', Wrestling: '#f59e0b', Golf: '#22c55e', Tennis: '#14b8a6', Racing: '#ef4444', 'Pokémon': '#facc15', 'Yu-Gi-Oh!': '#a855f7', Magic: '#f59e0b', Lorcana: '#8b5cf6', 'One Piece': '#ef4444', Entertainment: '#ec4899', 'Non-Sport': '#fb923c', 'Multi-Sport': '#94a3b8' }
-const BRAND_OF = (name) => { const n = (name || '').toLowerCase(); return /upper deck|\bud\b|o-pee-chee|sp authentic|sp game|spx|the cup|ultimate collection|artifacts|black diamond|trilogy|synergy|allure|parkhurst|fleer|skybox|\bmvp\b|credentials|stature|engrained|premier hockey|ice hockey/.test(n) ? 'Upper Deck' : /topps|bowman|finest|stadium club|allen|gypsy|heritage|archives|museum|tribute|dynasty|inception|tier one|triple threads|sterling|five star|definitive|transcendent|chrome/.test(n) ? 'Topps' : /panini|prizm|select|mosaic|donruss|optic|contenders|national treasures|immaculate|flawless|obsidian|spectra|certified|absolute|phoenix|origins|noir|court kings|hoops|revolution|score|playbook|luminance|illusions|zenith|gold standard|crown royale|limited|elite|prestige|rookies|legacy|classics|chronicles|encased|eminence|impeccable|silhouette|one and one/.test(n) ? 'Panini' : /leaf|\bitg\b|in the game/.test(n) ? 'Leaf' : /pro set/.test(n) ? 'Pro Set' : 'Other' }
 
 // ---------- data hooks ----------
 let dirPromise = null
@@ -281,7 +281,7 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
       if (r[0] !== player.id) continue
       const slug = shard.slugs[r[1]]
       const m = setMeta[slug] || { name: slug, year: 0, sport: '' }
-      out.push({ slug, set: m.name, year: m.year, sport: m.sport, brand: BRAND_OF(m.name), section: shard.sections[r[2]], n: r[3], team: r[4] >= 0 ? shard.teams[r[4]] : '', serial: r[5], type: r[6], mem: r[7] || 0, raw: r })
+      out.push({ slug, set: m.name, year: m.year, sport: m.sport, brand: brandOf(m.name, m.year), section: shard.sections[r[2]], n: r[3], team: r[4] >= 0 ? shard.teams[r[4]] : '', serial: r[5], type: r[6], mem: r[7] || 0, raw: r })
     }
     return out
   }, [shard, player.id, setMeta])

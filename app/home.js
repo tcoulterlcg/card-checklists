@@ -9,6 +9,7 @@ import { addWant, removeWant, myWantlist } from '../lib/supa'
 import { Omnibox, PlayerPage, MyPlayersPanel, useMyPlayers, loadPlayerDir, loadTopPlayers, seasonLabel, MemBadge, MemChip, memCodeOf } from '../components/player'
 import { norm, parseQuery, parseQueryFor, matchPlayers, TYPE, typeLabel, TYPE_COLORS, serialLabel } from '../lib/query'
 import { loadSet, loadIndex } from '../lib/catalog'
+import { classifySet, brandSort, BRAND_COLORS } from '../lib/brands'
 import { ACCENT, ACCENT_TEXT, BG, SURFACE, SURFACE_2, LINE, CHIP_LINE, TEXT, TEXT_2, LABEL, display, eyebrow, title, buttonText } from '../lib/theme'
 
 
@@ -62,56 +63,9 @@ const TCG_EXAMPLE = { 'Pokémon': 'Charizard', 'Yu-Gi-Oh!': 'Dark Magician', Mag
 // "Stitch — Rock Star" / "Sanji (SP)" / "A-Ancestral Katana" -> base card name.
 const tcgBaseName = (p) => String(p || '').replace(/\s+[—–-]\s+.*$/, '').replace(/\s*\([^)]*\)\s*$/, '').replace(/^A-(?=\S)/, '').trim()
 
-const BRAND_COLORS = { Panini: '#e11d48', Topps: '#ef8c1c', 'Upper Deck': '#2563eb', Leaf: '#16a34a', Other: '#8A8A93' }
 
 const RPA_TYPES = [['RPA', 'Rookie Patch Auto'], ['PA', 'Patch Auto'], ['RA', 'Rookie Auto'], ['AU', 'Autograph'], ['PATCH', 'Patch'], ['RELIC', 'Relic'], ['All', 'All Hits']]
 const RPA_TYPE_COLOR = { RPA: '#d4a843', PA: '#e11d48', RA: '#8b5cf6', AU: '#2563eb', PATCH: '#16a34a', RELIC: '#f97316', All: '#8A8A93' }
-
-// Ordered product-line matchers → [brand, product]. First match wins, so more
-// specific lines (Bowman Chrome) precede general ones (Bowman).
-const PRODUCT_MAP = [
-  [/topps chrome/, 'Topps', 'Topps Chrome'], [/bowman chrome/, 'Topps', 'Bowman Chrome'],
-  [/bowman'?s best/, 'Topps', "Bowman's Best"], [/bowman sterling/, 'Topps', 'Bowman Sterling'],
-  [/bowman platinum/, 'Topps', 'Bowman Platinum'], [/bowman draft/, 'Topps', 'Bowman Draft'],
-  [/bowman/, 'Topps', 'Bowman'], [/topps heritage/, 'Topps', 'Heritage'],
-  [/stadium club/, 'Topps', 'Stadium Club'], [/gypsy queen/, 'Topps', 'Gypsy Queen'],
-  [/allen ?(&|and) ?ginter/, 'Topps', 'Allen & Ginter'], [/topps finest|(?<![a-z])finest/, 'Topps', 'Finest'],
-  [/topps fire/, 'Topps', 'Topps Fire'], [/gold label/, 'Topps', 'Gold Label'],
-  [/topps archives/, 'Topps', 'Archives'], [/museum collection/, 'Topps', 'Museum Collection'],
-  [/tier one/, 'Topps', 'Tier One'], [/triple threads/, 'Topps', 'Triple Threads'],
-  [/topps tribute/, 'Topps', 'Tribute'], [/topps inception/, 'Topps', 'Inception'],
-  [/topps dynasty/, 'Topps', 'Dynasty'], [/definitive collection/, 'Topps', 'Definitive'],
-  [/big league/, 'Topps', 'Big League'], [/topps platinum/, 'Topps', 'Topps Platinum'],
-  [/topps/, 'Topps', 'Topps'],
-  [/panini prizm|(?<![a-z])prizm/, 'Panini', 'Prizm'], [/donruss optic|(?<![a-z])optic/, 'Panini', 'Donruss Optic'],
-  [/(?<![a-z])donruss/, 'Panini', 'Donruss'], [/(?<![a-z])select/, 'Panini', 'Select'],
-  [/contenders/, 'Panini', 'Contenders'], [/national treasures/, 'Panini', 'National Treasures'],
-  [/immaculate/, 'Panini', 'Immaculate'], [/(?<![a-z])mosaic/, 'Panini', 'Mosaic'],
-  [/flawless/, 'Panini', 'Flawless'], [/(?<![a-z])absolute/, 'Panini', 'Absolute'],
-  [/(?<![a-z])certified/, 'Panini', 'Certified'], [/(?<![a-z])spectra/, 'Panini', 'Spectra'],
-  [/(?<![a-z])obsidian/, 'Panini', 'Obsidian'], [/(?<![a-z])phoenix/, 'Panini', 'Phoenix'],
-  [/(?<![a-z])chronicles/, 'Panini', 'Chronicles'], [/(?<![a-z])playbook/, 'Panini', 'Playbook'],
-  [/(?<![a-z])prestige/, 'Panini', 'Prestige'], [/(?<![a-z])score/, 'Panini', 'Score'],
-  [/diamond kings/, 'Panini', 'Diamond Kings'], [/crown royale/, 'Panini', 'Crown Royale'],
-  [/rookies (&|and) stars/, 'Panini', 'Rookies & Stars'], [/(?<![a-z])elite/, 'Panini', 'Elite'],
-  [/(?<![a-z])revolution/, 'Panini', 'Revolution'], [/(?<![a-z])illusions/, 'Panini', 'Illusions'],
-  [/gold standard/, 'Panini', 'Gold Standard'], [/(?<![a-z])origins/, 'Panini', 'Origins'],
-  [/(?<![a-z])zenith/, 'Panini', 'Zenith'], [/(?<![a-z])panini/, 'Panini', 'Panini'],
-  [/o-?pee-?chee platinum/, 'Upper Deck', 'O-Pee-Chee Platinum'], [/o-?pee-?chee/, 'Upper Deck', 'O-Pee-Chee'],
-  [/sp authentic/, 'Upper Deck', 'SP Authentic'], [/sp game used/, 'Upper Deck', 'SP Game Used'],
-  [/(?<![a-z])spx/, 'Upper Deck', 'SPx'], [/the cup/, 'Upper Deck', 'The Cup'],
-  [/black diamond/, 'Upper Deck', 'Black Diamond'], [/(?<![a-z])artifacts/, 'Upper Deck', 'Artifacts'],
-  [/ultimate collection/, 'Upper Deck', 'Ultimate Collection'], [/(?<![a-z])trilogy/, 'Upper Deck', 'Trilogy'],
-  [/(?<![a-z])allure/, 'Upper Deck', 'Allure'], [/(?<![a-z])engrained/, 'Upper Deck', 'Engrained'],
-  [/(?<![a-z])synergy/, 'Upper Deck', 'Synergy'], [/(?<![a-z])parkhurst/, 'Upper Deck', 'Parkhurst'],
-  [/(?<![a-z])stature/, 'Upper Deck', 'Stature'], [/upper deck ice|(?<![a-z])ice hockey/, 'Upper Deck', 'Ice'],
-  [/(?<![a-z])compendium/, 'Upper Deck', 'Compendium'], [/(?<![a-z])fleer/, 'Upper Deck', 'Fleer'],
-  [/(?<![a-z])skybox/, 'Upper Deck', 'SkyBox'], [/upper deck mvp|(?<![a-z])mvp hockey/, 'Upper Deck', 'MVP'],
-  [/upper deck/, 'Upper Deck', 'Upper Deck'],
-  [/(?<![a-z])leaf metal/, 'Leaf', 'Leaf Metal'], [/(?<![a-z])leaf trinity/, 'Leaf', 'Leaf Trinity'],
-  [/leaf ultimate/, 'Leaf', 'Leaf Ultimate'], [/(?<![a-z])itg|in the game/, 'Leaf', 'ITG'],
-  [/(?<![a-z])leaf/, 'Leaf', 'Leaf']
-]
 
 // "2024-25 Upper Deck The Cup" -> "2024-25"; otherwise the stored year.
 function yearLabel(s) {
@@ -119,13 +73,6 @@ function yearLabel(s) {
   return m ? m[1] : (s && s.year) || ''
 }
 
-function classifySet(name) {
-  const n = (name || '').toLowerCase()
-  for (const [re, brand, product] of PRODUCT_MAP) {
-    if (re.test(n)) return { brand, product }
-  }
-  return { brand: 'Other', product: 'Other' }
-}
 
 // Natural sort for card numbers: compare the embedded numeric part first
 // (so #2 < #10 < #100), then fall back to the full string for prefixes.
@@ -536,11 +483,11 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
   }, [onlyMine, visibleSections, setData, myPlayers.list])
 
   // Every set tagged with brand + product (derived from its name).
-  const taggedSets = useMemo(() => sets.map(s => Object.assign({}, s, classifySet(s.name))), [sets])
+  const taggedSets = useMemo(() => sets.map(s => Object.assign({}, s, classifySet(s.name, s.year))), [sets])
 
   const brands = useMemo(() => {
     const base = sportFilter === 'All' ? taggedSets : taggedSets.filter(s => s.sport === sportFilter)
-    return ['All', ...[...new Set(base.map(s => s.brand))].sort((a, b) => (a === 'Other' ? 1 : b === 'Other' ? -1 : a.localeCompare(b)))]
+    return ['All', ...[...new Set(base.map(s => s.brand))].sort(brandSort)]
   }, [taggedSets, sportFilter])
 
   const products = useMemo(() => {
@@ -1365,7 +1312,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
                   <span style={{ flex: '2 1 0', minWidth: 0 }}>Set</span>
                 </div>
                 {rpaResults.map((c, i) => (
-                  <button key={i} onClick={() => { const s = sets.find(x => x.slug === c.slug); if (s) openSet(Object.assign({}, s, classifySet(s.name))) }}
+                  <button key={i} onClick={() => { const s = sets.find(x => x.slug === c.slug); if (s) openSet(Object.assign({}, s, classifySet(s.name, s.year))) }}
                     style={{ width: '100%', textAlign: 'left', display: 'flex', gap: 12, padding: '8px 16px', fontSize: 14, alignItems: 'baseline', background: i % 2 === 0 ? '#0F1320' : '#121626', border: 'none', color: '#EDEDEF', cursor: 'pointer' }}>
                     <span style={{ flex: '0 0 56px', color: ACCENT_TEXT, fontWeight: 700, fontVariantNumeric: 'tabular-nums' }}>{c.n ? '#' + c.n : '—'}</span>
                     <span style={{ flex: '1 1 auto', minWidth: 0, fontWeight: 600 }}>{c.p}</span>
@@ -1498,7 +1445,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
               <span style={{ flex: '2 1 0', minWidth: 0 }}>Set · Section</span>
             </div>
             {teamHits.map((c, i) => (
-              <button key={i} onClick={() => { const s = sets.find(x => x.slug === c.slug); if (s) openSet(Object.assign({}, s, classifySet(s.name))) }}
+              <button key={i} onClick={() => { const s = sets.find(x => x.slug === c.slug); if (s) openSet(Object.assign({}, s, classifySet(s.name, s.year))) }}
                 style={{ width: '100%', textAlign: 'left', display: 'flex', gap: 12, padding: '8px 16px', fontSize: 14, alignItems: 'baseline', background: i % 2 === 0 ? '#0F1320' : '#121626', border: 'none', color: '#EDEDEF', cursor: 'pointer' }}>
                 <span style={{ flex: '0 0 60px', color: ACCENT_TEXT, fontWeight: 700, fontVariantNumeric: 'tabular-nums' }}>{c.n ? '#' + c.n : '—'}</span>
                 <span style={{ flex: '1 1 auto', minWidth: 0, fontWeight: 600 }}>{c.p}{isTcg && c.t ? <span style={{ color: '#8A8A93', fontWeight: 400, fontSize: 13 }}> · {c.t}</span> : null}</span>
