@@ -37,8 +37,8 @@
   },
   "Wrestling": {
    "file": "index/wrestling.json",
-   "sets": 632,
-   "cards": 49024
+   "sets": 735,
+   "cards": 64651
   },
   "Golf": {
    "file": "index/golf.json",
@@ -71,11 +71,11 @@
    "cards": 5033
   }
  },
- "sets": 19795,
- "cards": 1941328,
- "updated": "2026-10-23T20:26:48.515Z",
+ "sets": 19898,
+ "cards": 1956955,
+ "updated": "2026-10-23T20:59:33.319Z",
  "visible": {
   "file": "index/visible.json",
-  "sets": 993
+  "sets": 1168
  }
 }
