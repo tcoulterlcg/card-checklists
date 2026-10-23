@@ -3074,108 +3074,6 @@
    "swinging bat ink"
   ]
  },
- "2001-bowman-chrome-baseball": {
-  "missingPlayers": [
-   "abruzzo",
-   "acosta",
-   "almonte",
-   "bautista",
-   "betemit",
-   "biggio",
-   "blalock",
-   "boitel",
-   "bonds",
-   "borrell",
-   "brazoban",
-   "burnett",
-   "burrell",
-   "byrnes",
-   "cabrera",
-   "chenard",
-   "clemens",
-   "crosby",
-   "dempster",
-   "devarez",
-   "dunn",
-   "evert",
-   "fogg",
-   "fossum",
-   "frazier",
-   "giambi",
-   "glaus",
-   "gonzalez",
-   "grabowski",
-   "green",
-   "griffey",
-   "guante",
-   "guerrero",
-   "gwynn",
-   "hafner",
-   "hannaman",
-   "hekken",
-   "hendrickson",
-   "herr",
-   "hudson",
-   "jeter",
-   "johnson",
-   "journell",
-   "kendall",
-   "kryznel",
-   "ludwick",
-   "madson",
-   "martinez",
-   "mcgwire",
-   "mcneal",
-   "mendez",
-   "mims",
-   "montanez",
-   "morban",
-   "morneau",
-   "mulder",
-   "niekro",
-   "olmedo",
-   "oswalt",
-   "overbay",
-   "palmeiro",
-   "peavy",
-   "pettitte",
-   "pineiro",
-   "posada",
-   "reyes",
-   "ripken",
-   "rivera",
-   "rodriguez",
-   "rogers",
-   "rolen",
-   "rollins",
-   "ross",
-   "shinjo",
-   "sizemore",
-   "smitherman",
-   "snow",
-   "song",
-   "sorensen",
-   "soriano",
-   "sosa",
-   "soules",
-   "stiles",
-   "suzuki",
-   "thomas",
-   "thurston",
-   "tosca",
-   "wainwright",
-   "wayne",
-   "whitecotton",
-   "wilderson",
-   "williams",
-   "wilson",
-   "woodrow"
-  ],
-  "missingInserts": [
-   "japanese",
-   "uer photo denny bautista"
-  ]
- },
  "2016-bowman-chrome-baseball-cards": {
   "missingPlayers": [
    "aaron",
@@ -3425,74 +3323,6 @@
    "path to cup stanley winner"
   ]
  },
- "2014-bowman-chome-mini-baseball-cards": {
-  "missingPlayers": [
-   "baez",
-   "bauer",
-   "biddle",
-   "boyd",
-   "brean",
-   "bumgarner",
-   "butler",
-   "buxton",
-   "cabrera",
-   "cespedes",
-   "crick",
-   "cron",
-   "dahl",
-   "darvish",
-   "falefa",
-   "fernandez",
-   "freeman",
-   "goldschmidt",
-   "goodwin",
-   "graham",
-   "gray",
-   "green",
-   "harper",
-   "heaney",
-   "johnson",
-   "jungmann",
-   "kershaw",
-   "lee",
-   "lindor",
-   "liriano",
-   "martinez",
-   "mccutchen",
-   "mckinney",
-   "meyer",
-   "myers",
-   "naquin",
-   "nelson",
-   "norris",
-   "osuna",
-   "owens",
-   "pederson",
-   "piscotty",
-   "puig",
-   "russell",
-   "sale",
-   "soler",
-   "stanton",
-   "starling",
-   "strasburg",
-   "stroman",
-   "syndergaard",
-   "toles",
-   "trout",
-   "wacha",
-   "yelich"
-  ],
-  "missingInserts": [
-   "die cut",
-   "die cut wave",
-   "indigo",
-   "scout top",
-   "shimmer",
-   "top",
-   "wave"
-  ]
- },
  "2014-topps-chrome-baseball-cards": {
   "missingPlayers": [
    "abreu",
@@ -3655,6 +3485,72 @@
    "willis"
   ],
   "missingInserts": []
+ },
+ "2014-bowman-chome-mini-baseball-cards": {
+  "missingPlayers": [
+   "baez",
+   "bauer",
+   "biddle",
+   "boyd",
+   "brean",
+   "bumgarner",
+   "butler",
+   "buxton",
+   "cabrera",
+   "cespedes",
+   "crick",
+   "cron",
+   "dahl",
+   "darvish",
+   "falefa",
+   "fernandez",
+   "freeman",
+   "goldschmidt",
+   "goodwin",
+   "graham",
+   "gray",
+   "green",
+   "harper",
+   "heaney",
+   "johnson",
+   "jungmann",
+   "kershaw",
+   "lee",
+   "lindor",
+   "liriano",
+   "martinez",
+   "mccutchen",
+   "mckinney",
+   "meyer",
+   "myers",
+   "naquin",
+   "nelson",
+   "norris",
+   "osuna",
+   "owens",
+   "pederson",
+   "piscotty",
+   "puig",
+   "russell",
+   "sale",
+   "soler",
+   "stanton",
+   "starling",
+   "strasburg",
+   "stroman",
+   "syndergaard",
+   "toles",
+   "trout",
+   "wacha",
+   "yelich"
+  ],
+  "missingInserts": [
+   "die cut",
+   "die cut wave",
+   "scout top",
+   "top",
+   "wave"
+  ]
  },
  "2011-12-upper-deck-artifacts-hockey-2": {
   "missingPlayers": [
@@ -3930,110 +3826,6 @@
    "piece puzzle 58 59 60"
   ]
  },
- "2018-bowman-baseball-cards": {
-  "missingPlayers": [
-   "altuve",
-   "beaty",
-   "bettencourt",
-   "betts",
-   "biggio",
-   "bishop",
-   "bote",
-   "bregman",
-   "burdi",
-   "burke",
-   "burks",
-   "cabral",
-   "carlson",
-   "chapman",
-   "chester",
-   "claus",
-   "crouse",
-   "deetz",
-   "degrom",
-   "deichman",
-   "diaz",
-   "dietz",
-   "downs",
-   "elf",
-   "estrada",
-   "fillmyer",
-   "fitch",
-   "givin",
-   "gomez",
-   "gregorius",
-   "lopez",
-   "maitan",
-   "may",
-   "mundell",
-   "ramirez",
-   "segura",
-   "spitzbarth",
-   "turkey",
-   "uelman",
-   "waters",
-   "woodruff",
-   "yuchengchang"
-  ],
-  "missingInserts": [
-   "camo",
-   "festive",
-   "holiday",
-   "snow",
-   "trending",
-   "turkey"
-  ]
- },
- "2014-topps-prime-football-cards": {
-  "missingPlayers": [
-   "adams",
-   "allen",
-   "alonso",
-   "ansah",
-   "austin",
-   "ball",
-   "beckham",
-   "bell",
-   "benjamin",
-   "bernard",
-   "brown",
-   "carr",
-   "cooks",
-   "dobson",
-   "eifert",
-   "ellington",
-   "ertz",
-   "evans",
-   "garoppolo",
-   "glennon",
-   "goodwin",
-   "gordon",
-   "hopkins",
-   "jones",
-   "lacy",
-   "latimer",
-   "manuel",
-   "milliner",
-   "patterson",
-   "reed",
-   "sanders",
-   "smith",
-   "stills",
-   "thomas",
-   "wheaton",
-   "williams",
-   "woods"
-  ],
-  "missingInserts": [
-   "autographed relics level",
-   "dual relics",
-   "patches",
-   "performance",
-   "primed",
-   "quad relics",
-   "timers"
-  ]
- },
  "2014-topps-tribute-baseball-cards": {
   "missingPlayers": [
    "bauer",
@@ -4250,49 +4042,6 @@
    "relic"
   ]
  },
- "2014-bowman-baseball-cards": {
-  "missingPlayers": [
-   "alcantara",
-   "betancourt",
-   "bonifacio",
-   "brean",
-   "brett",
-   "cordero",
-   "dejong",
-   "encinas",
-   "falefa",
-   "glavine",
-   "gregorio",
-   "griffey",
-   "judge",
-   "knebel",
-   "maddux",
-   "mayers",
-   "mcgrath",
-   "meisner",
-   "mendez",
-   "molitor",
-   "morgan",
-   "piscotty",
-   "ramsey",
-   "ripken",
-   "scavuzzo",
-   "st",
-   "toles",
-   "waldrop",
-   "winker",
-   "yarbrough"
-  ],
-  "missingInserts": [
-   "1989 is back diamond",
-   "chrome wave",
-   "ice",
-   "inception inceptioned",
-   "inception patch",
-   "inception relic",
-   "state hometown"
-  ]
- },
  "2013-bowman-sterling-baseball-cards": {
   "missingPlayers": [
    "anderson",
@@ -4473,51 +4222,6 @@
    "now road to"
   ]
  },
- "2014-bowman-sterling-baseball-cards": {
-  "missingPlayers": [
-   "almora",
-   "barnes",
-   "blandino",
-   "chavis",
-   "cole",
-   "coyle",
-   "crick",
-   "deshields",
-   "edwards",
-   "fisher",
-   "flaherty",
-   "foltynewicz",
-   "gatewood",
-   "griffin",
-   "gueller",
-   "hanson",
-   "holmes",
-   "hursh",
-   "johnson",
-   "kopech",
-   "morgan",
-   "murphy",
-   "nicolino",
-   "northcraft",
-   "papi",
-   "peraza",
-   "piscotty",
-   "rodriguez",
-   "rosario",
-   "sheffield",
-   "sims",
-   "tucker",
-   "vallot",
-   "weaver"
-  ],
-  "missingInserts": [
-   "atomic",
-   "canary diamond",
-   "japan fractor",
-   "magenta",
-   "prospect"
-  ]
- },
  "2016-topps-ufc-knockout-trading-cards": {
   "missingPlayers": [
    "akiyama",
@@ -4565,65 +4269,6 @@
    "relics",
    "scarlet signatures",
    "scarlet signatures relics"
-  ]
- },
- "2015-topps-platinum-football-cards": {
-  "missingPlayers": [
-   "armstead",
-   "carter",
-   "collins",
-   "dawson",
-   "flowers",
-   "fowler",
-   "goodley",
-   "greenberry",
-   "harold",
-   "harper",
-   "heuerman",
-   "hunter",
-   "kendricks",
-   "koyack",
-   "lippett",
-   "mauldin",
-   "mcbride",
-   "mckinney",
-   "ml",
-   "odighizuwa",
-   "perryman",
-   "peters",
-   "ray",
-   "robinson",
-   "shelton",
-   "thompson"
-  ],
-  "missingInserts": [
-   "autographed",
-   "breast cancer awareness",
-   "players die cut",
-   "pulsar",
-   "salute to service",
-   "sapphire"
-  ]
- },
- "2013-topps-opening-day-baseball-cards-2": {
-  "missingPlayers": [
-   "ace",
-   "bird",
-   "bobcat",
-   "box",
-   "hammels"
-  ],
-  "missingInserts": [
-   "batting",
-   "conference holding jersey",
-   "conference jersey",
-   "grey jersey",
-   "jersey",
-   "parade",
-   "pitching",
-   "running",
-   "t shirt",
-   "team mascots"
   ]
  },
  "2017-bowman-baseball-cards": {
@@ -4719,6 +4364,25 @@
    "family business",
    "update 150 years professional",
    "xfractor"
+  ]
+ },
+ "2013-topps-opening-day-baseball-cards-2": {
+  "missingPlayers": [
+   "box",
+   "hammels",
+   "sox"
+  ],
+  "missingInserts": [
+   "batting",
+   "conference holding jersey",
+   "conference jersey",
+   "grey jersey",
+   "jersey",
+   "parade",
+   "pitching",
+   "running",
+   "t shirt",
+   "team mascots"
   ]
  },
  "1985-topps-traded-baseball-cards": {
@@ -5025,6 +4689,37 @@
    "shorts",
    "sitting",
    "superstar sensations"
+  ]
+ },
+ "2018-bowman-baseball-cards": {
+  "missingPlayers": [
+   "altuve",
+   "betts",
+   "biggio",
+   "bregman",
+   "burdi",
+   "carlson",
+   "claus",
+   "degrom",
+   "deichman",
+   "downs",
+   "elf",
+   "gregorius",
+   "maitan",
+   "segura",
+   "turkey",
+   "uelman",
+   "waters",
+   "woodruff",
+   "yuchengchang"
+  ],
+  "missingInserts": [
+   "festive",
+   "holiday",
+   "paper prospects",
+   "snow",
+   "trending",
+   "turkey"
   ]
  },
  "2018-topps-finest-baseball-mlb-cards": {
@@ -7058,6 +6753,21 @@
    "signature swatches triple relic"
   ]
  },
+ "2014-bowman-baseball-cards": {
+  "missingPlayers": [
+   "bonifacio",
+   "brean",
+   "falefa",
+   "judge",
+   "st"
+  ],
+  "missingInserts": [
+   "inception inceptioned",
+   "inception patch",
+   "inception relic",
+   "state hometown"
+  ]
+ },
  "2014-topps-finest-baseball-cards": {
   "missingPlayers": [
    "butler",
@@ -8137,6 +7847,17 @@
   "missingInserts": [
    "momentous material relics",
    "signature swatches dual relic"
+  ]
+ },
+ "2001-bowman-chrome-baseball": {
+  "missingPlayers": [
+   "dempster",
+   "kryznel",
+   "wilderson"
+  ],
+  "missingInserts": [
+   "japanese",
+   "uer photo denny bautista"
   ]
  },
  "1989-topps-traded-baseball-cards": {
@@ -9652,6 +9373,12 @@
   ],
   "missingInserts": []
  },
+ "2014-topps-prime-football-cards": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "timers"
+  ]
+ },
  "2018-19-panini-contenders-draft-picks-basketball": {
   "missingPlayers": [
    "alexander",
@@ -10626,6 +10353,12 @@
  "2015-panini-national-treasures-football": {
   "missingPlayers": [
    "norwood"
+  ],
+  "missingInserts": []
+ },
+ "2015-topps-platinum-football-cards": {
+  "missingPlayers": [
+   "ml"
   ],
   "missingInserts": []
  },
