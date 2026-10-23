@@ -639,18 +639,12 @@
   ],
   "missingInserts": [
    "2017",
-   "commemorative championship medallions",
    "defeats triple h an unsanctioned street fight",
-   "hall fame defeats big john studd body slam challenge",
-   "hall fame undefeated streak 1973 1987",
-   "hall fame winsthe world tag team championship",
    "heritage",
    "heritage big legends",
    "heritage kiss",
    "heritage shawn michaels tribute",
-   "heritage survivor series mat relics",
    "heritage tag teams stables",
-   "heritage tlc commemorative medallion relics",
    "heritage top 10",
    "kiss",
    "legends",
@@ -660,16 +654,12 @@
    "now",
    "retires macho king randy savage at wrestlemania vii",
    "road to wrestlemania",
-   "road to wrestlemania 33 mat relics",
    "road to wrestlemania 34",
    "road to wrestlemania 34 roster",
-   "road to wrestlemania hall fame tribute",
    "roster updates",
    "shirt relics",
    "slam attax live",
-   "slam attax live collector",
    "slam attax live mat relics",
-   "slam attax live rivals",
    "summerslam mat relics",
    "then now forever",
    "then now forever 25 years raw",
@@ -688,14 +678,11 @@
   "missingPlayers": [
    "afenir",
    "amaya",
-   "anderson",
    "aquino",
    "arbet",
    "astudillo",
-   "austin",
    "baez",
    "ball",
-   "barnes",
    "beras",
    "bethancourt",
    "biddle",
@@ -703,7 +690,6 @@
    "blackburn",
    "blair",
    "blanton",
-   "bogaerts",
    "bonifacio",
    "box",
    "brentz",
@@ -725,29 +711,21 @@
    "ciuffo",
    "clarkin",
    "coleman",
-   "correa",
    "cosart",
-   "cowart",
    "crawford",
-   "cron",
    "cuevas",
-   "dahl",
    "darnaud",
    "davidson",
    "delmonico",
    "demeritte",
    "denney",
-   "depaula",
    "derosier",
    "deshields",
    "diaz",
    "dickerson",
    "ervin",
-   "escaleramaldonado",
    "feliz",
    "flores",
-   "fulmer",
-   "gallo",
    "gassaway",
    "gelalich",
    "gerritse",
@@ -762,15 +740,11 @@
    "griffin",
    "grosser",
    "guerra",
-   "guerrero",
-   "guerrieri",
    "guillorme",
    "guzman",
    "hagenmiller",
    "hahn",
    "hall",
-   "hanson",
-   "harvey",
    "heaney",
    "heim",
    "hellweg",
@@ -787,11 +761,9 @@
    "katoh",
    "keller",
    "kellogg",
-   "kelly",
    "keys",
    "kibby",
    "kinley",
-   "kivlehan",
    "knapp",
    "knebel",
    "koch",
@@ -800,7 +772,6 @@
    "landecker",
    "leon",
    "leonora",
-   "lindor",
    "linsky",
    "liriano",
    "lorenzen",
@@ -819,9 +790,7 @@
    "medrano",
    "meisner",
    "mercado",
-   "meyer",
    "middleton",
-   "mondesi",
    "monge",
    "montgomery",
    "moran",
@@ -842,14 +811,11 @@
    "olson",
    "ott",
    "panik",
-   "paulino",
    "paxton",
-   "pederson",
    "penilla",
    "peralta",
    "peterson",
    "piscotty",
-   "quinn",
    "rahier",
    "reed",
    "renda",
@@ -861,7 +827,6 @@
    "rutledge",
    "salazar",
    "sanburn",
-   "sanchez",
    "sandberg",
    "sano",
    "sardinas",
@@ -877,14 +842,12 @@
    "skole",
    "snell",
    "snyder",
-   "soler",
    "southard",
    "speier",
    "spezial",
    "springer",
    "stankiewicz",
    "starling",
-   "stephenson",
    "stevenson",
    "stewart",
    "stiffler",
@@ -897,7 +860,6 @@
    "taillon",
    "taveras",
    "teheran",
-   "thompson",
    "thornburg",
    "townsley",
    "tuttle",
@@ -907,18 +869,15 @@
    "vaughn",
    "ventura",
    "villanueva",
-   "vogelbach",
    "wade",
    "ward",
    "westmoreland",
    "white",
    "wiles",
-   "williams",
    "windle",
    "witherspoon",
    "wong",
    "yelich",
-   "zimmer",
    "ziomek"
   ],
   "missingInserts": [
@@ -950,12 +909,10 @@
    "side image",
    "standing with glove",
    "sunglasses hat",
-   "superfractor",
    "swinging",
    "swinging wave",
    "swinging xfractor",
    "throwing",
-   "wave",
    "xfractor"
   ]
  },
@@ -3187,140 +3144,6 @@
    "xfractor"
   ]
  },
- "2018-19-o-pee-chee-hockey-cards": {
-  "missingPlayers": [
-   "and",
-   "andersondolan",
-   "badlands",
-   "batherson",
-   "bay",
-   "bean",
-   "bouchard",
-   "box",
-   "breton",
-   "bridge",
-   "brunswick",
-   "building",
-   "calgary",
-   "canyon",
-   "chartier",
-   "chelios",
-   "cholowski",
-   "city",
-   "comtois",
-   "couturier",
-   "coyotoes",
-   "crouse",
-   "cut",
-   "dahlin",
-   "dries",
-   "dube",
-   "edmonton",
-   "ehn",
-   "falls",
-   "fundy",
-   "gartner",
-   "gaunce",
-   "halifax",
-   "hawerchuk",
-   "heiskanen",
-   "hill",
-   "hintz",
-   "hopkins",
-   "howden",
-   "hronek",
-   "island",
-   "islands",
-   "johns",
-   "jokiharju",
-   "kahun",
-   "kotkaniemi",
-   "kovalchuk",
-   "kyrou",
-   "lajoie",
-   "lammikko",
-   "lundestrom",
-   "lyubushkin",
-   "macdonald",
-   "madeleine",
-   "marcandrefleury",
-   "mccabe",
-   "mcleod",
-   "mittelstadt",
-   "modano",
-   "montreal",
-   "mountains",
-   "ontario",
-   "oratory",
-   "oreily",
-   "ottawa",
-   "ozhiganov",
-   "park",
-   "petan",
-   "rasmussen",
-   "reese",
-   "reilly",
-   "reserve",
-   "riikola",
-   "rose",
-   "sainjean",
-   "samsonov",
-   "sang",
-   "sanheim",
-   "saskatoon",
-   "sherwood",
-   "sittler",
-   "sprong",
-   "steel",
-   "sulak",
-   "suomela",
-   "svechnikov",
-   "takchuk",
-   "tartar",
-   "thomas",
-   "toronto",
-   "townships",
-   "valimaki",
-   "valley",
-   "vancouver",
-   "vancover",
-   "vasilevsky",
-   "vesalainen",
-   "vesaleinen",
-   "victoria",
-   "village",
-   "vorobyev",
-   "white",
-   "whitehorse",
-   "winnipeg",
-   "yellowknife",
-   "zboril"
-  ],
-  "missingInserts": [
-   "anti freeze",
-   "binoculars",
-   "blank back",
-   "cleaners polish",
-   "coast to",
-   "coast to canadiana cuts",
-   "coast to canadiana vintage map relics",
-   "coast to franchise heroes",
-   "coast to iconic captains",
-   "coast to landmarks north",
-   "coast to landmarks north map relics",
-   "coast to pride north",
-   "coast to transparent",
-   "coast to transparent stars",
-   "coast to vs",
-   "coupon",
-   "extended",
-   "glossy",
-   "playing",
-   "pliers",
-   "retro name scratch off",
-   "toolboxes"
-  ]
- },
  "2017-bowman-chrome-baseball-cards": {
   "missingPlayers": [
    "aaron",
@@ -3502,6 +3325,137 @@
    "mojo",
    "national convention",
    "relics"
+  ]
+ },
+ "2018-19-o-pee-chee-hockey-cards": {
+  "missingPlayers": [
+   "and",
+   "andersondolan",
+   "badlands",
+   "batherson",
+   "bay",
+   "bean",
+   "bouchard",
+   "box",
+   "breton",
+   "bridge",
+   "brunswick",
+   "building",
+   "calgary",
+   "canyon",
+   "chartier",
+   "chelios",
+   "cholowski",
+   "city",
+   "comtois",
+   "couturier",
+   "coyotoes",
+   "crouse",
+   "cut",
+   "dahlin",
+   "dries",
+   "dube",
+   "edmonton",
+   "ehn",
+   "falls",
+   "fundy",
+   "gartner",
+   "gaunce",
+   "halifax",
+   "hawerchuk",
+   "heiskanen",
+   "hill",
+   "hintz",
+   "hopkins",
+   "howden",
+   "hronek",
+   "island",
+   "islands",
+   "johns",
+   "jokiharju",
+   "kahun",
+   "kotkaniemi",
+   "kovalchuk",
+   "kyrou",
+   "lajoie",
+   "lammikko",
+   "lundestrom",
+   "lyubushkin",
+   "macdonald",
+   "madeleine",
+   "marcandrefleury",
+   "mccabe",
+   "mcleod",
+   "mittelstadt",
+   "modano",
+   "montreal",
+   "mountains",
+   "ontario",
+   "oratory",
+   "oreily",
+   "ottawa",
+   "ozhiganov",
+   "park",
+   "petan",
+   "rasmussen",
+   "reese",
+   "reilly",
+   "reserve",
+   "riikola",
+   "rose",
+   "sainjean",
+   "samsonov",
+   "sang",
+   "sanheim",
+   "saskatoon",
+   "sherwood",
+   "sittler",
+   "sprong",
+   "steel",
+   "sulak",
+   "suomela",
+   "svechnikov",
+   "takchuk",
+   "tartar",
+   "thomas",
+   "toronto",
+   "townships",
+   "valimaki",
+   "valley",
+   "vancouver",
+   "vancover",
+   "vasilevsky",
+   "vesalainen",
+   "vesaleinen",
+   "victoria",
+   "village",
+   "vorobyev",
+   "white",
+   "whitehorse",
+   "winnipeg",
+   "yellowknife",
+   "zboril"
+  ],
+  "missingInserts": [
+   "anti freeze",
+   "binoculars",
+   "blank back",
+   "cleaners polish",
+   "coast to",
+   "coast to canadiana cuts",
+   "coast to canadiana vintage map relics",
+   "coast to franchise heroes",
+   "coast to landmarks north",
+   "coast to landmarks north map relics",
+   "coast to transparent",
+   "coast to transparent stars",
+   "coast to vs",
+   "coupon",
+   "extended",
+   "glossy",
+   "pliers",
+   "retro name scratch off",
+   "toolboxes"
   ]
  },
  "2016-bowman-chrome-baseball-cards": {
@@ -4554,7 +4508,6 @@
    "winn"
   ],
   "missingInserts": [
-   "arizona fall league alumni",
    "cracked ice",
    "national convention",
    "prism",
@@ -5878,60 +5831,6 @@
    "timers"
   ]
  },
- "2018-topps-ufc-museum-collection-cards": {
-  "missingPlayers": [
-   "aguilar",
-   "alvarez",
-   "arlovski",
-   "assuncao",
-   "benavidez",
-   "blair",
-   "calderwood",
-   "celeste",
-   "chiesa",
-   "chookagian",
-   "cirkunov",
-   "cruz",
-   "duffy",
-   "edgar",
-   "faber",
-   "felder",
-   "gadelha",
-   "gall",
-   "garbrandt",
-   "giles",
-   "grasso",
-   "griffin",
-   "hall",
-   "hunt",
-   "laprise",
-   "liddell",
-   "magny",
-   "mercier",
-   "montano",
-   "moroz",
-   "pena",
-   "penn",
-   "pennington",
-   "pettis",
-   "pierre",
-   "poirier",
-   "reis",
-   "rivera",
-   "romero",
-   "swanson",
-   "velasquez",
-   "wren"
-  ],
-  "missingInserts": [
-   "chrome",
-   "dual",
-   "dual relic",
-   "framed",
-   "meaningful moments relics",
-   "relic"
-  ]
- },
  "2017-topps-archives-baseball-cards": {
   "missingPlayers": [
    "ankiel",
@@ -6155,40 +6054,57 @@
    "state hometown"
   ]
  },
- "18-19-ud-upper-deck-sp-authentic-hockey": {
+ "2018-topps-ufc-museum-collection-cards": {
   "missingPlayers": [
-   "bowey",
-   "box",
-   "danault",
-   "dolan",
-   "domingue",
-   "duclair",
-   "faksa",
-   "fluery",
-   "gaunce",
-   "goldobin",
-   "heinen",
-   "hudon",
-   "laughton",
-   "pouliot",
-   "pysyk",
-   "reese",
-   "ritchie",
-   "wallmark",
-   "weal",
-   "weber",
-   "werenski"
+   "aguilar",
+   "alvarez",
+   "arlovski",
+   "assuncao",
+   "benavidez",
+   "blair",
+   "calderwood",
+   "celeste",
+   "chiesa",
+   "chookagian",
+   "cirkunov",
+   "cruz",
+   "duffy",
+   "edgar",
+   "faber",
+   "felder",
+   "gadelha",
+   "gall",
+   "garbrandt",
+   "giles",
+   "grasso",
+   "griffin",
+   "hall",
+   "hunt",
+   "laprise",
+   "liddell",
+   "magny",
+   "mercier",
+   "montano",
+   "moroz",
+   "pena",
+   "penn",
+   "pennington",
+   "pettis",
+   "pierre",
+   "poirier",
+   "reis",
+   "rivera",
+   "romero",
+   "swanson",
+   "velasquez",
+   "wren"
   ],
   "missingInserts": [
-   "acetate",
-   "patch ink",
-   "profiles",
-   "profiles jersey",
-   "profiles signature",
-   "sign times 70s",
-   "sign times 90s",
-   "signature",
-   "young guns acetate"
+   "chrome",
+   "dual",
+   "dual relic",
+   "meaningful moments relics",
+   "relic"
   ]
  },
  "2014-bowman-baseball-cards": {
@@ -6291,68 +6207,6 @@
    "canary diamond",
    "japan fractor",
    "ruby"
-  ]
- },
- "2019-topps-opening-day-baseball": {
-  "missingPlayers": [
-   "allard",
-   "allen",
-   "alonso",
-   "black",
-   "borucki",
-   "bourjos",
-   "briceno",
-   "burdi",
-   "burnes",
-   "cave",
-   "corbin",
-   "cozart",
-   "darvish",
-   "dean",
-   "duggar",
-   "erlin",
-   "fillmyer",
-   "fletcher",
-   "foil",
-   "foley",
-   "greiner",
-   "guerrero",
-   "guzman",
-   "hamels",
-   "hampson",
-   "happ",
-   "heaney",
-   "heyward",
-   "jimenez",
-   "kingery",
-   "lopez",
-   "lowe",
-   "lucroy",
-   "margevicius",
-   "martin",
-   "mccutchen",
-   "mckinney",
-   "morrow",
-   "nix",
-   "otani",
-   "pivetta",
-   "puk",
-   "richards",
-   "robertson",
-   "robles",
-   "santos",
-   "senzel",
-   "shaw",
-   "skaggs",
-   "stanton",
-   "stella",
-   "tatis",
-   "underwood",
-   "voit"
-  ],
-  "missingInserts": [
-   "diamond dirt relics",
-   "now road to"
   ]
  },
  "2013-bowman-inception-baseball-cards": {
@@ -6476,25 +6330,65 @@
    "with ball"
   ]
  },
- "2019-panini-diamond-kings-baseball-cards": {
+ "2019-topps-opening-day-baseball": {
   "missingPlayers": [
-   "bauer",
-   "greinke",
-   "matsui",
-   "suzuki"
+   "allard",
+   "allen",
+   "alonso",
+   "black",
+   "borucki",
+   "bourjos",
+   "briceno",
+   "burdi",
+   "burnes",
+   "cave",
+   "corbin",
+   "cozart",
+   "darvish",
+   "dean",
+   "duggar",
+   "erlin",
+   "fillmyer",
+   "fletcher",
+   "foil",
+   "foley",
+   "greiner",
+   "guerrero",
+   "guzman",
+   "hamels",
+   "hampson",
+   "happ",
+   "heaney",
+   "heyward",
+   "jimenez",
+   "kingery",
+   "lopez",
+   "lowe",
+   "lucroy",
+   "margevicius",
+   "martin",
+   "mccutchen",
+   "mckinney",
+   "morrow",
+   "nix",
+   "otani",
+   "pivetta",
+   "puk",
+   "richards",
+   "robertson",
+   "robles",
+   "santos",
+   "senzel",
+   "shaw",
+   "skaggs",
+   "stanton",
+   "stella",
+   "tatis",
+   "underwood",
+   "voit"
   ],
   "missingInserts": [
-   "1919",
-   "2002 dk retro",
-   "2003 dk retro",
-   "2004 dk retro",
-   "artist",
-   "dk downtown",
-   "frame",
-   "framed crowning moment",
-   "gallery star",
-   "hall fame heroes",
-   "plum framed"
+   "now road to"
   ]
  },
  "2014-bowman-sterling-baseball-cards": {
@@ -6659,41 +6553,6 @@
    "xfractor"
   ]
  },
- "2019-topps-heritage-baseball": {
-  "missingPlayers": [
-   "bohm",
-   "chavis",
-   "duplantier",
-   "eovaldi",
-   "glasnow",
-   "guerrero",
-   "hiura",
-   "ichiro",
-   "july",
-   "kelenic",
-   "kieboom",
-   "kikuchi",
-   "mays",
-   "paddack",
-   "puig",
-   "roario",
-   "robles",
-   "rodgers",
-   "senzel",
-   "suzuki",
-   "tatis",
-   "thomas",
-   "whitlock"
-  ],
-  "missingInserts": [
-   "1970 scratch off",
-   "1970 stars candy lids",
-   "1970 super box loaders",
-   "award winners",
-   "combo",
-   "high number"
-  ]
- },
  "1985-topps-traded-baseball-cards": {
   "missingPlayers": [
    "aaron",
@@ -6747,29 +6606,6 @@
   ],
   "missingInserts": [
    "tiffany"
-  ]
- },
- "2018-panini-limited-football-nfl-cards": {
-  "missingPlayers": [
-   "bennett",
-   "bettis",
-   "coleman",
-   "cox",
-   "kearse",
-   "lasley",
-   "stewart",
-   "walls"
-  ],
-  "missingInserts": [
-   "dual patch combination",
-   "emerald spotlight",
-   "game day swatch",
-   "partnership dual",
-   "partnership trio",
-   "prime time swatch",
-   "ruby spotlight",
-   "sapphire spotlight",
-   "spotlight"
   ]
  },
  "2017-topps-triple-threads-baseball": {
@@ -7021,29 +6857,6 @@
    "shorts",
    "sitting",
    "superstar sensations"
-  ]
- },
- "2019-panini-chronicles-baseball": {
-  "missingPlayers": [
-   "astral",
-   "cainred",
-   "crystal",
-   "galactic",
-   "gold",
-   "green",
-   "kikcuhi",
-   "prizm",
-   "rc"
-  ],
-  "missingInserts": [
-   "absolute triple relics",
-   "contenders season ticket",
-   "cornerstones relics",
-   "cornerstones reserve materials",
-   "prime swatch",
-   "prospect cornerstones relics",
-   "signature",
-   "swatch"
   ]
  },
  "2018-topps-finest-baseball-mlb-cards": {
@@ -7475,6 +7288,39 @@
    "trios jerseys"
   ]
  },
+ "2019-topps-heritage-baseball": {
+  "missingPlayers": [
+   "bohm",
+   "chavis",
+   "duplantier",
+   "eovaldi",
+   "glasnow",
+   "guerrero",
+   "hiura",
+   "ichiro",
+   "july",
+   "kelenic",
+   "kieboom",
+   "kikuchi",
+   "mays",
+   "paddack",
+   "puig",
+   "roario",
+   "robles",
+   "rodgers",
+   "senzel",
+   "suzuki",
+   "tatis",
+   "thomas",
+   "whitlock"
+  ],
+  "missingInserts": [
+   "1970 stars candy lids",
+   "1970 super box loaders",
+   "combo",
+   "high number"
+  ]
+ },
  "2018-topps-gold-label-baseball-cards": {
   "missingPlayers": [
    "anderson",
@@ -7650,6 +7496,37 @@
    "prism"
   ]
  },
+ "18-19-ud-upper-deck-sp-authentic-hockey": {
+  "missingPlayers": [
+   "bowey",
+   "box",
+   "danault",
+   "dolan",
+   "domingue",
+   "duclair",
+   "faksa",
+   "fluery",
+   "gaunce",
+   "goldobin",
+   "heinen",
+   "hudon",
+   "laughton",
+   "pouliot",
+   "pysyk",
+   "reese",
+   "ritchie",
+   "wallmark",
+   "weal",
+   "weber",
+   "werenski"
+  ],
+  "missingInserts": [
+   "acetate",
+   "patch ink",
+   "profiles",
+   "signature"
+  ]
+ },
  "2013-14-fleer-showcase-hockey-cards": {
   "missingPlayers": [
    "bancks",
@@ -7686,19 +7563,6 @@
   "missingInserts": [
    "stitches memorabilia",
    "uniformity dual jerseys"
-  ]
- },
- "2019-panini-immaculate-collection-baseball": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "doubles relics",
-   "extra bases relics",
-   "five relics",
-   "fives relics",
-   "jerseys relics",
-   "relic",
-   "team heroes relics",
-   "winter relics"
   ]
  },
  "2014-topps-mini-baseball-cards": {
@@ -7833,28 +7697,6 @@
    "f w",
    "f w ink",
    "sign times"
-  ]
- },
- "2019-topps-archives-baseball": {
-  "missingPlayers": [
-   "autograph",
-   "baines",
-   "bote",
-   "box",
-   "cox",
-   "cozens",
-   "grace",
-   "heritage",
-   "tarpley",
-   "valdez",
-   "ward"
-  ],
-  "missingInserts": [
-   "1994 future star",
-   "signature series active players",
-   "signature series retired players",
-   "snapshots",
-   "snapshots captured moment"
   ]
  },
  "2018-topps-pro-debut-baseball-milb-cards": {
@@ -8072,6 +7914,25 @@
    "1983 star",
    "gallery heroes",
    "tall boy"
+  ]
+ },
+ "2018-panini-limited-football-nfl-cards": {
+  "missingPlayers": [
+   "bennett",
+   "bettis",
+   "coleman",
+   "cox",
+   "kearse",
+   "lasley",
+   "stewart",
+   "walls"
+  ],
+  "missingInserts": [
+   "partnership dual",
+   "partnership trio",
+   "ruby spotlight",
+   "sapphire spotlight",
+   "spotlight"
   ]
  },
  "2017-panini-prizm-football-cards": {
@@ -8988,14 +8849,18 @@
    "xfractor"
   ]
  },
- "2018-panini-adrenalyn-xl-world-cup-russia-cards": {
-  "missingPlayers": [],
+ "2019-panini-diamond-kings-baseball-cards": {
+  "missingPlayers": [
+   "bauer",
+   "greinke",
+   "matsui",
+   "suzuki"
+  ],
   "missingInserts": [
-   "fifa",
-   "icon",
-   "star",
-   "top master",
-   "top masters"
+   "2003 dk retro",
+   "2004 dk retro",
+   "artist",
+   "framed crowning moment"
   ]
  },
  "1985-donruss-baseball-cards": {
@@ -9215,15 +9080,23 @@
    "fighting forefathers"
   ]
  },
- "2019-donruss-baseball": {
+ "2019-topps-archives-baseball": {
   "missingPlayers": [
-   "foley"
+   "autograph",
+   "baines",
+   "bote",
+   "box",
+   "cox",
+   "cozens",
+   "grace",
+   "heritage",
+   "tarpley",
+   "valdez",
+   "ward"
   ],
   "missingInserts": [
-   "fireworks",
-   "maze",
-   "retro 1985 signature",
-   "retro 1989"
+   "signature series retired players",
+   "snapshots"
   ]
  },
  "2016-topps-museum-collection-baseball": {
@@ -9451,15 +9324,6 @@
   ],
   "missingInserts": [
    "scarlet signatures"
-  ]
- },
- "2019-topps-gallery-baseball": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "250",
-   "insert",
-   "national day",
-   "oversized box toppers"
   ]
  },
  "2018-topps-tribute-baseball-cards": {
@@ -9787,16 +9651,6 @@
    "pulsar"
   ]
  },
- "2019-panini-contenders-draft-picks-baseball-cards": {
-  "missingPlayers": [
-   "burns"
-  ],
-  "missingInserts": [
-   "batting",
-   "pinstripe",
-   "running"
-  ]
- },
  "2019-panini-prizm-draft-picks-baseball-cards": {
   "missingPlayers": [
    "opitz"
@@ -9833,30 +9687,6 @@
   "missingInserts": [
    "artist s",
    "glossy"
-  ]
- },
- "2018-panini-contenders-draft-picks-football-cards": {
-  "missingPlayers": [
-   "farve"
-  ],
-  "missingInserts": [
-   "bowl",
-   "cracked ice",
-   "playoff"
-  ]
- },
- "2018-score-football-nfl-cards": {
-  "missingPlayers": [
-   "chacellor",
-   "garoppolp",
-   "keenum",
-   "mach",
-   "red",
-   "schuster"
-  ],
-  "missingInserts": [
-   "jersey",
-   "jersey swatch"
   ]
  },
  "2017-18-mvp-hockey": {
@@ -9938,12 +9768,20 @@
    "patches"
   ]
  },
- "2019-panini-elite-extra-edition-baseball": {
-  "missingPlayers": [],
+ "2019-panini-chronicles-baseball": {
+  "missingPlayers": [
+   "astral",
+   "cainred",
+   "crystal",
+   "galactic",
+   "gold",
+   "green",
+   "kikcuhi",
+   "prizm",
+   "rc"
+  ],
   "missingInserts": [
-   "college ticket",
-   "college ticket signature",
-   "usa national team materials"
+   "cornerstones reserve materials"
   ]
  },
  "2018-topps-stadium-club-baseball-mlb-cards": {
@@ -10049,17 +9887,6 @@
    "star patches"
   ]
  },
- "2019-topps-triple-threads-baseball": {
-  "missingPlayers": [
-   "amethyst",
-   "beninendi",
-   "sjrab"
-  ],
-  "missingInserts": [
-   "amethyst 27",
-   "relics combo"
-  ]
- },
  "2013-topps-museum-collection-baseball-cards": {
   "missingPlayers": [
    "loney",
@@ -10149,17 +9976,6 @@
    "starburst"
   ]
  },
- "2018-panini-donruss-elite-football-nfl-cards": {
-  "missingPlayers": [
-   "favre",
-   "freemann",
-   "orange"
-  ],
-  "missingInserts": [
-   "ink",
-   "series"
-  ]
- },
  "2015-panini-contenders-football-cards": {
   "missingPlayers": [
    "farve",
@@ -10217,27 +10033,6 @@
   "missingInserts": [
    "7x champ",
    "jj"
-  ]
- },
- "2018-topps-wwe-nxt-wrestling": {
-  "missingPlayers": [
-   "ambrose",
-   "bayley",
-   "lerea"
-  ],
-  "missingInserts": [
-   "road to wrestlemania takeover orlando mat relics",
-   "shirt relics"
-  ]
- },
- "2019-topps-big-league-baseball": {
-  "missingPlayers": [
-   "gold",
-   "kelper"
-  ],
-  "missingInserts": [
-   "blast off",
-   "blaster box hand cut"
   ]
  },
  "2017-donruss-optic-baseball-cards": {
@@ -10320,16 +10115,6 @@
    "ground breakers"
   ]
  },
- "18-19-ud-upper-deck-sp-game-used-hockey": {
-  "missingPlayers": [
-   "db",
-   "jersey"
-  ],
-  "missingInserts": [
-   "banner year draft relic",
-   "banner year star relic"
-  ]
- },
  "2017-18-leaf-hockey-cards": {
   "missingPlayers": [
    "berezin",
@@ -10372,15 +10157,6 @@
   "missingInserts": [
    "dominator",
    "holographic"
-  ]
- },
- "2019-donruss-optic-baseball": {
-  "missingPlayers": [
-   "foley"
-  ],
-  "missingInserts": [
-   "halo",
-   "rapture"
   ]
  },
  "2018-bowman-platinum-baseball-cards": {
@@ -10482,15 +10258,6 @@
    "honors update"
   ]
  },
- "2018-panini-spectra-football-nfl-cards": {
-  "missingPlayers": [
-   "engram"
-  ],
-  "missingInserts": [
-   "cornerstone materials",
-   "neon marble"
-  ]
- },
  "2013-topps-chrome-football-cards": {
   "missingPlayers": [
    "refractor"
@@ -10509,15 +10276,6 @@
    "authentics signature"
   ]
  },
- "18-19-ud-upper-deck-spx-hockey": {
-  "missingPlayers": [
-   "zboril"
-  ],
-  "missingInserts": [
-   "2008 09 relics retro",
-   "2008 09 retro"
-  ]
- },
  "2015-16-upper-deck-champs-hockey-cards": {
   "missingPlayers": [
    "box"
@@ -10525,15 +10283,6 @@
   "missingInserts": [
    "front",
    "variant back"
-  ]
- },
- "2018-19-topps-uefa-champions-league-match-attax-cards": {
-  "missingPlayers": [
-   "juventus"
-  ],
-  "missingInserts": [
-   "limited super squad",
-   "man match"
   ]
  },
  "2016-17-panini-grand-reserve-basketball": {
@@ -10573,34 +10322,6 @@
   ],
   "missingInserts": [
    "xs os"
-  ]
- },
- "2019-topps-diamond-icons-baseball": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "10",
-   "authenticated autographed patches"
-  ]
- },
- "2019-topps-fire-baseball": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "chip",
-   "tyson beck"
-  ]
- },
- "2019-topps-museum-collection-baseball": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "dual meaningful material relic",
-   "signatures swatches triple relic"
-  ]
- },
- "18-19-o-pee-chee-platinum-hockey": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "color wheel",
-   "future is now"
   ]
  },
  "2018-topps-fire-baseball-mlb-cards": {
@@ -10700,17 +10421,6 @@
   ],
   "missingInserts": [
    "adrenaline rush"
-  ]
- },
- "2018-19-upper-deck-tim-hortons-hockey-cards": {
-  "missingPlayers": [
-   "karlson",
-   "palmeieri",
-   "sguin",
-   "zimanejad"
-  ],
-  "missingInserts": [
-   "top line talents"
   ]
  },
  "2016-17-sp-authentic-hockey-cards": {
@@ -10875,6 +10585,16 @@
    "pulsar"
   ]
  },
+ "2018-panini-donruss-elite-football-nfl-cards": {
+  "missingPlayers": [
+   "favre",
+   "freemann",
+   "orange"
+  ],
+  "missingInserts": [
+   "series"
+  ]
+ },
  "2017-panini-contenders-football-nfl-cards": {
   "missingPlayers": [
    "harrison",
@@ -10933,25 +10653,6 @@
   ],
   "missingInserts": [
    "1996 97 skybox autographics"
-  ]
- },
- "2018-19-topps-finest-uefa-champions-league-soccer-cards": {
-  "missingPlayers": [
-   "arnold",
-   "box",
-   "kvirkvelia"
-  ],
-  "missingInserts": [
-   "cornerstones"
-  ]
- },
- "2019-bowman-platinum-baseball": {
-  "missingPlayers": [
-   "burns",
-   "sanchez"
-  ],
-  "missingInserts": [
-   "sky"
   ]
  },
  "2018-topps-big-league-baseball-cards": {
@@ -11156,22 +10857,6 @@
   ],
   "missingInserts": [
    "relics"
-  ]
- },
- "2019-panini-prizm-baseball": {
-  "missingPlayers": [
-   "foley"
-  ],
-  "missingInserts": [
-   "case hit"
-  ]
- },
- "2019-topps-stadium-club-baseball": {
-  "missingPlayers": [
-   "foley"
-  ],
-  "missingInserts": [
-   "oversized topper"
   ]
  },
  "2018-panini-diamond-kings-baseball-cards": {
@@ -11385,6 +11070,17 @@
    "color burst"
   ]
  },
+ "2018-score-football-nfl-cards": {
+  "missingPlayers": [
+   "chacellor",
+   "garoppolp",
+   "keenum",
+   "mach",
+   "red",
+   "schuster"
+  ],
+  "missingInserts": []
+ },
  "2017-panini-certified-football-cards": {
   "missingPlayers": [
    "schuster"
@@ -11527,14 +11223,6 @@
    "2008 09 retro autographed"
   ]
  },
- "18-19-ud-upper-deck-premier-hockey": {
-  "missingPlayers": [
-   "bjork"
-  ],
-  "missingInserts": [
-   "acetate patches"
-  ]
- },
  "2017-18-sp-game-used-hockey-cards": {
   "missingPlayers": [
    "nyquist"
@@ -11639,6 +11327,14 @@
    "authentic fabrics"
   ]
  },
+ "2018-19-topps-uefa-champions-league-match-attax-cards": {
+  "missingPlayers": [
+   "juventus"
+  ],
+  "missingInserts": [
+   "man match"
+  ]
+ },
  "2016-topps-gypsy-queen-baseball-cards": {
   "missingPlayers": [
    "buxton",
@@ -11699,54 +11395,6 @@
   ],
   "missingInserts": []
  },
- "2019-bowman-draft-baseball": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "franchise futures dual"
-  ]
- },
- "2019-panini-flawless-baseball": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "milestones jersey"
-  ]
- },
- "2019-panini-national-treasures-baseball": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "shadowbox signatures material"
-  ]
- },
- "2019-topps-definitive-collection-baseball": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "dual relics"
-  ]
- },
- "2019-topps-finest-baseball": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "careers die cut"
-  ]
- },
- "2019-topps-pro-debut-baseball-milb-cards": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "future cornerstones"
-  ]
- },
- "18-19-ud-upper-deck-engrained-hockey": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "remnants stick"
-  ]
- },
- "18-19-ud-upper-deck-trilogy-hockey": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "premieres"
-  ]
- },
  "2018-19-panini-contenders-draft-picks-basketball": {
   "missingPlayers": [
    "alexander",
@@ -11783,6 +11431,15 @@
   ],
   "missingInserts": []
  },
+ "2018-19-upper-deck-tim-hortons-hockey-cards": {
+  "missingPlayers": [
+   "karlson",
+   "palmeieri",
+   "sguin",
+   "zimanejad"
+  ],
+  "missingInserts": []
+ },
  "2016-17-spx-hockey-cards": {
   "missingPlayers": [
    "point",
@@ -11798,6 +11455,14 @@
    "cheek",
    "depay",
    "sigurdsson"
+  ],
+  "missingInserts": []
+ },
+ "2019-topps-triple-threads-baseball": {
+  "missingPlayers": [
+   "amethyst",
+   "beninendi",
+   "sjrab"
   ],
   "missingInserts": []
  },
@@ -11886,6 +11551,36 @@
    "au",
    "box",
    "mears"
+  ],
+  "missingInserts": []
+ },
+ "2018-19-topps-finest-uefa-champions-league-soccer-cards": {
+  "missingPlayers": [
+   "arnold",
+   "box",
+   "kvirkvelia"
+  ],
+  "missingInserts": []
+ },
+ "2018-topps-wwe-nxt-wrestling": {
+  "missingPlayers": [
+   "ambrose",
+   "bayley",
+   "lerea"
+  ],
+  "missingInserts": []
+ },
+ "2019-bowman-platinum-baseball": {
+  "missingPlayers": [
+   "burns",
+   "sanchez"
+  ],
+  "missingInserts": []
+ },
+ "2019-topps-big-league-baseball": {
+  "missingPlayers": [
+   "gold",
+   "kelper"
   ],
   "missingInserts": []
  },
@@ -12043,6 +11738,13 @@
   ],
   "missingInserts": []
  },
+ "18-19-ud-upper-deck-sp-game-used-hockey": {
+  "missingPlayers": [
+   "db",
+   "jersey"
+  ],
+  "missingInserts": []
+ },
  "18-19-ud-upper-deck-black-diamond-hockey": {
   "missingPlayers": [
    "mittlestadt",
@@ -12096,6 +11798,36 @@
   "missingPlayers": [
    "box",
    "team"
+  ],
+  "missingInserts": []
+ },
+ "2019-panini-contenders-draft-picks-baseball-cards": {
+  "missingPlayers": [
+   "burns"
+  ],
+  "missingInserts": []
+ },
+ "2019-donruss-optic-baseball": {
+  "missingPlayers": [
+   "foley"
+  ],
+  "missingInserts": []
+ },
+ "2019-donruss-baseball": {
+  "missingPlayers": [
+   "foley"
+  ],
+  "missingInserts": []
+ },
+ "2019-panini-prizm-baseball": {
+  "missingPlayers": [
+   "foley"
+  ],
+  "missingInserts": []
+ },
+ "2019-topps-stadium-club-baseball": {
+  "missingPlayers": [
+   "foley"
   ],
   "missingInserts": []
  },
@@ -12435,6 +12167,12 @@
   ],
   "missingInserts": []
  },
+ "2018-panini-contenders-draft-picks-football-cards": {
+  "missingPlayers": [
+   "farve"
+  ],
+  "missingInserts": []
+ },
  "2018-panini-gold-standard-football-nfl-cards": {
   "missingPlayers": [
    "schuster"
@@ -12462,6 +12200,12 @@
  "2018-panini-origins-football-nfl-cards": {
   "missingPlayers": [
    "scantling"
+  ],
+  "missingInserts": []
+ },
+ "2018-panini-spectra-football-nfl-cards": {
+  "missingPlayers": [
+   "engram"
   ],
   "missingInserts": []
  },
@@ -12663,6 +12407,12 @@
   ],
   "missingInserts": []
  },
+ "18-19-ud-upper-deck-spx-hockey": {
+  "missingPlayers": [
+   "zboril"
+  ],
+  "missingInserts": []
+ },
  "18-19-ud-upper-deck-chronology-hockey": {
   "missingPlayers": [
    "shelley"
@@ -12672,6 +12422,12 @@
  "2018-upper-deck-national-hockey-card-day": {
   "missingPlayers": [
    "sang"
+  ],
+  "missingInserts": []
+ },
+ "18-19-ud-upper-deck-premier-hockey": {
+  "missingPlayers": [
+   "bjork"
   ],
   "missingInserts": []
  },
