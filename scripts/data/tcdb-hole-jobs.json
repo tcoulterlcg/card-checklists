@@ -969,7 +969,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2023-leaf-metal-football",
@@ -981,7 +982,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2023-leaf-perfect-game-all-american-baseball-card",
@@ -993,7 +995,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2023-leaf-perfect-game-bonus-box-baseball-card",
@@ -1005,7 +1008,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2023-leaf-signature-series-baseball",
@@ -1017,7 +1021,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2023-leaf-signature-series-football",
@@ -1029,7 +1034,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2023-leaf-trinity-baseball-card",
@@ -1041,7 +1047,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2023-leaf-trinity-basketball",
@@ -1053,7 +1060,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2023-leaf-trinity-football-mega-box",
@@ -1065,7 +1073,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2023-leaf-trinity-mega-box-baseball-card",
@@ -1077,7 +1086,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2023-leaf-ultimate-hockey",
@@ -1089,7 +1099,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2023-leaf-vivid-football",
@@ -1101,7 +1112,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2023-onyx-vintage-extended-baseball",
@@ -1113,7 +1125,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2023-pro-set-metal-football",
@@ -1125,7 +1138,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2023-pro-set-pure-football",
@@ -1137,7 +1151,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2023-sage-high-series-football",
@@ -3714,8 +3729,9 @@
    "missing inserts: chrome wave, hometown, perfect game american classic, sapphire reprints, state home, state hometown",
    "39 players sold on SCP not on checklist"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3 (scraping now)"
+  "status": "review",
+  "note": "2013-bowman-baseball-cards: 704 -> 8050 cards, 8 -> 87 sections, covers 90.3% of current",
+  "tcdbSid": 73103
  },
  {
   "slug": "2016-topps-ufc-knockout-trading-cards",
@@ -3728,8 +3744,8 @@
    "missing inserts: championship belt relics, dominant duos dual relics, fight mat relics, relics, scarlet signatures, scarlet signatures relics",
    "39 players sold on SCP not on checklist"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3 (scraping now)"
+  "status": "review",
+  "note": "TCDB search found no matching set"
  },
  {
   "slug": "1949-leaf",
@@ -3741,8 +3757,9 @@
   "why": [
    "base skips 33 numbers in #1-67 (e.g. 5, 6, 8, 11, 12)"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3 (scraping now)"
+  "status": "done",
+  "note": "1949-leaf: 49 -> 49 cards, 1 -> 1 sections, covers 100.0% of current",
+  "at": "2026-10-23"
  },
  {
   "slug": "2015-16-o-pee-chee-platinum-hockey-cards",
@@ -3755,8 +3772,9 @@
    "missing inserts: cubes, emerald surge, ice, prism, seismic, superstar die cut, team logo die cut, traxx",
    "8 players sold on SCP not on checklist"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3 (scraping now)"
+  "status": "done",
+  "note": "2015-16-o-pee-chee-platinum-hockey-cards: 527 -> 4135 cards, 13 -> 47 sections, covers 100.0% of current",
+  "at": "2026-10-23"
  },
  {
   "slug": "2016-bowman-baseball-cards",
