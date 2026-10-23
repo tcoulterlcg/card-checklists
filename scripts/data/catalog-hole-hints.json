@@ -11313,12 +11313,28 @@
    "man match"
   ]
  },
- "2011-topps-ufc-title-shot": {
+ "2011-finest-ufc": {
   "missingPlayers": [
    "pierre"
   ],
   "missingInserts": [
-   "fighter relic"
+   "octafractor"
+  ]
+ },
+ "2011-topps-ufc-moment-of-truth": {
+  "missingPlayers": [
+   "shots"
+  ],
+  "missingInserts": [
+   "anderson silva chael sonnen"
+  ]
+ },
+ "2009-topps-ufc-round-1": {
+  "missingPlayers": [
+   "pierre"
+  ],
+  "missingInserts": [
+   "victorious debuts"
   ]
  },
  "2016-topps-gypsy-queen-baseball-cards": {
@@ -11444,6 +11460,15 @@
   ],
   "missingInserts": []
  },
+ "2010-topps-ufc-knockout": {
+  "missingPlayers": [
+   "nogu",
+   "nogue",
+   "pierre",
+   "white"
+  ],
+  "missingInserts": []
+ },
  "2019-topps-triple-threads-baseball": {
   "missingPlayers": [
    "amethyst",
@@ -11545,6 +11570,14 @@
    "arnold",
    "box",
    "kvirkvelia"
+  ],
+  "missingInserts": []
+ },
+ "2010-leaf-mma": {
+  "missingPlayers": [
+   "lc",
+   "pierre",
+   "roop"
   ],
   "missingInserts": []
  },
@@ -11777,6 +11810,13 @@
   "missingPlayers": [
    "box",
    "shaarawy"
+  ],
+  "missingInserts": []
+ },
+ "2010-topps-ufc-main-event": {
+  "missingPlayers": [
+   "pierre",
+   "poster"
   ],
   "missingInserts": []
  },
@@ -12498,6 +12538,24 @@
  "noir-soccer-checklist-added": {
   "missingPlayers": [
    "box"
+  ],
+  "missingInserts": []
+ },
+ "2012-topps-ufc-knockout": {
+  "missingPlayers": [
+   "pierre"
+  ],
+  "missingInserts": []
+ },
+ "2011-topps-ufc-title-shot": {
+  "missingPlayers": [
+   "pierre"
+  ],
+  "missingInserts": []
+ },
+ "2009-topps-ufc-round-2": {
+  "missingPlayers": [
+   "pierre"
   ],
   "missingInserts": []
  }
