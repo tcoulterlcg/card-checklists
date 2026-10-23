@@ -2819,6 +2819,71 @@
    "talent pipeline"
   ]
  },
+ "2015-topps-wwe": {
+  "missingPlayers": [
+   "amore",
+   "anderson",
+   "backlund",
+   "balor",
+   "banks",
+   "bayley",
+   "bearer",
+   "bigelow",
+   "blake",
+   "blassie",
+   "blayze",
+   "box",
+   "breeze",
+   "bulldog",
+   "carmella",
+   "charlotte",
+   "clown",
+   "corbin",
+   "crowe",
+   "gotch",
+   "hennig",
+   "joe",
+   "jordan",
+   "konnor",
+   "lynch",
+   "malenko",
+   "man",
+   "murphy",
+   "nash",
+   "neville",
+   "no",
+   "owens",
+   "page",
+   "ravish",
+   "rawley",
+   "rude",
+   "sandow",
+   "sheik",
+   "taylor",
+   "truth",
+   "viii",
+   "viktor",
+   "yes",
+   "yokozuna",
+   "zayn"
+  ],
+  "missingInserts": [
+   "big show ruins money bank title shot for john cena",
+   "crowd chants usa",
+   "daniel bryan defeats triple h at wrestlemania 30",
+   "dvd promo",
+   "undisputed",
+   "undisputed cage evolution moments",
+   "undisputed famous finishers",
+   "undisputed famous rivalries dual",
+   "undisputed fistograph",
+   "undisputed four corners quadragraph books",
+   "undisputed nxt line",
+   "undisputed nxt prospects",
+   "undisputed relics",
+   "wyatt family cost john cena his wwe championship match"
+  ]
+ },
  "2017-bowman-chrome-baseball-cards": {
   "missingPlayers": [
    "aaron",
@@ -4327,51 +4392,6 @@
    "signature goalies"
   ]
  },
- "2016-topps-archives-baseball-cards": {
-  "missingPlayers": [
-   "alou",
-   "baines",
-   "benes",
-   "blomberg",
-   "bordick",
-   "box",
-   "burroughs",
-   "campaneris",
-   "carlton",
-   "clemens",
-   "conine",
-   "everett",
-   "fingers",
-   "hatteberg",
-   "hentgen",
-   "higuera",
-   "kaat",
-   "law",
-   "lyle",
-   "mattingly",
-   "monday",
-   "nelson",
-   "park",
-   "richard",
-   "rijo",
-   "schilling",
-   "strawberry",
-   "surhoff",
-   "tatis",
-   "tekulve",
-   "valenzuela",
-   "vidro",
-   "vina",
-   "vizcaino",
-   "vizquel",
-   "willis"
-  ],
-  "missingInserts": [
-   "65th anniversary update",
-   "fan favorites",
-   "snapshots"
-  ]
- },
  "2018-19-topps-chrome-uefa-champions-league-cards": {
   "missingPlayers": [
    "arnold",
@@ -4793,26 +4813,6 @@
    "stats"
   ]
  },
- "2014-topps-chrome-football-cards": {
-  "missingPlayers": [
-   "decker",
-   "jenkins",
-   "locker",
-   "marhsall",
-   "stafforf",
-   "witten"
-  ],
-  "missingInserts": [
-   "1963",
-   "1965 tall boy",
-   "1985",
-   "die cut",
-   "fantasy focus",
-   "pulsar",
-   "pulsar die cut",
-   "wave"
-  ]
- },
  "1989-score-football-cards": {
   "missingPlayers": [
    "bears",
@@ -4851,22 +4851,6 @@
    "error photo actually gary hogeboom",
    "franco harris",
    "trivia quiz"
-  ]
- },
- "2009-topps-wwe": {
-  "missingPlayers": [
-   "truth"
-  ],
-  "missingInserts": [
-   "hands apart",
-   "hands clasped",
-   "hat",
-   "judgement day mat relic",
-   "looking left",
-   "looking right",
-   "tin lid bonus",
-   "town",
-   "with hat"
   ]
  },
  "2018-19-panini-prizm-basketball-nba-cards": {
@@ -5105,41 +5089,6 @@
    "picks top prospects"
   ]
  },
- "2013-bowman-platinum-baseball-cards": {
-  "missingPlayers": [
-   "ahmed",
-   "alfaro",
-   "ames",
-   "calixte",
-   "conley",
-   "cruz",
-   "dunston",
-   "franco",
-   "graham",
-   "hellweg",
-   "james",
-   "kepler",
-   "loux",
-   "magill",
-   "mateo",
-   "may",
-   "mccullers",
-   "meo",
-   "obrien",
-   "odor",
-   "oneill",
-   "roberts",
-   "salazar",
-   "scott",
-   "spangberg",
-   "swanner"
-  ],
-  "missingInserts": [
-   "atomic",
-   "ice",
-   "relics"
-  ]
- },
  "2015-16-panini-revolution-basketball-cards": {
   "missingPlayers": [
    "futura",
@@ -5215,6 +5164,21 @@
    "patch ink",
    "profiles",
    "signature"
+  ]
+ },
+ "2013-topps-wwe": {
+  "missingPlayers": [
+   "truth"
+  ],
+  "missingInserts": [
+   "agility",
+   "confidence",
+   "drive",
+   "fighting style",
+   "history",
+   "leadership",
+   "paul heyman",
+   "wwe universe"
   ]
  },
  "2013-14-fleer-showcase-hockey-cards": {
@@ -5832,6 +5796,31 @@
   "missingInserts": [
    "relics",
    "scarlet signatures"
+  ]
+ },
+ "2016-topps-archives-baseball-cards": {
+  "missingPlayers": [
+   "bordick",
+   "box",
+   "clemens",
+   "conine",
+   "hatteberg",
+   "lyle",
+   "mattingly",
+   "park",
+   "rijo",
+   "schilling",
+   "tekulve",
+   "valenzuela",
+   "vidro",
+   "vina",
+   "vizquel",
+   "willis"
+  ],
+  "missingInserts": [
+   "65th anniversary update",
+   "fan favorites",
+   "snapshots"
   ]
  },
  "2014-topps-triple-threads-baseball-cards": {
@@ -6581,6 +6570,16 @@
    "atomic",
    "vintage",
    "xfractor"
+  ]
+ },
+ "2013-topps-best-of-wwe": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "hat",
+   "headband",
+   "shirt",
+   "sweatband",
+   "teddy bear"
   ]
  },
  "2019-panini-diamond-kings-baseball-cards": {
@@ -8135,6 +8134,18 @@
    "xs os"
   ]
  },
+ "2014-topps-chrome-football-cards": {
+  "missingPlayers": [
+   "decker",
+   "jenkins",
+   "locker",
+   "marhsall",
+   "stafforf"
+  ],
+  "missingInserts": [
+   "1965 tall boy"
+  ]
+ },
  "2018-topps-fire-baseball-mlb-cards": {
   "missingPlayers": [
    "dozier",
@@ -9188,6 +9199,30 @@
    "anderson silva chael sonnen"
   ]
  },
+ "2015-topps-wwe-road-to-wrestlemania": {
+  "missingPlayers": [
+   "dog"
+  ],
+  "missingInserts": [
+   "promos"
+  ]
+ },
+ "2014-topps-wwe-road-to-wrestlemania": {
+  "missingPlayers": [
+   "helmsley"
+  ],
+  "missingInserts": [
+   "defeats batista for world heavyweight championship"
+  ]
+ },
+ "2009-topps-wwe": {
+  "missingPlayers": [
+   "truth"
+  ],
+  "missingInserts": [
+   "town"
+  ]
+ },
  "2001-fleer-wwf-the-ultimate-diva-collection": {
   "missingPlayers": [
    "apa",
@@ -9258,12 +9293,6 @@
    "sahlawi"
   ],
   "missingInserts": []
- },
- "2009-topps-slam-attax-wwe": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "limited"
-  ]
  },
  "2018-19-panini-contenders-draft-picks-basketball": {
   "missingPlayers": [
@@ -9506,6 +9535,13 @@
   "missingPlayers": [
    "lindor",
    "severino"
+  ],
+  "missingInserts": []
+ },
+ "2013-bowman-platinum-baseball-cards": {
+  "missingPlayers": [
+   "james",
+   "spangberg"
   ],
   "missingInserts": []
  },
@@ -10486,6 +10522,12 @@
  "2009-topps-ufc-round-2": {
   "missingPlayers": [
    "pierre"
+  ],
+  "missingInserts": []
+ },
+ "2014-topps-wwe": {
+  "missingPlayers": [
+   "pac"
   ],
   "missingInserts": []
  },
