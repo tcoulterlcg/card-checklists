@@ -760,7 +760,9 @@
    "missing inserts: 1989 is back diamond, chrome wave, collection, ice, inception, inception inceptioned, inception patch, inception prospect",
    "30 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2014-bowman-baseball-cards: 675 -> 11393 cards, 6 -> 137 sections, covers 95.6% of current",
+  "at": "2026-10-23"
  },
  {
   "slug": "2022-topps-now-turn-back-the-clock-baseball-cards",
@@ -772,7 +774,9 @@
   "why": [
    "base skips 43 numbers in #1-215 (e.g. 8, 12, 23, 42, 44)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2022-topps-now-turn-back-the-clock-baseball-cards: 172 -> 646 cards, 1 -> 4 sections, covers 96.5% of current",
+  "at": "2026-10-23"
  },
  {
   "slug": "2014-bowman-chome-mini-baseball-cards",
@@ -785,7 +789,9 @@
    "missing inserts: die cut, die cut wave, indigo, scout top, shimmer, top, wave",
    "55 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2014-bowman-chome-mini-baseball-cards: 626 -> 4622 cards, 3 -> 14 sections, covers 100.0% of current",
+  "at": "2026-10-23"
  },
  {
   "slug": "2025-topps-series-2-baseball",
@@ -809,7 +815,9 @@
   "why": [
    "missing inserts: cinematic signatures veterans legends, crimson, genregraphs classics, genregraphs comedy, genregraphs drama, genregraphs thriller, ink, jade"
   ],
-  "status": "todo"
+  "status": "review",
+  "note": "2015-16-panini-gala-basketball-cards: 819 -> 2042 cards, 15 -> 56 sections, covers 63.6% of current",
+  "tcdbSid": 127818
  },
  {
   "slug": "2015-panini-prizm-football-cards",
@@ -821,7 +829,9 @@
   "why": [
    "missing inserts: cracked ice, cyber monday, cyber monday materials, draft picks alumnus, draft picks americans, draft picks helmet die cuts, draft picks stained glass, draft picks team trademarks"
   ],
-  "status": "todo"
+  "status": "review",
+  "note": "2015-panini-prizm-football-cards: 634 -> 7053 cards, 16 -> 74 sections, covers 53.0% of current",
+  "tcdbSid": 116934
  },
  {
   "slug": "2015-topps-platinum-football-cards",
@@ -834,7 +844,9 @@
    "missing inserts: autographed, breast cancer awareness, camo die cut ribbon, patch, players die cut, pulsar, relics, salute to service",
    "26 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2015-topps-platinum-football-cards: 200 -> 2827 cards, 3 -> 60 sections, covers 100.0% of current",
+  "at": "2026-10-23"
  },
  {
   "slug": "2013-topps-opening-day-baseball-cards-2",
@@ -847,7 +859,9 @@
    "missing inserts: batting, conference holding jersey, conference jersey, grey jersey, highlights, jersey, parade, pitching",
    "5 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2013-topps-opening-day-baseball-cards-2: 364 -> 1704 cards, 8 -> 15 sections, covers 98.0% of current",
+  "at": "2026-10-23"
  },
  {
   "slug": "2001-bowman-chrome-baseball",
@@ -860,7 +874,9 @@
    "missing inserts: japanese, uer photo denny bautista",
    "94 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2001-bowman-chrome-baseball: 53 -> 1102 cards, 4 -> 7 sections, covers 100.0% of current",
+  "at": "2026-10-23"
  },
  {
   "slug": "2014-bowman-sterling-baseball-cards",
@@ -873,7 +889,9 @@
    "missing inserts: atomic, canary diamond, diamond, die cut, japan, japan fractor, magenta, prospect",
    "34 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2014-bowman-sterling-baseball-cards: 200 -> 3589 cards, 4 -> 92 sections, covers 100.0% of current",
+  "at": "2026-10-23"
  },
  {
   "slug": "2020-topps-allen-and-ginter-baseball",
