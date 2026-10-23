@@ -4253,7 +4253,9 @@
   "why": [
    "base skips 28 numbers in #1-42 (e.g. 3, 4, 5, 6, 8)"
   ],
-  "status": "todo"
+  "status": "review",
+  "note": "20222-topps-x-juan-soto-curated-baseball: 205 -> 608 cards, 8 -> 13 sections, covers 76.9% of current",
+  "tcdbSid": 354806
  },
  {
   "slug": "2013-topps-archives-baseball-cards",
@@ -4281,7 +4283,9 @@
    "missing inserts: before, diamond relics, stadium, stadium signatures, team traditions celebrations",
    "31 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2018-topps-opening-day-baseball-mlb-cards: 259 -> 1909 cards, 4 -> 25 sections, covers 100.0% of current",
+  "at": "2026-10-23"
  },
  {
   "slug": "2015-topps-archives-baseball-cards",
@@ -4294,7 +4298,9 @@
    "missing inserts: 1968 game insert, 1990 draft picks, fan favorites, originals buybacks, signature series",
    "31 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2015-topps-archives-baseball-cards: 343 -> 3090 cards, 2 -> 48 sections, covers 99.1% of current",
+  "at": "2026-10-23"
  },
  {
   "slug": "1989-score-football-cards",
@@ -4307,7 +4313,9 @@
    "missing inserts: error photo actually gary hogeboom, franco harris, hof, promos, trivia quiz",
    "31 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "review",
+  "note": "1989-score-football-cards: 456 -> 372 cards, 3 -> 3 sections, covers 73.0% of current",
+  "tcdbSid": 3243
  },
  {
   "slug": "2018-topps-pro-debut-baseball-milb-cards",
@@ -4320,7 +4328,9 @@
    "missing inserts: distinguished manufactured patch, foilfractor, fragments farm relic, milb leaps bounds, promo night uniforms, promo night uniforms relic, splash future",
    "11 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2018-topps-pro-debut-baseball-milb-cards: 280 -> 1843 cards, 3 -> 36 sections, covers 100.0% of current",
+  "at": "2026-10-23"
  },
  {
   "slug": "2022-panini-mosaic-draft-picks-football",
@@ -4332,7 +4342,9 @@
   "why": [
    "base skips 27 numbers in #3-40 (e.g. 5, 6, 8, 10, 11)"
   ],
-  "status": "todo"
+  "status": "review",
+  "note": "2022-panini-mosaic-draft-picks-football: 250 -> 1170 cards, 13 -> 15 sections, covers 68.4% of current",
+  "tcdbSid": 323981
  },
  {
   "slug": "2017-bowman-chrome-mini-baseball-cards",
@@ -4344,7 +4356,9 @@
   "why": [
    "base skips 27 numbers in #2-44 (e.g. 3, 5, 6, 7, 8)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2017-bowman-chrome-mini-baseball-cards: 554 -> 3822 cards, 2 -> 14 sections, covers 98.5% of current",
+  "at": "2026-10-23"
  },
  {
   "slug": "2012-13-panini-classic-signatures-hockey-cards",
@@ -4356,7 +4370,9 @@
   "why": [
    "base skips 27 numbers in #1-200 (e.g. 6, 8, 18, 21, 24)"
   ],
-  "status": "todo"
+  "status": "review",
+  "note": "2012-13-panini-classic-signatures-hockey-cards: 579 -> 582 cards, 13 -> 12 sections, covers 48.9% of current",
+  "tcdbSid": 72750
  },
  {
   "slug": "2013-bowman-sterling-baseball-cards",
