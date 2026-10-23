@@ -41,7 +41,8 @@ for (const f of readdirSync(dataDir)) {
     }
   }
 }
-writeFileSync(new URL('search-index.json', dataDir), JSON.stringify({ slugs, sections, teams, rows }))
+// The full index (~95 MB) is only an intermediate for the browse slices below; nothing on the
+// site loads it, so it is no longer written into public/ (it was being deployed as a static file).
 console.log('search index:', rows.length.toLocaleString(), 'cards |', slugs.length, 'slugs,', sections.length, 'sections,', teams.length, 'teams')
 
 // Small slices for the browse filters, so a phone never downloads the full index:

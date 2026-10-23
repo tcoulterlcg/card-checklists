@@ -7,6 +7,10 @@
 - **Set slugs are public URLs.** If an import renames or removes a set file, add `old-slug -> new-slug` to
   `public/data/redirects.json` (see `scripts/dedupe-sets.mjs`). Never delete a set file without a redirect.
 - **After any data import:** run `node scripts/cleanup-names.mjs` (name/team/junk hygiene), then the normal build.
+  After a Break Ninja import also run `node scripts/fix-breakninja.mjs` (its free preview stops at 250 rows — those sets
+  are hidden and queued for TCDB — and its tables repeat unnumbered rows) and `node scripts/dedupe-near.mjs` (same product
+  under two slugs). A set with `incompleteWhy` is hidden on purpose; cleanup scripts keep it hidden until a fuller copy replaces it.
+- **Unreleased sets** (TCG spoilers, future-dated products) only hold the cards revealed so far — don't import them until release.
 - **After any catalog build:** run `node scripts/catalog-prune.mjs ../catalog --write`. SportsCardsPro (`scp-*`) entries are
   price-guide pages (only cards that have sold, one insert per "set"); this drops the ones already covered by a real set,
   adds redirects, and writes `scripts/data/catalog-hole-hints.json` — players/inserts the real sets are missing.
