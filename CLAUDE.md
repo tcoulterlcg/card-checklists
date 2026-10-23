@@ -21,5 +21,10 @@
 - **SuperFractor rows:** `node scripts/add-superfractors.mjs` adds them only where the set's checklist notes or
   `scripts/data/superfractor-research.json` (sourced) state them. Re-run it after any TCDB repair merge or re-import,
   since replacing a set drops these derived sections.
+- **Memorabilia tags** (`scripts/classify-memorabilia.mjs`): Game-used needs evidence (TCDB note, card wording, or a maker
+  source). The Upper Deck hockey "veteran memorabilia is game-used" convention covers jersey/material swatches and plain
+  patches only — never shields, logos, tags, nameplates, numbers, commemorative patches (→ Unknown), and never pucks,
+  net cord, glass, towels, tickets or printing plates. Manufactured lines go in `MFG_LINES` with a source URL. When in
+  doubt, Unknown — not Game-used.
 - **Colors:** small secondary text uses `#8A93A8` (passes WCAG AA on the dark background); avoid darker greys for text.
 - **Grails:** collectors define their own grails; the site does not mark sets as grails.
