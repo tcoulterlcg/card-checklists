@@ -73,5 +73,9 @@
  },
  "sets": 19795,
  "cards": 1941328,
- "updated": "2026-10-23T20:26:48.515Z"
+ "updated": "2026-10-23T20:26:48.515Z",
+ "visible": {
+  "file": "index/visible.json",
+  "sets": 993
+ }
 }
