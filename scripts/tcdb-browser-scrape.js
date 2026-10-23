@@ -1,8 +1,13 @@
 // TCDB set scraper — runs INSIDE a tcdb.com tab (Claude in Chrome javascript_tool),
-// because TCDB blocks server-side fetches. Paste/inject this file once per tab, then:
+// because TCDB blocks server-side fetches. Load it once per tab:
+//   eval(await (await fetch("https://raw.githubusercontent.com/tcoulterlcg/card-checklists/main/scripts/tcdb-browser-scrape.js")).text())
+// then:
 //
-//   __tcdb.find("2018 Topps Chrome", "Baseball")   -> Promise<[{sid, name}]>  (search)
-//   __tcdb.queue([{ sid, slug, name, year, sport }, ...])                       (start / add work)
+//   __tcdb.find("2018 Topps Chrome", "Baseball")   -> Promise<[{sid, path, name}]>  (search)
+//   __tcdb.queue([{ sid, path, slug, name, year, sport }, ...])                 (start / add work)
+//
+// `path` is TCDB's name slug from the set's link ("2018-Topps-Chrome"): TCDB serves a
+// 404 page (with HTTP 200) for /Checklist.cfm/sid/N without it.
 //   __tcdb.status()                                 -> progress summary
 //   await __tcdb.take(maxChars)                     -> gzip+base64 chunk of finished sets (removes them)
 //
@@ -16,10 +21,10 @@
 // narrows slowly on success. Long runs keep going in the background; the
 // javascript_tool call itself must return within 45 s, so always poll.
 (() => {
-  if (window.__tcdb && window.__tcdb.version >= 1) return
+  if (window.__tcdb && window.__tcdb.version >= 2) return
   const sleep = (ms) => new Promise(r => setTimeout(r, ms))
   const parse = (h) => new DOMParser().parseFromString(h, 'text/html')
-  const st = { version: 1, gap: 6000, minGap: 4000, maxGap: 120000, todo: [], done: [], failed: [], current: null, requests: 0, throttled: 0, running: false, log: [] }
+  const st = { version: 2, gap: 6000, minGap: 4000, maxGap: 120000, todo: [], done: [], failed: [], current: null, requests: 0, throttled: 0, running: false, log: [] }
 
   async function get(url) {
     for (let attempt = 0; attempt < 8; attempt++) {
@@ -28,7 +33,7 @@
       let r
       try { r = await fetch(url, { credentials: 'include' }) } catch (e) { st.gap = Math.min(st.maxGap, st.gap * 2); continue }
       if (r.status === 429 || r.status === 503) { st.throttled++; st.gap = Math.min(st.maxGap, st.gap * 2); continue }
-      if (!r.ok) throw new Error(r.status + ' ' + url)
+      if (!r.ok || /Error404/.test(r.url)) throw new Error((r.ok ? 404 : r.status) + ' ' + url)
       st.gap = Math.max(st.minGap, Math.round(st.gap * 0.9))
       const html = await r.text()
       if (/Just a moment|Performing security verification/.test(html)) { st.gap = Math.min(st.maxGap, st.gap * 2); continue }
@@ -77,26 +82,29 @@
     return cards
   }
 
-  async function checklist(sid) {
-    const first = await get('/Checklist.cfm/sid/' + sid)
+  async function checklist(sid, path) {
+    const base = '/Checklist.cfm/sid/' + sid + '/' + path
+    const first = await get(base)
     const pages = Math.max(1, ...[...first.querySelectorAll('a[href*="PageIndex="]')].map(a => +((a.getAttribute('href') || '').match(/PageIndex=(\d+)/) || [0, 1])[1]))
     let cards = rowsOf(first)
-    for (let p = 2; p <= pages; p++) cards = cards.concat(rowsOf(await get('/Checklist.cfm/sid/' + sid + '?PageIndex=' + p)))
+    for (let p = 2; p <= pages; p++) cards = cards.concat(rowsOf(await get(base + '?PageIndex=' + p)))
     return cards
   }
 
   async function scrape(job) {
-    const ins = await get('/Inserts.cfm/sid/' + job.sid)
+    if (!job.path) throw new Error('job needs path (TCDB name slug)')
+    const ins = await get('/Inserts.cfm/sid/' + job.sid + '/' + job.path)
     const subs = new Map()
     for (const a of ins.querySelectorAll('a[href*="/sid/"]')) {
-      const m = (a.getAttribute('href') || '').match(/^\/(?:Checklist|ViewSet)\.cfm\/sid\/(\d+)/)
+      const m = (a.getAttribute('href') || '').match(/^\/(?:Checklist|ViewSet)\.cfm\/sid\/(\d+)\/([^/?#]+)/)
       const title = a.textContent.replace(/\s+/g, ' ').trim()
-      if (m && title && m[1] !== String(job.sid) && !subs.has(m[1])) subs.set(m[1], title)
+      if (m && title && m[1] !== String(job.sid) && !subs.has(m[1])) subs.set(m[1], { title, path: m[2] })
     }
-    const sections = [{ title: 'Base', cards: await checklist(job.sid) }]
+    const sections = [{ title: 'Base', cards: await checklist(job.sid, job.path) }]
+    if (!sections[0].cards.length) throw new Error('no cards parsed from the base checklist')
     job.progress = { subs: subs.size, done: 0 }
-    for (const [sid, title] of subs) {
-      const cards = await checklist(sid)
+    for (const [sid, { title, path }] of subs) {
+      const cards = await checklist(sid, path)
       if (cards.length) sections.push({ title, cards, sid: +sid })
       job.progress.done++
     }
@@ -120,11 +128,12 @@
     const doc = await get('/Search.cfm?SearchCategory=' + encodeURIComponent(sport || '') + '&q=' + encodeURIComponent(q))
     const seen = new Map()
     for (const a of doc.querySelectorAll('a[href*="ViewSet.cfm/sid/"]')) {
-      const sid = (a.getAttribute('href').match(/sid\/(\d+)/) || [])[1]
-      const name = a.textContent.replace(/\s+/g, ' ').trim()
-      if (sid && name && !seen.has(sid)) seen.set(sid, name)
+      const m = a.getAttribute('href').match(/sid\/(\d+)\/([^/?#]+)/)
+      if (!m) continue
+      const name = a.textContent.replace(/\s+/g, ' ').trim() || m[2].replace(/-/g, ' ')
+      if (!seen.has(m[1]) || seen.get(m[1]).name === 'Overview') seen.set(m[1], { path: m[2], name })
     }
-    return [...seen].map(([sid, name]) => ({ sid: +sid, name }))
+    return [...seen].map(([sid, v]) => ({ sid: +sid, ...v }))
   }
 
   async function take(maxChars = 30000) {
@@ -150,5 +159,5 @@
 
   const status = () => ({ gap: st.gap, requests: st.requests, throttled: st.throttled, running: st.running, todo: st.todo.length, done: st.done.length, failed: st.failed.map(f => f.slug + ': ' + f.error), current: st.current && { slug: st.current.slug, ...st.current.progress, mins: Math.round((Date.now() - st.current.started) / 60000) } })
 
-  window.__tcdb = { version: 1, st, find, queue: (jobs) => { st.todo.push(...jobs); run(); return st.todo.length }, status, take, stage, slice, checklist, rowsOf, flagsToX }
+  window.__tcdb = { version: 2, st, find, queue: (jobs) => { st.todo.push(...jobs); run(); return st.todo.length }, status, take, stage, slice, checklist, rowsOf, flagsToX }
 })()
