@@ -6,6 +6,7 @@ import { memo, useDeferredValue, useEffect, useMemo, useRef, useState } from 're
 import { supa } from '../lib/supa'
 import { TYPE, norm, parseQuery, parseQueryFor, matchPlayers, akaOf, rowMatches, typeLabel, TYPE_COLORS, serialLabel, MEM_LABEL, MEM_COLORS, memKind, memTypical } from '../lib/query'
 import { brandOf } from '../lib/brands'
+import { PAR, PAR_LABEL, parallelKinds } from '../lib/parallels'
 import { ACCENT, ACCENT_TEXT, BG, SURFACE, SURFACE_2, LINE, CHIP_LINE, TEXT, TEXT_2, LABEL, display, eyebrow, title, buttonText } from '../lib/theme'
 
 const SPORT_COLORS = { Baseball: '#60a5fa', Football: '#4ade80', Basketball: '#f97316', Hockey: '#a78bfa', Soccer: '#f43f5e', UFC: '#dc2626', Boxing: '#eab308', Wrestling: '#f59e0b', Golf: '#22c55e', Tennis: '#14b8a6', Racing: '#ef4444', 'Pokémon': '#facc15', 'Yu-Gi-Oh!': '#a855f7', Magic: '#f59e0b', Lorcana: '#8b5cf6', 'One Piece': '#ef4444', Entertainment: '#ec4899', 'Non-Sport': '#fb923c', 'Multi-Sport': '#94a3b8' }
@@ -167,6 +168,7 @@ export function Omnibox({ value, onChange, onSubmit, onPickPlayer, onPickSet, se
   else if (parsed.serial) understood.push(['print run', '/' + parsed.serial])
   if (parsed.serialMax) understood.push(['print run', '≤ /' + parsed.serialMax])
   for (const t of parsed.types) understood.push(['type', t.toLowerCase()])
+  for (const k of parsed.pars || []) understood.push(['parallel', PAR_LABEL[k].toLowerCase()])
   if (parsed.sport) understood.push(['sport', parsed.sport])
   if (parsed.season) understood.push(['season', String(parsed.season)])
   for (const p of parsed.products) understood.push(['product', p])
@@ -253,6 +255,7 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
   const [limit, setLimit] = useState(40)
   const [hidePlates, setHidePlates] = useState(false)
   const [mems, setMems] = useState(null) // null/empty = any; checked boxes narrow
+  const [pars, setPars] = useState(null) // named parallels / patch kinds; null/empty = any
   const [statedOnly, setStatedOnly] = useState(false)
   const [filtersOpen, setFiltersOpen] = useState(false) // mobile only; desktop always shows filters
 
@@ -271,6 +274,7 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
     setYearFrom(parsed.season || 0); setYearTo(parsed.season || 9999)
     setProducts(parsed.products.slice())
     setMems(parsed.mem ? new Set([parsed.mem]) : null)
+    setPars(parsed.pars && parsed.pars.size ? new Set(parsed.pars) : null)
   }, [parsed])
 
   const setMeta = useMemo(() => { const m = {}; for (const s of sets) m[s.slug] = s; return m }, [sets])
@@ -283,20 +287,21 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
       if (r[0] !== player.id) continue
       const slug = shard.slugs[r[1]]
       const m = setMeta[slug] || { name: slug, year: 0, sport: '' }
-      out.push({ slug, set: m.name, year: m.year, sport: m.sport, brand: brandOf(m.name, m.year), section: shard.sections[r[2]], n: r[3], team: r[4] >= 0 ? shard.teams[r[4]] : '', serial: r[5], type: r[6], mem: r[7] || 0, label: r.length > 8 && shard.labels ? shard.labels[r[8]] : player.name, raw: r })
+      out.push({ slug, set: m.name, year: m.year, sport: m.sport, brand: brandOf(m.name, m.year), section: shard.sections[r[2]], n: r[3], team: r[4] >= 0 ? shard.teams[r[4]] : '', serial: r[5], type: r[6], mem: r[7] || 0, label: r.length > 8 && shard.labels ? shard.labels[r[8]] : player.name, par: parallelKinds(shard.sections[r[2]], m.sport, m.name, m.year), raw: r })
     }
     return out
   }, [shard, player.id, setMeta])
 
   // Facet universe (counts over the player's full catalogue).
   const facets = useMemo(() => {
-    const f = { mem: {}, sets: new Set(), au: 0, one: 0, rc: 0, patch: 0, base: 0, parallel: 0, insert: 0, relic: 0, plate: 0, brands: new Map(), teams: new Map(), labels: new Map(), years: new Map(), minY: 9999, maxY: 0, seasons: 0 }
+    const f = { mem: {}, par: {}, sets: new Set(), au: 0, one: 0, rc: 0, patch: 0, base: 0, parallel: 0, insert: 0, relic: 0, plate: 0, brands: new Map(), teams: new Map(), labels: new Map(), years: new Map(), minY: 9999, maxY: 0, seasons: 0 }
     for (const r of rows) {
       f.sets.add(r.slug)
       if (r.type & TYPE.AU) f.au++; if (r.serial === 1) f.one++; if (r.type & TYPE.RC) f.rc++; if (r.type & TYPE.PATCH) f.patch++
       if (r.type & TYPE.BASE) f.base++; if (r.type & TYPE.PARALLEL) f.parallel++; if (r.type & TYPE.INSERT) f.insert++; if (r.type & TYPE.RELIC) f.relic++; if (r.type & TYPE.PLATE) f.plate++
       f.brands.set(r.brand, (f.brands.get(r.brand) || 0) + 1)
       if (r.mem) { const k = memKind(r.mem); f.mem[k] = (f.mem[k] || 0) + 1 }
+      if (r.par) for (const k in PAR) if (r.par & PAR[k]) f.par[k] = (f.par[k] || 0) + 1
       if (r.team) f.teams.set(r.team, (f.teams.get(r.team) || 0) + 1)
       f.labels.set(r.label, (f.labels.get(r.label) || 0) + 1)
       if (r.year) { f.years.set(r.year, (f.years.get(r.year) || 0) + 1); if (r.year < f.minY) f.minY = r.year; if (r.year > f.maxY) f.maxY = r.year }
@@ -334,9 +339,10 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
       if (parsed && parsed.sport && r.sport !== parsed.sport) return false
       if (mems && mems.size && !(r.mem && mems.has(memKind(r.mem)))) return false
       if (statedOnly && r.mem && memTypical(r.mem)) return false
+      if (pars && pars.size && ![...pars].some(k => r.par & PAR[k])) return false
       return true
     })
-  }, [rows, quick, types, run, brands, teams, labels, yearFrom, yearTo, products, hidePlates, parsed, mems, statedOnly])
+  }, [rows, quick, types, run, brands, teams, labels, yearFrom, yearTo, products, hidePlates, parsed, mems, statedOnly, pars])
 
   const sorted = useMemo(() => {
     const out = filtered.slice()
@@ -364,7 +370,7 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
   const toggleType = (t) => setTypes(prev => { const n = new Set(prev); if (n.has(t)) n.delete(t); else n.add(t); return n })
   // Facet checkboxes: nothing checked = any; checking narrows to the checked values.
   const toggleIn = (setter, cur, v) => setter(() => { const n = new Set(cur || []); if (n.has(v)) n.delete(v); else n.add(v); return n.size ? n : null })
-  const resetAll = () => { setMems(null); setStatedOnly(false); setQuick('all'); setTypes(new Set()); setRun('any'); setBrands(null); setTeams(null); setLabels(null); setProducts([]); setYearFrom(0); setYearTo(9999); setHidePlates(false) }
+  const resetAll = () => { setPars(null); setMems(null); setStatedOnly(false); setQuick('all'); setTypes(new Set()); setRun('any'); setBrands(null); setTeams(null); setLabels(null); setProducts([]); setYearFrom(0); setYearTo(9999); setHidePlates(false) }
   const color = SPORT_COLORS[player.sport] || ACCENT
   const following = myPlayers.has(player.name)
   const nonSports = NON_SPORTS.has(player.sport)
@@ -478,6 +484,14 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
             ))}
             <label style={lbl}><input type="checkbox" checked={hidePlates} onChange={(e) => setHidePlates(e.target.checked)} style={cb} />Hide printing plates</label>
           </div>
+          {Object.keys(facets.par).length > 0 && (
+            <div>
+              <p style={legend}>Parallel / patch</p>
+              {['SUPERFRACTOR', 'SHIELD', 'LOGOMAN', 'LAUNDRY', 'NAMEPLATE', 'BUTTON', 'BRAND'].filter(k => facets.par[k]).map(k => (
+                <label key={k} style={lbl}><input type="checkbox" checked={!!pars && pars.has(k)} onChange={() => toggleIn(setPars, pars, k)} style={cb} />{PAR_LABEL[k]}<span style={cnt}>{facets.par[k].toLocaleString()}</span></label>
+              ))}
+            </div>
+          )}
           {Object.keys(facets.mem).length > 0 && (
             <div>
               <p style={legend}>Memorabilia</p>
