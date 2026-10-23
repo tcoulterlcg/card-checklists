@@ -192,6 +192,196 @@ function Chip({ children, color, solid }) {
   )
 }
 
+// Does set `s` belong to the current category filter? sportFilter is either a
+// group ('All' | 'Sports' | 'TCG' | 'Other') or one category ('Baseball').
+function matchSport(s, f) {
+  if (f === 'All') return true
+  if (f === 'TCG') return TCG_SET.has(s.sport)
+  if (f === 'Other') return OTHER_SET.has(s.sport)
+  if (f === 'Sports') return !TCG_SET.has(s.sport) && !OTHER_SET.has(s.sport)
+  return s.sport === f
+}
+const groupOf = (f) => f === 'All' ? 'All' : (f === 'TCG' || TCG_SET.has(f)) ? 'TCG' : (f === 'Other' || OTHER_SET.has(f)) ? 'Other' : 'Sports'
+
+// Sports shown as chips; every other sport goes in the "More sports" menu.
+const MAIN_SPORTS = ['Baseball', 'Football', 'Basketball', 'Hockey', 'Soccer']
+const POPULAR_BRANDS = ['Topps', 'Panini', 'Upper Deck', 'Bowman', 'Donruss', 'Fleer']
+const SECONDARY = '#8A93A8'
+
+const Chevron = () => (
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6" /></svg>
+)
+const Check = () => (
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={ACCENT_TEXT} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10" /></svg>
+)
+const XIcon = () => (
+  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
+)
+
+const pill = (on) => ({
+  minHeight: 40, padding: '0 16px', borderRadius: 999, cursor: 'pointer', whiteSpace: 'nowrap',
+  display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 14, ...buttonText,
+  background: on ? ACCENT : SURFACE, color: on ? '#fff' : '#C9CCD6',
+  border: '1px solid ' + (on ? ACCENT : LINE)
+})
+const menuItem = (on) => ({
+  minHeight: 40, padding: '0 12px', borderRadius: 8, cursor: 'pointer', textAlign: 'left',
+  display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8, fontSize: 14,
+  fontWeight: on ? 600 : 500, background: on ? SURFACE_2 : 'transparent', color: on ? '#fff' : '#D4D4D8', border: 'none'
+})
+const popover = {
+  position: 'absolute', top: 'calc(100% + 8px)', zIndex: 40, background: SURFACE, border: '1px solid ' + LINE,
+  borderRadius: 14, padding: 8, boxShadow: '0 20px 40px rgba(0,0,0,0.5)', boxSizing: 'border-box'
+}
+
+// Category tabs (All / Sports / TCG / Other), one row of chips for the active
+// tab, a "More sports" menu, a searchable Brand menu, the Product select and a
+// strip of active filters with one-click removal.
+function SetFilters({ sports, sportFilter, onPick, showBrand, brands, brandFilter, onBrand, products, productFilter, onProduct }) {
+  const [menu, setMenu] = useState(null)          // 'more' | 'brand' | null
+  const [brandQ, setBrandQ] = useState('')
+  const [moreLeft, setMoreLeft] = useState(0)
+  const wrapRef = useRef(null)
+  const moreBtn = useRef(null)
+
+  useEffect(() => {
+    if (!menu) return
+    const down = (e) => { if (wrapRef.current && !wrapRef.current.contains(e.target)) setMenu(null) }
+    const key = (e) => { if (e.key === 'Escape') setMenu(null) }
+    document.addEventListener('mousedown', down)
+    document.addEventListener('keydown', key)
+    return () => { document.removeEventListener('mousedown', down); document.removeEventListener('keydown', key) }
+  }, [menu])
+  useEffect(() => { if (menu !== 'brand') setBrandQ('') }, [menu])
+
+  const group = groupOf(sportFilter)
+  const sportCats = sports.filter(s => s !== 'All' && !TCG_SET.has(s) && !OTHER_SET.has(s))
+  const tcgCats = sports.filter(s => TCG_SET.has(s))
+  const otherCats = sports.filter(s => OTHER_SET.has(s))
+  const mainSports = MAIN_SPORTS.filter(s => sportCats.includes(s))
+  const moreSports = sportCats.filter(s => !MAIN_SPORTS.includes(s))
+  const tabs = [['All', 'All'], ['Sports', 'Sports'], ...(tcgCats.length ? [['TCG', 'TCG']] : []), ...(otherCats.length ? [['Other', 'Other']] : [])]
+  const chips = group === 'Sports' ? [['All sports', 'Sports'], ...mainSports.map(s => [s, s])]
+    : group === 'TCG' ? [['All TCG', 'TCG'], ...tcgCats.map(s => [s, s])]
+    : group === 'Other' ? [['All other', 'Other'], ...otherCats.map(s => [s, s])] : []
+  const moreSel = moreSports.includes(sportFilter)
+
+  const toggleMore = () => {
+    if (menu === 'more') return setMenu(null)
+    const w = wrapRef.current, b = moreBtn.current
+    if (w && b) {
+      const wr = w.getBoundingClientRect(), br = b.getBoundingClientRect()
+      setMoreLeft(Math.max(0, Math.min(br.left - wr.left, wr.width - 320)))
+    }
+    setMenu('more')
+  }
+
+  const brandList = brands.slice(1)
+  const q = brandQ.trim().toLowerCase()
+  const shown = q ? brandList.filter(b => b.toLowerCase().includes(q)) : brandList
+  const popular = q ? [] : POPULAR_BRANDS.filter(b => brandList.includes(b))
+  const rest = (q ? shown : shown.filter(b => !popular.includes(b))).slice().sort((a, b) => a.localeCompare(b))
+  const pickBrand = (b) => { onBrand(b); setMenu(null) }
+
+  const active = []
+  if (sportFilter !== 'All' && !['Sports', 'TCG', 'Other'].includes(sportFilter)) active.push([sportFilter, () => onPick(group)])
+  if (brandFilter !== 'All') active.push([brandFilter, () => onBrand('All')])
+  if (productFilter !== 'All') active.push([productFilter, () => onProduct('All')])
+
+  const brandItems = (list) => list.map(b => (
+    <button key={b} onClick={() => pickBrand(b)} style={menuItem(brandFilter === b)}>{b}{brandFilter === b && <Check />}</button>
+  ))
+
+  return (
+    <div ref={wrapRef} style={{ position: 'relative' }}>
+      <div role="tablist" aria-label="Category" className="hq-chiprow" style={{ display: 'flex', gap: 32, borderBottom: '1px solid ' + LINE }}>
+        {tabs.map(([label, value]) => {
+          const on = group === value
+          return (
+            <button key={value} role="tab" aria-selected={on} onClick={() => { setMenu(null); onPick(value) }}
+              style={{ ...eyebrow, fontSize: 17, background: 'none', border: 'none', cursor: 'pointer', padding: '12px 0', marginBottom: -1,
+                borderBottom: '3px solid ' + (on ? ACCENT : 'transparent'), color: on ? TEXT : SECONDARY, whiteSpace: 'nowrap' }}>{label}</button>
+          )
+        })}
+      </div>
+
+      <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: 12, marginTop: 16 }}>
+        <div className="hq-chiprow" style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 8, minWidth: 0, maxWidth: '100%' }}>
+          {chips.map(([label, value]) => (
+            <button key={value} onClick={() => { setMenu(null); onPick(value) }} style={pill(sportFilter === value)}>{label}</button>
+          ))}
+          {group === 'Sports' && moreSports.length > 0 && (
+            <button ref={moreBtn} aria-haspopup="true" aria-expanded={menu === 'more'} onClick={toggleMore}
+              style={{ ...pill(moreSel), paddingRight: 12, ...(moreSel ? {} : { border: '1px dashed #3A4260' }) }}>
+              {moreSel ? sportFilter : 'More sports'}<Chevron />
+            </button>
+          )}
+        </div>
+
+        <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 8 }}>
+          {showBrand && brandList.length > 0 && (
+            <div style={{ position: 'relative' }}>
+              <button aria-haspopup="true" aria-expanded={menu === 'brand'} onClick={() => setMenu(menu === 'brand' ? null : 'brand')}
+                style={{ minHeight: 40, padding: '0 12px', borderRadius: 10, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 8, fontSize: 14, ...buttonText,
+                  background: brandFilter !== 'All' ? SURFACE_2 : SURFACE, color: TEXT, border: '1px solid ' + (brandFilter !== 'All' ? ACCENT : LINE) }}>
+                <span style={{ color: brandFilter !== 'All' ? ACCENT_TEXT : SECONDARY, fontWeight: 500 }}>Brand</span>
+                {brandFilter === 'All' ? 'Any' : brandFilter}<Chevron />
+              </button>
+              {menu === 'brand' && (
+                <div style={{ ...popover, right: 0, width: 'min(360px, calc(100vw - 28px))', maxHeight: 440, overflowY: 'auto', padding: 12, display: 'flex', flexDirection: 'column', gap: 10 }}>
+                  <label style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+                    <span style={{ fontSize: 12, color: SECONDARY }}>Find a brand</span>
+                    <input type="search" autoFocus value={brandQ} onChange={(e) => setBrandQ(e.target.value)} placeholder="e.g. SkyBox"
+                      style={{ height: 40, padding: '0 12px', background: BG, color: TEXT, border: '1px solid ' + LINE, borderRadius: 8, fontSize: 14, boxSizing: 'border-box' }} />
+                  </label>
+                  {!q && <button onClick={() => pickBrand('All')} style={menuItem(brandFilter === 'All')}>Any brand{brandFilter === 'All' && <Check />}</button>}
+                  {popular.length > 0 && <>
+                    <span style={{ ...eyebrow, fontSize: 12, color: SECONDARY, padding: '4px 4px 0' }}>Popular</span>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: 2 }}>{brandItems(popular)}</div>
+                  </>}
+                  {rest.length > 0 && <>
+                    {!q && <span style={{ ...eyebrow, fontSize: 12, color: SECONDARY, padding: '4px 4px 0' }}>All brands A–Z</span>}
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: 2 }}>{brandItems(rest)}</div>
+                  </>}
+                  {q && shown.length === 0 && <span style={{ fontSize: 13, color: SECONDARY, padding: '4px' }}>No brand matches “{brandQ}”.</span>}
+                </div>
+              )}
+            </div>
+          )}
+          {showBrand && products.length > 1 && (
+            <select aria-label="Product line" value={productFilter} onChange={(e) => onProduct(e.target.value)}
+              style={{ minHeight: 40, background: productFilter !== 'All' ? SURFACE_2 : SURFACE, border: '1px solid ' + (productFilter !== 'All' ? ACCENT : LINE), borderRadius: 10, color: TEXT, fontSize: 14, fontWeight: 600, padding: '0 12px', cursor: 'pointer' }}>
+              <option value="All">All products ({products.length - 1})</option>
+              {products.slice(1).map(p => <option key={p} value={p}>{p}</option>)}
+            </select>
+          )}
+        </div>
+      </div>
+
+      {menu === 'more' && (
+        <div style={{ ...popover, top: 'auto', marginTop: 8, left: moreLeft, width: 'min(320px, calc(100vw - 28px))', display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: 2 }}>
+          {moreSports.map(s => (
+            <button key={s} onClick={() => { onPick(s); setMenu(null) }} style={menuItem(sportFilter === s)}>{s}{sportFilter === s && <Check />}</button>
+          ))}
+        </div>
+      )}
+
+      {active.length > 0 && (
+        <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 8, marginTop: 14 }}>
+          <span style={{ fontSize: 13, color: SECONDARY }}>Filtered by</span>
+          {active.map(([label, remove]) => (
+            <button key={label} onClick={remove} aria-label={'Remove filter ' + label}
+              style={{ height: 32, padding: '0 10px 0 12px', borderRadius: 999, cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: 6,
+                fontSize: 13, fontWeight: 600, background: SURFACE_2, color: TEXT, border: '1px solid ' + CHIP_LINE }}>{label}<XIcon /></button>
+          ))}
+          <button onClick={() => { setMenu(null); onPick('All') }}
+            style={{ height: 32, padding: '0 6px', background: 'none', border: 'none', cursor: 'pointer', color: ACCENT_TEXT, fontSize: 13, fontWeight: 600, textDecoration: 'underline' }}>Clear all</button>
+        </div>
+      )}
+    </div>
+  )
+}
+
 export default function Home() {   // rendered by app/page.js (server wrapper that adds per-page metadata)
   const [sets, setSets] = useState([])
   const [activeSet, setActiveSet] = useState(null)
@@ -489,23 +679,18 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
   const taggedSets = useMemo(() => sets.map(s => Object.assign({}, s, classifySet(s.name, s.year))), [sets])
 
   const brands = useMemo(() => {
-    const base = sportFilter === 'All' ? taggedSets : taggedSets.filter(s => s.sport === sportFilter)
+    const base = taggedSets.filter(s => matchSport(s, sportFilter))
     return ['All', ...[...new Set(base.map(s => s.brand))].sort(brandSort)]
   }, [taggedSets, sportFilter])
 
   const products = useMemo(() => {
-    let base = taggedSets
-    if (sportFilter !== 'All') base = base.filter(s => s.sport === sportFilter)
+    let base = taggedSets.filter(s => matchSport(s, sportFilter))
     if (brandFilter !== 'All') base = base.filter(s => s.brand === brandFilter)
     return ['All', ...[...new Set(base.map(s => s.product))].filter(p => p !== 'Other').sort()]
   }, [taggedSets, sportFilter, brandFilter])
 
   const filteredSets = useMemo(() => {
-    let list = taggedSets
-    if (sportFilter === 'TCG') list = list.filter(s => TCG_SET.has(s.sport))
-    else if (sportFilter === 'Other') list = list.filter(s => OTHER_SET.has(s.sport))
-    else if (sportFilter === 'Sports') list = list.filter(s => !TCG_SET.has(s.sport) && !OTHER_SET.has(s.sport))
-    else if (sportFilter !== 'All') list = list.filter(s => s.sport === sportFilter)
+    let list = taggedSets.filter(s => matchSport(s, sportFilter))
     if (brandFilter !== 'All') list = list.filter(s => s.brand === brandFilter)
     if (productFilter !== 'All') list = list.filter(s => s.product === productFilter)
     const term = dQuery.trim().toLowerCase()
@@ -843,27 +1028,11 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
             </div>
           </section>
 
-          {/* FILTERS */}
+          {/* FILTERS: category tabs, sport chips + "More sports", Brand menu, Product, active filters */}
           {(() => {
-            const sportCats = sports.filter(s => s !== 'All' && !TCG_SET.has(s) && !OTHER_SET.has(s))
-            const otherCats = sports.filter(s => OTHER_SET.has(s))
-            const tcgCats = sports.filter(s => TCG_SET.has(s))
             const pick = (v) => { setSportFilter(v); setBrandFilter('All'); setProductFilter('All'); setTeamFilter('All'); setTeamInput(''); setTeamBrowse(false); setTcgRarity('All'); setTcgType('All') }
-            const chip = (label, value, color) => (
-              <button key={label} onClick={() => pick(value)}
-                style={{
-                  padding: '6px 14px',
-                  borderRadius: 999,
-                  cursor: 'pointer',
-                  background: sportFilter === value ? (color || ACCENT) : '#121626',
-                  color: sportFilter === value ? '#0F1320' : '#A1A1AA',
-                  border: '1px solid ' + (sportFilter === value ? 'transparent' : '#232A3E'),
-                  fontSize: 13,
-                  fontWeight: 600
-                }}>{label}</button>
-            )
             return (
-              <div style={{ margin: '38px 0 18px' }}>
+              <div style={{ margin: '38px 0 22px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', flexWrap: 'wrap', gap: 10, marginBottom: 16 }}>
                   <h2 style={{ ...title(20), margin: 0 }}>
                     {productFilter !== 'All' ? productFilter + ' Sets' : sportFilter === 'All' ? 'Featured Sets' : sportFilter === 'TCG' ? 'Trading Card Games' : sportFilter === 'Other' ? 'Other Cards' : sportFilter === 'Sports' ? 'Sports Cards' : sportFilter + ' Sets'}
@@ -882,55 +1051,15 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
                       <option value="category">Category</option>
                       <option value="brand">Brand</option>
                     </select>
-                    {chip('All', 'All', ACCENT)}
                   </div>
                 </div>
-                <div className="hq-chiprow" style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap', marginBottom: 10 }}>
-                  <span style={{ ...eyebrow, color: '#8A93A8', width: 42 }}>Sports</span>
-                  {chip('All Sports', 'Sports', '#cbd5e1')}
-                  {sportCats.map(sp => chip(sp, sp, SPORT_COLORS[sp]))}
-                </div>
-                {tcgCats.length > 0 && (
-                  <div className="hq-chiprow" style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap', paddingTop: 10, borderTop: '1px solid #1A1F31' }}>
-                    <span style={{ ...eyebrow, color: '#8A93A8', width: 42 }}>TCG</span>
-                    {chip('All TCG', 'TCG', '#e879f9')}
-                    {tcgCats.map(sp => chip(sp, sp, SPORT_COLORS[sp]))}
-                  </div>
-                )}
-                {otherCats.length > 0 && (
-                  <div className="hq-chiprow" style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap', paddingTop: 10, marginTop: 10, borderTop: '1px solid #1A1F31' }}>
-                    <span style={{ ...eyebrow, color: '#8A93A8', width: 42 }}>Other</span>
-                    {chip('All Other', 'Other', '#fb923c')}
-                    {otherCats.map(sp => chip(sp, sp, SPORT_COLORS[sp]))}
-                  </div>
-                )}
+                <SetFilters sports={sports} sportFilter={sportFilter} onPick={pick}
+                  showBrand={groupOf(sportFilter) !== 'TCG'}
+                  brands={brands} brandFilter={brandFilter} onBrand={(b) => { setBrandFilter(b); setProductFilter('All') }}
+                  products={products} productFilter={productFilter} onProduct={setProductFilter} />
               </div>
             )
           })()}
-          {/* BRAND CHIPS + PRODUCT DROPDOWN (sports only) */}
-          {sportFilter !== 'TCG' && !TCG_SET.has(sportFilter) && (
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12, marginBottom: 22 }}>
-            <div className="hq-chiprow" style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center', maxWidth: '100%' }}>
-              <span style={{ ...eyebrow, color: '#8A93A8', marginRight: 2 }}>Brand</span>
-              {brands.map(b => (
-                <button key={b} onClick={() => { setBrandFilter(b); setProductFilter('All') }}
-                  style={{
-                    padding: '5px 13px', borderRadius: 999, fontSize: 12, fontWeight: 700, cursor: 'pointer', letterSpacing: '0.04em',
-                    background: brandFilter === b ? (BRAND_COLORS[b] || ACCENT) : '#121626',
-                    color: brandFilter === b ? '#fff' : '#A1A1AA',
-                    border: '1px solid ' + (brandFilter === b ? 'transparent' : '#232A3E')
-                  }}>{b}</button>
-              ))}
-            </div>
-            {products.length > 1 && (
-              <select aria-label="Product line" value={productFilter} onChange={(e) => setProductFilter(e.target.value)}
-                style={{ background: '#121626', border: '1px solid #232A3E', borderRadius: 8, color: '#D4D4D8', fontSize: 13, padding: '8px 12px', cursor: 'pointer' }}>
-                <option value="All">All products ({products.length - 1})</option>
-                {products.slice(1).map(p => <option key={p} value={p}>{p}</option>)}
-              </select>
-            )}
-          </div>
-          )}
           {/* TCG FILTERS: card name / rarity / type across every set of the game */}
           {oneSport && isTcg && (
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap', marginBottom: 22 }}>
