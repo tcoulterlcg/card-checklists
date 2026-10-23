@@ -48,6 +48,18 @@ const sets = []
 for (const f of files) {
   try {
     const s = JSON.parse(readFileSync(new URL(f, dataDir), 'utf8'))
+    // Section titles that repeat the set name ("2026 Fleer Ultra Golf – Base Set" -> "Base"), every sport.
+    if (s.name && Array.isArray(s.sections)) {
+      const re = new RegExp('^' + s.name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\s*(?:[–—:-]\\s*)?', 'i')
+      const titles = new Set(s.sections.map(x => x.title))
+      let renamed = false
+      for (const sec of s.sections) {
+        if (!re.test(sec.title || '')) continue
+        const t = sec.title.replace(re, '').replace(/\s+Set$/, '').trim()
+        if (t && !titles.has(t)) { titles.add(t); sec.title = t; renamed = true }
+      }
+      if (renamed && !DRY) writeFileSync(new URL(f, dataDir), JSON.stringify(s))
+    }
     if (SPORTS.has(s.sport)) { sets.push([f, s]); continue }
     // Non-sport sets keep their names as-is, but TCDB flag notes in the team column ("SN25",
     // "AU, MEM") are fixed here too — they show as a "team" otherwise.
