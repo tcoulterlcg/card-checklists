@@ -42,7 +42,7 @@ for (const [name, cards] of Object.entries(bySet)) {
     .map(r => ({ title: r, cards: groups[r] }))
   const slug = 'ygo-' + name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 60)
   writeFileSync(new URL(slug + '.json', dataDir), JSON.stringify({
-    slug, name: 'Yu-Gi-Oh! ' + name, year: setMeta[name] || null, sport: 'Yu-Gi-Oh!', source: 'ygoprodeck.com', sections
+    slug, name: /^yu-gi-oh!?/i.test(name) ? name.replace(/\b(promotional|prize|participation) cards?\b/g, (m) => m.replace(/\b\w/g, c => c.toUpperCase())) : 'Yu-Gi-Oh! ' + name.replace(/\b(promotional|prize|participation) cards?\b/g, (m) => m.replace(/\b\w/g, c => c.toUpperCase())), year: setMeta[name] || null, sport: 'Yu-Gi-Oh!', source: 'ygoprodeck.com', sections
   }))
   ok++; total += cards.length
 }

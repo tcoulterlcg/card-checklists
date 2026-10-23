@@ -38,7 +38,7 @@ for (const set of sets) {
   const year = set.released_at ? parseInt(set.released_at.slice(0, 4)) : null
   const out = {
     slug: 'lorcana-' + (set.code || set.id).toLowerCase().replace(/[^a-z0-9]+/g, '-'),
-    name: 'Lorcana ' + set.name,
+    name: /^lorcana\b/i.test(set.name) ? set.name : 'Lorcana ' + set.name,
     year,
     sport: 'Lorcana',
     source: 'lorcast.com',

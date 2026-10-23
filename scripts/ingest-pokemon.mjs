@@ -49,7 +49,7 @@ for (const set of sets) {
   const year = set.releaseDate ? parseInt(set.releaseDate.slice(0, 4)) : null
   const out = {
     slug: 'pkmn-' + set.id,
-    name: 'Pokémon ' + set.name + (set.series && set.series !== set.name ? ' (' + set.series + ')' : ''),
+    name: (/^pok[eé]mon\b/i.test(set.name) ? set.name : 'Pokémon ' + set.name) + (set.series && set.series !== set.name ? ' (' + set.series + ')' : ''),
     year,
     sport: 'Pokémon',
     source: 'pokemontcg.io',

@@ -50,7 +50,7 @@ for (const set of sets) {
     .map(r => ({ title: rlabel[r] || r, cards: groups[r] }))
 
   const out = {
-    slug, name: 'Magic ' + set.name,
+    slug, name: /^magic\b/i.test(set.name) ? set.name : 'Magic ' + set.name,
     year: set.released_at ? parseInt(set.released_at.slice(0, 4)) : null,
     sport: 'Magic', source: 'scryfall.com', sections
   }
