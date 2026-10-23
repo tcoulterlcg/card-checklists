@@ -3787,8 +3787,9 @@
    "missing inserts: family tree, inception, inception inceptionized veteran, inception prospect, inception relic, international ink, prospect, under armour american",
    "17 players sold on SCP not on checklist"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3 (scraping now)"
+  "status": "done",
+  "note": "2016-bowman-baseball-cards: 681 -> 8504 cards, 8 -> 131 sections, covers 99.8% of current",
+  "at": "2026-10-23"
  },
  {
   "slug": "2024-bowman-chrome-mega-box-baseball",
@@ -3800,8 +3801,8 @@
   "why": [
    "base skips 32 numbers in #1-67 (e.g. 2, 6, 8, 10, 11)"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3 (scraping now)"
+  "status": "review",
+  "note": "no separate TCDB set found (search: only 2024 Leaf Trinity Mega Box)"
  },
  {
   "slug": "2018-panini-flawless-collegiate-football-cards",
@@ -3813,8 +3814,9 @@
   "why": [
    "base skips 31 numbers in #1-82 (e.g. 4, 8, 9, 16, 19)"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3 (scraping now)"
+  "status": "review",
+  "note": "2018-panini-flawless-collegiate-football-cards: 575 -> 1775 cards, 34 -> 115 sections, covers 32.3% of current",
+  "tcdbSid": 179537
  },
  {
   "slug": "2014-topps-chrome-baseball-cards",
@@ -3827,8 +3829,9 @@
    "missing inserts: connections die cuts, shelf, update star stitches relics",
    "62 players sold on SCP not on checklist"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3 (scraping now)"
+  "status": "done",
+  "note": "2014-topps-chrome-baseball-cards: 583 -> 4482 cards, 7 -> 46 sections, covers 100.0% of current",
+  "at": "2026-10-23"
  },
  {
   "slug": "2016-17-panini-revolution-basketball",
@@ -3841,8 +3844,9 @@
    "missing inserts: astro, cosmic, fractal, futura, galactic, infinite, starburst, sunburst",
    "11 players sold on SCP not on checklist"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3 (scraping now)"
+  "status": "done",
+  "note": "2016-17-panini-revolution-basketball: 292 -> 1626 cards, 8 -> 29 sections, covers 100.0% of current",
+  "at": "2026-10-23"
  },
  {
   "slug": "2016-17-o-pee-chee-hockey-cards",
@@ -3855,8 +3859,9 @@
    "missing inserts: border, league leaders, retro, retro blank back, update glossy",
    "40 players sold on SCP not on checklist"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3 (scraping now)"
+  "status": "done",
+  "note": "2016-17-o-pee-chee-hockey-cards: 920 -> 4314 cards, 9 -> 17 sections, covers 95.2% of current",
+  "at": "2026-10-23"
  },
  {
   "slug": "2013-topps-chrome-football-cards",
