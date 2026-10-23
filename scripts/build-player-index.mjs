@@ -89,7 +89,46 @@ const NON_PERSON_SPORTS = new Set(['', 'Multi-Sport', 'Entertainment', 'Non-Spor
 const SUFFIX = / (jr|sr|ii|iii|iv)$/
 const stats = new Map() // key -> { sports: Map(sport -> n), min, max }
 const setFiles = []
-for (const f of readdirSync(dataDir)) {
+// Bulk-catalog (TCDB) sets live on the repo's `catalog` branch, not in public/data. Fetch the
+// visible ones into a local cache so their cards count on player pages too (vintage Jordan,
+// Gretzky…). Best effort: no network or no catalog -> static sets only.
+const catalogFiles = await fetchCatalogSets()
+async function fetchCatalogSets() {
+  if (process.env.SKIP_CATALOG) return []
+  const RAW = 'https://raw.githubusercontent.com/tcoulterlcg/card-checklists/catalog/'
+  const { HIDDEN_SOURCES, setPath, fixSeasonYear } = await import('../lib/catalog.js')
+  const get = async (u) => { try { const r = await fetch(u, { signal: AbortSignal.timeout(15000) }); return r.ok ? await r.json() : null } catch { return null } }
+  const m = await get(RAW + 'manifest.json'); if (!m) return []
+  const staticSlugs = new Set(readdirSync(dataDir).filter(f => f.endsWith('.json')).map(f => f.slice(0, -5)))
+  const wanted = []
+  for (const sp of Object.values(m.sports || {})) { const ix = sp.file && await get(RAW + sp.file); for (const e of (ix && ix.sets) || []) if (!HIDDEN_SOURCES.has(e.source) && !staticSlugs.has(e.slug)) wanted.push(e.slug) }
+  const cacheDir = new URL('../node_modules/.cache/catalog-sets/', import.meta.url)
+  mkdirSync(cacheDir, { recursive: true })
+  const out = []
+  let i = 0
+  await Promise.all(Array.from({ length: 12 }, async () => {
+    while (i < wanted.length) {
+      const slug = wanted[i++]
+      const s = await get(RAW + setPath(slug))
+      if (!s || !Array.isArray(s.sections) || HIDDEN_SOURCES.has(s.source)) continue
+      fixSeasonYear(s)
+      for (const sec of s.sections) for (const c of sec.cards || []) tidyTcdbCard(c)
+      const u = new URL(encodeURIComponent(slug) + '.json', cacheDir)
+      writeFileSync(u, JSON.stringify(s))
+      out.push(u.href)
+    }
+  }))
+  console.log('catalog sets for player pages:', out.length, 'of', wanted.length)
+  return out
+}
+// TCDB rows can carry their flags where the team goes ("AU, MEM, SN25"); same fix as cleanup-names.mjs.
+function tidyTcdbCard(c) {
+  if (!c.t || !/^(?:(?:URA?|AUR?|MEM|RC|SP|SSP|SN\d+)(?:,\s*|$))+$/.test(c.t.trim())) return
+  const x = (c.x || '').split(/\s+/).filter(Boolean)
+  for (const f of c.t.split(/,\s*/)) { const v = /^SN(\d+)$/.test(f) ? '/' + f.slice(2) : (f === 'URA' || f === 'AUR') ? 'AU' : f; if (!x.includes(v)) x.push(v) }
+  c.x = x.join(' '); delete c.t
+}
+for (const f of [...readdirSync(dataDir), ...catalogFiles]) {
   if (!f.endsWith('.json') || SKIP.test(f)) continue
   let s
   try { s = JSON.parse(readFileSync(new URL(f, dataDir), 'utf8')) } catch { continue }
@@ -104,7 +143,10 @@ for (const f of readdirSync(dataDir)) {
 }
 const primarySport = (st) => [...st.sports.entries()].filter(([sp]) => !NON_PERSON_SPORTS.has(sp)).sort((a, b) => b[1] - a[1])[0]?.[0] ?? ''
 const splitSports = new Map() // key -> Set(sports that are a different person)
+// Real two-sport athletes: one person, one page (their baseball cards stay with the main page).
+const TWO_SPORT = new Set(['michael jordan', 'bo jackson', 'deion sanders', 'brian jordan', 'danny ainge', 'dave winfield', 'kyler murray', 'tim tebow', 'jim thorpe', 'john elway', 'charlie ward', 'drew henson', 'chad hutchinson', 'russell wilson', 'jameis winston', 'gene conley', 'dave debusschere', 'ron reed', 'kenny lofton'])
 for (const [k, st] of stats) {
+  if (TWO_SPORT.has(k)) continue
   const main = primarySport(st)
   const others = [...st.sports.entries()].filter(([sp, n]) => sp !== main && !NON_PERSON_SPORTS.has(sp) && n >= SPLIT_MIN).map(([sp]) => sp)
   if (others.length) splitSports.set(k, new Set(others))
