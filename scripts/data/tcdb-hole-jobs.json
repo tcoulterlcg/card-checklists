@@ -987,7 +987,8 @@
   "why": [
    "base skips 35 numbers in #10-55 (e.g. 11, 12, 14, 16, 17)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3 (scraping now)"
  },
  {
   "slug": "2024-bowman-mega-box-baseball",
@@ -999,7 +1000,8 @@
   "why": [
    "base skips 34 numbers in #1-68 (e.g. 3, 4, 6, 8, 10)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3 (scraping now)"
  },
  {
   "slug": "2014-topps-tribute-baseball-cards",
@@ -1012,7 +1014,8 @@
    "missing inserts: forever young relics, titans relics, to pastime, to throne relic, traditions",
    "50 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3 (scraping now)"
  },
  {
   "slug": "2015-16-upper-deck-ice-hockey-cards",
@@ -1024,7 +1027,8 @@
   "why": [
    "missing inserts: 2005 06 retro premieres, exquisite collection, exquisite collection 2003 04 patch, exquisite collection signatures, fresh threads, frozen fabrics, glacial graphs, global impact"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3 (scraping now)"
  },
  {
   "slug": "2013-bowman-baseball-cards",
@@ -1037,7 +1041,8 @@
    "missing inserts: chrome wave, hometown, perfect game american classic, sapphire reprints, state home, state hometown",
    "39 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3 (scraping now)"
  },
  {
   "slug": "2016-topps-ufc-knockout-trading-cards",
@@ -1050,7 +1055,8 @@
    "missing inserts: championship belt relics, dominant duos dual relics, fight mat relics, relics, scarlet signatures, scarlet signatures relics",
    "39 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3 (scraping now)"
  },
  {
   "slug": "1949-leaf",
@@ -1062,7 +1068,8 @@
   "why": [
    "base skips 33 numbers in #1-67 (e.g. 5, 6, 8, 11, 12)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3 (scraping now)"
  },
  {
   "slug": "2015-16-o-pee-chee-platinum-hockey-cards",
@@ -1075,7 +1082,8 @@
    "missing inserts: cubes, emerald surge, ice, prism, seismic, superstar die cut, team logo die cut, traxx",
    "8 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3 (scraping now)"
  },
  {
   "slug": "2016-bowman-baseball-cards",
@@ -1088,7 +1096,8 @@
    "missing inserts: family tree, inception, inception inceptionized veteran, inception prospect, inception relic, international ink, prospect, under armour american",
    "17 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3 (scraping now)"
  },
  {
   "slug": "2024-bowman-chrome-mega-box-baseball",
@@ -1100,7 +1109,8 @@
   "why": [
    "base skips 32 numbers in #1-67 (e.g. 2, 6, 8, 10, 11)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3 (scraping now)"
  },
  {
   "slug": "2018-panini-flawless-collegiate-football-cards",
@@ -1112,7 +1122,8 @@
   "why": [
    "base skips 31 numbers in #1-82 (e.g. 4, 8, 9, 16, 19)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3 (scraping now)"
  },
  {
   "slug": "2014-topps-chrome-baseball-cards",
@@ -1125,7 +1136,8 @@
    "missing inserts: connections die cuts, shelf, update star stitches relics",
    "62 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3 (scraping now)"
  },
  {
   "slug": "2016-17-panini-revolution-basketball",
@@ -1138,7 +1150,8 @@
    "missing inserts: astro, cosmic, fractal, futura, galactic, infinite, starburst, sunburst",
    "11 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3 (scraping now)"
  },
  {
   "slug": "2016-17-o-pee-chee-hockey-cards",
@@ -1151,7 +1164,8 @@
    "missing inserts: border, league leaders, retro, retro blank back, update glossy",
    "40 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3 (scraping now)"
  },
  {
   "slug": "2013-topps-chrome-football-cards",
@@ -1163,7 +1177,8 @@
   "why": [
    "missing inserts: 1965 tall boy, 1969 inserts, 1986 insert, die cut, giovani bernard, le veon bell, prism, prism die cut"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3 (scraping now)"
  },
  {
   "slug": "2025-upper-deck-world-of-sports-volume-2-card",
