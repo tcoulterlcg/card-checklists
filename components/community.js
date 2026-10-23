@@ -92,7 +92,7 @@ export function AuthModal({ open, onClose, account }) {
           <>
             <h3 style={{ ...title(24), margin: 0, color: '#fff' }}>Pick a username</h3>
             <p style={{ color: '#A1A1AA', fontSize: 14, margin: '10px 0 16px' }}>This is how you appear on wantlists and in the community.</p>
-            <input style={input} placeholder="e.g. patchhunter99" value={username} onChange={(e) => setUsername(e.target.value.replace(/[^a-zA-Z0-9_]/g, ''))} />
+            <input style={input} maxLength={24} aria-label="Username" placeholder="e.g. patchhunter99" value={username} onChange={(e) => setUsername(e.target.value.replace(/[^a-zA-Z0-9_]/g, ''))} />
             {err && <p style={{ color: '#f87171', fontSize: 13, margin: '8px 0 0' }}>{err}</p>}
             <button style={{ ...btnAccent, width: '100%', marginTop: 12 }} onClick={async () => {
               setErr('')
@@ -128,7 +128,7 @@ function ProfileEditor({ session, profile, setProfile, onClose }) {
       <h3 style={{ ...title(22), margin: 0, color: '#fff' }}>Your profile</h3>
       <p style={{ color: '#8A93A8', fontSize: 13, margin: '6px 0 16px' }}>Signed in as {session.user.email}</p>
       <label style={{ display: 'block', color: '#A1A1AA', fontSize: 12, fontWeight: 600, marginBottom: 6 }} htmlFor="hq-username">Username (shown on posts)</label>
-      <input id="hq-username" style={input} value={username} onChange={(e) => setUsername(e.target.value.replace(/[^a-zA-Z0-9_]/g, ''))} />
+      <input id="hq-username" maxLength={24} style={input} value={username} onChange={(e) => setUsername(e.target.value.replace(/[^a-zA-Z0-9_]/g, ''))} />
       <label style={{ display: 'block', color: '#A1A1AA', fontSize: 12, fontWeight: 600, margin: '12px 0 6px' }} htmlFor="hq-display">Display name (optional)</label>
       <input id="hq-display" style={input} value={display} maxLength={40} onChange={(e) => setDisplay(e.target.value)} />
       {err && <p role="alert" style={{ color: '#f87171', fontSize: 13, margin: '8px 0 0' }}>{err}</p>}
@@ -192,7 +192,12 @@ export function CollectionView({ account, indexSets, onOpenAuth, onOpenSet }) {
         const f = e.target.files?.[0]
         if (!f || !uploadTarget) return
         const { url, error } = await uploadCardImage(session.user.id, f)
-        if (!error && url) { await setCollectionImage(uploadTarget, url); myCollection(session.user.id).then(setCollected) }
+        if (error) setNotice('Couldn’t upload that photo — ' + error.message)
+        else if (url) {
+          const r = await setCollectionImage(uploadTarget, url)
+          if (r.error) setNotice('Couldn’t save that photo — ' + r.error.message)
+          myCollection(session.user.id).then(setCollected)
+        }
         e.target.value = ''
       }} />
       {notice && <div style={{ ...card, borderColor: ACCENT, padding: '14px 18px', marginBottom: 18, color: ACCENT_TEXT, fontWeight: 600, fontSize: 14 }}>{notice}</div>}
@@ -368,14 +373,14 @@ export function CommunityView({ account, indexSets, onOpenAuth }) {
       {composing && session && (
         <div style={{ ...card, padding: 22, marginBottom: 22 }}>
           <div style={{ display: 'grid', gap: 10 }}>
-            <input style={input} placeholder="Title — e.g. Finished the 2004-05 Megacracks base set!" value={postTitle} onChange={(e) => setPostTitle(e.target.value)} />
+            <input style={input} maxLength={120} aria-label="Post title" placeholder="Title — e.g. Finished the 2004-05 Megacracks base set!" value={postTitle} onChange={(e) => setPostTitle(e.target.value)} />
             <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
               {ACHIEVEMENTS.map(([v, label]) => (
                 <button key={v} onClick={() => setAch(v)} style={{ ...btnGhost, padding: '7px 12px', fontSize: 12, borderColor: ach === v ? ACCENT : '#232A3E', color: ach === v ? ACCENT_TEXT : '#A1A1AA' }}>{label}</button>
               ))}
             </div>
             <div style={{ position: 'relative' }}>
-              <input style={input} placeholder="Link a set (start typing its name)…" value={chosenSet ? chosenSet.name : setQuery}
+              <input style={input} aria-label="Link a set" placeholder="Link a set (start typing its name)…" value={chosenSet ? chosenSet.name : setQuery}
                 onChange={(e) => { setChosenSet(null); setSetQuery(e.target.value) }} />
               {setMatches.length > 0 && !chosenSet && (
                 <div style={{ position: 'absolute', top: '100%', left: 0, right: 0, zIndex: 5, background: '#121626', border: '1px solid #232A3E', borderRadius: 10, overflow: 'hidden' }}>
@@ -387,7 +392,7 @@ export function CommunityView({ account, indexSets, onOpenAuth }) {
                 </div>
               )}
             </div>
-            <textarea style={{ ...input, minHeight: 90, resize: 'vertical' }} placeholder="Tell the story — how long it took, the last card you needed…" value={body} onChange={(e) => setBody(e.target.value)} />
+            <textarea style={{ ...input, minHeight: 90, resize: 'vertical' }} maxLength={5000} aria-label="Post text" placeholder="Tell the story — how long it took, the last card you needed…" value={body} onChange={(e) => setBody(e.target.value)} />
             {postErr && <p role="alert" style={{ color: '#f87171', fontSize: 13, margin: 0 }}>{postErr}</p>}
             <button style={{ ...btnAccent, justifySelf: 'start' }} onClick={submit}>Post it</button>
           </div>
@@ -446,7 +451,7 @@ export function CommunityView({ account, indexSets, onOpenAuth }) {
                     ))}
                     {session && (
                       <div style={{ display: 'flex', gap: 8 }}>
-                        <input style={{ ...input, padding: '8px 12px' }} placeholder="Add a comment…" value={commentDraft[p.id] || ''} onChange={(e) => setCommentDraft({ ...commentDraft, [p.id]: e.target.value })} />
+                        <input style={{ ...input, padding: '8px 12px' }} maxLength={1000} aria-label="Add a comment" placeholder="Add a comment…" value={commentDraft[p.id] || ''} onChange={(e) => setCommentDraft({ ...commentDraft, [p.id]: e.target.value })} />
                         <button style={{ ...btnGhost }} onClick={async () => {
                           const t = (commentDraft[p.id] || '').trim(); if (!t) return
                           if (needName()) return
