@@ -584,7 +584,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
     const players = []
     for (let i = 0; i < dir.players.length && players.length < 60; i++) {
       const p = dir.players[i]
-      if (p[0].toLowerCase().includes(term)) players.push({ id: i, name: p[0], cards: p[2], sport: dir.sports[p[3]], minYear: p[4], maxYear: p[5], shard: p[1] })
+      if (p[0].toLowerCase().includes(term)) players.push({ id: p[6] ?? i, name: p[0], cards: p[2], sport: dir.sports[p[3]], minYear: p[4], maxYear: p[5], shard: p[1] })
     }
     players.sort((a, b) => b.cards - a.cards)
     const toks = norm(term).split(' ').filter(Boolean)

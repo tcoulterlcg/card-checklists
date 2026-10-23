@@ -259,14 +259,19 @@ function displayName(c) {
 }
 
 // ---- pass 3: directory + shard files (rows re-bucketed under the canonical player) ----
-const dir = [], pid = new Map(), names = new Map()
-const sorted = [...groups.entries()].sort((a, b) => b[1].cards - a[1].cards)
+// Player ids are stable across builds (a hash of the canonical key), not the directory position:
+// a visitor holding an older directory (open tab, cached file) still finds their player's rows in
+// a newer shard, instead of an id that now belongs to someone else (or no one -> "0 cards").
+const dir = [], pid = new Map(), dirIdx = new Map(), names = new Map(), usedIds = new Set()
+const stableId = (key) => { for (let n = 0; ; n++) { let h = 0x811c9dc5; const s = n ? key + '#' + n : key; for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 0x01000193) } h = (h >>> 1) || 1; if (!usedIds.has(h)) { usedIds.add(h); return h } } }
+const sorted = [...groups.entries()].sort((a, b) => b[1].cards - a[1].cards || (a[0] < b[0] ? -1 : 1))
 for (const [key, g] of sorted) {
   const topSport = [...g.sports.entries()].sort((a, b) => b[1] - a[1])[0][0]
   const name = displayName(key)
   names.set(key, name)
-  pid.set(key, dir.length)
-  dir.push([name, hash(key), 0, topSport, g.minYear, g.maxYear])
+  const id = stableId(key)
+  pid.set(key, id); dirIdx.set(key, dir.length)
+  dir.push([name, hash(key), 0, topSport, g.minYear, g.maxYear, id])
 }
 // Other names search should find each page by (spellings that differ in more than spacing/case).
 const aka = []
@@ -297,11 +302,11 @@ for (let si = 0; si < SHARDS; si++) {
         if (dedupe.has(dk)) continue
         dedupe.add(dk)
       }
-      const id = pid.get(c), o = out[dir[id][1]]
+      const id = pid.get(c), d = dir[dirIdx.get(c)], o = out[d[1]]
       const row = [id, intern(slug, o.slugs, o.slugId), intern(section, o.sections, o.secId), r[3], r[4] >= 0 ? intern(sh.teams[r[4]], o.teams, o.teamId) : -1, r[5], targets.length > 1 ? r[6] | TYPE.MULTI : r[6], r[7]]
       if (norm(label) !== norm(names.get(c))) row.push(intern(label, o.labels, o.labelId))
       o.rows.push(row)
-      dir[id][2]++
+      d[2]++
     }
   }
   shards[si] = null
@@ -315,7 +320,7 @@ writeFileSync(new URL('dir.json', outDir), JSON.stringify({ v: 2, shards: SHARDS
 // search box can suggest instantly while the full directory (~2 MB gzipped) loads.
 // Plus all-time icons whose checklists are thin (Michael Jordan, Tiger Woods), so "jordan" suggests MJ instantly.
 const { ICONS } = await import('../lib/query.js')
-const ranked = dir.map((p, i) => [...p.slice(0, 6), i]).sort((a, b) => b[2] - a[2])
+const ranked = dir.map(p => p.slice(0, 7)).sort((a, b) => b[2] - a[2])
 const top = ranked.slice(0, 5000).concat(ranked.slice(5000).filter(p => ICONS.has(norm(p[0]))))
 const inTop = new Set(top.map(p => p[6]))
 writeFileSync(new URL('top.json', outDir), JSON.stringify({ v: 2, shards: SHARDS, sports: sportsPool, players: top, aka: aka.filter(a => inTop.has(a[0])), partial: true }))
