@@ -3629,7 +3629,7 @@
    "27 players sold on SCP not on checklist"
   ],
   "status": "done",
-  "note": "2014-bowman-platinum-baseball-cards: 300 -> 4253 cards, 3 -> 84 sections, covers 99.5% of current",
+  "note": "2014-bowman-platinum-baseball-cards: 4253 -> 4253 cards, 84 -> 84 sections, covers 100.0% of current",
   "at": "2026-10-23"
  },
  {
@@ -3643,7 +3643,9 @@
    "missing inserts: batting, catcher gear, ice, next generation prospects, top prospects",
    "55 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2016-bowman-platinum-baseball-cards: 190 -> 2903 cards, 3 -> 50 sections, covers 100.0% of current",
+  "at": "2026-10-23"
  },
  {
   "slug": "2025-upper-deck-world-of-sports-volume-1-card",
@@ -3655,8 +3657,9 @@
   "why": [
    "base skips 35 numbers in #10-55 (e.g. 11, 12, 14, 16, 17)"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3 (scraping now)"
+  "status": "done",
+  "note": "2025-upper-deck-world-of-sports-volume-1-card: 250 -> 3673 cards, 41 -> 55 sections, covers 100.0% of current",
+  "at": "2026-10-23"
  },
  {
   "slug": "2024-bowman-mega-box-baseball",
@@ -3668,8 +3671,8 @@
   "why": [
    "base skips 34 numbers in #1-68 (e.g. 3, 4, 6, 8, 10)"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3 (scraping now)"
+  "status": "review",
+  "note": "no separate TCDB set found (search: only 2024 Leaf Trinity Mega Box)"
  },
  {
   "slug": "2014-topps-tribute-baseball-cards",
@@ -3682,8 +3685,9 @@
    "missing inserts: forever young relics, titans relics, to pastime, to throne relic, traditions",
    "50 players sold on SCP not on checklist"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3 (scraping now)"
+  "status": "done",
+  "note": "2014-topps-tribute-baseball-cards: 100 -> 5264 cards, 1 -> 92 sections, covers 100.0% of current",
+  "at": "2026-10-23"
  },
  {
   "slug": "2015-16-upper-deck-ice-hockey-cards",
@@ -3695,8 +3699,9 @@
   "why": [
    "missing inserts: 2005 06 retro premieres, exquisite collection, exquisite collection 2003 04 patch, exquisite collection signatures, fresh threads, frozen fabrics, glacial graphs, global impact"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3 (scraping now)"
+  "status": "done",
+  "note": "2015-16-upper-deck-ice-hockey-cards: 256 -> 1175 cards, 4 -> 41 sections, covers 100.0% of current",
+  "at": "2026-10-23"
  },
  {
   "slug": "2013-bowman-baseball-cards",
