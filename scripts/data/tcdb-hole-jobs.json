@@ -1,5 +1,113 @@
 [
  {
+  "slug": "1955-topps-baseball-cards",
+  "name": "1955 Topps Baseball",
+  "year": 1955,
+  "sport": "Baseball",
+  "cards": 0,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "1959-topps-baseball-cards",
+  "name": "1959 Topps Baseball",
+  "year": 1959,
+  "sport": "Baseball",
+  "cards": 0,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "1961-topps-baseball-cards",
+  "name": "1961 Topps Baseball",
+  "year": 1961,
+  "sport": "Baseball",
+  "cards": 0,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "1962-topps-baseball-cards",
+  "name": "1962 Topps Baseball",
+  "year": 1962,
+  "sport": "Baseball",
+  "cards": 1,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 1 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "1963-topps-baseball-cards",
+  "name": "1963 Topps Baseball",
+  "year": 1963,
+  "sport": "Baseball",
+  "cards": 0,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "1972-topps-baseball-cards",
+  "name": "1972 Topps Baseball",
+  "year": 1972,
+  "sport": "Baseball",
+  "cards": 8,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only 8 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "1990-topps-mylar-stickers-test-issue-baseball",
+  "name": "1990 Topps Mylar Stickers Test Issue Baseball",
+  "year": 1990,
+  "sport": "Baseball",
+  "cards": 6,
+  "source": "tcdb.com",
+  "why": [
+   "only 6 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "1993-topps-brookshire-brothers-nolan-ryan-reprints-stickers-baseball",
+  "name": "1993 Topps Brookshire Brothers Nolan Ryan Reprints Stickers Baseball",
+  "year": 1993,
+  "sport": "Baseball",
+  "cards": 1,
+  "source": "tcdb.com",
+  "why": [
+   "only 1 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "1997-topps-create-a-card-vinyl-stickers-basketball",
+  "name": "1997 Topps Create a Card Vinyl Stickers Basketball",
+  "year": 1997,
+  "sport": "Basketball",
+  "cards": 5,
+  "source": "tcdb.com",
+  "why": [
+   "only 5 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
   "slug": "19-20-upper-deck-sp-game-used-chl-hockey",
   "name": "2019-20 SP Game Used CHL Hockey",
   "year": 2020,
@@ -11621,114 +11729,6 @@
   "source": "cardboardconnection.com",
   "why": [
    "5 players sold on SCP not on checklist"
-  ],
-  "status": "todo"
- },
- {
-  "slug": "1955-topps-baseball-cards",
-  "name": "1955 Topps Baseball",
-  "year": 1955,
-  "sport": "Baseball",
-  "cards": 0,
-  "source": "cardboardconnection.com",
-  "why": [
-   "only 0 cards scraped — hidden until a full checklist is imported"
-  ],
-  "status": "todo"
- },
- {
-  "slug": "1959-topps-baseball-cards",
-  "name": "1959 Topps Baseball",
-  "year": 1959,
-  "sport": "Baseball",
-  "cards": 0,
-  "source": "cardboardconnection.com",
-  "why": [
-   "only 0 cards scraped — hidden until a full checklist is imported"
-  ],
-  "status": "todo"
- },
- {
-  "slug": "1961-topps-baseball-cards",
-  "name": "1961 Topps Baseball",
-  "year": 1961,
-  "sport": "Baseball",
-  "cards": 0,
-  "source": "cardboardconnection.com",
-  "why": [
-   "only 0 cards scraped — hidden until a full checklist is imported"
-  ],
-  "status": "todo"
- },
- {
-  "slug": "1962-topps-baseball-cards",
-  "name": "1962 Topps Baseball",
-  "year": 1962,
-  "sport": "Baseball",
-  "cards": 1,
-  "source": "cardboardconnection.com",
-  "why": [
-   "only 1 cards scraped — hidden until a full checklist is imported"
-  ],
-  "status": "todo"
- },
- {
-  "slug": "1963-topps-baseball-cards",
-  "name": "1963 Topps Baseball",
-  "year": 1963,
-  "sport": "Baseball",
-  "cards": 0,
-  "source": "cardboardconnection.com",
-  "why": [
-   "only 0 cards scraped — hidden until a full checklist is imported"
-  ],
-  "status": "todo"
- },
- {
-  "slug": "1972-topps-baseball-cards",
-  "name": "1972 Topps Baseball",
-  "year": 1972,
-  "sport": "Baseball",
-  "cards": 8,
-  "source": "cardboardconnection.com",
-  "why": [
-   "only 8 cards scraped — hidden until a full checklist is imported"
-  ],
-  "status": "todo"
- },
- {
-  "slug": "1990-topps-mylar-stickers-test-issue-baseball",
-  "name": "1990 Topps Mylar Stickers Test Issue Baseball",
-  "year": 1990,
-  "sport": "Baseball",
-  "cards": 6,
-  "source": "tcdb.com",
-  "why": [
-   "only 6 cards scraped — hidden until a full checklist is imported"
-  ],
-  "status": "todo"
- },
- {
-  "slug": "1993-topps-brookshire-brothers-nolan-ryan-reprints-stickers-baseball",
-  "name": "1993 Topps Brookshire Brothers Nolan Ryan Reprints Stickers Baseball",
-  "year": 1993,
-  "sport": "Baseball",
-  "cards": 1,
-  "source": "tcdb.com",
-  "why": [
-   "only 1 cards scraped — hidden until a full checklist is imported"
-  ],
-  "status": "todo"
- },
- {
-  "slug": "1997-topps-create-a-card-vinyl-stickers-basketball",
-  "name": "1997 Topps Create a Card Vinyl Stickers Basketball",
-  "year": 1997,
-  "sport": "Basketball",
-  "cards": 5,
-  "source": "tcdb.com",
-  "why": [
-   "only 5 cards scraped — hidden until a full checklist is imported"
   ],
   "status": "todo"
  },
