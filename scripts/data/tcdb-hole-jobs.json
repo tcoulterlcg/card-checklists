@@ -647,7 +647,7 @@
    "base skips 46 numbers in #1-300 (e.g. 14, 36, 40, 42, 59)"
   ],
   "status": "review",
-  "note": "2021-topps-allen-and-ginter-baseball: 8580 -> 6809 cards, 72 -> 69 sections, covers 63.8% of current",
+  "note": "2021-topps-allen-and-ginter-baseball: 8580 -> 6815 cards, 72 -> 69 sections, covers 63.8% of current",
   "tcdbSid": 258453
  },
  {
@@ -761,7 +761,7 @@
    "30 players sold on SCP not on checklist"
   ],
   "status": "done",
-  "note": "2014-bowman-baseball-cards: 675 -> 11393 cards, 6 -> 137 sections, covers 95.6% of current",
+  "note": "2014-bowman-baseball-cards: 11393 -> 11396 cards, 137 -> 137 sections, covers 100.0% of current",
   "at": "2026-10-23"
  },
  {
