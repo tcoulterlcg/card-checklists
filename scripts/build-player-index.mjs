@@ -24,7 +24,7 @@
 //
 //   node scripts/build-player-index.mjs
 import { readFileSync, writeFileSync, readdirSync, mkdirSync, existsSync } from 'node:fs'
-import { splitPlayers, subjects, mergePlayers, norm } from './player-names.mjs'
+import { splitPlayers, subjects, mergePlayers, splitComposites, norm } from './player-names.mjs'
 
 const dataDir = new URL('../public/data/', import.meta.url)
 const outDir = new URL('../public/data/players/', import.meta.url)
@@ -137,7 +137,7 @@ for (const f of setFiles) {
   let s
   try { s = JSON.parse(readFileSync(new URL(f, dataDir), 'utf8')) } catch { continue }
   if (!s.slug || !Array.isArray(s.sections) || s.incomplete) continue
-  files++
+  const setNo = files++
   const sp = intern(s.sport || '', sportsPool, sportIdx)
   const seen = new Set()
   for (const sec of s.sections) {
@@ -163,8 +163,9 @@ for (const f of setFiles) {
           if (seen.has(dk)) continue
           seen.add(dk)
           let pl = players.get(key)
-          if (!pl) { pl = { cards: 0, sports: new Map(), teams: new Map(), base: new Map(), labels: new Map(), minYear: s.year || 0, maxYear: s.year || 0 }; players.set(key, pl) }
+          if (!pl) { pl = { cards: 0, sports: new Map(), teams: new Map(), base: new Map(), labels: new Map(), sets: new Set(), minYear: s.year || 0, maxYear: s.year || 0 }; players.set(key, pl) }
           pl.cards++
+          pl.sets.add(setNo)
           pl.sports.set(sp, (pl.sports.get(sp) || 0) + 1)
           pl.base.set(base, (pl.base.get(base) || 0) + 1)
           pl.labels.set(label, (pl.labels.get(label) || 0) + 1)
@@ -187,14 +188,23 @@ const groups = new Map() // canonical key -> { cards, sports, minYear, maxYear, 
 for (const [k, pl] of players) {
   const c = canon(k)
   let g = groups.get(c)
-  if (!g) { g = { cards: 0, sports: new Map(), base: new Map(), labels: new Map(), names: new Set(), minYear: 0, maxYear: 0 }; groups.set(c, g) }
+  if (!g) { g = { cards: 0, sports: new Map(), base: new Map(), labels: new Map(), sets: new Set(), minYear: 0, maxYear: 0 }; groups.set(c, g) }
   g.cards += pl.cards
+  for (const x of pl.sets) g.sets.add(x)
   for (const [s, n] of pl.sports) g.sports.set(s, (g.sports.get(s) || 0) + n)
   for (const [b, n] of pl.base) g.base.set(b, (g.base.get(b) || 0) + n)
   for (const [l, n] of pl.labels) g.labels.set(l, (g.labels.get(l) || 0) + n)
   if (pl.minYear && (!g.minYear || pl.minYear < g.minYear)) g.minYear = pl.minYear
   if (pl.maxYear > g.maxYear) g.maxYear = pl.maxYear
 }
+// Cards naming several players / characters ("Elsa and Anna") go to each of them.
+const splits = splitComposites(groups, sportsPool)
+for (const [k, ts] of splits) {
+  const g = groups.get(k)
+  for (const t of ts) groups.get(t).cards += g.cards   // its printed names stay off the targets' search aliases
+  groups.delete(k)
+}
+for (const g of groups.values()) g.sets = null
 // Display name: the canonical page's most-printed spelling; prefer one without quoted
 // nicknames or scrape codes when it is close in volume.
 function displayName(c) {
@@ -228,24 +238,26 @@ for (const [key, g] of sorted) {
 }
 
 const out = Array.from({ length: SHARDS }, newShard)
-const dedupe = new Set(), mergedInto = new Set(moved.values())
+const dedupe = new Set(), mergedInto = new Set([...moved.values(), ...[...splits.values()].flat()])
 let total = 0
 for (let si = 0; si < SHARDS; si++) {
   const sh = shards[si]
   for (const r of sh.rows) {
-    const c = canon(r[0])
+    const c0 = canon(r[0]), targets = splits.get(c0) || [c0]
     const slug = sh.slugs[r[1]], section = sh.sections[r[2]], label = sh.labels[r[8]]
-    // the same card listed under two spellings in one set counts once
-    if (mergedInto.has(c)) {
-      const dk = c + '|' + slug + '|' + section + '|' + r[3] + '|' + r[5]
-      if (dedupe.has(dk)) continue
-      dedupe.add(dk)
+    for (const c of targets) {
+      // the same card listed under two spellings in one set counts once
+      if (mergedInto.has(c)) {
+        const dk = c + '|' + slug + '|' + section + '|' + r[3] + '|' + r[5]
+        if (dedupe.has(dk)) continue
+        dedupe.add(dk)
+      }
+      const id = pid.get(c), o = out[dir[id][1]]
+      const row = [id, intern(slug, o.slugs, o.slugId), intern(section, o.sections, o.secId), r[3], r[4] >= 0 ? intern(sh.teams[r[4]], o.teams, o.teamId) : -1, r[5], targets.length > 1 ? r[6] | TYPE.MULTI : r[6], r[7]]
+      if (norm(label) !== norm(names.get(c))) row.push(intern(label, o.labels, o.labelId))
+      o.rows.push(row)
+      dir[id][2]++
     }
-    const id = pid.get(c), o = out[dir[id][1]]
-    const row = [id, intern(slug, o.slugs, o.slugId), intern(section, o.sections, o.secId), r[3], r[4] >= 0 ? intern(sh.teams[r[4]], o.teams, o.teamId) : -1, r[5], r[6], r[7]]
-    if (norm(label) !== norm(names.get(c))) row.push(intern(label, o.labels, o.labelId))
-    o.rows.push(row)
-    dir[id][2]++
   }
   shards[si] = null
 }
@@ -262,4 +274,4 @@ const ranked = dir.map((p, i) => [...p.slice(0, 6), i]).sort((a, b) => b[2] - a[
 const top = ranked.slice(0, 5000).concat(ranked.slice(5000).filter(p => ICONS.has(norm(p[0]))))
 const inTop = new Set(top.map(p => p[6]))
 writeFileSync(new URL('top.json', outDir), JSON.stringify({ v: 2, shards: SHARDS, sports: sportsPool, players: top, aka: aka.filter(a => inTop.has(a[0])), partial: true }))
-console.log('player index:', dir.length.toLocaleString(), 'players (' + moved.size.toLocaleString() + ' spellings merged),', total.toLocaleString(), 'card rows across', SHARDS, 'shards from', files, 'sets')
+console.log('player index:', dir.length.toLocaleString(), 'players (' + moved.size.toLocaleString() + ' spellings merged, ' + splits.size.toLocaleString() + ' multi-name cards credited to each),', total.toLocaleString(), 'card rows across', SHARDS, 'shards from', files, 'sets')

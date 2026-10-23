@@ -319,10 +319,11 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
     return first.find(r => (r.type & TYPE.RC) && (r.type & TYPE.BASE)) || first.find(r => r.type & TYPE.RC) || first.find(r => r.type & TYPE.BASE) || first[0]
   }, [rows])
 
-  // Apply filters.
-  const filtered = useMemo(() => {
+  // Apply filters. `matches(r, true)` skips the season range so the per-season chart can show
+  // every season's count under the other active filters (and stay clickable).
+  const matches = useMemo(() => {
     const qf = quickFilter[quick] || quickFilter.all
-    return rows.filter(r => {
+    return (r, skipYear) => {
       if (!qf(r.raw)) return false
       if (hidePlates && (r.type & TYPE.PLATE)) return false
       if (types.size && ![...types].some(k => r.type & TYPE[k])) return false
@@ -333,7 +334,7 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
       if (brands && brands.size && !brands.has(r.brand)) return false
       if (teams && teams.size && !teams.has(r.team)) return false
       if (labels && labels.size && !labels.has(r.label)) return false
-      if (r.year && (r.year < yearFrom || r.year > yearTo)) return false
+      if (!skipYear && r.year && (r.year < yearFrom || r.year > yearTo)) return false
       if (products.length) { const n = r.set.toLowerCase(); if (!products.every(p => n.includes(p.toLowerCase()))) return false }
       if (parsed && parsed.types.size) { for (const t of parsed.types) { if (t === 'RPA' && !((r.type & TYPE.AU) && (r.type & TYPE.PATCH) && (r.type & TYPE.RC))) return false; if (TYPE[t] && !(r.type & TYPE[t])) return false } }
       if (parsed && parsed.sport && r.sport !== parsed.sport) return false
@@ -341,8 +342,15 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
       if (statedOnly && r.mem && memTypical(r.mem)) return false
       if (pars && pars.size && ![...pars].some(k => r.par & PAR[k])) return false
       return true
-    })
-  }, [rows, quick, types, run, brands, teams, labels, yearFrom, yearTo, products, hidePlates, parsed, mems, statedOnly, pars])
+    }
+  }, [quick, types, run, brands, teams, labels, yearFrom, yearTo, products, hidePlates, parsed, mems, statedOnly, pars])
+  const filtered = useMemo(() => rows.filter(r => matches(r, false)), [rows, matches])
+  // Cards per season under every filter except the season range.
+  const yearCounts = useMemo(() => {
+    const m = new Map()
+    for (const r of rows) if (r.year && matches(r, true)) m.set(r.year, (m.get(r.year) || 0) + 1)
+    return m
+  }, [rows, matches])
 
   const sorted = useMemo(() => {
     const out = filtered.slice()
@@ -375,7 +383,7 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
   const following = myPlayers.has(player.name)
   const nonSports = NON_SPORTS.has(player.sport)
   const years = [...facets.years.keys()].sort()
-  const maxYearCount = Math.max(1, ...facets.years.values())
+  const maxYearCount = Math.max(1, ...yearCounts.values())
   const brandList = [...facets.brands.entries()].sort((a, b) => b[1] - a[1])
   // Every name this player is printed under, biggest first (the page's own name leads).
   const labelList = [...facets.labels.entries()].sort((a, b) => (b[0] === player.name) - (a[0] === player.name) || b[1] - a[1])
@@ -544,9 +552,9 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
 
           {years.length > 1 && (
             <div aria-label="Cards per season" style={{ display: 'flex', gap: 3, alignItems: 'flex-end', height: 58, padding: '0 2px' }}>
-              {years.map(y => { const n = facets.years.get(y); const active = y >= yearFrom && y <= yearTo; return (
-                <button key={y} onClick={() => { setYearFrom(y); setYearTo(y) }} title={n + ' cards'} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4, background: 'none', border: 'none', padding: 0, cursor: 'pointer', fontFamily: 'inherit' }}>
-                  <span style={{ width: '100%', height: 6 + Math.round(38 * n / maxYearCount), background: active ? (yearFrom === yearTo && yearFrom === y ? ACCENT : '#2E3D6B') : '#1A1F31', borderRadius: '3px 3px 0 0' }} />
+              {years.map(y => { const n = yearCounts.get(y) || 0; const active = y >= yearFrom && y <= yearTo; return (
+                <button key={y} onClick={() => { setYearFrom(y); setYearTo(y) }} title={n.toLocaleString() + (n === 1 ? ' card' : ' cards')} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-end', gap: 4, height: '100%', background: 'none', border: 'none', padding: 0, cursor: 'pointer', fontFamily: 'inherit' }}>
+                  <span style={{ width: '100%', height: n ? 6 + Math.round(38 * n / maxYearCount) : 2, opacity: n ? 1 : 0.5, transition: 'height 300ms ease, background-color 200ms ease, opacity 200ms ease', background: active ? (yearFrom === yearTo && yearFrom === y ? ACCENT : '#2E3D6B') : '#1A1F31', borderRadius: '3px 3px 0 0' }} />
                   <span style={{ fontSize: 12, color: active ? '#A1A1AA' : '#8A93A8' }}>{String(y).slice(2)}</span>
                 </button>) })}
             </div>

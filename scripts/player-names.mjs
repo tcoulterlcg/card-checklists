@@ -63,6 +63,7 @@ export function subjects(name, sport) {
       .replace(/(\S\s+\S+)\s+\d{1,2}$/, '$1')                                     // "Joe Jackson 1"
       .trim()
   }
+  label = label.replace(/\s+SN\d{1,5}$/, '').trim()   // print-run flag glued on: "Simba & Friends SN25"
   if (!label) return []
   if (!ch) return [{ label, base: label }]
   // "Idina Menzel as Elsa": the card belongs to the character and to the actor.
@@ -193,6 +194,90 @@ export function mergePlayers(players, sportNames) {
   if (process.env.PLAYER_MERGE_LOG) {
     const lines = [...out].sort((a, b) => players.get(b[1]).cards - players.get(a[1]).cards).map(([k, r]) => fam.get(k) + '\t' + players.get(k).cards + '\t' + nameOf(k) + '\t->\t' + nameOf(r) + '\t' + players.get(r).cards)
     import('node:fs').then(fs => fs.writeFileSync(process.env.PLAYER_MERGE_LOG, lines.join('\n')))
+  }
+  return out
+}
+
+// ---- cards that name several people / characters, or one plus extra words ----
+// "Elsa and Anna", "Frozen Fractals Anna and Elsa", "Anna Saves Elsa Frozen" -> credited to
+// Elsa and to Anna; "Elsa Julie Vu" (artist variant) -> Elsa; "Topps Joe Morgan RC ... Sonny
+// Jackson #16" -> Joe Morgan and Sonny Jackson. A name inside the string only counts when it
+// is a clearly bigger page in the same sport (characters: any character game) that shares a
+// set with the card, and "Ken Griffey" never matches inside "Ken Griffey Jr.".
+// groups: Map canonicalKey -> { cards, sports: Map(sportIdx -> n), sets: Set }
+// Returns Map key -> [target keys] (the key's cards move to every target).
+export function splitComposites(groups, sportNames) {
+  const SUFFIX = /^(jr|sr|ii|iii|iv|v)$/
+  const CONNECT = /\b(and|vs|v|with|saves|meets|x|featuring|feat|or|et)\b/
+  const rawOf = (g) => g.base ? [...g.base.entries()].sort((a, b) => b[1] - a[1])[0][0] : ''
+  const info = new Map()
+  for (const [k, g] of groups) {
+    const top = [...g.sports.entries()].sort((a, b) => b[1] - a[1])[0]
+    const sport = top ? sportNames[top[0]] : ''
+    info.set(k, { fam: family(sport), cardGame: CARD_NAMES.has(sport), toks: k.split('|')[0].split(' ') })
+  }
+  // big pages by first token
+  const byFirst = new Map()
+  for (const [k, g] of groups) {
+    const i = info.get(k)
+    if (g.cards < 20 || i.cardGame || k.includes('|') || CONNECT.test(k)) continue   // "Mickey and Minnie" is not a target
+    if (i.toks.length === 1 && (i.fam !== 'CHAR' || k.length < 4)) continue
+    if (!byFirst.has(i.toks[0])) byFirst.set(i.toks[0], [])
+    byFirst.get(i.toks[0]).push(k)
+  }
+  for (const list of byFirst.values()) list.sort((a, b) => info.get(b).toks.length - info.get(a).toks.length)
+  const shares = (a, b) => { const [x, y] = a.size < b.size ? [a, b] : [b, a]; for (const s of x) if (y.has(s)) return true; return false }
+  const out = new Map()
+  for (const [k, g] of groups) {
+    const i = info.get(k)
+    if (i.cardGame || k.includes('|') || i.toks.length < 2) continue
+    const raw = rawOf(g)
+    const found = [], joined = CONNECT.test(k) || /&/.test(raw)
+    for (let p = 0; p < i.toks.length;) {
+      let hit = null
+      for (const t of byFirst.get(i.toks[p]) || []) {
+        if (t === k) continue
+        const tt = info.get(t).toks, tg = groups.get(t)
+        if (p + tt.length > i.toks.length) continue
+        let ok = true
+        for (let j = 0; j < tt.length; j++) if (i.toks[p + j] !== tt[j]) { ok = false; break }
+        if (!ok) continue
+        if (SUFFIX.test(i.toks[p + tt.length] || '')) continue
+        if (info.get(t).fam !== i.fam) continue
+        if (tt[0] === 'the') continue   // "Beauty and the Beast" is not The Beast
+        // "Elsa and Anna": with a joining word each named page only needs to be bigger than the card
+        if (tg.cards < Math.max(20, (joined ? 1 : 5) * g.cards)) continue
+        hit = t; break
+      }
+      if (hit) { found.push(hit); p += info.get(hit).toks.length } else p++
+    }
+    // first names in a joined card: "Mickey and Minnie" -> Mickey Mouse + Minnie Mouse,
+    // "Anakin and Ahsoka" -> Anakin Skywalker + Ahsoka Tano (the one clearly biggest
+    // character with that first name, appearing in the same set)
+    if (joined && i.fam === 'CHAR') {
+      const have = new Set(found.flatMap(t => info.get(t).toks))
+      for (const part of raw.split(/\s*(?:,|&|\band\b|\bvs\.?|\bwith\b|\bet\b|\bor\b)\s*/i).map(norm)) {
+        if (!part || part.includes(' ') || part.length < 3 || have.has(part)) continue
+        const cands = (byFirst.get(part) || []).filter(t => t !== k && info.get(t).fam === 'CHAR').sort((a, b) => groups.get(b).cards - groups.get(a).cards)
+        const best = cands[0]
+        if (!best || groups.get(best).cards < Math.max(20, g.cards)) continue
+        if (cands[1] && groups.get(cands[1]).cards * 3 > groups.get(best).cards) continue
+        if (!found.length && !shares(g.sets, groups.get(best).sets)) continue
+        found.push(best)
+      }
+    }
+    if (!found.length) continue
+    const uniq = [...new Set(found)]
+    // each named page must share a set with the card, unless the card plainly joins
+    // two or more names ("Frozen Fractals Anna and Elsa")
+    if (!(joined && uniq.length >= 2) && !uniq.every(t => shares(g.sets, groups.get(t).sets))) continue
+    if (uniq.length >= 2 || g.cards <= 30 || joined) out.set(k, uniq)
+  }
+  // a page that is itself split up is not a target
+  for (const [k, ts] of out) { const keep = ts.filter(t => !out.has(t)); if (keep.length) out.set(k, keep); else out.delete(k) }
+  if (process.env.PLAYER_SPLIT_LOG) {
+    const lines = [...out].sort((a, b) => groups.get(b[0]).cards - groups.get(a[0]).cards).map(([k, ts]) => info.get(k).fam + '\t' + groups.get(k).cards + '\t' + k + '\t->\t' + ts.join(' + '))
+    import('node:fs').then(fs => fs.writeFileSync(process.env.PLAYER_SPLIT_LOG, lines.join('\n')))
   }
   return out
 }
