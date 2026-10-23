@@ -600,7 +600,9 @@
    "missing inserts: 1964 bazooka inserts, clubhouse collection relics, flashback, ink, memorable moments, new age performers, real one, then now",
    "65 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "review",
+  "note": "2013-topps-heritage-baseball-cards: 908 -> 3243 cards, 11 -> 44 sections, covers 94.1% of current",
+  "tcdbSid": 72767
  },
  {
   "slug": "1984-donruss-baseball-cards",
@@ -613,7 +615,9 @@
    "missing inserts: action stars, champions, piece puzzle 10 11 12, piece puzzle 13 14 15, piece puzzle 16 17 18, piece puzzle 22 23 24, piece puzzle 25 26 27, piece puzzle 31 32 33",
    "10 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "review",
+  "note": "1984-donruss-baseball-cards: 657 -> 708 cards, 2 -> 2 sections, covers 95.0% of current",
+  "tcdbSid": 95
  },
  {
   "slug": "2017-topps-heritage-minor-league-baseball",
@@ -626,7 +630,9 @@
    "missing inserts: 1968 discs, 1968 mint relics, america stars, clubhouse collection relic, fantastic feats, first name omission, gray border, looming legacy",
    "39 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2017-topps-heritage-minor-league-baseball: 243 -> 2001 cards, 5 -> 30 sections, covers 99.5% of current",
+  "at": "2026-10-23"
  },
  {
   "slug": "2021-topps-allen-and-ginter-baseball",
@@ -638,7 +644,9 @@
   "why": [
    "base skips 46 numbers in #1-300 (e.g. 14, 36, 40, 42, 59)"
   ],
-  "status": "todo"
+  "status": "review",
+  "note": "2021-topps-allen-and-ginter-baseball: 8580 -> 6809 cards, 72 -> 69 sections, covers 63.8% of current",
+  "tcdbSid": 258453
  },
  {
   "slug": "2017-18-topps-chrome-uefa-champions-league-soccer-cards",
@@ -651,7 +659,9 @@
    "missing inserts: ball at chest, celebrating, dribbling, future stars, kicking, kneeling, lightning strike, portrait",
    "5 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2017-18-topps-chrome-uefa-champions-league-soccer-cards: 285 -> 1361 cards, 5 -> 33 sections, covers 100.0% of current",
+  "at": "2026-10-23"
  },
  {
   "slug": "2021-topps-now-turn-back-the-clock-baseball-cards",
@@ -663,7 +673,9 @@
   "why": [
    "base skips 45 numbers in #1-214 (e.g. 8, 13, 27, 29, 40)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2021-topps-now-turn-back-the-clock-baseball-cards: 169 -> 713 cards, 1 -> 7 sections, covers 97.6% of current",
+  "at": "2026-10-23"
  },
  {
   "slug": "2021-topps-allen-and-ginter-chrome-baseball",
@@ -675,7 +687,9 @@
   "why": [
    "base skips 45 numbers in #1-300 (e.g. 14, 36, 40, 42, 59)"
   ],
-  "status": "todo"
+  "status": "review",
+  "note": "2021-topps-allen-and-ginter-chrome-baseball: 4953 -> 4444 cards, 21 -> 21 sections, covers 49.4% of current",
+  "tcdbSid": 264675
  },
  {
   "slug": "2017-18-leaf-masked-men-hockey-cards",
@@ -688,7 +702,9 @@
    "missing inserts: 300 win club relic, cup confrontation dual relic, decade dominance 6 relic, emerald, enshrined relic, goalie gear relic, goalie graphs, patch",
    "22 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "review",
+  "note": "2017-18-leaf-masked-men-hockey-cards: 123 -> 2097 cards, 8 -> 136 sections, covers 91.9% of current",
+  "tcdbSid": 169634
  },
  {
   "slug": "20-21-ud-upper-deck-extended-series-hockey",
@@ -712,7 +728,9 @@
   "why": [
    "base skips 44 numbers in #1-300 (e.g. 8, 24, 95, 129, 137)"
   ],
-  "status": "todo"
+  "status": "review",
+  "note": "2019-topps-allen-and-ginter-baseball: 8959 -> 7091 cards, 78 -> 68 sections, covers 65.3% of current",
+  "tcdbSid": 198281
  },
  {
   "slug": "2017-topps-archives-baseball-cards",
@@ -725,7 +743,9 @@
    "missing inserts: 1959 bazooka, 1960 star, 2016 retro original, fan favorites, signatures series, sky, snapshots, unique unis",
    "50 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2017-topps-archives-baseball-cards: 393 -> 2601 cards, 5 -> 40 sections, covers 99.2% of current",
+  "at": "2026-10-23"
  },
  {
   "slug": "2014-bowman-baseball-cards",
