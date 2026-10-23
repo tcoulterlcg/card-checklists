@@ -56,6 +56,8 @@ for (const f of files) {
   const fp = new URL(f, dataDir); let s2; try { s2 = JSON.parse(readFileSync(fp, 'utf8')) } catch { continue }
   let ch = false
   // "22 23 Panini Revolution Basketball" (year 22) -> "2022-23 Panini Revolution Basketball" (year 2023)
+  // import-name leftovers: "2023 Upper Deck Marvel Platinum Checklist" / "… Trading"
+  if (/\s+(Checklist|Trading)$/.test(s2.name || '')) { s2.name = s2.name.replace(/\s+(Checklist|Trading)$/, ''); ch = true; shopFixed++ }
   const yy = (s2.name || '').match(/^(\d\d) (\d\d) (.+)$/)
   if (yy && +yy[2] === (+yy[1] + 1) % 100) { const y1 = (+yy[1] > 40 ? 1900 : 2000) + +yy[1]; s2.name = y1 + '-' + yy[2] + ' ' + yy[3]; s2.year = y1 + 1; ch = true; shopFixed++ }
   else if (s2.year && s2.year < 100 && /^\d{4}/.test(s2.name || '')) { s2.year = +s2.name.slice(0, 4) + (/^\d{4}-\d\d/.test(s2.name) ? 1 : 0); ch = true; shopFixed++ }
