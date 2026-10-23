@@ -55,14 +55,16 @@ for (const f of files) {
     // the start of ours — older imports glued the team onto the name ("Xander Bogaerts Boston Red Sox").
     const norm = (x) => String(x || '').normalize('NFKD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9 ]/g, ' ').replace(/\s+/g, ' ').trim()
     const byNum = new Map()
-    for (const sec of sections) for (const c of sec.cards) { const k = norm(c.n); if (!byNum.has(k)) byNum.set(k, []); byNum.get(k).push(norm(c.p)) }
+    for (const sec of sections) for (const c of sec.cards) { const k = norm(c.n); if (!byNum.has(k)) byNum.set(k, []); byNum.get(k).push(norm(c.p), ...String(c.p || '').split(/\s*\/\s*/).map(norm)) }
     const oldCards = new Map()
     for (const sec of old.sections || []) for (const c of sec.cards) oldCards.set(String(c.n || '').trim().replace(/^#/, '').toLowerCase() + '|' + surname(c.p), c)
     let inside = 0
     for (const k of oldKeys) {
       if (newKeys.has(k)) { inside++; continue }
       const c = oldCards.get(k), p = c && norm(c.p)
-      if (p && (byNum.get(norm(c.n)) || []).some(q => q && (p === q || p.startsWith(q + ' ')))) inside++
+      // TCDB lists multi-player cards (league leaders, combos) as "A / B / C"; ours may name one of them.
+      const qs = byNum.get(norm(c.n)) || []
+      if (p && qs.some(q => q && (p === q || p.startsWith(q + ' ')))) inside++
     }
     const cover = oldKeys.size ? inside / oldKeys.size : 1
     const nOld = count(old), nNew = count(fresh)

@@ -40,7 +40,7 @@
    "missing inserts: ball prospect ticket, batting, batting cracked ice, batting playoff ticket, batting prospect ticket, both feet ground playoff ticket, both feet ground prospect ticket, catching prospect ticket"
   ],
   "status": "review",
-  "note": "2018-panini-contenders-draft-picks-baseball-cards: 261 -> 1968 cards, 13 -> 74 sections, covers 82.5% of current",
+  "note": "2018-panini-contenders-draft-picks-baseball-cards: 261 -> 1968 cards, 13 -> 74 sections, covers 86.3% of current",
   "tcdbSid": 181044
  },
  {
@@ -69,9 +69,10 @@
    "missing inserts: 1967 discs, 1967 stand ups, adam eaton todd frazier, adrian beltre nomar mazara, albert pujols mike trout, award winners, bat, bryce harper max scherzer",
    "81 players sold on SCP not on checklist"
   ],
-  "status": "review",
-  "note": "2016-topps-heritage-baseball-cards: 859 -> 5737 cards, 5 -> 51 sections, covers 89.9% of current",
-  "tcdbSid": 116351
+  "status": "done",
+  "note": "2016-topps-heritage-baseball-cards: 859 -> 5737 cards, 5 -> 51 sections, covers 99.8% of current",
+  "tcdbSid": 116351,
+  "at": "2026-10-23"
  },
  {
   "slug": "2017-bowman-baseball-cards",
@@ -114,9 +115,10 @@
    "missing inserts: 1969 bazooka panel, 1969 collector, 1969 decal, 1969 deckle edge, award winners, circle color, clubhouse collection relics, color image",
    "198 players sold on SCP not on checklist"
   ],
-  "status": "review",
-  "note": "2018-topps-heritage-baseball-cards: 976 -> 6907 cards, 9 -> 81 sections, covers 88.0% of current",
-  "tcdbSid": 157374
+  "status": "done",
+  "note": "2018-topps-heritage-baseball-cards: 976 -> 6907 cards, 9 -> 81 sections, covers 95.0% of current",
+  "tcdbSid": 157374,
+  "at": "2026-10-23"
  },
  {
   "slug": "2002-bowman-chrome-baseball",
@@ -190,7 +192,7 @@
    "48 players sold on SCP not on checklist"
   ],
   "status": "review",
-  "note": "2017-topps-heritage-baseball-cards: 953 -> 17788 cards, 8 -> 257 sections, covers 87.5% of current",
+  "note": "2017-topps-heritage-baseball-cards: 953 -> 17788 cards, 8 -> 257 sections, covers 94.5% of current",
   "tcdbSid": 134721
  },
  {
