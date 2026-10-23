@@ -9,6 +9,7 @@ import { useAccount, AccountChip, AuthModal, CollectionView, CommunityView } fro
 import { supa, addWant, removeWant, myWantlist, grailfindrFindUrl } from '../lib/supa'
 import { FeedbackModal, FeedbackView, useFeedbackAdmin } from '../components/feedback'
 import { Omnibox, PlayerPage, MyPlayersPanel, useMyPlayers, loadPlayerDir, loadTopPlayers, seasonLabel, MemBadge, MemChip, memCodeOf } from '../components/player'
+import { ComparePage } from '../components/compare'
 import { norm, parseQuery, parseQueryFor, matchPlayers, TYPE, typeLabel, TYPE_COLORS, serialLabel } from '../lib/query'
 import { loadSet, loadIndex } from '../lib/catalog'
 import { classifySet, brandSort, BRAND_COLORS } from '../lib/brands'
@@ -387,6 +388,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
   // Player pages + My Players
   const myPlayers = useMyPlayers(account)
   const [activePlayer, setActivePlayer] = useState(null)
+  const [compareNames, setCompareNames] = useState(['', ''])   // ?compare=A&vs=B
   const [playerParsed, setPlayerParsed] = useState(null)
   const [playerCandidates, setPlayerCandidates] = useState([])
   const [onlyMine, setOnlyMine] = useState(false)
@@ -739,7 +741,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
   const [deepLoading, setDeepLoading] = useState(false)
   useEffect(() => {
     const unhide = () => document.documentElement.classList.remove('hq-deep')   // set by the inline script in layout.js
-    if (!/[?&](set|player|search)=/.test(window.location.search)) { unhide(); return }
+    if (!/[?&](set|player|search|compare)=/.test(window.location.search)) { unhide(); return }
     setDeepLoading(true); unhide()
     const t = setTimeout(() => setDeepLoading(false), 25000)
     return () => clearTimeout(t)
@@ -755,6 +757,15 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
     setView('rpa'); setActiveSet(null); setSetData(null); setGlobalHits(null)
     if (!rpaData) fetch('/data/rpa-index.json').then(r => r.json()).then(setRpaData).catch(() => setRpaData({ slugs: [], rows: [] }))
     window.scrollTo(0, 0)
+  }
+  // Player vs player. Either name may be empty (the page shows a picker for it).
+  const openCompare = (names, push) => {
+    const [a, b] = [names[0] || '', names[1] || '']
+    setNotice(''); setCompareNames([a, b]); setView('compare'); setActiveSet(null); setSetData(null); setGlobalHits(null); setActivePlayer(null)
+    const url = '?compare=' + encodeURIComponent(a) + (b ? '&vs=' + encodeURIComponent(b) : '')
+    // picking or swapping a player on the page replaces the history entry instead of stacking one per pick
+    if (push === 'replace') { navSeq.current++; try { history.replaceState(null, '', url) } catch {} } else nav(url, push)
+    if (push !== 'replace') window.scrollTo(0, 0)
   }
   const openView = (v, push, extra = '') => { setNotice(''); nav('?view=' + v + extra, push); setView(v); setActiveSet(null); setSetData(null); setGlobalHits(null); setActivePlayer(null); window.scrollTo(0, 0) }
   // Wantlist add — whole set or a single card/parallel from the set page.
@@ -810,16 +821,17 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
   // Stable callbacks for the (memoized) player page, so typing in the search box
   // doesn't re-render a 1,000-row player page on every keystroke.
   const cbRef = useRef({})
-  cbRef.current = { openSetBySlug, wantIt, runSearch, pickCandidate: (c) => openPlayer(c, playerParsed, playerCandidates) }
+  cbRef.current = { openSetBySlug, wantIt, runSearch, pickCandidate: (c) => openPlayer(c, playerParsed, playerCandidates), compare: (name) => openCompare([name, '']) }
   const stableCb = useMemo(() => ({
     openSetBySlug: (...a) => cbRef.current.openSetBySlug(...a), wantIt: (...a) => cbRef.current.wantIt(...a),
-    runSearch: (...a) => cbRef.current.runSearch(...a), pickCandidate: (...a) => cbRef.current.pickCandidate(...a)
+    runSearch: (...a) => cbRef.current.runSearch(...a), pickCandidate: (...a) => cbRef.current.pickCandidate(...a),
+    compare: (...a) => cbRef.current.compare(...a)
   }), [])
   const urlApplied = useRef(false)   // don't overwrite a shared ?sport=… link before applyUrl has read it
   useEffect(() => {
     if (!isLanding || sets.length === 0 || !urlApplied.current) return
     const sp = new URLSearchParams(location.search)
-    if (sp.get('set') || sp.get('player') || sp.get('view') || sp.get('search')) return
+    if (sp.get('set') || sp.get('player') || sp.get('view') || sp.get('search') || sp.has('compare')) return
     const q = new URLSearchParams()
     if (sportFilter !== 'All') q.set('sport', sportFilter)
     if (brandFilter !== 'All') q.set('brand', brandFilter)
@@ -835,17 +847,19 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
   useEffect(() => {
     const t = activeSet ? (setData ? setData.name : activeSet.name) + ' Checklist'
       : view === 'player' && activePlayer ? activePlayer.name + ' Cards'
+      : view === 'compare' ? (compareNames.filter(Boolean).join(' vs ') || 'Compare players')
       : globalHits ? 'Search: ' + query
       : view === 'community' ? 'Community' : view === 'collection' ? 'My Collection' : view === 'myplayers' ? 'My Players' : view === 'feedback' ? 'Feedback' : ''
     document.title = t ? t + ' — CardHQ' : 'CardHQ — Sports Card & TCG Checklists'
-  }, [activeSet, setData, view, activePlayer, globalHits])
+  }, [activeSet, setData, view, activePlayer, globalHits, compareNames])
   // Deep links and Back/Forward: ?player=Name[&q=raw] · ?set=slug · ?view=community · ?search=term
   const applyUrl = () => {
     urlApplied.current = true
     const sp = new URLSearchParams(location.search)
     const pl = sp.get('player'), v = sp.get('view'), sr = sp.get('search')
     const st = sp.get('set') && sp.get('set').trim().toLowerCase().replace(/\/+$/, '')   // tolerate pasted links: case, trailing slash
-    if (pl) { const q = sp.get('q'); setQuery(q || pl); openPlayerByName(pl, q, false, sp.get('sport') || undefined) }
+    if (sp.has('compare')) openCompare([sp.get('compare'), sp.get('vs')], false)
+    else if (pl) { const q = sp.get('q'); setQuery(q || pl); openPlayerByName(pl, q, false, sp.get('sport') || undefined) }
     else if (st) {
       const s = sets.find(x => x.slug === st)
       if (s) openSet(s, false)
@@ -1094,7 +1108,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
             </div>
           )}
         </>
-      ) : (activeSet || globalHits || view === 'player' || view === 'myplayers') ? (
+      ) : (activeSet || globalHits || view === 'player' || view === 'myplayers' || view === 'compare') ? (
         <div style={{ marginBottom: 16 }}>
           {activeSet ? (
             <input
@@ -1344,12 +1358,15 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
         <>
         <PlayerPage key={activePlayer.id + '|' + ((playerParsed && playerParsed.raw) || '')} player={activePlayer} parsed={playerParsed} sets={sets} myPlayers={myPlayers}
           onOpenSet={stableCb.openSetBySlug}
-          onWant={stableCb.wantIt} onSearch={stableCb.runSearch} candidates={playerCandidates} onPickCandidate={stableCb.pickCandidate} />
+          onWant={stableCb.wantIt} onSearch={stableCb.runSearch} candidates={playerCandidates} onPickCandidate={stableCb.pickCandidate} onCompare={stableCb.compare} />
         <p style={{ color: '#8A93A8', fontSize: 13, margin: '18px 0 0' }}>
           Missing a card or parallel for {activePlayer.name}?{' '}
           <button onClick={() => setFeedback({ player: activePlayer.name })} style={{ background: 'none', border: 'none', padding: 0, color: ACCENT_TEXT, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit', fontSize: 13 }}>Report it</button>
         </p>
         </>
+      ) : view === 'compare' ? (
+        <ComparePage names={compareNames} sets={sets} onChange={(n) => openCompare(n, 'replace')}
+          onOpenSet={openSetBySlug} onOpenPlayer={(name) => openPlayerByName(name, null, true)} />
       ) : view === 'myplayers' ? (
         <MyPlayersPanel myPlayers={myPlayers} onOpenPlayer={(name) => openPlayerByName(name)} onOpenSet={(slug) => openSetBySlug(slug)} />
       ) : view === 'feedback' ? (

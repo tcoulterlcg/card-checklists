@@ -110,7 +110,7 @@ export default function RootLayout({ children }) {
         />
         <style dangerouslySetInnerHTML={{ __html: RESPONSIVE_CSS }} />
         {/* Shared links (?set= / ?player= / ?search=): hide the prerendered home page until the app opens the page */}
-        <script dangerouslySetInnerHTML={{ __html: "try{if(/[?&](set|player|search)=/.test(location.search))document.documentElement.classList.add('hq-deep')}catch(e){}" }} />
+        <script dangerouslySetInnerHTML={{ __html: "try{if(/[?&](set|player|search|compare)=/.test(location.search))document.documentElement.classList.add('hq-deep')}catch(e){}" }} />
       </head>
       <body style={{ margin: 0, fontFamily: "'Inter', system-ui, sans-serif", background: '#0B0E17', color: '#EDEDEF' }}>
         {children}

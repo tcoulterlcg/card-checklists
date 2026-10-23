@@ -232,8 +232,8 @@ const NON_SPORTS = new Set(['Pokémon', 'Yu-Gi-Oh!', 'Magic', 'Lorcana', 'One Pi
 const VIEWS = [['all', 'All cards'], ['oneofone', '1/1s'], ['rc', 'Rookies'], ['auto', 'Autos'], ['pa', 'Patch autos'], ['gu', 'Game-used'], ['base', 'Base only'], ['rare', '/25 or rarer']]
 const quickFilter = { all: () => true, oneofone: r => r[5] === 1, rc: r => r[6] & TYPE.RC, auto: r => r[6] & TYPE.AU, pa: r => (r[6] & TYPE.AU) && (r[6] & TYPE.PATCH), gu: r => (r[7] & 7) === 1, base: r => r[6] & TYPE.BASE, rare: r => r[5] > 0 && r[5] <= 25 }
 
-export const PlayerPage = memo(PlayerPageInner, (a, b) => a.player === b.player && a.parsed === b.parsed && a.sets === b.sets && a.candidates === b.candidates && a.myPlayers.list === b.myPlayers.list && a.onWant === b.onWant)
-function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, onSearch, candidates, onPickCandidate }) {
+export const PlayerPage = memo(PlayerPageInner, (a, b) => a.player === b.player && a.parsed === b.parsed && a.sets === b.sets && a.candidates === b.candidates && a.myPlayers.list === b.myPlayers.list && a.onWant === b.onWant && a.onCompare === b.onCompare)
+function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, onSearch, candidates, onPickCandidate, onCompare }) {
   const [shard, setShard] = useState(null)
   // View choices round-trip through the URL (?qv=rookies&group=season&sort=rarest&run=25),
   // so Back from a set returns to the same view.
@@ -448,6 +448,7 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
             </button>
             <button onClick={exportCsv} style={btn(false)}>Export CSV</button>
             <button onClick={copyLink} style={btn(false)}>{copied || 'Copy link'}</button>
+            {onCompare && <button onClick={() => onCompare(player.name)} style={btn(false)}>Compare</button>}
           </div>
         </div>
         <div style={{ flex: '1 1 300px', minWidth: 0, display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(110px, 1fr))', gap: 10 }}>
