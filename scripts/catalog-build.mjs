@@ -78,7 +78,7 @@ for (const file of dumps) {
       replaced++
     }
     catKey.set(key(slug), { slug, sport: raw.sport, n: n0 })
-    const set = { slug, name: raw.name, year: raw.year ?? null, sport: raw.sport, source: raw.source || 'tcdb.com', sections }
+    const set = { slug, name: String(raw.name).replace(/^\s*prices for\s*/i, '').replace(/\s+cards?$/i, '').trim(), year: raw.year ?? null, sport: raw.sport, source: raw.source || 'tcdb.com', sections }
     const dir = join(root, 'sets', shard(slug))
     mkdirSync(dir, { recursive: true })
     const p = join(dir, slug + '.json')
