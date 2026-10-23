@@ -13,7 +13,8 @@
 - **Repairing sets with holes:** `scripts/data/tcdb-hole-jobs.json` is the shared to-do list (status todo/done/review),
   highest priority first. Scrape in a tcdb.com tab with `scripts/tcdb-browser-scrape.js` (inject, then `__tcdb.queue`),
   merge with `node scripts/tcdb-repair-merge.mjs <dump>` — it only replaces a set when TCDB has ≥ the cards and covers
-  ≥95% of the current ones, and marks the job. TCDB's rate limit is shared by every agent on this computer: run ONE
+  ≥95% of the current ones, and marks the job. Before scraping, claim the jobs you'll take (status `claimed-<tag>`, commit +
+  push) and skip any job that isn't `todo` — two agents scraping the same set doubles the TCDB cost. TCDB's rate limit is shared by every agent on this computer: run ONE
   TCDB scraper at a time, and commit job-status changes promptly so other agents skip finished sets.
 - **Parallel / patch tags** (Shield, SuperFractor, Logoman…) come from section titles via `lib/parallels.js`; it only tags
   names Trevor has verified or that name patch material. Unverified look-alikes are held, not guessed. Never infer a
