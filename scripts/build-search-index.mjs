@@ -106,7 +106,11 @@ for (const [sp, list] of bySport) {
   byTeam.clear(); for (const [t, v] of merged) byTeam.set(t, [...v])
   const list2 = [...byTeam.entries()].filter(([, v]) => v.length >= 3).sort((a, b) => a[0].localeCompare(b[0]))
   mkdirSync(new URL(f + '/', outDir), { recursive: true })
-  list2.forEach(([, v], i) => { writeFileSync(new URL(f + '/' + i + '.json', outDir), slice(v)); files++ })
-  writeFileSync(new URL(f + '.json', outDir), JSON.stringify({ teams: list2.map(([t, v]) => [t, v.length]) })); files++
+  // slice files are named after the team, not its position in the list, so a cached older list
+  // can never load a different team's cards after a rebuild
+  const used = new Set()
+  const fileOf = list2.map(([t]) => { const b = sportFile(t) || 'team'; let n = b, k = 2; while (used.has(n)) n = b + '-' + k++; used.add(n); return n })
+  list2.forEach(([, v], i) => { writeFileSync(new URL(f + '/' + fileOf[i] + '.json', outDir), slice(v)); files++ })
+  writeFileSync(new URL(f + '.json', outDir), JSON.stringify({ teams: list2.map(([t, v], i) => [t, v.length, fileOf[i]]) })); files++
 }
 console.log('browse slices:', files, 'files in public/data/teams/')

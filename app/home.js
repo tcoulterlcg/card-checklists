@@ -449,7 +449,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
     if (searchIndex && searchIndex.__key === key) return
     setSliceLoading(true)
     let live = true   // a quick team change must not let the earlier team's slice land last
-    getJson('/data/teams/' + sportFile(sportFilter) + '/' + i + '.json').then(j => { if (!live) return; const x = j || { ...EMPTY_IDX }; x.__key = key; setSearchIndex(x); setSliceLoading(false) })
+    getJson('/data/teams/' + sportFile(sportFilter) + '/' + (teamList.teams[i][2] ?? i) + '.json').then(j => { if (!live) return; const x = j || { ...EMPTY_IDX }; x.__key = key; setSearchIndex(x); setSliceLoading(false) })
     return () => { live = false }
   }, [sportFilter, teamFilter, teamList])
 
