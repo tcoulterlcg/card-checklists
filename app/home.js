@@ -476,7 +476,8 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
   }, [sets])
   const yearRange = useMemo(() => {
     const ys = sets.map(s => s.year).filter(y => y >= 1850)   // ignore malformed years (e.g. a stray "24")
-    return ys.length ? Math.min(...ys) + '–' + Math.max(...ys) : ''
+    // 2026-27 season sets are filed under 2027; don't advertise a year that hasn't started
+    return ys.length ? Math.min(...ys) + '–' + Math.min(Math.max(...ys), new Date().getFullYear()) : ''
   }, [sets])
 
   useEffect(() => {
