@@ -56,7 +56,10 @@ function decode(s) {
   return (s || '').replace(/<!\[CDATA\[|\]\]>/g, '')
     .replace(/&amp;/g, '&').replace(/&#8217;|&#039;|&apos;|&rsquo;/g, "'").replace(/&#8216;|&lsquo;/g, "'")
     .replace(/&#8220;|&#8221;|&ldquo;|&rdquo;|&quot;/g, '"').replace(/&#8211;|&#8212;|&ndash;|&mdash;/g, '–')
-    .replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&#\d+;/g, ' ')
+    .replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&nbsp;/g, ' ')
+    // any other numeric entity (&#39; &#x27; &#038; …) decoded, not blanked — "McDavid's", not "McDavid s"
+    .replace(/&#x([0-9a-f]+);/gi, (_, h) => String.fromCodePoint(parseInt(h, 16))).replace(/&#(\d+);/g, (_, d) => String.fromCodePoint(+d))
+    .replace(/[\u2018\u2019]/g, "'").replace(/[\u201C\u201D]/g, '"')
     .replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim()
 }
 

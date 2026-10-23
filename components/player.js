@@ -4,7 +4,7 @@
 // public/data/players/ (built by scripts/build-player-index.mjs).
 import { memo, useDeferredValue, useEffect, useMemo, useRef, useState } from 'react'
 import { supa } from '../lib/supa'
-import { Select } from './dropdown'
+import { Select, useIsMobile } from './dropdown'
 import { TYPE, norm, parseQuery, parseQueryFor, matchPlayers, akaOf, rowMatches, typeLabel, TYPE_COLORS, serialLabel, MEM_LABEL, MEM_COLORS, memKind, memTypical } from '../lib/query'
 import { brandOf } from '../lib/brands'
 import { PAR, PAR_LABEL, parallelKinds } from '../lib/parallels'
@@ -176,16 +176,17 @@ export function Omnibox({ value, onChange, onSubmit, onPickPlayer, onPickSet, se
   if (parsed.season) understood.push(['season', String(parsed.season)])
   for (const p of parsed.products) understood.push(['product', p])
   if (parsed.mem) understood.push(['material', { GU: 'game-used', PW: 'player-worn', EW: 'event-worn', MFG: 'manufactured' }[parsed.mem]])
+  const narrow = useIsMobile()   // the long example placeholder is cut off mid-word on phones
   return (
     <div ref={box} style={{ position: 'relative' }}>
       <form role="search" onSubmit={(e) => { e.preventDefault(); go(open && items.length ? sel : -1) }}
-        style={{ display: 'flex', alignItems: 'center', background: '#121212', border: '1px solid ' + (open ? ACCENT + '66' : '#232A3E'), borderRadius: open && items.length ? '14px 14px 0 0' : 14, padding: 6, boxShadow: open ? '0 0 0 4px ' + ACCENT + '14' : '0 20px 50px -20px rgba(0,0,0,0.8)' }}>
+        style={{ display: 'flex', alignItems: 'center', background: '#121626', border: '1px solid ' + (open ? ACCENT + '66' : '#232A3E'), borderRadius: open && items.length ? '14px 14px 0 0' : 14, padding: 6, boxShadow: open ? '0 0 0 4px ' + ACCENT + '14' : '0 20px 50px -20px rgba(0,0,0,0.8)' }}>
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={open ? ACCENT : '#8A93A8'} strokeWidth="2" aria-hidden="true" style={{ marginLeft: 10, flexShrink: 0 }}><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
         <input value={value} autoFocus={autoFocus} aria-label="Search players, sets, serials"
           onChange={(e) => { onChange(e.target.value); setOpen(true); setSel(0) }}
           onFocus={() => setOpen(true)}
           onKeyDown={(e) => { if (e.key === 'ArrowDown') { e.preventDefault(); setSel(s => Math.min(s + 1, items.length - 1)) } else if (e.key === 'ArrowUp') { e.preventDefault(); setSel(s => Math.max(s - 1, 0)) } else if (e.key === 'Escape') setOpen(false) }}
-          placeholder='Search any player, e.g. "Tom Brady Auto" or "Connor McDavid Game-Used 1/1"'
+          placeholder={narrow ? 'Search a player or set…' : 'Search any player, e.g. "Tom Brady Auto" or "Connor McDavid Game-Used 1/1"'}
           style={{ flex: 1, minWidth: 0, background: 'transparent', border: 'none', padding: compact ? '10px 12px' : '13px 14px', color: '#EDEDEF', fontSize: compact ? 15 : 16, outline: 'none', fontFamily: 'inherit' }} />
         <button type="submit" style={{ ...buttonText, background: ACCENT, color: '#fff', border: 'none', borderRadius: 10, padding: '0 22px', height: compact ? 38 : 44, cursor: 'pointer', fontSize: 14, opacity: busy ? 0.75 : 1 }} aria-busy={busy ? 'true' : undefined}>{busy ? 'Searching…' : 'Search'}</button>
       </form>
@@ -390,6 +391,10 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
   const brandList = [...facets.brands.entries()].sort((a, b) => b[1] - a[1])
   // Every name this player is printed under, biggest first (the page's own name leads).
   const labelList = [...facets.labels.entries()].sort((a, b) => (b[0] === player.name) - (a[0] === player.name) || b[1] - a[1])
+  // "Also listed as" is for real alternate names (Shoeless Joe Jackson), not card text like
+  // "Michael Jordan 1987-88 Fleer" (buybacks) or "PT Michael Jordan" (subset prefixes)
+  const otherNames = labelList.map(([l]) => l).filter(l => l !== player.name && !/\d|[()\/#]/.test(l) && !/^[A-Z]{1,3}\s/.test(l)
+    && !l.toLowerCase().startsWith(player.name.toLowerCase() + ' '))   // "Connor McDavid Hart" = card text, not a name
   const teamList = [...facets.teams.entries()].filter(([t]) => /[A-Za-z]{3,}/.test(t) && !/^\/|#|\d\/\d/.test(t)).sort((a, b) => b[1] - a[1]).slice(0, 12)
   const productOptions = useMemo(() => [...new Set(rows.map(r => r.set.replace(/^\d{4}(-\d{2})?\s*/, '').replace(/\s+(hockey|baseball|basketball|football|soccer).*$/i, '')))].sort(), [rows])
   const titleSuffix = quick !== 'all' ? ' · ' + VIEWS.find(v => v[0] === quick)[1] : parsed && parsed.serial === 1 ? ' · 1/1s' : ''
@@ -443,7 +448,7 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
             {!shard ? 'Loading cards…' : firstCard ? <>First card: {firstCard.year ? seasonLabel(firstCard.year, firstCard.sport) + ' ' : ''}{firstCard.set.replace(/^\d{4}(-\d{2})?\s*/, '')}{firstCard.n ? ' #' + firstCard.n : ''} · </> : null}
             {shard && <>Appears in {facets.sets.size.toLocaleString()} sets across {facets.seasons} season{facets.seasons === 1 ? '' : 's'}</>}
           </p>
-          {labelList.length > 1 && <p style={{ color: '#8A93A8', fontSize: 13, margin: '6px 0 0', lineHeight: 1.5 }}>Also listed as {labelList.filter(([l]) => l !== player.name).slice(0, 4).map(([l]) => l).join(', ')}{labelList.length > 5 ? ' and ' + (labelList.length - 5) + ' more' : ''}</p>}
+          {otherNames.length > 0 && <p style={{ color: '#8A93A8', fontSize: 13, margin: '6px 0 0', lineHeight: 1.5 }}>Also listed as {otherNames.slice(0, 4).join(', ')}{otherNames.length > 4 ? ' and ' + (otherNames.length - 4) + ' more' : ''}</p>}
           <div style={{ display: 'flex', gap: 10, marginTop: 18, flexWrap: 'wrap' }}>
             <button onClick={() => myPlayers.toggle(player.name)} style={btn(!following)} aria-pressed={following}>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true">{following ? <path d="m5 12 5 5L20 7" /> : <path d="M12 5v14M5 12h14" />}</svg>

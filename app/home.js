@@ -739,7 +739,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
         if (needle && !String(row[0]).toLowerCase().includes(needle)) continue
         if (tcgRarity !== 'All' && row[5] !== tcgRarity) continue
         if (tcgType !== 'All' && (row[4] < 0 || teams[row[4]] !== tcgType)) continue
-      } else if (row[4] < 0 || teams[row[4]] !== teamFilter) continue
+      }   // team sports: the slice file already holds just this team's rows (spellings, nicknames and combo cards merged at build)
       const slug = slugs[row[1]]
       if (slugSport[slug] !== sportFilter) continue
       const m = setMeta[slug] || {}
@@ -1344,10 +1344,10 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
                 <div style={{ border: '1px solid #222', borderRadius: 12, overflow: 'hidden' }}>
                   <div className="hq-setrow" style={{ display: 'flex', gap: 14, padding: '9px 16px', background: '#121626', borderBottom: '1px solid #232A3E', alignItems: 'center' }}>
                     <div className="hq-col-num" style={{ flex: '0 0 68px' }}><SortHeader label="Card #" field="n" sortField={sortField} sortDir={sortDir} onClick={toggleSort} /></div>
-                    <div style={{ flex: '1 1 auto', minWidth: 0 }}><SortHeader label={setIsTcg ? 'Card' : 'Player'} field="p" sortField={sortField} sortDir={sortDir} onClick={toggleSort} grow /></div>
-                    <div className="hq-col-team" style={{ flex: '1 1 auto', minWidth: 0 }}><SortHeader label={setIsTcg ? 'Type' : 'Team'} field="t" sortField={sortField} sortDir={sortDir} onClick={toggleSort} grow /></div>
+                    <div style={{ flex: '1 1 0', minWidth: 0 }}><SortHeader label={setIsTcg ? 'Card' : 'Player'} field="p" sortField={sortField} sortDir={sortDir} onClick={toggleSort} grow /></div>
+                    <div className="hq-col-team" style={{ flex: '1 1 0', minWidth: 0 }}><SortHeader label={setIsTcg ? 'Type' : 'Team'} field="t" sortField={sortField} sortDir={sortDir} onClick={toggleSort} grow /></div>
                     <div className="hq-col-flag" style={{ flex: setIsTcg ? '0 0 110px' : '0 0 70px' }}><SortHeader label={setIsTcg ? 'Rarity' : 'Flag'} field="x" sortField={sortField} sortDir={sortDir} onClick={toggleSort} align="right" /></div>
-                    <span aria-hidden="true" style={{ flex: '0 0 32px' }} />
+                    <span aria-hidden="true" style={{ flex: '0 0 78px' }} />
                   </div>
                   {sorted.slice(0, openSecs.has(sec.title) ? 5000 : 200).map((c, i) => (
                     <div key={i} className="hq-setrow" style={{
@@ -1355,11 +1355,11 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
                       background: i % 2 === 0 ? '#0F1320' : '#121626', alignItems: 'center'
                     }}>
                       <span className="hq-col-num" style={{ flex: '0 0 68px', color: ACCENT_TEXT, fontWeight: 700, fontVariantNumeric: 'tabular-nums', overflowWrap: 'anywhere' }}>{c.n ? '#' + c.n : '—'}</span>
-                      <span style={{ flex: '1 1 auto', minWidth: 0 }}>
+                      <span style={{ flex: '1 1 0', minWidth: 0 }}>
                         <button onClick={() => openPlayerByName(c.p, null, true, setData?.sport)} title={'Open ' + c.p + "'s player page"} style={{ fontWeight: 600, background: 'none', border: 'none', color: isMine(c.p) ? ACCENT_TEXT : '#EDEDEF', cursor: 'pointer', padding: 0, textAlign: 'left', fontFamily: 'inherit', fontSize: 14 }}>{c.p}</button>
                         {c.t && <span className="hq-mobile-only" style={{ color: '#8A93A8', fontSize: 12, marginTop: 2 }}>{c.t}</span>}
                       </span>
-                      <span className="hq-col-team" style={{ flex: '1 1 auto', minWidth: 0, color: '#8A93A8', fontSize: 13 }}>{c.t || ''}</span>
+                      <span className="hq-col-team" style={{ flex: '1 1 0', minWidth: 0, color: '#8A93A8', fontSize: 13 }}>{c.t || ''}</span>
                       <span className="hq-col-flag" style={{ flex: setIsTcg ? '0 0 110px' : '0 0 70px', textAlign: 'right' }}>{c.x ? <Chip color={c.x === 'RC' ? '#4ade80' : '#8A93A8'}>{c.x}</Chip> : null}</span>
                       <a href={grailfindrFindUrl({ setName: setData.name, player: c.p, n: c.n, section: sec.title })} target="_blank" rel="noreferrer"
                         title="Find this card for sale on GrailFindr (every marketplace)" aria-label={'Find ' + (c.p || 'this card') + ' on GrailFindr'}

@@ -201,6 +201,21 @@ for (const [f, s] of sets) {
       }
       const b = best.get(key(p))
       if (b && b !== p && !/[?�]/.test(p)) { p = b; stats.unified++ }
+      // team field: card flags and print runs glued on ("Anaheim Ducks FOIL", "Winnipeg Jets*",
+      // "Anaheim Ducks #/ 1,299", "Vancouver)"), or TCDB flag notes where the team should be ("AU, MEM, SN25")
+      if (c.t) {
+        const flag = (f) => { const x = (c.x || '').split(/\s+/).filter(Boolean); for (const t of f.split(/\s+/)) if (t && !x.includes(t)) x.push(t); c.x = x.join(' ') }
+        let t = c.t.trim()
+        if (/^(?:(?:URA?|AUR?|MEM|RC|SP|SSP|SN\d+)(?:,\s*|$))+$/.test(t)) {   // flags, not a team
+          for (const f of t.split(/,\s*/)) flag(/^SN(\d+)$/.test(f) ? '/' + f.slice(2) : f === 'URA' || f === 'AUR' ? 'AU' : f)
+          t = ''
+        }
+        const run = t.match(/\s+#?\/\s*([\d,]+)$/)
+        if (run) { flag('/' + run[1].replace(/,/g, '')); t = t.slice(0, run.index) }
+        t = t.replace(/\s+(FOIL|Auto|XRC|C \d+:\d+)$/i, '').replace(/\s*\*+$/, '').trim()
+        if (/\)$/.test(t) && !t.includes('(')) t = t.slice(0, -1).trim()
+        if (t !== c.t) { if (t) c.t = t; else delete c.t; stats.team++; changed = true }
+      }
       // team field: Break Ninja tags merged in ("Anaheim Ducks / All Rookies / One Of Ones"), repeated teams
       if (c.t && c.t.includes('/')) {
         const segs = c.t.split(/\s+\/\s+/).map(x => x.trim()).filter(x => x && !TEAM_TAG.test(x))

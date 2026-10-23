@@ -11,7 +11,9 @@ const RESUME = process.argv.includes('--resume')
 
 const setsRes = await fetch('https://api.scryfall.com/sets', { headers: H })
 const allSets = (await setsRes.json()).data
-const sets = allSets.filter(s => ['core', 'expansion', 'masters', 'draft_innovation'].includes(s.set_type) && !s.digital && (s.card_count || 0) > 0)
+const sets = allSets.filter(s => ['core', 'expansion', 'masters', 'draft_innovation'].includes(s.set_type) && !s.digital && (s.card_count || 0) > 0
+  // unreleased sets carry only the cards spoiled so far — a set with holes; add it once it's out
+  && (!s.released_at || s.released_at <= new Date().toISOString().slice(0, 10)))
 console.log('MTG paper sets:', sets.length)
 
 const order = ['common', 'uncommon', 'rare', 'mythic', 'special', 'bonus']
