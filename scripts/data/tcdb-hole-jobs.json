@@ -11,7 +11,7 @@
    "234 players sold on SCP not on checklist"
   ],
   "status": "done",
-  "note": "2013-bowman-chrome-baseball-cards: 363 -> 6680 cards, 5 -> 61 sections, covers 100.0% of current",
+  "note": "2013-bowman-chrome-baseball-cards: 6680 -> 6680 cards, 61 -> 61 sections, covers 100.0% of current",
   "at": "2026-10-23"
  },
  {
@@ -26,7 +26,7 @@
    "193 players sold on SCP not on checklist"
   ],
   "status": "review",
-  "note": "2017-topps-wwe-wrestling-checklist-added: 187 -> 1743 cards, 8 -> 56 sections, covers 87.6% of current",
+  "note": "2017-topps-wwe-wrestling-checklist-added: 187 -> 1726 cards, 8 -> 56 sections, covers 87.6% of current",
   "tcdbSid": 142170
  },
  {
@@ -54,7 +54,9 @@
    "missing inserts: debut medallion, update an international affair, wearing helmet, xfractor",
    "409 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2018-topps-chrome-baseball-cards: 275 -> 6665 cards, 5 -> 99 sections, covers 100.0% of current",
+  "at": "2026-10-23"
  },
  {
   "slug": "2016-topps-heritage-baseball-cards",
@@ -67,7 +69,9 @@
    "missing inserts: 1967 discs, 1967 stand ups, adam eaton todd frazier, adrian beltre nomar mazara, albert pujols mike trout, award winners, bat, bryce harper max scherzer",
    "81 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "review",
+  "note": "2016-topps-heritage-baseball-cards: 759 -> 5687 cards, 4 -> 51 sections, covers 89.9% of current",
+  "tcdbSid": 116351
  },
  {
   "slug": "2017-bowman-baseball-cards",
