@@ -18,7 +18,7 @@ const notesFile = new URL('./data/tcdb-mem-notes.json', import.meta.url)
 const DRY = process.argv.includes('--dry-run')
 const SKIP = /^(index|search-index|rpa-index|patch-swaps)\.json$/
 
-export const MEM_SECTION = /relic|memorabilia|material|jersey|swatch|game.?used|game.?worn|player.?worn|event.?worn|threads|fabric|\bgu\b|patch|laundry tag|nameplate|logo ?man|\blogos?\b|shield|emblem|button|\bstick\b|net cord|foundations|booklet.*(relic|patch|jersey)|\bbat\b|bat barrel|\bknob\b|glove|cleat|helmet|\bshoe|\bsock|\bhat\b|\bcap\b|\bpants\b|\bball\b|base.*used|\btag\b|\bprime\b|fabric|sweater|\bgear\b|bench|\bseats?\b|\btowel|\bnet\b|\bpuck|\bturf\b|\bbanner/i
+export const MEM_SECTION = /relic|memorabilia|material|jersey|swatch|game.?used|game.?worn|player.?worn|event.?worn|threads|fabric|\bgu\b|patch|laundry tag|nameplate|logo ?man|\blogos?\b|shield|emblem|button|\bstick\b|net cord|foundations|booklet.*(relic|patch|jersey)|\bbat\b|bat barrel|\bknob\b|glove|cleat|helmet|\bshoe|\bsock|\bhat\b|\bcap\b|\bpants\b|\bball\b|base.*used|\btag\b|\bprime\b|fabric|sweater|\bgear\b|bench|\bseats?\b|\btowel|\bnet\b|\bpuck|\bturf\b|\bbanner|nhl glory/i
 
 // Read a free-text note and decide what it says.
 export function classifyText(t) {
@@ -89,6 +89,8 @@ export const MFG_LINES = [
     note: 'Upper Deck Letterman Patches are manufactured letter patches.', url: 'https://collectibles.com/2019-upper-deck-chronology-letterman-patches-manufactured-letter-relics-l-mo-ga-brendan-gallagher' },
   { re: /patch/i, set: /o-pee-chee|\bopc\b/i,
     note: 'O-Pee-Chee patch inserts (trophies, team logos, mascots, draft patches) are manufactured patches.', url: 'https://www.cardboardconnection.com/2012-13-o-pee-chee-hockey-team-logo-patches-guide' },
+  { re: /nhl glory/i, set: /the cup/i,
+    note: 'The Cup NHL Glory shields are manufactured (verified by Trevor, 2026-10-23).' },
   { re: /\bstickers?\b/i, note: 'Stickers are printed for the card, not memorabilia.' }
 ]
 export function manufactured(set, title) {
@@ -112,6 +114,12 @@ function convention(set, title) {
   if (set.sport !== 'Hockey' || !UD_HOCKEY.test(set.name || '')) return null
   if (/o-pee-chee|\bopc\b/i.test(set.name || '')) return null // OPC has no game-used convention; its patches are manufactured
   if (NOT_WORN.test(title)) return null
+  // Verified by Trevor (2026-10-23): veteran shields in The Cup and Ultimate Collection are game-used;
+  // rookie shields are event-worn (NHLPA Rookie Showcase).
+  if (/shield/i.test(title) && /the cup|ultimate collection/i.test(set.name || '') && !/(tag|logo|nameplate|emblem|button|letter|number|flag)/i.test(title.replace(/shield/gi, '')))
+    return ROOKIE_SEC.test(title)
+      ? { k: 'EW', src: 'verified', note: 'Rookie shields in The Cup / Ultimate Collection are event-worn (Rookie Showcase).' }
+      : { k: 'GU', src: 'verified', note: 'Veteran shields in The Cup / Ultimate Collection are game-used.' }
   if (UNSTATED_PART.test(title) && !PART_OK.test(title)) return { k: 'UNK', src: 'none', note: 'Upper Deck does not say this logo, shield, tag or nameplate piece was game-worn, so we do not assume it.' }
   if (!WORN.test(title)) return null
   if (/debut/i.test(title) && /extended/i.test(set.name || '') && (set.year || 0) >= 2026) return { k: 'GU', src: 'maker', note: 'Upper Deck Rookie Debut Jersey program: jersey worn in the player\'s first NHL game.', url: 'https://upperdeck.com/upper-deck-introduces-nhl-rookie-debut-jersey-cards-30-years-after-pioneering-first-ever-game-used-jersey-trading-cards/' }
