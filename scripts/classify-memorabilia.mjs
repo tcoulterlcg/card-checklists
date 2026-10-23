@@ -79,9 +79,40 @@ const UD_HOCKEY = /upper deck|\bud\b|o-pee-chee|\bspx?\b|sp authentic|sp game us
 const WORN = /jersey|patch|material|swatch|relic|memorabilia|threads|fabric|sweater|\btags?\b|\blogos?\b|shield|emblem|nameplate|laundry|letter|numbers?|apparel|gear|premium|prime|booklet|foundations/i
 const ROOKIE_SEC = /\brookie|\brc\b|\brpa\b|young guns|future watch|premieres|rookie gems|hot prospects|draft|debut|prospect|freshmen|future legacy|first impressions|rookie showcase/i
 const UD_SRC = { rookieUrl: 'https://upperdeck.com/nhlpa-rookie-showcase-get-your-skates-on/', vetUrl: 'https://upperdeck.com/2025-26-sp-game-used-hockey/' }
+
+// Lines whose patches are made for the card (never worn). Each is verified against a listing or guide.
+// `set` limits the rule to one product so look-alike titles elsewhere aren't caught.
+export const MFG_LINES = [
+  { re: /team logo jumbo|logo jumbo puzzle/i, set: /black diamond/i,
+    note: 'Black Diamond Team Logo Jumbo patches are manufactured patches, not cut from a worn jersey.', url: 'https://www.comc.com/Cards/Hockey/2024-25/Upper_Deck_Black_Diamond_-_Rookie_Team_Logo_Jumbo_Puzzle_Manufactured_Patches_-_Retro' },
+  { re: /letterman/i, set: /upper deck|\bud\b|chronology/i, need: /patch/i,
+    note: 'Upper Deck Letterman Patches are manufactured letter patches.', url: 'https://collectibles.com/2019-upper-deck-chronology-letterman-patches-manufactured-letter-relics-l-mo-ga-brendan-gallagher' },
+  { re: /patch/i, set: /o-pee-chee|\bopc\b/i,
+    note: 'O-Pee-Chee patch inserts (trophies, team logos, mascots, draft patches) are manufactured patches.', url: 'https://www.cardboardconnection.com/2012-13-o-pee-chee-hockey-team-logo-patches-guide' },
+  { re: /\bstickers?\b/i, note: 'Stickers are printed for the card, not memorabilia.' }
+]
+export function manufactured(set, title) {
+  if (/manufactured|\bmfg\b/i.test(title)) return { k: 'MFG', src: 'title' }
+  for (const r of MFG_LINES) {
+    if (!r.re.test(title) || (r.set && !r.set.test(set.name || '')) || (r.need && !r.need.test(title))) continue
+    return { k: 'MFG', src: 'source', note: r.note, ...(r.url ? { url: r.url } : {}) }
+  }
+  return null
+}
+// Not something a player wears, so the "veteran memorabilia is game-used" convention says nothing about it.
+const NOT_WORN = /\bpucks?\b|net cord|\bbanners?\b|\bseats?\b|\bsticks?\b|materialisticks|etching|draft boards?|\bglass\b|towel|dodgeball|target|carpet|microphone|ticket|mascot/i
+// Jersey parts Upper Deck doesn't describe as game-worn (shields, logos, tags, nameplates…). Many are
+// unworn or come from team-issued stock, so don't assume. Mega Patch / Supreme Patch are cut from
+// game-used jerseys per Upper Deck, so they keep the convention.
+// Also commemorative/theme patches (Hall of Fame, Hockey History, Cup Winners, Captains, Pride of a Nation
+// flags) that are likely made for the card but that we haven't confirmed either way.
+const UNSTATED_PART = /shield|laundry|\btags?\b|nameplate|\blogos?\b|emblem|button|\bletters?\b|\bnumbers?\b|\bflag\b|patch-taculars|logoman|pride of a nation|hall of fame|hockey history|cup winners|captains? patch/i
+const PART_OK = /mega patch|supreme/i
 function convention(set, title) {
   if (set.sport !== 'Hockey' || !UD_HOCKEY.test(set.name || '')) return null
-  if (/manufactured|\bmfg\b/i.test(title)) return { k: 'MFG', src: 'title' }
+  if (/o-pee-chee|\bopc\b/i.test(set.name || '')) return null // OPC has no game-used convention; its patches are manufactured
+  if (NOT_WORN.test(title)) return null
+  if (UNSTATED_PART.test(title) && !PART_OK.test(title)) return { k: 'UNK', src: 'none', note: 'Upper Deck does not say this logo, shield, tag or nameplate piece was game-worn, so we do not assume it.' }
   if (!WORN.test(title)) return null
   if (/debut/i.test(title) && /extended/i.test(set.name || '') && (set.year || 0) >= 2026) return { k: 'GU', src: 'maker', note: 'Upper Deck Rookie Debut Jersey program: jersey worn in the player\'s first NHL game.', url: 'https://upperdeck.com/upper-deck-introduces-nhl-rookie-debut-jersey-cards-30-years-after-pioneering-first-ever-game-used-jersey-trading-cards/' }
   if (ROOKIE_SEC.test(title)) return { k: 'EW', src: 'typical', note: 'Upper Deck rookie memorabilia comes from the NHLPA Rookie Showcase and is event-worn unless the card says otherwise.', url: UD_SRC.rookieUrl }
@@ -98,14 +129,18 @@ for (const f of readdirSync(dataDir)) {
   const ins = bySlug.get(s.slug)
   let changed = false
   for (const sec of s.sections) {
-    const title = sec.title || ''
+    const title = (sec.title || '').replace(/new jersey/gi, 'NJ') // "New Jersey Devils" is a team, not a jersey relic
     const hasMemFlag = (sec.cards || []).some(c => /\bMEM\b/.test(c.x || ''))
-    if (/printing plate/i.test(title) || !(MEM_SECTION.test(title) || hasMemFlag)) { if (sec.mem) { delete sec.mem; changed = true } continue }
+    // Printing plates (incl. The Cup "Rookie Plates - … Cyan/Magenta/Yellow") are metal plates, not memorabilia.
+    const isPlate = /printing plate|\brookie plates\b|\bplates?\b.*\b(cyan|magenta|yellow)\b/i.test(title)
+    if (isPlate || !(MEM_SECTION.test(title) || hasMemFlag)) { if (sec.mem) { delete sec.mem; changed = true } continue }
     let mem = null
     const m = matchInsert(ins, title)
     if (m && m.k) mem = { k: m.k, src: 'tcdb', note: m.note.slice(0, 220) }
-    if (!mem) { const k = classifyText(title); if (k && k !== 'UNK') mem = { k, src: 'title' } }
+    // "SP Game Used" / "In The Game Used" are product names, not a statement about the material.
+    if (!mem) { const k = classifyText(title.replace(/\b(sp|in the) game[- ]used\b/gi, '')); if (k && k !== 'UNK') mem = { k, src: 'title' } }
     if (!mem && sec.odds) { const k = classifyText(sec.odds); if (k && k !== 'UNK') mem = { k, src: 'odds' } }
+    if (!mem) mem = manufactured(s, title)
     if (!mem) mem = convention(s, title)
     if (!mem) mem = m && m.note ? { k: 'UNK', src: 'tcdb', note: m.note.slice(0, 220) } : { k: 'UNK', src: 'none' }
     // card-level overrides the maker has stated

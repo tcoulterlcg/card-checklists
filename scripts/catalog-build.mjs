@@ -67,6 +67,7 @@ for (const f of existsSync(join(root, 'index')) ? readdirSync(join(root, 'index'
   for (const s of sp) catKey.set(key(s.slug, s.sport), { slug: s.slug, sport: s.sport, n: s.cardCount || 0 })
 }
 let added = 0, updated = 0, skippedStatic = 0, empty = 0, cards = 0, replaced = 0, skippedDup = 0
+const newRedirects = {} // replaced catalog slugs -> their replacement (set slugs are public URLs)
 for (const file of dumps) {
   for (const raw of JSON.parse(readFileSync(file, 'utf8'))) {
     if (raw.err) { empty++; continue }
@@ -79,10 +80,14 @@ for (const file of dumps) {
     const n0 = sections.reduce((a, s) => a + s.cards.length, 0)
     const prev = catKey.get(key(slug, raw.sport))
     if (prev && prev.slug !== slug) {
-      if (prev.n >= n0) { skippedDup++; continue }
+      // SportsCardsPro (scp-*) entries are hidden price-guide fragments: a real
+      // checklist always replaces them, whatever their card counts.
+      const prevIsScp = prev.slug.startsWith('scp-') && !slug.startsWith('scp-')
+      if (!prevIsScp && prev.n >= n0) { skippedDup++; continue }
       const pf = join(root, 'sets', shard(prev.slug), prev.slug + '.json')
       if (existsSync(pf)) unlinkSync(pf)
       loadIndex(prev.sport).map.delete(prev.slug)
+      newRedirects[prev.slug] = slug
       replaced++
     }
     catKey.set(key(slug, raw.sport), { slug, sport: raw.sport, n: n0 })
@@ -107,4 +112,10 @@ manifest.sets = Object.values(manifest.sports).reduce((a, s) => a + s.sets, 0)
 manifest.cards = Object.values(manifest.sports).reduce((a, s) => a + s.cards, 0)
 manifest.updated = new Date().toISOString()
 writeFileSync(manifestPath, JSON.stringify(manifest, null, 1))
+if (Object.keys(newRedirects).length) {
+  const rp = new URL('../public/data/redirects.json', import.meta.url)
+  const redirects = existsSync(rp) ? JSON.parse(readFileSync(rp, 'utf8')) : {}
+  Object.assign(redirects, newRedirects)
+  writeFileSync(rp, JSON.stringify(redirects))
+}
 console.log(`catalog: +${added} new, ${updated} updated, ${replaced} replaced fuller, ${skippedDup} dup kept, ${skippedStatic} already static, ${empty} empty; ${cards.toLocaleString()} cards this run; catalog total ${manifest.sets.toLocaleString()} sets / ${manifest.cards.toLocaleString()} cards`)
