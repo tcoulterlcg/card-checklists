@@ -119,6 +119,8 @@ export function CollectionView({ account, indexSets, onOpenAuth, onOpenSet }) {
   const [wants, setWants] = useState(null)
   const [collected, setCollected] = useState(null)
   const [activeSlug, setActiveSlug] = useState(null)
+  const [wantOpen, setWantOpen] = useState({})     // wantlist cards: show all for a set
+  const [confirmRm, setConfirmRm] = useState(null)  // set slug whose whole wantlist is about to be removed
   const [secShown, setSecShown] = useState(12) // big sets have hundreds of parallel sections
   const [setData, setSetData] = useState(null)
   const [grails, setGrails] = useState([])
@@ -245,13 +247,36 @@ export function CollectionView({ account, indexSets, onOpenAuth, onOpenSet }) {
                       <div style={{ height: '100%', width: Math.min(100, (mine / total) * 100) + '%', background: ACCENT }} />
                     </div>
                   )}
-                  <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+                  {/* the actual cards wanted, each removable */}
+                  {g.items.some(i => i.card_n) && (
+                    <ul style={{ listStyle: 'none', margin: '0 0 12px', padding: 0, display: 'grid', gap: 4 }}>
+                      {g.items.filter(i => i.card_n).slice(0, wantOpen[slug] ? undefined : 6).map(i => (
+                        <li key={i.id} style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 13, color: '#D4D4D8' }}>
+                          <span style={{ color: ACCENT_TEXT, fontWeight: 700, minWidth: 44 }}>{String(i.card_n).startsWith('—') ? '—' : '#' + i.card_n}</span>
+                          <span style={{ flex: 1, minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{i.player || ''}{i.section && i.section !== 'Base' ? <span style={{ color: '#6B7080' }}> · {i.section}</span> : null}</span>
+                          <button aria-label={'Remove ' + (i.player || 'card') + ' from wantlist'} onClick={async () => { await removeWant(i.id); myWantlist(session.user.id).then(setWants) }}
+                            style={{ background: 'none', border: 'none', color: '#6B7080', cursor: 'pointer', fontSize: 14, padding: '2px 6px' }}>✕</button>
+                        </li>
+                      ))}
+                      {g.items.filter(i => i.card_n).length > 6 && !wantOpen[slug] && (
+                        <li><button onClick={() => setWantOpen(o => ({ ...o, [slug]: true }))} style={{ background: 'none', border: 'none', color: ACCENT_TEXT, cursor: 'pointer', fontSize: 13, padding: 0, fontFamily: 'inherit' }}>Show all {g.items.filter(i => i.card_n).length}</button></li>
+                      )}
+                    </ul>
+                  )}
+                  <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center' }}>
                     <button style={btnAccent} onClick={() => setActiveSlug(slug)}>Open checklist</button>
                     {onOpenSet && <button style={btnGhost} onClick={() => onOpenSet(slug)}>View set</button>}
-                    <button style={{ ...btnGhost, color: '#a55' }} onClick={async () => {
-                      for (const i of g.items) await removeWant(i.id)
-                      myWantlist(session.user.id).then(setWants)
-                    }}>Remove</button>
+                    {confirmRm === slug ? (
+                      <>
+                        <button style={{ ...btnGhost, color: '#fff', background: '#7f1d1d', borderColor: '#7f1d1d' }} onClick={async () => {
+                          for (const i of g.items) await removeWant(i.id)
+                          setConfirmRm(null); myWantlist(session.user.id).then(setWants)
+                        }}>Remove all {g.items.length}</button>
+                        <button style={btnGhost} onClick={() => setConfirmRm(null)}>Cancel</button>
+                      </>
+                    ) : (
+                      <button style={{ ...btnGhost, color: '#a55' }} onClick={() => setConfirmRm(slug)}>Remove</button>
+                    )}
                   </div>
                 </div>
               )
