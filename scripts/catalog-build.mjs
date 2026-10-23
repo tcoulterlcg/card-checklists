@@ -17,7 +17,7 @@
 // Sets already on the site as static files (same slug, or the same product by
 // merge-browser-dump's year+name key) are skipped: the static versions are the
 // curated ones (Break Ninja parallels, print runs).
-import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs'
+import { readFileSync, writeFileSync, mkdirSync, existsSync, readdirSync, unlinkSync } from 'node:fs'
 import { join } from 'node:path'
 
 const [root, ...dumps] = process.argv.slice(2)
@@ -30,7 +30,7 @@ const sportFile = (sp) => slugify(sp) || 'other'
 
 // Same product key as merge-browser-dump.mjs, so "2024 Topps Chrome Disney" from
 // TCDB matches a static "2024-topps-chrome-disney-entertainment".
-const STOP = new Set(['and', 'the', 'card', 'cards', 'trading', 'checklist', 'checklists', 'x', 'edition', 'series', 'set', 'mlb', 'nba', 'nfl', 'nhl', 'mma', 'autographed', 'photo', 'box', 'ud', 'upper', 'deck', 'panini', 'topps', 'hobby', 'entertainment'])
+const STOP = new Set(['and', 'the', 'card', 'cards', 'trading', 'checklist', 'checklists', 'x', 'edition', 'series', 'set', 'mlb', 'nba', 'nfl', 'nhl', 'mma', 'autographed', 'photo', 'box', 'ud', 'upper', 'deck', 'panini', 'topps', 'hobby', 'entertainment', 'baseball', 'basketball', 'football', 'hockey', 'soccer', 'racing', 'wrestling', 'golf', 'tennis', 'boxing', 'ufc', 'non', 'sport', 'scp'])
 const key = (slug) => slug.toLowerCase().replace(/^(\d{2})-(\d{2})-/, '20$1-$2-').split('-').filter(t => t && !STOP.has(t)).sort().join('-')
 
 const staticIndex = JSON.parse(readFileSync(new URL('../public/data/index.json', import.meta.url), 'utf8')).sets || []
@@ -52,7 +52,13 @@ const loadIndex = (sp) => {
   return indexes[f]
 }
 
-let added = 0, updated = 0, skippedStatic = 0, empty = 0, cards = 0
+// Same product already in the catalog from another source: keep whichever has more cards.
+const catKey = new Map()
+for (const f of existsSync(join(root, 'index')) ? readdirSync(join(root, 'index')) : []) {
+  const sp = JSON.parse(readFileSync(join(root, 'index', f), 'utf8')).sets || []
+  for (const s of sp) catKey.set(key(s.slug), { slug: s.slug, sport: s.sport, n: s.cardCount || 0 })
+}
+let added = 0, updated = 0, skippedStatic = 0, empty = 0, cards = 0, replaced = 0, skippedDup = 0
 for (const file of dumps) {
   for (const raw of JSON.parse(readFileSync(file, 'utf8'))) {
     if (raw.err) { empty++; continue }
@@ -62,6 +68,16 @@ for (const file of dumps) {
     if (!sections.length) { empty++; continue }
     const slug = raw.slug || slugify(raw.name)
     if (staticSlugs.has(slug) || staticKeys.has(key(slug))) { skippedStatic++; continue }
+    const n0 = sections.reduce((a, s) => a + s.cards.length, 0)
+    const prev = catKey.get(key(slug))
+    if (prev && prev.slug !== slug) {
+      if (prev.n >= n0) { skippedDup++; continue }
+      const pf = join(root, 'sets', shard(prev.slug), prev.slug + '.json')
+      if (existsSync(pf)) unlinkSync(pf)
+      loadIndex(prev.sport).map.delete(prev.slug)
+      replaced++
+    }
+    catKey.set(key(slug), { slug, sport: raw.sport, n: n0 })
     const set = { slug, name: raw.name, year: raw.year ?? null, sport: raw.sport, source: raw.source || 'tcdb.com', sections }
     const dir = join(root, 'sets', shard(slug))
     mkdirSync(dir, { recursive: true })
@@ -83,4 +99,4 @@ manifest.sets = Object.values(manifest.sports).reduce((a, s) => a + s.sets, 0)
 manifest.cards = Object.values(manifest.sports).reduce((a, s) => a + s.cards, 0)
 manifest.updated = new Date().toISOString()
 writeFileSync(manifestPath, JSON.stringify(manifest, null, 1))
-console.log(`catalog: +${added} new, ${updated} updated, ${skippedStatic} already static, ${empty} empty; ${cards.toLocaleString()} cards this run; catalog total ${manifest.sets.toLocaleString()} sets / ${manifest.cards.toLocaleString()} cards`)
+console.log(`catalog: +${added} new, ${updated} updated, ${replaced} replaced fuller, ${skippedDup} dup kept, ${skippedStatic} already static, ${empty} empty; ${cards.toLocaleString()} cards this run; catalog total ${manifest.sets.toLocaleString()} sets / ${manifest.cards.toLocaleString()} cards`)
