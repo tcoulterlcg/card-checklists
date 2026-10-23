@@ -21,7 +21,8 @@ export default async function sitemap() {
     for (const s of idx.sets || []) addSet(s.slug)
   } catch {}
   const m = await getJson(RAW + 'manifest.json')
-  const parts = await Promise.all(Object.values(m?.sports || {}).map(s => s.file && getJson(RAW + s.file)))
+  const files = m?.visible?.file ? [m.visible.file] : Object.values(m?.sports || {}).map(s => s.file)
+  const parts = await Promise.all(files.map(f => f && getJson(RAW + f)))
   for (const p of parts) for (const s of (p && p.sets) || []) if (!HIDDEN_SOURCES.has(s.source)) addSet(s.slug)
   try {
     const top = JSON.parse(readFileSync(join(process.cwd(), 'public/data/players/top.json'), 'utf8'))

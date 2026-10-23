@@ -24,6 +24,7 @@
 const seasonEndYear = (name, y) => { const m = /^(\d{4})-(\d{2}|\d{4})\b/.exec(String(name || '')); return m && y === +m[1] ? y + 1 : y }
 import { readFileSync, writeFileSync, mkdirSync, existsSync, readdirSync, unlinkSync } from 'node:fs'
 import { join } from 'node:path'
+import { writeVisibleIndex } from './catalog-visible.mjs'
 
 const [root, ...dumps] = process.argv.slice(2)
 if (!root || !dumps.length) { console.error('usage: node scripts/catalog-build.mjs <catalogDir> <dump.json>...'); process.exit(1) }
@@ -112,6 +113,7 @@ for (const [f, { sport, map }] of Object.entries(indexes)) {
 }
 manifest.sets = Object.values(manifest.sports).reduce((a, s) => a + s.sets, 0)
 manifest.cards = Object.values(manifest.sports).reduce((a, s) => a + s.cards, 0)
+writeVisibleIndex(root, manifest)
 manifest.updated = new Date().toISOString()
 writeFileSync(manifestPath, JSON.stringify(manifest, null, 1))
 if (Object.keys(newRedirects).length) {

@@ -23,6 +23,7 @@
 import { readFileSync, writeFileSync, readdirSync, existsSync, unlinkSync } from 'node:fs'
 import { join } from 'node:path'
 import { classifySet } from '../lib/brands.js'
+import { writeVisibleIndex } from './catalog-visible.mjs'
 
 const [root, flag] = process.argv.slice(2)
 if (!root) { console.error('usage: node scripts/catalog-prune.mjs <catalogDir> [--write]'); process.exit(1) }
@@ -57,7 +58,7 @@ const players = (set) => {
 
 // Real sets: static files + non-scp catalog sets.
 const staticIndex = readJson(new URL('index.json', dataDir)).sets || []
-const indexFiles = readdirSync(join(root, 'index')).filter(f => f.endsWith('.json'))
+const indexFiles = readdirSync(join(root, 'index')).filter(f => f.endsWith('.json') && f !== 'visible.json')
 const indexes = Object.fromEntries(indexFiles.map(f => [f, readJson(join(root, 'index', f))]))
 const real = new Map()
 const addReal = (s, where) => {
@@ -172,6 +173,7 @@ for (const [sport, m] of Object.entries(manifest.sports)) {
   m.cards = idx.sets.reduce((a, s) => a + (s.cardCount || 0), 0)
   totalSets += m.sets; totalCards += m.cards
 }
+writeVisibleIndex(root, manifest)
 manifest.sets = totalSets; manifest.cards = totalCards; manifest.updated = new Date().toISOString()
 writeFileSync(join(root, 'manifest.json'), JSON.stringify(manifest, null, 1))
 

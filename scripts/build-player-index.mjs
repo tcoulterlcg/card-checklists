@@ -101,7 +101,8 @@ async function fetchCatalogSets() {
   const m = await get(RAW + 'manifest.json'); if (!m) return []
   const staticSlugs = new Set(readdirSync(dataDir).filter(f => f.endsWith('.json')).map(f => f.slice(0, -5)))
   const wanted = []
-  for (const sp of Object.values(m.sports || {})) { const ix = sp.file && await get(RAW + sp.file); for (const e of (ix && ix.sets) || []) if (!HIDDEN_SOURCES.has(e.source) && !staticSlugs.has(e.slug)) wanted.push(e.slug) }
+  const files = m.visible && m.visible.file ? [m.visible.file] : Object.values(m.sports || {}).map(sp => sp.file)
+  for (const f of files) { const ix = f && await get(RAW + f); for (const e of (ix && ix.sets) || []) if (!HIDDEN_SOURCES.has(e.source) && !staticSlugs.has(e.slug)) wanted.push(e.slug) }
   const cacheDir = new URL('../node_modules/.cache/catalog-sets/', import.meta.url)
   mkdirSync(cacheDir, { recursive: true })
   const out = []
