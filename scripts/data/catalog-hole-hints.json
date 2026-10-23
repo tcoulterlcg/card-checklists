@@ -3732,71 +3732,6 @@
    "jersey prism"
   ]
  },
- "2016-bowman-platinum-baseball-cards": {
-  "missingPlayers": [
-   "adames",
-   "aiken",
-   "albies",
-   "anderson",
-   "bautista",
-   "bellinger",
-   "clark",
-   "contreras",
-   "cotton",
-   "davidson",
-   "denson",
-   "dubon",
-   "engel",
-   "faria",
-   "frazier",
-   "garcia",
-   "garrett",
-   "giron",
-   "greene",
-   "hoffman",
-   "holmes",
-   "huang",
-   "javier",
-   "jurado",
-   "kingery",
-   "kramer",
-   "mancini",
-   "mcguire",
-   "mckinney",
-   "mcmahon",
-   "musgrove",
-   "naylor",
-   "oneill",
-   "padlo",
-   "paulino",
-   "phillips",
-   "ramirez",
-   "randolph",
-   "raudes",
-   "reed",
-   "renfroe",
-   "ruiz",
-   "santillan",
-   "senzatela",
-   "sheffield",
-   "tate",
-   "tatis",
-   "thompson",
-   "toussaint",
-   "tucker",
-   "verdugo",
-   "walker",
-   "weaver",
-   "whitley",
-   "williams"
-  ],
-  "missingInserts": [
-   "batting",
-   "catcher gear",
-   "ice",
-   "top prospects"
-  ]
- },
  "1984-donruss-baseball-cards": {
   "missingPlayers": [
    "aaron",
@@ -3824,66 +3759,6 @@
    "piece puzzle 43 44 45",
    "piece puzzle 49 50 51",
    "piece puzzle 58 59 60"
-  ]
- },
- "2014-topps-tribute-baseball-cards": {
-  "missingPlayers": [
-   "bauer",
-   "belle",
-   "bogaerts",
-   "bumgarner",
-   "bundy",
-   "butler",
-   "canseco",
-   "cingrani",
-   "clark",
-   "corbin",
-   "cueto",
-   "darnaud",
-   "freeman",
-   "freese",
-   "gattis",
-   "glavin",
-   "glavine",
-   "gregorius",
-   "grilli",
-   "heyward",
-   "hicks",
-   "holland",
-   "lynn",
-   "martinez",
-   "mcgriff",
-   "medlen",
-   "middlebrooks",
-   "minor",
-   "mitchel",
-   "mitchell",
-   "moore",
-   "murphy",
-   "oneill",
-   "phillips",
-   "posada",
-   "raines",
-   "rice",
-   "rizzo",
-   "rosario",
-   "santana",
-   "segura",
-   "shields",
-   "skaggs",
-   "stewart",
-   "teheran",
-   "trumbo",
-   "upton",
-   "wilson",
-   "zimmerman",
-   "zobrist"
-  ],
-  "missingInserts": [
-   "forever young relics",
-   "to pastime",
-   "to throne relic",
-   "traditions"
   ]
  },
  "2016-17-o-pee-chee-hockey-cards": {
@@ -4524,44 +4399,6 @@
    "under armour american"
   ]
  },
- "2014-bowman-platinum-baseball-cards": {
-  "missingPlayers": [
-   "almonte",
-   "ball",
-   "bandilla",
-   "binford",
-   "borenstein",
-   "bostick",
-   "campos",
-   "casali",
-   "danish",
-   "flexen",
-   "garcia",
-   "gilmartin",
-   "gregorio",
-   "healy",
-   "obrien",
-   "ratterree",
-   "rijo",
-   "sandberg",
-   "sano",
-   "schebler",
-   "simmons",
-   "springer",
-   "sweaney",
-   "tapia",
-   "thorpe",
-   "thurman",
-   "vaughn"
-  ],
-  "missingInserts": [
-   "atomic",
-   "camo",
-   "canary",
-   "toolsy die cuts",
-   "top prospects"
-  ]
- },
  "2017-18-leaf-masked-men-hockey-cards": {
   "missingPlayers": [
    "brathwaite",
@@ -4689,37 +4526,6 @@
    "shorts",
    "sitting",
    "superstar sensations"
-  ]
- },
- "2018-bowman-baseball-cards": {
-  "missingPlayers": [
-   "altuve",
-   "betts",
-   "biggio",
-   "bregman",
-   "burdi",
-   "carlson",
-   "claus",
-   "degrom",
-   "deichman",
-   "downs",
-   "elf",
-   "gregorius",
-   "maitan",
-   "segura",
-   "turkey",
-   "uelman",
-   "waters",
-   "woodruff",
-   "yuchengchang"
-  ],
-  "missingInserts": [
-   "festive",
-   "holiday",
-   "paper prospects",
-   "snow",
-   "trending",
-   "turkey"
   ]
  },
  "2018-topps-finest-baseball-mlb-cards": {
@@ -5107,6 +4913,36 @@
    "neon",
    "ruby",
    "sparkle"
+  ]
+ },
+ "2018-bowman-baseball-cards": {
+  "missingPlayers": [
+   "altuve",
+   "betts",
+   "biggio",
+   "bregman",
+   "burdi",
+   "carlson",
+   "claus",
+   "degrom",
+   "deichman",
+   "downs",
+   "elf",
+   "gregorius",
+   "maitan",
+   "segura",
+   "turkey",
+   "uelman",
+   "waters",
+   "woodruff",
+   "yuchengchang"
+  ],
+  "missingInserts": [
+   "festive",
+   "holiday",
+   "paper prospects",
+   "snow",
+   "turkey"
   ]
  },
  "2017-18-ud-premier-hockey": {
@@ -8101,16 +7937,6 @@
    "honoured members signatures"
   ]
  },
- "2015-16-upper-deck-ice-hockey-cards": {
-  "missingPlayers": [
-   "carlson",
-   "richard"
-  ],
-  "missingInserts": [
-   "exquisite collection 2003 04 patch",
-   "signature swatches"
-  ]
- },
  "2016-17-donruss-soccer-full": {
   "missingPlayers": [
    "cavini",
@@ -8284,6 +8110,13 @@
   ],
   "missingInserts": [
    "xs os"
+  ]
+ },
+ "2016-bowman-platinum-baseball-cards": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "batting",
+   "catcher gear"
   ]
  },
  "2018-topps-fire-baseball-mlb-cards": {
@@ -8660,6 +8493,15 @@
   ],
   "missingInserts": [
    "major league"
+  ]
+ },
+ "2014-topps-tribute-baseball-cards": {
+  "missingPlayers": [
+   "glavin",
+   "mitchel"
+  ],
+  "missingInserts": [
+   "to throne relic"
   ]
  },
  "2013-panini-golden-age-baseball-cards": {
@@ -9372,12 +9214,6 @@
    "sahlawi"
   ],
   "missingInserts": []
- },
- "2014-topps-prime-football-cards": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "timers"
-  ]
  },
  "2018-19-panini-contenders-draft-picks-basketball": {
   "missingPlayers": [
@@ -10485,6 +10321,12 @@
  "2016-17-upper-deck-parkhurst-hockey": {
   "missingPlayers": [
    "cizikas"
+  ],
+  "missingInserts": []
+ },
+ "2015-16-upper-deck-ice-hockey-cards": {
+  "missingPlayers": [
+   "richard"
   ],
   "missingInserts": []
  },
