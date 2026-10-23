@@ -2,6 +2,7 @@
 //   1. Same card, same set: if a card (number + player) is flagged RC in one base or
 //      parallel section, its copies in the set's other base/parallel sections are RC too
 //      (a parallel never changes rookie status).
+//   1b. a "Rookie Variations" section names rookies by number: their base cards are RC.
 //   2. Upper Deck Series 1 / 2 hockey: base #201-250 / #451-500 are Young Guns (the
 //      rookie cards) — applied only where Young Guns sit inside the Base section, and
 //      to the base parallels carrying the same player at the same number.
@@ -23,6 +24,8 @@ for (const s of idx) {
   const f = JSON.parse(readFileSync(new URL(s.slug + '.json', D), 'utf8'))
   const rc = new Set()
   for (const sec of f.sections) if (baseish(sec.title)) for (const c of sec.cards) if (c.n && isRC(c.x)) rc.add(norm(c.n) + '|' + norm(c.p))
+  // "Rookie Variations" sections are image variations of the rookies' base cards (same numbers)
+  for (const sec of f.sections) if (/rookie (image )?variations?/i.test(sec.title || '') && !NOT_BASEISH.test(sec.title || '')) for (const c of sec.cards) if (c.n) rc.add(norm(c.n) + '|' + norm(c.p))
   // Young Guns inside Base (UD Series 1 / 2 hockey)
   const ud = /^\d{4}-\d\d Upper Deck Series ([12]) Hockey$/.exec(s.name)
   if (ud) {
