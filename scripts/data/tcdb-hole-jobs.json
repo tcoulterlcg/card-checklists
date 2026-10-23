@@ -1272,7 +1272,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2023-sage-low-series-football",
@@ -1284,7 +1285,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2023-topps-206-high-series-baseball",
@@ -1296,7 +1298,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2023-topps-206-low-series-baseball",
@@ -1308,7 +1311,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2023-topps-brooklyn-collection-baseball",
@@ -1320,7 +1324,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2023-topps-chrome-lids-baseball",
@@ -1332,7 +1337,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2023-topps-chrome-logofractor-edition-baseball",
@@ -1344,7 +1350,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2023-topps-chrome-mcdonalds-all-american-basketball",
@@ -1356,7 +1363,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2023-topps-motif-football",
@@ -1368,7 +1376,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2023-topps-world-classic-baseball",
@@ -1380,7 +1389,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2023-topps-world-classic-global-stars-baseball",
@@ -1392,7 +1402,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2023-topps-x-bob-ross-the-joy-of-baseball",
@@ -1404,7 +1415,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2023-topps-xpectations-baseball",
@@ -1416,7 +1428,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2023-topss-dynamic-duals-baseball",
@@ -1428,7 +1441,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2023-wild-card-auto-mania-pro-look-football",
@@ -1440,7 +1454,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2023-wild-card-wildchrome-pro-look-football",
@@ -3981,8 +3996,9 @@
   "why": [
    "missing inserts: 1965 tall boy, 1969 inserts, 1986 insert, die cut, giovani bernard, le veon bell, prism, prism die cut"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3 (scraping now)"
+  "status": "done",
+  "note": "2013-topps-chrome-football-cards: 700 -> 5971 cards, 10 -> 67 sections, covers 100.0% of current",
+  "at": "2026-10-23"
  },
  {
   "slug": "2025-upper-deck-world-of-sports-volume-2-card",
@@ -3994,7 +4010,8 @@
   "why": [
    "base skips 30 numbers in #26-61 (e.g. 27, 28, 29, 31, 32)"
   ],
-  "status": "todo"
+  "status": "review",
+  "note": "TCDB search found only Volume 1"
  },
  {
   "slug": "2025-bowman-chrome-mega-box-baseball",
@@ -4006,7 +4023,8 @@
   "why": [
    "base skips 30 numbers in #1-66 (e.g. 4, 5, 6, 9, 10)"
   ],
-  "status": "todo"
+  "status": "review",
+  "note": "no separate TCDB set found"
  },
  {
   "slug": "2020-panini-score-football",
@@ -4018,7 +4036,9 @@
   "why": [
    "base skips 30 numbers in #1-330 (e.g. 144, 145, 146, 147, 148)"
   ],
-  "status": "todo"
+  "status": "review",
+  "note": "2020-panini-score-football: 11273 -> 10985 cards, 124 -> 100 sections, covers 41.4% of current",
+  "tcdbSid": 227003
  },
  {
   "slug": "2022-topps-x-wander-franco-baseball",
@@ -4030,7 +4050,9 @@
   "why": [
    "base skips 29 numbers in #3-46 (e.g. 4, 5, 6, 7, 11)"
   ],
-  "status": "todo"
+  "status": "review",
+  "note": "2022-topps-x-wander-franco-baseball: 250 -> 849 cards, 10 -> 21 sections, covers 70.7% of current",
+  "tcdbSid": 347694
  },
  {
   "slug": "2025-bowman-mega-box-baseball",
@@ -4042,7 +4064,8 @@
   "why": [
    "base skips 29 numbers in #1-65 (e.g. 4, 10, 14, 15, 19)"
   ],
-  "status": "todo"
+  "status": "review",
+  "note": "no separate TCDB set found"
  },
  {
   "slug": "25-26-upper-deck-chicago-blackhawks-100th-anniversary-hockey",
