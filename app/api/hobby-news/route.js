@@ -15,7 +15,7 @@ const GN = (q) => 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&
 // ESPN/CBS are only a fallback when a league has no hobby stories that week.
 const HOBBY_WORDS = '("trading card" OR "trading cards" OR "rookie card" OR "card sells" OR "card sold" OR PSA OR "1/1" OR "one-of-one" OR Panini OR Topps OR Bowman OR "Upper Deck" OR "card show" OR "card break")'
 const HOBBY_KEEP = /card|psa|\b1\/1\b|one-of-one|panini|topps|bowman|upper deck|prizm|chrome|autograph|auto\b|patch|rookie|collect|hobby|break|graded|auction|sells?\b|sold\b/i
-const league = (key, label, color, terms, fallback) => ({ key, label, color, feeds: [GN(terms + ' ' + HOBBY_WORDS)], keep: HOBBY_KEEP, fallback })
+const league = (key, label, color, terms, fallback, must) => ({ key, label, color, feeds: [GN(terms + ' ' + HOBBY_WORDS)], keep: must ? { test: (t) => HOBBY_KEEP.test(t) && must.test(t) } : HOBBY_KEEP, fallback })
 
 const SEGMENTS = [
   {
@@ -42,7 +42,7 @@ const SEGMENTS = [
   league('nba', 'NBA', '#f97316', '(NBA OR basketball OR WNBA)', ['https://www.espn.com/espn/rss/nba/news']),
   league('mlb', 'MLB', '#60a5fa', '(MLB OR baseball)', ['https://www.espn.com/espn/rss/mlb/news']),
   league('nhl', 'NHL', '#a78bfa', '(NHL OR hockey)', ['https://www.espn.com/espn/rss/nhl/news']),
-  league('soccer', 'Soccer', '#f43f5e', '(soccer OR "Premier League" OR MLS OR UEFA)', ['https://www.espn.com/espn/rss/soccer/news']),
+  league('soccer', 'Soccer', '#f43f5e', '(soccer OR "Premier League" OR MLS OR UEFA)', ['https://www.espn.com/espn/rss/soccer/news'], /soccer|football club|premier league|\bmls\b|uefa|fifa|world cup|la liga|bundesliga|serie a|champions league|messi|ronaldo|haaland|mbapp|yamal|bellingham|\bfc\b|merlin/i),
   {
     key: 'tcg', label: 'TCG', color: '#e879f9',
     feeds: ['https://pokemonblog.com/feed/', 'https://bleedingcool.com/games/feed/', 'https://comicbook.com/category/gaming/feed/', GN('(Pokemon OR Lorcana OR "One Piece" OR "Magic: The Gathering") ("trading card game" OR TCG OR booster OR expansion)')],
