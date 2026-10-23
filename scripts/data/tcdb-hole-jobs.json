@@ -110,7 +110,9 @@
    "missing inserts: 1969 bazooka panel, 1969 collector, 1969 decal, 1969 deckle edge, award winners, circle color, clubhouse collection relics, color image",
    "198 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "review",
+  "note": "2018-topps-heritage-baseball-cards: 976 -> 6906 cards, 9 -> 81 sections, covers 88.0% of current",
+  "tcdbSid": 157374
  },
  {
   "slug": "2002-bowman-chrome-baseball",
@@ -123,7 +125,9 @@
    "missing inserts: autographed, draft picks, reprints, xfractor",
    "323 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2002-bowman-chrome-baseball: 43 -> 1876 cards, 2 -> 8 sections, covers 95.3% of current",
+  "at": "2026-10-23"
  },
  {
   "slug": "2014-bowman-chrome-baseball-cards",
@@ -148,7 +152,9 @@
   "why": [
    "missing inserts: arizona diamondbacks, batting, camo uniform, catcher gear, celebrating, close up, crowd background, cyan"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2016-topps-opening-baseball-cards: 350 -> 1789 cards, 9 -> 19 sections, covers 98.2% of current",
+  "at": "2026-10-23"
  },
  {
   "slug": "2015-bowman-chrome-baseball-cards",
@@ -187,7 +193,9 @@
    "missing inserts: batting, batting wave, batting xfractor, facing foward, fielding, franchise star, jersey, jersey wave",
    "138 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2012-bowman-chrome-baseball: 790 -> 5639 cards, 6 -> 57 sections, covers 100.0% of current",
+  "at": "2026-10-23"
  },
  {
   "slug": "25-26-o-pee-chee-hockey",
