@@ -411,7 +411,9 @@
   "why": [
    "base skips 63 numbers in #1-297 (e.g. 26, 30, 51, 64, 107)"
   ],
-  "status": "todo"
+  "status": "review",
+  "note": "2023-topps-allen-and-ginter-baseball: 4222 -> 8042 cards, 56 -> 59 sections, covers 69.0% of current",
+  "tcdbSid": 376820
  },
  {
   "slug": "2012-13-pee-chee-hockey-cards",
@@ -631,7 +633,7 @@
    "39 players sold on SCP not on checklist"
   ],
   "status": "done",
-  "note": "2017-topps-heritage-minor-league-baseball: 243 -> 2001 cards, 5 -> 30 sections, covers 99.5% of current",
+  "note": "2017-topps-heritage-minor-league-baseball: 2001 -> 2001 cards, 30 -> 30 sections, covers 100.0% of current",
   "at": "2026-10-23"
  },
  {
@@ -660,7 +662,7 @@
    "5 players sold on SCP not on checklist"
   ],
   "status": "done",
-  "note": "2017-18-topps-chrome-uefa-champions-league-soccer-cards: 285 -> 1361 cards, 5 -> 33 sections, covers 100.0% of current",
+  "note": "2017-18-topps-chrome-uefa-champions-league-soccer-cards: 1361 -> 1361 cards, 33 -> 33 sections, covers 100.0% of current",
   "at": "2026-10-23"
  },
  {
@@ -674,7 +676,7 @@
    "base skips 45 numbers in #1-214 (e.g. 8, 13, 27, 29, 40)"
   ],
   "status": "done",
-  "note": "2021-topps-now-turn-back-the-clock-baseball-cards: 169 -> 713 cards, 1 -> 7 sections, covers 97.6% of current",
+  "note": "2021-topps-now-turn-back-the-clock-baseball-cards: 713 -> 716 cards, 7 -> 7 sections, covers 100.0% of current",
   "at": "2026-10-23"
  },
  {
