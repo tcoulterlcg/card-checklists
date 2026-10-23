@@ -346,7 +346,9 @@
    "missing inserts: ichiro, roy chronicles, superfractor, update 3000 hits club, update star stitches relics",
    "160 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2016-topps-chrome-baseball-cards: 580 -> 5621 cards, 12 -> 107 sections, covers 100.0% of current",
+  "at": "2026-10-23"
  },
  {
   "slug": "2014-chee-platinum-hockey-cards",
@@ -371,7 +373,9 @@
    "missing inserts: award winners, clubhouse collection relics, field background ink, glove w ball ink, holding two bats, holding two bats ink, ink, jersey",
    "49 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "review",
+  "note": "2015-topps-heritage-baseball-cards: 860 -> 5032 cards, 15 -> 54 sections, covers 89.8% of current",
+  "tcdbSid": 97895
  },
  {
   "slug": "2021-rittenhouse-game-of-thrones-iron-anniversary-series-2-entertainment",
@@ -420,7 +424,9 @@
   "why": [
    "base skips 59 numbers in #1-300 (e.g. 93, 108, 109, 112, 116)"
   ],
-  "status": "todo"
+  "status": "review",
+  "note": "2022-topps-allen-and-ginter-baseball: 9605 -> 7303 cards, 103 -> 66 sections, covers 22.0% of current",
+  "tcdbSid": 301281
  },
  {
   "slug": "2022-topps-allen-and-ginter-chrome-baseball",
