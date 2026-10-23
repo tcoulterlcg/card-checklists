@@ -189,6 +189,58 @@ export function mergePlayers(players, sportNames) {
       break
     }
   }
+  // 6–8 (athletes only): small pages that are clearly one big player's card text or misspelling.
+  //  6. name + card descriptor: "Shohei Ohtani HR #12", "Shohei Ohtani 3-HR Game",
+  //     "Fernando Tatis Jr. (PR=3,100)" -> the name's page (descriptor has a digit, # or bracket)
+  //  7. surname only: "Ohtani", "Tatis Jr." -> the one big page with that surname in the sport
+  //  8. one-letter typo on a tiny page (≤5 cards): "Shotei Ohtani", "Patick Mahomes II" -> a page 50x bigger in the same sport
+  const athlete = (k) => fam.get(k) !== 'CHAR' && !cardGame.has(k) && !k.includes('|')
+  const big = [...players.keys()].filter(k => athlete(k) && players.get(k).cards >= 100)
+  const bigSet = new Set(big)
+  const bySurname = new Map(), byToken = new Map()
+  for (const k of big) {
+    const w = k.split(' '), sur = SUFFIX.test(w[w.length - 1]) && w.length > 2 ? w.slice(-2).join(' ') : w[w.length - 1]
+    ;(bySurname.get(sur) || bySurname.set(sur, []).get(sur)).push(k)
+    for (const t of new Set(w)) if (t.length >= 3 && !SUFFIX.test(t)) (byToken.get(t) || byToken.set(t, []).get(t)).push(k)
+  }
+  const lev1 = (a, b) => {   // true when a and b differ by one insert, delete or substitution
+    if (Math.abs(a.length - b.length) > 1 || a === b) return false
+    let i = 0, j = 0, e = 0
+    while (i < a.length && j < b.length) {
+      if (a[i] === b[j]) { i++; j++; continue }
+      if (++e > 1) return false
+      if (a.length > b.length) i++; else if (b.length > a.length) j++; else { i++; j++ }
+    }
+    return e + (a.length - i) + (b.length - j) <= 1
+  }
+  for (const k of players.keys()) {
+    if (!athlete(k) || bigSet.has(k) && players.get(k).cards >= 500) continue
+    const pk = players.get(k), w = k.split(' '), raw = nameOf(k)
+    if (GENERIC.test(k)) continue
+    let target = null
+    // 6
+    if (/[\d#(]/.test(raw)) for (let i = w.length - 1; i >= 2 && !target; i--) {
+      const head = w.slice(0, i).join(' ')
+      if (bigSet.has(head) && sameFamily(k, head) && players.get(head).cards >= 10 * pk.cards) target = head
+    }
+    // 7
+    if (!target && (w.length === 1 || (w.length === 2 && SUFFIX.test(w[1]))) && k.length >= 4) {
+      const c = (bySurname.get(k) || []).filter(x => x !== k && sameFamily(k, x))
+      const top = c.sort((a, b) => players.get(b).cards - players.get(a).cards)
+      if (top.length && players.get(top[0]).cards >= 20 * pk.cards && (top.length === 1 || players.get(top[1]).cards * 10 <= players.get(top[0]).cards) && teamsAgree(k, top[0])) target = top[0]
+    }
+    // 8
+    // (tiny pages only: "Zoran Dragić" is Goran's brother, not a typo — real people get more than a few cards)
+    if (!target && w.length >= 2 && k.length >= 8 && pk.cards <= 5 && !/[\d#(]/.test(raw)) {
+      const seen = new Set()
+      for (const t of w) for (const c of byToken.get(t) || []) {
+        if (seen.has(c) || c === k) continue
+        seen.add(c)
+        if (lev1(k, c) && sameFamily(k, c) && players.get(c).cards >= 50 * pk.cards && teamsAgree(k, c)) { target = c; break }
+      }
+    }
+    if (target) union(k, target)
+  }
   const out = new Map()
   for (const k of players.keys()) { const r = find(k); if (r !== k) out.set(k, r) }
   if (process.env.PLAYER_MERGE_LOG) {

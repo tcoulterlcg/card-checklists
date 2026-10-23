@@ -112,10 +112,12 @@ for (const [k, st] of stats) {
 const suffixInto = new Map() // plain key -> suffixed key
 for (const [k, st] of stats) {
   if (SUFFIX.test(k)) continue
-  const forms = ['jr', 'sr', 'ii', 'iii', 'iv'].map(x => k + ' ' + x).filter(x => stats.has(x))
+  // only suffixed forms in this player's sport count ("Patrick Mahomes Sr." the baseball dad
+  // doesn't stop "Patrick Mahomes" folding into "Patrick Mahomes II")
+  const forms = ['jr', 'sr', 'ii', 'iii', 'iv'].map(x => k + ' ' + x).filter(x => stats.has(x) && primarySport(stats.get(x)) === primarySport(st))
+    .filter(x => !x.endsWith(' sr') || [...stats.get(x).sports.values()].reduce((a, b) => a + b, 0) >= 10)   // a 1-card "Sr." typo isn't a second person
   if (forms.length !== 1 || forms[0].endsWith(' sr')) continue
   const t = stats.get(forms[0])
-  if (primarySport(t) !== primarySport(st)) continue
   if (st.min > t.max + 1 || t.min > st.max + 1) continue   // different eras: different people
   suffixInto.set(k, forms[0])
 }
