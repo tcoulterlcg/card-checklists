@@ -73,7 +73,8 @@ for (const f of readdirSync(dataDir)) {
     total += keep.length
   }
   s.sections = (s.sections || []).filter(x => x.cards.length)
-  const inc = total < 10 && !TCG.test(s.sport || '')
+  // incompleteWhy = flagged on purpose (e.g. fix-breakninja.mjs truncation); keep it hidden
+  const inc = (total < 10 && !TCG.test(s.sport || '')) || !!s.incompleteWhy
   if (!!s.incomplete !== inc) { if (inc) s.incomplete = true; else delete s.incomplete; changed = true }
   if (inc) stats.incomplete++
   if (changed && !DRY) writeFileSync(p, JSON.stringify(s))

@@ -183,6 +183,8 @@ export function Select({ value, onChange, options, label, ariaLabel, defaultValu
   useEffect(() => {
     if (!open) return
     setFocus(Math.max(0, shown.findIndex(o => String(o.value) === String(value))))
+    // React ignores autoFocus on a <div>: focus the list so arrow keys work in short menus
+    if (!searchable && !mobile) { const id = requestAnimationFrame(() => listRef.current?.focus()); return () => cancelAnimationFrame(id) }
   }, [open]) // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
@@ -207,7 +209,7 @@ export function Select({ value, onChange, options, label, ariaLabel, defaultValu
               aria-label={'Search ' + (ariaLabel || label || 'options')}
               style={{ height: 40, padding: '0 12px', marginBottom: 4, background: BG, color: TEXT, border: '1px solid ' + LINE, borderRadius: 8, fontSize: 16, boxSizing: 'border-box', flexShrink: 0 }} />
           )}
-          <div ref={listRef} role="listbox" aria-label={ariaLabel || label} tabIndex={searchable ? -1 : 0} autoFocus={!searchable && !mobile}
+          <div ref={listRef} role="listbox" aria-label={ariaLabel || label} tabIndex={searchable ? -1 : 0}
             style={{ display: 'flex', flexDirection: 'column', gap: 2, outline: 'none' }}>
             {shown.map((o, i) => {
               const on = String(o.value) === String(value)

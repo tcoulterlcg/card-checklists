@@ -5,7 +5,14 @@
 import { useEffect, useState } from 'react'
 import { supa, grailfindrConnectUrl } from '../../../lib/supa'
 
-const safePath = (p) => (p && p.startsWith('/') && !p.startsWith('//') && !p.includes('\\') ? p : '/')
+// Only same-site paths. Browsers drop tabs/newlines while parsing, so "/\t/evil.com"
+// would become "//evil.com" — resolve it and compare origins instead of pattern-matching.
+const safePath = (p) => {
+  if (!p || /[\x00-\x1f\\]/.test(p)) return '/'
+  try { const u = new URL(p, window.location.origin); return u.origin === window.location.origin ? u.pathname + u.search + u.hash : '/' } catch { return '/' }
+}
+// GrailFindr error codes -> fixed text (never echo the URL's own wording onto the page).
+const ERRORS = { access_denied: 'Sign-in was cancelled.', expired: 'That sign-in link expired. Try again.' }
 
 export default function GrailFindrHandoff() {
   const [error, setError] = useState('')
@@ -16,7 +23,7 @@ export default function GrailFindrHandoff() {
     window.history.replaceState(null, '', window.location.pathname)
     const tokenHash = frag.get('token_hash')
     const next = safePath(frag.get('next'))
-    if (!tokenHash) { setError(frag.get('error') || 'That sign-in link is missing or expired.'); return }
+    if (!tokenHash) { setError(ERRORS[frag.get('error')] || 'That sign-in link is missing or expired.'); return }
     supa.auth.verifyOtp({ token_hash: tokenHash, type: 'magiclink' }).then(({ error }) => {
       if (error) setError('That sign-in link expired. Try again.')
       else window.location.replace(next)

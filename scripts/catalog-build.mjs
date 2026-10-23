@@ -20,6 +20,8 @@
 //
 // After every build, run scripts/catalog-prune.mjs: it removes price-guide
 // fragments (one insert listed as its own "set") of sets the site already has.
+// Seasons ("2005-06") are filed under their end year, matching the static sets.
+const seasonEndYear = (name, y) => { const m = /^(\d{4})-(\d{2}|\d{4})\b/.exec(String(name || '')); return m && y === +m[1] ? y + 1 : y }
 import { readFileSync, writeFileSync, mkdirSync, existsSync, readdirSync, unlinkSync } from 'node:fs'
 import { join } from 'node:path'
 
@@ -91,7 +93,7 @@ for (const file of dumps) {
       replaced++
     }
     catKey.set(key(slug, raw.sport), { slug, sport: raw.sport, n: n0 })
-    const set = { slug, name: String(raw.name).replace(/^\s*prices for\s*/i, '').replace(/\s+cards?$/i, '').trim(), year: raw.year ?? null, sport: raw.sport, source: raw.source || 'tcdb.com', sections }
+    const set = { slug, name: String(raw.name).replace(/^\s*prices for\s*/i, '').replace(/\s+cards?$/i, '').trim(), year: seasonEndYear(raw.name, raw.year ?? null), sport: raw.sport, source: raw.source || 'tcdb.com', sections }
     const dir = join(root, 'sets', shard(slug))
     mkdirSync(dir, { recursive: true })
     const p = join(dir, slug + '.json')

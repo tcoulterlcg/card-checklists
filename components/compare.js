@@ -31,7 +31,11 @@ async function resolvePlayer(name) {
 // Every card row for one player, with the fields the comparison needs.
 function useRows(player, setMeta) {
   const [shard, setShard] = useState(null)
-  useEffect(() => { setShard(null); if (player) loadShard(player.shard).then(setShard) }, [player && player.id, player && player.shard])
+  useEffect(() => {
+    let live = true   // switching players quickly: the earlier player's shard must not land last
+    setShard(null); if (player) loadShard(player.shard).then(x => { if (live) setShard(x) })
+    return () => { live = false }
+  }, [player && player.id, player && player.shard])
   return useMemo(() => {
     if (!player || !shard) return null
     const out = []

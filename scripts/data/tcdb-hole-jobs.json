@@ -1,5 +1,2669 @@
 [
  {
+  "slug": "19-20-upper-deck-sp-game-used-chl-hockey",
+  "name": "2019-20 SP Game Used CHL Hockey",
+  "year": 2020,
+  "sport": "Hockey",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "20-21-leaf-superlative-hockey",
+  "name": "2020-21 Leaf ITG Superlative Hockey",
+  "year": 2021,
+  "sport": "Hockey",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "20-21-pro-set-memories-hockey",
+  "name": "2020-21 Pro Set Memories Hockey",
+  "year": 2021,
+  "sport": "Hockey",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "20-21-upper-deck-overtime-wave-1-hockey-322-total-cards",
+  "name": "2020-21 Upper Deck Overtime Wave 1 Hockey",
+  "year": 2021,
+  "sport": "Hockey",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2019-leaf-trinity-baseball-database-full",
+  "name": "2019 Leaf Trinity Baseball",
+  "year": 2019,
+  "sport": "Baseball",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2020-leaf-flash-baseball",
+  "name": "2020 Leaf Flash Baseball",
+  "year": 2020,
+  "sport": "Baseball",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2020-leaf-metal-perfect-game-all-american-classic-baseball",
+  "name": "2020 Leaf Metal Perfect Game All-American Classic Baseball",
+  "year": 2020,
+  "sport": "Baseball",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2020-leaf-trinity-baseball",
+  "name": "2020 Leaf Trinity Baseball",
+  "year": 2020,
+  "sport": "Baseball",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2020-leaf-valiant-baseball",
+  "name": "2020 Leaf Valiant Baseball",
+  "year": 2020,
+  "sport": "Baseball",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2021-22-onyx-vintage-basketball-card",
+  "name": "2021-22 Onyx Vintage Basketball",
+  "year": 2022,
+  "sport": "Basketball",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2021-22-panini-immaculate-collection-collegiate-basketball",
+  "name": "2021-22 Panini Immaculate Collection Collegiate Basketball",
+  "year": 2022,
+  "sport": "Basketball",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2021-leaf-draft-football-card",
+  "name": "2021 Leaf Draft Football",
+  "year": 2021,
+  "sport": "Football",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2021-leaf-flash-baseball",
+  "name": "2021 Leaf Flash Baseball",
+  "year": 2021,
+  "sport": "Baseball",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2021-leaf-flash-football",
+  "name": "2021 Leaf Flash Football",
+  "year": 2021,
+  "sport": "Football",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2021-leaf-memories-college-football",
+  "name": "2021 Leaf Memories College Football",
+  "year": 2021,
+  "sport": "Football",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2021-leaf-metal-draft-baseball",
+  "name": "2021 Leaf Metal Draft Baseball",
+  "year": 2021,
+  "sport": "Baseball",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2021-leaf-metal-draft-football",
+  "name": "2021 Leaf Metal Draft Football",
+  "year": 2021,
+  "sport": "Football",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2021-leaf-proset-college-football-blaster",
+  "name": "2021 Leaf ProSet College Blaster Football",
+  "year": 2021,
+  "sport": "Football",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2021-leaf-trinity-baseball",
+  "name": "2021 Leaf Trinity Baseball",
+  "year": 2021,
+  "sport": "Baseball",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2021-leaf-trinity-football",
+  "name": "2021 Leaf Trinity Football",
+  "year": 2021,
+  "sport": "Football",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2021-leaf-ultimate-draft-football",
+  "name": "2021 Leaf Ultimate Draft Football",
+  "year": 2021,
+  "sport": "Football",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2021-leaf-valiant-baseball",
+  "name": "2021 Leaf Valiant Baseball",
+  "year": 2021,
+  "sport": "Baseball",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2021-leaf-valiant-football",
+  "name": "2021 Leaf Valiant Football",
+  "year": 2021,
+  "sport": "Football",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2021-onyx-vintage-baseball",
+  "name": "2021 Onyx Vintage Baseball",
+  "year": 2021,
+  "sport": "Baseball",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2021-onyx-vintage-extended-baseball",
+  "name": "2021 Onyx Vintage Extended Baseball",
+  "year": 2021,
+  "sport": "Baseball",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2021-onyx-vintage-football-card",
+  "name": "2021 Onyx Vintage Football",
+  "year": 2021,
+  "sport": "Football",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2021-panini-prizm-wnba-basketball-card",
+  "name": "2021 Panini Prizm WNBA Basketball",
+  "year": 2021,
+  "sport": "Basketball",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2021-panini-stars-and-stripes-baseball",
+  "name": "2021 Panini Stars and Stripes Baseball",
+  "year": 2021,
+  "sport": "Baseball",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2021-pro-set-baseball-blaster",
+  "name": "2021 Pro Set Blaster Baseball",
+  "year": 2021,
+  "sport": "Baseball",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2021-pro-set-metal-baseball",
+  "name": "2021 Pro Set Metal Baseball",
+  "year": 2021,
+  "sport": "Baseball",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2021-pro-set-metal-football",
+  "name": "2021 Pro Set Metal Football",
+  "year": 2021,
+  "sport": "Football",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2021-pro-set-power-football",
+  "name": "2021 Pro Set Power Football",
+  "year": 2021,
+  "sport": "Football",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2021-sage-aspire-football",
+  "name": "2021 Sage Aspire Football",
+  "year": 2021,
+  "sport": "Football",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2021-sage-hit-premier-draft-high-series-football",
+  "name": "2021 Sage Hit Premier Draft High Series Football",
+  "year": 2021,
+  "sport": "Football",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2021-sage-hit-premier-draft-low-series-football-card",
+  "name": "2021 Sage Hit Premier Draft Low Series Football",
+  "year": 2021,
+  "sport": "Football",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2021-topps-brooklyn-collection-baseball",
+  "name": "2021 Topps Brooklyn Collection Baseball",
+  "year": 2021,
+  "sport": "Baseball",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2021-topps-finest-basketball",
+  "name": "2021 Topps Finest Basketball",
+  "year": 2021,
+  "sport": "Basketball",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2021-topps-spotlight-70-andy-friedman-baseball",
+  "name": "2021 Topps Spotlight 70 Andy Friedman Baseball",
+  "year": 2021,
+  "sport": "Baseball",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2021-topps-transcendent-collection-hof-baseball",
+  "name": "2021 Topps Transcendent Collection HOF Baseball",
+  "year": 2021,
+  "sport": "Baseball",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2021-topps-x-derek-jeter-baseball",
+  "name": "2021 Topps X Derek Jeter Baseball",
+  "year": 2021,
+  "sport": "Baseball",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2021-topps-x-trevor-lawrence-football-card",
+  "name": "2021 Topps X Trevor Lawrence Football",
+  "year": 2021,
+  "sport": "Football",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2022-bowman-chrome-sapphire-edition-baseball",
+  "name": "2022 Bowman Chrome Sapphire Baseball",
+  "year": 2022,
+  "sport": "Baseball",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2022-bowman-npb-nippon-professional-baseball",
+  "name": "2022 Bowman NPB Nippon Professional Baseball",
+  "year": 2022,
+  "sport": "Baseball",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2022-fanatics-under-wraps-nhl-series-2-autographed-puck-hockey",
+  "name": "2022 Fanatics Under Wraps NHL Series 2 Autographed Puck Hockey",
+  "year": 2022,
+  "sport": "Hockey",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2022-fanatics-under-wraps-series-2-baseball",
+  "name": "2022 Fanatics Under Wraps Series 2 Baseball",
+  "year": 2022,
+  "sport": "Baseball",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2022-leaf-draft-football",
+  "name": "2022 Leaf Draft Football",
+  "year": 2022,
+  "sport": "Football",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2022-leaf-exotic-football",
+  "name": "2022 Leaf Exotic Football",
+  "year": 2022,
+  "sport": "Football",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2022-leaf-expo-ink-hockey",
+  "name": "2022 Leaf Expo Ink Hockey",
+  "year": 2022,
+  "sport": "Hockey",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2022-leaf-flash-football",
+  "name": "2022 Leaf Flash Football",
+  "year": 2022,
+  "sport": "Football",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2022-leaf-metal-draft-football",
+  "name": "2022 Leaf Metal Draft Football",
+  "year": 2022,
+  "sport": "Football",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2022-leaf-metal-perfect-game-aac-baseball",
+  "name": "2022 Leaf Metal Perfect Game AAC Baseball",
+  "year": 2022,
+  "sport": "Baseball",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2022-leaf-trinity-baseball",
+  "name": "2022 Leaf Trinity Baseball",
+  "year": 2022,
+  "sport": "Baseball",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2022-leaf-trinity-football",
+  "name": "2022 Leaf Trinity Football",
+  "year": 2022,
+  "sport": "Football",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2022-leaf-ultimate-draft-football",
+  "name": "2022 Leaf Ultimate Draft Football",
+  "year": 2022,
+  "sport": "Football",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2022-leaf-valiant-football",
+  "name": "2022 Leaf Valiant Football",
+  "year": 2022,
+  "sport": "Football",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2022-leaf-vivid-baseball",
+  "name": "2022 Leaf Vivid Baseball",
+  "year": 2022,
+  "sport": "Baseball",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2022-onyx-vintage-baseball",
+  "name": "2022 Onyx Vintage Baseball",
+  "year": 2022,
+  "sport": "Baseball",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2022-onyx-vintage-extended-baseball",
+  "name": "2022 Onyx Vintage Extended Baseball",
+  "year": 2022,
+  "sport": "Baseball",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2022-onyx-vintage-football",
+  "name": "2022 Onyx Vintage Football",
+  "year": 2022,
+  "sport": "Football",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2022-proset-metal-football",
+  "name": "2022 Proset Metal Football",
+  "year": 2022,
+  "sport": "Football",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2022-topps-black-and-white-baseball",
+  "name": "2022 Topps Black And White Baseball",
+  "year": 2022,
+  "sport": "Baseball",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2022-topps-dynamic-duals-baseball",
+  "name": "2022 Topps Dynamic Duals Baseball",
+  "year": 2022,
+  "sport": "Baseball",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2022-topps-mlb-rookie-of-the-year-75th-anniversary-baseball",
+  "name": "2022 Topps MLB Rookie Of The Year 75th Anniversary Baseball",
+  "year": 2022,
+  "sport": "Baseball",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2022-topps-nscc-bowman-chrome-redemption-baseball",
+  "name": "2022 Topps NSCC Bowman Chrome Redemption Baseball",
+  "year": 2022,
+  "sport": "Baseball",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2022-topps-x-bobby-witt-collection-baseball",
+  "name": "2022 Topps X Bobby Witt Collection Baseball",
+  "year": 2022,
+  "sport": "Baseball",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2022-topps-x-chet-holmgren-curated-basketball",
+  "name": "2022 Topps X Chet Holmgren Curated Basketball",
+  "year": 2022,
+  "sport": "Basketball",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "20221-leaf-metal-perfect-game-all-american-classic-baseball",
+  "name": "2022 20221 Leaf Metal Perfect Game All American Classic Baseball",
+  "year": 2022,
+  "sport": "Baseball",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "20222-bowman-chrome-x-baseball",
+  "name": "2022 20222 Bowman Chrome X Baseball",
+  "year": 2022,
+  "sport": "Baseball",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "20222-topps-uk-edition-baseball",
+  "name": "2022 20222 Topps UK Edition Baseball",
+  "year": 2022,
+  "sport": "Baseball",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2023-bowman-chrome-sapphire-edition-baseball",
+  "name": "2023 Bowman Chrome Sapphire Baseball",
+  "year": 2023,
+  "sport": "Baseball",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2023-bowman-sapphire-edition-baseball",
+  "name": "2023 Bowman Sapphire Edition Baseball",
+  "year": 2023,
+  "sport": "Baseball",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2023-bowman-university-alabama-football",
+  "name": "2023 Bowman University Alabama Football",
+  "year": 2023,
+  "sport": "Football",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2023-bowman-university-chrome-sapphire-football",
+  "name": "2023 Bowman University Chrome Sapphire Football",
+  "year": 2023,
+  "sport": "Football",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2023-bowmans-best-university-football",
+  "name": "2023 Bowmans Best University Football",
+  "year": 2023,
+  "sport": "Football",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2023-leaf-a-bronx-legacy-baseball",
+  "name": "2023 Leaf A Bronx Legacy Baseball",
+  "year": 2023,
+  "sport": "Baseball",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2023-leaf-draft-blaster-football",
+  "name": "2023 Leaf Draft Blaster Football",
+  "year": 2023,
+  "sport": "Football",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2023-leaf-eclectic-baseball",
+  "name": "2023 Leaf Eclectic Baseball",
+  "year": 2023,
+  "sport": "Baseball",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2023-leaf-eclectic-football",
+  "name": "2023 Leaf Eclectic Football",
+  "year": 2023,
+  "sport": "Football",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2023-leaf-exotic-baseball",
+  "name": "2023 Leaf Exotic Baseball",
+  "year": 2023,
+  "sport": "Baseball",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2023-leaf-exotic-football",
+  "name": "2023 Leaf Exotic Football",
+  "year": 2023,
+  "sport": "Football",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2023-leaf-metal-baseball",
+  "name": "2023 Leaf Metal Baseball",
+  "year": 2023,
+  "sport": "Baseball",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2023-leaf-metal-football",
+  "name": "2023 Leaf Metal Football",
+  "year": 2023,
+  "sport": "Football",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2023-leaf-perfect-game-all-american-baseball-card",
+  "name": "2023 Leaf Perfect Game All American Baseball",
+  "year": 2023,
+  "sport": "Baseball",
+  "cards": 251,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2023-leaf-perfect-game-bonus-box-baseball-card",
+  "name": "2023 Leaf Perfect Game Bonus Box Baseball",
+  "year": 2023,
+  "sport": "Baseball",
+  "cards": 251,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2023-leaf-signature-series-baseball",
+  "name": "2023 Leaf Signature Series Baseball",
+  "year": 2023,
+  "sport": "Baseball",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2023-leaf-signature-series-football",
+  "name": "2023 Leaf Signature Series Football",
+  "year": 2023,
+  "sport": "Football",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2023-leaf-trinity-baseball-card",
+  "name": "2023 Leaf Trinity Baseball",
+  "year": 2023,
+  "sport": "Baseball",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2023-leaf-trinity-basketball",
+  "name": "2023 Leaf Trinity Basketball",
+  "year": 2023,
+  "sport": "Basketball",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2023-leaf-trinity-football-mega-box",
+  "name": "2023 Leaf Trinity Mega Box Football",
+  "year": 2023,
+  "sport": "Football",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2023-leaf-trinity-mega-box-baseball-card",
+  "name": "2023 Leaf Trinity Mega Box Baseball",
+  "year": 2023,
+  "sport": "Baseball",
+  "cards": 251,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2023-leaf-ultimate-hockey",
+  "name": "2023 Leaf Ultimate Hockey",
+  "year": 2023,
+  "sport": "Hockey",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2023-leaf-vivid-football",
+  "name": "2023 Leaf Vivid Football",
+  "year": 2023,
+  "sport": "Football",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2023-onyx-vintage-extended-baseball",
+  "name": "2023 Onyx Vintage Extended Baseball",
+  "year": 2023,
+  "sport": "Baseball",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2023-pro-set-metal-football",
+  "name": "2023 Pro Set Metal Football",
+  "year": 2023,
+  "sport": "Football",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2023-pro-set-pure-football",
+  "name": "2023 Pro Set Pure Football",
+  "year": 2023,
+  "sport": "Football",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2023-sage-high-series-football",
+  "name": "2023 Sage High Series Football",
+  "year": 2023,
+  "sport": "Football",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2023-sage-low-series-football",
+  "name": "2023 Sage Low Series Football",
+  "year": 2023,
+  "sport": "Football",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2023-topps-206-high-series-baseball",
+  "name": "2023 Topps 206 High Series Baseball",
+  "year": 2023,
+  "sport": "Baseball",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2023-topps-206-low-series-baseball",
+  "name": "2023 Topps 206 Low Series Baseball",
+  "year": 2023,
+  "sport": "Baseball",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2023-topps-brooklyn-collection-baseball",
+  "name": "2023 Topps Brooklyn Collection Baseball",
+  "year": 2023,
+  "sport": "Baseball",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2023-topps-chrome-lids-baseball",
+  "name": "2023 Topps Chrome Lids Baseball",
+  "year": 2023,
+  "sport": "Baseball",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2023-topps-chrome-logofractor-edition-baseball",
+  "name": "2023 Topps Chrome LogoFractor Edition Baseball",
+  "year": 2023,
+  "sport": "Baseball",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2023-topps-chrome-mcdonalds-all-american-basketball",
+  "name": "2023 Topps Chrome McDonalds All American Basketball",
+  "year": 2023,
+  "sport": "Basketball",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2023-topps-motif-football",
+  "name": "2023 Topps Motif Football",
+  "year": 2023,
+  "sport": "Football",
+  "cards": 251,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2023-topps-world-classic-baseball",
+  "name": "2023 Topps World Baseball Classic",
+  "year": 2023,
+  "sport": "Baseball",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2023-topps-world-classic-global-stars-baseball",
+  "name": "2023 Topps World Baseball Classic Global Stars",
+  "year": 2023,
+  "sport": "Baseball",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2023-topps-x-bob-ross-the-joy-of-baseball",
+  "name": "2023 Topps x Bob Ross: The Joy of Baseball",
+  "year": 2023,
+  "sport": "Baseball",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2023-topps-xpectations-baseball",
+  "name": "2023 Topps Xpectations Baseball",
+  "year": 2023,
+  "sport": "Baseball",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2023-topss-dynamic-duals-baseball",
+  "name": "2023 Topss Dynamic Duals Baseball",
+  "year": 2023,
+  "sport": "Baseball",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2023-wild-card-auto-mania-pro-look-football",
+  "name": "2023 Wild Card Auto Mania Pro Look Football",
+  "year": 2023,
+  "sport": "Football",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2023-wild-card-wildchrome-pro-look-football",
+  "name": "2023 Wild Card WildChrome Pro Look Football",
+  "year": 2023,
+  "sport": "Football",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2025-bowmans-best-university-football-card",
+  "name": "2025 Bowmans Best University Football",
+  "year": 2025,
+  "sport": "Football",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2025-leaf-15tth-anniversary-multiple-sport",
+  "name": "2025 Leaf 15tth Anniversary Multiple Sport",
+  "year": 2025,
+  "sport": "Multi-Sport",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2025-leaf-electrum-multiple-sport",
+  "name": "2025 Leaf Electrum Multiple Sport",
+  "year": 2025,
+  "sport": "Multi-Sport",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2025-leaf-history-book-sports-edition-chapter-2-multiple-sport",
+  "name": "2025 Leaf History Book Sports Edition Chapter 2 Multiple Sport",
+  "year": 2025,
+  "sport": "Multi-Sport",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2025-leaf-in-the-game-used-sports-multiple-sport",
+  "name": "2025 Leaf ITG Used Sports Multiple Sport",
+  "year": 2025,
+  "sport": "Multi-Sport",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2025-leaf-metal-authentics-volume-2-multiple-sport",
+  "name": "2025 Leaf Metal Authentics Volume 2 Multiple Sport",
+  "year": 2025,
+  "sport": "Multi-Sport",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2025-leaf-metal-halloween-multiple-sport",
+  "name": "2025 Leaf Metal Halloween Multiple Sport",
+  "year": 2025,
+  "sport": "Multi-Sport",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2025-leaf-metal-independence-day-multiple-sport",
+  "name": "2025 Leaf Metal Independence Day Multiple Sport",
+  "year": 2025,
+  "sport": "Multi-Sport",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2025-leaf-metal-sports-heroes-multisport",
+  "name": "2025 Leaf Metal Sports Heroes Multisport",
+  "year": 2025,
+  "sport": "Multi-Sport",
+  "cards": 251,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2025-leaf-metal-women-of-sport-multiple-sport",
+  "name": "2025 Leaf Metal Women Of Sport Multiple Sport",
+  "year": 2025,
+  "sport": "Multi-Sport",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2025-leaf-pearl-multiple-sport",
+  "name": "2025 Leaf Pearl Multiple Sport",
+  "year": 2025,
+  "sport": "Multi-Sport",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2025-leaf-signature-series-multiple-sport",
+  "name": "2025 Leaf Signature Series Multiple Sport",
+  "year": 2025,
+  "sport": "Multi-Sport",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2025-panini-combat-anthology-card",
+  "name": "2025 Panini Combat Anthology UFC",
+  "year": 2025,
+  "sport": "UFC",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2025-panini-contenders-premier-fighters-league-mma-card",
+  "name": "2025 Panini Contenders Premier Fighters League MMA UFC",
+  "year": 2025,
+  "sport": "UFC",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2025-panini-national-convention-silver-packs-multiple-sport",
+  "name": "2025 Panini National Convention Silver Packs Multiple Sport",
+  "year": 2025,
+  "sport": "Multi-Sport",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2025-panini-university-of-texas-nil-multiple-sport",
+  "name": "2025 Panini University Of Texas NIL Multiple Sport",
+  "year": 2025,
+  "sport": "Multi-Sport",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2025-topps-chrome-bundesliga-soccer-card",
+  "name": "2025 Topps Chrome Bundesliga Soccer",
+  "year": 2025,
+  "sport": "Soccer",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2025-topps-decades-1990s-uefa-club-competitions-soccer-card",
+  "name": "2025 Topps Decades 1990s UEFA Club Competitions Soccer",
+  "year": 2025,
+  "sport": "Soccer",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2025-topps-decades-premier-league-90s-edition-soccer-card",
+  "name": "2025 Topps Decades Premier League 90s Edition Soccer",
+  "year": 2025,
+  "sport": "Soccer",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2025-topps-mlb-mvp-collection-baseball-card",
+  "name": "2025 Topps MLB MVP Collection Baseball",
+  "year": 2025,
+  "sport": "Baseball",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2025-upper-deck-allure-se-multiple-sport",
+  "name": "2025 Upper Deck Allure SE Multiple Sport",
+  "year": 2025,
+  "sport": "Multi-Sport",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2025-upper-deck-goodwin-champions-card",
+  "name": "2025 Upper Deck Goodwin Champions",
+  "year": 2025,
+  "sport": "Multi-Sport",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2025-upper-deck-sp-signature-edition-aew-wrestling-card",
+  "name": "2025 SP Signature Edition AEW Wrestling",
+  "year": 2025,
+  "sport": "Wrestling",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2026-donruss-nwsl-soccer-card",
+  "name": "2026 Donruss NWSL Soccer",
+  "year": 2026,
+  "sport": "Soccer",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2026-donruss-wnba-basketball-card",
+  "name": "2026 Donruss WNBA Basketball",
+  "year": 2026,
+  "sport": "Basketball",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2026-leaf-art-of-sport-multiple-sport",
+  "name": "2026 Leaf Art Of Sport Multiple Sport",
+  "year": 2026,
+  "sport": "Multi-Sport",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2026-leaf-autograph-collection-football-card",
+  "name": "2026 Leaf Autograph Collection Football",
+  "year": 2026,
+  "sport": "Football",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2026-leaf-city-of-champions-multiple-sport",
+  "name": "2026 Leaf City Of Champions Multiple Sport",
+  "year": 2026,
+  "sport": "Multi-Sport",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2026-leaf-decadence-multiple-sport",
+  "name": "2026 Leaf Decadence Multiple Sport",
+  "year": 2026,
+  "sport": "Multi-Sport",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2026-leaf-magnificence-multiple-sport",
+  "name": "2026 Leaf Magnificence Multiple Sport",
+  "year": 2026,
+  "sport": "Multi-Sport",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2026-leaf-melange-multiple-sport",
+  "name": "2026 Leaf Melange Multiple Sport",
+  "year": 2026,
+  "sport": "Multi-Sport",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2026-leaf-metal-halloween-multiple-sport",
+  "name": "2026 Leaf Metal Halloween Multiple Sport",
+  "year": 2026,
+  "sport": "Multi-Sport",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2026-leaf-metal-independence-day-multiple-sport",
+  "name": "2026 Leaf Metal Independence Day Multiple Sport",
+  "year": 2026,
+  "sport": "Multi-Sport",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2026-leaf-metal-presidents-day-multiple-sport",
+  "name": "2026 Leaf Metal Presidents Day Multiple Sport",
+  "year": 2026,
+  "sport": "Multi-Sport",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2026-leaf-metal-ring-kings-card",
+  "name": "2026 Leaf Metal Ring Kings UFC",
+  "year": 2026,
+  "sport": "UFC",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2026-leaf-metal-st-patricks-day-multiple-sport",
+  "name": "2026 Leaf Metal St Patricks Day Multiple Sport",
+  "year": 2026,
+  "sport": "Multi-Sport",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2026-leaf-metal-women-of-sport-multiple-sport",
+  "name": "2026 Leaf Metal Women Of Sport Multiple Sport",
+  "year": 2026,
+  "sport": "Multi-Sport",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2026-leaf-national-redemptions-multiple-sport",
+  "name": "2026 Leaf National Redemptions Multiple Sport",
+  "year": 2026,
+  "sport": "Multi-Sport",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2026-leaf-seasons-in-the-sun-baseball-card",
+  "name": "2026 Leaf Seasons In The Sun Baseball",
+  "year": 2026,
+  "sport": "Baseball",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2026-leaf-signature-series-sports-multiple-sport",
+  "name": "2026 Leaf Signature Series Sports Multiple Sport",
+  "year": 2026,
+  "sport": "Multi-Sport",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2026-leaf-sport-heroes-multiple-sport",
+  "name": "2026 Leaf Sport Heroes Multiple Sport",
+  "year": 2026,
+  "sport": "Multi-Sport",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2026-leaf-ultimate-sports-multiple-sport",
+  "name": "2026 Leaf Ultimate Sports Multiple Sport",
+  "year": 2026,
+  "sport": "Multi-Sport",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2026-panini-decades-90s-pop-culture-multiple-sport",
+  "name": "2026 Panini Decades 90s Pop Culture Multiple Sport",
+  "year": 2026,
+  "sport": "Multi-Sport",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2026-panini-intl-englandl-soccer-card",
+  "name": "2026 Panini INTL Englandl Soccer",
+  "year": 2026,
+  "sport": "Soccer",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2026-panini-intl-france-soccer-card",
+  "name": "2026 Panini INTL France Soccer",
+  "year": 2026,
+  "sport": "Soccer",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2026-panini-intl-germany-soccer-card",
+  "name": "2026 Panini INTL Germany Soccer",
+  "year": 2026,
+  "sport": "Soccer",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2026-panini-intl-mexico-soccer-card",
+  "name": "2026 Panini INTL Mexico Soccer",
+  "year": 2026,
+  "sport": "Soccer",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2026-panini-luminance-englandl-soccer-card",
+  "name": "2026 Panini Luminance Englandl Soccer",
+  "year": 2026,
+  "sport": "Soccer",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2026-panini-obsidian-k-league-soccer-card",
+  "name": "2026 Panini Obsidian K League Soccer",
+  "year": 2026,
+  "sport": "Soccer",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2026-panini-prizm-wnba-basketball-card",
+  "name": "2026 Panini Prizm WNBA Basketball",
+  "year": 2026,
+  "sport": "Basketball",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2026-panini-revolution-k-league-soccer-card",
+  "name": "2026 Panini Revolution K League Soccer",
+  "year": 2026,
+  "sport": "Soccer",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2026-panini-ring-royalty-mlw-wrestling",
+  "name": "2026 Panini Ring Royalty MLW Wrestling",
+  "year": 2026,
+  "sport": "Wrestling",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2026-pro-set-metal-football-card",
+  "name": "2026 Pro Set Metal Football",
+  "year": 2026,
+  "sport": "Football",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2026-score-a-treat-multiple-sport",
+  "name": "2026 Score A Treat Multiple Sport",
+  "year": 2026,
+  "sport": "Multi-Sport",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2026-skybox-metal-universe-se-multiple-sport",
+  "name": "2026 SkyBox Metal Universe SE Multiple Sport",
+  "year": 2026,
+  "sport": "Multi-Sport",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2026-topps-chrome-mls-soccer-card",
+  "name": "2026 Topps Chrome MLS Soccer",
+  "year": 2026,
+  "sport": "Soccer",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2026-topps-chrome-samurai-japan-baseball-card",
+  "name": "2026 Topps Chrome Samurai Japan Baseball",
+  "year": 2026,
+  "sport": "Baseball",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2026-topps-chrome-sapphire-mls-soccer-card",
+  "name": "2026 Topps Chrome Sapphire MLS Soccer",
+  "year": 2026,
+  "sport": "Soccer",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2026-topps-chrome-us-winter-olympic-paralympic-hopefuls-multiple-sport",
+  "name": "2026 Topps Chrome US Winter Olympic Paralympic Hopefuls Multiple Sport",
+  "year": 2026,
+  "sport": "Multi-Sport",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2026-topps-merlin-premier-league-soccer-card",
+  "name": "2026 Topps Merlin Premier League Soccer",
+  "year": 2026,
+  "sport": "Soccer",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2026-topps-national-convention-multiple-sport",
+  "name": "2026 Topps National Convention Multiple Sport",
+  "year": 2026,
+  "sport": "Multi-Sport",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2026-topps-stadium-club-ufc-card",
+  "name": "2026 Topps Stadium Club UFC",
+  "year": 2026,
+  "sport": "UFC",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2026-topps-universe-wwe-wrestling",
+  "name": "2026 Topps Universe WWE Wrestling",
+  "year": 2026,
+  "sport": "Wrestling",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2026-upper-deck-goodwin-champions-card",
+  "name": "2026 Upper Deck Goodwin Champions",
+  "year": 2026,
+  "sport": "Multi-Sport",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2026-upper-deck-team-canada-juniors-hockey",
+  "name": "2026 Upper Deck Team Canada Juniors Hockey",
+  "year": 2026,
+  "sport": "Hockey",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2026-upper-deck-team-usa-juniors-hockey",
+  "name": "2026 Upper Deck Team USA Juniors Hockey",
+  "year": 2026,
+  "sport": "Hockey",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "21-22-leaf-art-of-hockey",
+  "name": "2021-22 Leaf Art Of Hockey",
+  "year": 2022,
+  "sport": "Hockey",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "21-22-leaf-lumber-hockey",
+  "name": "2021-22 Leaf Lumber Hockey",
+  "year": 2022,
+  "sport": "Hockey",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "21-22-leaf-metal-basketball",
+  "name": "2021-22 Leaf Metal Basketball",
+  "year": 2022,
+  "sport": "Basketball",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "21-22-leaf-signature-series-hockey",
+  "name": "2021-22 Leaf Signature Series Hockey",
+  "year": 2022,
+  "sport": "Hockey",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "21-22-pro-set-blaster-hockey",
+  "name": "2021-22 Pro Set Blaster Hockey",
+  "year": 2022,
+  "sport": "Hockey",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "21-22-pro-set-power-basketball",
+  "name": "2021-22 Pro Set Power Basketball",
+  "year": 2022,
+  "sport": "Basketball",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "21-22-topps-chrome-ote-elite-basketball",
+  "name": "2021-22 Topps Chrome OTE Elite Basketball",
+  "year": 2022,
+  "sport": "Basketball",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "21-22-topps-inception-ote-basketball",
+  "name": "2021-22 Topps Inception OTE Basketball",
+  "year": 2022,
+  "sport": "Basketball",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "22-23-bowman-university-best-basketball",
+  "name": "2022-23 Bowman Best University Basketball",
+  "year": 2023,
+  "sport": "Basketball",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "22-23-leaf-draft-basketball",
+  "name": "2022-23 Leaf Draft Basketball",
+  "year": 2023,
+  "sport": "Basketball",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "22-23-leaf-multigraphics-basketball",
+  "name": "2022-23 Leaf MultiGraphics Basketball",
+  "year": 2023,
+  "sport": "Basketball",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "22-23-leaf-optichrome-basketball",
+  "name": "2022-23 Leaf Optichrome Basketball",
+  "year": 2023,
+  "sport": "Basketball",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "22-23-leaf-signature-series-basketball",
+  "name": "2022-23 Leaf Signature Series Basketball",
+  "year": 2023,
+  "sport": "Basketball",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "22-23-leaf-vivid-basketball",
+  "name": "2022-23 Leaf Vivid Basketball",
+  "year": 2023,
+  "sport": "Basketball",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "22-23-topps-chrome-nbl-basketball",
+  "name": "2022-23 Topps Chrome NBL Basketball",
+  "year": 2023,
+  "sport": "Basketball",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "22-23-topps-chrome-ote-overtime-elite-basketball",
+  "name": "2022-23 Topps Chrome OTE Overtime Elite Basketball",
+  "year": 2023,
+  "sport": "Basketball",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "22-23-topps-chrome-sapphire-edition-ote-basketball",
+  "name": "2022-23 Topps Chrome Sapphire Edition OTE Basketball",
+  "year": 2023,
+  "sport": "Basketball",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "24-25-donruss-euroleague-basketball-card",
+  "name": "2024-25 Donruss EuroLeague Basketball",
+  "year": 2025,
+  "sport": "Basketball",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "24-25-topps-bundesliga-international-stars-soccer-card",
+  "name": "2024-25 Topps Bundesliga International Stars Soccer",
+  "year": 2025,
+  "sport": "Soccer",
+  "cards": 251,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "24-25-topps-definitive-collection-uefa-club-competitions-soccer-card",
+  "name": "2024-25 Topps Definitive Collection UEFA Club Competitions Soccer",
+  "year": 2025,
+  "sport": "Soccer",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "24-25-topps-finest-uefa-soccer-card",
+  "name": "2024-25 Topps Finest UEFA Soccer",
+  "year": 2025,
+  "sport": "Soccer",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "24-25-topps-merlin-uefa-club-competitions-soccer-card",
+  "name": "2024-25 Topps Merlin UEFA Club Competitions Soccer",
+  "year": 2025,
+  "sport": "Soccer",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "24-25-topps-reverence-uefa-soccer-card",
+  "name": "2024-25 Topps Reverence UEFA Soccer",
+  "year": 2025,
+  "sport": "Soccer",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "25-26-fleer-ultra-pwhl-hockey-card",
+  "name": "2025-26 Fleer Ultra PWHL Hockey",
+  "year": 2026,
+  "sport": "Hockey",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "25-26-panini-football-efl-soccer-card",
+  "name": "2025-26 Panini Football EFL Soccer",
+  "year": 2026,
+  "sport": "Soccer",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "25-26-panini-frauen-bundesliga-soccer-card",
+  "name": "2025-26 Panini Frauen Bundesliga Soccer",
+  "year": 2026,
+  "sport": "Soccer",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "25-26-panini-noir-road-to-world-cup-soccer-card",
+  "name": "2025-26 Panini Noir Road To World Cup Soccer",
+  "year": 2026,
+  "sport": "Soccer",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "25-26-panini-pitch-kings-soccer-card",
+  "name": "2025-26 Panini Pitch Kings Soccer",
+  "year": 2026,
+  "sport": "Soccer",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "25-26-panini-select-road-to-world-cup-soccer-card",
+  "name": "2025-26 Panini Select Road To World Cup Soccer",
+  "year": 2026,
+  "sport": "Soccer",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "25-26-topps-chrome-sapphire-uefa-womens-champions-league-soccer-card",
+  "name": "2025-26 Topps Chrome Sapphire UEFA Womens Champions League Soccer",
+  "year": 2026,
+  "sport": "Soccer",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "25-26-topps-deco-uefa-club-competitions-soccer-card",
+  "name": "2025-26 Topps Deco UEFA Club Competitions Soccer",
+  "year": 2026,
+  "sport": "Soccer",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "25-26-topps-fc-barcelona-forever-soccer-card",
+  "name": "2025-26 Topps FC Barcelona Forever Soccer",
+  "year": 2026,
+  "sport": "Soccer",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "25-26-topps-gold-bundesliga-soccer-card",
+  "name": "2025-26 Topps Gold Bundesliga Soccer",
+  "year": 2026,
+  "sport": "Soccer",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "25-26-topps-gold-premier-league-soccer-card",
+  "name": "2025-26 Topps Premier League Gold Soccer",
+  "year": 2026,
+  "sport": "Soccer",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "25-26-topps-gold-uefa-club-competitions-soccer-card",
+  "name": "2025-26 Topps Gold UEFA Club Competitions Soccer",
+  "year": 2026,
+  "sport": "Soccer",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "25-26-topps-inception-uefa-club-competitions-soccer-card",
+  "name": "2025-26 Topps Inception UEFA Club Competitions Soccer",
+  "year": 2026,
+  "sport": "Soccer",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "25-26-topps-lineage-bayern-muchen-soccer-card",
+  "name": "2025-26 Topps Lineage Bayern Muchen Soccer",
+  "year": 2026,
+  "sport": "Soccer",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "25-26-topps-museum-collection-uefa-club-competitions-soccer-card",
+  "name": "2025-26 Topps Museum Collection UEFA Club Competitions Soccer",
+  "year": 2026,
+  "sport": "Soccer",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "25-26-topps-royalty-premier-league-soccer-card",
+  "name": "2025-26 Topps Royalty Premier League Soccer",
+  "year": 2026,
+  "sport": "Soccer",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "25-26-topps-simplicidad-uefa-club-competitions-soccer-card",
+  "name": "2025-26 Topps Simplicidad UEFA Club Competitions Soccer",
+  "year": 2026,
+  "sport": "Soccer",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "25-26-topps-sl-benfica-soccer-card",
+  "name": "2025-26 Topps SL Benfica Team Set Soccer",
+  "year": 2026,
+  "sport": "Soccer",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "25-26-upper-deck-chicago-blackhawks-centennial-tin-set-hockey",
+  "name": "2025-26 Upper Deck Chicago Blackhawks Centennial Tin Set Hockey",
+  "year": 2026,
+  "sport": "Hockey",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "25-26-upper-deck-pwhl-hockey-card",
+  "name": "2025-26 Upper Deck PWHL Hockey",
+  "year": 2026,
+  "sport": "Hockey",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "26-27-topps-flagship-premier-league-soccer-card",
+  "name": "2026-27 Topps Flagship Premier League Soccer",
+  "year": 2027,
+  "sport": "Soccer",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "26-27-topps-summer-signings-uefa-club-competitions-soccer-card",
+  "name": "2026-27 Topps Summer Signings UEFA Club Competitions Soccer",
+  "year": 2027,
+  "sport": "Soccer",
+  "cards": 250,
+  "source": "breakninja.com",
+  "why": [
+   "Break Ninja preview cut off at 250 cards (A–M players only)"
+  ],
+  "status": "todo"
+ },
+ {
   "slug": "2013-bowman-chrome-baseball-cards",
   "name": "2013 Bowman Chrome Baseball",
   "year": 2013,

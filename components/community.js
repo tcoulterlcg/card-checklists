@@ -62,7 +62,7 @@ export function AuthModal({ open, onClose, account }) {
   return (
     <div onClick={onClose} style={{ position: 'fixed', inset: 0, background: '#000a', zIndex: 90, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       <div role="dialog" aria-modal="true" aria-label={session ? "Your profile" : "Sign in to Card HQ"} onClick={(e) => e.stopPropagation()} style={{ ...card, width: 'min(420px, 92vw)', padding: 28, position: 'relative' }}>
-        <button aria-label="Close" onClick={onClose} style={{ position: 'absolute', top: 10, right: 10, width: 36, height: 36, background: 'none', border: 'none', color: '#8A8A93', fontSize: 20, cursor: 'pointer', borderRadius: 8 }}>×</button>
+        <button aria-label="Close" onClick={onClose} style={{ position: 'absolute', top: 10, right: 10, width: 36, height: 36, background: 'none', border: 'none', color: '#8A93A8', fontSize: 20, cursor: 'pointer', borderRadius: 8 }}>×</button>
         {!session ? (
           <>
             <h3 style={{ ...title(24), margin: 0, color: '#fff' }}>Sign in to Card HQ</h3>
@@ -198,14 +198,14 @@ export function CollectionView({ account, indexSets, onOpenAuth, onOpenSet }) {
       {notice && <div style={{ ...card, borderColor: ACCENT, padding: '14px 18px', marginBottom: 18, color: ACCENT_TEXT, fontWeight: 600, fontSize: 14 }}>{notice}</div>}
       <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', flexWrap: 'wrap', gap: 10, marginBottom: 18 }}>
         <h1 style={{ ...display, fontSize: 40, margin: 0 }}>My Collection</h1>
-        <span style={{ color: '#8A8A93', fontSize: 13 }}>{(wants || []).length} wantlist items · {(collected || []).length} cards collected</span>
+        <span style={{ color: '#8A93A8', fontSize: 13 }}>{(wants || []).length} wantlist items · {(collected || []).length} cards collected</span>
       </div>
 
       {activeSlug && setData ? (
         <div>
           <button style={{ ...btnGhost, marginBottom: 16 }} onClick={() => setActiveSlug(null)}>← Back to wantlist</button>
           <h2 style={{ ...title(24), margin: '0 0 4px' }}>{setData.name}</h2>
-          <p style={{ color: '#8A8A93', fontSize: 13, margin: '0 0 16px' }}>Check off cards as you collect them.</p>
+          <p style={{ color: '#8A93A8', fontSize: 13, margin: '0 0 16px' }}>Check off cards as you collect them.</p>
           {setData.sections.slice(0, secShown).map((sec, si) => (
             <div key={si} style={{ marginBottom: 18 }}>
               <h3 style={{ ...title(16), color: ACCENT_TEXT, margin: '0 0 8px' }}>{sec.title} <span style={{ color: '#8A93A8', fontWeight: 600 }}>({sec.cards.length})</span></h3>
@@ -223,11 +223,11 @@ export function CollectionView({ account, indexSets, onOpenAuth, onOpenSet }) {
                         const next = await myCollection(session.user.id)
                         setCollected(next)
                       }} style={{ accentColor: ACCENT, width: 18, height: 18, flexShrink: 0 }} />
-                      <span style={{ color: '#8A8A93', fontSize: 12, minWidth: 34 }}>{c.n || '—'}</span>
+                      <span style={{ color: '#8A93A8', fontSize: 12, minWidth: 34 }}>{c.n || '—'}</span>
                       <span style={{ color: isC ? '#9fd18a' : '#D4D4D8', fontSize: 13, fontWeight: 600, flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{c.p}</span>
                       {isC && (rec?.image_url
                         ? <a href={rec.image_url} target="_blank" rel="noreferrer" style={{ fontSize: 12, color: ACCENT_TEXT }}>photo</a>
-                        : <button onClick={() => { setUploadTarget(rec?.id); fileRef.current?.click() }} style={{ background: 'none', border: '1px solid #232A3E', color: '#8A8A93', fontSize: 12, borderRadius: 6, padding: '2px 7px', cursor: 'pointer' }}>+ photo</button>)}
+                        : <button onClick={() => { setUploadTarget(rec?.id); fileRef.current?.click() }} style={{ background: 'none', border: '1px solid #232A3E', color: '#8A93A8', fontSize: 12, borderRadius: 6, padding: '2px 7px', cursor: 'pointer' }}>+ photo</button>)}
                     </div>
                   )
                 })}
@@ -258,7 +258,7 @@ export function CollectionView({ account, indexSets, onOpenAuth, onOpenSet }) {
               return (
                 <div key={slug} style={{ ...card, padding: '18px 20px' }}>
                   <p style={{ ...title(16), margin: 0, color: '#fff' }}>{g.name}</p>
-                  <p style={{ color: '#8A8A93', fontSize: 13, margin: '4px 0 10px' }}>
+                  <p style={{ color: '#8A93A8', fontSize: 13, margin: '4px 0 10px' }}>
                     {g.items.some(i => !i.card_n) ? 'Full set wanted' : `${g.items.length} card${g.items.length === 1 ? '' : 's'} wanted`}
                     {baseTotal ? ` · base ${baseMine}/${baseTotal}` : ''}{total ? ` · master ${mine}/${total}` : ''}
                   </p>
@@ -355,7 +355,7 @@ export function CommunityView({ account, indexSets, onOpenAuth }) {
     <section>
       <div style={{ background: 'linear-gradient(140deg, #0f1526, #0F1320)', border: '1px solid ' + ACCENT + '33', borderRadius: 18, padding: 30, marginBottom: 22 }} className="hq-panel">
         <h1 style={{ ...display, fontSize: 40, margin: 0, lineHeight: 1 }}>Community</h1>
-        <p style={{ color: '#aaa', fontSize: 16, lineHeight: 1.6, maxWidth: 720, margin: '14px 0 0' }}>
+        <p style={{ color: '#A3ABBD', fontSize: 16, lineHeight: 1.6, maxWidth: 720, margin: '14px 0 0' }}>
           Collecting accomplishments from the CardHQ community — completed sets, finished rainbows, grail pulls.
         </p>
         <div style={{ marginTop: 18 }}>
@@ -428,7 +428,7 @@ export function CommunityView({ account, indexSets, onOpenAuth }) {
                     const open = !openComments[p.id]
                     setOpenComments({ ...openComments, [p.id]: open })
                     if (open) { const cs = await comments(p.id); setOpenComments(o => ({ ...o, [p.id]: cs })) }
-                  }} style={{ background: 'none', border: 'none', color: '#8A8A93', fontSize: 13, cursor: 'pointer' }}>💬 {nComments} comment{nComments === 1 ? '' : 's'}</button>
+                  }} style={{ background: 'none', border: 'none', color: '#8A93A8', fontSize: 13, cursor: 'pointer' }}>💬 {nComments} comment{nComments === 1 ? '' : 's'}</button>
                   {session && p.user_id === session.user.id && (confirmDel === p.id ? (
                     <span style={{ marginLeft: 'auto', display: 'inline-flex', gap: 8, alignItems: 'center', fontSize: 13 }}>
                       <span style={{ color: '#A1A1AA' }}>Delete this post?</span>

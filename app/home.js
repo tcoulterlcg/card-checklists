@@ -12,7 +12,7 @@ import { FixEditor } from '../components/fix-editor'
 import { Omnibox, PlayerPage, MyPlayersPanel, useMyPlayers, loadPlayerDir, loadTopPlayers, seasonLabel, MemBadge, MemChip, memCodeOf } from '../components/player'
 import { ComparePage } from '../components/compare'
 import { norm, parseQuery, parseQueryFor, matchPlayers, TYPE, typeLabel, TYPE_COLORS, serialLabel } from '../lib/query'
-import { loadSet, loadIndex } from '../lib/catalog'
+import { loadSet, loadIndex, loadRedirects } from '../lib/catalog'
 import { classifySet, brandSort, BRAND_COLORS } from '../lib/brands'
 import { ACCENT, ACCENT_TEXT, BG, SURFACE, SURFACE_2, LINE, CHIP_LINE, TEXT, TEXT_2, LABEL, display, eyebrow, title, buttonText } from '../lib/theme'
 
@@ -69,7 +69,7 @@ const tcgBaseName = (p) => String(p || '').replace(/\s+[—–-]\s+.*$/, '').rep
 
 
 const RPA_TYPES = [['RPA', 'Rookie Patch Auto'], ['PA', 'Patch Auto'], ['RA', 'Rookie Auto'], ['AU', 'Autograph'], ['PATCH', 'Patch'], ['RELIC', 'Relic'], ['All', 'All Hits']]
-const RPA_TYPE_COLOR = { RPA: '#d4a843', PA: '#e11d48', RA: '#8b5cf6', AU: '#2563eb', PATCH: '#16a34a', RELIC: '#f97316', All: '#8A8A93' }
+const RPA_TYPE_COLOR = { RPA: '#d4a843', PA: '#e11d48', RA: '#8b5cf6', AU: '#2563eb', PATCH: '#16a34a', RELIC: '#f97316', All: '#8A93A8' }
 
 // "2024-25 Upper Deck The Cup" -> "2024-25"; otherwise the stored year.
 function yearLabel(s) {
@@ -112,7 +112,7 @@ function SortHeader({ label, field, sortField, sortDir, onClick, align, grow }) 
                   border: 'none',
                   cursor: 'pointer',
                   padding: 0,
-                  color: active ? ACCENT_TEXT : '#8A8A93',
+                  color: active ? ACCENT_TEXT : '#8A93A8',
                   display: 'flex',
                   alignItems: 'center',
                   gap: 4,
@@ -405,12 +405,14 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
   // Big sets have 500+ sections; render them in pages so phones don't freeze.
   const [secLimit, setSecLimit] = useState(20)
   const [notice, setNotice] = useState('')
+  const [catalogDone, setCatalogDone] = useState(false) // bulk catalog merged into `sets` (or failed)
+  const [setLoadErr, setSetLoadErr] = useState(false) // the open set's checklist failed to load (404 / network)
   const [openSecs, setOpenSecs] = useState(() => new Set()) // set-page sections expanded past 200 rows
   const [setLimit, setSetLimit] = useState(60) // home grid pages in 60s; all 5k cards at once is slow on phones
 
   const toggleSort = (field) => {
     if (sortField === field) setSortDir(d => (d === 'asc' ? 'desc' : 'asc'))
-    else { setSortField(field); setSortDir(field === 'n' ? 'asc' : 'asc') }
+    else { setSortField(field); setSortDir('asc') }
   }
 
   // Browse filters load small slices built by build-search-index.mjs instead of
@@ -445,7 +447,9 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
     const key = sportFilter + '|' + teamFilter
     if (searchIndex && searchIndex.__key === key) return
     setSliceLoading(true)
-    getJson('/data/teams/' + sportFile(sportFilter) + '/' + i + '.json').then(j => { const x = j || { ...EMPTY_IDX }; x.__key = key; setSearchIndex(x); setSliceLoading(false) })
+    let live = true   // a quick team change must not let the earlier team's slice land last
+    getJson('/data/teams/' + sportFile(sportFilter) + '/' + i + '.json').then(j => { if (!live) return; const x = j || { ...EMPTY_IDX }; x.__key = key; setSearchIndex(x); setSliceLoading(false) })
+    return () => { live = false }
   }, [sportFilter, teamFilter, teamList])
 
   // Count-up animation for the hero stat cards.
@@ -456,7 +460,8 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
   }, [])
 
   useEffect(() => {
-    loadIndex().then(setSets).catch(() => {})
+    // show the static sets right away; the catalog (GitHub) merges in when it arrives
+    loadIndex(base => setSets(base)).then(all => { if (all.length) setSets(all) }).catch(() => {}).finally(() => setCatalogDone(true))
   }, [])
 
   const totalCards = useMemo(() => sets.reduce((s, x) => s + (x.cardCount || 0), 0), [sets])
@@ -499,10 +504,11 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
     setActiveSet(s); setGlobalHits(null); setActiveSection('All'); setShowAllSecs(false); setQuery(''); setActivePlayer(null); setView('browse'); setSetTypeFilter('All'); setSetRunFilter('any'); setSetRcOnly(false); setSetMemFilter('any'); setSecLimit(20); setOpenSecs(new Set())
     nav('?set=' + encodeURIComponent(s.slug), push)
     const my = navSeq.current
-    setSetData(null)
+    setSetData(null); setSetLoadErr(false)
     let data = null
     try { data = await loadSet(s.slug) } catch (e) {}
     if (my !== navSeq.current) return
+    if (!data) { setSetLoadErr(true); return }
     setSetData(data)
     window.scrollTo(0, 0)
   }
@@ -546,7 +552,9 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
     const q = (raw == null ? query : raw).trim()
     if (q.length < 2) return
     setSearching(true)
+    const my = ++navSeq.current
     const dir = await loadPlayerDir()
+    if (my !== navSeq.current) { setSearching(false); return }   // moved on while the directory loaded
     const parsed = parseQueryFor(dir, q)
     if (parsed.player.length >= 2) {
       const hits = matchPlayers(dir, parsed.player, 8)
@@ -568,7 +576,9 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
     const term = (raw == null ? query : raw).trim().toLowerCase()
     if (term.length < 3) return
     setSearching(true); setActiveSet(null); setSetData(null); setActivePlayer(null); setView('browse')
+    const my = ++navSeq.current
     const dir = await loadPlayerDir()
+    if (my !== navSeq.current) { setSearching(false); return }
     const players = []
     for (let i = 0; i < dir.players.length && players.length < 60; i++) {
       const p = dir.players[i]
@@ -670,7 +680,13 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
     if (brandFilter !== 'All') list = list.filter(s => s.brand === brandFilter)
     if (productFilter !== 'All') list = list.filter(s => s.product === productFilter)
     const term = dQuery.trim().toLowerCase()
-    if (term && !activeSet) list = list.filter(s => s.name.toLowerCase().includes(term))
+    if (term && !activeSet) {
+      // word-by-word ("chrome 2024 topps"); a player name typed into the search
+      // matches no set name, so it leaves the grid alone instead of emptying it
+      const toks = term.split(/\s+/).filter(Boolean)
+      const hit = list.filter(s => { const n = s.name.toLowerCase(); return toks.every(t => n.includes(t)) })
+      if (hit.length) list = hit
+    }
     return list
   }, [taggedSets, sportFilter, brandFilter, productFilter, dQuery, activeSet])
 
@@ -731,10 +747,10 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
     }
     const bySet = (a, b) => (a.set || '').localeCompare(b.set || '')
     out.sort((a, b) => {
-      if (teamSort === 'year-asc') return (a.year - b.year) || bySet(a, b)
+      if (teamSort === 'year-asc') return ((a.year || 0) - (b.year || 0)) || bySet(a, b)
       if (teamSort === 'player') return (a.p || '').localeCompare(b.p || '') || bySet(a, b)
       if (teamSort === 'set') return bySet(a, b) || (cardNumKey(a.n) - cardNumKey(b.n))
-      return (b.year - a.year) || bySet(a, b) // year-desc
+      return ((b.year || 0) - (a.year || 0)) || bySet(a, b) // year-desc
     })
     return out.slice(0, 2500)
   }, [searchIndex, teamFilter, oneSport, sportFilter, slugSport, sets, teamSort, isTcg, browseActive, tcgRarity, tcgType])
@@ -782,6 +798,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
   useEffect(() => { if (account.session?.user?.id) loadWanted(account.session.user.id); else setWanted(new Map()) }, [account.session?.user?.id])
   const normWant = (item) => (item.section && (item.card_n == null || item.card_n === '')) ? { ...item, card_n: '—' + (item.player || '') } : item
   const isWanted = (item) => wanted.has(wantKey(normWant(item)))
+  const flashTimer = useRef(0)
   const wantIt = async (item) => {
     if (!account.session) { setAuthOpen(true); return }
     // a single card with no number is still a single card, not the whole set
@@ -797,7 +814,8 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
       if (r.error) setWantFlash('Couldn’t add to your wantlist — ' + r.error.message)
       else { setWantFlash(r.duplicate ? 'Already on your wantlist' : label + ' added to your wantlist'); loadWanted(account.session.user.id) }
     }
-    setTimeout(() => setWantFlash(''), 2500)
+    clearTimeout(flashTimer.current)   // a newer message must not be cleared by an older click's timer
+    flashTimer.current = setTimeout(() => setWantFlash(''), 2500)
   }
 
   const rpaResults = useMemo(() => {
@@ -820,8 +838,9 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
   // Open a set by slug, following redirects for sets merged into another copy.
   const openSetBySlug = async (slug) => {
     let s = sets.find(x => x.slug === slug)
-    if (!s) { try { const rd = await (await fetch('/data/redirects.json')).json(); s = rd[slug] && sets.find(x => x.slug === rd[slug]) } catch {} }
+    if (!s) { const rd = await loadRedirects(); s = rd[slug] && sets.find(x => x.slug === rd[slug]) }
     if (s) { setView('browse'); openSet(s) }
+    else setNotice('That set isn’t in the database right now.')
   }
   const searchFor = (name) => { setQuery(name); runSearch(name) }
   // Stable callbacks for the (memoized) player page, so typing in the search box
@@ -863,16 +882,17 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
     urlApplied.current = true
     const sp = new URLSearchParams(location.search)
     const pl = sp.get('player'), v = sp.get('view'), sr = sp.get('search')
-    const st = sp.get('set') && sp.get('set').trim().toLowerCase().replace(/\/+$/, '')   // tolerate pasted links: case, trailing slash
+    const st = sp.get('set') && sp.get('set').trim().replace(/\/+$/, '')   // tolerate pasted links: case, trailing slash
     if (sp.has('compare')) openCompare([sp.get('compare'), sp.get('vs')], false)
     else if (pl) { const q = sp.get('q'); setQuery(q || pl); openPlayerByName(pl, q, false, sp.get('sport') || undefined) }
     else if (st) {
-      const s = sets.find(x => x.slug === st)
+      const s = sets.find(x => x.slug === st) || sets.find(x => x.slug.toLowerCase() === st.toLowerCase())
       if (s) openSet(s, false)
-      else fetch('/data/redirects.json').then(r => r.json()).then(rd => {
-        const t = rd[st] && sets.find(x => x.slug === rd[st])
+      else loadRedirects().then(rd => {
+        const to = rd[st] || rd[st.toLowerCase()]
+        const t = to && sets.find(x => x.slug === to)
         if (t) openSet(t, false); else { goHome(false); setNotice('That set isn’t in the database (the link may be old). Browse or search below.') }
-      }).catch(() => { goHome(false); setNotice('That set isn’t in the database (the link may be old). Browse or search below.') })
+      })
     }
     else if (sr) runGlobalSearch(sr, false)
     else if (v && ['myplayers', 'community', 'collection', 'feedback'].includes(v)) openView(v, false, v === 'collection' && sp.get('cset') ? '&cset=' + encodeURIComponent(sp.get('cset')) : '')
@@ -886,15 +906,25 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
       if (tm || sp.get('rarity') || sp.get('type')) { setTeamInput(tm || ''); setTeamFilter(tm || 'All'); openTeamBrowse(g('sport')) }
     }
   }
+  // Apply the URL once the index is in. A ?set= link that isn't a static set waits for the
+  // bulk catalog, so catalog links don't flash "not in the database" first.
+  const applyRef = useRef(applyUrl)
+  applyRef.current = applyUrl
+  const firstApplied = useRef(false)
   useEffect(() => {
-    if (sets.length === 0) return
-    applyUrl()
-    const onPop = () => applyUrl()
+    if (sets.length === 0 || firstApplied.current) return
+    const st = (new URLSearchParams(location.search).get('set') || '').trim().replace(/\/+$/, '').toLowerCase()
+    if (st && !catalogDone && !sets.some(x => x.slug.toLowerCase() === st)) return
+    firstApplied.current = true
+    applyRef.current()
+  }, [sets.length, catalogDone])
+  useEffect(() => {
+    const onPop = () => applyRef.current()   // latest applyUrl, not the first render's
     window.addEventListener('popstate', onPop)
     return () => window.removeEventListener('popstate', onPop)
-  }, [sets.length])
+  }, [])
 
-  const NAV_ITEMS = [['Sets', () => { goHome(); setSportFilter('All') }, 'browse'], ['Players', () => openView('myplayers'), 'myplayers'], ['Community', () => openView('community'), 'community'], ['My Collection', () => openView('collection'), 'collection']]
+  const NAV_ITEMS = [['Sets', () => { goHome(); setSportFilter('All'); setBrandFilter('All'); setProductFilter('All') }, 'browse'], ['Players', () => openView('myplayers'), 'myplayers'], ['Community', () => openView('community'), 'community'], ['My Collection', () => openView('collection'), 'collection']]
   const [scrolled, setScrolled] = useState(false)
   const [pastHero, setPastHero] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
@@ -1060,11 +1090,11 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
               {!teamBrowse ? (
                 <button type="button" onClick={openTeamBrowse} style={triggerStyle(false)}>Search cards, rarities &amp; types<Chevron /></button>
               ) : teamLoading ? (
-                <span style={{ color: '#8A8A93', fontSize: 13 }}>Loading cards…</span>
+                <span style={{ color: '#8A93A8', fontSize: 13 }}>Loading cards…</span>
               ) : (
                 <>
                   <input list="tcg-card-options" value={teamInput}
-                    placeholder={'Card name… e.g. ' + (TCG_EXAMPLE[sportFilter] || 'any card')}
+                    aria-label="Filter by card name" placeholder={'Card name… e.g. ' + (TCG_EXAMPLE[sportFilter] || 'any card')}
                     onChange={(e) => { const v = e.target.value; setTeamInput(v); const t = v.trim(); setTeamFilter(t.length >= 2 ? t : 'All') }}
                     style={{ background: '#121626', border: '1px solid ' + (teamFilter !== 'All' ? ACCENT : '#232A3E'), borderRadius: 10, color: TEXT, fontSize: 16, height: 40, boxSizing: 'border-box', padding: '0 12px', minWidth: 0, width: 230, maxWidth: '100%', outline: 'none' }} />
                   <datalist id="tcg-card-options">{tcgOptions.names.map(t => <option key={t} value={t} />)}</datalist>
@@ -1091,11 +1121,11 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
               {!teamBrowse ? (
                 <button type="button" onClick={openTeamBrowse} style={triggerStyle(false)}>Filter by team<Chevron /></button>
               ) : teamLoading ? (
-                <span style={{ color: '#8A8A93', fontSize: 13 }}>Loading teams…</span>
+                <span style={{ color: '#8A93A8', fontSize: 13 }}>Loading teams…</span>
               ) : (
                 <>
                   <input list="team-options" value={teamInput}
-                    placeholder={'Type a team… (' + teamsForSport.length.toLocaleString() + ')'}
+                    aria-label="Filter by team" placeholder={'Type a team… (' + teamsForSport.length.toLocaleString() + ')'}
                     onChange={(e) => {
                       const v = e.target.value
                       setTeamInput(v)
@@ -1124,7 +1154,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
             <input
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder={TCG_SET.has(activeSet.sport) ? 'Filter this set (card, type, rarity, card #, section)…' : 'Filter this set (player, team, card #, section)…'}
+              aria-label="Filter this set" placeholder={TCG_SET.has(activeSet.sport) ? 'Filter this set (card, type, rarity, card #, section)…' : 'Filter this set (player, team, card #, section)…'}
               style={{ width: '100%', boxSizing: 'border-box', background: '#121626', border: '1px solid #232A3E', borderRadius: 10, padding: '13px 16px', color: '#EDEDEF', fontSize: 16, outline: 'none' }}
             />
           ) : (
@@ -1134,8 +1164,14 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
         </div>
       ) : null}
 
-      {activeSet && !setData ? (
-        <p style={{ color: '#8A8A93', fontSize: 14, padding: '24px 0' }}>Loading {activeSet.name}…</p>
+      {activeSet && !setData && setLoadErr ? (
+        <div style={{ padding: '24px 0' }}>
+          <p style={{ color: '#EDEDEF', fontSize: 15, margin: '0 0 12px' }}>Couldn’t load the {activeSet.name} checklist.</p>
+          <button onClick={() => openSet(activeSet, false)} style={{ background: ACCENT, color: '#fff', border: 'none', borderRadius: 8, padding: '8px 14px', fontWeight: 600, cursor: 'pointer', marginRight: 10 }}>Try again</button>
+          <button onClick={() => goHome()} style={{ background: 'none', border: '1px solid #232A3E', color: '#EDEDEF', borderRadius: 8, padding: '8px 14px', cursor: 'pointer' }}>← All sets</button>
+        </div>
+      ) : activeSet && !setData ? (
+        <p style={{ color: '#8A93A8', fontSize: 14, padding: '24px 0' }}>Loading {activeSet.name}…</p>
       ) : activeSet && setData ? (
         <section>
           <button onClick={() => goHome()}
@@ -1150,7 +1186,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
               {(setData.sections || []).some(s => s.odds) && <Chip>Pack odds</Chip>}
             </div>
             <h1 style={{ ...display, fontSize: 40, margin: 0, lineHeight: 1.05 }}>{setData.name}</h1>
-            <p style={{ color: '#8a8a8a', fontSize: 13, margin: '10px 0 0' }}>
+            <p style={{ color: '#8A93A8', fontSize: 13, margin: '10px 0 0' }}>
               {(setData.sections || []).reduce((s, x) => s + x.cards.length, 0).toLocaleString()} cards
               {rcCount(setData) > 0 ? ' · ' + rcCount(setData) + ' rookies flagged' : ''} · source: {setData.source}
             </p>
@@ -1237,7 +1273,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
           {onlyMine && (
             <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center', margin: '0 0 14px' }}>
               <span style={{ ...eyebrow, color: '#8A93A8' }}>Showing cards of</span>
-              {myPlayers.list.length === 0 && <span style={{ color: '#8A8A93', fontSize: 13 }}>nobody yet — open a player page and hit “Collect this player”.</span>}
+              {myPlayers.list.length === 0 && <span style={{ color: '#8A93A8', fontSize: 13 }}>nobody yet — open a player page and hit “Collect this player”.</span>}
               {byPlayer.map(g => <button key={g.name} onClick={() => openPlayerByName(g.name, null, true, setData?.sport)} style={{ background: '#0e1630', border: '1px solid ' + ACCENT + '55', color: '#c9d8ff', fontSize: 13, fontWeight: 600, padding: '5px 10px', borderRadius: 999, cursor: 'pointer', fontFamily: 'inherit' }}>{g.name} <span style={{ color: '#5b82e8' }}>· {g.rows.length}</span></button>)}
               {myPlayers.list.filter(n => !byPlayer.some(g => g.name === n)).map(n => <span key={n} style={{ border: '1px solid #232A3E', color: '#8A93A8', fontSize: 13, padding: '5px 10px', borderRadius: 999 }}>{n} · 0</span>)}
               <button onClick={() => openView('myplayers')} style={{ background: 'none', border: 'none', color: ACCENT_TEXT, fontSize: 13, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit' }}>Manage my players</button>
@@ -1271,19 +1307,19 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
               <div style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '12px 18px', background: '#121626', flexWrap: 'wrap' }}>
                 <div style={{ flex: 1, minWidth: 200 }}>
                   <button onClick={() => openPlayerByName(g.name, null, true, setData?.sport)} style={{ ...title(16), background: 'none', border: 'none', color: '#EDEDEF', cursor: 'pointer', padding: 0, textAlign: 'left' }}>{g.name}</button>
-                  <p style={{ margin: '2px 0 0', color: '#8A8A93', fontSize: 12 }}>{g.team ? g.team + ' · ' : ''}{g.rows.length} card{g.rows.length === 1 ? '' : 's'} in this set{g.au ? ' · ' + g.au + ' autos' : ''}{g.one ? ' · ' + g.one + ' × 1/1' : ''}</p>
+                  <p style={{ margin: '2px 0 0', color: '#8A93A8', fontSize: 12 }}>{g.team ? g.team + ' · ' : ''}{g.rows.length} card{g.rows.length === 1 ? '' : 's'} in this set{g.au ? ' · ' + g.au + ' autos' : ''}{g.one ? ' · ' + g.one + ' × 1/1' : ''}</p>
                 </div>
                 <button onClick={() => openPlayerByName(g.name, null, true, setData?.sport)} style={{ background: 'none', border: 'none', color: ACCENT_TEXT, fontSize: 13, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit' }}>Player page →</button>
               </div>
               <div style={{ overflowX: 'auto' }}>
                 <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14, minWidth: 560 }}>
-                  <thead><tr>{['Card #', 'Section', 'Type', 'Material', 'Run', 'Want'].map((h, i) => <th key={h} style={{ ...eyebrow, padding: '9px 14px', textAlign: i >= 4 ? 'right' : 'left', color: '#8A8A93' }}>{h}</th>)}</tr></thead>
+                  <thead><tr>{['Card #', 'Section', 'Type', 'Material', 'Run', 'Want'].map((h, i) => <th key={h} style={{ ...eyebrow, padding: '9px 14px', textAlign: i >= 4 ? 'right' : 'left', color: '#8A93A8' }}>{h}</th>)}</tr></thead>
                   <tbody>{g.rows.map((r, i) => (
                     <tr key={i} style={{ borderTop: '1px solid #1a1a1a', background: i % 2 ? '#131313' : 'transparent' }}>
                       <td style={{ padding: '9px 14px', color: ACCENT_TEXT, fontWeight: 700, whiteSpace: 'nowrap' }}>{r.n ? '#' + r.n : '—'}</td>
                       <td style={{ padding: '9px 14px' }}>{r.section}</td>
                       <td style={{ padding: '9px 14px' }}><Chip color={r.kind === 'PA' ? '#e11d48' : r.kind === 'AU' ? '#60a5fa' : r.kind === 'PATCH' ? '#16a34a' : r.kind === 'RELIC' ? '#f97316' : '#9ca3af'}>{r.kind === 'PA' ? 'PATCH AUTO' : r.kind === 'AU' ? 'AUTO' : r.kind === 'OTHER' ? (r.x === 'RC' ? 'RC' : 'INSERT') : r.kind}</Chip></td>
-                      <td style={{ padding: '9px 14px' }}>{r.memc ? <MemChip code={r.memc} /> : <span style={{ color: '#444' }}>—</span>}</td>
+                      <td style={{ padding: '9px 14px' }}>{r.memc ? <MemChip code={r.memc} /> : <span style={{ color: '#5C6478' }}>—</span>}</td>
                       <td style={{ padding: '9px 14px', textAlign: 'right', whiteSpace: 'nowrap' }}>{r.serial === 1 ? <span style={{ background: ACCENT, color: '#fff', padding: '2px 8px', borderRadius: 999, fontSize: 12, fontWeight: 700 }}>1/1</span> : r.serial > 0 ? '/' + r.serial : <span style={{ color: '#8A93A8' }}>—</span>}</td>
                       <td style={{ padding: '9px 14px', textAlign: 'right' }}>{(() => { const it = { set_slug: setData.slug, set_name: setData.name, card_n: r.n, section: r.section, player: r.p }, on = isWanted(it); return <button aria-label={on ? 'On your wantlist — remove' : 'Add to wantlist'} aria-pressed={on} onClick={() => wantIt(it)} style={{ background: on ? ACCENT : 'none', border: '1px solid ' + (on ? ACCENT : '#232A3E'), color: on ? '#fff' : '#A1A1AA', borderRadius: 6, width: 32, height: 32, cursor: 'pointer', fontFamily: 'inherit' }}>{on ? '✓' : '+'}</button> })()}</td>
                     </tr>
@@ -1321,10 +1357,10 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
                       <span className="hq-col-num" style={{ flex: '0 0 68px', color: ACCENT_TEXT, fontWeight: 700, fontVariantNumeric: 'tabular-nums', overflowWrap: 'anywhere' }}>{c.n ? '#' + c.n : '—'}</span>
                       <span style={{ flex: '1 1 auto', minWidth: 0 }}>
                         <button onClick={() => openPlayerByName(c.p, null, true, setData?.sport)} title={'Open ' + c.p + "'s player page"} style={{ fontWeight: 600, background: 'none', border: 'none', color: isMine(c.p) ? ACCENT_TEXT : '#EDEDEF', cursor: 'pointer', padding: 0, textAlign: 'left', fontFamily: 'inherit', fontSize: 14 }}>{c.p}</button>
-                        {c.t && <span className="hq-mobile-only" style={{ color: '#8A8A93', fontSize: 12, marginTop: 2 }}>{c.t}</span>}
+                        {c.t && <span className="hq-mobile-only" style={{ color: '#8A93A8', fontSize: 12, marginTop: 2 }}>{c.t}</span>}
                       </span>
-                      <span className="hq-col-team" style={{ flex: '1 1 auto', minWidth: 0, color: '#8A8A93', fontSize: 13 }}>{c.t || ''}</span>
-                      <span className="hq-col-flag" style={{ flex: setIsTcg ? '0 0 110px' : '0 0 70px', textAlign: 'right' }}>{c.x ? <Chip color={c.x === 'RC' ? '#4ade80' : '#8A8A93'}>{c.x}</Chip> : null}</span>
+                      <span className="hq-col-team" style={{ flex: '1 1 auto', minWidth: 0, color: '#8A93A8', fontSize: 13 }}>{c.t || ''}</span>
+                      <span className="hq-col-flag" style={{ flex: setIsTcg ? '0 0 110px' : '0 0 70px', textAlign: 'right' }}>{c.x ? <Chip color={c.x === 'RC' ? '#4ade80' : '#8A93A8'}>{c.x}</Chip> : null}</span>
                       <a href={grailfindrFindUrl({ setName: setData.name, player: c.p, n: c.n, section: sec.title })} target="_blank" rel="noreferrer"
                         title="Find this card for sale on GrailFindr (every marketplace)" aria-label={'Find ' + (c.p || 'this card') + ' on GrailFindr'}
                         style={{ flex: '0 0 32px', height: 32, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', border: '1px solid #232A3E', borderRadius: 6, color: '#8A93A8', textDecoration: 'none' }}>
@@ -1333,7 +1369,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
                       {(() => { const it = { set_slug: setData.slug, set_name: setData.name, card_n: c.n, section: sec.title, player: c.p }, on = isWanted(it); return (
                       <button title={on ? 'On your wantlist — click to remove' : 'Add this card (and its parallel section) to your wantlist'}
                         onClick={() => wantIt(it)} aria-pressed={on}
-                        aria-label={on ? 'On your wantlist — remove' : 'Add to wantlist'} style={{ flex: '0 0 32px', height: 32, background: on ? ACCENT : 'none', border: '1px solid ' + (on ? ACCENT : '#232A3E'), color: on ? '#fff' : '#7a7a7a', borderRadius: 6, fontSize: 14, cursor: 'pointer', padding: 0 }}>{on ? '✓' : '+'}</button>) })()}
+                        aria-label={on ? 'On your wantlist — remove' : 'Add to wantlist'} style={{ flex: '0 0 32px', height: 32, background: on ? ACCENT : 'none', border: '1px solid ' + (on ? ACCENT : '#232A3E'), color: on ? '#fff' : '#8A93A8', borderRadius: 6, fontSize: 14, cursor: 'pointer', padding: 0 }}>{on ? '✓' : '+'}</button>) })()}
                     </div>
                   ))}
                   {sorted.length > 200 && !openSecs.has(sec.title) && (
@@ -1368,7 +1404,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
                 <button key={p.id} onClick={() => openPlayer(p, null, [])}
                   style={{ width: '100%', textAlign: 'left', display: 'flex', gap: 12, padding: '11px 16px', fontSize: 14, alignItems: 'baseline', flexWrap: 'wrap', background: i % 2 === 0 ? '#0F1320' : '#121626', border: 'none', color: '#EDEDEF', cursor: 'pointer', fontFamily: 'inherit' }}>
                   <span style={{ fontWeight: 600 }}>{p.name}</span>
-                  <span style={{ color: '#8A8A93', fontSize: 13 }}>{p.sport} · {p.cards.toLocaleString()} cards</span>
+                  <span style={{ color: '#8A93A8', fontSize: 13 }}>{p.sport} · {p.cards.toLocaleString()} cards</span>
                 </button>
               ))}
             </div>
@@ -1379,7 +1415,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
                 <button key={x.slug} onClick={() => openSet(x)}
                   style={{ width: '100%', textAlign: 'left', display: 'flex', gap: 12, padding: '11px 16px', fontSize: 14, alignItems: 'baseline', flexWrap: 'wrap', background: i % 2 === 0 ? '#0F1320' : '#121626', border: 'none', color: '#EDEDEF', cursor: 'pointer', fontFamily: 'inherit' }}>
                   <span style={{ fontWeight: 600 }}>{x.name}</span>
-                  <span style={{ color: '#8A8A93', fontSize: 13 }}>Set · {(x.cardCount || 0).toLocaleString()} cards</span>
+                  <span style={{ color: '#8A93A8', fontSize: 13 }}>Set · {(x.cardCount || 0).toLocaleString()} cards</span>
                 </button>
               ))}
             </div>
@@ -1413,7 +1449,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
         <section>
           <div style={{ background: 'linear-gradient(140deg, #0f1526, #0F1320)', border: '1px solid ' + ACCENT + '33', borderRadius: 18, padding: '30px 30px', marginBottom: 22 }}>
             <h1 style={{ ...display, fontSize: 40, margin: 0, lineHeight: 1 }}>RPA Tracker</h1>
-            <p style={{ color: '#aaa', fontSize: 16, lineHeight: 1.6, maxWidth: 720, margin: '14px 0 0' }}>
+            <p style={{ color: '#A3ABBD', fontSize: 16, lineHeight: 1.6, maxWidth: 720, margin: '14px 0 0' }}>
               Every Rookie Patch Auto, on-card autograph, patch and relic card across {statN.sets.toLocaleString()} sets — with its serial print run — so you can track the hobby's premium hits in one place.
             </p>
           </div>
@@ -1444,14 +1480,14 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
                 }}>{sp}</button>
             ))}
           </div>
-          <input value={rpaQuery} onChange={(e) => setRpaQuery(e.target.value)} placeholder="Filter by player…"
+          <input value={rpaQuery} onChange={(e) => setRpaQuery(e.target.value)} aria-label="Filter by player" placeholder="Filter by player…"
             style={{ width: '100%', boxSizing: 'border-box', background: '#121626', border: '1px solid #232A3E', borderRadius: 10, padding: '12px 16px', color: '#EDEDEF', fontSize: 16, outline: 'none', marginBottom: 16 }} />
 
           {!rpaData ? <p style={{ color: '#8A93A8' }}>Loading RPA database…</p> : (
             <>
               <p style={{ color: '#8A93A8', fontSize: 12, margin: '0 0 10px' }}>{rpaResults.length >= 1200 ? '1,200+' : rpaResults.length.toLocaleString()} cards{rpaQuery ? ' for “' + rpaQuery + '”' : ''}</p>
               <div style={{ border: '1px solid #222', borderRadius: 12, overflow: 'hidden' }}>
-                <div style={{ ...eyebrow, display: 'flex', gap: 12, padding: '9px 16px', background: '#121626', borderBottom: '1px solid #232A3E', color: '#8A8A93' }}>
+                <div style={{ ...eyebrow, display: 'flex', gap: 12, padding: '9px 16px', background: '#121626', borderBottom: '1px solid #232A3E', color: '#8A93A8' }}>
                   <span style={{ flex: '0 0 56px' }}>Card</span>
                   <span style={{ flex: '1 1 auto', minWidth: 0 }}>Player</span>
                   <span style={{ flex: '0 0 88px' }}>Type</span>
@@ -1465,7 +1501,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
                     <span style={{ flex: '1 1 auto', minWidth: 0, fontWeight: 600 }}>{c.p}</span>
                     <span style={{ flex: '0 0 88px' }}><Chip color={RPA_TYPE_COLOR[c.type]}>{c.type}</Chip></span>
                     <span style={{ flex: '0 0 64px', textAlign: 'right', color: c.serial ? '#EDEDEF' : '#8A93A8', fontWeight: 700, fontVariantNumeric: 'tabular-nums' }}>{c.serial || '—'}</span>
-                    <span style={{ flex: '2 1 0', minWidth: 0, color: '#8A8A93', fontSize: 13, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{c.year} {c.set}</span>
+                    <span style={{ flex: '2 1 0', minWidth: 0, color: '#8A93A8', fontSize: 13, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{c.year} {c.set}</span>
                   </button>
                 ))}
                 {rpaResults.length === 0 && <p style={{ padding: 20, color: '#8A93A8', fontSize: 14 }}>No hits match.</p>}
@@ -1477,10 +1513,10 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
         <section>
           <div style={{ background: 'linear-gradient(140deg, #0f1526, #0F1320)', border: '1px solid ' + ACCENT + '33', borderRadius: 18, padding: '30px 30px', marginBottom: 24 }}>
             <h1 style={{ ...display, fontSize: 40, margin: 0, lineHeight: 1 }}>Patch Swaps</h1>
-            <p style={{ color: '#aaa', fontSize: 16, lineHeight: 1.6, maxWidth: 720, margin: '14px 0 0' }}>
+            <p style={{ color: '#A3ABBD', fontSize: 16, lineHeight: 1.6, maxWidth: 720, margin: '14px 0 0' }}>
               A running record of cards known to have had their game-used or manufactured patches swapped — with the original and the replacement patch side by side so collectors can spot altered cards before they buy.
             </p>
-            <p style={{ color: '#8A8A93', fontSize: 13, margin: '16px 0 0' }}>
+            <p style={{ color: '#8A93A8', fontSize: 13, margin: '16px 0 0' }}>
               Primary source:{' '}
               <a href={(patchData && patchData.source && patchData.source.url) || 'https://www.instagram.com/fake_hockey_patches/'} target="_blank" rel="noreferrer" style={{ color: ACCENT_TEXT, fontWeight: 700 }}>
                 @fake_hockey_patches
@@ -1528,7 +1564,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
                       <span style={{ ...display, color: '#e11d48', fontSize: 20 }}>{String(i + 1).padStart(2, '0')}</span>
                       <p style={{ ...title(16), margin: 0, lineHeight: 1.15 }}>{f.title}</p>
                     </div>
-                    <p style={{ color: '#a9a9a9', fontSize: 14, lineHeight: 1.55, margin: 0 }}>{f.detail}</p>
+                    <p style={{ color: '#A3ABBD', fontSize: 14, lineHeight: 1.55, margin: 0 }}>{f.detail}</p>
                   </div>
                 ))}
               </div>
@@ -1558,14 +1594,14 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
                       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 2, background: '#000' }}>
                         {[['Original', e.originalImg], ['Swapped', e.swappedImg]].map(([lbl, img]) => (
                           <div key={lbl} style={{ position: 'relative', aspectRatio: '1', background: '#0B0E17', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                            {img ? <img src={img} alt={lbl} style={{ width: '100%', height: '100%', objectFit: 'cover' }} /> : <span style={{ color: '#444', fontSize: 12 }}>{lbl} photo</span>}
+                            {img ? <img src={img} alt={lbl} style={{ width: '100%', height: '100%', objectFit: 'cover' }} /> : <span style={{ color: '#5C6478', fontSize: 12 }}>{lbl} photo</span>}
                             <span style={{ ...eyebrow, position: 'absolute', top: 8, left: 8, background: lbl === 'Swapped' ? '#e11d48' : '#232A3E', color: '#fff', padding: '3px 8px', borderRadius: 4 }}>{lbl}</span>
                           </div>
                         ))}
                       </div>
                       <div style={{ padding: '16px 18px' }}>
                         <p style={{ ...title(16), margin: 0 }}>{e.player || e.card}</p>
-                        <p style={{ color: '#8A8A93', fontSize: 12, margin: '4px 0 0' }}>{[e.year, e.set, e.card].filter(Boolean).join(' · ')}</p>
+                        <p style={{ color: '#8A93A8', fontSize: 12, margin: '4px 0 0' }}>{[e.year, e.set, e.card].filter(Boolean).join(' · ')}</p>
                         {e.summary && <p style={{ color: '#A1A1AA', fontSize: 13, lineHeight: 1.5, margin: '10px 0 0' }}>{e.summary}</p>}
                         {e.sourceUrl && <a href={e.sourceUrl} target="_blank" rel="noreferrer" style={{ color: ACCENT_TEXT, fontSize: 12, fontWeight: 700, display: 'inline-block', marginTop: 10 }}>View source →</a>}
                       </div>
@@ -1585,7 +1621,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
             </h2>
           </div>
           <div style={{ border: '1px solid #222', borderRadius: 12, overflow: 'hidden' }}>
-            <div style={{ ...eyebrow, display: 'flex', gap: 12, padding: '9px 16px', background: '#121626', borderBottom: '1px solid #232A3E', color: '#8A8A93' }}>
+            <div style={{ ...eyebrow, display: 'flex', gap: 12, padding: '9px 16px', background: '#121626', borderBottom: '1px solid #232A3E', color: '#8A93A8' }}>
               <span style={{ flex: '0 0 60px' }}>Card</span>
               <span style={{ flex: '1 1 auto', minWidth: 0 }}>{isTcg ? 'Card' : 'Player'}</span>
               <span style={{ flex: isTcg ? '0 0 120px' : '0 0 54px' }}>{isTcg ? 'Rarity' : 'Flag'}</span>
@@ -1595,9 +1631,9 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
               <button key={i} onClick={() => { const s = sets.find(x => x.slug === c.slug); if (s) openSet(Object.assign({}, s, classifySet(s.name, s.year))) }}
                 style={{ width: '100%', textAlign: 'left', display: 'flex', gap: 12, padding: '8px 16px', fontSize: 14, alignItems: 'baseline', background: i % 2 === 0 ? '#0F1320' : '#121626', border: 'none', color: '#EDEDEF', cursor: 'pointer' }}>
                 <span style={{ flex: '0 0 60px', color: ACCENT_TEXT, fontWeight: 700, fontVariantNumeric: 'tabular-nums' }}>{c.n ? '#' + c.n : '—'}</span>
-                <span style={{ flex: '1 1 auto', minWidth: 0, fontWeight: 600 }}>{c.p}{isTcg && c.t ? <span style={{ color: '#8A8A93', fontWeight: 400, fontSize: 13 }}> · {c.t}</span> : null}</span>
-                <span style={{ flex: isTcg ? '0 0 120px' : '0 0 54px' }}>{c.x ? <Chip color={c.x === 'RC' ? '#4ade80' : '#8A8A93'}>{c.x}</Chip> : null}</span>
-                <span style={{ flex: '2 1 0', minWidth: 0, color: '#8A8A93', fontSize: 13 }}>{c.set}{c.section ? ' · ' + c.section : ''}</span>
+                <span style={{ flex: '1 1 auto', minWidth: 0, fontWeight: 600 }}>{c.p}{isTcg && c.t ? <span style={{ color: '#8A93A8', fontWeight: 400, fontSize: 13 }}> · {c.t}</span> : null}</span>
+                <span style={{ flex: isTcg ? '0 0 120px' : '0 0 54px' }}>{c.x ? <Chip color={c.x === 'RC' ? '#4ade80' : '#8A93A8'}>{c.x}</Chip> : null}</span>
+                <span style={{ flex: '2 1 0', minWidth: 0, color: '#8A93A8', fontSize: 13 }}>{c.set}{c.section ? ' · ' + c.section : ''}</span>
               </button>
             ))}
             {sliceLoading && <p style={{ padding: 20, color: '#8A93A8', fontSize: 14 }}>Loading {teamFilter} cards…</p>}
@@ -1621,8 +1657,8 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
                 const grp = (x) => (TCG_SET.has(x.sport) ? 1 : OTHER_SET.has(x.sport) ? 2 : 0)
                 return (grp(a) - grp(b)) || (a.sport || '').localeCompare(b.sport || '') || ((b.year || 0) - (a.year || 0)) || nm()
               }
-              if (sortBy === 'brand') return (a.brand || 'zzz').localeCompare(b.brand || 'zzz') || (b.year - a.year) || nm()
-              return (b.year - a.year) || nm() // year-desc default
+              if (sortBy === 'brand') return (a.brand || 'zzz').localeCompare(b.brand || 'zzz') || ((b.year || 0) - (a.year || 0)) || nm()
+              return ((b.year || 0) - (a.year || 0)) || nm() // year-desc default
             }).slice(0, setLimit).map((s) => {
               const c = SPORT_COLORS[s.sport] || ACCENT
               return (
@@ -1643,7 +1679,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
                   <p style={{ ...title(16), margin: '0 0 12px', lineHeight: 1.1, minHeight: 44 }}>{s.name.replace(/^\d{4}(-\d{2})?\s*/, '')}</p>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', borderTop: '1px solid #222', paddingTop: 10 }}>
                     <span style={{ ...display, fontSize: 24, color: ACCENT_TEXT }}>{(s.cardCount || 0).toLocaleString()}</span>
-                    <span style={{ ...eyebrow, color: '#8A8A93' }}>Cards</span>
+                    <span style={{ ...eyebrow, color: '#8A93A8' }}>Cards</span>
                   </div>
                 </button>
               )
@@ -1667,7 +1703,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
       )}
 
       <footer style={{ marginTop: 60, borderTop: '1px solid #1A1F31', paddingTop: 18, display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: 8 }}>
-        <span style={{ color: '#8A93A8', fontSize: 12 }}>Checklist data sourced from The Cardboard Connection.</span>
+        <span style={{ color: '#8A93A8', fontSize: 12 }}>Checklist data compiled from TCDB, Cardboard Connection, Break Ninja, Checklist Center, Scryfall, YGOPRODeck and the Pokémon TCG API, plus collector corrections.</span>
         <span style={{ display: 'inline-flex', gap: 14, flexWrap: 'wrap' }}>
           {[['Report a problem', () => setFeedback(activeSet && setData ? { set_slug: setData.slug, set_name: setData.name, sections: (setData.sections || []).map(x => x.title) } : { kind: 'other_data' })],
             ['Suggest a feature', () => setFeedback({ kind: 'feature' })],

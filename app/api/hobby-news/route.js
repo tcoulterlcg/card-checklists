@@ -73,7 +73,7 @@ function parseFeed(xml, source) {
     if (gnSource && title.endsWith(' - ' + gnSource)) title = title.slice(0, -(gnSource.length + 3))
     const link = decode((b.match(/<link>([\s\S]*?)<\/link>/) || [])[1])
     const date = Date.parse(decode((b.match(/<pubDate>([\s\S]*?)<\/pubDate>/) || [])[1])) || 0
-    if (title && title.length > 8 && link) items.push({ title, link, source: gnSource || source, date })
+    if (title && title.length > 8 && /^https?:\/\//.test(link)) items.push({ title, link, source: gnSource || source, date })
     if (items.length >= 15) break
   }
   return items
@@ -83,7 +83,8 @@ async function pull(url) {
   try {
     const r = await fetch(url, {
       headers: { 'user-agent': 'Mozilla/5.0 (compatible; CardHQ/1.0; +https://cardhq.vercel.app)', accept: 'application/rss+xml, application/xml, text/xml' },
-      next: { revalidate: 1800 }
+      next: { revalidate: 1800 },
+      signal: AbortSignal.timeout(5000)   // one slow feed must not hang the whole ticker
     })
     if (!r.ok) return []
     return parseFeed(await r.text(), sourceOf(url))
@@ -121,5 +122,7 @@ export async function GET() {
   const seen = new Set()
   for (const s of built) s.items = s.items.filter(it => { const k = it.title.toLowerCase().replace(/[^a-z0-9]/g, '').slice(0, 60); if (seen.has(k)) return false; seen.add(k); return true })
   const segments = built.filter(s => s.items.length > 0)
+  // every feed failed: error out so the last good copy keeps being served instead of caching an empty ticker
+  if (!segments.length) return NextResponse.json({ segments: [] }, { status: 503, headers: { 'cache-control': 'no-store' } })
   return NextResponse.json({ segments })
 }

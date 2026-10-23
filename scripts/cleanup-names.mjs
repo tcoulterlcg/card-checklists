@@ -35,6 +35,7 @@ function tidy(p) {
   s = s.replace(/\s+(UR|RAP|ROO|PROS|FY)\s*,?$/, '')   // subset tags glued to names ("UR" = Ultimate Rookie)
   s = s.replace(/,\s*$/, '')
   s = s.replace(/\s*\(R\)$/, '')                     // "(R)" marker
+  s = s.replace(/\s*\(\$\d[\d,]*(?:\.\d\d)?\)$/, '')   // retail price glued on: "Trevor Lawrence ($750)"
   // trailing year on a person's name ("Elias Pettersson 2025"), not on "Badge 1900"
   s = s.replace(/\s+(19|20)\d\d$/, (m) => { const rest = s.slice(0, -m.length); return /^[A-Z][\w'.-]+( [A-Z][\w'.-]+)+$/.test(rest) && !/\d/.test(rest) ? '' : m })
   if (/\)$/.test(s) && !s.includes('(')) s = s.slice(0, -1).trim()

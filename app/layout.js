@@ -16,6 +16,8 @@ export const viewport = {
 // Responsive rules. Most styling is inline; these classes add the breakpoints
 // inline styles can't express (!important is needed to beat inline values).
 const RESPONSIVE_CSS = `
+button, input, select, textarea { font-family: inherit; }
+:focus-visible { outline: 2px solid #7FA2FF !important; outline-offset: 2px; }   /* !important: beats inline outline:none */
 html { -webkit-text-size-adjust: 100%; }
 body { overflow-x: clip; }
 .hq-aside { position: sticky; top: 88px; max-height: calc(100vh - 140px); overflow-y: auto; }
@@ -38,7 +40,7 @@ body { overflow-x: clip; }
 .hq-hsearch input { flex: 1; min-width: 0; background: none; border: 0; outline: none; color: #ECEEF3; font: 400 13px 'Inter', system-ui, sans-serif; }
 .hq-hsearch input::placeholder { color: #6F788C; }
 .hq-hsearch kbd { font: 500 12px 'Inter', system-ui, sans-serif; color: #8A93A8; border: 1px solid #2A3247; border-radius: 4px; padding: 1px 5px; }
-.hq-hsearch.hq-hidden { opacity: 0; pointer-events: none; }
+.hq-hsearch.hq-hidden { opacity: 0; pointer-events: none; visibility: hidden; }
 .hq-signin { height: 42px; padding: 0 18px; box-sizing: border-box; background: #151A27; border: 1px solid #2A3247; border-radius: 8px; color: #ECEEF3; font: 700 16px 'Barlow Condensed', 'Arial Narrow', sans-serif; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; white-space: nowrap; transition: background 120ms, border-color 120ms; }
 .hq-signin:hover { background: #1C2233; border-color: #3A4562; }
 .hq-signin:active { background: #121623; }
