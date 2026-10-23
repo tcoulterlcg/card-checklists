@@ -235,7 +235,9 @@
    "missing inserts: batting, batting ice, batting royal, ice, next generation, post throw, pre throw, pre throw ice",
    "102 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2017-bowman-platinum-baseball-cards: 107 -> 3023 cards, 2 -> 56 sections, covers 100.0% of current",
+  "at": "2026-10-23"
  },
  {
   "slug": "2024-topps-chrome-logofractor-edition-baseball",
@@ -247,7 +249,9 @@
   "why": [
    "base skips 82 numbers in #1-255 (e.g. 7, 8, 13, 17, 26)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2024-topps-chrome-logofractor-edition-baseball: 255 -> 2656 cards, 6 -> 46 sections, covers 100.0% of current",
+  "at": "2026-10-23"
  },
  {
   "slug": "2017-bowman-chrome-baseball-cards",
@@ -260,7 +264,9 @@
    "missing inserts: 2016 arizona fall league stars, 70th anniversary, bowman 70th, mojo, national convention, relics",
    "171 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2017-bowman-chrome-baseball-cards: 415 -> 3956 cards, 5 -> 76 sections, covers 100.0% of current",
+  "at": "2026-10-23"
  },
  {
   "slug": "2016-topps-tribute-baseball-cards",
@@ -273,7 +279,9 @@
    "missing inserts: ageless accolades, cuts from cloth relics, foundations greatness, milestone relics, prime patch, relics, rightful recognition, stamp approval relic",
    "101 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2016-topps-tribute-baseball-cards: 180 -> 3318 cards, 2 -> 81 sections, covers 100.0% of current",
+  "at": "2026-10-23"
  },
  {
   "slug": "2016-bowman-chrome-baseball-cards",
@@ -286,7 +294,9 @@
    "missing inserts: 2015 afl fall star, national, prime position, prospect, shimmer, that never were",
    "162 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2016-bowman-chrome-baseball-cards: 420 -> 4606 cards, 6 -> 94 sections, covers 100.0% of current",
+  "at": "2026-10-23"
  },
  {
   "slug": "2016-panini-prizm-football-cards",
@@ -299,7 +309,9 @@
    "missing inserts: camo, die cut, disco, draft picks, draft picks die cuts, draft picks helmet die cuts, draft picks stained glass, flash",
    "82 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "review",
+  "note": "2016-panini-prizm-football-cards: 690 -> 7550 cards, 17 -> 75 sections, covers 66.4% of current",
+  "tcdbSid": 134882
  },
  {
   "slug": "2013-fleer-retro-football-cards",
@@ -312,7 +324,9 @@
    "missing inserts: e century, electrifying, essential credentials future, essential credentials now, focus wondrous, greats game, metal universe, metal universe planet",
    "64 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2013-fleer-retro-football-cards: 212 -> 1388 cards, 3 -> 33 sections, covers 100.0% of current",
+  "at": "2026-10-23"
  },
  {
   "slug": "2016-topps-chrome-baseball-cards",
