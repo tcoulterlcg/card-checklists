@@ -57,8 +57,8 @@
   },
   "UFC": {
    "file": "index/ufc.json",
-   "sets": 217,
-   "cards": 18437
+   "sets": 227,
+   "cards": 19693
   },
   "Multi-Sport": {
    "file": "index/multi-sport.json",
@@ -71,7 +71,7 @@
    "cards": 195
   }
  },
- "sets": 21783,
- "cards": 1850636,
- "updated": "2026-10-23T13:17:21.587Z"
+ "sets": 21793,
+ "cards": 1851892,
+ "updated": "2026-10-23T13:34:52.732Z"
 }
