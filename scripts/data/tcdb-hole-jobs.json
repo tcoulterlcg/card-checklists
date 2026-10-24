@@ -6801,8 +6801,9 @@
   "why": [
    "base skips 13 numbers in #1-200 (e.g. 93, 94, 95, 96, 97)"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "review",
+  "note": "2020-panini-playoff-football: 4815 -> 4599 cards, 83 -> 74 sections, covers 92.4% of current",
+  "tcdbSid": 254826
  },
  {
   "slug": "1961-fleer-baseball-cards",
@@ -6829,8 +6830,9 @@
    "missing inserts: game used jersey, prospects signature",
    "base skips 6 numbers in #1-100 (e.g. 21, 24, 34, 37, 65)"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "done",
+  "note": "2014-panini-elite-extra-edition-baseball: 515 -> 3418 cards, 18 -> 52 sections, covers 97.8% of current",
+  "at": "2026-10-24"
  },
  {
   "slug": "1988-topps-traded-baseball-cards",
@@ -6843,8 +6845,9 @@
    "missing inserts: tiffany",
    "27 players sold on SCP not on checklist"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "done",
+  "note": "1988-topps-traded-baseball-cards: 133 -> 264 cards, 2 -> 2 sections, covers 98.5% of current",
+  "at": "2026-10-24"
  },
  {
   "slug": "1993-sp-baseball",
@@ -6857,8 +6860,9 @@
    "missing inserts: error photo is tracy sanders, power",
    "17 players sold on SCP not on checklist"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "done",
+  "note": "1993-sp-baseball: 290 -> 310 cards, 1 -> 2 sections, covers 100.0% of current",
+  "at": "2026-10-24"
  },
  {
   "slug": "2015-leaf-signature-series-hockey-cards",
@@ -6899,8 +6903,9 @@
    "missing inserts: emerald, ruby, zone",
    "6 players sold on SCP not on checklist"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "done",
+  "note": "2018-panini-contenders-football-nfl-cards: 1180 -> 5358 cards, 31 -> 137 sections, covers 100.0% of current",
+  "at": "2026-10-24"
  },
  {
   "slug": "2017-panini-playoff-football-nfl-cards",
@@ -9152,7 +9157,8 @@
   "why": [
    "missing inserts: atomic, relics"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2013-topps-five-star-football-cards",
@@ -9164,7 +9170,8 @@
   "why": [
    "missing inserts: jersey relic, superstar combos"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2017-18-sp-game-used-hockey-cards",
@@ -9176,7 +9183,8 @@
   "why": [
    "missing inserts: banner year relic, star skills fabrics"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2016-upper-deck-national-hockey-card-day",
@@ -9188,7 +9196,8 @@
   "why": [
    "missing inserts: america, canada"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2015-16-spx-hockey-cards",
@@ -9200,7 +9209,8 @@
   "why": [
    "missing inserts: 2005 06 retro fabric, monochromatics jersey"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2014-15-spx-hockey-cards",
@@ -9212,7 +9222,8 @@
   "why": [
    "missing inserts: 1997 98 retro, winning combos"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2011-12-panini-rookie-anthology-hockey",
@@ -9224,7 +9235,8 @@
   "why": [
    "missing inserts: rivalry dual jerseys, treasures rpa"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2011-12-sp-authentic-hockey-cards",
@@ -9236,7 +9248,8 @@
   "why": [
    "missing inserts: fx, sign times"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2018-panini-chronicles-baseball-cards",
@@ -9248,7 +9261,8 @@
   "why": [
    "missing inserts: galactic, rapture"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2018-topps-triple-threads-baseball",
@@ -9260,7 +9274,8 @@
   "why": [
    "missing inserts: relics legend, single relic"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2017-topps-inception-baseball-cards",
@@ -9272,7 +9287,8 @@
   "why": [
    "missing inserts: legendary debut, signings"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2016-donruss-baseball-cards",
@@ -9284,7 +9300,8 @@
   "why": [
    "missing inserts: border, rated die cut"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2015-panini-prizm-baseball-cards",
@@ -9296,7 +9313,8 @@
   "why": [
    "missing inserts: flash, tie dye"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2015-topps-high-tek-baseball",
@@ -9308,7 +9326,8 @@
   "why": [
    "missing inserts: pattern grass waves, sky"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2013-panini-prizm-baseball-cards",
@@ -9320,7 +9339,8 @@
   "why": [
    "missing inserts: pulsar, team mvp"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "18-19-panini-encased-basketball",
@@ -9332,7 +9352,8 @@
   "why": [
    "missing inserts: jersey relics, material relics"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "18-19-panini-national-treasures-basketball",
@@ -9344,7 +9365,8 @@
   "why": [
    "missing inserts: clutch factor signature material, game gear relics"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2015-16-donruss-basketball-cards",
@@ -9356,7 +9378,8 @@
   "why": [
    "missing inserts: promising pros swatch, status die cut"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2012-13-panini-gold-standard-basketball-cards",
@@ -9368,7 +9391,8 @@
   "why": [
    "missing inserts: bullion brand memorabilia, strike signature"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2012-13-prestige-basketball-cards",
@@ -9380,7 +9404,8 @@
   "why": [
    "missing inserts: prestigious picks signatures, starting promo"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2018-panini-playbook-football-nfl-cards",
@@ -9392,7 +9417,8 @@
   "why": [
    "missing inserts: nexus play action, patch"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2017-donruss-certified-cuts-football-cards",
@@ -9404,7 +9430,8 @@
   "why": [
    "missing inserts: future legends memorabilia, modern signature"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2017-panini-gold-standard-football",
@@ -9416,7 +9443,8 @@
   "why": [
    "missing inserts: gear relic, relic"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2016-panini-absolute-football-cards",
@@ -9428,7 +9456,8 @@
   "why": [
    "missing inserts: die cut, force material"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2015-panini-prestige-football-cards",
@@ -9440,7 +9469,8 @@
   "why": [
    "missing inserts: american die cut, jersey"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2015-topps-inception-football",
