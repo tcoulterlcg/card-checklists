@@ -3588,6 +3588,45 @@
    "tiffany"
   ]
  },
+ "2013-14-fleer-showcase-hockey-cards": {
+  "missingPlayers": [
+   "bobkov",
+   "box",
+   "breen",
+   "broll",
+   "chiarot",
+   "cunningham",
+   "damigo",
+   "dziurzynski",
+   "gazdic",
+   "haula",
+   "hellberg",
+   "henderson",
+   "holland",
+   "irwin",
+   "konan",
+   "korobov",
+   "lauridsen",
+   "marchenko",
+   "nilstorp",
+   "odell",
+   "oleksy",
+   "petrovic",
+   "roussel",
+   "samuelsson",
+   "sill",
+   "simpson",
+   "sislo",
+   "zatkoff"
+  ],
+  "missingInserts": [
+   "glow jersey",
+   "hot patch",
+   "patch",
+   "stitches memorabilia",
+   "uniformity dual jerseys"
+  ]
+ },
  "2017-18-leaf-masked-men-hockey-cards": {
   "missingPlayers": [
    "brathwaite",
@@ -3917,46 +3956,6 @@
    "merlin"
   ]
  },
- "1983-donruss-baseball-cards": {
-  "missingPlayers": [
-   "aaron",
-   "appling",
-   "boudreau",
-   "campanella",
-   "checklist",
-   "clemente",
-   "cobb",
-   "cronin",
-   "dean",
-   "dickey",
-   "feller",
-   "foxx",
-   "gehringer",
-   "greenberg",
-   "grimes",
-   "hubbell",
-   "irvin",
-   "kaline",
-   "kiner",
-   "mantle",
-   "mathewson",
-   "mize",
-   "musial",
-   "ott",
-   "paige",
-   "ruffing",
-   "snider",
-   "stengel",
-   "wynn",
-   "young",
-   "yount"
-  ],
-  "missingInserts": [
-   "action stars",
-   "hall fame heroes",
-   "stats"
-  ]
- },
  "1989-score-football-cards": {
   "missingPlayers": [
    "bears",
@@ -3995,6 +3994,45 @@
    "error photo actually gary hogeboom",
    "franco harris",
    "trivia quiz"
+  ]
+ },
+ "1983-donruss-baseball-cards": {
+  "missingPlayers": [
+   "aaron",
+   "appling",
+   "boudreau",
+   "brothers",
+   "campanella",
+   "checklist",
+   "clemente",
+   "cronin",
+   "dean",
+   "dickey",
+   "feller",
+   "foxx",
+   "gehringer",
+   "greenberg",
+   "grimes",
+   "hubbell",
+   "irvin",
+   "kaline",
+   "kiner",
+   "mantle",
+   "mathewson",
+   "mize",
+   "musial",
+   "ott",
+   "paige",
+   "ruffing",
+   "snider",
+   "stengel",
+   "wynn",
+   "young"
+  ],
+  "missingInserts": [
+   "action stars",
+   "hall fame heroes",
+   "stats"
   ]
  },
  "2018-19-panini-prizm-basketball-nba-cards": {
@@ -4192,44 +4230,6 @@
    "patch ink",
    "profiles",
    "signature"
-  ]
- },
- "2013-14-fleer-showcase-hockey-cards": {
-  "missingPlayers": [
-   "bancks",
-   "bartley",
-   "berra",
-   "box",
-   "breen",
-   "carrick",
-   "cundari",
-   "cunningham",
-   "dubnyk",
-   "dumoulin",
-   "dziurzynski",
-   "florek",
-   "gryba",
-   "hanowski",
-   "hayes",
-   "henderson",
-   "johnson",
-   "lauridsen",
-   "leblanc",
-   "megna",
-   "neuvirth",
-   "oleksy",
-   "petrovic",
-   "raanta",
-   "reinhart",
-   "samuelsson",
-   "stafford",
-   "sustr",
-   "trotman",
-   "wey"
-  ],
-  "missingInserts": [
-   "stitches memorabilia",
-   "uniformity dual jerseys"
   ]
  },
  "2014-topps-mini-baseball-cards": {
@@ -5417,27 +5417,6 @@
    "battle cry",
    "patches",
    "shield honor patch"
-  ]
- },
- "2013-topps-archives-football": {
-  "missingPlayers": [
-   "brister",
-   "butler",
-   "duper",
-   "krieg",
-   "lomax",
-   "mcginest",
-   "mecklenburg",
-   "moore",
-   "paul",
-   "plank",
-   "rathman",
-   "sipe",
-   "zorn"
-  ],
-  "missingInserts": [
-   "1970 glossy",
-   "fan favorites"
   ]
  },
  "2014-topps-update-series-baseball-cards": {
@@ -7888,6 +7867,14 @@
   ],
   "missingInserts": [
    "team threads dual materials"
+  ]
+ },
+ "2013-topps-archives-football": {
+  "missingPlayers": [
+   "paul"
+  ],
+  "missingInserts": [
+   "fan favorites"
   ]
  },
  "2013-topps-finest-football-cards": {
