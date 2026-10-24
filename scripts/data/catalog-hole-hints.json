@@ -1577,82 +1577,6 @@
    "xfractor"
   ]
  },
- "2017-topps-heritage-baseball-cards": {
-  "missingPlayers": [
-   "aaron",
-   "alfaro",
-   "arroyo",
-   "barreto",
-   "bellinger",
-   "bench",
-   "blach",
-   "bouton",
-   "brinson",
-   "bryan",
-   "buchek",
-   "carew",
-   "carlton",
-   "cepeda",
-   "cimino",
-   "denehy",
-   "garrett",
-   "glasnow",
-   "hoffman",
-   "hunter",
-   "jeter",
-   "jimenez",
-   "kaline",
-   "koufax",
-   "lachemann",
-   "lee",
-   "locke",
-   "lopez",
-   "mancini",
-   "marquez",
-   "nen",
-   "newcomb",
-   "niekro",
-   "olson",
-   "renfroe",
-   "robinson",
-   "roggenburk",
-   "ryan",
-   "saverine",
-   "schaffer",
-   "thames",
-   "thomas",
-   "toles",
-   "valentine",
-   "vogelbach",
-   "winker",
-   "worthington",
-   "zimmer"
-  ],
-  "missingInserts": [
-   "1968 game",
-   "bat",
-   "bat ink",
-   "bat shoulder",
-   "bat shoulder ink",
-   "clubhouse collection relics",
-   "fielding",
-   "fielding ink",
-   "gray jersey",
-   "grey border",
-   "high number",
-   "ink",
-   "jersey",
-   "jersey ink",
-   "mouth closed",
-   "mouth closed ink",
-   "mouth open",
-   "mouth open ink",
-   "player sample",
-   "real one",
-   "with bat",
-   "with bat ink"
-  ]
- },
  "2016-topps-heritage-baseball-cards": {
   "missingPlayers": [
    "bashers",
@@ -2795,83 +2719,6 @@
    "national"
   ]
  },
- "2013-topps-heritage-baseball-cards": {
-  "missingPlayers": [
-   "aaron",
-   "arenado",
-   "banks",
-   "bouldin",
-   "bowsfield",
-   "buxton",
-   "campbell",
-   "cepeda",
-   "cingrani",
-   "cole",
-   "conley",
-   "dailey",
-   "dees",
-   "fernandez",
-   "fischer",
-   "foiles",
-   "foytack",
-   "franklin",
-   "fujikawa",
-   "funk",
-   "gattis",
-   "gausman",
-   "goryl",
-   "green",
-   "groat",
-   "gyorko",
-   "harkness",
-   "hicks",
-   "hobbie",
-   "hook",
-   "in",
-   "kaline",
-   "kelly",
-   "koufax",
-   "leppert",
-   "lillis",
-   "long",
-   "mackenzie",
-   "marichal",
-   "mathews",
-   "maurer",
-   "mays",
-   "mejias",
-   "minoso",
-   "moran",
-   "musial",
-   "myers",
-   "ozuna",
-   "pfister",
-   "pierce",
-   "rendon",
-   "richardson",
-   "roarke",
-   "robinson",
-   "roosevelt",
-   "ryu",
-   "samuel",
-   "shantz",
-   "spring",
-   "springer",
-   "stadium",
-   "tiant",
-   "wheeler",
-   "wills",
-   "yastrzemski"
-  ],
-  "missingInserts": [
-   "1964 bazooka inserts",
-   "flashback",
-   "ink",
-   "memorable moments",
-   "real one",
-   "then now"
-  ]
- },
  "2012-13-panini-certified-hockey-cards": {
   "missingPlayers": [
    "alzner",
@@ -3035,6 +2882,28 @@
   ],
   "missingInserts": []
  },
+ "2017-topps-heritage-baseball-cards": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "bat",
+   "bat ink",
+   "bat shoulder",
+   "bat shoulder ink",
+   "fielding",
+   "fielding ink",
+   "gray jersey",
+   "grey border",
+   "jersey",
+   "jersey ink",
+   "mouth closed",
+   "mouth closed ink",
+   "mouth open",
+   "mouth open ink",
+   "player sample",
+   "with bat",
+   "with bat ink"
+  ]
+ },
  "2014-bowman-chome-mini-baseball-cards": {
   "missingPlayers": [
    "baez",
@@ -3177,32 +3046,11 @@
    "top 100 prospects"
   ]
  },
- "2014-chee-platinum-hockey-cards": {
-  "missingPlayers": [
-   "morris"
-  ],
-  "missingInserts": [
-   "brown frame",
-   "frame",
-   "frame cubes",
-   "frame ice",
-   "frame prism",
-   "frame seismic",
-   "frame traxx",
-   "full body",
-   "full body cubes",
-   "full body seismic",
-   "jersey",
-   "jersey cube",
-   "jersey cubes",
-   "jersey ice",
-   "jersey prism"
-  ]
- },
  "1984-donruss-baseball-cards": {
   "missingPlayers": [
    "aaron",
    "bench",
+   "checklist",
    "cobb",
    "fingers",
    "hornsby",
@@ -3226,6 +3074,28 @@
    "piece puzzle 43 44 45",
    "piece puzzle 49 50 51",
    "piece puzzle 58 59 60"
+  ]
+ },
+ "2014-chee-platinum-hockey-cards": {
+  "missingPlayers": [
+   "morris"
+  ],
+  "missingInserts": [
+   "brown frame",
+   "frame",
+   "frame cubes",
+   "frame ice",
+   "frame prism",
+   "frame seismic",
+   "frame traxx",
+   "full body",
+   "full body cubes",
+   "full body seismic",
+   "jersey",
+   "jersey cube",
+   "jersey cubes",
+   "jersey ice",
+   "jersey prism"
   ]
  },
  "2013-bowman-baseball-cards": {
@@ -4245,48 +4115,6 @@
    "turkey"
   ]
  },
- "2017-18-ud-premier-hockey": {
-  "missingPlayers": [
-   "allen",
-   "anisimov",
-   "athanasiou",
-   "bishop",
-   "blake",
-   "brindamour",
-   "brodzinski",
-   "burns",
-   "carlsson",
-   "datsyuk",
-   "draisaitl",
-   "ehlers",
-   "faulk",
-   "gostisbehere",
-   "hedman",
-   "johansen",
-   "jones",
-   "josi",
-   "lucic",
-   "malkin",
-   "marchessault",
-   "montour",
-   "niederreiter",
-   "nugenthopkins",
-   "oreilly",
-   "pietrangelo",
-   "provorov",
-   "radulov",
-   "staal",
-   "subban",
-   "toews",
-   "vasilevskiy",
-   "vlasic",
-   "werenski"
-  ],
-  "missingInserts": [
-   "duals jersey relics",
-   "trios jerseys"
-  ]
- },
  "2019-topps-heritage-baseball": {
   "missingPlayers": [
    "bohm",
@@ -4599,23 +4427,6 @@
    "greats"
   ]
  },
- "2018-19-panini-revolution-basketball-cards": {
-  "missingPlayers": [
-   "alexander",
-   "box",
-   "cubic",
-   "galactic",
-   "set"
-  ],
-  "missingInserts": [
-   "astro",
-   "cubic",
-   "fractal",
-   "galactic",
-   "groove",
-   "impact"
-  ]
- },
  "2016-17-panini-excalibur-basketball": {
   "missingPlayers": [
    "black",
@@ -4672,22 +4483,6 @@
   ],
   "missingInserts": [
    "mojo"
-  ]
- },
- "2017-18-panini-prizm-basketball-nba-cards": {
-  "missingPlayers": [
-   "break",
-   "prizm",
-   "schroeder",
-   "shimmer"
-  ],
-  "missingInserts": [
-   "fastbreak",
-   "hyper",
-   "mojo",
-   "shimmer",
-   "signature",
-   "sparkle"
   ]
  },
  "2017-18-panini-status-basketball-nba-cards": {
@@ -5830,6 +5625,30 @@
    "world mvp patches"
   ]
  },
+ "2013-topps-heritage-baseball-cards": {
+  "missingPlayers": [
+   "arenado",
+   "buxton",
+   "cole",
+   "fernandez",
+   "franklin",
+   "fujikawa",
+   "gattis",
+   "gyorko",
+   "hicks",
+   "in",
+   "maurer",
+   "myers",
+   "ozuna",
+   "rendon",
+   "ryu",
+   "springer",
+   "wheeler"
+  ],
+  "missingInserts": [
+   "1964 bazooka inserts"
+  ]
+ },
  "1993-sp-baseball": {
   "missingPlayers": [
    "bere",
@@ -6750,6 +6569,18 @@
   "missingInserts": [
    "atomic",
    "xfractor"
+  ]
+ },
+ "2017-18-panini-prizm-basketball-nba-cards": {
+  "missingPlayers": [
+   "break",
+   "prizm",
+   "schroeder",
+   "shimmer"
+  ],
+  "missingInserts": [
+   "fastbreak",
+   "signature"
   ]
  },
  "2016-17-panini-mosaic-prizm-basketball": {
@@ -8298,6 +8129,14 @@
    "banner year relic"
   ]
  },
+ "2017-18-ud-premier-hockey": {
+  "missingPlayers": [
+   "datsyuk"
+  ],
+  "missingInserts": [
+   "trios jerseys"
+  ]
+ },
  "2016-17-upper-deck-black-diamond-hockey": {
   "missingPlayers": [
    "roy"
@@ -8475,6 +8314,16 @@
    "diop",
    "gilchrist",
    "stein"
+  ],
+  "missingInserts": []
+ },
+ "2018-19-panini-revolution-basketball-cards": {
+  "missingPlayers": [
+   "alexander",
+   "box",
+   "cubic",
+   "galactic",
+   "set"
   ],
   "missingInserts": []
  },
