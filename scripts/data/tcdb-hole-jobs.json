@@ -6918,8 +6918,9 @@
    "missing inserts: game day signature, hail mary, headliner relics",
    "6 players sold on SCP not on checklist"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "done",
+  "note": "2017-panini-playoff-football-nfl-cards: 808 -> 4673 cards, 21 -> 95 sections, covers 100.0% of current",
+  "at": "2026-10-24"
  },
  {
   "slug": "2013-topps-ufc-bloodlines-trading-cards",
@@ -6945,8 +6946,9 @@
   "why": [
    "base skips 12 numbers in #1-99 (e.g. 2, 12, 18, 22, 34)"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "review",
+  "note": "21-22-tim-hortons-team-canada-hockey: 241 -> 238 cards, 13 -> 12 sections, covers 81.1% of current",
+  "tcdbSid": 293642
  },
  {
   "slug": "2026-leaf-spectacular-football",
@@ -7009,8 +7011,9 @@
    "missing inserts: 1981 tribute, phenom jersey, res",
    "5 players sold on SCP not on checklist"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "done",
+  "note": "2017-donruss-optic-football-nfl-cards: 710 -> 5376 cards, 21 -> 108 sections, covers 100.0% of current",
+  "at": "2026-10-24"
  },
  {
   "slug": "2015-panini-playbook-football-cards",
@@ -7023,8 +7026,9 @@
    "missing inserts: split 6 signature booklets, tag, triple threats materials",
    "5 players sold on SCP not on checklist"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "review",
+  "note": "2015-panini-playbook-football-cards: 402 -> 2327 cards, 18 -> 85 sections, covers 92.3% of current",
+  "tcdbSid": 115276
  },
  {
   "slug": "2013-14-panini-dominion-hockey-cards",
@@ -7037,8 +7041,9 @@
    "missing inserts: mammoth jersey, patches, quad jerseys",
    "5 players sold on SCP not on checklist"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "done",
+  "note": "2013-14-panini-dominion-hockey-cards: 245 -> 3693 cards, 8 -> 57 sections, covers 100.0% of current",
+  "at": "2026-10-24"
  },
  {
   "slug": "2012-13-upper-deck-black-diamond-hockey-cards",
@@ -9482,7 +9487,8 @@
   "why": [
    "missing inserts: patch, relics"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2015-topps-triple-threads-football",
@@ -9494,7 +9500,8 @@
   "why": [
    "missing inserts: relic, relic trios"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2014-panini-select-football",
@@ -9506,7 +9513,8 @@
   "why": [
    "missing inserts: fuschsia, jerseys"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2013-panini-crown-royale-football-cards",
@@ -9518,7 +9526,8 @@
   "why": [
    "missing inserts: signature, silhoutte"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2013-upper-deck-ultimate-collection-football-cards",
@@ -9530,7 +9539,8 @@
   "why": [
    "missing inserts: dual jerseys, signatures"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2014-15-upper-deck-black-diamond-hockey-cards",
@@ -9542,7 +9552,8 @@
   "why": [
    "missing inserts: double jerseys, ruby"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2013-14-sp-authentic-hockey-cards",
@@ -9554,7 +9565,8 @@
   "why": [
    "missing inserts: 1993 94 retro skates, sign times"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "ninja-update-1999-00-upper-deck-ultimate-victory-hockey",
@@ -9566,7 +9578,8 @@
   "why": [
    "missing inserts: smokin guns, victory collection"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2015-panini-select-soccer-cards",
@@ -9578,7 +9591,8 @@
   "why": [
    "missing inserts: camo, tie dye"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2018-topps-gypsy-queen-baseball-mlb-cards",
@@ -9590,7 +9604,8 @@
   "why": [
    "18 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "1989-topps-traded-baseball-cards",
@@ -9603,7 +9618,8 @@
    "missing inserts: tiffany",
    "8 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "1987-topps-traded-baseball-cards",
@@ -9616,7 +9632,8 @@
    "missing inserts: tiffany",
    "8 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "1986-topps-traded-baseball-cards",
@@ -9629,7 +9646,8 @@
    "missing inserts: tiffany",
    "8 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2017-18-sp-authentic-hockey-nhl-cards",
@@ -9642,7 +9660,8 @@
    "missing inserts: future watch ink",
    "8 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2022-panini-diamond-kings-baseball",
@@ -9666,7 +9685,8 @@
   "why": [
    "base skips 6 numbers in #1-90 (e.g. 7, 8, 9, 47, 48)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2019-topps-tribute-baseball",
@@ -9678,7 +9698,8 @@
   "why": [
    "base skips 6 numbers in #1-90 (e.g. 2, 3, 15, 19, 25)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2021-panini-xr-football",
@@ -9702,7 +9723,8 @@
   "why": [
    "base skips 6 numbers in #2-100 (e.g. 53, 54, 55, 56, 57)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2019-panini-playbook-football",
@@ -9714,7 +9736,8 @@
   "why": [
    "base skips 6 numbers in #1-99 (e.g. 42, 43, 44, 82, 83)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2021-donruss-elite-football",
@@ -9750,7 +9773,8 @@
   "why": [
    "base skips 6 numbers in #1-100 (e.g. 51, 52, 53, 54, 55)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2021-panini-phoenix-football",
@@ -9798,7 +9822,8 @@
   "why": [
    "base skips 6 numbers in #1-100 (e.g. 46, 47, 48, 94, 95)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2020-panini-immaculate-football",
@@ -9810,7 +9835,8 @@
   "why": [
    "base skips 6 numbers in #1-100 (e.g. 17, 18, 56, 77, 78)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2020-panini-impeccable-football",
@@ -9822,7 +9848,8 @@
   "why": [
    "base skips 6 numbers in #1-100 (e.g. 51, 52, 53, 54, 55)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2020-panini-phoenix-football",
@@ -9870,7 +9897,8 @@
   "why": [
    "base skips 6 numbers in #1-100 (e.g. 48, 49, 50, 51, 52)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2019-panini-obsidian-football",
@@ -9882,7 +9910,8 @@
   "why": [
    "base skips 6 numbers in #1-100 (e.g. 46, 47, 48, 88, 89)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2022-panini-national-treasures-racing-nascar",
@@ -9894,7 +9923,8 @@
   "why": [
    "base skips 6 numbers in #1-116 (e.g. 101, 102, 103, 104, 105)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2021-panini-national-treasures-racing-nascar",
