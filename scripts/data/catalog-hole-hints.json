@@ -4424,25 +4424,6 @@
    "picks top prospects"
   ]
  },
- "2015-16-panini-revolution-basketball-cards": {
-  "missingPlayers": [
-   "futura",
-   "galactic",
-   "jefferson",
-   "pope",
-   "showstoppers",
-   "stein"
-  ],
-  "missingInserts": [
-   "angular",
-   "cosmic",
-   "futura",
-   "galactic",
-   "infinite",
-   "nova",
-   "sunburst"
-  ]
- },
  "18-19-ud-upper-deck-sp-authentic-hockey": {
   "missingPlayers": [
    "bowey",
@@ -5997,21 +5978,6 @@
    "throwing"
   ]
  },
- "2015-topps-chrome-football-cards": {
-  "missingPlayers": [
-   "bettis",
-   "largent",
-   "riggins",
-   "sayers",
-   "taylor",
-   "warner"
-  ],
-  "missingInserts": [
-   "60th anniversary",
-   "pulsar",
-   "super bowl 50 die cut"
-  ]
- },
  "2013-panini-absolute-football-cards": {
   "missingPlayers": [
    "berry",
@@ -7197,15 +7163,6 @@
    "sky"
   ]
  },
- "2017-topps-pro-debut-baseball-cards": {
-  "missingPlayers": [
-   "cap"
-  ],
-  "missingInserts": [
-   "fragments farm relic",
-   "promo night uniform relic"
-  ]
- },
  "2017-topps-tribute-baseball-cards": {
   "missingPlayers": [
    "bradley",
@@ -7518,16 +7475,6 @@
   ],
   "missingInserts": [
    "power zone"
-  ]
- },
- "2017-topps-triple-threads-baseball": {
-  "missingPlayers": [
-   "dimaggio",
-   "mantle",
-   "relics"
-  ],
-  "missingInserts": [
-   "unity relic"
   ]
  },
  "2016-topps-transcendent-baseball-cards": {
@@ -7976,6 +7923,14 @@
    "portrait art reproduction"
   ]
  },
+ "2017-topps-pro-debut-baseball-cards": {
+  "missingPlayers": [
+   "cap"
+  ],
+  "missingInserts": [
+   "fragments farm relic"
+  ]
+ },
  "2016-bowman-draft-baseball-cards": {
   "missingPlayers": [
    "lilek"
@@ -8079,6 +8034,17 @@
   "missingInserts": [
    "dazzle"
   ]
+ },
+ "2015-16-panini-revolution-basketball-cards": {
+  "missingPlayers": [
+   "futura",
+   "galactic",
+   "jefferson",
+   "pope",
+   "showstoppers",
+   "stein"
+  ],
+  "missingInserts": []
  },
  "2013-14-panini-elite-basketball-cards": {
   "missingPlayers": [
@@ -8647,6 +8613,14 @@
    "amethyst",
    "beninendi",
    "sjrab"
+  ],
+  "missingInserts": []
+ },
+ "2017-topps-triple-threads-baseball": {
+  "missingPlayers": [
+   "dimaggio",
+   "mantle",
+   "relics"
   ],
   "missingInserts": []
  },
