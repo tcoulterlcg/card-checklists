@@ -5791,8 +5791,9 @@
   "why": [
    "missing inserts: inked sweaters patch, stadium series, star skills fabrics, star skills relic blends, sweaters"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "review",
+  "note": "2016-17-sp-game-used-hockey: 568 -> 3347 cards, 8 -> 79 sections, covers 94.7% of current",
+  "tcdbSid": 144588
  },
  {
   "slug": "2014-topps-archive-baseball-cards",
@@ -5804,8 +5805,9 @@
   "why": [
    "missing inserts: 1969 deckle, 1971 72, 1987 future stars, 1987 stars, major league"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "done",
+  "note": "2014-topps-archive-baseball-cards: 254 -> 2344 cards, 2 -> 55 sections, covers 98.4% of current",
+  "at": "2026-10-24"
  },
  {
   "slug": "2014-topps-platinum-football-cards",
@@ -5817,8 +5819,9 @@
   "why": [
    "missing inserts: camo, die cut, patch, pulsar, relics"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "done",
+  "note": "2014-topps-platinum-football-cards: 332 -> 3020 cards, 5 -> 60 sections, covers 100.0% of current",
+  "at": "2026-10-24"
  },
  {
   "slug": "2016-17-upper-deck-ice-hockey-cards",
@@ -5830,8 +5833,9 @@
   "why": [
    "missing inserts: exquisite, exquisite signatures, fresh threads, relic jumbos, rinkside signings"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "done",
+  "note": "2016-17-upper-deck-ice-hockey-cards: 408 -> 1120 cards, 8 -> 42 sections, covers 98.7% of current",
+  "at": "2026-10-24"
  },
  {
   "slug": "2015-16-upper-deck-portfolio-hockey-cards",
@@ -5843,8 +5847,9 @@
   "why": [
    "missing inserts: profiles materials jersey, xrc redemption art, xrc redemption color art, xrc redemption color photo, xrc redemption wire photo"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "done",
+  "note": "2015-16-upper-deck-portfolio-hockey-cards: 605 -> 1042 cards, 5 -> 25 sections, covers 98.4% of current",
+  "at": "2026-10-24"
  },
  {
   "slug": "2017-donruss-baseball-cards",
@@ -6018,7 +6023,8 @@
    "missing inserts: 1913 national game, legends music memorabilia, museum memorabilia, panels",
    "6 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2018-19-panini-nba-hoops-basketball-cards",
@@ -6031,7 +6037,8 @@
    "missing inserts: back, remembrance relics, teal explosion, winter",
    "6 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2013-14-panini-prizm-basketball-cards",
@@ -6044,7 +6051,8 @@
    "missing inserts: light die cut, post season, pulsar, summit 2014",
    "6 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2017-panini-national-treasures-football-nfl-cards",
@@ -6057,7 +6065,8 @@
    "missing inserts: number, numbers, signature rps",
    "15 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2018-19-panini-select-basketball-nba-cards",
@@ -6070,7 +6079,8 @@
    "missing inserts: copper, ds tyg 99, neon, xfactor memorabilia",
    "5 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2018-donruss-football",
@@ -6083,7 +6093,8 @@
    "missing inserts: changing stripes jerseys, horizontal, prime, studio series",
    "5 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2011-12-elite-hockey",
@@ -6096,7 +6107,8 @@
    "missing inserts: die cut, die cut aspirations, jersey, signature",
    "5 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2023-donruss-baseball",
@@ -6145,7 +6157,8 @@
    "missing inserts: border, retro blank back",
    "24 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2015-topps-opening-day-baseball",
@@ -6158,7 +6171,8 @@
    "missing inserts: stadium scenes, stars 3d, superstars celebration",
    "14 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2013-topps-ufc-finest-trading-cards",
@@ -6171,7 +6185,8 @@
    "missing inserts: fans, fight mat relics, threads fighter relics",
    "14 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2014-bowman-football-cards",
