@@ -5861,8 +5861,9 @@
   "why": [
    "missing inserts: career stat line, cyan back, dominators, magenta back, season stat line"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "review",
+  "note": "2017-donruss-baseball-cards: 745 -> 6025 cards, 23 -> 142 sections, covers 81.6% of current",
+  "tcdbSid": 143397
  },
  {
   "slug": "2017-18-mvp-hockey",
@@ -5874,8 +5875,9 @@
   "why": [
    "missing inserts: mcdavid, player credentials level access, player credentials level vip, script, signature"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "done",
+  "note": "2017-18-mvp-hockey: 805 -> 3037 cards, 7 -> 29 sections, covers 99.2% of current",
+  "at": "2026-10-24"
  },
  {
   "slug": "2017-18-panini-chronicles-basketball-nba-cards",
@@ -5887,8 +5889,9 @@
   "why": [
    "missing inserts: au, brilliance starbursts, marquee tier, momentum drive, momentum force die cut"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "done",
+  "note": "2017-18-panini-chronicles-basketball-nba-cards: 632 -> 2834 cards, 17 -> 37 sections, covers 99.4% of current",
+  "at": "2026-10-24"
  },
  {
   "slug": "2018-donruss-optic-football-nfl-cards",
@@ -5900,8 +5903,9 @@
   "why": [
    "missing inserts: 1988 tribute, 1998 tribute, horizontal, lazer, phenoms"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "review",
+  "note": "2018-donruss-optic-football-nfl-cards: 773 -> 4983 cards, 23 -> 96 sections, covers 85.8% of current",
+  "tcdbSid": 188545
  },
  {
   "slug": "2014-topps-strata-football-cards",
@@ -6199,7 +6203,8 @@
    "missing inserts: die cut, ice, relic",
    "13 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2014-topps-ufc-knockout-trading-cards",
@@ -6212,7 +6217,8 @@
    "missing inserts: championship belt, fight mat relics, relics",
    "13 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2015-bowman-football-cards",
@@ -6225,7 +6231,8 @@
    "missing inserts: die cuts, ice, relics",
    "12 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2016-topps-ufc-museum-collection-trading",
@@ -6238,7 +6245,8 @@
    "missing inserts: archival, single fighter primary pieces quad relics",
    "22 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2014-topps-update-series-baseball-cards",
