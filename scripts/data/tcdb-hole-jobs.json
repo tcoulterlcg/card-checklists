@@ -4998,7 +4998,9 @@
   "why": [
    "base skips 22 numbers in #1-330 (e.g. 63, 64, 65, 66, 67)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2021-panini-prizm-football: 23714 -> 24161 cards, 208 -> 165 sections, covers 99.9% of current",
+  "at": "2026-10-24"
  },
  {
   "slug": "21-22-o-pee-chee-hockey",
@@ -5010,7 +5012,9 @@
   "why": [
    "base skips 22 numbers in #1-499 (e.g. 36, 38, 64, 71, 83)"
   ],
-  "status": "todo"
+  "status": "review",
+  "note": "21-22-o-pee-chee-hockey: 8625 -> 10177 cards, 114 -> 39 sections, covers 88.9% of current",
+  "tcdbSid": 273715
  },
  {
   "slug": "2016-panini-black-gold-football-cards",
