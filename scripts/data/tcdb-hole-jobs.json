@@ -2052,7 +2052,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2026-panini-intl-germany-soccer-card",
@@ -2064,7 +2065,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2026-panini-intl-mexico-soccer-card",
@@ -2076,7 +2078,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2026-panini-luminance-englandl-soccer-card",
@@ -2088,7 +2091,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2026-panini-obsidian-k-league-soccer-card",
@@ -2100,7 +2104,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2026-panini-prizm-wnba-basketball-card",
@@ -2112,7 +2117,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2026-panini-revolution-k-league-soccer-card",
@@ -2124,7 +2130,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2026-panini-ring-royalty-mlw-wrestling",
@@ -2136,7 +2143,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2026-pro-set-metal-football-card",
@@ -2148,7 +2156,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2026-score-a-treat-multiple-sport",
@@ -2160,7 +2169,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2026-skybox-metal-universe-se-multiple-sport",
@@ -2172,7 +2182,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2026-topps-chrome-mls-soccer-card",
@@ -2184,7 +2195,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2026-topps-chrome-samurai-japan-baseball-card",
@@ -2196,7 +2208,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2026-topps-chrome-sapphire-mls-soccer-card",
@@ -2208,7 +2221,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2026-topps-chrome-us-winter-olympic-paralympic-hopefuls-multiple-sport",
@@ -2220,7 +2234,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2026-topps-merlin-premier-league-soccer-card",
@@ -4669,7 +4684,9 @@
    "missing inserts: aqua, foundations, inscriptions, prime, pursuit, pursuit die cut",
    "14 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2017-18-panini-status-basketball-nba-cards: 727 -> 3233 cards, 17 -> 59 sections, covers 99.6% of current",
+  "at": "2026-10-24"
  },
  {
   "slug": "2013-bowman-inception-baseball-cards",
@@ -4682,7 +4699,8 @@
    "missing inserts: patch, prospects",
    "52 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "review",
+  "note": "pre-check: TCDB 76005 base covers 0% of ours"
  },
  {
   "slug": "2022-topps-chrome-ben-baller-baseball",
@@ -4706,7 +4724,9 @@
   "why": [
    "base skips 24 numbers in #1-42 (e.g. 5, 6, 8, 9, 10)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "20-21-ud-upper-deck-synergy-hockey: 1644 -> 1822 cards, 73 -> 50 sections, covers 99.7% of current",
+  "at": "2026-10-24"
  },
  {
   "slug": "2018-topps-stadium-club-baseball-mlb-cards",
@@ -4731,7 +4751,8 @@
    "missing inserts: fan favorites, originals buyback, signature series active players, signature series retired players buyback, sky, snapshots",
    "10 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "review",
+  "note": "pre-check: TCDB 173294 base covers 0% of ours"
  },
  {
   "slug": "2016-17-panini-excalibur-basketball",
@@ -4744,7 +4765,9 @@
    "missing inserts: apprentice signature shield relic, baron, camo, count, lord, viscount",
    "10 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "review",
+  "note": "2016-17-panini-excalibur-basketball: 798 -> 4034 cards, 20 -> 63 sections, covers 92.1% of current",
+  "tcdbSid": 149101
  },
  {
   "slug": "2016-17-panini-prizm-basketball-cards",
@@ -4756,7 +4779,9 @@
   "why": [
    "missing inserts: hyper, jersey, mojo, orang, ruby wave, teal wave, wave"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2016-17-panini-prizm-basketball-cards: 693 -> 6776 cards, 10 -> 89 sections, covers 100.0% of current",
+  "at": "2026-10-24"
  },
  {
   "slug": "2017-panini-prizm-football-cards",
@@ -4768,7 +4793,8 @@
   "why": [
    "missing inserts: disco, mojo, premier jersey, select signature memorabilia, select signatures, stars, tie dye"
   ],
-  "status": "todo"
+  "status": "review",
+  "note": "pre-check: TCDB 155685 base covers 67% of ours"
  },
  {
   "slug": "2014-topps-gypsy-queen-baseball-cards",
