@@ -5475,8 +5475,9 @@
    "missing inserts: aqua, clear for take off, disco prizim, lime, vinyl",
    "6 players sold on SCP not on checklist"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "done",
+  "note": "2017-18-donruss-optic-basketball-nba-cards: 749 -> 9946 cards, 16 -> 153 sections, covers 99.9% of current",
+  "at": "2026-10-24"
  },
  {
   "slug": "2003-04-topps-chrome-basketball",
@@ -5489,8 +5490,9 @@
    "missing inserts: cuts relics, gametime gear relics",
    "base skips 12 numbers in #1-165 (e.g. 112, 121, 127, 129, 131)"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "done",
+  "note": "2003-04-topps-chrome-basketball: 177 -> 1047 cards, 1 -> 13 sections, covers 100.0% of current",
+  "at": "2026-10-24"
  },
  {
   "slug": "1990-score-football-cards",
@@ -5503,8 +5505,9 @@
    "missing inserts: supplemental",
    "44 players sold on SCP not on checklist"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "review",
+  "note": "1990-score-football-cards: 821 -> 750 cards, 6 -> 5 sections, covers 87.3% of current",
+  "tcdbSid": 3253
  },
  {
   "slug": "2022-topps-x-naturel-1952-baseball",
@@ -5516,8 +5519,9 @@
   "why": [
    "base skips 18 numbers in #2-34 (e.g. 3, 4, 7, 9, 11)"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "review",
+  "note": "2022-topps-x-naturel-1952-baseball: 250 -> 630 cards, 20 -> 21 sections, covers 92.6% of current",
+  "tcdbSid": 339883
  },
  {
   "slug": "2023-donruss-elite-football",
@@ -5529,8 +5533,8 @@
   "why": [
    "base skips 18 numbers in #1-100 (e.g. 14, 19, 22, 25, 33)"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "review",
+  "note": "pre-check: TCDB 372364 base covers 89% of ours"
  },
  {
   "slug": "2020-panini-prestige-football",
@@ -5542,7 +5546,9 @@
   "why": [
    "base skips 18 numbers in #1-200 (e.g. 51, 52, 53, 54, 55)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2020-panini-prestige-football: 7144 -> 7150 cards, 147 -> 128 sections, covers 98.8% of current",
+  "at": "2026-10-24"
  },
  {
   "slug": "2012-bowman-sterling-baseball-cards",
