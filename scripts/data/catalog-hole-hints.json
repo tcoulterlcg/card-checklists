@@ -2882,28 +2882,6 @@
   ],
   "missingInserts": []
  },
- "2017-topps-heritage-baseball-cards": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "bat",
-   "bat ink",
-   "bat shoulder",
-   "bat shoulder ink",
-   "fielding",
-   "fielding ink",
-   "gray jersey",
-   "grey border",
-   "jersey",
-   "jersey ink",
-   "mouth closed",
-   "mouth closed ink",
-   "mouth open",
-   "mouth open ink",
-   "player sample",
-   "with bat",
-   "with bat ink"
-  ]
- },
  "2014-bowman-chome-mini-baseball-cards": {
   "missingPlayers": [
    "baez",
@@ -4483,30 +4461,6 @@
   ],
   "missingInserts": [
    "mojo"
-  ]
- },
- "2017-18-panini-status-basketball-nba-cards": {
-  "missingPlayers": [
-   "billups",
-   "box",
-   "dumars",
-   "goodrich",
-   "laimbeer",
-   "lamb",
-   "middleton",
-   "mourning",
-   "parish",
-   "rice",
-   "terry",
-   "valanciunas",
-   "west",
-   "worthy"
-  ],
-  "missingInserts": [
-   "aqua",
-   "foundations",
-   "pursuit",
-   "pursuit die cut"
   ]
  },
  "2016-panini-black-gold-football-cards": {
@@ -7367,16 +7321,6 @@
    "tiffany"
   ]
  },
- "2016-17-panini-prizm-basketball-cards": {
-  "missingPlayers": [
-   "cabarrot",
-   "gilchrist",
-   "stein"
-  ],
-  "missingInserts": [
-   "hyper"
-  ]
- },
  "2016-17-panini-totally-certified-basketball": {
   "missingPlayers": [
    "box",
@@ -7848,6 +7792,14 @@
   ],
   "missingInserts": [
    "teal explosion"
+  ]
+ },
+ "2017-18-panini-status-basketball-nba-cards": {
+  "missingPlayers": [
+   "box"
+  ],
+  "missingInserts": [
+   "pursuit die cut"
   ]
  },
  "2016-17-panini-absolute-basketball": {
@@ -8509,6 +8461,14 @@
   "missingPlayers": [
    "box",
    "durent",
+   "stein"
+  ],
+  "missingInserts": []
+ },
+ "2016-17-panini-prizm-basketball-cards": {
+  "missingPlayers": [
+   "cabarrot",
+   "gilchrist",
    "stein"
   ],
   "missingInserts": []
