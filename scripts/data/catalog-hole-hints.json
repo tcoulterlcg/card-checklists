@@ -4632,30 +4632,6 @@
   ],
   "missingInserts": []
  },
- "2017-panini-national-treasures-football-nfl-cards": {
-  "missingPlayers": [
-   "bridgewater",
-   "brooks",
-   "charles",
-   "cobb",
-   "cruz",
-   "escobar",
-   "gold",
-   "griese",
-   "hunter",
-   "manuel",
-   "mcfadden",
-   "mingo",
-   "patterson",
-   "schuster",
-   "sproles"
-  ],
-  "missingInserts": [
-   "number",
-   "numbers",
-   "signature rps"
-  ]
- },
  "2015-score-football-cards": {
   "missingPlayers": [
    "bears",
@@ -5691,6 +5667,26 @@
    "cracked ice",
    "sparkle",
    "sprakle"
+  ]
+ },
+ "2017-panini-national-treasures-football-nfl-cards": {
+  "missingPlayers": [
+   "bridgewater",
+   "brooks",
+   "cobb",
+   "cruz",
+   "escobar",
+   "gold",
+   "griese",
+   "hunter",
+   "manuel",
+   "mingo",
+   "patterson",
+   "schuster",
+   "sproles"
+  ],
+  "missingInserts": [
+   "signature rps"
   ]
  },
  "2015-panini-crown-royale-football-cards": {
