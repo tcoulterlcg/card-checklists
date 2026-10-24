@@ -5989,8 +5989,9 @@
   "why": [
    "base skips 16 numbers in #1-500 (e.g. 69, 191, 192, 193, 194)"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "done",
+  "note": "2025-topps-heritage-baseball: 1193 -> 18326 cards, 8 -> 105 sections, covers 99.7% of current",
+  "at": "2026-10-24"
  },
  {
   "slug": "2018-19-panini-court-kings-basketball-cards",
@@ -6003,8 +6004,9 @@
    "missing inserts: international, jade, masterpiece, ruby",
    "7 players sold on SCP not on checklist"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "review",
+  "note": "2018-19-panini-court-kings-basketball-cards: 822 -> 3101 cards, 22 -> 70 sections, covers 84.5% of current",
+  "tcdbSid": 196490
  },
  {
   "slug": "2016-17-premier-hockey",
@@ -6017,8 +6019,9 @@
    "missing inserts: 2003 04 tribute patch, gear, signature award winner, signature champions",
    "7 players sold on SCP not on checklist"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "done",
+  "note": "2016-17-premier-hockey: 472 -> 1801 cards, 16 -> 69 sections, covers 98.7% of current",
+  "at": "2026-10-24"
  },
  {
   "slug": "2014-panini-golden-age-baseball-cards",
@@ -6031,8 +6034,9 @@
    "missing inserts: 1913 national game, legends music memorabilia, museum memorabilia, panels",
    "6 players sold on SCP not on checklist"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "done",
+  "note": "2014-panini-golden-age-baseball-cards: 384 -> 2002 cards, 17 -> 30 sections, covers 100.0% of current",
+  "at": "2026-10-24"
  },
  {
   "slug": "2018-19-panini-nba-hoops-basketball-cards",
