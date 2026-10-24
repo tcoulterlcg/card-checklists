@@ -4207,42 +4207,6 @@
    "update"
   ]
  },
- "2014-topps-mini-baseball-cards": {
-  "missingPlayers": [
-   "banks",
-   "bench",
-   "berra",
-   "boggs",
-   "brett",
-   "canseco",
-   "clemente",
-   "dawson",
-   "foxx",
-   "garciaparra",
-   "gehrig",
-   "glavine",
-   "griffey",
-   "gwynn",
-   "koufax",
-   "maddux",
-   "mattingly",
-   "mcgriff",
-   "mcgwire",
-   "morgan",
-   "raines",
-   "rice",
-   "ripken",
-   "ruth",
-   "ryan",
-   "sandberg",
-   "schmidt",
-   "williams"
-  ],
-  "missingInserts": [
-   "1989 die cut",
-   "update 1989 die cut"
-  ]
- },
  "2016-17-panini-excalibur-basketball": {
   "missingPlayers": [
    "black",
@@ -4331,6 +4295,41 @@
   "missingInserts": [
    "collegiate",
    "collegiate jersey"
+  ]
+ },
+ "2014-topps-mini-baseball-cards": {
+  "missingPlayers": [
+   "banks",
+   "bench",
+   "berra",
+   "boggs",
+   "brett",
+   "canseco",
+   "clemente",
+   "dawson",
+   "foxx",
+   "garciaparra",
+   "gehrig",
+   "glavine",
+   "griffey",
+   "gwynn",
+   "koufax",
+   "maddux",
+   "mattingly",
+   "mcgriff",
+   "mcgwire",
+   "morgan",
+   "raines",
+   "rice",
+   "ripken",
+   "ruth",
+   "ryan",
+   "sandberg",
+   "schmidt",
+   "williams"
+  ],
+  "missingInserts": [
+   "1989 die cut"
   ]
  },
  "2018-panini-limited-football-nfl-cards": {
@@ -4957,23 +4956,6 @@
    "xfractor",
    "xfractor patch",
    "xfractor relic"
-  ]
- },
- "2016-17-premier-hockey": {
-  "missingPlayers": [
-   "bergeron",
-   "brindamour",
-   "datsyuk",
-   "lafleur",
-   "larkin",
-   "nielsen",
-   "roy"
-  ],
-  "missingInserts": [
-   "2003 04 tribute patch",
-   "gear",
-   "signature award winner",
-   "signature champions"
   ]
  },
  "2015-leaf-signature-series-hockey-cards": {
@@ -6556,19 +6538,6 @@
    "relics"
   ]
  },
- "2014-panini-golden-age-baseball-cards": {
-  "missingPlayers": [
-   "ashburn",
-   "goslin",
-   "hunter",
-   "mathews",
-   "pulitzer",
-   "stargell"
-  ],
-  "missingInserts": [
-   "1913 national game"
-  ]
- },
  "18-19-donruss-optic-basketball": {
   "missingPlayers": [
    "alexander",
@@ -7908,6 +7877,12 @@
    "sahlawi"
   ],
   "missingInserts": []
+ },
+ "2016-17-premier-hockey": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "signature award winner"
+  ]
  },
  "2018-19-panini-contenders-draft-picks-basketball": {
   "missingPlayers": [
