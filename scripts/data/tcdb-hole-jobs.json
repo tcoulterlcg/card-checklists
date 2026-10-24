@@ -5591,8 +5591,9 @@
    "missing inserts: 1994 95 recreates, breakthroughs, firsts",
    "22 players sold on SCP not on checklist"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "done",
+  "note": "2017-topps-finest-baseball-cards: 253 -> 2063 cards, 5 -> 57 sections, covers 97.7% of current",
+  "at": "2026-10-24"
  },
  {
   "slug": "2013-14-o-pee-chee-hockey-cards",
@@ -5661,8 +5662,9 @@
   "why": [
    "base skips 17 numbers in #1-150 (e.g. 25, 26, 27, 28, 29)"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "review",
+  "note": "2024-25-panini-immaculate-soccer: 1046 -> 4420 cards, 46 -> 174 sections, covers 16.5% of current",
+  "tcdbSid": 534846
  },
  {
   "slug": "2021-donruss-football",
