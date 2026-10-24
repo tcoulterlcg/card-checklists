@@ -4486,7 +4486,9 @@
    "missing inserts: 2014 15 update limited, cup masterpieces, f w, f w ink, global chirography, sign times",
    "18 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2015-16-sp-authentic-hockey-cards: 603 -> 1449 cards, 9 -> 58 sections, covers 99.5% of current",
+  "at": "2026-10-24"
  },
  {
   "slug": "2017-topps-triple-threads-baseball",
@@ -4499,7 +4501,9 @@
    "missing inserts: relics, unity relic, world classic relics combos",
    "47 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2017-topps-triple-threads-baseball: 118 -> 8550 cards, 3 -> 122 sections, covers 100.0% of current",
+  "at": "2026-10-24"
  },
  {
   "slug": "2017-topps-pro-debut-baseball-cards",
@@ -4512,7 +4516,9 @@
    "missing inserts: fragments farm relic, pennant patch, production, promo night uniform relic, wave future, wings",
    "17 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2017-topps-pro-debut-baseball-cards: 275 -> 1807 cards, 6 -> 37 sections, covers 98.6% of current",
+  "at": "2026-10-24"
  },
  {
   "slug": "2015-topps-chrome-football-cards",
