@@ -2637,7 +2637,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "25-26-panini-football-efl-soccer-card",
@@ -2649,7 +2650,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "25-26-panini-frauen-bundesliga-soccer-card",
@@ -2661,7 +2663,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "25-26-panini-noir-road-to-world-cup-soccer-card",
@@ -2673,7 +2676,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "25-26-panini-pitch-kings-soccer-card",
@@ -2685,7 +2689,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "25-26-panini-select-road-to-world-cup-soccer-card",
@@ -2697,7 +2702,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "25-26-topps-chrome-sapphire-uefa-womens-champions-league-soccer-card",
@@ -2709,7 +2715,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "25-26-topps-deco-uefa-club-competitions-soccer-card",
@@ -2721,7 +2728,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "25-26-topps-fc-barcelona-forever-soccer-card",
@@ -2733,7 +2741,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "25-26-topps-gold-bundesliga-soccer-card",
@@ -2745,7 +2754,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "25-26-topps-gold-premier-league-soccer-card",
@@ -2757,7 +2767,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "25-26-topps-gold-uefa-club-competitions-soccer-card",
@@ -2769,7 +2780,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "25-26-topps-inception-uefa-club-competitions-soccer-card",
@@ -2781,7 +2793,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "25-26-topps-lineage-bayern-muchen-soccer-card",
@@ -2793,7 +2806,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "25-26-topps-museum-collection-uefa-club-competitions-soccer-card",
@@ -2805,7 +2819,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "25-26-topps-royalty-premier-league-soccer-card",
@@ -5085,7 +5100,8 @@
   "why": [
    "base skips 21 numbers in #2-192 (e.g. 29, 55, 60, 79, 85)"
   ],
-  "status": "todo"
+  "status": "review",
+  "note": "TCDB 679895 (2026 Leaf) base checklist parsed empty"
  },
  {
   "slug": "2015-topps-ufc-knockout-trading-cards",
@@ -5155,7 +5171,9 @@
   "why": [
    "missing inserts: crowning achievements relic, premier date, pro bowl die cut, regal die cut, ribbons die cut, royalty memorabilia die cut"
   ],
-  "status": "todo"
+  "status": "review",
+  "note": "2015-panini-crown-royale-football-cards: 687 -> 6110 cards, 26 -> 124 sections, covers 75.6% of current",
+  "tcdbSid": 116938
  },
  {
   "slug": "2015-topps-valor-football-cards",
@@ -5167,7 +5185,9 @@
   "why": [
    "missing inserts: battle cry, gridiron warriors, patches, relic, relics, shield honor patch"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2015-topps-valor-football-cards: 255 -> 3389 cards, 2 -> 49 sections, covers 100.0% of current",
+  "at": "2026-10-24"
  },
  {
   "slug": "2014-15-panini-nba-hoops-basketball-cards",
@@ -5180,7 +5200,8 @@
    "missing inserts: artist, back, cracked ice, draft preview, remembrance memorabilia",
    "10 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "review",
+  "note": "no TCDB parent set named 2014-15 Hoops found"
  },
  {
   "slug": "2017-18-panini-prestige-basketball-nba-cards",
@@ -5192,7 +5213,9 @@
   "why": [
    "missing inserts: bright, crystal, cystal, horizon, mist, rain"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2017-18-panini-prestige-basketball-nba-cards: 550 -> 3085 cards, 13 -> 70 sections, covers 99.4% of current",
+  "at": "2026-10-24"
  },
  {
   "slug": "2017-topps-stadium-club-baseball-cards",
@@ -5216,7 +5239,9 @@
   "why": [
    "missing inserts: artist, artist s, artists, die cuts, performers jersey, upstart jersey"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2013-14-pinnacle-basketball-cards: 1015 -> 4500 cards, 17 -> 89 sections, covers 100.0% of current",
+  "at": "2026-10-24"
  },
  {
   "slug": "2017-rittenhouse-wnba-basketball-cards",
@@ -5228,7 +5253,9 @@
   "why": [
    "missing inserts: game action, legends game, posed uniform, seattle storm, street clothes, wnba"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2017-rittenhouse-wnba-basketball-cards: 110 -> 119 cards, 1 -> 2 sections, covers 100.0% of current",
+  "at": "2026-10-24"
  },
  {
   "slug": "13-14-panini-score-hockey",
@@ -5240,7 +5267,8 @@
   "why": [
    "missing inserts: first goal, hot signatures, net cam, netcam, signatures, team 8s jersey"
   ],
-  "status": "todo"
+  "status": "review",
+  "note": "pre-check: TCDB 80588 base covers 0% of ours"
  },
  {
   "slug": "2023-panini-prizm-baseball",
@@ -5252,7 +5280,9 @@
   "why": [
    "base skips 20 numbers in #1-300 (e.g. 45, 87, 183, 184, 185)"
   ],
-  "status": "todo"
+  "status": "review",
+  "note": "2023-panini-prizm-baseball: 11770 -> 10656 cards, 150 -> 110 sections, covers 25.9% of current",
+  "tcdbSid": 361296
  },
  {
   "slug": "2013-topps-ufc-knockout-trading-cards",
@@ -5265,7 +5295,8 @@
    "missing inserts: fight mat relics, full contact, memorable matchups dual relics, premium pieces relics, relics",
    "9 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "review",
+  "note": "TCDB search found no matching set"
  },
  {
   "slug": "1985-topps-traded-baseball-cards",
@@ -5278,7 +5309,9 @@
    "missing inserts: tiffany",
    "48 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "1985-topps-traded-baseball-cards: 133 -> 265 cards, 2 -> 3 sections, covers 99.2% of current",
+  "at": "2026-10-24"
  },
  {
   "slug": "2013-14-nba-hoops-basketball-cards",
@@ -5291,7 +5324,8 @@
    "missing inserts: artist, artist s, back, glossy, rising stars",
    "8 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "review",
+  "note": "no TCDB parent set named 2013-14 Hoops found"
  },
  {
   "slug": "2013-14-panini-innovation-basketball-cards",
@@ -5304,7 +5338,8 @@
    "missing inserts: jersey, light, stat line jersey",
    "27 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "review",
+  "note": "pre-check: TCDB 94451 base covers 0% of ours"
  },
  {
   "slug": "2021-panini-mosaic-draft-picks-football",
@@ -5316,7 +5351,9 @@
   "why": [
    "base skips 19 numbers in #9-33 (e.g. 10, 11, 12, 13, 14)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2021-panini-mosaic-draft-picks-football: 250 -> 1181 cards, 15 -> 15 sections, covers 100.0% of current",
+  "at": "2026-10-24"
  },
  {
   "slug": "22-23-topps-nbl-national-basketball",
@@ -5328,7 +5365,8 @@
   "why": [
    "base skips 19 numbers in #1-26 (e.g. 2, 4, 5, 6, 8)"
   ],
-  "status": "todo"
+  "status": "review",
+  "note": "TCDB has Topps Chrome NBL only, not this product"
  },
  {
   "slug": "2023-topps-black-and-white-baseball",
@@ -5340,7 +5378,9 @@
   "why": [
    "base skips 19 numbers in #2-29 (e.g. 3, 4, 5, 6, 7)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2023-topps-black-and-white-baseball: 250 -> 1282 cards, 27 -> 32 sections, covers 97.2% of current",
+  "at": "2026-10-24"
  },
  {
   "slug": "2020-panini-prizm-football",
