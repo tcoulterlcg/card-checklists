@@ -3588,45 +3588,6 @@
    "tiffany"
   ]
  },
- "2013-14-fleer-showcase-hockey-cards": {
-  "missingPlayers": [
-   "bobkov",
-   "box",
-   "breen",
-   "broll",
-   "chiarot",
-   "cunningham",
-   "damigo",
-   "dziurzynski",
-   "gazdic",
-   "haula",
-   "hellberg",
-   "henderson",
-   "holland",
-   "irwin",
-   "konan",
-   "korobov",
-   "lauridsen",
-   "marchenko",
-   "nilstorp",
-   "odell",
-   "oleksy",
-   "petrovic",
-   "roussel",
-   "samuelsson",
-   "sill",
-   "simpson",
-   "sislo",
-   "zatkoff"
-  ],
-  "missingInserts": [
-   "glow jersey",
-   "hot patch",
-   "patch",
-   "stitches memorabilia",
-   "uniformity dual jerseys"
-  ]
- },
  "2017-18-leaf-masked-men-hockey-cards": {
   "missingPlayers": [
    "brathwaite",
@@ -4168,6 +4129,43 @@
   ],
   "missingInserts": [
    "framed"
+  ]
+ },
+ "2013-14-fleer-showcase-hockey-cards": {
+  "missingPlayers": [
+   "bobkov",
+   "box",
+   "breen",
+   "broll",
+   "chiarot",
+   "cunningham",
+   "damigo",
+   "dziurzynski",
+   "gazdic",
+   "haula",
+   "hellberg",
+   "henderson",
+   "holland",
+   "irwin",
+   "konan",
+   "korobov",
+   "lauridsen",
+   "marchenko",
+   "nilstorp",
+   "odell",
+   "oleksy",
+   "petrovic",
+   "roussel",
+   "samuelsson",
+   "sill",
+   "simpson",
+   "sislo",
+   "zatkoff"
+  ],
+  "missingInserts": [
+   "glow jersey",
+   "hot patch",
+   "patch"
   ]
  },
  "2014-bowman-draft-baseball-cards": {
@@ -7869,14 +7867,6 @@
    "team threads dual materials"
   ]
  },
- "2013-topps-archives-football": {
-  "missingPlayers": [
-   "paul"
-  ],
-  "missingInserts": [
-   "fan favorites"
-  ]
- },
  "2013-topps-finest-football-cards": {
   "missingPlayers": [
    "ballard"
@@ -9314,6 +9304,12 @@
  "2013-score-football-cards": {
   "missingPlayers": [
    "adams"
+  ],
+  "missingInserts": []
+ },
+ "2013-topps-archives-football": {
+  "missingPlayers": [
+   "paul"
   ],
   "missingInserts": []
  },
