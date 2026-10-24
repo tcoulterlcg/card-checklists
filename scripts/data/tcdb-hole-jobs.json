@@ -5227,7 +5227,9 @@
   "why": [
    "missing inserts: beam team, contact sheet, instavision, minted, power zone, scoreless streak"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2017-topps-stadium-club-baseball-cards: 532 -> 4358 cards, 5 -> 64 sections, covers 100.0% of current",
+  "at": "2026-10-24"
  },
  {
   "slug": "2013-14-pinnacle-basketball-cards",
@@ -5392,7 +5394,9 @@
   "why": [
    "base skips 19 numbers in #1-300 (e.g. 110, 138, 139, 140, 141)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2020-panini-prizm-football: 18779 -> 19467 cards, 178 -> 141 sections, covers 98.8% of current",
+  "at": "2026-10-24"
  },
  {
   "slug": "2023-topps-chrome-platinum-anniversary-baseball",
@@ -5404,7 +5408,9 @@
   "why": [
    "base skips 19 numbers in #1-500 (e.g. 53, 95, 405, 425, 426)"
   ],
-  "status": "todo"
+  "status": "review",
+  "note": "2023-topps-chrome-platinum-anniversary-baseball: 15357 -> 16901 cards, 79 -> 45 sections, covers 41.4% of current",
+  "tcdbSid": 427035
  },
  {
   "slug": "2017-18-spx-hockey",
