@@ -449,7 +449,7 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
           <h1 style={{ ...display, fontSize: 'clamp(36px, 5vw, 56px)', lineHeight: 0.95, margin: 0 }}>{player.name}{titleSuffix && <span style={{ color: ACCENT_TEXT }}>{titleSuffix}</span>}</h1>
           <p style={{ color: '#8A93A8', fontSize: 14, margin: '12px 0 0', lineHeight: 1.6 }}>
             {!shard ? 'Loading cards…' : firstCard ? <>First card: {firstCard.year ? seasonLabel(firstCard.year, firstCard.sport) + ' ' : ''}{firstCard.set.replace(/^\d{4}(-\d{2})?\s*/, '')}{firstCard.n ? ' #' + firstCard.n : ''} · </> : null}
-            {shard && <>Appears in {facets.sets.size.toLocaleString()} sets across {facets.seasons} season{facets.seasons === 1 ? '' : 's'}</>}
+            {shard && <>Appears in {facets.sets.size.toLocaleString()} sets across {facets.seasons} year{facets.seasons === 1 ? '' : 's'} of sets</>}
           </p>
           {otherNames.length > 0 && <p style={{ color: '#8A93A8', fontSize: 13, margin: '6px 0 0', lineHeight: 1.5 }}>Also listed as {otherNames.slice(0, 4).join(', ')}{otherNames.length > 4 ? ' and ' + (otherNames.length - 4) + ' more' : ''}</p>}
           <div style={{ display: 'flex', gap: 10, marginTop: 18, flexWrap: 'wrap' }}>
@@ -463,7 +463,7 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
           </div>
         </div>
         <div style={{ flex: '1 1 300px', minWidth: 0, display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(110px, 1fr))', gap: 10 }}>
-          {[[rows.length, 'Cards', ACCENT], [facets.sets.size, 'Sets'], [facets.au, 'Autographs'], [facets.one, '1/1s'], [facets.rc, 'Rookies'], [facets.patch, 'Patches'], [facets.mem.GU || 0, 'Game-used'], [facets.seasons, 'Seasons']].filter(([n, l]) => !(nonSports && shard && !n && l !== 'Cards' && l !== 'Sets')).map(([n, l, c]) => (
+          {[[rows.length, 'Cards', ACCENT], [facets.sets.size, 'Sets'], [facets.au, 'Autographs'], [facets.one, '1/1s'], [facets.rc, 'Rookies'], [facets.patch, 'Patches'], [facets.mem.GU || 0, 'Game-used'], [facets.seasons, 'Years of sets']].filter(([n, l]) => !(nonSports && shard && !n && l !== 'Cards' && l !== 'Sets')).map(([n, l, c]) => (
             <div key={l} style={{ background: '#0F1320', border: '1px solid #232A3E', borderRadius: 12, padding: '14px 12px' }}>
               <p style={{ ...display, margin: 0, fontSize: 32, color: c || '#EDEDEF', lineHeight: 1 }}>{shard ? n.toLocaleString() : '…'}</p>
               <p style={{ ...eyebrow, margin: '6px 0 0', color: '#8A93A8' }}>{l}</p>

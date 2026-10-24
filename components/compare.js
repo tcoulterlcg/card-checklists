@@ -74,7 +74,7 @@ function statsOf(rows) {
 
 const METRICS = [
   ['cards', 'Cards'], ['setCount', 'Sets'], ['au', 'Autographs'], ['one', '1/1s'], ['rc', 'Rookie cards'],
-  ['patch', 'Patches'], ['pa', 'Patch autos'], ['rpa', 'RPAs'], ['gu', 'Game-used'], ['rare', '/25 or rarer'], ['shield', 'Shields'], ['seasons', 'Seasons']
+  ['patch', 'Patches'], ['pa', 'Patch autos'], ['rpa', 'RPAs'], ['gu', 'Game-used'], ['rare', '/25 or rarer'], ['shield', 'Shields'], ['seasons', 'Years of sets']
 ]
 const fmt = (v, perSeason) => perSeason ? (v >= 100 ? Math.round(v).toLocaleString() : v.toFixed(1)) : Math.round(v).toLocaleString()
 const lastName = (name) => name.split(/\s+/).slice(-1)[0]
@@ -243,9 +243,9 @@ export function ComparePage({ names, sets, onChange, onOpenSet, onOpenPlayer }) 
         <>
           {/* CONTROLS */}
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 10 }}>
-            <div style={{ display: 'flex', gap: 8 }} role="group" aria-label="Show totals or per season">
+            <div style={{ display: 'flex', gap: 8 }} role="group" aria-label="Show totals or per year of sets">
               <button onClick={() => setPerSeason(false)} style={pill(!perSeason)} aria-pressed={!perSeason}>Totals</button>
-              <button onClick={() => setPerSeason(true)} style={pill(perSeason)} aria-pressed={perSeason}>Per season</button>
+              <button onClick={() => setPerSeason(true)} style={pill(perSeason)} aria-pressed={perSeason}>Per year</button>
               <button onClick={copyLink} style={pill(false)}>{copied || 'Copy link'}</button>
             </div>
             <p style={{ ...eyebrow, fontSize: 15, margin: 0, color: DIM }}>
@@ -253,7 +253,7 @@ export function ComparePage({ names, sets, onChange, onOpenSet, onOpenPlayer }) 
                 : <>{lastName(nm[leader])} leads <span style={{ color: '#EDEDEF' }}>{wins[leader]}</span> of {metrics.length} · {lastName(nm[1 - leader])} <span style={{ color: '#EDEDEF' }}>{wins[1 - leader]}</span></>}
             </p>
           </div>
-          {perSeason && <p style={{ color: DIM, fontSize: 13, margin: 0 }}>Averages per season with cards ({sA.seasons} for {lastName(nm[0])}, {sB.seasons} for {lastName(nm[1])}), which evens out career length.</p>}
+          {perSeason && <p style={{ color: DIM, fontSize: 13, margin: 0 }}>Averages per year with sets ({sA.seasons} for {lastName(nm[0])}, {sB.seasons} for {lastName(nm[1])}). Card years include releases after a player retires, so they aren't playing seasons.</p>}
           {crossSport && <p style={{ color: DIM, fontSize: 13, margin: 0 }}>Different sports: hobby sizes differ, so read the gaps with that in mind.</p>}
 
           {/* STAT ROWS */}
