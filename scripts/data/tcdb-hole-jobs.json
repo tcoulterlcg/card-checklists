@@ -5561,7 +5561,9 @@
    "missing inserts: japan fractor",
    "42 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "review",
+  "note": "2012-bowman-sterling-baseball-cards: 134 -> 2466 cards, 4 -> 66 sections, covers 88.8% of current",
+  "tcdbSid": 72752
  },
  {
   "slug": "2015-score-football-cards",
@@ -5574,7 +5576,9 @@
    "missing inserts: camo, desert camo",
    "32 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2015-score-football-cards: 964 -> 8409 cards, 21 -> 92 sections, covers 100.0% of current",
+  "at": "2026-10-24"
  },
  {
   "slug": "2017-topps-finest-baseball-cards",
@@ -5587,7 +5591,8 @@
    "missing inserts: 1994 95 recreates, breakthroughs, firsts",
    "22 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2013-14-o-pee-chee-hockey-cards",
@@ -5600,7 +5605,9 @@
    "missing inserts: retro, retro blank back, signatures, stickers",
    "11 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "review",
+  "note": "2013-14-o-pee-chee-hockey-cards: 821 -> 4071 cards, 12 -> 21 sections, covers 87.1% of current",
+  "tcdbSid": 79961
  },
  {
   "slug": "2017-topps-wwe-nxt-checklist-added",
@@ -5613,7 +5620,8 @@
    "missing inserts: heritage takeover toronto mat relics, mat relics, nxt takeover toronto, then now forever takeover san antonio 2017 mat relics",
    "11 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "review",
+  "note": "pre-check: TCDB 152331 base covers 2% of ours"
  },
  {
   "slug": "2023-topps-x-j-rod-the-show-out-collection-baseball",
@@ -5625,7 +5633,9 @@
   "why": [
    "base skips 17 numbers in #4-30 (e.g. 6, 7, 8, 11, 14)"
   ],
-  "status": "todo"
+  "status": "review",
+  "note": "2023-topps-x-j-rod-the-show-out-collection-baseball: 250 -> 1179 cards, 16 -> 40 sections, covers 94.6% of current",
+  "tcdbSid": 390102
  },
  {
   "slug": "2005-disneyland-50-happiest-moments",
@@ -5637,7 +5647,9 @@
   "why": [
    "base skips 17 numbers in #1954-1995 (e.g. 1957, 1960, 1962, 1968, 1970)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2005-disneyland-50-happiest-moments: 50 -> 50 cards, 1 -> 1 sections, covers 100.0% of current",
+  "at": "2026-10-24"
  },
  {
   "slug": "2024-25-panini-immaculate-soccer",
@@ -5649,7 +5661,8 @@
   "why": [
    "base skips 17 numbers in #1-150 (e.g. 25, 26, 27, 28, 29)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2021-donruss-football",
@@ -5661,7 +5674,8 @@
   "why": [
    "base skips 17 numbers in #1-250 (e.g. 70, 71, 72, 73, 74)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2021-panini-score-football",
@@ -5673,7 +5687,8 @@
   "why": [
    "base skips 17 numbers in #1-299 (e.g. 130, 233, 234, 235, 236)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2014-topps-finest-baseball-cards",
@@ -5686,7 +5701,8 @@
    "missing inserts: atomic, sterling, vintage, xfractor",
    "10 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2017-18-panini-essentials-basketball-nba-cards",
@@ -5699,7 +5715,8 @@
    "missing inserts: essential legends, essential stars, spiral, status",
    "10 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2012-13-fleer-retro-basketball",
@@ -5712,7 +5729,8 @@
    "missing inserts: 1997 98 metal universe precious gems, focus fresh ink, mystique fresh ink, playmakers theater",
    "10 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2013-spx-football-cards",
@@ -5724,7 +5742,8 @@
   "why": [
    "missing inserts: finite, finite legends, super scripts, winning big materials, winning combos dual jerseys"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2018-topps-tribute-baseball-cards",
@@ -5736,7 +5755,8 @@
   "why": [
    "missing inserts: dual relics, generations excellence, iconic perspectives, stamp approval relics, triple relics"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2013-topps-museum-collection-baseball-cards",
@@ -5748,7 +5768,8 @@
   "why": [
    "missing inserts: archival, momentous material relics, primary pieces quad relics, signature swatches dual relic, signature swatches triple relic"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2016-17-sp-game-used-hockey",
