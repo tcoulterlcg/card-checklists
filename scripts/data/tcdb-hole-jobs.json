@@ -5676,8 +5676,9 @@
   "why": [
    "base skips 17 numbers in #1-250 (e.g. 70, 71, 72, 73, 74)"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "review",
+  "note": "2021-donruss-football: 11193 -> 11035 cards, 193 -> 156 sections, covers 85.1% of current",
+  "tcdbSid": 275324
  },
  {
   "slug": "2021-panini-score-football",
@@ -5689,8 +5690,9 @@
   "why": [
    "base skips 17 numbers in #1-299 (e.g. 130, 233, 234, 235, 236)"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "review",
+  "note": "2021-panini-score-football: 12938 -> 12611 cards, 153 -> 107 sections, covers 79.8% of current",
+  "tcdbSid": 263020
  },
  {
   "slug": "2014-topps-finest-baseball-cards",
@@ -5717,8 +5719,9 @@
    "missing inserts: essential legends, essential stars, spiral, status",
    "10 players sold on SCP not on checklist"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "review",
+  "note": "2017-18-panini-essentials-basketball-nba-cards: 793 -> 2831 cards, 18 -> 40 sections, covers 60.7% of current",
+  "tcdbSid": 171362
  },
  {
   "slug": "2012-13-fleer-retro-basketball",
@@ -5783,7 +5786,8 @@
   "why": [
    "missing inserts: inked sweaters patch, stadium series, star skills fabrics, star skills relic blends, sweaters"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2014-topps-archive-baseball-cards",
@@ -5795,7 +5799,8 @@
   "why": [
    "missing inserts: 1969 deckle, 1971 72, 1987 future stars, 1987 stars, major league"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2014-topps-platinum-football-cards",
@@ -5807,7 +5812,8 @@
   "why": [
    "missing inserts: camo, die cut, patch, pulsar, relics"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2016-17-upper-deck-ice-hockey-cards",
@@ -5819,7 +5825,8 @@
   "why": [
    "missing inserts: exquisite, exquisite signatures, fresh threads, relic jumbos, rinkside signings"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2015-16-upper-deck-portfolio-hockey-cards",
@@ -5831,7 +5838,8 @@
   "why": [
    "missing inserts: profiles materials jersey, xrc redemption art, xrc redemption color art, xrc redemption color photo, xrc redemption wire photo"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2017-donruss-baseball-cards",
@@ -5843,7 +5851,8 @@
   "why": [
    "missing inserts: career stat line, cyan back, dominators, magenta back, season stat line"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2017-18-mvp-hockey",
@@ -5855,7 +5864,8 @@
   "why": [
    "missing inserts: mcdavid, player credentials level access, player credentials level vip, script, signature"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2017-18-panini-chronicles-basketball-nba-cards",
@@ -5867,7 +5877,8 @@
   "why": [
    "missing inserts: au, brilliance starbursts, marquee tier, momentum drive, momentum force die cut"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2018-donruss-optic-football-nfl-cards",
@@ -5879,7 +5890,8 @@
   "why": [
    "missing inserts: 1988 tribute, 1998 tribute, horizontal, lazer, phenoms"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2014-topps-strata-football-cards",
@@ -5891,7 +5903,8 @@
   "why": [
    "missing inserts: clear cut relic, die cut, quarterback die cut, relics, signature"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2014-topps-mini-baseball-cards",
@@ -5904,7 +5917,8 @@
    "missing inserts: 1989 die cut, update 1989 die cut",
    "29 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2018-topps-gold-label-baseball-cards",
@@ -5917,7 +5931,8 @@
    "missing inserts: framed",
    "38 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2013-14-panini-crusade-basketball-cards",
@@ -5930,7 +5945,8 @@
    "missing inserts: 2014 national, die cut, sultans springfield signature, teal",
    "8 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2019-donruss-football",
@@ -5942,7 +5958,8 @@
   "why": [
    "base skips 16 numbers in #1-250 (e.g. 99, 113, 130, 131, 132)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2025-topps-heritage-baseball",
@@ -5954,7 +5971,8 @@
   "why": [
    "base skips 16 numbers in #1-500 (e.g. 69, 191, 192, 193, 194)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2018-19-panini-court-kings-basketball-cards",
