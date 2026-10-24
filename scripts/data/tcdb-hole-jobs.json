@@ -6247,8 +6247,9 @@
    "missing inserts: die cuts, ice, relics",
    "12 players sold on SCP not on checklist"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "done",
+  "note": "2015-bowman-football-cards: 220 -> 6880 cards, 2 -> 76 sections, covers 100.0% of current",
+  "at": "2026-10-24"
  },
  {
   "slug": "2016-topps-ufc-museum-collection-trading",
@@ -6288,8 +6289,9 @@
    "missing inserts: color wheel, ice traxx, phenoms die cut",
    "12 players sold on SCP not on checklist"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "done",
+  "note": "2016-17-o-pee-chee-platinum-hockey: 426 -> 3946 cards, 7 -> 51 sections, covers 100.0% of current",
+  "at": "2026-10-24"
  },
  {
   "slug": "2014-topps-ufc-bloodlines-trading-cards",
@@ -6327,8 +6329,9 @@
   "why": [
    "base skips 14 numbers in #1-170 (e.g. 110, 113, 116, 127, 128)"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "done",
+  "note": "2020-panini-prizm-draft-picks-football-cards: 375 -> 8433 cards, 4 -> 61 sections, covers 95.7% of current",
+  "at": "2026-10-24"
  },
  {
   "slug": "2025-leaf-metal-baseball",
@@ -6625,7 +6628,8 @@
   "why": [
    "missing inserts: 8, background 8, background mvp, mvp"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2015-topps-museum-collection-football",
@@ -6637,7 +6641,8 @@
   "why": [
    "missing inserts: canvas, dual signature series, signature series, signature swatches dual relic"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2013-prestige-football-cards",
@@ -6649,7 +6654,8 @@
   "why": [
    "missing inserts: game worn material, passport, shield inserts, stars inserts"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2015-upper-deck-full-force-hockey-cards",
@@ -6661,7 +6667,8 @@
   "why": [
    "missing inserts: blueprint, draft board, goooal, valuable assets"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2017-18-o-pee-chee-hockey-cards",
@@ -6674,7 +6681,8 @@
    "missing inserts: playing, retro blank back",
    "19 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2018-topps-heritage-high-number-baseball-cards",
@@ -6687,7 +6695,8 @@
    "missing inserts: 1969 decal, 1969 deckle edge",
    "19 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2016-17-panini-studio-basketball-cards",
@@ -6700,7 +6709,8 @@
    "missing inserts: defying gravity die cut, glossy, teal",
    "9 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2020-topps-wwe-road-to-wrestlemania-wrestling",
@@ -6712,7 +6722,8 @@
   "why": [
    "base skips 13 numbers in #1-100 (e.g. 3, 5, 8, 11, 12)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2019-panini-elite-extra-edition-baseball",
@@ -6748,7 +6759,8 @@
   "why": [
    "base skips 13 numbers in #1-200 (e.g. 93, 94, 95, 96, 97)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "1961-fleer-baseball-cards",
@@ -6761,7 +6773,8 @@
    "missing inserts: team logo decals, world champ pennant decals",
    "18 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2014-panini-elite-extra-edition-baseball",
@@ -6774,7 +6787,8 @@
    "missing inserts: game used jersey, prospects signature",
    "base skips 6 numbers in #1-100 (e.g. 21, 24, 34, 37, 65)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "1988-topps-traded-baseball-cards",
@@ -6787,7 +6801,8 @@
    "missing inserts: tiffany",
    "27 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "1993-sp-baseball",
@@ -6800,7 +6815,8 @@
    "missing inserts: error photo is tracy sanders, power",
    "17 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2015-leaf-signature-series-hockey-cards",
@@ -6813,7 +6829,8 @@
    "missing inserts: decades, miracle team",
    "17 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2012-13-nba-hoops-basketball-cards",
@@ -6826,7 +6843,8 @@
    "missing inserts: artist s, glossy, international spark plugs",
    "6 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2018-panini-contenders-football-nfl-cards",
@@ -6839,7 +6857,8 @@
    "missing inserts: emerald, ruby, zone",
    "6 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2017-panini-playoff-football-nfl-cards",
@@ -6852,7 +6871,8 @@
    "missing inserts: game day signature, hail mary, headliner relics",
    "6 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2013-topps-ufc-bloodlines-trading-cards",
@@ -6865,7 +6885,8 @@
    "missing inserts: octagon coins, octagon side, relics",
    "6 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "21-22-tim-hortons-team-canada-hockey",
