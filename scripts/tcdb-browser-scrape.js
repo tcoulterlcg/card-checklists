@@ -105,7 +105,11 @@
     if (!sections[0].cards.length) throw new Error('no cards parsed from the base checklist')
     job.progress = { subs: subs.size, done: 0 }
     for (const [sid, { title, path }] of subs) {
-      const cards = await checklist(sid, path)
+      // A dead insert link (TCDB 404, e.g. a promo/rewards listing) skips that insert, not the whole set;
+      // rate-limit give-ups still fail the set so it is retried rather than merged short.
+      let cards = []
+      try { cards = await checklist(sid, path) }
+      catch (e) { if (!/^Error: 404 /.test(String(e))) throw e; (job.skippedSubs = job.skippedSubs || []).push(title) }
       if (cards.length) sections.push({ title, cards, sid: +sid })
       job.progress.done++
     }

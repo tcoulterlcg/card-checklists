@@ -5333,8 +5333,9 @@
    "missing inserts: artist, artist s, back, glossy, rising stars",
    "8 players sold on SCP not on checklist"
   ],
-  "status": "review",
-  "note": "no TCDB parent set named 2013-14 Hoops found"
+  "status": "done",
+  "note": "2013-14-nba-hoops-basketball-cards: 1318 -> 3136 cards, 17 -> 24 sections, covers 99.9% of current",
+  "at": "2026-10-24"
  },
  {
   "slug": "2013-14-panini-innovation-basketball-cards",
@@ -6049,8 +6050,9 @@
    "missing inserts: back, remembrance relics, teal explosion, winter",
    "6 players sold on SCP not on checklist"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "review",
+  "note": "2018-19-panini-nba-hoops-basketball-cards: 1097 -> 6902 cards, 24 -> 65 sections, covers 93.0% of current",
+  "tcdbSid": 182809
  },
  {
   "slug": "2013-14-panini-prizm-basketball-cards",
@@ -6063,8 +6065,9 @@
    "missing inserts: light die cut, post season, pulsar, summit 2014",
    "6 players sold on SCP not on checklist"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "done",
+  "note": "2013-14-panini-prizm-basketball-cards: 1022 -> 6285 cards, 10 -> 76 sections, covers 99.8% of current",
+  "at": "2026-10-24"
  },
  {
   "slug": "2017-panini-national-treasures-football-nfl-cards",
