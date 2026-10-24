@@ -4984,7 +4984,9 @@
   "why": [
    "base skips 22 numbers in #1-300 (e.g. 150, 216, 217, 218, 219)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2019-panini-prizm-football: 13041 -> 13412 cards, 127 -> 107 sections, covers 98.1% of current",
+  "at": "2026-10-24"
  },
  {
   "slug": "2021-panini-prizm-football",
