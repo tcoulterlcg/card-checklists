@@ -6080,8 +6080,9 @@
    "missing inserts: number, numbers, signature rps",
    "15 players sold on SCP not on checklist"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "done",
+  "note": "2017-panini-national-treasures-football-nfl-cards: 1444 -> 9226 cards, 48 -> 280 sections, covers 98.2% of current",
+  "at": "2026-10-24"
  },
  {
   "slug": "2018-19-panini-select-basketball-nba-cards",
@@ -6094,8 +6095,9 @@
    "missing inserts: copper, ds tyg 99, neon, xfactor memorabilia",
    "5 players sold on SCP not on checklist"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "review",
+  "note": "2018-19-panini-select-basketball-nba-cards: 734 -> 5608 cards, 19 -> 89 sections, covers 94.9% of current",
+  "tcdbSid": 194154
  },
  {
   "slug": "2018-donruss-football",
@@ -6335,7 +6337,8 @@
   "why": [
    "base skips 14 numbers in #1-185 (e.g. 5, 24, 30, 39, 41)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2021-panini-playoff-football",
@@ -6347,7 +6350,8 @@
   "why": [
    "base skips 14 numbers in #1-200 (e.g. 56, 93, 94, 95, 96)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2020-panini-mosaic-football",
@@ -6371,7 +6375,8 @@
   "why": [
    "base skips 14 numbers in #1-200 (e.g. 71, 72, 85, 86, 87)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2019-panini-unparalleled-football",
@@ -6383,7 +6388,8 @@
   "why": [
    "base skips 14 numbers in #1-200 (e.g. 88, 89, 90, 91, 92)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "1985-donruss-baseball-cards",
@@ -6395,7 +6401,8 @@
   "why": [
    "missing inserts: action stars, highlights, puzzle, uncut"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2016-topps-triple-threads-baseball",
@@ -6407,7 +6414,8 @@
   "why": [
    "missing inserts: phenoms relic, relics, star patches, unity relic"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2013-topps-chrome-baseball-cards",
@@ -6419,7 +6427,8 @@
   "why": [
    "missing inserts: 1972 insert, connection die cut, dynamic die cuts, update postseason heroes"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2017-donruss-elite-football-cards",
@@ -6431,7 +6440,8 @@
   "why": [
    "missing inserts: coverage materials, fans game, gridiron kings, series"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2015-panini-contenders-football-cards",
