@@ -2832,7 +2832,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "25-26-topps-simplicidad-uefa-club-competitions-soccer-card",
@@ -2844,7 +2845,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "25-26-topps-sl-benfica-soccer-card",
@@ -2856,7 +2858,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "25-26-upper-deck-chicago-blackhawks-centennial-tin-set-hockey",
@@ -2868,7 +2871,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "25-26-upper-deck-pwhl-hockey-card",
@@ -2880,7 +2884,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "26-27-topps-flagship-premier-league-soccer-card",
@@ -2892,7 +2897,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "26-27-topps-summer-signings-uefa-club-competitions-soccer-card",
@@ -2904,7 +2910,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2013-bowman-chrome-baseball-cards",
@@ -5423,7 +5430,9 @@
    "missing inserts: double xl duos materials, extravagant materials, lasting marks, lustrous",
    "16 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2017-18-spx-hockey: 194 -> 834 cards, 8 -> 51 sections, covers 100.0% of current",
+  "at": "2026-10-24"
  },
  {
   "slug": "2016-topps-museum-collection-baseball",
@@ -5436,7 +5445,9 @@
    "missing inserts: archival, canvas original, meaningful material prime relic, premium prints, primary pieces quad relics",
    "6 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2016-topps-museum-collection-baseball: 125 -> 3162 cards, 2 -> 47 sections, covers 100.0% of current",
+  "at": "2026-10-24"
  },
  {
   "slug": "2014-topps-triple-threads-baseball-cards",
@@ -5449,7 +5460,9 @@
    "missing inserts: relics, relics combos, star logo patches, unity relic, unity relics",
    "6 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "review",
+  "note": "2014-topps-triple-threads-baseball-cards: 225 -> 8011 cards, 5 -> 96 sections, covers 85.2% of current",
+  "tcdbSid": 91634
  },
  {
   "slug": "2017-18-donruss-optic-basketball-nba-cards",
@@ -5462,7 +5475,8 @@
    "missing inserts: aqua, clear for take off, disco prizim, lime, vinyl",
    "6 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2003-04-topps-chrome-basketball",
@@ -5475,7 +5489,8 @@
    "missing inserts: cuts relics, gametime gear relics",
    "base skips 12 numbers in #1-165 (e.g. 112, 121, 127, 129, 131)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "1990-score-football-cards",
@@ -5488,7 +5503,8 @@
    "missing inserts: supplemental",
    "44 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2022-topps-x-naturel-1952-baseball",
@@ -5500,7 +5516,8 @@
   "why": [
    "base skips 18 numbers in #2-34 (e.g. 3, 4, 7, 9, 11)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2023-donruss-elite-football",
@@ -5512,7 +5529,8 @@
   "why": [
    "base skips 18 numbers in #1-100 (e.g. 14, 19, 22, 25, 33)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2020-panini-prestige-football",
