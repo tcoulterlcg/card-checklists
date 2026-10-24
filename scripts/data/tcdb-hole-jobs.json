@@ -3330,7 +3330,7 @@
    "base skips 63 numbers in #1-297 (e.g. 26, 30, 51, 64, 107)"
   ],
   "status": "review",
-  "note": "2023-topps-allen-and-ginter-baseball: 3931 -> 8042 cards, 56 -> 59 sections, covers 86.4% of current",
+  "note": "2023-topps-allen-and-ginter-baseball: 3931 -> 8042 cards, 56 -> 59 sections, covers 90.1% of current",
   "tcdbSid": 376820
  },
  {
@@ -3345,7 +3345,7 @@
    "143 players sold on SCP not on checklist"
   ],
   "status": "review",
-  "note": "2012-13-pee-chee-hockey-cards: 970 -> 4048 cards, 16 -> 21 sections, covers 87.6% of current",
+  "note": "2012-13-pee-chee-hockey-cards: 970 -> 4048 cards, 16 -> 21 sections, covers 88.5% of current",
   "tcdbSid": 70294
  },
  {
@@ -3567,8 +3567,9 @@
    "base skips 46 numbers in #1-300 (e.g. 14, 36, 40, 42, 59)"
   ],
   "status": "review",
-  "note": "2021-topps-allen-and-ginter-baseball: 6570 -> 6815 cards, 72 -> 69 sections, covers 91.8% of current",
-  "tcdbSid": 258453
+  "note": "held: A&G sets kept for a human check (minis/variations differ); 2021-topps-allen-and-ginter-baseball: 6570 -> 6815 cards, 72 -> 69 sections, covers 96.5% of current",
+  "tcdbSid": 258453,
+  "at": "2026-10-24"
  },
  {
   "slug": "2017-18-topps-chrome-uefa-champions-league-soccer-cards",
@@ -4054,7 +4055,7 @@
    "base skips 31 numbers in #1-82 (e.g. 4, 8, 9, 16, 19)"
   ],
   "status": "review",
-  "note": "2018-panini-flawless-collegiate-football-cards: 575 -> 1775 cards, 34 -> 115 sections, covers 88.7% of current",
+  "note": "2018-panini-flawless-collegiate-football-cards: 575 -> 1775 cards, 34 -> 115 sections, covers 91.3% of current",
   "tcdbSid": 179537
  },
  {
@@ -4711,7 +4712,7 @@
    "base skips 25 numbers in #1-250 (e.g. 83, 118, 133, 134, 135)"
   ],
   "status": "review",
-  "note": "2020-donruss-football: 7634 -> 9765 cards, 156 -> 143 sections, covers 92.7% of current",
+  "note": "2020-donruss-football: 7634 -> 9765 cards, 156 -> 143 sections, covers 94.6% of current",
   "tcdbSid": 235892
  },
  {
@@ -5055,7 +5056,7 @@
    "base skips 22 numbers in #1-499 (e.g. 36, 38, 64, 71, 83)"
   ],
   "status": "review",
-  "note": "21-22-o-pee-chee-hockey: 8625 -> 10177 cards, 114 -> 39 sections, covers 88.9% of current",
+  "note": "21-22-o-pee-chee-hockey: 8625 -> 10177 cards, 114 -> 39 sections, covers 92.5% of current",
   "tcdbSid": 273715
  },
  {
@@ -5469,7 +5470,7 @@
    "6 players sold on SCP not on checklist"
   ],
   "status": "review",
-  "note": "2014-topps-triple-threads-baseball-cards: 225 -> 8011 cards, 5 -> 96 sections, covers 85.2% of current",
+  "note": "2014-topps-triple-threads-baseball-cards: 225 -> 8011 cards, 5 -> 96 sections, covers 86.9% of current",
   "tcdbSid": 91634
  },
  {
@@ -5615,7 +5616,7 @@
    "11 players sold on SCP not on checklist"
   ],
   "status": "review",
-  "note": "2013-14-o-pee-chee-hockey-cards: 821 -> 4071 cards, 12 -> 21 sections, covers 87.1% of current",
+  "note": "2013-14-o-pee-chee-hockey-cards: 821 -> 4071 cards, 12 -> 21 sections, covers 87.8% of current",
   "tcdbSid": 79961
  },
  {
@@ -5671,7 +5672,7 @@
    "base skips 17 numbers in #1-150 (e.g. 25, 26, 27, 28, 29)"
   ],
   "status": "review",
-  "note": "2024-25-panini-immaculate-soccer: 1046 -> 4420 cards, 46 -> 174 sections, covers 84.8% of current",
+  "note": "2024-25-panini-immaculate-soccer: 1046 -> 4420 cards, 46 -> 174 sections, covers 85.6% of current",
   "tcdbSid": 534846
  },
  {
@@ -5685,7 +5686,7 @@
    "base skips 17 numbers in #1-250 (e.g. 70, 71, 72, 73, 74)"
   ],
   "status": "review",
-  "note": "2021-donruss-football: 11193 -> 11035 cards, 193 -> 156 sections, covers 85.5% of current",
+  "note": "2021-donruss-football: 11193 -> 11035 cards, 193 -> 156 sections, covers 87.3% of current",
   "tcdbSid": 275324
  },
  {
@@ -6372,7 +6373,7 @@
    "base skips 14 numbers in #1-200 (e.g. 56, 93, 94, 95, 96)"
   ],
   "status": "review",
-  "note": "2021-panini-playoff-football: 5885 -> 5662 cards, 102 -> 85 sections, covers 91.9% of current",
+  "note": "2021-panini-playoff-football: 5885 -> 5662 cards, 102 -> 85 sections, covers 93.5% of current",
   "tcdbSid": 297485
  },
  {
@@ -6398,7 +6399,7 @@
    "base skips 14 numbers in #1-200 (e.g. 71, 72, 85, 86, 87)"
   ],
   "status": "review",
-  "note": "2019-panini-playoff-football: 3922 -> 3842 cards, 53 -> 44 sections, covers 96.7% of current",
+  "note": "2019-panini-playoff-football: 3922 -> 3842 cards, 53 -> 44 sections, covers 98.3% of current",
   "tcdbSid": 218920
  },
  {
@@ -6565,9 +6566,10 @@
   "why": [
    "missing inserts: lumber relic, momentous material relic, signature swatches dual relic, single player primary pieces quad relic"
   ],
-  "status": "review",
-  "note": "2014-topps-museum-collection-baseball-cards: 294 -> 3620 cards, 6 -> 53 sections, covers 88.7% of current",
-  "tcdbSid": 85818
+  "status": "done",
+  "note": "2014-topps-museum-collection-baseball-cards: 294 -> 3620 cards, 6 -> 53 sections, covers 98.0% of current",
+  "tcdbSid": 85818,
+  "at": "2026-10-24"
  },
  {
   "slug": "2016-17-panini-prestige-basketball",
