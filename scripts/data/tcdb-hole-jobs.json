@@ -5705,8 +5705,9 @@
    "missing inserts: atomic, sterling, vintage, xfractor",
    "10 players sold on SCP not on checklist"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "done",
+  "note": "2014-topps-finest-baseball-cards: 203 -> 2437 cards, 3 -> 61 sections, covers 97.1% of current",
+  "at": "2026-10-24"
  },
  {
   "slug": "2017-18-panini-essentials-basketball-nba-cards",
@@ -5734,8 +5735,9 @@
    "missing inserts: 1997 98 metal universe precious gems, focus fresh ink, mystique fresh ink, playmakers theater",
    "10 players sold on SCP not on checklist"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "done",
+  "note": "2012-13-fleer-retro-basketball: 576 -> 1203 cards, 19 -> 31 sections, covers 96.7% of current",
+  "at": "2026-10-24"
  },
  {
   "slug": "2013-spx-football-cards",
@@ -5747,8 +5749,9 @@
   "why": [
    "missing inserts: finite, finite legends, super scripts, winning big materials, winning combos dual jerseys"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "done",
+  "note": "2013-spx-football-cards: 183 -> 1080 cards, 7 -> 32 sections, covers 100.0% of current",
+  "at": "2026-10-24"
  },
  {
   "slug": "2018-topps-tribute-baseball-cards",
@@ -5760,8 +5763,9 @@
   "why": [
    "missing inserts: dual relics, generations excellence, iconic perspectives, stamp approval relics, triple relics"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "done",
+  "note": "2018-topps-tribute-baseball-cards: 90 -> 2574 cards, 1 -> 64 sections, covers 100.0% of current",
+  "at": "2026-10-24"
  },
  {
   "slug": "2013-topps-museum-collection-baseball-cards",
@@ -5773,8 +5777,9 @@
   "why": [
    "missing inserts: archival, momentous material relics, primary pieces quad relics, signature swatches dual relic, signature swatches triple relic"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "review",
+  "note": "2013-topps-museum-collection-baseball-cards: 170 -> 3562 cards, 4 -> 55 sections, covers 93.5% of current",
+  "tcdbSid": 72769
  },
  {
   "slug": "2016-17-sp-game-used-hockey",
