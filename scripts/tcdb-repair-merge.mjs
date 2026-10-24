@@ -60,6 +60,22 @@ for (const f of files) {
     // where TCDB uses the card code ("A-CB"). Count those too — the section and the player must both match.
     const bySec = new Map()
     for (const sec of sections) { const t = norm(sec.title); if (!bySec.has(t)) bySec.set(t, new Set()); for (const c of sec.cards) for (const part of String(c.p || '').split(/\s*\/\s*/)) bySec.get(t).add(surname(part)) }
+    const nameWords = new Set(norm(old.name).split(' '))
+    const WORDING = /^(set|auto|autos|autograph|autographs|autographed|signature|signatures|signed|relic|relics|jersey|jerseys|memorabilia|card|cards|insert|inserts)$/
+    const core = (t) => {
+      const w = norm(t).split(' ').filter(Boolean)
+      while (w.length > 1 && (nameWords.has(w[0]) || /^\d{2,4}$/.test(w[0]))) w.shift()
+      return w.filter(x => !WORDING.test(x)).map(x => x.length > 3 ? x.replace(/s$/, '') : x).join(' ')
+    }
+    const byCore = new Map()
+    for (const [t, set] of bySec) { const k = core(t); if (!k) continue; if (!byCore.has(k)) byCore.set(k, new Set()); for (const x of set) byCore.get(k).add(x) }
+    const coreCache = new Map()
+    const coreSurnames = (t) => {
+      if (coreCache.has(t)) return coreCache.get(t)
+      const c = core(t), out = new Set()
+      if (c.length >= 4) for (const [k, set] of byCore) if (k === c || k.startsWith(c + ' ')) for (const x of set) out.add(x)
+      coreCache.set(t, out); return out
+    }
     const oldCards = new Map()
     for (const sec of old.sections || []) for (const c of sec.cards) {
       const k = String(c.n || '').trim().replace(/^#/, '').toLowerCase() + '|' + surname(c.p)
@@ -67,14 +83,20 @@ for (const f of files) {
       oldCards.get(k).titles.push(norm(sec.title))
     }
     let inside = 0
+    const missed = {}
     for (const k of oldKeys) {
       if (newKeys.has(k)) { inside++; continue }
       const { c, titles } = oldCards.get(k) || {}, p = c && norm(c.p)
       // TCDB lists multi-player cards (league leaders, combos) as "A / B / C"; ours may name one of them.
       const qs = (c && byNum.get(norm(c.n))) || []
       if (p && qs.some(q => q && (p === q || p.startsWith(q + ' ')))) { inside++; continue }
-      if (c && titles.some(t => bySec.get(t) && bySec.get(t).has(surname(c.p)))) inside++
+      if (c && titles.some(t => bySec.get(t) && bySec.get(t).has(surname(c.p)))) { inside++; continue }
+      // Same player in a section whose title differs only in wording: "2018 Donruss Signature Marks Set" vs
+      // "Signature Marks", "Pen Pals Autographs" vs "Pen Pals", "Draft Class Autograph RPS" vs "Draft Class Autographs RPS".
+      if (c && titles.some(t => coreSurnames(t).has(surname(c.p)))) { inside++; continue }
+      if (process.env.MISSES && c) (missed[titles[0]] = missed[titles[0]] || []).push(c.n + ' ' + c.p)
     }
+    if (process.env.MISSES) for (const [t, l] of Object.entries(missed)) console.log('   miss', t, l.length, '::', l.slice(0, 4).join(' | '))
     const cover = oldKeys.size ? inside / oldKeys.size : 1
     const nOld = count(old), nNew = count(fresh)
     const line = `${s.slug}: ${nOld} -> ${nNew} cards, ${old.sections.length} -> ${sections.length} sections, covers ${(cover * 100).toFixed(1)}% of current`

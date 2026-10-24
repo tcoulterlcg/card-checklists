@@ -6095,9 +6095,10 @@
    "missing inserts: copper, ds tyg 99, neon, xfactor memorabilia",
    "5 players sold on SCP not on checklist"
   ],
-  "status": "review",
-  "note": "2018-19-panini-select-basketball-nba-cards: 734 -> 5608 cards, 19 -> 89 sections, covers 94.9% of current",
-  "tcdbSid": 194154
+  "status": "done",
+  "note": "2018-19-panini-select-basketball-nba-cards: 734 -> 5608 cards, 19 -> 89 sections, covers 99.1% of current",
+  "tcdbSid": 194154,
+  "at": "2026-10-24"
  },
  {
   "slug": "2018-donruss-football",
@@ -6110,9 +6111,10 @@
    "missing inserts: changing stripes jerseys, horizontal, prime, studio series",
    "5 players sold on SCP not on checklist"
   ],
-  "status": "review",
-  "note": "2018-donruss-football: 1719 -> 8341 cards, 57 -> 117 sections, covers 45.6% of current",
-  "tcdbSid": 176369
+  "status": "done",
+  "note": "2018-donruss-football: 1719 -> 8341 cards, 57 -> 117 sections, covers 96.8% of current",
+  "tcdbSid": 176369,
+  "at": "2026-10-24"
  },
  {
   "slug": "2011-12-elite-hockey",
@@ -6452,9 +6454,10 @@
   "why": [
    "missing inserts: coverage materials, fans game, gridiron kings, series"
   ],
-  "status": "review",
-  "note": "2017-donruss-elite-football-cards: 747 -> 5448 cards, 27 -> 117 sections, covers 90.3% of current",
-  "tcdbSid": 151512
+  "status": "done",
+  "note": "2017-donruss-elite-football-cards: 747 -> 5448 cards, 27 -> 117 sections, covers 99.7% of current",
+  "tcdbSid": 151512,
+  "at": "2026-10-24"
  },
  {
   "slug": "2015-panini-contenders-football-cards",
@@ -6466,9 +6469,10 @@
   "why": [
    "missing inserts: die cut, school colors signatures, team helmet, team logo"
   ],
-  "status": "review",
-  "note": "2015-panini-contenders-football-cards: 756 -> 4477 cards, 23 -> 64 sections, covers 80.8% of current",
-  "tcdbSid": 116937
+  "status": "done",
+  "note": "2015-panini-contenders-football-cards: 756 -> 4477 cards, 23 -> 64 sections, covers 97.8% of current",
+  "tcdbSid": 116937,
+  "at": "2026-10-24"
  },
  {
   "slug": "2014-score-football-cards",
