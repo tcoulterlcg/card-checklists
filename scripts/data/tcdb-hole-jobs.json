@@ -4531,7 +4531,9 @@
    "missing inserts: 1989 super, 60th anniversary, 60th anniversary relics, patch, pulsar, relics, super bowl 50 die cut",
    "6 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2015-topps-chrome-football-cards: 742 -> 6615 cards, 10 -> 90 sections, covers 98.2% of current",
+  "at": "2026-10-24"
  },
  {
   "slug": "2015-16-panini-revolution-basketball-cards",
@@ -4544,7 +4546,9 @@
    "missing inserts: angular, cosmic, futura, galactic, infinite, nova, sunburst",
    "6 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2015-16-panini-revolution-basketball-cards: 296 -> 1547 cards, 6 -> 22 sections, covers 100.0% of current",
+  "at": "2026-10-24"
  },
  {
   "slug": "2018-19-panini-prizm-basketball-nba-cards",
@@ -4557,7 +4561,9 @@
    "missing inserts: choice, hyper, mojo, neon, ruby, sparkle",
    "15 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "review",
+  "note": "2018-19-panini-prizm-basketball-nba-cards: 1263 -> 14209 cards, 22 -> 117 sections, covers 71.2% of current",
+  "tcdbSid": 188541
  },
  {
   "slug": "2018-19-panini-revolution-basketball-cards",
