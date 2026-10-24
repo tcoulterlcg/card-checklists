@@ -4443,7 +4443,9 @@
   "why": [
    "missing inserts: epix play relic, fabric game signature, moment, new generation jersey, prime, season, signature, team signature"
   ],
-  "status": "todo"
+  "status": "review",
+  "note": "2016-panini-certified-football-cards: 691 -> 4509 cards, 17 -> 96 sections, covers 69.2% of current",
+  "tcdbSid": 128360
  },
  {
   "slug": "2015-panini-national-treasures-baseball",
@@ -4455,7 +4457,9 @@
   "why": [
    "missing inserts: 42 tribute material, century triple materials, collegiate, colossal materials, colossal signature materials, silhouette material, silhouette prospect material, treasured materials"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2015-panini-national-treasures-baseball: 1503 -> 5955 cards, 45 -> 178 sections, covers 98.5% of current",
+  "at": "2026-10-24"
  },
  {
   "slug": "2014-15-donruss-basketball-cards",
@@ -4467,7 +4471,9 @@
   "why": [
    "missing inserts: gamers jersey, production line assists, production line rebounds, production line scoring, rated signature patch, status signature, swirlorama, wrapper redemption star"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2014-15-donruss-basketball-cards: 933 -> 5762 cards, 18 -> 97 sections, covers 95.6% of current",
+  "at": "2026-10-24"
  },
  {
   "slug": "2015-16-sp-authentic-hockey-cards",
