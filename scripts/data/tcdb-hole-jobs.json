@@ -6110,8 +6110,9 @@
    "missing inserts: changing stripes jerseys, horizontal, prime, studio series",
    "5 players sold on SCP not on checklist"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "review",
+  "note": "2018-donruss-football: 1719 -> 8341 cards, 57 -> 117 sections, covers 45.6% of current",
+  "tcdbSid": 176369
  },
  {
   "slug": "2011-12-elite-hockey",
@@ -6174,8 +6175,9 @@
    "missing inserts: border, retro blank back",
    "24 players sold on SCP not on checklist"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "done",
+  "note": "2015-chee-hockey-cards: 872 -> 3998 cards, 9 -> 20 sections, covers 99.2% of current",
+  "at": "2026-10-24"
  },
  {
   "slug": "2015-topps-opening-day-baseball",
@@ -6216,8 +6218,9 @@
    "missing inserts: die cut, ice, relic",
    "13 players sold on SCP not on checklist"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "done",
+  "note": "2014-bowman-football-cards: 260 -> 6663 cards, 3 -> 73 sections, covers 99.2% of current",
+  "at": "2026-10-24"
  },
  {
   "slug": "2014-topps-ufc-knockout-trading-cards",
@@ -6453,7 +6456,8 @@
   "why": [
    "missing inserts: die cut, school colors signatures, team helmet, team logo"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2014-score-football-cards",
@@ -6465,7 +6469,8 @@
   "why": [
    "missing inserts: air mail die cut, hot franchise fabrics signatures, hot future franchise fabrics signatures, team helmets"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2014-15-sp-game-used-hockey-cards",
@@ -6477,7 +6482,8 @@
   "why": [
    "missing inserts: authentic fabrics patch, draft day marks, jerseys, stadium series material jersey"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2016-17-nba-hoops-basketball-cards",
@@ -6489,7 +6495,8 @@
   "why": [
    "missing inserts: back, hot signature, spark plugs, teal explosion"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2016-donruss-elite-football-cards",
@@ -6501,7 +6508,8 @@
   "why": [
    "missing inserts: back to future materials, die cut, ink, series"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2016-17-upper-deck-artifacts-hockey-cards",
@@ -6513,7 +6521,8 @@
   "why": [
    "missing inserts: autofacts, honoured members signatures, relic redemption, tundra teammates quad relics"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2014-topps-museum-collection-baseball-cards",
@@ -6525,7 +6534,8 @@
   "why": [
    "missing inserts: lumber relic, momentous material relic, signature swatches dual relic, single player primary pieces quad relic"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2016-17-panini-prestige-basketball",
@@ -6537,7 +6547,8 @@
   "why": [
    "missing inserts: acetate veterans, crystal, horizon, rain"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2018-panini-elite-draft-picks-football-checklist-added",
@@ -6549,7 +6560,8 @@
   "why": [
    "missing inserts: aspirations, aspirations teal, status die cut, throwing"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2014-topps-museum-collection-football-cards",
@@ -6561,7 +6573,8 @@
   "why": [
    "missing inserts: canvas, player quad relics, quad relics, signature series"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2013-topps-inception-football-cards",
@@ -6573,7 +6586,8 @@
   "why": [
    "missing inserts: elements, patches, relic, signings"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2015-16-upper-deck-champs-hockey-cards",
@@ -6585,7 +6599,8 @@
   "why": [
    "missing inserts: framed jersey, front, jersey, variant back"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2017-18-panini-revolution-basketball-nba-cards",
@@ -6597,7 +6612,8 @@
   "why": [
    "missing inserts: cubic, galactic, impact, kaleido"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2015-16-panini-herovillain-kobe-bryant-basketball",
