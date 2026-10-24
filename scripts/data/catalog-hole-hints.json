@@ -5212,17 +5212,6 @@
    "winter"
   ]
  },
- "2018-panini-elite-draft-picks-football-checklist-added": {
-  "missingPlayers": [
-   "box"
-  ],
-  "missingInserts": [
-   "aspirations",
-   "aspirations teal",
-   "status die cut",
-   "throwing"
-  ]
- },
  "2014-bowman-sterling-football-cards": {
   "missingPlayers": [
    "asj",
@@ -6402,15 +6391,6 @@
    "authentics signature"
   ]
  },
- "2015-16-upper-deck-champs-hockey-cards": {
-  "missingPlayers": [
-   "box"
-  ],
-  "missingInserts": [
-   "front",
-   "variant back"
-  ]
- },
  "2018-19-panini-select-basketball-nba-cards": {
   "missingPlayers": [
    "alexander",
@@ -7167,14 +7147,6 @@
    "relic"
   ]
  },
- "2014-topps-museum-collection-baseball-cards": {
-  "missingPlayers": [
-   "seager"
-  ],
-  "missingInserts": [
-   "signature swatches dual relic"
-  ]
- },
  "2014-topps-tier-one-baseball-cards": {
   "missingPlayers": [
    "rice"
@@ -7352,6 +7324,14 @@
   ],
   "missingInserts": []
  },
+ "2018-panini-elite-draft-picks-football-checklist-added": {
+  "missingPlayers": [
+   "box"
+  ],
+  "missingInserts": [
+   "throwing"
+  ]
+ },
  "2018-panini-phoenix-football-nfl-cards": {
   "missingPlayers": [
    "keenum"
@@ -7441,14 +7421,6 @@
    "bright horizons"
   ]
  },
- "2014-topps-museum-collection-football-cards": {
-  "missingPlayers": [
-   "seaver"
-  ],
-  "missingInserts": [
-   "canvas"
-  ]
- },
  "2014-topps-supreme-football-cards": {
   "missingPlayers": [
    "latimer"
@@ -7487,14 +7459,6 @@
   ],
   "missingInserts": [
    "superstar combos"
-  ]
- },
- "2013-topps-inception-football-cards": {
-  "missingPlayers": [
-   "watkins"
-  ],
-  "missingInserts": [
-   "signings"
   ]
  },
  "2000-bowman-chrome-football": {
@@ -7575,6 +7539,14 @@
   ],
   "missingInserts": [
    "pro penmanship"
+  ]
+ },
+ "2015-16-upper-deck-champs-hockey-cards": {
+  "missingPlayers": [
+   "box"
+  ],
+  "missingInserts": [
+   "front"
   ]
  },
  "2014-15-spx-hockey-cards": {
@@ -8902,6 +8874,12 @@
   ],
   "missingInserts": []
  },
+ "2014-topps-museum-collection-football-cards": {
+  "missingPlayers": [
+   "seaver"
+  ],
+  "missingInserts": []
+ },
  "2013-panini-black-football-cards": {
   "missingPlayers": [
    "hopkin"
@@ -8947,6 +8925,12 @@
  "2013-topps-chrome-football-cards": {
   "missingPlayers": [
    "refractor"
+  ],
+  "missingInserts": []
+ },
+ "2013-topps-inception-football-cards": {
+  "missingPlayers": [
+   "watkins"
   ],
   "missingInserts": []
  },
