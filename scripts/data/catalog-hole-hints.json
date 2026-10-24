@@ -5520,21 +5520,6 @@
    "snapshots"
   ]
  },
- "2017-18-donruss-optic-basketball-nba-cards": {
-  "missingPlayers": [
-   "blue",
-   "gold",
-   "holo",
-   "jabbar",
-   "jonhson",
-   "nowitizki"
-  ],
-  "missingInserts": [
-   "aqua",
-   "lime",
-   "vinyl"
-  ]
- },
  "2018-panini-elite-draft-picks-football-checklist-added": {
   "missingPlayers": [
    "box"
@@ -6876,13 +6861,6 @@
    "1965 tall boy"
   ]
  },
- "2016-topps-museum-collection-baseball": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "canvas original",
-   "meaningful material prime relic"
-  ]
- },
  "2018-topps-fire-baseball-mlb-cards": {
   "missingPlayers": [
    "dozier",
@@ -7542,6 +7520,17 @@
   "missingInserts": [
    "76ers"
   ]
+ },
+ "2017-18-donruss-optic-basketball-nba-cards": {
+  "missingPlayers": [
+   "blue",
+   "gold",
+   "holo",
+   "jabbar",
+   "jonhson",
+   "nowitizki"
+  ],
+  "missingInserts": []
  },
  "2017-18-panini-encased-basketball-nba-cards": {
   "missingPlayers": [
