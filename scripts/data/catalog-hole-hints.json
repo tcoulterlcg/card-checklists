@@ -4174,39 +4174,6 @@
   ],
   "missingInserts": []
  },
- "2015-chee-hockey-cards": {
-  "missingPlayers": [
-   "athanasiou",
-   "brickley",
-   "condon",
-   "domi",
-   "donskoi",
-   "ehlers",
-   "eichel",
-   "fabbri",
-   "faksa",
-   "forbort",
-   "fucale",
-   "goldobin",
-   "hanifin",
-   "hellebuyck",
-   "janmark",
-   "larkin",
-   "mcdavid",
-   "panarin",
-   "petan",
-   "plotnikov",
-   "rantanen",
-   "ullmark",
-   "vandevelde",
-   "virtanen"
-  ],
-  "missingInserts": [
-   "border",
-   "retro blank back",
-   "update"
-  ]
- },
  "2016-17-panini-excalibur-basketball": {
   "missingPlayers": [
    "black",
@@ -4364,6 +4331,37 @@
    "select signatures",
    "stars",
    "tie dye"
+  ]
+ },
+ "2015-chee-hockey-cards": {
+  "missingPlayers": [
+   "athanasiou",
+   "brickley",
+   "condon",
+   "domi",
+   "donskoi",
+   "ehlers",
+   "eichel",
+   "fabbri",
+   "faksa",
+   "forbort",
+   "fucale",
+   "goldobin",
+   "hanifin",
+   "hellebuyck",
+   "janmark",
+   "larkin",
+   "mcdavid",
+   "panarin",
+   "petan",
+   "plotnikov",
+   "rantanen",
+   "ullmark",
+   "virtanen"
+  ],
+  "missingInserts": [
+   "border",
+   "update"
   ]
  },
  "2015-topps-ufc-chronicles-trading-cards": {
@@ -4803,28 +4801,6 @@
   "missingInserts": [
    "team logo decals",
    "world champ pennant decals"
-  ]
- },
- "2014-bowman-football-cards": {
-  "missingPlayers": [
-   "amukamara",
-   "ansah",
-   "bowe",
-   "bradford",
-   "dalton",
-   "flacco",
-   "foles",
-   "glennon",
-   "holo",
-   "jenkins",
-   "pattersonrelic",
-   "teo",
-   "woods"
-  ],
-  "missingInserts": [
-   "die cut",
-   "ice",
-   "relic"
   ]
  },
  "2018-topps-ufc-knockout-mma-cards": {
@@ -6923,6 +6899,16 @@
   ],
   "missingInserts": [
    "power"
+  ]
+ },
+ "2014-bowman-football-cards": {
+  "missingPlayers": [
+   "holo",
+   "jenkins",
+   "pattersonrelic"
+  ],
+  "missingInserts": [
+   "relic"
   ]
  },
  "2014-score-football-cards": {
