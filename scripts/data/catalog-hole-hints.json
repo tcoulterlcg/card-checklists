@@ -3533,61 +3533,6 @@
    "team mascots"
   ]
  },
- "1985-topps-traded-baseball-cards": {
-  "missingPlayers": [
-   "aaron",
-   "alexander",
-   "bamberger",
-   "banks",
-   "brock",
-   "carlton",
-   "chesbro",
-   "cobb",
-   "crawford",
-   "davenport",
-   "felske",
-   "fingers",
-   "ford",
-   "frederick",
-   "frisch",
-   "gehrig",
-   "gentile",
-   "gooden",
-   "haas",
-   "hornsby",
-   "howard",
-   "hudson",
-   "john",
-   "leonard",
-   "mantle",
-   "maris",
-   "martin",
-   "mathewson",
-   "mauch",
-   "mays",
-   "musial",
-   "quisenberry",
-   "robinson",
-   "rodgers",
-   "ruth",
-   "ryan",
-   "sisler",
-   "speaker",
-   "valentine",
-   "walsh",
-   "waner",
-   "weaver",
-   "webb",
-   "williams",
-   "wills",
-   "wilson",
-   "york",
-   "young"
-  ],
-  "missingInserts": [
-   "tiffany"
-  ]
- },
  "2017-18-leaf-masked-men-hockey-cards": {
   "missingPlayers": [
    "brathwaite",
@@ -4266,6 +4211,50 @@
    "1989 die cut",
    "update 1989 die cut"
   ]
+ },
+ "1985-topps-traded-baseball-cards": {
+  "missingPlayers": [
+   "aaron",
+   "alexander",
+   "banks",
+   "brock",
+   "carlton",
+   "chesbro",
+   "cobb",
+   "crawford",
+   "fingers",
+   "ford",
+   "frederick",
+   "frisch",
+   "gehrig",
+   "gentile",
+   "gooden",
+   "hornsby",
+   "howard",
+   "hudson",
+   "john",
+   "leonard",
+   "mantle",
+   "maris",
+   "mathewson",
+   "mays",
+   "musial",
+   "quisenberry",
+   "robinson",
+   "ruth",
+   "ryan",
+   "sisler",
+   "speaker",
+   "walsh",
+   "waner",
+   "webb",
+   "williams",
+   "wills",
+   "wilson",
+   "york",
+   "young"
+  ],
+  "missingInserts": []
  },
  "2015-chee-hockey-cards": {
   "missingPlayers": [
@@ -5402,19 +5391,6 @@
    "2014 national",
    "die cut",
    "teal"
-  ]
- },
- "2015-topps-valor-football-cards": {
-  "missingPlayers": [
-   "bp",
-   "cushing",
-   "freeman"
-  ],
-  "missingInserts": [
-   "5x7",
-   "battle cry",
-   "patches",
-   "shield honor patch"
   ]
  },
  "2014-topps-update-series-baseball-cards": {
@@ -6844,15 +6820,6 @@
    "back"
   ]
  },
- "2013-14-pinnacle-basketball-cards": {
-  "missingPlayers": [
-   "skaggs"
-  ],
-  "missingInserts": [
-   "artist",
-   "artists"
-  ]
- },
  "2013-14-panini-prizm-basketball-cards": {
   "missingPlayers": [
    "barkley",
@@ -7023,17 +6990,6 @@
   ],
   "missingInserts": [
    "flood"
-  ]
- },
- "2017-18-panini-prestige-basketball-nba-cards": {
-  "missingPlayers": [
-   "gold",
-   "orange",
-   "pink",
-   "red"
-  ],
-  "missingInserts": [
-   "bright"
   ]
  },
  "2015-topps-field-access-football-cards": {
@@ -7406,6 +7362,15 @@
    "draft day signatures"
   ]
  },
+ "2015-topps-valor-football-cards": {
+  "missingPlayers": [
+   "bp",
+   "freeman"
+  ],
+  "missingInserts": [
+   "shield honor patch"
+  ]
+ },
  "2014-panini-contenders-football-cards": {
   "missingPlayers": [
    "red",
@@ -7685,6 +7650,14 @@
   ],
   "missingInserts": [
    "new breed jersey"
+  ]
+ },
+ "2013-14-pinnacle-basketball-cards": {
+  "missingPlayers": [
+   "skaggs"
+  ],
+  "missingInserts": [
+   "artists"
   ]
  },
  "2013-14-panini-spectra-basketball-cards": {
@@ -8159,6 +8132,15 @@
    "diop",
    "kowar",
    "town"
+  ],
+  "missingInserts": []
+ },
+ "2017-18-panini-prestige-basketball-nba-cards": {
+  "missingPlayers": [
+   "gold",
+   "orange",
+   "pink",
+   "red"
   ],
   "missingInserts": []
  },
