@@ -2442,7 +2442,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "22-23-leaf-draft-basketball",
@@ -2454,7 +2455,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "22-23-leaf-multigraphics-basketball",
@@ -2466,7 +2468,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "22-23-leaf-optichrome-basketball",
@@ -2478,7 +2481,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "22-23-leaf-signature-series-basketball",
@@ -2490,7 +2494,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "22-23-leaf-vivid-basketball",
@@ -2502,7 +2507,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "22-23-topps-chrome-nbl-basketball",
@@ -2514,7 +2520,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "22-23-topps-chrome-ote-overtime-elite-basketball",
@@ -2526,7 +2533,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "22-23-topps-chrome-sapphire-edition-ote-basketball",
@@ -2538,7 +2546,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "24-25-donruss-euroleague-basketball-card",
@@ -2550,7 +2559,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "24-25-topps-bundesliga-international-stars-soccer-card",
@@ -2562,7 +2572,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "24-25-topps-definitive-collection-uefa-club-competitions-soccer-card",
@@ -2574,7 +2585,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "24-25-topps-finest-uefa-soccer-card",
@@ -2586,7 +2598,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "24-25-topps-merlin-uefa-club-competitions-soccer-card",
@@ -2598,7 +2611,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "24-25-topps-reverence-uefa-soccer-card",
@@ -2610,7 +2624,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "25-26-fleer-ultra-pwhl-hockey-card",
@@ -5027,7 +5042,9 @@
    "missing inserts: collegiate, collegiate jersey, collegiate sizeable signatures jersey, golden hands relic",
    "24 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "review",
+  "note": "2016-panini-black-gold-football-cards: 634 -> 3147 cards, 28 -> 123 sections, covers 85.8% of current",
+  "tcdbSid": 140755
  },
  {
   "slug": "2013-topps-archives-football",
@@ -5040,7 +5057,9 @@
    "missing inserts: 1962 relics, 1968 stand ups, 1970 glossy, fan favorites, material",
    "13 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2013-topps-archives-football: 254 -> 2330 cards, 3 -> 43 sections, covers 98.0% of current",
+  "at": "2026-10-24"
  },
  {
   "slug": "2015-topps-ufc-chronicles-trading-cards",
@@ -5053,7 +5072,8 @@
    "missing inserts: dual relics, fight mat relics, fight poster preview, relics, victorious debut medallions",
    "13 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "review",
+  "note": "TCDB search (MMA) found no matching set"
  },
  {
   "slug": "2026-leaf-football",
@@ -5078,7 +5098,8 @@
    "missing inserts: fight mat relics, relics, scarlet signatures, thoughts from boss",
    "22 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "review",
+  "note": "TCDB search (MMA) found no matching set"
  },
  {
   "slug": "2012-topps-ufc-bloodlines-trading-cards",
@@ -5091,7 +5112,8 @@
    "missing inserts: dual relics, fight mat relic, fighter relics, fighting forefathers, patriotic patch",
    "12 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "review",
+  "note": "TCDB search (MMA) found no matching set"
  },
  {
   "slug": "1983-donruss-baseball-cards",
@@ -5104,7 +5126,9 @@
    "missing inserts: action stars, hall fame heroes, stats",
    "31 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "1983-donruss-baseball-cards: 659 -> 691 cards, 2 -> 2 sections, covers 99.2% of current",
+  "at": "2026-10-24"
  },
  {
   "slug": "2013-14-fleer-showcase-hockey-cards",
@@ -5117,7 +5141,9 @@
    "missing inserts: prospect, stitches memorabilia, uniformity dual jerseys",
    "30 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2013-14-fleer-showcase-hockey-cards: 546 -> 1279 cards, 14 -> 21 sections, covers 99.7% of current",
+  "at": "2026-10-24"
  },
  {
   "slug": "2015-panini-crown-royale-football-cards",
