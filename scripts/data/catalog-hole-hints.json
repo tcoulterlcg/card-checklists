@@ -5047,19 +5047,6 @@
    "miracle team"
   ]
  },
- "2015-16-upper-deck-portfolio-hockey-cards": {
-  "missingPlayers": [
-   "box",
-   "hopkins"
-  ],
-  "missingInserts": [
-   "profiles materials jersey",
-   "xrc redemption art",
-   "xrc redemption color art",
-   "xrc redemption color photo",
-   "xrc redemption wire photo"
-  ]
- },
  "2018-19-topps-chrome-premier-league-soccer-cards": {
   "missingPlayers": [
    "arnold",
@@ -5996,17 +5983,6 @@
    "crimson",
    "jade",
    "midnight"
-  ]
- },
- "2014-topps-platinum-football-cards": {
-  "missingPlayers": [
-   "dix",
-   "jenkins"
-  ],
-  "missingInserts": [
-   "camo",
-   "patch",
-   "pulsar"
   ]
  },
  "2015-16-sp-authentic-hockey-cards": {
@@ -7121,15 +7097,6 @@
    "framed"
   ]
  },
- "2014-topps-archive-baseball-cards": {
-  "missingPlayers": [
-   "box",
-   "vaughn"
-  ],
-  "missingInserts": [
-   "major league"
-  ]
- },
  "2014-topps-tribute-baseball-cards": {
   "missingPlayers": [
    "glavin",
@@ -7271,13 +7238,13 @@
    "autofacts"
   ]
  },
- "2016-17-upper-deck-ice-hockey-cards": {
+ "2015-16-upper-deck-portfolio-hockey-cards": {
   "missingPlayers": [
-   "fiala",
-   "nystrom"
+   "box",
+   "hopkins"
   ],
   "missingInserts": [
-   "rinkside signings"
+   "profiles materials jersey"
   ]
  },
  "2013-14-spx-hockey-cards": {
@@ -7992,12 +7959,6 @@
   ],
   "missingInserts": []
  },
- "2014-topps-finest-baseball-cards": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "xfractor"
-  ]
- },
  "2018-19-panini-contenders-draft-picks-basketball": {
   "missingPlayers": [
    "alexander",
@@ -8431,6 +8392,13 @@
   ],
   "missingInserts": []
  },
+ "2014-topps-platinum-football-cards": {
+  "missingPlayers": [
+   "dix",
+   "jenkins"
+  ],
+  "missingInserts": []
+ },
  "2013-elite-football-cards": {
   "missingPlayers": [
    "campbell",
@@ -8672,6 +8640,12 @@
  "2014-panini-prizm-perennial-draft-picks-baseball-cards": {
   "missingPlayers": [
    "meadows"
+  ],
+  "missingInserts": []
+ },
+ "2014-topps-archive-baseball-cards": {
+  "missingPlayers": [
+   "box"
   ],
   "missingInserts": []
  },
@@ -9236,6 +9210,12 @@
  "2016-17-upper-deck-biography-season-hockey": {
   "missingPlayers": [
    "mcdavid"
+  ],
+  "missingInserts": []
+ },
+ "2016-17-upper-deck-ice-hockey-cards": {
+  "missingPlayers": [
+   "fiala"
   ],
   "missingInserts": []
  },
