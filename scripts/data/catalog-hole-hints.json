@@ -4829,24 +4829,6 @@
    "world champ pennant decals"
   ]
  },
- "2013-14-nba-hoops-basketball-cards": {
-  "missingPlayers": [
-   "back",
-   "diego",
-   "gilchrist",
-   "glossy",
-   "gold",
-   "jasonterry",
-   "poindexter",
-   "proof"
-  ],
-  "missingInserts": [
-   "artist",
-   "artist s",
-   "back",
-   "glossy"
-  ]
- },
  "2014-bowman-football-cards": {
   "missingPlayers": [
    "amukamara",
@@ -6322,6 +6304,21 @@
    "light"
   ]
  },
+ "2013-14-nba-hoops-basketball-cards": {
+  "missingPlayers": [
+   "back",
+   "diego",
+   "gilchrist",
+   "glossy",
+   "gold",
+   "jasonterry",
+   "poindexter",
+   "proof"
+  ],
+  "missingInserts": [
+   "glossy"
+  ]
+ },
  "2012-13-panini-brilliance-basketball-cards": {
   "missingPlayers": [
    "box",
@@ -6472,6 +6469,20 @@
    "teal explosion"
   ]
  },
+ "2013-14-panini-prizm-basketball-cards": {
+  "missingPlayers": [
+   "barkley",
+   "card",
+   "jabbar",
+   "pope",
+   "prizm",
+   "schroeder",
+   "wahad"
+  ],
+  "missingInserts": [
+   "summit 2014"
+  ]
+ },
  "2015-panini-prizm-football-cards": {
   "missingPlayers": [
    "payne",
@@ -6565,19 +6576,6 @@
   ],
   "missingInserts": [
    "back"
-  ]
- },
- "2013-14-panini-prizm-basketball-cards": {
-  "missingPlayers": [
-   "barkley",
-   "jabbar",
-   "pope",
-   "prizm",
-   "schroeder",
-   "wahad"
-  ],
-  "missingInserts": [
-   "summit 2014"
   ]
  },
  "2018-panini-classics-football-cards": {
@@ -7877,12 +7875,6 @@
    "sahlawi"
   ],
   "missingInserts": []
- },
- "2016-17-premier-hockey": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "signature award winner"
-  ]
  },
  "2018-19-panini-contenders-draft-picks-basketball": {
   "missingPlayers": [
