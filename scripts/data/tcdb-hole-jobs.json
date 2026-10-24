@@ -4868,7 +4868,9 @@
    "missing inserts: cornerstones, firsts, hour, sitting",
    "29 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2018-topps-finest-baseball-mlb-cards: 254 -> 2168 cards, 6 -> 61 sections, covers 99.2% of current",
+  "at": "2026-10-24"
  },
  {
   "slug": "2023-panini-mosaic-draft-picks-football",
@@ -4894,7 +4896,9 @@
   "why": [
    "base skips 23 numbers in #1-56 (e.g. 3, 8, 9, 10, 11)"
   ],
-  "status": "todo"
+  "status": "review",
+  "note": "2022-topps-spotlight-70-ii-friedman-baseball: 250 -> 708 cards, 10 -> 19 sections, covers 93.6% of current",
+  "tcdbSid": 304130
  },
  {
   "slug": "2016-topps-finest-baseball-cards",
@@ -4907,7 +4911,9 @@
    "missing inserts: 1996 intimidators, firsts, franchise, greats",
    "28 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2016-topps-finest-baseball-cards: 223 -> 2429 cards, 5 -> 79 sections, covers 97.3% of current",
+  "at": "2026-10-24"
  },
  {
   "slug": "2014-bowman-sterling-football-cards",
@@ -4935,7 +4941,9 @@
    "missing inserts: archival, dual player meaningful relics, momentous material patch, primary pieces single player quad relics, signature swatches dual relic, signature swatches triple relic",
    "6 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2018-topps-museum-collection-baseball-mlb-cards: 150 -> 3884 cards, 2 -> 58 sections, covers 100.0% of current",
+  "at": "2026-10-24"
  },
  {
   "slug": "2013-topps-gypsy-queen-baseball-cards",
@@ -4948,7 +4956,9 @@
    "missing inserts: collisions at, dealing aces, glove stories, hitters, relic, sliding stars",
    "6 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2013-topps-gypsy-queen-baseball-cards: 923 -> 6967 cards, 5 -> 59 sections, covers 100.0% of current",
+  "at": "2026-10-24"
  },
  {
   "slug": "25-26-upper-deck-overtime-hockey-card",
@@ -4960,7 +4970,9 @@
   "why": [
    "base skips 22 numbers in #4-36 (e.g. 7, 8, 9, 10, 11)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "25-26-upper-deck-overtime-hockey-card: 250 -> 1048 cards, 21 -> 19 sections, covers 100.0% of current",
+  "at": "2026-10-24"
  },
  {
   "slug": "2019-panini-prizm-football",
