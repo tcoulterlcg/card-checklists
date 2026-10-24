@@ -70,7 +70,9 @@
         const clone = nameCell.cloneNode(true)
         clone.querySelectorAll('a, figcaption, br').forEach(e => e.remove())
         flags = clone.textContent.replace(/\s+/g, ' ').trim()
+        // No person links: the cell text is name + flags ("Dustin Pedroia MEM, SN99"); keep the name only.
         p = people.length ? people.join(' / ') : nameCell.textContent.replace(/\s+/g, ' ').trim()
+          .replace(/\s+(?:AUR?|URA?|MEM|RC|SN\d*|PR\d+|HN|EXCH|CUT|AS|ARP|SP|SSP|RS|VAR|UER|DP|TR|FS|LL|HL|CL)(?:,\s*(?:AUR?|URA?|MEM|RC|SN\d*|PR\d+|HN|EXCH|CUT|AS|ARP|SP|SSP|RS|VAR|UER|DP|TR|FS|LL|HL|CL))*$/, (m) => /\b(?:AUR?|URA?|MEM|RC|SN\d*|PR\d+|EXCH)\b/.test(m) ? '' : m)
       }
       const t = [...tr.querySelectorAll('a[href*="Team.cfm"]')].map(a => a.textContent.trim()).filter(Boolean).join(' / ')
       if (!p) continue

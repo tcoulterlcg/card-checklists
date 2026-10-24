@@ -11,6 +11,7 @@
 // TCG and entertainment sets are not touched (their card names are not people).
 //   node scripts/cleanup-names.mjs [--dry-run]
 import { readFileSync, writeFileSync, readdirSync } from 'node:fs'
+import { fixFlagTail } from './flag-tail.mjs'
 
 const dataDir = new URL('../public/data/', import.meta.url)
 const DRY = process.argv.includes('--dry-run')
@@ -65,6 +66,7 @@ for (const f of files) {
     // "AU, MEM") are fixed here too — they show as a "team" otherwise.
     let ch = false
     for (const sec of s.sections || []) for (const c of sec.cards || []) {
+      if (fixFlagTail(c)) ch = true   // "Pete PR3600", "X AU, MEM, SN25": flags glued onto the name
       // TCDB variation / error notes in the team column ("VARVAR: Black hair", "UERUER: name misspelled")
       if (c.t && /^(VAR|UER)\1:?/.test(c.t)) { const k = c.t.slice(0, 3); const x = (c.x || '').split(/\s+/).filter(Boolean); if (!x.includes(k)) x.push(k); c.x = x.join(' '); delete c.t; ch = true; continue }
       if (!c.t || !/^(?:(?:URA?|AUR?|MEM|RC|SP|SSP|SN\d+)(?:,\s*|$))+$/.test(c.t.trim())) continue
@@ -218,6 +220,7 @@ for (const [f, s] of sets) {
   for (const sec of s.sections || []) {
     const keep = []
     for (const c of sec.cards || []) {
+      if (fixFlagTail(c)) { stats.flagTails = (stats.flagTails || 0) + 1; changed = true }   // "Dustin Pedroia MEM, SN99" -> name + flags
       const raw = String(c.p || '')
       if (JUNK.test(raw.trim())) { stats.junk++; changed = true; continue }
       let p = tidy(raw)
@@ -279,6 +282,6 @@ for (const [f, s] of sets) {
   if (s.sections.length !== before) changed = true
   if (changed) { stats.files++; if (!DRY) writeFileSync(new URL(f, dataDir), JSON.stringify(s)) }
 }
-console.log(`widget listings dropped ${widgetDropped}, affiliate text removed ${shopFixed}, duplicate rows merged ${stats.merged}, team fields cleaned ${stats.team}, junk rows dropped ${stats.junk}, names tidied ${stats.tidied}, encoding repaired ${stats.repaired}, spellings unified ${stats.unified}, files changed ${stats.files}${DRY ? ' (dry run)' : ''}`)
+console.log(`widget listings dropped ${widgetDropped}, affiliate text removed ${shopFixed}, duplicate rows merged ${stats.merged}, team fields cleaned ${stats.team}, junk rows dropped ${stats.junk}, names tidied ${stats.tidied}, flag tails moved ${stats.flagTails || 0}, encoding repaired ${stats.repaired}, spellings unified ${stats.unified}, files changed ${stats.files}${DRY ? ' (dry run)' : ''}`)
 if (REPORT) writeFileSync(REPORT.slice(9), [...renames.entries()].sort((a, b) => b[1] - a[1]).map(([k, n]) => n + '\t' + k).join('\n'))
 if (stats.unrepaired.size) console.log(`unrepaired (${stats.unrepaired.size}):`, [...stats.unrepaired].slice(0, 40).join(' | '))

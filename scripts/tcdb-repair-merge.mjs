@@ -10,6 +10,7 @@
 // Afterwards: node scripts/cleanup-names.mjs && node scripts/classify-memorabilia.mjs && node scripts/build-index.mjs
 import { readFileSync, writeFileSync, existsSync } from 'node:fs'
 import { gunzipSync } from 'node:zlib'
+import { fixFlagTail } from './flag-tail.mjs'
 
 const files = process.argv.slice(2)
 if (!files.length) { console.error('usage: node scripts/tcdb-repair-merge.mjs <dump.json | dump.b64> ...'); process.exit(1) }
@@ -46,6 +47,7 @@ for (const f of files) {
   for (const s of [].concat(load(f)).map(expand)) {
     const path = new URL(s.slug + '.json', dataDir)
     const job = jobBySlug.get(s.slug)
+    for (const x of s.sections || []) for (const c of x.cards) fixFlagTail(c)   // older scrapes glued flags onto names
     const sections = (s.sections || []).map(x => ({ title: x.title, cards: x.cards.filter(c => c.p) })).filter(x => x.cards.length)
     const fresh = { sections }
     if (!existsSync(path)) { if (job) Object.assign(job, { status: 'review', note: 'no curated file with this slug' }); review++; continue }
