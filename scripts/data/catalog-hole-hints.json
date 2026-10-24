@@ -4522,43 +4522,6 @@
    "light"
   ]
  },
- "2015-score-football-cards": {
-  "missingPlayers": [
-   "bears",
-   "bengals",
-   "bills",
-   "broncos",
-   "browns",
-   "buccaneers",
-   "cardinals",
-   "chargers",
-   "chiefs",
-   "colts",
-   "cowboys",
-   "dolphins",
-   "eagles",
-   "ers",
-   "falcons",
-   "galette",
-   "giants",
-   "jaguars",
-   "jets",
-   "leaders",
-   "lions",
-   "panthers",
-   "raiders",
-   "rams",
-   "ravens",
-   "redskins",
-   "saints",
-   "seahawks",
-   "texans",
-   "titans",
-   "vikings",
-   "worilds"
-  ],
-  "missingInserts": []
- },
  "2018-19-ud-mvp-hockey": {
   "missingPlayers": [
    "credential",
@@ -4739,6 +4702,41 @@
    "numbers",
    "signature rps"
   ]
+ },
+ "2015-score-football-cards": {
+  "missingPlayers": [
+   "bears",
+   "bengals",
+   "bills",
+   "broncos",
+   "browns",
+   "buccaneers",
+   "cardinals",
+   "chargers",
+   "chiefs",
+   "colts",
+   "cowboys",
+   "dolphins",
+   "eagles",
+   "ers",
+   "falcons",
+   "giants",
+   "jaguars",
+   "jets",
+   "leaders",
+   "lions",
+   "panthers",
+   "raiders",
+   "rams",
+   "ravens",
+   "redskins",
+   "saints",
+   "seahawks",
+   "texans",
+   "titans",
+   "vikings"
+  ],
+  "missingInserts": []
  },
  "2015-topps-fire-football-cards": {
   "missingPlayers": [
