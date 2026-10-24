@@ -7,8 +7,8 @@
   },
   "Baseball": {
    "file": "index/baseball.json",
-   "sets": 7217,
-   "cards": 641202
+   "sets": 7212,
+   "cards": 641193
   },
   "Basketball": {
    "file": "index/basketball.json",
@@ -62,8 +62,8 @@
   },
   "Multi-Sport": {
    "file": "index/multi-sport.json",
-   "sets": 1774,
-   "cards": 235892
+   "sets": 1795,
+   "cards": 254728
   },
   "Cricket": {
    "file": "index/cricket.json",
@@ -76,11 +76,11 @@
    "cards": 298210
   }
  },
- "sets": 23765,
- "cards": 2626325,
- "updated": "2026-10-24T16:26:31.367Z",
+ "sets": 23781,
+ "cards": 2645152,
+ "updated": "2026-10-24T16:58:37.453Z",
  "visible": {
   "file": "index/visible.json",
-  "sets": 5439
+  "sets": 5460
  }
 }
