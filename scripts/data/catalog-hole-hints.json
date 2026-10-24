@@ -4536,26 +4536,6 @@
    "production error"
   ]
  },
- "2014-15-panini-nba-hoops-basketball-cards": {
-  "missingPlayers": [
-   "a",
-   "box",
-   "card",
-   "gold",
-   "henry",
-   "perdue",
-   "places",
-   "proof",
-   "red",
-   "silver"
-  ],
-  "missingInserts": [
-   "artist",
-   "back",
-   "cracked ice",
-   "draft preview"
-  ]
- },
  "2012-13-panini-preferred-basketball-cards": {
   "missingPlayers": [
    "abduljabba",
@@ -5067,6 +5047,23 @@
   ],
   "missingInserts": [
    "draft change"
+  ]
+ },
+ "2014-15-panini-nba-hoops-basketball-cards": {
+  "missingPlayers": [
+   "a",
+   "box",
+   "card",
+   "gold",
+   "places",
+   "proof",
+   "red",
+   "silver"
+  ],
+  "missingInserts": [
+   "cracked ice",
+   "draft preview",
+   "road to finals 1st round"
   ]
  },
  "2014-topps-update-series-baseball-cards": {
@@ -6320,16 +6317,6 @@
   ],
   "missingInserts": [
    "toronto maple leafs centennial marks"
-  ]
- },
- "2016-17-upper-deck-artifacts-hockey-cards": {
-  "missingPlayers": [
-   "brindamour",
-   "modano"
-  ],
-  "missingInserts": [
-   "autofacts",
-   "honoured members signatures"
   ]
  },
  "2016-17-donruss-soccer-full": {
