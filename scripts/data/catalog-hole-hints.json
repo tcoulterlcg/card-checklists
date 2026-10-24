@@ -5491,19 +5491,6 @@
    "stadium scenes"
   ]
  },
- "1985-donruss-baseball-cards": {
-  "missingPlayers": [
-   "checklist",
-   "coleman",
-   "guillen",
-   "mcdowell"
-  ],
-  "missingInserts": [
-   "box panels hand cut",
-   "highlights",
-   "uncut"
-  ]
- },
  "2016-17-donruss-optic-basketball-cards": {
   "missingPlayers": [
    "aqua",
@@ -5898,32 +5885,6 @@
    "snapshots"
   ]
  },
- "2018-19-panini-select-basketball-nba-cards": {
-  "missingPlayers": [
-   "alexander",
-   "diop",
-   "gold",
-   "hutchinson",
-   "rahim"
-  ],
-  "missingInserts": [
-   "ds tyg 99",
-   "neon"
-  ]
- },
- "2018-donruss-football": {
-  "missingPlayers": [
-   "andrews",
-   "chubhb",
-   "gisecki",
-   "keenum",
-   "rogers"
-  ],
-  "missingInserts": [
-   "changing stripes jerseys",
-   "prime"
-  ]
- },
  "2017-donruss-optic-football-nfl-cards": {
   "missingPlayers": [
    "bavaro",
@@ -6303,17 +6264,6 @@
    "trophied talent die cut"
   ]
  },
- "2014-15-sp-game-used-hockey-cards": {
-  "missingPlayers": [
-   "fraser",
-   "hull",
-   "turco"
-  ],
-  "missingInserts": [
-   "authentic fabrics patch",
-   "stadium series material jersey"
-  ]
- },
  "2014-15-upper-deck-mvp-hockey-cards": {
   "missingPlayers": [
    "mazanec",
@@ -6526,6 +6476,18 @@
    "variant back"
   ]
  },
+ "2018-19-panini-select-basketball-nba-cards": {
+  "missingPlayers": [
+   "alexander",
+   "diop",
+   "gold",
+   "hutchinson",
+   "rahim"
+  ],
+  "missingInserts": [
+   "ds tyg 99"
+  ]
+ },
  "2016-17-panini-grand-reserve-basketball": {
   "missingPlayers": [
    "box",
@@ -6577,11 +6539,11 @@
    "1965 tall boy"
   ]
  },
- "2016-topps-triple-threads-baseball": {
+ "2014-15-sp-game-used-hockey-cards": {
   "missingPlayers": [],
   "missingInserts": [
-   "phenoms relic",
-   "unity relic"
+   "authentic fabrics patch",
+   "stadium series material jersey"
   ]
  },
  "2018-topps-fire-baseball-mlb-cards": {
@@ -6648,6 +6610,17 @@
   ],
   "missingInserts": [
    "update postseason heroes"
+  ]
+ },
+ "1985-donruss-baseball-cards": {
+  "missingPlayers": [
+   "checklist",
+   "coleman",
+   "guillen",
+   "mcdowell"
+  ],
+  "missingInserts": [
+   "highlights"
   ]
  },
  "2018-19-donruss-basketball-nba-cards": {
@@ -6855,16 +6828,6 @@
    "emerald"
   ]
  },
- "2017-donruss-elite-football-cards": {
-  "missingPlayers": [
-   "belladonna",
-   "crabtree",
-   "schuster"
-  ],
-  "missingInserts": [
-   "fans game"
-  ]
- },
  "2015-panini-prizm-collegiate-draft-football": {
   "missingPlayers": [
    "glass",
@@ -7029,6 +6992,15 @@
    "stribling"
   ],
   "missingInserts": []
+ },
+ "2017-donruss-elite-football-cards": {
+  "missingPlayers": [
+   "belladonna",
+   "schuster"
+  ],
+  "missingInserts": [
+   "fans game"
+  ]
  },
  "2016-donruss-elite-football-cards": {
   "missingPlayers": [
@@ -7856,6 +7828,15 @@
    "proof",
    "scherzer",
    "timberwolves"
+  ],
+  "missingInserts": []
+ },
+ "2018-donruss-football": {
+  "missingPlayers": [
+   "andrews",
+   "chubhb",
+   "gisecki",
+   "rogers"
   ],
   "missingInserts": []
  },
