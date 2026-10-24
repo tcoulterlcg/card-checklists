@@ -4174,27 +4174,6 @@
   ],
   "missingInserts": []
  },
- "2016-17-panini-excalibur-basketball": {
-  "missingPlayers": [
-   "black",
-   "blue",
-   "box",
-   "camo",
-   "gilchrist",
-   "gold",
-   "orange",
-   "pope",
-   "purple",
-   "red"
-  ],
-  "missingInserts": [
-   "baron",
-   "camo",
-   "count",
-   "lord",
-   "viscount"
-  ]
- },
  "2018-panini-prizm-football": {
   "missingPlayers": [
    "bears",
@@ -4419,24 +4398,6 @@
   ],
   "missingInserts": [
    "tiffany"
-  ]
- },
- "2018-19-panini-court-kings-basketball-cards": {
-  "missingPlayers": [
-   "alexander",
-   "box",
-   "diop",
-   "jade",
-   "ruby",
-   "sapphire",
-   "stein"
-  ],
-  "missingInserts": [
-   "international",
-   "jade",
-   "masterpiece",
-   "ruby",
-   "sapphire"
   ]
  },
  "2013-14-panini-innovation-basketball-cards": {
@@ -5015,22 +4976,6 @@
    "snapshots"
   ]
  },
- "2018-19-panini-nba-hoops-basketball-cards": {
-  "missingPlayers": [
-   "alexander",
-   "box",
-   "diop",
-   "holo",
-   "oneil",
-   "winter"
-  ],
-  "missingInserts": [
-   "back",
-   "premium box",
-   "teal explosion",
-   "winter"
-  ]
- },
  "2017-topps-wwe-nxt-checklist-added": {
   "missingPlayers": [
    "aries",
@@ -5253,6 +5198,21 @@
   "missingInserts": [
    "signature series retired players",
    "snapshots"
+  ]
+ },
+ "2018-19-panini-nba-hoops-basketball-cards": {
+  "missingPlayers": [
+   "alexander",
+   "box",
+   "diop",
+   "holo",
+   "oneil",
+   "winter"
+  ],
+  "missingInserts": [
+   "back",
+   "premium box",
+   "winter"
   ]
  },
  "2018-panini-elite-draft-picks-football-checklist-added": {
@@ -5595,18 +5555,6 @@
   ],
   "missingInserts": [
    "signature rps"
-  ]
- },
- "2015-panini-crown-royale-football-cards": {
-  "missingPlayers": [
-   "autograph",
-   "breeze",
-   "montegomery"
-  ],
-  "missingInserts": [
-   "chrome",
-   "pro bowl die cut",
-   "royalty memorabilia die cut"
   ]
  },
  "2016-17-sp-game-used-hockey": {
@@ -6093,17 +6041,6 @@
    "signature series"
   ]
  },
- "2013-topps-museum-collection-baseball-cards": {
-  "missingPlayers": [
-   "loney",
-   "trumbo",
-   "wallace"
-  ],
-  "missingInserts": [
-   "momentous material relics",
-   "signature swatches dual relic"
-  ]
- },
  "2001-bowman-chrome-baseball": {
   "missingPlayers": [
    "dempster",
@@ -6217,6 +6154,17 @@
   "missingInserts": [
    "die cut",
    "school colors signatures"
+  ]
+ },
+ "2015-panini-crown-royale-football-cards": {
+  "missingPlayers": [
+   "autograph",
+   "breeze",
+   "montegomery"
+  ],
+  "missingInserts": [
+   "chrome",
+   "pro bowl die cut"
   ]
  },
  "2014-bowman-chrome-football-cards": {
@@ -6488,6 +6436,21 @@
    "ds tyg 99"
   ]
  },
+ "2016-17-panini-excalibur-basketball": {
+  "missingPlayers": [
+   "black",
+   "blue",
+   "box",
+   "camo",
+   "gilchrist",
+   "gold",
+   "orange",
+   "pope",
+   "purple",
+   "red"
+  ],
+  "missingInserts": []
+ },
  "2016-17-panini-grand-reserve-basketball": {
   "missingPlayers": [
    "box",
@@ -6537,13 +6500,6 @@
   ],
   "missingInserts": [
    "1965 tall boy"
-  ]
- },
- "2014-15-sp-game-used-hockey-cards": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "authentic fabrics patch",
-   "stadium series material jersey"
   ]
  },
  "2018-topps-fire-baseball-mlb-cards": {
@@ -6962,6 +6918,18 @@
   "missingInserts": [
    "unity relics"
   ]
+ },
+ "2018-19-panini-court-kings-basketball-cards": {
+  "missingPlayers": [
+   "alexander",
+   "box",
+   "diop",
+   "jade",
+   "ruby",
+   "sapphire",
+   "stein"
+  ],
+  "missingInserts": []
  },
  "2014-15-panini-court-kings-basketball-cards": {
   "missingPlayers": [
@@ -8854,12 +8822,6 @@
  "2016-leaf-draft-football-cards": {
   "missingPlayers": [
    "butt"
-  ],
-  "missingInserts": []
- },
- "2016-panini-certified-football-cards": {
-  "missingPlayers": [
-   "keenum"
   ],
   "missingInserts": []
  },
