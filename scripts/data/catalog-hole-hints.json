@@ -4031,51 +4031,6 @@
    "high number"
   ]
  },
- "2018-topps-gold-label-baseball-cards": {
-  "missingPlayers": [
-   "anderson",
-   "ankiel",
-   "bader",
-   "banda",
-   "berrios",
-   "blackburn",
-   "brinson",
-   "canseco",
-   "caratini",
-   "castillo",
-   "contreras",
-   "cooper",
-   "dejong",
-   "delmonico",
-   "flaherty",
-   "fowler",
-   "fried",
-   "gooden",
-   "gregorius",
-   "kinsler",
-   "lamb",
-   "mahle",
-   "marte",
-   "meadows",
-   "merrifield",
-   "newcomb",
-   "nola",
-   "perez",
-   "pham",
-   "ramirez",
-   "rosario",
-   "shaw",
-   "sims",
-   "sisco",
-   "soto",
-   "stratton",
-   "strawberry",
-   "taylor"
-  ],
-  "missingInserts": [
-   "framed"
-  ]
- },
  "2013-14-fleer-showcase-hockey-cards": {
   "missingPlayers": [
    "bobkov",
@@ -4175,43 +4130,6 @@
    "signature"
   ]
  },
- "2014-topps-mini-baseball-cards": {
-  "missingPlayers": [
-   "banks",
-   "bench",
-   "berra",
-   "boggs",
-   "brett",
-   "canseco",
-   "clemente",
-   "dawson",
-   "foxx",
-   "garciaparra",
-   "gehrig",
-   "glavine",
-   "griffey",
-   "gwynn",
-   "koufax",
-   "maddux",
-   "mattingly",
-   "mcgriff",
-   "mcgwire",
-   "morgan",
-   "raines",
-   "rice",
-   "ripken",
-   "ruth",
-   "ryan",
-   "sandberg",
-   "schmidt",
-   "tulowitzki",
-   "williams"
-  ],
-  "missingInserts": [
-   "1989 die cut",
-   "update 1989 die cut"
-  ]
- },
  "1985-topps-traded-baseball-cards": {
   "missingPlayers": [
    "aaron",
@@ -4287,6 +4205,42 @@
    "border",
    "retro blank back",
    "update"
+  ]
+ },
+ "2014-topps-mini-baseball-cards": {
+  "missingPlayers": [
+   "banks",
+   "bench",
+   "berra",
+   "boggs",
+   "brett",
+   "canseco",
+   "clemente",
+   "dawson",
+   "foxx",
+   "garciaparra",
+   "gehrig",
+   "glavine",
+   "griffey",
+   "gwynn",
+   "koufax",
+   "maddux",
+   "mattingly",
+   "mcgriff",
+   "mcgwire",
+   "morgan",
+   "raines",
+   "rice",
+   "ripken",
+   "ruth",
+   "ryan",
+   "sandberg",
+   "schmidt",
+   "williams"
+  ],
+  "missingInserts": [
+   "1989 die cut",
+   "update 1989 die cut"
   ]
  },
  "2016-17-panini-excalibur-basketball": {
@@ -5287,23 +5241,6 @@
   ],
   "missingInserts": [
    "draft change"
-  ]
- },
- "2013-14-panini-crusade-basketball-cards": {
-  "missingPlayers": [
-   "blanche",
-   "blue",
-   "cut",
-   "gold",
-   "pope",
-   "purple",
-   "red",
-   "teal"
-  ],
-  "missingInserts": [
-   "2014 national",
-   "die cut",
-   "teal"
   ]
  },
  "2014-topps-update-series-baseball-cards": {
@@ -6971,6 +6908,19 @@
   "missingInserts": [
    "pulsar"
   ]
+ },
+ "2013-14-panini-crusade-basketball-cards": {
+  "missingPlayers": [
+   "blanche",
+   "blue",
+   "cut",
+   "gold",
+   "pope",
+   "purple",
+   "red",
+   "teal"
+  ],
+  "missingInserts": []
  },
  "2018-panini-donruss-elite-football-nfl-cards": {
   "missingPlayers": [
