@@ -3740,60 +3740,6 @@
    "tiffany"
   ]
  },
- "2017-topps-triple-threads-baseball": {
-  "missingPlayers": [
-   "adams",
-   "betances",
-   "bird",
-   "blackmon",
-   "bour",
-   "bregman",
-   "canseco",
-   "conforto",
-   "contreras",
-   "cozart",
-   "dickerson",
-   "dimaggio",
-   "duvall",
-   "familia",
-   "fowler",
-   "franco",
-   "fulmer",
-   "gallo",
-   "garrett",
-   "gordon",
-   "graveman",
-   "gray",
-   "gregorius",
-   "grichuk",
-   "guerrero",
-   "gurriel",
-   "herrera",
-   "inciarte",
-   "kiermaier",
-   "mancini",
-   "mantle",
-   "matz",
-   "morales",
-   "owens",
-   "panik",
-   "piscotty",
-   "pomeranz",
-   "relics",
-   "rendon",
-   "sano",
-   "severino",
-   "sheffield",
-   "soler",
-   "story",
-   "taillon",
-   "winker",
-   "zimmer"
-  ],
-  "missingInserts": [
-   "unity relic"
-  ]
- },
  "2017-18-leaf-masked-men-hockey-cards": {
   "missingPlayers": [
    "brathwaite",
@@ -4672,34 +4618,6 @@
    "greats"
   ]
  },
- "2015-16-sp-authentic-hockey-cards": {
-  "missingPlayers": [
-   "beleskey",
-   "box",
-   "hamilton",
-   "hammond",
-   "hayes",
-   "hextall",
-   "kucherov",
-   "lazar",
-   "leclair",
-   "marleau",
-   "moulson",
-   "nichushkin",
-   "ryan",
-   "sergachev",
-   "stone",
-   "tatar",
-   "turco",
-   "yakupov"
-  ],
-  "missingInserts": [
-   "2014 15 update limited",
-   "f w",
-   "f w ink",
-   "sign times"
-  ]
- },
  "2018-19-panini-revolution-basketball-cards": {
   "missingPlayers": [
    "alexander",
@@ -5439,31 +5357,6 @@
   ],
   "missingInserts": [
    "1994 95 recreates"
-  ]
- },
- "2017-topps-pro-debut-baseball-cards": {
-  "missingPlayers": [
-   "ballpark",
-   "banner",
-   "cap",
-   "celebration",
-   "day",
-   "dog",
-   "field",
-   "giveaway",
-   "mascot",
-   "mudcat",
-   "park",
-   "patch",
-   "series",
-   "stadium",
-   "steamer",
-   "tuesdays",
-   "unveiling"
-  ],
-  "missingInserts": [
-   "fragments farm relic",
-   "promo night uniform relic"
   ]
  },
  "2012-13-sp-authentic-basketball-cards": {
@@ -6659,6 +6552,17 @@
    "pulsar"
   ]
  },
+ "2015-16-sp-authentic-hockey-cards": {
+  "missingPlayers": [
+   "box",
+   "sergachev"
+  ],
+  "missingInserts": [
+   "f w",
+   "f w ink",
+   "limited patch"
+  ]
+ },
  "1998-topps-wcw-nwo": {
   "missingPlayers": [
    "bigelow",
@@ -7293,6 +7197,15 @@
    "sky"
   ]
  },
+ "2017-topps-pro-debut-baseball-cards": {
+  "missingPlayers": [
+   "cap"
+  ],
+  "missingInserts": [
+   "fragments farm relic",
+   "promo night uniform relic"
+  ]
+ },
  "2017-topps-tribute-baseball-cards": {
   "missingPlayers": [
    "bradley",
@@ -7605,6 +7518,16 @@
   ],
   "missingInserts": [
    "power zone"
+  ]
+ },
+ "2017-topps-triple-threads-baseball": {
+  "missingPlayers": [
+   "dimaggio",
+   "mantle",
+   "relics"
+  ],
+  "missingInserts": [
+   "unity relic"
   ]
  },
  "2016-topps-transcendent-baseball-cards": {
