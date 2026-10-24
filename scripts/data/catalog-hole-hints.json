@@ -4942,35 +4942,6 @@
    "relics"
   ]
  },
- "2017-topps-finest-baseball-cards": {
-  "missingPlayers": [
-   "bonds",
-   "duvall",
-   "galarraga",
-   "giolito",
-   "griffey",
-   "heyward",
-   "jeter",
-   "kepler",
-   "maddux",
-   "mazara",
-   "morales",
-   "naquin",
-   "owens",
-   "reed",
-   "rodriguez",
-   "rosario",
-   "russell",
-   "segedin",
-   "severino",
-   "snell",
-   "vizquel",
-   "wright"
-  ],
-  "missingInserts": [
-   "1994 95 recreates"
-  ]
- },
  "2012-13-sp-authentic-basketball-cards": {
   "missingPlayers": [
    "admiral",
@@ -8070,6 +8041,12 @@
    "sahlawi"
   ],
   "missingInserts": []
+ },
+ "2017-topps-finest-baseball-cards": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "1994 95 recreates"
+  ]
  },
  "2018-19-panini-contenders-draft-picks-basketball": {
   "missingPlayers": [
