@@ -5917,8 +5917,9 @@
   "why": [
    "missing inserts: clear cut relic, die cut, quarterback die cut, relics, signature"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "done",
+  "note": "2014-topps-strata-football-cards: 270 -> 3781 cards, 4 -> 50 sections, covers 100.0% of current",
+  "at": "2026-10-24"
  },
  {
   "slug": "2014-topps-mini-baseball-cards",
@@ -5931,8 +5932,9 @@
    "missing inserts: 1989 die cut, update 1989 die cut",
    "29 players sold on SCP not on checklist"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "done",
+  "note": "2014-topps-mini-baseball-cards: 708 -> 6077 cards, 2 -> 13 sections, covers 99.9% of current",
+  "at": "2026-10-24"
  },
  {
   "slug": "2018-topps-gold-label-baseball-cards",
@@ -5945,8 +5947,9 @@
    "missing inserts: framed",
    "38 players sold on SCP not on checklist"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "done",
+  "note": "2018-topps-gold-label-baseball-cards: 100 -> 2034 cards, 1 -> 27 sections, covers 100.0% of current",
+  "at": "2026-10-24"
  },
  {
   "slug": "2013-14-panini-crusade-basketball-cards",
@@ -5959,8 +5962,9 @@
    "missing inserts: 2014 national, die cut, sultans springfield signature, teal",
    "8 players sold on SCP not on checklist"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "done",
+  "note": "2013-14-panini-crusade-basketball-cards: 1560 -> 5100 cards, 28 -> 53 sections, covers 99.8% of current",
+  "at": "2026-10-24"
  },
  {
   "slug": "2019-donruss-football",
@@ -6272,7 +6276,8 @@
    "missing inserts: color wheel, ice traxx, phenoms die cut",
    "12 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2014-topps-ufc-bloodlines-trading-cards",
@@ -6285,7 +6290,8 @@
    "missing inserts: die cut, fighter, fighter relics",
    "12 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2023-panini-immaculate-collection-baseball",
@@ -6309,7 +6315,8 @@
   "why": [
    "base skips 14 numbers in #1-170 (e.g. 110, 113, 116, 127, 128)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2025-leaf-metal-baseball",
