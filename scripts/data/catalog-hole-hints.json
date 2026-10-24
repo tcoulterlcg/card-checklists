@@ -4366,40 +4366,6 @@
    "relics"
   ]
  },
- "1988-topps-traded-baseball-cards": {
-  "missingPlayers": [
-   "abbott",
-   "barberie",
-   "benes",
-   "branson",
-   "campanis",
-   "combs",
-   "fiore",
-   "marquess",
-   "martinez",
-   "masse",
-   "mckeon",
-   "morandini",
-   "nagy",
-   "nixon",
-   "poole",
-   "robbins",
-   "robinson",
-   "rojas",
-   "servais",
-   "silvestri",
-   "slusarski",
-   "snyder",
-   "sprague",
-   "tt",
-   "ventura",
-   "wood",
-   "zimmer"
-  ],
-  "missingInserts": [
-   "tiffany"
-  ]
- },
  "2013-14-panini-innovation-basketball-cards": {
   "missingPlayers": [
    "ariza",
@@ -5081,30 +5047,6 @@
   ],
   "missingInserts": [
    "1964 bazooka inserts"
-  ]
- },
- "1993-sp-baseball": {
-  "missingPlayers": [
-   "bere",
-   "damon",
-   "delgado",
-   "desheilds",
-   "everett",
-   "floyd",
-   "jeter",
-   "jones",
-   "lopez",
-   "mcfarlane",
-   "mottola",
-   "newfield",
-   "perez",
-   "ramirez",
-   "steverson",
-   "tucker",
-   "watson"
-  ],
-  "missingInserts": [
-   "error photo is tracy sanders"
   ]
  },
  "2017-score-football-cards": {
@@ -6883,6 +6825,15 @@
    "unity relics"
   ]
  },
+ "1993-sp-baseball": {
+  "missingPlayers": [
+   "desheilds",
+   "mcfarlane"
+  ],
+  "missingInserts": [
+   "error photo is tracy sanders"
+  ]
+ },
  "2018-19-panini-court-kings-basketball-cards": {
   "missingPlayers": [
    "alexander",
@@ -7309,17 +7260,6 @@
   "missingInserts": [
    "sticker"
   ]
- },
- "2018-panini-contenders-football-nfl-cards": {
-  "missingPlayers": [
-   "callaway",
-   "car",
-   "conner",
-   "davenport",
-   "ingram",
-   "shepard"
-  ],
-  "missingInserts": []
  },
  "2018-panini-elite-draft-picks-football-checklist-added": {
   "missingPlayers": [
@@ -8676,6 +8616,12 @@
  "2018-panini-contenders-draft-picks-football-cards": {
   "missingPlayers": [
    "farve"
+  ],
+  "missingInserts": []
+ },
+ "2018-panini-contenders-football-nfl-cards": {
+  "missingPlayers": [
+   "car"
   ],
   "missingInserts": []
  },
