@@ -4858,27 +4858,6 @@
    "nickname signature"
   ]
  },
- "2015-bowman-football-cards": {
-  "missingPlayers": [
-   "adams",
-   "ebron",
-   "ellington",
-   "freeman",
-   "garoppolo",
-   "joyner",
-   "latimer",
-   "miller",
-   "olomu",
-   "patterson",
-   "payne",
-   "wheaton"
-  ],
-  "missingInserts": [
-   "1948",
-   "ice",
-   "relics"
-  ]
- },
  "2014-topps-finest-football-cards": {
   "missingPlayers": [
    "conley",
@@ -5249,26 +5228,6 @@
   ],
   "missingInserts": [
    "franchise fabrics"
-  ]
- },
- "2016-17-o-pee-chee-platinum-hockey": {
-  "missingPlayers": [
-   "box",
-   "checklist",
-   "dickinson",
-   "greiss",
-   "hopkins",
-   "lindell",
-   "meier",
-   "reilly",
-   "simon",
-   "sundqvist",
-   "vrana",
-   "wood"
-  ],
-  "missingInserts": [
-   "color wheel",
-   "ice traxx"
   ]
  },
  "2012-topps-ufc-bloodlines-trading-cards": {
@@ -6709,6 +6668,17 @@
    "flood"
   ]
  },
+ "2015-bowman-football-cards": {
+  "missingPlayers": [
+   "joyner",
+   "olomu",
+   "payne",
+   "san"
+  ],
+  "missingInserts": [
+   "1948"
+  ]
+ },
  "2015-topps-field-access-football-cards": {
   "missingPlayers": [
    "dickerson",
@@ -6718,6 +6688,17 @@
   ],
   "missingInserts": [
    "adrenaline rush"
+  ]
+ },
+ "2016-17-o-pee-chee-platinum-hockey": {
+  "missingPlayers": [
+   "box",
+   "checklist",
+   "greiss",
+   "hopkins"
+  ],
+  "missingInserts": [
+   "die cut"
   ]
  },
  "2016-17-sp-authentic-hockey-cards": {
