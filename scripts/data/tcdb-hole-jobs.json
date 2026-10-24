@@ -3040,9 +3040,10 @@
    "missing inserts: 1968 3d, 1968 bazooka, 1968 discs, 1968 game, award winners, bat, bat ink, bat shoulder",
    "48 players sold on SCP not on checklist"
   ],
-  "status": "review",
-  "note": "2017-topps-heritage-baseball-cards: 953 -> 17788 cards, 8 -> 257 sections, covers 94.5% of current",
-  "tcdbSid": 134721
+  "status": "done",
+  "note": "2017-topps-heritage-baseball-cards: 953 -> 17788 cards, 8 -> 257 sections, covers 95.1% of current",
+  "tcdbSid": 134721,
+  "at": "2026-10-24"
  },
  {
   "slug": "2012-bowman-chrome-baseball",
@@ -3069,9 +3070,10 @@
   "why": [
    "base skips 99 numbers in #1-600 (e.g. 501, 502, 503, 504, 505)"
   ],
-  "status": "review",
-  "note": "25-26-o-pee-chee-hockey: 11091 -> 11091 cards, 89 -> 43 sections, covers 88.7% of current",
-  "tcdbSid": 547911
+  "status": "done",
+  "note": "25-26-o-pee-chee-hockey: 11091 -> 11091 cards, 89 -> 43 sections, covers 96.6% of current",
+  "tcdbSid": 547911,
+  "at": "2026-10-24"
  },
  {
   "slug": "2018-bowman-chrome-baseball-cards",
@@ -3261,7 +3263,7 @@
    "base skips 63 numbers in #1-297 (e.g. 26, 30, 51, 64, 107)"
   ],
   "status": "review",
-  "note": "2023-topps-allen-and-ginter-baseball: 4222 -> 8042 cards, 56 -> 59 sections, covers 69.0% of current",
+  "note": "2023-topps-allen-and-ginter-baseball: 3931 -> 8042 cards, 56 -> 59 sections, covers 85.9% of current",
   "tcdbSid": 376820
  },
  {
@@ -3451,9 +3453,10 @@
    "missing inserts: 1964 bazooka inserts, clubhouse collection relics, flashback, ink, memorable moments, new age performers, real one, then now",
    "65 players sold on SCP not on checklist"
   ],
-  "status": "review",
-  "note": "2013-topps-heritage-baseball-cards: 908 -> 3243 cards, 11 -> 44 sections, covers 94.1% of current",
-  "tcdbSid": 72767
+  "status": "done",
+  "note": "2013-topps-heritage-baseball-cards: 908 -> 3243 cards, 11 -> 44 sections, covers 99.5% of current",
+  "tcdbSid": 72767,
+  "at": "2026-10-24"
  },
  {
   "slug": "1984-donruss-baseball-cards",
@@ -3466,9 +3469,10 @@
    "missing inserts: action stars, champions, piece puzzle 10 11 12, piece puzzle 13 14 15, piece puzzle 16 17 18, piece puzzle 22 23 24, piece puzzle 25 26 27, piece puzzle 31 32 33",
    "10 players sold on SCP not on checklist"
   ],
-  "status": "review",
-  "note": "1984-donruss-baseball-cards: 657 -> 708 cards, 2 -> 2 sections, covers 95.0% of current",
-  "tcdbSid": 95
+  "status": "done",
+  "note": "1984-donruss-baseball-cards: 657 -> 708 cards, 2 -> 2 sections, covers 98.9% of current",
+  "tcdbSid": 95,
+  "at": "2026-10-24"
  },
  {
   "slug": "2017-topps-heritage-minor-league-baseball",
@@ -3496,7 +3500,7 @@
    "base skips 46 numbers in #1-300 (e.g. 14, 36, 40, 42, 59)"
   ],
   "status": "review",
-  "note": "2021-topps-allen-and-ginter-baseball: 8580 -> 6815 cards, 72 -> 69 sections, covers 63.8% of current",
+  "note": "2021-topps-allen-and-ginter-baseball: 6570 -> 6815 cards, 72 -> 69 sections, covers 91.8% of current",
   "tcdbSid": 258453
  },
  {
@@ -3539,7 +3543,7 @@
    "base skips 45 numbers in #1-300 (e.g. 14, 36, 40, 42, 59)"
   ],
   "status": "review",
-  "note": "2021-topps-allen-and-ginter-chrome-baseball: 4953 -> 4444 cards, 21 -> 21 sections, covers 49.4% of current",
+  "note": "2021-topps-allen-and-ginter-chrome-baseball: 4469 -> 4444 cards, 21 -> 21 sections, covers 92.1% of current",
   "tcdbSid": 264675
  },
  {
@@ -3767,7 +3771,7 @@
    "base skips 38 numbers in #1-300 (e.g. 10, 22, 42, 46, 59)"
   ],
   "status": "review",
-  "note": "2020-topps-allen-and-ginter-chrome-baseball: 3690 -> 3166 cards, 17 -> 17 sections, covers 46.3% of current",
+  "note": "2020-topps-allen-and-ginter-chrome-baseball: 3190 -> 3166 cards, 17 -> 17 sections, covers 93.5% of current",
   "tcdbSid": 236705
  },
  {
@@ -3983,7 +3987,7 @@
    "base skips 31 numbers in #1-82 (e.g. 4, 8, 9, 16, 19)"
   ],
   "status": "review",
-  "note": "2018-panini-flawless-collegiate-football-cards: 575 -> 1775 cards, 34 -> 115 sections, covers 32.3% of current",
+  "note": "2018-panini-flawless-collegiate-football-cards: 575 -> 1775 cards, 34 -> 115 sections, covers 88.7% of current",
   "tcdbSid": 179537
  },
  {
@@ -4082,7 +4086,7 @@
    "base skips 30 numbers in #1-330 (e.g. 144, 145, 146, 147, 148)"
   ],
   "status": "review",
-  "note": "2020-panini-score-football: 11273 -> 10985 cards, 124 -> 100 sections, covers 41.4% of current",
+  "note": "2020-panini-score-football: 11273 -> 10985 cards, 124 -> 100 sections, covers 89.9% of current",
   "tcdbSid": 227003
  },
  {
@@ -4096,7 +4100,7 @@
    "base skips 29 numbers in #3-46 (e.g. 4, 5, 6, 7, 11)"
   ],
   "status": "review",
-  "note": "2022-topps-x-wander-franco-baseball: 250 -> 849 cards, 10 -> 21 sections, covers 70.7% of current",
+  "note": "2022-topps-x-wander-franco-baseball: 250 -> 849 cards, 10 -> 21 sections, covers 78.0% of current",
   "tcdbSid": 347694
  },
  {
@@ -4344,7 +4348,7 @@
    "31 players sold on SCP not on checklist"
   ],
   "status": "review",
-  "note": "1989-score-football-cards: 456 -> 372 cards, 3 -> 3 sections, covers 73.0% of current",
+  "note": "1989-score-football-cards: 456 -> 372 cards, 3 -> 3 sections, covers 74.6% of current",
   "tcdbSid": 3243
  },
  {
@@ -4372,9 +4376,10 @@
   "why": [
    "base skips 27 numbers in #3-40 (e.g. 5, 6, 8, 10, 11)"
   ],
-  "status": "review",
-  "note": "2022-panini-mosaic-draft-picks-football: 250 -> 1170 cards, 13 -> 15 sections, covers 68.4% of current",
-  "tcdbSid": 323981
+  "status": "done",
+  "note": "2022-panini-mosaic-draft-picks-football: 250 -> 1170 cards, 13 -> 15 sections, covers 100.0% of current",
+  "tcdbSid": 323981,
+  "at": "2026-10-24"
  },
  {
   "slug": "2017-bowman-chrome-mini-baseball-cards",
@@ -4401,7 +4406,7 @@
    "base skips 27 numbers in #1-200 (e.g. 6, 8, 18, 21, 24)"
   ],
   "status": "review",
-  "note": "2012-13-panini-classic-signatures-hockey-cards: 579 -> 582 cards, 13 -> 12 sections, covers 48.9% of current",
+  "note": "2012-13-panini-classic-signatures-hockey-cards: 579 -> 582 cards, 13 -> 12 sections, covers 82.6% of current",
   "tcdbSid": 72750
  },
  {
@@ -4444,9 +4449,10 @@
   "why": [
    "missing inserts: fastbreak, hyper, mojo, sensational signature, sensational swatch, shimmer, signature, sparkle"
   ],
-  "status": "review",
-  "note": "2017-18-panini-prizm-basketball-nba-cards: 1079 -> 9974 cards, 12 -> 76 sections, covers 64.5% of current",
-  "tcdbSid": 157371
+  "status": "done",
+  "note": "2017-18-panini-prizm-basketball-nba-cards: 1079 -> 9974 cards, 12 -> 76 sections, covers 100.0% of current",
+  "tcdbSid": 157371,
+  "at": "2026-10-24"
  },
  {
   "slug": "2016-panini-certified-football-cards",
@@ -4459,7 +4465,7 @@
    "missing inserts: epix play relic, fabric game signature, moment, new generation jersey, prime, season, signature, team signature"
   ],
   "status": "review",
-  "note": "2016-panini-certified-football-cards: 691 -> 4509 cards, 17 -> 96 sections, covers 69.2% of current",
+  "note": "2016-panini-certified-football-cards: 691 -> 4509 cards, 17 -> 96 sections, covers 91.4% of current",
   "tcdbSid": 128360
  },
  {
@@ -4577,7 +4583,7 @@
    "15 players sold on SCP not on checklist"
   ],
   "status": "review",
-  "note": "2018-19-panini-prizm-basketball-nba-cards: 1263 -> 14209 cards, 22 -> 117 sections, covers 71.2% of current",
+  "note": "2018-19-panini-prizm-basketball-nba-cards: 1263 -> 14209 cards, 22 -> 117 sections, covers 91.3% of current",
   "tcdbSid": 188541
  },
  {
@@ -4591,9 +4597,10 @@
    "missing inserts: astro, cubic, fractal, galactic, groove, impact, infinite",
    "5 players sold on SCP not on checklist"
   ],
-  "status": "review",
-  "note": "2018-19-panini-revolution-basketball-cards: 320 -> 2520 cards, 9 -> 40 sections, covers 83.4% of current",
-  "tcdbSid": 187915
+  "status": "done",
+  "note": "2018-19-panini-revolution-basketball-cards: 320 -> 2520 cards, 9 -> 40 sections, covers 100.0% of current",
+  "tcdbSid": 187915,
+  "at": "2026-10-24"
  },
  {
   "slug": "2021-topps-npb-baseball",
@@ -4633,7 +4640,7 @@
    "base skips 25 numbers in #1-250 (e.g. 83, 118, 133, 134, 135)"
   ],
   "status": "review",
-  "note": "2020-donruss-football: 7634 -> 9765 cards, 156 -> 143 sections, covers 45.1% of current",
+  "note": "2020-donruss-football: 7634 -> 9765 cards, 156 -> 143 sections, covers 92.7% of current",
   "tcdbSid": 235892
  },
  {

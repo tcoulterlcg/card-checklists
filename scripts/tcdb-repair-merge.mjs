@@ -56,15 +56,24 @@ for (const f of files) {
     const norm = (x) => String(x || '').normalize('NFKD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9 ]/g, ' ').replace(/\s+/g, ' ').trim()
     const byNum = new Map()
     for (const sec of sections) for (const c of sec.cards) { const k = norm(c.n); if (!byNum.has(k)) byNum.set(k, []); byNum.get(k).push(norm(c.p), ...String(c.p || '').split(/\s*\/\s*/).map(norm)) }
+    // Same-titled section, same player, different numbering: older checklists number inserts 1, 2, 3…
+    // where TCDB uses the card code ("A-CB"). Count those too — the section and the player must both match.
+    const bySec = new Map()
+    for (const sec of sections) { const t = norm(sec.title); if (!bySec.has(t)) bySec.set(t, new Set()); for (const c of sec.cards) for (const part of String(c.p || '').split(/\s*\/\s*/)) bySec.get(t).add(surname(part)) }
     const oldCards = new Map()
-    for (const sec of old.sections || []) for (const c of sec.cards) oldCards.set(String(c.n || '').trim().replace(/^#/, '').toLowerCase() + '|' + surname(c.p), c)
+    for (const sec of old.sections || []) for (const c of sec.cards) {
+      const k = String(c.n || '').trim().replace(/^#/, '').toLowerCase() + '|' + surname(c.p)
+      if (!oldCards.has(k)) oldCards.set(k, { c, titles: [] })
+      oldCards.get(k).titles.push(norm(sec.title))
+    }
     let inside = 0
     for (const k of oldKeys) {
       if (newKeys.has(k)) { inside++; continue }
-      const c = oldCards.get(k), p = c && norm(c.p)
+      const { c, titles } = oldCards.get(k) || {}, p = c && norm(c.p)
       // TCDB lists multi-player cards (league leaders, combos) as "A / B / C"; ours may name one of them.
-      const qs = byNum.get(norm(c.n)) || []
-      if (p && qs.some(q => q && (p === q || p.startsWith(q + ' ')))) inside++
+      const qs = (c && byNum.get(norm(c.n))) || []
+      if (p && qs.some(q => q && (p === q || p.startsWith(q + ' ')))) { inside++; continue }
+      if (c && titles.some(t => bySec.get(t) && bySec.get(t).has(surname(c.p)))) inside++
     }
     const cover = oldKeys.size ? inside / oldKeys.size : 1
     const nOld = count(old), nNew = count(fresh)
