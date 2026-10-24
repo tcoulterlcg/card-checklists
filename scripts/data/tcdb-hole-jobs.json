@@ -5213,8 +5213,9 @@
    "missing inserts: artist, back, cracked ice, draft preview, remembrance memorabilia",
    "10 players sold on SCP not on checklist"
   ],
-  "status": "review",
-  "note": "no TCDB parent set named 2014-15 Hoops found"
+  "status": "done",
+  "note": "2014-15-panini-nba-hoops-basketball-cards: 1136 -> 3962 cards, 33 -> 50 sections, covers 96.2% of current",
+  "at": "2026-10-24"
  },
  {
   "slug": "2017-18-panini-prestige-basketball-nba-cards",
@@ -6495,8 +6496,9 @@
   "why": [
    "missing inserts: air mail die cut, hot franchise fabrics signatures, hot future franchise fabrics signatures, team helmets"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "review",
+  "note": "2014-score-football-cards: 979 -> 6611 cards, 27 -> 61 sections, covers 94.2% of current",
+  "tcdbSid": 94818
  },
  {
   "slug": "2014-15-sp-game-used-hockey-cards",
@@ -6535,8 +6537,9 @@
   "why": [
    "missing inserts: back to future materials, die cut, ink, series"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "done",
+  "note": "2016-donruss-elite-football-cards: 724 -> 4638 cards, 24 -> 106 sections, covers 99.3% of current",
+  "at": "2026-10-24"
  },
  {
   "slug": "2016-17-upper-deck-artifacts-hockey-cards",
@@ -6548,8 +6551,9 @@
   "why": [
    "missing inserts: autofacts, honoured members signatures, relic redemption, tundra teammates quad relics"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "done",
+  "note": "2016-17-upper-deck-artifacts-hockey-cards: 709 -> 2866 cards, 6 -> 63 sections, covers 100.0% of current",
+  "at": "2026-10-24"
  },
  {
   "slug": "2014-topps-museum-collection-baseball-cards",
@@ -8034,7 +8038,8 @@
    "missing inserts: autographed relic",
    "14 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2023-topps-x-mlb-players-clubhouse-exclusive-baseball",
@@ -8046,7 +8051,8 @@
   "why": [
    "base skips 8 numbers in #1-50 (e.g. 2, 5, 9, 15, 18)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2021-panini-diamond-kings-baseball",
@@ -8058,7 +8064,8 @@
   "why": [
    "base skips 8 numbers in #1-100 (e.g. 2, 14, 15, 16, 17)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2021-panini-national-treasures-football",
@@ -8082,7 +8089,8 @@
   "why": [
    "base skips 8 numbers in #1-100 (e.g. 45, 46, 47, 48, 49)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2020-panini-gold-standard-football",
@@ -8094,7 +8102,8 @@
   "why": [
    "base skips 8 numbers in #1-100 (e.g. 38, 40, 41, 42, 43)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2020-panini-national-treasures-football",
@@ -8118,7 +8127,8 @@
   "why": [
    "base skips 8 numbers in #1-100 (e.g. 49, 50, 51, 52, 53)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2019-panini-majestic-football",
@@ -8130,7 +8140,8 @@
   "why": [
    "base skips 8 numbers in #1-100 (e.g. 40, 41, 42, 43, 87)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2019-panini-rookies-and-stars-football",
@@ -8142,7 +8153,8 @@
   "why": [
    "base skips 8 numbers in #1-100 (e.g. 33, 34, 35, 36, 77)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2019-panini-gold-standard-football",
@@ -8154,7 +8166,8 @@
   "why": [
    "base skips 8 numbers in #1-140 (e.g. 46, 47, 48, 49, 50)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2025-leaf-vivid-baseball",
@@ -8166,7 +8179,8 @@
   "why": [
    "base skips 8 numbers in #1-158 (e.g. 63, 79, 90, 99, 128)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2023-topps-stadium-club-baseball",
@@ -8203,7 +8217,8 @@
    "missing inserts: tiffany",
    "12 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2016-panini-elite-extra-edition-baseball",
@@ -8216,7 +8231,8 @@
    "missing inserts: usa contenders season ticket",
    "base skips 4 numbers in #1-184 (e.g. 47, 63, 140, 175)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "1999-topps-pokemon-the-first-movie",
@@ -8228,7 +8244,8 @@
   "why": [
    "base skips 7 numbers in #1-55 (e.g. 44, 45, 46, 47, 52)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2021-panini-impeccable-football",
@@ -8240,7 +8257,8 @@
   "why": [
    "base skips 7 numbers in #1-97 (e.g. 52, 53, 54, 55, 56)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2021-panini-encased-football",
@@ -8252,7 +8270,8 @@
   "why": [
    "base skips 7 numbers in #1-100 (e.g. 48, 49, 50, 51, 52)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2021-panini-gold-standard-football",
@@ -8264,7 +8283,8 @@
   "why": [
    "base skips 7 numbers in #1-100 (e.g. 51, 52, 53, 55, 56)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2021-panini-immaculate-collection-football",
@@ -8276,7 +8296,8 @@
   "why": [
    "base skips 7 numbers in #1-100 (e.g. 37, 38, 39, 40, 41)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2021-panini-legacy-football",
@@ -8300,7 +8321,8 @@
   "why": [
    "base skips 7 numbers in #1-100 (e.g. 50, 51, 52, 53, 54)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2021-panini-playbook-football",
@@ -8312,7 +8334,8 @@
   "why": [
    "base skips 7 numbers in #1-100 (e.g. 42, 43, 44, 65, 66)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2021-panini-rookies-and-stars-football",
@@ -8348,7 +8371,8 @@
   "why": [
    "base skips 7 numbers in #1-100 (e.g. 54, 55, 56, 80, 81)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2020-panini-xr-football",
@@ -8372,7 +8396,8 @@
   "why": [
    "base skips 7 numbers in #1-100 (e.g. 43, 44, 45, 46, 92)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2019-panini-illusions-football",
@@ -8384,7 +8409,8 @@
   "why": [
    "base skips 7 numbers in #1-100 (e.g. 18, 32, 38, 51, 80)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2019-panini-limited-football",
@@ -8396,7 +8422,8 @@
   "why": [
    "base skips 7 numbers in #1-100 (e.g. 47, 48, 49, 50, 90)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2019-panini-origins-football",
@@ -8408,7 +8435,8 @@
   "why": [
    "base skips 7 numbers in #1-100 (e.g. 46, 47, 48, 49, 50)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2019-panini-plates-and-patches-football",
@@ -8420,7 +8448,8 @@
   "why": [
    "base skips 7 numbers in #1-100 (e.g. 47, 49, 50, 51, 52)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2024-leaf-electrum-baseball",
