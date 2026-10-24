@@ -3647,45 +3647,6 @@
    "superstar sensations"
   ]
  },
- "2018-topps-finest-baseball-mlb-cards": {
-  "missingPlayers": [
-   "alcantara",
-   "allen",
-   "anderson",
-   "arroyo",
-   "banda",
-   "blackburn",
-   "bour",
-   "buehler",
-   "cooper",
-   "fried",
-   "giolito",
-   "happ",
-   "henderson",
-   "ichiro",
-   "jackson",
-   "jeter",
-   "larkin",
-   "lin",
-   "mahle",
-   "martinez",
-   "newcomb",
-   "pettitte",
-   "rivera",
-   "robles",
-   "sano",
-   "taylor",
-   "thomas",
-   "thome",
-   "wade"
-  ],
-  "missingInserts": [
-   "cornerstones",
-   "firsts",
-   "hour",
-   "sitting"
-  ]
- },
  "1990-score-football-cards": {
   "missingPlayers": [
    "baab",
@@ -4339,42 +4300,6 @@
    "border",
    "retro blank back",
    "update"
-  ]
- },
- "2016-topps-finest-baseball-cards": {
-  "missingPlayers": [
-   "aaron",
-   "biggio",
-   "cain",
-   "calhoun",
-   "carew",
-   "delgado",
-   "dickerson",
-   "fingers",
-   "galarraga",
-   "gonzalez",
-   "guerrero",
-   "johnson",
-   "kaline",
-   "koufax",
-   "kruk",
-   "mattingly",
-   "matz",
-   "norris",
-   "park",
-   "piazza",
-   "realmuto",
-   "ripken",
-   "ryan",
-   "smoltz",
-   "suzuki",
-   "swihart",
-   "thomas",
-   "vizquel"
-  ],
-  "missingInserts": [
-   "1996 intimidators",
-   "greats"
   ]
  },
  "2016-17-panini-excalibur-basketball": {
@@ -5244,22 +5169,6 @@
    "die cut",
    "fighter",
    "fighter relics"
-  ]
- },
- "2018-topps-museum-collection-baseball-mlb-cards": {
-  "missingPlayers": [
-   "casrellanos",
-   "gregorious",
-   "kimbrel",
-   "ramirez",
-   "story",
-   "wright"
-  ],
-  "missingInserts": [
-   "archival",
-   "dual player meaningful relics",
-   "primary pieces single player quad relics",
-   "signature swatches dual relic"
   ]
  },
  "2017-topps-transcendent-baseball-cards": {
@@ -6320,20 +6229,6 @@
    "camo",
    "snakeskin",
    "sparkle"
-  ]
- },
- "2013-topps-gypsy-queen-baseball-cards": {
-  "missingPlayers": [
-   "archer",
-   "blanco",
-   "carpenter",
-   "gonzalalez",
-   "ramos",
-   "vries"
-  ],
-  "missingInserts": [
-   "dealing aces",
-   "glove stories"
   ]
  },
  "2016-17-panini-revolution-basketball": {
@@ -7400,6 +7295,15 @@
   ],
   "missingInserts": [
    "republic"
+  ]
+ },
+ "2018-topps-museum-collection-baseball-mlb-cards": {
+  "missingPlayers": [
+   "casrellanos",
+   "gregorious"
+  ],
+  "missingInserts": [
+   "dual player meaningful relics"
   ]
  },
  "2018-topps-baseball-silver-pack-1983-promo-cards": {
@@ -8892,6 +8796,12 @@
   ],
   "missingInserts": []
  },
+ "2016-topps-finest-baseball-cards": {
+  "missingPlayers": [
+   "suzuki"
+  ],
+  "missingInserts": []
+ },
  "2015-panini-elite-extra-edition-baseball": {
   "missingPlayers": [
    "lindor"
@@ -8949,6 +8859,12 @@
  "2013-panini-hometown-heroes-baseball-cards": {
   "missingPlayers": [
    "sunberg"
+  ],
+  "missingInserts": []
+ },
+ "2013-topps-gypsy-queen-baseball-cards": {
+  "missingPlayers": [
+   "gonzalalez"
   ],
   "missingInserts": []
  },
