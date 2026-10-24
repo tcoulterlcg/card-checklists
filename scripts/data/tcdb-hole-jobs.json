@@ -4712,7 +4712,9 @@
   "why": [
    "base skips 24 numbers in #10-38 (e.g. 11, 12, 13, 14, 15)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2022-topps-chrome-ben-baller-baseball: 250 -> 2756 cards, 45 -> 40 sections, covers 100.0% of current",
+  "at": "2026-10-24"
  },
  {
   "slug": "20-21-ud-upper-deck-synergy-hockey",
@@ -4738,7 +4740,9 @@
   "why": [
    "missing inserts: beam team, lone star signatures, minted, never compromise, power zone, sepia, special forces"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2018-topps-stadium-club-baseball-mlb-cards: 530 -> 4835 cards, 4 -> 62 sections, covers 99.0% of current",
+  "at": "2026-10-24"
  },
  {
   "slug": "2018-topps-archives-baseball",
@@ -4806,7 +4810,9 @@
   "why": [
    "missing inserts: dealing aces, debut stars, framed relics, glove stories, mc, n174, relics"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2014-topps-gypsy-queen-baseball-cards: 1102 -> 7804 cards, 7 -> 67 sections, covers 99.4% of current",
+  "at": "2026-10-24"
  },
  {
   "slug": "2018-panini-national-treasures-football-nfl-cards",
