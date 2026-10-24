@@ -3332,65 +3332,6 @@
    "relic"
   ]
  },
- "2013-bowman-sterling-baseball-cards": {
-  "missingPlayers": [
-   "anderson",
-   "blair",
-   "bohm",
-   "church",
-   "ciuffo",
-   "clarkin",
-   "crawford",
-   "danish",
-   "depaula",
-   "dozier",
-   "edwards",
-   "ervin",
-   "hart",
-   "harvey",
-   "healy",
-   "jagielo",
-   "jones",
-   "judge",
-   "kaminsky",
-   "katoh",
-   "kingham",
-   "kivlehan",
-   "knebel",
-   "lorenzen",
-   "mazzilli",
-   "mcguire",
-   "mckinney",
-   "mcmahon",
-   "mcphearson",
-   "mercado",
-   "morban",
-   "neuhaus",
-   "oneill",
-   "overton",
-   "palka",
-   "peterson",
-   "quinn",
-   "renfroe",
-   "rodriguez",
-   "sandberg",
-   "shipley",
-   "sisco",
-   "sweaney",
-   "taylor",
-   "turley",
-   "urias",
-   "ventura",
-   "wilson",
-   "windle",
-   "ziomek"
-  ],
-  "missingInserts": [
-   "canary diamond",
-   "japan fractor",
-   "ruby"
-  ]
- },
  "2013-bowman-inception-baseball-cards": {
   "missingPlayers": [
    "almora",
@@ -5283,26 +5224,6 @@
    "transcendent touchdowns"
   ]
  },
- "2014-bowman-chrome-football-cards": {
-  "missingPlayers": [
-   "dix",
-   "hurns",
-   "jenkins",
-   "joyner",
-   "loston",
-   "perkins",
-   "purifoy",
-   "rees",
-   "washington",
-   "wilder"
-  ],
-  "missingInserts": [
-   "bordered",
-   "bubbles",
-   "prism",
-   "xfractor"
-  ]
- },
  "2018-topps-heritage-high-number-baseball-cards": {
   "missingPlayers": [
    "abreu",
@@ -7181,6 +7102,21 @@
    "school colors signatures"
   ]
  },
+ "2014-bowman-chrome-football-cards": {
+  "missingPlayers": [
+   "dix",
+   "jenkins",
+   "joyner",
+   "loston",
+   "perkins",
+   "purifoy",
+   "rees",
+   "wilder"
+  ],
+  "missingInserts": [
+   "bordered"
+  ]
+ },
  "2017-18-sp-authentic-hockey-nhl-cards": {
   "missingPlayers": [
    "box",
@@ -7242,16 +7178,6 @@
   "missingInserts": [
    "7x champ",
    "jj"
-  ]
- },
- "2018-topps-pro-debut-baseball-milb-cards": {
-  "missingPlayers": [
-   "box",
-   "pack"
-  ],
-  "missingInserts": [
-   "fragments farm relic",
-   "promo night uniforms relic"
   ]
  },
  "2017-donruss-optic-baseball-cards": {
@@ -8167,6 +8093,14 @@
    "acclaimed"
   ]
  },
+ "2013-bowman-sterling-baseball-cards": {
+  "missingPlayers": [
+   "bohm"
+  ],
+  "missingInserts": [
+   "japan fractor"
+  ]
+ },
  "2012-topps-finest-baseball": {
   "missingPlayers": [
    "mccutchen"
@@ -8939,6 +8873,13 @@
   "missingPlayers": [
    "marlins",
    "sales"
+  ],
+  "missingInserts": []
+ },
+ "2018-topps-pro-debut-baseball-milb-cards": {
+  "missingPlayers": [
+   "box",
+   "pack"
   ],
   "missingInserts": []
  },
