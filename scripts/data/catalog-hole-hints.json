@@ -4171,34 +4171,6 @@
    "framed"
   ]
  },
- "2014-bowman-sterling-football-cards": {
-  "missingPlayers": [
-   "asj",
-   "brees",
-   "brown",
-   "cs",
-   "csh",
-   "df",
-   "dix",
-   "foles",
-   "jg",
-   "kn",
-   "lt",
-   "mckinnon",
-   "ml",
-   "tb",
-   "tbo",
-   "white",
-   "wilson"
-  ],
-  "missingInserts": [
-   "dual relics",
-   "patch",
-   "pulsar",
-   "relics",
-   "wave"
-  ]
- },
  "2014-bowman-draft-baseball-cards": {
   "missingPlayers": [
    "box",
@@ -5749,6 +5721,25 @@
    "aspirations teal",
    "status die cut",
    "throwing"
+  ]
+ },
+ "2014-bowman-sterling-football-cards": {
+  "missingPlayers": [
+   "asj",
+   "cs",
+   "csh",
+   "df",
+   "dix",
+   "jg",
+   "kn",
+   "lt",
+   "ml",
+   "tb",
+   "tbo"
+  ],
+  "missingInserts": [
+   "dual relics",
+   "patch"
   ]
  },
  "2013-panini-absolute-football-cards": {
@@ -7863,14 +7854,6 @@
    "sticker"
   ]
  },
- "2018-panini-national-treasures-football-nfl-cards": {
-  "missingPlayers": [
-   "keenum"
-  ],
-  "missingInserts": [
-   "emerald"
-  ]
- },
  "2018-panini-contenders-football-nfl-cards": {
   "missingPlayers": [
    "callaway",
@@ -8025,14 +8008,6 @@
   ],
   "missingInserts": [
    "signings"
-  ]
- },
- "2013-topps-prime-football-cards": {
-  "missingPlayers": [
-   "jeffery"
-  ],
-  "missingInserts": [
-   "performance"
   ]
  },
  "2000-bowman-chrome-football": {
