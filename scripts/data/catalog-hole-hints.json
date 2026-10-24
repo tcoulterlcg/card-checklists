@@ -5226,30 +5226,6 @@
    "winter"
   ]
  },
- "2017-18-spx-hockey": {
-  "missingPlayers": [
-   "benn",
-   "burns",
-   "crawford",
-   "draisaitl",
-   "gaudreau",
-   "hull",
-   "mackinnon",
-   "marchand",
-   "marner",
-   "parayko",
-   "pastrnak",
-   "perry",
-   "quick",
-   "rookies",
-   "talbot",
-   "wheeler"
-  ],
-  "missingInserts": [
-   "double xl duos materials",
-   "extravagant materials"
-  ]
- },
  "2017-topps-wwe-nxt-checklist-added": {
   "missingPlayers": [
    "aries",
@@ -5542,21 +5518,6 @@
   "missingInserts": [
    "signature series retired players",
    "snapshots"
-  ]
- },
- "2016-topps-museum-collection-baseball": {
-  "missingPlayers": [
-   "carew",
-   "castellanos",
-   "gossage",
-   "harrison",
-   "smoltz",
-   "suzuki"
-  ],
-  "missingInserts": [
-   "canvas original",
-   "meaningful material prime relic",
-   "primary pieces quad relics"
   ]
  },
  "2017-18-donruss-optic-basketball-nba-cards": {
@@ -6913,6 +6874,13 @@
   ],
   "missingInserts": [
    "1965 tall boy"
+  ]
+ },
+ "2016-topps-museum-collection-baseball": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "canvas original",
+   "meaningful material prime relic"
   ]
  },
  "2018-topps-fire-baseball-mlb-cards": {
@@ -9324,6 +9292,12 @@
  "18-19-ud-upper-deck-the-cup-hockey": {
   "missingPlayers": [
    "petersson"
+  ],
+  "missingInserts": []
+ },
+ "2017-18-spx-hockey": {
+  "missingPlayers": [
+   "rookies"
   ],
   "missingInserts": []
  },
