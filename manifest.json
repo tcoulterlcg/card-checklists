@@ -72,15 +72,15 @@
   },
   "Misc Sports": {
    "file": "index/misc-sports.json",
-   "sets": 1064,
-   "cards": 104195
+   "sets": 1186,
+   "cards": 127748
   }
  },
- "sets": 21390,
- "cards": 2198869,
- "updated": "2026-10-24T04:30:07.903Z",
+ "sets": 21512,
+ "cards": 2222422,
+ "updated": "2026-10-24T05:02:35.068Z",
  "visible": {
   "file": "index/visible.json",
-  "sets": 3032
+  "sets": 3154
  }
 }
