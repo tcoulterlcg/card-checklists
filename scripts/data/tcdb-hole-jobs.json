@@ -1857,7 +1857,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2026-leaf-melange-multiple-sport",
@@ -1869,7 +1870,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2026-leaf-metal-halloween-multiple-sport",
@@ -1881,7 +1883,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2026-leaf-metal-independence-day-multiple-sport",
@@ -1893,7 +1896,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2026-leaf-metal-presidents-day-multiple-sport",
@@ -1905,7 +1909,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2026-leaf-metal-ring-kings-card",
@@ -1917,7 +1922,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2026-leaf-metal-st-patricks-day-multiple-sport",
@@ -1929,7 +1935,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2026-leaf-metal-women-of-sport-multiple-sport",
@@ -1941,7 +1948,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2026-leaf-national-redemptions-multiple-sport",
@@ -1953,7 +1961,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2026-leaf-seasons-in-the-sun-baseball-card",
@@ -1965,7 +1974,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2026-leaf-signature-series-sports-multiple-sport",
@@ -1977,7 +1987,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2026-leaf-sport-heroes-multiple-sport",
@@ -1989,7 +2000,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2026-leaf-ultimate-sports-multiple-sport",
@@ -2001,7 +2013,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2026-panini-decades-90s-pop-culture-multiple-sport",
@@ -2013,7 +2026,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2026-panini-intl-englandl-soccer-card",
@@ -2025,7 +2039,8 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2026-panini-intl-france-soccer-card",
@@ -4576,7 +4591,9 @@
    "missing inserts: astro, cubic, fractal, galactic, groove, impact, infinite",
    "5 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "review",
+  "note": "2018-19-panini-revolution-basketball-cards: 320 -> 2520 cards, 9 -> 40 sections, covers 83.4% of current",
+  "tcdbSid": 187915
  },
  {
   "slug": "2021-topps-npb-baseball",
@@ -4588,7 +4605,8 @@
   "why": [
    "base skips 25 numbers in #11-40 (e.g. 12, 13, 14, 15, 16)"
   ],
-  "status": "todo"
+  "status": "review",
+  "note": "pre-check: TCDB set 291350 base covers ~90% of ours (below threshold)"
  },
  {
   "slug": "2021-topps-heritage-minor-league-baseball",
@@ -4600,7 +4618,9 @@
   "why": [
    "base skips 25 numbers in #5-36 (e.g. 6, 7, 9, 12, 13)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2021-topps-heritage-minor-league-baseball: 250 -> 1858 cards, 33 -> 22 sections, covers 100.0% of current",
+  "at": "2026-10-24"
  },
  {
   "slug": "2020-donruss-football",
@@ -4612,7 +4632,9 @@
   "why": [
    "base skips 25 numbers in #1-250 (e.g. 83, 118, 133, 134, 135)"
   ],
-  "status": "todo"
+  "status": "review",
+  "note": "2020-donruss-football: 7634 -> 9765 cards, 156 -> 143 sections, covers 45.1% of current",
+  "tcdbSid": 235892
  },
  {
   "slug": "2017-18-ud-premier-hockey",
@@ -4625,7 +4647,9 @@
    "missing inserts: acetate patches, duals jersey relics, mega patch relics, trios jerseys",
    "34 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2017-18-ud-premier-hockey: 536 -> 1539 cards, 11 -> 60 sections, covers 100.0% of current",
+  "at": "2026-10-24"
  },
  {
   "slug": "2017-18-panini-status-basketball-nba-cards",
