@@ -4649,33 +4649,6 @@
    "1969 deckle edge"
   ]
  },
- "2017-18-o-pee-chee-hockey-cards": {
-  "missingPlayers": [
-   "bjork",
-   "borowiecki",
-   "bowey",
-   "box",
-   "butcher",
-   "chytil",
-   "cizikas",
-   "debrincat",
-   "debrusk",
-   "girad",
-   "hischier",
-   "hopkins",
-   "kuokkanen",
-   "macdermid",
-   "mete",
-   "necas",
-   "pelly",
-   "sang",
-   "walker"
-  ],
-  "missingInserts": [
-   "retro blank back",
-   "update"
-  ]
- },
  "2013-topps-ufc-finest-trading-cards": {
   "missingPlayers": [
    "anik",
@@ -5156,6 +5129,30 @@
   ],
   "missingInserts": [
    "franchise fabrics"
+  ]
+ },
+ "2017-18-o-pee-chee-hockey-cards": {
+  "missingPlayers": [
+   "bjork",
+   "bowey",
+   "box",
+   "butcher",
+   "chytil",
+   "debrincat",
+   "debrusk",
+   "girad",
+   "hischier",
+   "hopkins",
+   "kuokkanen",
+   "macdermid",
+   "mete",
+   "necas",
+   "pelly",
+   "sang",
+   "walker"
+  ],
+  "missingInserts": [
+   "update"
   ]
  },
  "2012-topps-ufc-bloodlines-trading-cards": {
