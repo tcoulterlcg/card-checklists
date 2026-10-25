@@ -635,7 +635,8 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
         cards: s.cards.filter(c => {
           if (term && !((c.p || '').toLowerCase().includes(term) || (c.t || '').toLowerCase().includes(term) || String(c.n || '').toLowerCase() === term || (s.title || '').toLowerCase().includes(term))) return false
           if (onlyMine && !isMine(c.p)) return false
-          if (setRcOnly && !(/\bRC\b/.test(c.x || '') || /rookie|young guns|future watch|rated rookie|\brc\b/i.test(s.title || ''))) return false
+          // rookie tributes, retrospectives and buybacks look like rookies but aren't
+          if (setRcOnly && (!(/\bRC\b/.test(c.x || '') || /rookie|young guns|future watch|rated rookie|\brc\b/i.test(s.title || '')) || /tribute|renewed|rookie year|retrospective|remembrance|buy ?backs?\b/i.test((s.title || '') + ' ' + (setData?.name || '')))) return false
           if (setRunFilter !== 'any') {
             const sn = cardSerial(c, s)
             if (setRunFilter === '1' && sn !== 1) return false

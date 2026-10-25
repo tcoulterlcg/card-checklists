@@ -5,7 +5,7 @@
 import { memo, useDeferredValue, useEffect, useId, useMemo, useRef, useState } from 'react'
 import { supa } from '../lib/supa'
 import { Select, useIsMobile } from './dropdown'
-import { TYPE, norm, parseQuery, parseQueryFor, matchPlayers, akaOf, rowMatches, typeLabel, TYPE_COLORS, serialLabel, MEM_LABEL, MEM_COLORS, memKind, memTypical } from '../lib/query'
+import { TYPE, norm, parseQuery, parseQueryFor, matchPlayers, akaOf, rowMatches, typeLabel, tagLabel, TAG_COLORS, TYPE_COLORS, serialLabel, MEM_LABEL, MEM_COLORS, memKind, memTypical } from '../lib/query'
 import { brandOf } from '../lib/brands'
 import { PAR, PAR_LABEL, parallelKinds } from '../lib/parallels'
 import { ACCENT, ACCENT_TEXT, BG, SURFACE, SURFACE_2, LINE, CHIP_LINE, TEXT, TEXT_2, LABEL, display, eyebrow, title, buttonText } from '../lib/theme'
@@ -109,7 +109,11 @@ export function MemBadge({ mem }) {
     {mem.note && <span style={{ color: '#8A93A8', fontSize: 12 }}>{mem.note}{mem.url ? <> <a href={mem.url} target="_blank" rel="noreferrer" style={{ color: ACCENT_TEXT }}>source</a></> : null}</span>}
   </span>
 }
-function TypeChip({ t }) { const l = typeLabel(t); return <Chip color={TYPE_COLORS[l] || '#9ca3af'}>{l}</Chip> }
+function TypeChip({ t }) {
+  const l = typeLabel(t), g = tagLabel(t)
+  const chip = <Chip color={TYPE_COLORS[l] || '#9ca3af'}>{l}</Chip>
+  return g ? <span style={{ display: 'inline-flex', gap: 4, flexWrap: 'wrap' }}>{chip}<Chip color={TAG_COLORS[g]}>{g}</Chip></span> : chip
+}
 function Serial({ s }) {
   if (s === 1) return <span style={{ background: ACCENT, color: '#fff', padding: '2px 8px', borderRadius: 999, fontSize: 12, fontWeight: 700 }}>1/1</span>
   if (s > 0) return <span style={{ fontVariantNumeric: 'tabular-nums', fontWeight: 600 }}>/{s}</span>
@@ -300,11 +304,12 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
 
   // Facet universe (counts over the player's full catalogue).
   const facets = useMemo(() => {
-    const f = { mem: {}, par: {}, sets: new Set(), au: 0, one: 0, rc: 0, patch: 0, base: 0, parallel: 0, insert: 0, relic: 0, plate: 0, brands: new Map(), teams: new Map(), labels: new Map(), years: new Map(), minY: 9999, maxY: 0, seasons: 0 }
+    const f = { mem: {}, par: {}, sets: new Set(), au: 0, one: 0, rc: 0, patch: 0, base: 0, parallel: 0, insert: 0, relic: 0, plate: 0, tribute: 0, buyback: 0, prospect: 0, brands: new Map(), teams: new Map(), labels: new Map(), years: new Map(), minY: 9999, maxY: 0, seasons: 0 }
     for (const r of rows) {
       f.sets.add(r.slug)
       if (r.type & TYPE.AU) f.au++; if (r.serial === 1) f.one++; if (r.type & TYPE.RC) f.rc++; if (r.type & TYPE.PATCH) f.patch++
       if (r.type & TYPE.BASE) f.base++; if (r.type & TYPE.PARALLEL) f.parallel++; if (r.type & TYPE.INSERT) f.insert++; if (r.type & TYPE.RELIC) f.relic++; if (r.type & TYPE.PLATE) f.plate++
+      if (r.type & TYPE.TRIBUTE) f.tribute++; if (r.type & TYPE.BUYBACK) f.buyback++; if (r.type & TYPE.PROSPECT) f.prospect++
       f.brands.set(r.brand, (f.brands.get(r.brand) || 0) + 1)
       if (r.mem) { const k = memKind(r.mem); f.mem[k] = (f.mem[k] || 0) + 1 }
       if (r.par) for (const k in PAR) if (r.par & PAR[k]) f.par[k] = (f.par[k] || 0) + 1
@@ -408,7 +413,7 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
     setTimeout(() => setCopied(''), 2000)
   }
   const exportCsv = () => {
-    const lines = ['Player,Season,Set,Card #,Section,Type,Material,Print run,Team', ...sorted.map(r => [player.name, seasonLabel(r.year, r.sport), r.set, r.n, r.section, typeLabel(r.type), r.mem ? MEM_LABEL[r.mem & 7] + (memTypical(r.mem) ? ' (typical)' : '') : '', serialLabel(r.serial), r.team].map(v => '"' + String(v || '').replace(/"/g, '""') + '"').join(','))]
+    const lines = ['Player,Season,Set,Card #,Section,Type,Material,Print run,Team', ...sorted.map(r => [player.name, seasonLabel(r.year, r.sport), r.set, r.n, r.section, typeLabel(r.type) + (tagLabel(r.type) ? ' · ' + tagLabel(r.type) : ''), r.mem ? MEM_LABEL[r.mem & 7] + (memTypical(r.mem) ? ' (typical)' : '') : '', serialLabel(r.serial), r.team].map(v => '"' + String(v || '').replace(/"/g, '""') + '"').join(','))]
     const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([lines.join('\n')], { type: 'text/csv' })); a.download = player.name.replace(/\s+/g, '-') + '-checklist.csv'; a.click()
   }
 
@@ -499,7 +504,7 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
           </div>
           <div>
             <p style={legend}>Card type <span style={{ color: '#8A93A8', fontWeight: 600, letterSpacing: 0, textTransform: 'none' }}>· tick to narrow</span></p>
-            {[['BASE', 'Base', facets.base], ['PARALLEL', 'Parallels', facets.parallel], ['INSERT', 'Inserts', facets.insert], ['AU', 'Autographs', facets.au], ['PATCH', 'Patches', facets.patch], ['RELIC', 'Relics', facets.relic], ['PLATE', 'Printing plates', facets.plate]].map(([k, l, n]) => (
+            {[['BASE', 'Base', facets.base], ['PARALLEL', 'Parallels', facets.parallel], ['INSERT', 'Inserts', facets.insert], ['AU', 'Autographs', facets.au], ['PATCH', 'Patches', facets.patch], ['RELIC', 'Relics', facets.relic], ['PLATE', 'Printing plates', facets.plate], ['TRIBUTE', 'Rookie tributes', facets.tribute], ['BUYBACK', 'Buybacks', facets.buyback], ['PROSPECT', 'Prospects', facets.prospect]].filter(([k, , n]) => n || !['TRIBUTE', 'BUYBACK', 'PROSPECT'].includes(k)).map(([k, l, n]) => (
               <label key={k} style={lbl}><input type="checkbox" checked={types.has(k)} onChange={() => toggleType(k)} style={cb} />{l}<span style={cnt}>{n.toLocaleString()}</span></label>
             ))}
             <label style={lbl}><input type="checkbox" checked={hidePlates} onChange={(e) => setHidePlates(e.target.checked)} style={cb} />Hide printing plates</label>

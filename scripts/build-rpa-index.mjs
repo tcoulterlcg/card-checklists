@@ -13,7 +13,8 @@ function classifyType(title) {
   const t = (title || '').toLowerCase()
   const auto = /\bauto|autograph|signature|signing|\bink\b|dual sig|triple sig/.test(t)
   const patch = /\bpatch|laundry tag|nameplate|logo ?man/.test(t)
-  const rookie = /\brookie|\brc\b|\brpa\b|first bowman|1st bowman|debut/.test(t)
+  // rookie tributes / retrospectives / buybacks are veterans' cards, not rookie cards
+  const rookie = /\brookie|\brc\b|\brpa\b|first bowman|1st bowman|debut/.test(t) && !/tribute|renewed|rookie year|retrospective|remembrance|buy ?backs?\b/.test(t)
   const relic = /relic|memorabilia|material|jersey|swatch|game.?used|game.?worn|threads|fabric|\bgu\b|button/.test(t)
   if (/\brpa\b/.test(t) || (rookie && patch && auto)) return 'RPA'
   if (patch && auto) return 'PA'

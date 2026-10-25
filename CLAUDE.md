@@ -33,5 +33,10 @@
   patches only — never shields, logos, tags, nameplates, numbers, commemorative patches (→ Unknown), and never pucks,
   net cord, glass, towels, tickets or printing plates. Manufactured lines go in `MFG_LINES` with a source URL. When in
   doubt, Unknown — not Game-used.
+- **Rookie status** (`scripts/build-player-index.mjs`, player pages): a rookie card only exists in the player's rookie
+  season (or the season right after, for real rookie cards of late call-ups). Rookie-looking cards outside it are tagged
+  instead: **Rookie Tribute** (veteran in a rookie design: Rookie Tribute, Young Guns Renewed, Retrospective Rookies,
+  Rookie Year photos), **Buyback** (always, never RC), **Prospect** (1st Bowman, draft / college / minor-league / junior,
+  unlicensed pre-debut cards). Mixed "Stars and Rookies" sections outside the rookie season get no tag. Trevor's rules.
 - **Colors:** small secondary text uses `#8A93A8` (passes WCAG AA on the dark background); avoid darker greys for text.
 - **Grails:** collectors define their own grails; the site does not mark sets as grails.
