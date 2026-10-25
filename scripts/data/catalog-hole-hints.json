@@ -5421,18 +5421,6 @@
   ],
   "missingInserts": []
  },
- "2018-19-panini-contenders-basketball-nba-cards": {
-  "missingPlayers": [
-   "alexander",
-   "wilkins",
-   "yonug"
-  ],
-  "missingInserts": [
-   "cracked ice",
-   "sparkle",
-   "sprakle"
-  ]
- },
  "2017-panini-national-treasures-football-nfl-cards": {
   "missingPlayers": [
    "bridgewater",
@@ -5825,18 +5813,6 @@
    "violet pixels"
   ]
  },
- "2013-14-sp-game-used-hockey-cards": {
-  "missingPlayers": [
-   "hagelin",
-   "keith",
-   "moulson",
-   "thornton"
-  ],
-  "missingInserts": [
-   "authentic fabrics",
-   "supreme patches"
-  ]
- },
  "2006-panini-world-cup-germany-cards": {
   "missingPlayers": [
    "cahill",
@@ -5945,6 +5921,17 @@
   ],
   "missingInserts": [
    "tiffany"
+  ]
+ },
+ "2018-19-panini-contenders-basketball-nba-cards": {
+  "missingPlayers": [
+   "alexander",
+   "wilkins",
+   "yonug"
+  ],
+  "missingInserts": [
+   "sparkle",
+   "sprakle"
   ]
  },
  "2018-19-panini-status-basketball-nba-cards": {
@@ -6060,17 +6047,6 @@
   ],
   "missingInserts": [
    "trophied talent die cut"
-  ]
- },
- "2014-15-upper-deck-mvp-hockey-cards": {
-  "missingPlayers": [
-   "mazanec",
-   "wingles",
-   "zuccarello"
-  ],
-  "missingInserts": [
-   "script",
-   "stars player month"
   ]
  },
  "2017-donruss-nascar-full": {
@@ -8904,6 +8880,12 @@
  "2014-upper-deck-hockey-cards-2": {
   "missingPlayers": [
    "hellebuyck"
+  ],
+  "missingInserts": []
+ },
+ "2014-15-upper-deck-mvp-hockey-cards": {
+  "missingPlayers": [
+   "wingles"
   ],
   "missingInserts": []
  },
