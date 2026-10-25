@@ -6753,6 +6753,15 @@
   ],
   "missingInserts": []
  },
+ "2017-donruss-football-cards": {
+  "missingPlayers": [
+   "ajgreen",
+   "schuster"
+  ],
+  "missingInserts": [
+   "dominator"
+  ]
+ },
  "2017-donruss-elite-football-cards": {
   "missingPlayers": [
    "belladonna",
@@ -6778,15 +6787,6 @@
   ],
   "missingInserts": [
    "patches"
-  ]
- },
- "2016-panini-prestige-football-cards": {
-  "missingPlayers": [
-   "davis",
-   "diecut"
-  ],
-  "missingInserts": [
-   "draft day signatures"
   ]
  },
  "2015-topps-valor-football-cards": {
@@ -7271,14 +7271,6 @@
   ],
   "missingInserts": [
    "superstar combos"
-  ]
- },
- "2000-bowman-chrome-football": {
-  "missingPlayers": [
-   "rhet"
-  ],
-  "missingInserts": [
-   "ground breakers"
   ]
  },
  "18-19-ud-upper-deck-ultimate-collection-hockey": {
@@ -7957,13 +7949,6 @@
   "missingPlayers": [
    "prizm",
    "run"
-  ],
-  "missingInserts": []
- },
- "2017-donruss-football-cards": {
-  "missingPlayers": [
-   "ajgreen",
-   "schuster"
   ],
   "missingInserts": []
  },
@@ -8655,6 +8640,12 @@
   ],
   "missingInserts": []
  },
+ "2016-panini-prestige-football-cards": {
+  "missingPlayers": [
+   "diecut"
+  ],
+  "missingInserts": []
+ },
  "2016-panini-prime-signatures-football": {
   "missingPlayers": [
    "woodsen"
@@ -8778,6 +8769,12 @@
  "2013-topps-museum-collection-football-cards": {
   "missingPlayers": [
    "cobb"
+  ],
+  "missingInserts": []
+ },
+ "2000-bowman-chrome-football": {
+  "missingPlayers": [
+   "rhet"
   ],
   "missingInserts": []
  },
