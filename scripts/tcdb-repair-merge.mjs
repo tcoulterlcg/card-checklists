@@ -96,6 +96,9 @@ for (const f of files) {
       // Same player in a section whose title differs only in wording: "2018 Donruss Signature Marks Set" vs
       // "Signature Marks", "Pen Pals Autographs" vs "Pen Pals", "Draft Class Autograph RPS" vs "Draft Class Autographs RPS".
       if (c && titles.some(t => coreSurnames(t).has(surname(c.p)))) { inside++; continue }
+      // Older imports glued the team onto the name ("Dansby Swanson Atlanta Braves"): accept any name word
+      // (3+ letters) that is a surname in the matching TCDB section.
+      if (c && titles.some(t => { const set = coreSurnames(t); return norm(c.p).split(' ').some(w => w.length > 2 && set.has(w)) })) { inside++; continue }
       if (process.env.MISSES && c) (missed[titles[0]] = missed[titles[0]] || []).push(c.n + ' ' + c.p)
     }
     if (process.env.MISSES) for (const [t, l] of Object.entries(missed)) console.log('   miss', t, l.length, '::', l.slice(0, 4).join(' | '))

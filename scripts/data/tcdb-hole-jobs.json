@@ -4939,9 +4939,10 @@
   "why": [
    "base skips 23 numbers in #1-56 (e.g. 3, 8, 9, 10, 11)"
   ],
-  "status": "review",
-  "note": "2022-topps-spotlight-70-ii-friedman-baseball: 250 -> 708 cards, 10 -> 19 sections, covers 94.9% of current",
-  "tcdbSid": 304130
+  "status": "done",
+  "note": "2022-topps-spotlight-70-ii-friedman-baseball: 250 -> 708 cards, 10 -> 19 sections, covers 96.2% of current",
+  "tcdbSid": 304130,
+  "at": "2026-10-25"
  },
  {
   "slug": "2016-topps-finest-baseball-cards",
@@ -5686,7 +5687,7 @@
    "base skips 17 numbers in #1-250 (e.g. 70, 71, 72, 73, 74)"
   ],
   "status": "review",
-  "note": "2021-donruss-football: 11193 -> 11035 cards, 193 -> 156 sections, covers 87.3% of current",
+  "note": "2021-donruss-football: 11193 -> 11035 cards, 193 -> 156 sections, covers 87.4% of current",
   "tcdbSid": 275324
  },
  {
@@ -7080,9 +7081,10 @@
   "why": [
    "base skips 11 numbers in #11-23 (e.g. 12, 13, 14, 15, 16)"
   ],
-  "status": "review",
-  "note": "2023-topps-npb-baseball: 250 -> 2029 cards, 22 -> 24 sections, covers 90.9% of current",
-  "tcdbSid": 366082
+  "status": "done",
+  "note": "2023-topps-npb-baseball: 250 -> 2029 cards, 22 -> 24 sections, covers 95.5% of current",
+  "tcdbSid": 366082,
+  "at": "2026-10-25"
  },
  {
   "slug": "2022-panini-three-and-two-baseball",
@@ -8340,7 +8342,7 @@
    "base skips 4 numbers in #1-184 (e.g. 47, 63, 140, 175)"
   ],
   "status": "review",
-  "note": "2016-panini-elite-extra-edition-baseball: 651 -> 6772 cards, 14 -> 124 sections, covers 93.2% of current",
+  "note": "2016-panini-elite-extra-edition-baseball: 651 -> 6772 cards, 14 -> 124 sections, covers 94.8% of current",
   "tcdbSid": 136903
  },
  {
