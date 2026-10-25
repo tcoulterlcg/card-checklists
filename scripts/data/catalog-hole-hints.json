@@ -5412,25 +5412,6 @@
    "franchise feats"
   ]
  },
- "1990-topps-traded-baseball-cards": {
-  "missingPlayers": [
-   "appier",
-   "candaele",
-   "cox",
-   "harrelson",
-   "hollins",
-   "mcnamara",
-   "merrill",
-   "morris",
-   "riddoch",
-   "schoendienst",
-   "scmidt",
-   "willis"
-  ],
-  "missingInserts": [
-   "tiffany"
-  ]
- },
  "2017-18-panini-mosaic-prizm-basketball-cards": {
   "missingPlayers": [
    "black",
@@ -7396,6 +7377,15 @@
    "jassim",
    "min",
    "sahlawi"
+  ],
+  "missingInserts": []
+ },
+ "1990-topps-traded-baseball-cards": {
+  "missingPlayers": [
+   "appier",
+   "checklist",
+   "scmidt",
+   "willis"
   ],
   "missingInserts": []
  },
