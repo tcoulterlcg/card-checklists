@@ -3344,9 +3344,10 @@
    "missing inserts: playoff beard, retro, retro blank back, shooting stars",
    "143 players sold on SCP not on checklist"
   ],
-  "status": "review",
-  "note": "2012-13-pee-chee-hockey-cards: 970 -> 4048 cards, 16 -> 21 sections, covers 88.5% of current",
-  "tcdbSid": 70294
+  "status": "done",
+  "note": "2012-13-pee-chee-hockey-cards: 970 -> 4048 cards, 16 -> 21 sections, covers 98.8% of current",
+  "tcdbSid": 70294,
+  "at": "2026-10-25"
  },
  {
   "slug": "2022-topps-allen-and-ginter-baseball",
@@ -5057,7 +5058,7 @@
    "base skips 22 numbers in #1-499 (e.g. 36, 38, 64, 71, 83)"
   ],
   "status": "review",
-  "note": "21-22-o-pee-chee-hockey: 8625 -> 10177 cards, 114 -> 39 sections, covers 92.5% of current",
+  "note": "21-22-o-pee-chee-hockey: 8625 -> 10177 cards, 114 -> 39 sections, covers 93.6% of current",
   "tcdbSid": 273715
  },
  {
@@ -5616,9 +5617,10 @@
    "missing inserts: retro, retro blank back, signatures, stickers",
    "11 players sold on SCP not on checklist"
   ],
-  "status": "review",
-  "note": "2013-14-o-pee-chee-hockey-cards: 821 -> 4071 cards, 12 -> 21 sections, covers 87.8% of current",
-  "tcdbSid": 79961
+  "status": "done",
+  "note": "2013-14-o-pee-chee-hockey-cards: 821 -> 4071 cards, 12 -> 21 sections, covers 100.0% of current",
+  "tcdbSid": 79961,
+  "at": "2026-10-25"
  },
  {
   "slug": "2017-topps-wwe-nxt-checklist-added",
@@ -8621,9 +8623,10 @@
    "missing inserts: retro",
    "10 players sold on SCP not on checklist"
   ],
-  "status": "review",
-  "note": "2014-15-o-pee-chee-hockey-cards: 946 -> 4051 cards, 14 -> 20 sections, covers 88.7% of current",
-  "tcdbSid": 94822
+  "status": "done",
+  "note": "2014-15-o-pee-chee-hockey-cards: 946 -> 4051 cards, 14 -> 20 sections, covers 99.3% of current",
+  "tcdbSid": 94822,
+  "at": "2026-10-25"
  },
  {
   "slug": "2016-topps-ufc-high-impact-cards",

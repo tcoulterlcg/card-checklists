@@ -4,9 +4,9 @@
 // splitFlagTail(name) -> { p, x } : the name without the tail, and the tail as the site's
 // flag string ("/99 AU MEM RC"). Only strips a tail that holds a real card flag
 // (AU, MEM, RC, a serial number, a print run or EXCH), so names ending in other capitals stay.
-const TOKEN = '(?:AUR?|URA?|MEM|RC|SN\\d*|PR\\d+|HN|EXCH|CUT|AS|ARP|SP|SSP|RS|VAR|UER|DP|TR|FS|LL|HL|CL)'
+const TOKEN = '(?:AUR?|URA?|MEM|MANU|RC|SN\\d*|PR\\d+|HN|EXCH|CUT|AS|ARP|SP|SSP|RS|VAR|UER|DP|TR|FS|LL|HL|CL)'
 const TAIL = new RegExp('\\s+(' + TOKEN + '(?:,\\s*' + TOKEN + ')*)\\s*$')
-const KEY = /^(?:AUR?|URA?|MEM|RC|SN\d*|PR\d+|EXCH)$/
+const KEY = /^(?:AUR?|URA?|MEM|MANU|RC|SN\d*|PR\d+|EXCH)$/
 
 export function splitFlagTail(name) {
   const s = String(name || '')
