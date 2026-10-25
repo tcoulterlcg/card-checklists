@@ -4933,32 +4933,6 @@
    "teal"
   ]
  },
- "2013-14-panini-intrigue-basketball-cards": {
-  "missingPlayers": [
-   "caboclo",
-   "capela",
-   "embiid",
-   "ennis",
-   "exum",
-   "hairston",
-   "hood",
-   "lavine",
-   "mcdermott",
-   "mcgary",
-   "napier",
-   "nurkic",
-   "payne",
-   "randle",
-   "smart",
-   "stauskas",
-   "vonleh",
-   "warren",
-   "wiggins"
-  ],
-  "missingInserts": [
-   "draft change"
-  ]
- },
  "2014-15-panini-nba-hoops-basketball-cards": {
   "missingPlayers": [
    "a",
@@ -5331,23 +5305,6 @@
   ],
   "missingInserts": [
    "stadium scenes"
-  ]
- },
- "2016-17-donruss-optic-basketball-cards": {
-  "missingPlayers": [
-   "aqua",
-   "black",
-   "blue",
-   "cabarrot",
-   "gold",
-   "holo",
-   "papgiannis",
-   "pink",
-   "red"
-  ],
-  "missingInserts": [
-   "aqua",
-   "vinyl"
   ]
  },
  "18-19-ud-upper-deck-clear-cut-hockey": {
@@ -6360,6 +6317,20 @@
    "flood"
   ]
  },
+ "2016-17-donruss-optic-basketball-cards": {
+  "missingPlayers": [
+   "aqua",
+   "black",
+   "blue",
+   "cabarrot",
+   "gold",
+   "holo",
+   "papgiannis",
+   "pink",
+   "red"
+  ],
+  "missingInserts": []
+ },
  "2015-bowman-football-cards": {
   "missingPlayers": [
    "joyner",
@@ -6462,19 +6433,6 @@
    "rodon",
    "scruggs",
    "tomas"
-  ],
-  "missingInserts": []
- },
- "2015-topps-chrome-baseball-cards": {
-  "missingPlayers": [
-   "clark",
-   "cole",
-   "iglesias",
-   "kang",
-   "lindgren",
-   "mitchell",
-   "plawecki",
-   "swihart"
   ],
   "missingInserts": []
  },
