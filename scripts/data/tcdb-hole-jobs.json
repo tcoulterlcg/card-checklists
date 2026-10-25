@@ -7828,8 +7828,9 @@
   "why": [
    "base skips 10 numbers in #1-300 (e.g. 10, 11, 33, 43, 62)"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "done",
+  "note": "2022-topps-pristine-baseball: 4511 -> 5488 cards, 46 -> 58 sections, covers 98.3% of current",
+  "at": "2026-10-25"
  },
  {
   "slug": "2013-14-panini-intrigue-basketball-cards",
@@ -7842,8 +7843,9 @@
    "missing inserts: draft change",
    "19 players sold on SCP not on checklist"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "done",
+  "note": "2013-14-panini-intrigue-basketball-cards: 1150 -> 3470 cards, 22 -> 55 sections, covers 100.0% of current",
+  "at": "2026-10-25"
  },
  {
   "slug": "2016-17-donruss-optic-basketball-cards",
@@ -7856,8 +7858,9 @@
    "missing inserts: aqua, vinyl",
    "9 players sold on SCP not on checklist"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "done",
+  "note": "2016-17-donruss-optic-basketball-cards: 596 -> 5743 cards, 13 -> 116 sections, covers 100.0% of current",
+  "at": "2026-10-25"
  },
  {
   "slug": "2015-topps-chrome-baseball-cards",
@@ -7870,8 +7873,9 @@
    "missing inserts: update sensations, update star stitches relics",
    "8 players sold on SCP not on checklist"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "done",
+  "note": "2015-topps-chrome-baseball-cards: 570 -> 4589 cards, 10 -> 75 sections, covers 100.0% of current",
+  "at": "2026-10-25"
  },
  {
   "slug": "2017-score-football-cards",
