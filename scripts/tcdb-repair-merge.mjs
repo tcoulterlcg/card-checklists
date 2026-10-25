@@ -42,6 +42,26 @@ const surname = (p) => {
 const keys = (set) => new Set((set.sections || []).flatMap(s => s.cards.map(c => String(c.n || '').trim().replace(/^#/, '').toLowerCase() + '|' + surname(c.p))))
 const count = (set) => (set.sections || []).reduce((a, s) => a + s.cards.length, 0)
 
+// Keep what TCDB doesn't have: set-level extras (box-break details …) and each section's pack odds,
+// matched to the new section with the same title (or the same title once wording is ignored).
+const SET_KEEP_OUT = new Set(['slug', 'name', 'year', 'sport', 'source', 'sections', 'incomplete', 'incompleteWhy', 'tcdbSid'])
+function carryOver(old, out, norm, core) {
+  for (const [k, v] of Object.entries(old)) if (!SET_KEEP_OUT.has(k) && out[k] === undefined) out[k] = v
+  const byTitle = new Map(), byCore = new Map()
+  for (const sec of old.sections || []) {
+    if (!sec.odds) continue
+    if (!byTitle.has(norm(sec.title))) byTitle.set(norm(sec.title), sec.odds)
+    const c = core(sec.title); if (c && !byCore.has(c)) byCore.set(c, sec.odds)
+  }
+  let n = 0
+  for (const sec of out.sections) {
+    if (sec.odds) continue
+    const o = byTitle.get(norm(sec.title)) || byCore.get(core(sec.title))
+    if (o) { sec.odds = o; n++ }
+  }
+  return n
+}
+
 let replaced = 0, review = 0
 for (const f of files) {
   for (const s of [].concat(load(f)).map(expand)) {
@@ -107,6 +127,7 @@ for (const f of files) {
     const line = `${s.slug}: ${nOld} -> ${nNew} cards, ${old.sections.length} -> ${sections.length} sections, covers ${(cover * 100).toFixed(1)}% of current`
     if (nNew >= nOld && cover >= 0.95) {
       const out = { slug: old.slug, name: old.name, year: old.year, sport: old.sport, source: 'tcdb.com', tcdbSid: s.sid, sections }
+      carryOver(old, out, norm, core)
       writeFileSync(path, JSON.stringify(out))
       if (job) Object.assign(job, { status: 'done', note: line, at: new Date().toISOString().slice(0, 10) })
       replaced++; console.log('replaced', line)
