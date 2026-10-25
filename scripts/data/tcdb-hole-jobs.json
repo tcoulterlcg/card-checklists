@@ -8707,8 +8707,9 @@
    "missing inserts: flight selections",
    "10 players sold on SCP not on checklist"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "done",
+  "note": "2012-13-select-basketball-cards: 741 -> 2262 cards, 14 -> 33 sections, covers 100.0% of current",
+  "at": "2026-10-25"
  },
  {
   "slug": "2015-upper-deck-team-canada-master-collection-hockey",
@@ -8734,8 +8735,9 @@
   "why": [
    "missing inserts: chip, relic"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "done",
+  "note": "2018-topps-fire-baseball-mlb-cards: 300 -> 3222 cards, 7 -> 45 sections, covers 100.0% of current",
+  "at": "2026-10-25"
  },
  {
   "slug": "2015-topps-tribute-baseball-cards",
@@ -8747,8 +8749,9 @@
   "why": [
    "missing inserts: diamond cuts relics, relics"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "done",
+  "note": "2015-topps-tribute-baseball-cards: 100 -> 3643 cards, 1 -> 68 sections, covers 100.0% of current",
+  "at": "2026-10-25"
  },
  {
   "slug": "2013-topps-finest-baseball-cards",
@@ -8773,8 +8776,9 @@
   "why": [
    "missing inserts: flood, prints"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "done",
+  "note": "2018-19-donruss-basketball-nba-cards: 1038 -> 6334 cards, 27 -> 122 sections, covers 99.8% of current",
+  "at": "2026-10-25"
  },
  {
   "slug": "2016-17-panini-mosaic-prizm-basketball",
