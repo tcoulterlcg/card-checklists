@@ -4502,41 +4502,6 @@
    "production error"
   ]
  },
- "2012-13-panini-preferred-basketball-cards": {
-  "missingPlayers": [
-   "abduljabba",
-   "brook",
-   "burk",
-   "griffi",
-   "harrel",
-   "harri",
-   "jam",
-   "jame",
-   "jenkin",
-   "john",
-   "johnsonod",
-   "johnsonodo",
-   "jone",
-   "kiddgilc",
-   "lewi",
-   "liggin",
-   "lillard",
-   "morri",
-   "nelso",
-   "parson",
-   "rive",
-   "ro",
-   "robert",
-   "ros",
-   "thoma",
-   "thompkin",
-   "valanciuna",
-   "waiter",
-   "wayn",
-   "william"
-  ],
-  "missingInserts": []
- },
  "2015-score-football-cards": {
   "missingPlayers": [
    "bears",
@@ -4614,6 +4579,40 @@
    "1969 decal",
    "1969 deckle edge"
   ]
+ },
+ "2012-13-panini-preferred-basketball-cards": {
+  "missingPlayers": [
+   "abduljabba",
+   "brook",
+   "burk",
+   "griffi",
+   "harrel",
+   "harri",
+   "jam",
+   "jame",
+   "jenkin",
+   "john",
+   "johnsonod",
+   "johnsonodo",
+   "jone",
+   "kiddgilc",
+   "lewi",
+   "liggin",
+   "morri",
+   "nelso",
+   "parson",
+   "rive",
+   "ro",
+   "robert",
+   "ros",
+   "thoma",
+   "thompkin",
+   "valanciuna",
+   "waiter",
+   "wayn",
+   "william"
+  ],
+  "missingInserts": []
  },
  "2013-topps-ufc-finest-trading-cards": {
   "missingPlayers": [
@@ -4841,34 +4840,6 @@
    "die cut",
    "fighter",
    "fighter relics"
-  ]
- },
- "2017-topps-transcendent-baseball-cards": {
-  "missingPlayers": [
-   "bautista",
-   "biggio",
-   "boggs",
-   "bush",
-   "canseco",
-   "cubs",
-   "doby",
-   "fisk",
-   "gibson",
-   "halladay",
-   "longoria",
-   "mazeroski",
-   "mcgwire",
-   "paige",
-   "rivera",
-   "rodriguez",
-   "sandberg",
-   "schilling",
-   "slaughter",
-   "smith",
-   "sox"
-  ],
-  "missingInserts": [
-   "moments sketch reproductions"
   ]
  },
  "2016-topps-archives-baseball-cards": {
@@ -6393,17 +6364,6 @@
    "dividends"
   ]
  },
- "2015-topps-gypsy-queen-baseball-cards": {
-  "missingPlayers": [
-   "almonte",
-   "bryant",
-   "correa",
-   "crawford"
-  ],
-  "missingInserts": [
-   "national"
-  ]
- },
  "2015-topps-tribute-baseball-cards": {
   "missingPlayers": [
    "eckersley",
@@ -6756,6 +6716,15 @@
   ],
   "missingInserts": [
    "framed"
+  ]
+ },
+ "2015-topps-gypsy-queen-baseball-cards": {
+  "missingPlayers": [
+   "bryant",
+   "correa"
+  ],
+  "missingInserts": [
+   "national"
   ]
  },
  "2014-topps-tribute-baseball-cards": {
