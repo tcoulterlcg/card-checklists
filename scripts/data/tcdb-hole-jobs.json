@@ -8108,8 +8108,9 @@
    "missing inserts: team quads materials",
    "16 players sold on SCP not on checklist"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "done",
+  "note": "2013-panini-absolute-football-cards: 1030 -> 6090 cards, 28 -> 79 sections, covers 99.8% of current",
+  "at": "2026-10-25"
  },
  {
   "slug": "2015-topps-ufc-champions-trading-cards",
@@ -8136,8 +8137,9 @@
    "missing inserts: autographed relic",
    "14 players sold on SCP not on checklist"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "review",
+  "note": "2013-bowman-sterling-football-cards: 302 -> 3160 cards, 5 -> 68 sections, covers 77.6% of current",
+  "tcdbSid": 86312
  },
  {
   "slug": "2023-topps-x-mlb-players-clubhouse-exclusive-baseball",
@@ -8201,8 +8203,9 @@
   "why": [
    "base skips 8 numbers in #1-100 (e.g. 38, 40, 41, 42, 43)"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "done",
+  "note": "2020-panini-gold-standard-football: 3829 -> 4820 cards, 102 -> 96 sections, covers 100.0% of current",
+  "at": "2026-10-25"
  },
  {
   "slug": "2020-panini-national-treasures-football",
