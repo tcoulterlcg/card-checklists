@@ -7331,8 +7331,9 @@
   "why": [
    "missing inserts: 1983 retro signatures, carolina, dominators"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "done",
+  "note": "2017-donruss-optic-baseball-cards: 493 -> 4378 cards, 23 -> 137 sections, covers 99.8% of current",
+  "at": "2026-10-25"
  },
  {
   "slug": "2016-panini-national-treasures-baseball",
@@ -7344,8 +7345,9 @@
   "why": [
    "missing inserts: 42 tribute materials, 62 99, legends memorabilia"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "done",
+  "note": "2016-panini-national-treasures-baseball: 1878 -> 5111 cards, 63 -> 171 sections, covers 97.0% of current",
+  "at": "2026-10-25"
  },
  {
   "slug": "2017-donruss-football-cards",
@@ -11450,7 +11452,8 @@
   "why": [
    "missing inserts: exquisite material"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2016-17-upper-deck-parkhurst-hockey",
@@ -11462,7 +11465,8 @@
   "why": [
    "missing inserts: previews"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2015-16-fleer-showcase-hockey-cards",
@@ -11474,7 +11478,8 @@
   "why": [
    "missing inserts: glow"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2015-sp-game-hockey-cards",
@@ -11486,7 +11491,8 @@
   "why": [
    "missing inserts: star skills fabrics"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2014-upper-deck-hockey-cards-2",
@@ -11498,7 +11504,8 @@
   "why": [
    "missing inserts: rinkside signings"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2013-14-panini-playbook-hockey-cards",
@@ -11510,7 +11517,8 @@
   "why": [
    "missing inserts: limited jerseys"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2011-12-panini-titanium-hockey-cards",
@@ -11522,7 +11530,8 @@
   "why": [
    "missing inserts: hat tricks memorabilia"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2011-12-sp-game-used-hockey-cards",
@@ -11534,7 +11543,8 @@
   "why": [
    "missing inserts: authentic fabrics"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "certified-nascar-full",
@@ -11546,7 +11556,8 @@
   "why": [
    "missing inserts: famed fabrics"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2018-panini-national-treasures-baseball-cards",
@@ -11558,7 +11569,8 @@
   "why": [
    "missing inserts: 25"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2018-topps-dynasty-baseball",
@@ -11570,7 +11582,8 @@
   "why": [
    "missing inserts: factory cup great medallions"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2018-topps-high-tek-baseball",
@@ -11582,7 +11595,8 @@
   "why": [
    "missing inserts: portraitek"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2017-panini-national-treasures-baseball",
@@ -11594,7 +11608,8 @@
   "why": [
    "missing inserts: six swatch signature"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2017-topps-opening-day-baseball-cards",
@@ -11606,7 +11621,8 @@
   "why": [
    "missing inserts: now road to pittsburgh pirates"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2016-donruss-optic-baseball-cards",
@@ -11618,7 +11634,8 @@
   "why": [
    "missing inserts: carolina"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2016-topps-pro-debut-baseball-cards",
@@ -11630,7 +11647,8 @@
   "why": [
    "missing inserts: production"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2015-panini-diamond-kings-baseball",
@@ -11642,7 +11660,8 @@
   "why": [
    "missing inserts: donruss time"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2015-panini-elite-baseball-cards",
@@ -11654,7 +11673,8 @@
   "why": [
    "missing inserts: career best materials"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2015-panini-immaculate-baseball-cards",
@@ -11666,7 +11686,8 @@
   "why": [
    "missing inserts: prime"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2015-topps-stadium-club-baseball",
@@ -11678,7 +11699,8 @@
   "why": [
    "missing inserts: legends die cuts"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2015-topps-museum-collection-baseball",
@@ -11690,7 +11712,8 @@
   "why": [
    "missing inserts: momentous material relics"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2014-panini-classics-baseball-cards",
@@ -11702,7 +11725,8 @@
   "why": [
    "missing inserts: combos materials jersey bat"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2013-panini-usa-baseball-champions-baseball-cards",
@@ -11714,7 +11738,8 @@
   "why": [
    "missing inserts: game gear jersey"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2013-topps-mini-baseball-cards",
@@ -11726,7 +11751,8 @@
   "why": [
    "missing inserts: relics"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "1994-bowman-baseball-cards",
@@ -11738,7 +11764,8 @@
   "why": [
    "missing inserts: preview"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "18-19-panini-noir-basketball",
