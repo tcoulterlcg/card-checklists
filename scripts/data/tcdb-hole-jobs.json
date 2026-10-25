@@ -7428,8 +7428,9 @@
   "why": [
    "missing inserts: 1996 97 retro, materials, winning combos"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "done",
+  "note": "2013-14-spx-hockey-cards: 384 -> 785 cards, 16 -> 25 sections, covers 98.2% of current",
+  "at": "2026-10-25"
  },
  {
   "slug": "2017-18-donruss-basketball-cards",
@@ -7441,8 +7442,9 @@
   "why": [
    "missing inserts: back to future relics, fast break, flood"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "done",
+  "note": "2017-18-donruss-basketball-cards: 1016 -> 5644 cards, 23 -> 95 sections, covers 96.7% of current",
+  "at": "2026-10-25"
  },
  {
   "slug": "2016-panini-select-football-cards",
@@ -7454,8 +7456,9 @@
   "why": [
    "missing inserts: material, signature swatch, swatch"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "done",
+  "note": "2016-panini-select-football-cards: 809 -> 5124 cards, 16 -> 73 sections, covers 99.9% of current",
+  "at": "2026-10-25"
  },
  {
   "slug": "2015-panini-national-treasures-football",
@@ -12106,7 +12109,8 @@
   "why": [
    "missing inserts: greats patch"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2014-sp-authentic-football-cards",
@@ -12118,7 +12122,8 @@
   "why": [
    "missing inserts: future watch"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2014-topps-triple-threads-football-cards",
@@ -12130,7 +12135,8 @@
   "why": [
    "missing inserts: relics trio"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2013-panini-certified-football-cards",
@@ -12142,7 +12148,8 @@
   "why": [
    "missing inserts: mirror signature"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2013-panini-totally-certified-football-cards",
@@ -12154,7 +12161,8 @@
   "why": [
    "missing inserts: future signature material"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2013-topps-triple-threads-football-cards",
@@ -12166,7 +12174,8 @@
   "why": [
    "missing inserts: relics trios"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2012-score-football-cards",
@@ -12178,7 +12187,8 @@
   "why": [
    "missing inserts: glossy"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "1983-topps-stickers-football",
@@ -12190,7 +12200,8 @@
   "why": [
    "missing inserts: insert"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "national-hockey-card-day-full",
@@ -12202,7 +12213,8 @@
   "why": [
    "missing inserts: canada"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2016-17-upper-deck-black-hockey-cards",
@@ -12214,7 +12226,8 @@
   "why": [
    "missing inserts: fresh gear booklets"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2015-16-upper-deck-ultimate-collection-hockey",
@@ -12226,7 +12239,8 @@
   "why": [
    "missing inserts: jersey relic patch"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2015-upper-deck-hockey-cards",
@@ -12238,7 +12252,8 @@
   "why": [
    "missing inserts: script"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2015-16-upper-deck-premier-hockey-cards",
@@ -12250,7 +12265,8 @@
   "why": [
    "missing inserts: 113 10"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2015-upper-deck-team-canada-juniors-hockey",
@@ -12262,7 +12278,8 @@
   "why": [
    "missing inserts: jersey"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2015-upper-deck-trilogy-hockey-cards",
@@ -12274,7 +12291,8 @@
   "why": [
    "missing inserts: signature pucks"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2014-15-upper-deck-artifacts-hockey-cards",
@@ -12286,7 +12304,8 @@
   "why": [
    "missing inserts: tundra tandems jerseys"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2011-12-panini-dominion-hockey-cards",
@@ -12298,7 +12317,8 @@
   "why": [
    "missing inserts: stickside signatures die cut"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2006-07-upper-deck-the-cup-hockey",
@@ -12310,7 +12330,8 @@
   "why": [
    "missing inserts: foundations cornerstone quad"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2005-06-upper-deck-the-cup-hockey",
@@ -12334,7 +12355,8 @@
   "why": [
    "missing inserts: xfactor memorabilia"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2011-12-panini-contenders-hockey",
@@ -12346,7 +12368,8 @@
   "why": [
    "9 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "1979-80-o-pee-chee-hockey",
@@ -12358,7 +12381,8 @@
   "why": [
    "9 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2023-sage-artistry-football",
@@ -12370,7 +12394,8 @@
   "why": [
    "base skips 3 numbers in #1-32 (e.g. 19, 23, 30)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2020-panini-zenith-football",
@@ -12382,7 +12407,8 @@
   "why": [
    "base skips 3 numbers in #1-49 (e.g. 20, 21, 41)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2021-panini-zenith-football",
@@ -12394,7 +12420,8 @@
   "why": [
    "base skips 3 numbers in #1-50 (e.g. 19, 20, 21)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2025-rittenhouse-twin-peaks-the-log-lady-chronicles-entertainment",
@@ -12406,7 +12433,8 @@
   "why": [
    "base skips 3 numbers in #1-60 (e.g. 31, 53, 54)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2021-topps-x-sports-illustrated-cards",
