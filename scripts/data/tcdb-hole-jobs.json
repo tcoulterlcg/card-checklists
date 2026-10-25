@@ -7960,8 +7960,9 @@
   "why": [
    "base skips 9 numbers in #1-100 (e.g. 4, 11, 19, 27, 28)"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "review",
+  "note": "2023-panini-three-and-two-baseball: 5423 -> 4734 cards, 268 -> 216 sections, covers 45.7% of current",
+  "tcdbSid": 360174
  },
  {
   "slug": "2021-panini-absolute-football",
@@ -7999,8 +8000,9 @@
   "why": [
    "base skips 9 numbers in #1-100 (e.g. 42, 43, 44, 49, 50)"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "review",
+  "note": "2020-panini-legacy-football: 6481 -> 6456 cards, 158 -> 116 sections, covers 100.0% of current",
+  "tcdbSid": 227249
  },
  {
   "slug": "2020-topps-wwe-nxt-wrestling",
@@ -8012,8 +8014,9 @@
   "why": [
    "base skips 9 numbers in #1-100 (e.g. 17, 25, 28, 32, 42)"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "done",
+  "note": "2020-topps-wwe-nxt-wrestling: 188 -> 1034 cards, 5 -> 29 sections, covers 99.5% of current",
+  "at": "2026-10-25"
  },
  {
   "slug": "2020-topps-wwe-womens-division-wrestling",
@@ -8025,8 +8028,9 @@
   "why": [
    "base skips 9 numbers in #1-100 (e.g. 17, 26, 38, 44, 48)"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "done",
+  "note": "2020-topps-wwe-womens-division-wrestling: 176 -> 2384 cards, 4 -> 59 sections, covers 98.9% of current",
+  "at": "2026-10-25"
  },
  {
   "slug": "2019-panini-xr-football",
