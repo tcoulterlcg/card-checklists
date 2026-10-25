@@ -37,6 +37,7 @@
   season (or the season right after, for real rookie cards of late call-ups). Rookie-looking cards outside it are tagged
   instead: **Rookie Tribute** (veteran in a rookie design: Rookie Tribute, Young Guns Renewed, Retrospective Rookies,
   Rookie Year photos), **Buyback** (always, never RC), **Prospect** (1st Bowman, draft / college / minor-league / junior,
-  unlicensed pre-debut cards). Mixed "Stars and Rookies" sections outside the rookie season get no tag. Trevor's rules.
+  unlicensed pre-debut cards). Mixed "Stars and Rookies" sections outside the rookie season get no tag. An earlier product's
+  rookie-season cards inserted unchanged into a later product ("2020-21 Ice Premieres" in 2021-22 Ice) stay RC. Trevor's rules.
 - **Colors:** small secondary text uses `#8A93A8` (passes WCAG AA on the dark background); avoid darker greys for text.
 - **Grails:** collectors define their own grails; the site does not mark sets as grails.
