@@ -7746,8 +7746,9 @@
   "why": [
    "missing inserts: as, double jerseys, dual jerseys"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "done",
+  "note": "2013-14-upper-deck-black-diamond-hockey-cards: 376 -> 1334 cards, 17 -> 14 sections, covers 100.0% of current",
+  "at": "2026-10-25"
  },
  {
   "slug": "2012-13-sp-authentic-hockey-cards",
@@ -7759,8 +7760,9 @@
   "why": [
    "missing inserts: 1994 95 retro, marks distinction, sign times"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "done",
+  "note": "2012-13-sp-authentic-hockey-cards: 515 -> 950 cards, 19 -> 36 sections, covers 98.9% of current",
+  "at": "2026-10-25"
  },
  {
   "slug": "2021-panini-classics-football",
@@ -7798,8 +7800,9 @@
   "why": [
    "base skips 10 numbers in #1-100 (e.g. 21, 39, 43, 44, 45)"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "review",
+  "note": "2019-panini-impeccable-football: 3150 -> 3054 cards, 124 -> 115 sections, covers 97.3% of current",
+  "tcdbSid": 211963
  },
  {
   "slug": "2023-topps-pristine-baseball",
@@ -7811,8 +7814,9 @@
   "why": [
    "base skips 10 numbers in #1-300 (e.g. 15, 23, 50, 87, 95)"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "review",
+  "note": "2023-topps-pristine-baseball: 6581 -> 6094 cards, 95 -> 79 sections, covers 42.0% of current",
+  "tcdbSid": 379617
  },
  {
   "slug": "2022-topps-pristine-baseball",
