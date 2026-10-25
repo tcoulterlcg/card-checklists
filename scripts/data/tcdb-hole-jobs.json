@@ -7663,8 +7663,9 @@
   "why": [
    "missing inserts: colossal jersey number signature, colossal pro bowl material, material signatures"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "done",
+  "note": "2014-panini-national-treasures-football: 2110 -> 9234 cards, 54 -> 165 sections, covers 98.8% of current",
+  "at": "2026-10-25"
  },
  {
   "slug": "2014-panini-prestige-football",
@@ -7689,8 +7690,9 @@
   "why": [
    "missing inserts: patch, relic, signings"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "done",
+  "note": "2014-topps-inception-football-cards: 150 -> 2557 cards, 2 -> 55 sections, covers 100.0% of current",
+  "at": "2026-10-25"
  },
  {
   "slug": "2014-topps-valor-football-cards",
@@ -7702,8 +7704,9 @@
   "why": [
    "missing inserts: patch relics, relics, shield honor patc"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "done",
+  "note": "2014-topps-valor-football-cards: 200 -> 3122 cards, 1 -> 42 sections, covers 100.0% of current",
+  "at": "2026-10-25"
  },
  {
   "slug": "2013-topps-strata-football-cards",
@@ -7715,8 +7718,9 @@
   "why": [
    "missing inserts: clear cut relic, die cut, relics"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "done",
+  "note": "2013-topps-strata-football-cards: 200 -> 3657 cards, 2 -> 54 sections, covers 100.0% of current",
+  "at": "2026-10-25"
  },
  {
   "slug": "2017-18-upper-deck-ice-hockey-nhl-cards",
@@ -7728,8 +7732,9 @@
   "why": [
    "missing inserts: exquisite collection, premieres jerseys, premieres patch"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "done",
+  "note": "2017-18-upper-deck-ice-hockey-nhl-cards: 363 -> 1036 cards, 7 -> 37 sections, covers 99.4% of current",
+  "at": "2026-10-25"
  },
  {
   "slug": "2013-14-upper-deck-black-diamond-hockey-cards",
