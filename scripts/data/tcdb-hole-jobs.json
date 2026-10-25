@@ -7608,8 +7608,9 @@
   "why": [
    "missing inserts: colossal material signatures, colossal materials, made patch"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "done",
+  "note": "2014-panini-national-treasures-baseball-cards: 1728 -> 4867 cards, 44 -> 128 sections, covers 97.4% of current",
+  "at": "2026-10-25"
  },
  {
   "slug": "13-14-panini-national-treasures-basketball",
@@ -7634,8 +7635,9 @@
   "why": [
    "missing inserts: roy die cut, statisical, substantial signatures material"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "done",
+  "note": "2012-13-panini-contenders-basketball-cards: 958 -> 1857 cards, 15 -> 17 sections, covers 99.6% of current",
+  "at": "2026-10-25"
  },
  {
   "slug": "2014-panini-crown-royale-football-cards",
@@ -7647,8 +7649,9 @@
   "why": [
    "missing inserts: knights round table materials, prime, pro material"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "review",
+  "note": "2014-panini-crown-royale-football-cards: 904 -> 7441 cards, 24 -> 114 sections, covers 88.8% of current",
+  "tcdbSid": 100531
  },
  {
   "slug": "2014-panini-national-treasures-football",
@@ -9942,7 +9945,8 @@
   "why": [
    "base skips 6 numbers in #1-100 (e.g. 46, 47, 48, 90, 91)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2019-panini-absolute-football",
@@ -9954,7 +9958,8 @@
   "why": [
    "base skips 6 numbers in #1-100 (e.g. 42, 43, 44, 88, 89)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2019-panini-immaculate-collection-football",
@@ -10018,7 +10023,8 @@
   "why": [
    "base skips 6 numbers in #1-171 (e.g. 30, 52, 80, 85, 100)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2024-leaf-trinity-baseball",
@@ -10056,7 +10062,8 @@
   "why": [
    "base skips 6 numbers in #1-250 (e.g. 81, 107, 120, 242, 243)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "1953-topps-baseball-cards",
@@ -10081,7 +10088,8 @@
   "why": [
    "base skips 6 numbers in #1-300 (e.g. 157, 158, 167, 168, 176)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2022-score-football",
@@ -10093,7 +10101,8 @@
   "why": [
    "base skips 6 numbers in #1-300 (e.g. 6, 7, 131, 132, 141)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2022-topps-stadium-club-baseball",
@@ -10295,7 +10304,8 @@
   "why": [
    "base skips 5 numbers in #1-100 (e.g. 23, 55, 56, 84, 93)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2021-panini-black-football",
@@ -10320,7 +10330,8 @@
   "why": [
    "base skips 5 numbers in #1-100 (e.g. 61, 63, 83, 89, 95)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2021-panini-national-treasures-baseball",
@@ -10332,7 +10343,8 @@
   "why": [
    "base skips 5 numbers in #1-100 (e.g. 9, 12, 13, 63, 69)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2022-panini-spectra-football",
@@ -10344,7 +10356,8 @@
   "why": [
    "base skips 5 numbers in #1-133 (e.g. 103, 107, 112, 127, 129)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2023-panini-mosaic-football",
@@ -10356,7 +10369,8 @@
   "why": [
    "base skips 5 numbers in #1-250 (e.g. 124, 125, 126, 134, 135)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2019-panini-black-football",
@@ -10433,7 +10447,8 @@
   "why": [
    "base skips 4 numbers in #1-100 (e.g. 38, 42, 44, 64)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2023-topps-museum-collection-baseball",
@@ -10445,7 +10460,8 @@
   "why": [
    "base skips 4 numbers in #1-100 (e.g. 8, 10, 59, 90)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2022-panini-absolute-baseball",
@@ -10457,7 +10473,8 @@
   "why": [
    "base skips 4 numbers in #1-100 (e.g. 3, 6, 92, 98)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2021-topps-all-star-rookie-cup-baseball",
@@ -10495,7 +10512,8 @@
   "why": [
    "base skips 4 numbers in #1-100 (e.g. 17, 34, 54, 83)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2021-panini-elite-extra-edition-baseball",
@@ -10507,7 +10525,8 @@
   "why": [
    "base skips 4 numbers in #1-170 (e.g. 2, 27, 117, 132)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2013-in-the-game-draft-prospects-hockey-cards",
@@ -10558,7 +10577,8 @@
   "why": [
    "11 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2014-spx-football-cards",
@@ -11012,7 +11032,8 @@
   "why": [
    "missing inserts: unity relics"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2014-donruss-baseball-cards",
@@ -12389,7 +12410,8 @@
   "why": [
    "missing inserts: emblems endorsements"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2017-18-panini-select-soccer-checklist-added",
@@ -12544,7 +12566,8 @@
   "why": [
    "base skips 3 numbers in #1-97 (e.g. 45, 46, 47)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2019-panini-national-treasures-baseball",
@@ -12556,7 +12579,8 @@
   "why": [
    "base skips 3 numbers in #75-173 (e.g. 98, 120, 163)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2023-panini-elite-extra-edition-baseball",
@@ -12568,7 +12592,8 @@
   "why": [
    "base skips 3 numbers in #1-100 (e.g. 76, 77, 92)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2020-panini-obsidian-football",
