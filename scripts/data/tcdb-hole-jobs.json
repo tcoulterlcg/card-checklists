@@ -7220,8 +7220,9 @@
   "why": [
    "missing inserts: authentic fabrics, fabrics, supreme patches"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "done",
+  "note": "2013-14-sp-game-used-hockey-cards: 327 -> 1867 cards, 5 -> 80 sections, covers 100.0% of current",
+  "at": "2026-10-25"
  },
  {
   "slug": "2015-donruss-baseball-cards",
@@ -7233,8 +7234,9 @@
   "why": [
    "missing inserts: cuba national team, grand stand, longball leaders"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "review",
+  "note": "2015-donruss-baseball-cards: 739 -> 3095 cards, 19 -> 66 sections, covers 94.4% of current",
+  "tcdbSid": 105426
  },
  {
   "slug": "2018-19-panini-contenders-basketball-nba-cards",
@@ -7246,8 +7248,9 @@
   "why": [
    "missing inserts: cracked ice, sparkle, sprakle"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "done",
+  "note": "2018-19-panini-contenders-basketball-nba-cards: 695 -> 3962 cards, 21 -> 80 sections, covers 99.1% of current",
+  "at": "2026-10-25"
  },
  {
   "slug": "2014-15-upper-deck-mvp-hockey-cards",
@@ -7259,8 +7262,9 @@
   "why": [
    "missing inserts: script, stars player month, stars player week"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "done",
+  "note": "2014-15-upper-deck-mvp-hockey-cards: 640 -> 2856 cards, 5 -> 18 sections, covers 98.8% of current",
+  "at": "2026-10-25"
  },
  {
   "slug": "2012-13-fleer-retro-hockey-cards",
@@ -10781,7 +10785,8 @@
   "why": [
    "missing inserts: new generation jersey"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2014-panini-contenders-football-cards",
@@ -10793,7 +10798,8 @@
   "why": [
    "missing inserts: hands apart"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2013-14-upper-deck-trilogy-hockey-cards",
@@ -10805,7 +10811,8 @@
   "why": [
    "missing inserts: universal distribution promo"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2016-panini-torque-nascar-full",
@@ -10817,7 +10824,8 @@
   "why": [
    "missing inserts: legendary"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "wwe-divas-revolution",
@@ -10829,7 +10837,8 @@
   "why": [
    "missing inserts: kiss"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2018-panini-diamond-kings-baseball-cards",
@@ -10841,7 +10850,8 @@
   "why": [
    "missing inserts: bat relic"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2018-topps-national-baseball-card-day-cards",
@@ -10853,7 +10863,8 @@
   "why": [
    "missing inserts: opening anthem"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2017-panini-chronicles-baseball-cards",
@@ -10865,7 +10876,8 @@
   "why": [
    "missing inserts: draft picks international ticket"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2017-topps-holiday-baseball-cards",
@@ -10877,7 +10889,8 @@
   "why": [
    "missing inserts: relic"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2016-bowman-draft-baseball-cards",
@@ -10889,7 +10902,8 @@
   "why": [
    "missing inserts: dividends"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2016-panini-flawless-baseball-cards",
@@ -10901,7 +10915,8 @@
   "why": [
    "missing inserts: friday"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2016-topps-holiday-baseball-cards",
@@ -10913,7 +10928,8 @@
   "why": [
    "missing inserts: relic"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2015-panini-usa-baseball-cards",
@@ -10925,7 +10941,8 @@
   "why": [
    "missing inserts: 18u national team jersey"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2015-topps-triple-threads-baseball",
@@ -10949,7 +10966,8 @@
   "why": [
    "missing inserts: bat kings"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2014-topps-opening-day-baseball-cards",
@@ -10961,7 +10979,8 @@
   "why": [
    "missing inserts: 3d"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2014-topps-tier-one-baseball-cards",
@@ -10973,7 +10992,8 @@
   "why": [
    "missing inserts: acclaimed"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2012-topps-finest-baseball",
@@ -10985,7 +11005,8 @@
   "why": [
    "missing inserts: faces franchise"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "18-19-panini-contenders-optic-basketball",
@@ -10997,7 +11018,8 @@
   "why": [
    "missing inserts: veteran season ticket"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2017-18-panini-encased-basketball-nba-cards",
@@ -11009,7 +11031,8 @@
   "why": [
    "missing inserts: patch"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2017-18-panini-court-kings-basketball-cards",
@@ -11021,7 +11044,8 @@
   "why": [
    "missing inserts: essentials"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2017-18-panini-nba-hoops-basketball",
@@ -11033,7 +11057,8 @@
   "why": [
    "missing inserts: teal explosion"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2016-17-panini-absolute-basketball",
@@ -11045,7 +11070,8 @@
   "why": [
    "missing inserts: team tandems relics"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2016-17-panini-aficionado-basketball",
@@ -11057,7 +11083,8 @@
   "why": [
    "missing inserts: artists"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2016-17-panini-gold-standard-basketball",
@@ -11069,7 +11096,8 @@
   "why": [
    "missing inserts: good as material"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2016-17-panini-immaculate-collection-basketball-cards",
@@ -11081,7 +11109,8 @@
   "why": [
    "missing inserts: collegiate combos materials"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2016-17-panini-spectra-basketball-cards",
