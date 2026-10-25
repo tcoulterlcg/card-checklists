@@ -4994,30 +4994,6 @@
    "1964 bazooka inserts"
   ]
  },
- "2017-score-football-cards": {
-  "missingPlayers": [
-   "aikman",
-   "colts",
-   "cowboys",
-   "eagles",
-   "elliot",
-   "falcons",
-   "hayward",
-   "packers",
-   "panthers",
-   "patriots",
-   "saints",
-   "schuster",
-   "steelers",
-   "team",
-   "warfield",
-   "warner",
-   "willaims"
-  ],
-  "missingInserts": [
-   "franchise fabrics"
-  ]
- },
  "2017-18-o-pee-chee-hockey-cards": {
   "missingPlayers": [
    "bjork",
@@ -5459,36 +5435,6 @@
    "franchise feats"
   ]
  },
- "2017-topps-bunt-baseball-cards": {
-  "missingPlayers": [
-   "brett",
-   "gossage",
-   "niekro",
-   "robinson",
-   "smith",
-   "teheran",
-   "wieters"
-  ],
-  "missingInserts": [
-   "infinite",
-   "programs"
-  ]
- },
- "2015-topps-heritage-minor-league-baseball": {
-  "missingPlayers": [
-   "buxton",
-   "floyd",
-   "garciaparra",
-   "horn",
-   "jones",
-   "smoltz",
-   "vizquel"
-  ],
-  "missingInserts": [
-   "clubhouse collection relic",
-   "looming legacy"
-  ]
- },
  "1990-topps-traded-baseball-cards": {
   "missingPlayers": [
    "appier",
@@ -5712,6 +5658,18 @@
   "missingInserts": [
    "camo",
    "mosaic"
+  ]
+ },
+ "2017-score-football-cards": {
+  "missingPlayers": [
+   "elliot",
+   "schuster",
+   "team",
+   "willaims"
+  ],
+  "missingInserts": [
+   "drive team trios",
+   "franchise fabrics"
   ]
  },
  "2013-bowman-sterling-football-cards": {
@@ -7463,6 +7421,12 @@
    "sahlawi"
   ],
   "missingInserts": []
+ },
+ "2015-topps-heritage-minor-league-baseball": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "clubhouse collection relic"
+  ]
  },
  "2018-19-panini-contenders-draft-picks-basketball": {
   "missingPlayers": [
