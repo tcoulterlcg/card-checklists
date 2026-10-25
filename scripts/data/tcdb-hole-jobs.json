@@ -8579,8 +8579,9 @@
   "why": [
    "base skips 7 numbers in #1-105 (e.g. 26, 33, 42, 47, 65)"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "done",
+  "note": "2024-leaf-electrum-baseball: 161 -> 4146 cards, 6 -> 97 sections, covers 100.0% of current",
+  "at": "2026-10-25"
  },
  {
   "slug": "2020-panini-spectra-football",
@@ -8605,8 +8606,9 @@
   "why": [
    "base skips 7 numbers in #1-150 (e.g. 43, 60, 67, 81, 96)"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "review",
+  "note": "2023-topps-gilded-collection-baseball: 2440 -> 2079 cards, 65 -> 26 sections, covers 45.3% of current",
+  "tcdbSid": 386283
  },
  {
   "slug": "2014-15-o-pee-chee-hockey-cards",
@@ -8619,8 +8621,9 @@
    "missing inserts: retro",
    "10 players sold on SCP not on checklist"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "review",
+  "note": "2014-15-o-pee-chee-hockey-cards: 946 -> 4051 cards, 14 -> 20 sections, covers 88.7% of current",
+  "tcdbSid": 94822
  },
  {
   "slug": "2016-topps-ufc-high-impact-cards",
@@ -8645,8 +8648,9 @@
   "why": [
    "missing inserts: fresh paint, performance art jersey"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "done",
+  "note": "2014-15-panini-court-kings-basketball-cards: 1087 -> 2331 cards, 34 -> 58 sections, covers 99.7% of current",
+  "at": "2026-10-25"
  },
  {
   "slug": "2013-topps-magic-football-cards",
@@ -8658,8 +8662,9 @@
   "why": [
    "missing inserts: aerial attack, enchantment"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "done",
+  "note": "2013-topps-magic-football-cards: 498 -> 2971 cards, 4 -> 20 sections, covers 100.0% of current",
+  "at": "2026-10-25"
  },
  {
   "slug": "2015-topps-finest-football-cards",
@@ -8684,8 +8689,9 @@
   "why": [
    "missing inserts: die cut, relic"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "done",
+  "note": "2013-bowman-football-cards: 221 -> 7245 cards, 3 -> 57 sections, covers 100.0% of current",
+  "at": "2026-10-25"
  },
  {
   "slug": "2012-13-select-basketball-cards",
