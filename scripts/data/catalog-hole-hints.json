@@ -5516,17 +5516,6 @@
    "franchise feats"
   ]
  },
- "2018-donruss-optic-baseball-cards": {
-  "missingPlayers": [
-   "shilling",
-   "soto"
-  ],
-  "missingInserts": [
-   "aqua",
-   "carolina",
-   "chronicles rated"
-  ]
- },
  "2017-topps-bunt-baseball-cards": {
   "missingPlayers": [
    "brett",
@@ -6058,16 +6047,6 @@
   "missingInserts": [
    "7x champ",
    "jj"
-  ]
- },
- "2017-donruss-optic-baseball-cards": {
-  "missingPlayers": [
-   "crawford",
-   "ramirez"
-  ],
-  "missingInserts": [
-   "1983 retro signatures",
-   "carolina"
   ]
  },
  "2017-topps-national-baseball-card-day-checklist-added": {
@@ -6629,16 +6608,6 @@
    "jonathan toews"
   ]
  },
- "2012-13-fleer-retro-hockey-cards": {
-  "missingPlayers": [
-   "box",
-   "hopkins",
-   "markov"
-  ],
-  "missingInserts": [
-   "1996 97 skybox autographics"
-  ]
- },
  "2018-topps-wwe-heritage": {
   "missingPlayers": [
    "exch",
@@ -6647,6 +6616,15 @@
   ],
   "missingInserts": [
    "defeats triple h an unsanctioned street fight"
+  ]
+ },
+ "2018-donruss-optic-baseball-cards": {
+  "missingPlayers": [
+   "shilling",
+   "soto"
+  ],
+  "missingInserts": [
+   "chronicles rated"
   ]
  },
  "2018-topps-big-league-baseball-cards": {
@@ -6674,15 +6652,6 @@
   ],
   "missingInserts": [
    "wave"
-  ]
- },
- "2017-bowman-draft-baseball-cards": {
-  "missingPlayers": [
-   "moniak",
-   "senzel"
-  ],
-  "missingInserts": [
-   "defining moments"
   ]
  },
  "2017-topps-gold-label-baseball-cards": {
@@ -8075,6 +8044,13 @@
   ],
   "missingInserts": []
  },
+ "2012-13-fleer-retro-hockey-cards": {
+  "missingPlayers": [
+   "box",
+   "hopkins"
+  ],
+  "missingInserts": []
+ },
  "2005-06-upper-deck-ultimate-collection-hockey": {
   "missingPlayers": [
    "hockey",
@@ -8208,6 +8184,12 @@
  "2017-panini-chronicles-baseball-cards": {
   "missingPlayers": [
    "maitan"
+  ],
+  "missingInserts": []
+ },
+ "2017-donruss-optic-baseball-cards": {
+  "missingPlayers": [
+   "ramirez"
   ],
   "missingInserts": []
  },
