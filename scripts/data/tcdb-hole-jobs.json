@@ -7537,8 +7537,9 @@
   "why": [
    "missing inserts: coat arms materials, lords materials, silhouette materials"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "review",
+  "note": "2013-14-panini-crown-royale-hockey-cards: 948 -> 2970 cards, 28 -> 55 sections, covers 91.9% of current",
+  "tcdbSid": 89399
  },
  {
   "slug": "2012-13-upper-deck-artifacts-hockey",
@@ -7550,8 +7551,9 @@
   "why": [
    "missing inserts: dual jersey, treasured swatches, tundra tandems jerseys"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "review",
+  "note": "2012-13-upper-deck-artifacts-hockey: 1833 -> 3113 cards, 20 -> 34 sections, covers 81.7% of current",
+  "tcdbSid": 72425
  },
  {
   "slug": "2018-panini-elite-extra-edition-baseball",
@@ -7563,7 +7565,8 @@
   "why": [
    "missing inserts: dual materials, usa 18u national team signatures, usa college tickets signatures"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2016-panini-diamond-kings-baseball",
@@ -7575,8 +7578,9 @@
   "why": [
    "missing inserts: 10, dual relic 18 25, limited lithos signature material"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "review",
+  "note": "2016-panini-diamond-kings-baseball: 1053 -> 5168 cards, 26 -> 115 sections, covers 89.1% of current",
+  "tcdbSid": 123489
  },
  {
   "slug": "2016-panini-pantheon-baseball-cards",
@@ -7588,8 +7592,9 @@
   "why": [
    "missing inserts: class rank dual relics, great entertainers signature materials, honored privileged relic"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "done",
+  "note": "2016-panini-pantheon-baseball-cards: 864 -> 3156 cards, 34 -> 130 sections, covers 98.2% of current",
+  "at": "2026-10-25"
  },
  {
   "slug": "2014-panini-national-treasures-baseball-cards",
@@ -7757,7 +7762,8 @@
   "why": [
    "base skips 10 numbers in #1-97 (e.g. 60, 61, 62, 75, 76)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2021-panini-illusions-football",
@@ -7769,7 +7775,8 @@
   "why": [
    "base skips 10 numbers in #1-100 (e.g. 16, 17, 28, 29, 31)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2019-panini-impeccable-football",
@@ -7945,7 +7952,8 @@
   "why": [
    "base skips 9 numbers in #1-100 (e.g. 3, 4, 5, 17, 19)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2020-panini-certified-football",
@@ -7957,7 +7965,8 @@
   "why": [
    "base skips 9 numbers in #1-100 (e.g. 41, 42, 43, 58, 59)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2020-panini-legacy-football",
@@ -8008,7 +8017,8 @@
   "why": [
    "base skips 9 numbers in #1-100 (e.g. 6, 14, 29, 30, 46)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2015-topps-tribute-special-edition",
@@ -8033,7 +8043,8 @@
   "why": [
    "base skips 9 numbers in #1-150 (e.g. 59, 60, 61, 62, 63)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2024-topps-heritage-high-number-baseball",
@@ -8139,7 +8150,8 @@
   "why": [
    "base skips 8 numbers in #1-100 (e.g. 6, 33, 34, 35, 63)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2020-donruss-elite-football",
@@ -8177,7 +8189,8 @@
   "why": [
    "base skips 8 numbers in #1-100 (e.g. 42, 52, 53, 54, 55)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2019-donruss-optic-football",
@@ -8254,7 +8267,8 @@
   "why": [
    "base skips 8 numbers in #1-300 (e.g. 9, 24, 45, 194, 202)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2022-topps-series-1-baseball",
@@ -8266,7 +8280,8 @@
   "why": [
    "base skips 8 numbers in #1-330 (e.g. 14, 21, 65, 71, 77)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "1990-topps-traded-baseball-cards",
@@ -8371,7 +8386,8 @@
   "why": [
    "base skips 7 numbers in #1-100 (e.g. 42, 43, 44, 84, 85)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2021-panini-obsidian-football",
@@ -8409,7 +8425,8 @@
   "why": [
    "base skips 7 numbers in #1-100 (e.g. 29, 30, 31, 32, 74)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2020-panini-illusions-football",
@@ -8421,7 +8438,8 @@
   "why": [
    "base skips 7 numbers in #1-100 (e.g. 7, 16, 32, 40, 69)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2020-panini-limited-football",
@@ -8446,7 +8464,8 @@
   "why": [
    "base skips 7 numbers in #1-100 (e.g. 4, 5, 6, 14, 15)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2019-panini-certified-football",
@@ -8536,7 +8555,8 @@
   "why": [
    "base skips 7 numbers in #1-135 (e.g. 98, 99, 100, 114, 115)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2023-topps-gilded-collection-baseball",
@@ -8915,7 +8935,8 @@
   "why": [
    "missing inserts: air marshals, head greatest time"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2013-panini-prizm-football-cards",
@@ -9711,7 +9732,8 @@
   "why": [
    "base skips 6 numbers in #1-75 (e.g. 3, 14, 15, 20, 62)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2020-panini-origins-football",
@@ -9749,7 +9771,8 @@
   "why": [
    "base skips 6 numbers in #4-97 (e.g. 52, 53, 54, 55, 56)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2019-panini-encased-football",
@@ -9787,7 +9810,8 @@
   "why": [
    "base skips 6 numbers in #1-100 (e.g. 30, 31, 32, 48, 49)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2021-panini-certified-football",
@@ -9799,7 +9823,8 @@
   "why": [
    "base skips 6 numbers in #1-100 (e.g. 48, 49, 50, 92, 93)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2021-panini-origins-football",
@@ -9824,7 +9849,8 @@
   "why": [
    "base skips 6 numbers in #1-100 (e.g. 47, 48, 49, 70, 71)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2020-donruss-optic-football",
@@ -9836,7 +9862,8 @@
   "why": [
    "base skips 6 numbers in #1-100 (e.g. 54, 55, 56, 57, 58)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2020-panini-absolute-football",
@@ -9848,7 +9875,8 @@
   "why": [
    "base skips 6 numbers in #1-100 (e.g. 16, 17, 18, 59, 60)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2020-panini-encased-football",
@@ -9899,7 +9927,8 @@
   "why": [
    "base skips 6 numbers in #1-100 (e.g. 16, 17, 18, 95, 96)"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2020-panini-rookies-and-stars-football",
