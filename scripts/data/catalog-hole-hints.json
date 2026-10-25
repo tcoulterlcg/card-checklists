@@ -5229,20 +5229,6 @@
    "spiral"
   ]
  },
- "2015-panini-playbook-football-cards": {
-  "missingPlayers": [
-   "aikman",
-   "bell",
-   "irvin",
-   "stafford",
-   "stills"
-  ],
-  "missingInserts": [
-   "split 6 signature booklets",
-   "tag",
-   "triple threats materials"
-  ]
- },
  "2014-15-o-pee-chee-hockey-cards": {
   "missingPlayers": [
    "dano",
@@ -7344,14 +7330,6 @@
    "winning combos"
   ]
  },
- "2013-14-panini-crown-royale-hockey-cards": {
-  "missingPlayers": [
-   "kieth"
-  ],
-  "missingInserts": [
-   "silhouette materials"
-  ]
- },
  "2011-12-panini-rookie-anthology-hockey": {
   "missingPlayers": [
    "nolan"
@@ -7527,6 +7505,12 @@
    "sahlawi"
   ],
   "missingInserts": []
+ },
+ "2015-panini-playbook-football-cards": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "triple threats materials"
+  ]
  },
  "2018-19-panini-contenders-draft-picks-basketball": {
   "missingPlayers": [
@@ -8848,6 +8832,12 @@
  "2014-15-upper-deck-trilogy-hockey-cards": {
   "missingPlayers": [
    "niemo"
+  ],
+  "missingInserts": []
+ },
+ "2013-14-panini-crown-royale-hockey-cards": {
+  "missingPlayers": [
+   "kieth"
   ],
   "missingInserts": []
  },
