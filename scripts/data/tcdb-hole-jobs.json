@@ -7359,8 +7359,9 @@
   "why": [
    "missing inserts: 1981 tribute, production line touchdowns, production line yardage"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "done",
+  "note": "2017-donruss-football-cards: 1589 -> 8355 cards, 45 -> 111 sections, covers 99.9% of current",
+  "at": "2026-10-25"
  },
  {
   "slug": "2017-panini-prestige-football-cards",
@@ -7372,8 +7373,9 @@
   "why": [
    "missing inserts: extra points, shirt off my back relic, xtra points"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "done",
+  "note": "2017-panini-prestige-football-cards: 1119 -> 6306 cards, 28 -> 87 sections, covers 100.0% of current",
+  "at": "2026-10-25"
  },
  {
   "slug": "2016-panini-prestige-football-cards",
@@ -7385,8 +7387,9 @@
   "why": [
    "missing inserts: american, cracked ice, draft day signatures"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "done",
+  "note": "2016-panini-prestige-football-cards: 1190 -> 4739 cards, 28 -> 64 sections, covers 100.0% of current",
+  "at": "2026-10-25"
  },
  {
   "slug": "2013-elite-football-cards",
@@ -7411,8 +7414,9 @@
   "why": [
    "missing inserts: by selection, ground breakers, shattering performers"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "done",
+  "note": "2000-bowman-chrome-football: 270 -> 660 cards, 1 -> 12 sections, covers 100.0% of current",
+  "at": "2026-10-25"
  },
  {
   "slug": "2013-14-spx-hockey-cards",
@@ -11777,7 +11781,8 @@
   "why": [
    "missing inserts: patch tag"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "18-19-panini-spectra-basketball",
@@ -11789,7 +11794,8 @@
   "why": [
    "missing inserts: next era relic"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2017-18-panini-absolute-basketball-nba-cards",
@@ -11801,7 +11807,8 @@
   "why": [
    "missing inserts: memorabilia materials"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2016-17-panini-noir-basketball-cards",
@@ -11813,7 +11820,8 @@
   "why": [
    "missing inserts: material"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2016-17-panini-select-basketball-cards",
@@ -11825,7 +11833,8 @@
   "why": [
    "missing inserts: tie dye"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2015-16-panini-national-treasures-basketball",
@@ -11837,7 +11846,8 @@
   "why": [
    "missing inserts: laundry tags"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2014-15-panini-prestige-basketball-cards",
@@ -11849,7 +11859,8 @@
   "why": [
    "missing inserts: prestigious premieres signature"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2014-15-spx-basketball-cards",
@@ -11861,7 +11872,8 @@
   "why": [
    "missing inserts: finite legends"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2013-14-panini-court-kings-basketball-cards",
@@ -11873,7 +11885,8 @@
   "why": [
    "missing inserts: gallery stars jersey"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2013-14-panini-select-basketball-cards",
@@ -11885,7 +11898,8 @@
   "why": [
    "missing inserts: jersey"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2012-13-panini-innovation-basketball-cards",
@@ -11897,7 +11911,8 @@
   "why": [
    "missing inserts: jersey"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2012-13-panini-limited-basketball-cards",
@@ -11909,7 +11924,8 @@
   "why": [
    "missing inserts: performers materials"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "1986-87-fleer-basketball",
@@ -11921,7 +11937,8 @@
   "why": [
    "missing inserts: sticker"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2018-panini-playoff-football",
@@ -11933,7 +11950,8 @@
   "why": [
    "missing inserts: air command strike from above"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2017-panini-contenders-optic-football-nfl-cards",
@@ -11945,7 +11963,8 @@
   "why": [
    "missing inserts: emerald"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2017-panini-crown-royale-football-nfl-cards",
@@ -11957,7 +11976,8 @@
   "why": [
    "missing inserts: silhouette jersey"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2016-panini-clear-vision-football-cards",
@@ -11969,7 +11989,8 @@
   "why": [
    "missing inserts: prime"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2016-panini-crown-royale-football-cards",
@@ -11981,7 +12002,8 @@
   "why": [
    "missing inserts: silhouette jersey"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2016-panini-limited-football-cards",
@@ -11993,7 +12015,8 @@
   "why": [
    "missing inserts: phenom jersey"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2016-score-football-cards",
@@ -12005,7 +12028,8 @@
   "why": [
    "missing inserts: veteran helmets"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2015-panini-black-gold-football-cards",
@@ -12017,7 +12041,8 @@
   "why": [
    "missing inserts: dual symbols"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2015-panini-spectra-football-cards",
@@ -12029,7 +12054,8 @@
   "why": [
    "missing inserts: radiant patch signature"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2015-topps-football-complete-set",
@@ -12041,7 +12067,8 @@
   "why": [
    "missing inserts: single relics"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2015-topps-diamond-football-cards",
@@ -12053,7 +12080,8 @@
   "why": [
    "missing inserts: patch"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2014-panini-certified-football-cards",
@@ -12065,7 +12093,8 @@
   "why": [
    "missing inserts: johnny"
   ],
-  "status": "todo"
+  "status": "claimed-r",
+  "note": "claimed by TCDB repair session 014LvBG3"
  },
  {
   "slug": "2014-panini-flawless-football-cards-2",
