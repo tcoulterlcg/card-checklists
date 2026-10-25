@@ -8243,8 +8243,9 @@
   "why": [
    "base skips 8 numbers in #1-100 (e.g. 40, 41, 42, 43, 87)"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "review",
+  "note": "2019-panini-majestic-football: 2843 -> 2679 cards, 111 -> 103 sections, covers 99.5% of current",
+  "tcdbSid": 206592
  },
  {
   "slug": "2019-panini-rookies-and-stars-football",
@@ -8269,8 +8270,9 @@
   "why": [
    "base skips 8 numbers in #1-140 (e.g. 46, 47, 48, 49, 50)"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "review",
+  "note": "2019-panini-gold-standard-football: 3089 -> 3001 cards, 89 -> 80 sections, covers 99.1% of current",
+  "tcdbSid": 205014
  },
  {
   "slug": "2025-leaf-vivid-baseball",
@@ -8322,8 +8324,9 @@
    "missing inserts: tiffany",
    "12 players sold on SCP not on checklist"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "done",
+  "note": "1990-topps-traded-baseball-cards: 132 -> 660 cards, 2 -> 3 sections, covers 97.7% of current",
+  "at": "2026-10-25"
  },
  {
   "slug": "2016-panini-elite-extra-edition-baseball",
@@ -8336,8 +8339,9 @@
    "missing inserts: usa contenders season ticket",
    "base skips 4 numbers in #1-184 (e.g. 47, 63, 140, 175)"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "review",
+  "note": "2016-panini-elite-extra-edition-baseball: 651 -> 6772 cards, 14 -> 124 sections, covers 93.2% of current",
+  "tcdbSid": 136903
  },
  {
   "slug": "1999-topps-pokemon-the-first-movie",
