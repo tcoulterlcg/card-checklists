@@ -5494,26 +5494,6 @@
    "star skills relic blends"
   ]
  },
- "2012-13-upper-deck-black-diamond-hockey-cards": {
-  "missingPlayers": [
-   "bowman",
-   "cizikas",
-   "eakin",
-   "fowler",
-   "girardi",
-   "grossman",
-   "kassian",
-   "lapierre",
-   "mikkelson",
-   "moore",
-   "neuvirth",
-   "stapleton",
-   "wandell"
-  ],
-  "missingInserts": [
-   "gemography"
-  ]
- },
  "2014-topps-ufc-champions-trading-cards": {
   "missingPlayers": [
    "franklin",
@@ -5758,19 +5738,6 @@
    "snapshots"
   ]
  },
- "2017-donruss-optic-football-nfl-cards": {
-  "missingPlayers": [
-   "bavaro",
-   "holmes",
-   "newsome",
-   "schuster",
-   "sproles"
-  ],
-  "missingInserts": [
-   "phenom jersey",
-   "res"
-  ]
- },
  "2015-upper-deck-team-canada-master-collection-hockey": {
   "missingPlayers": [
    "bergeron",
@@ -5786,19 +5753,6 @@
   ],
   "missingInserts": [
    "winning standard"
-  ]
- },
- "2013-14-panini-dominion-hockey-cards": {
-  "missingPlayers": [
-   "heatley",
-   "kostka",
-   "murray",
-   "rookie",
-   "zadorov"
-  ],
-  "missingInserts": [
-   "mammoth jersey",
-   "patches"
   ]
  },
  "2019-panini-chronicles-baseball": {
@@ -6319,6 +6273,15 @@
   ],
   "missingInserts": [
    "honors update"
+  ]
+ },
+ "2017-donruss-optic-football-nfl-cards": {
+  "missingPlayers": [
+   "schuster"
+  ],
+  "missingInserts": [
+   "phenom jersey",
+   "res"
   ]
  },
  "2018-19-sp-hockey-cards": {
@@ -6975,6 +6938,15 @@
    "profiles materials jersey"
   ]
  },
+ "2013-14-panini-dominion-hockey-cards": {
+  "missingPlayers": [
+   "rookie",
+   "zadorov"
+  ],
+  "missingInserts": [
+   "mammoth jersey"
+  ]
+ },
  "2013-14-spx-hockey-cards": {
   "missingPlayers": [
    "gartner",
@@ -7304,17 +7276,6 @@
    "turquoise"
   ]
  },
- "2017-panini-playoff-football-nfl-cards": {
-  "missingPlayers": [
-   "bellbrown",
-   "landryajayitannehill",
-   "martinwinstonevans",
-   "rawls",
-   "sue",
-   "winstonevans"
-  ],
-  "missingInserts": []
- },
  "2016-panini-playbook-football-cards": {
   "missingPlayers": [
    "elliot"
@@ -7625,6 +7586,16 @@
    "cubic",
    "galactic",
    "set"
+  ],
+  "missingInserts": []
+ },
+ "2017-panini-playoff-football-nfl-cards": {
+  "missingPlayers": [
+   "bellbrown",
+   "landryajayitannehill",
+   "martinwinstonevans",
+   "sue",
+   "winstonevans"
   ],
   "missingInserts": []
  },
