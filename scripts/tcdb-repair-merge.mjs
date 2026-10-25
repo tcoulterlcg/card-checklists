@@ -65,7 +65,7 @@ for (const f of files) {
     const nameWords = new Set(norm(old.name).split(' '))
     const WORDING = /^(set|auto|autos|autograph|autographs|autographed|signature|signatures|signed|relic|relics|jersey|jerseys|memorabilia|card|cards|insert|inserts)$/
     const core = (t) => {
-      const w = norm(t).split(' ').filter(Boolean)
+      const w = norm(t).replace(/ s\b/g, 's').split(' ').filter(Boolean)   // "pacific s" (from Pacific's) -> "pacifics"
       while (w.length > 1 && (nameWords.has(w[0]) || /^\d{2,4}$/.test(w[0]))) w.shift()
       return w.filter(x => !WORDING.test(x)).map(x => x.length > 3 ? x.replace(/s$/, '') : x).join(' ')
     }

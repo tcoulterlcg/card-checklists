@@ -7035,9 +7035,10 @@
    "missing inserts: split 6 signature booklets, tag, triple threats materials",
    "5 players sold on SCP not on checklist"
   ],
-  "status": "review",
-  "note": "2015-panini-playbook-football-cards: 402 -> 2327 cards, 18 -> 85 sections, covers 92.3% of current",
-  "tcdbSid": 115276
+  "status": "done",
+  "note": "2015-panini-playbook-football-cards: 402 -> 2327 cards, 18 -> 85 sections, covers 100.0% of current",
+  "tcdbSid": 115276,
+  "at": "2026-10-25"
  },
  {
   "slug": "2013-14-panini-dominion-hockey-cards",
@@ -7537,9 +7538,10 @@
   "why": [
    "missing inserts: coat arms materials, lords materials, silhouette materials"
   ],
-  "status": "review",
-  "note": "2013-14-panini-crown-royale-hockey-cards: 948 -> 2970 cards, 28 -> 55 sections, covers 91.9% of current",
-  "tcdbSid": 89399
+  "status": "done",
+  "note": "2013-14-panini-crown-royale-hockey-cards: 948 -> 2970 cards, 28 -> 55 sections, covers 99.9% of current",
+  "tcdbSid": 89399,
+  "at": "2026-10-25"
  },
  {
   "slug": "2012-13-upper-deck-artifacts-hockey",
