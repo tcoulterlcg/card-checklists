@@ -62,8 +62,8 @@
   },
   "Multi-Sport": {
    "file": "index/multi-sport.json",
-   "sets": 2068,
-   "cards": 773567
+   "sets": 2069,
+   "cards": 800935
   },
   "Cricket": {
    "file": "index/cricket.json",
@@ -76,11 +76,11 @@
    "cards": 298210
   }
  },
- "sets": 24013,
- "cards": 3161789,
- "updated": "2026-10-25T20:41:01.042Z",
+ "sets": 24014,
+ "cards": 3189157,
+ "updated": "2026-10-25T21:13:28.974Z",
  "visible": {
   "file": "index/visible.json",
-  "sets": 5733
+  "sets": 5734
  }
 }
