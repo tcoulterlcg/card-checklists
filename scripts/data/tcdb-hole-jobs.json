@@ -8368,8 +8368,9 @@
   "why": [
    "base skips 7 numbers in #1-97 (e.g. 52, 53, 54, 55, 56)"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "review",
+  "note": "2021-panini-impeccable-football: 3324 -> 3314 cards, 165 -> 155 sections, covers 96.7% of current",
+  "tcdbSid": 287515
  },
  {
   "slug": "2021-panini-encased-football",
@@ -8537,8 +8538,9 @@
   "why": [
    "base skips 7 numbers in #1-100 (e.g. 47, 48, 49, 50, 90)"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "review",
+  "note": "2019-panini-limited-football: 3926 -> 3849 cards, 108 -> 78 sections, covers 99.4% of current",
+  "tcdbSid": 217476
  },
  {
   "slug": "2019-panini-origins-football",
@@ -8550,8 +8552,9 @@
   "why": [
    "base skips 7 numbers in #1-100 (e.g. 46, 47, 48, 49, 50)"
   ],
-  "status": "claimed-r",
-  "note": "claimed by TCDB repair session 014LvBG3"
+  "status": "review",
+  "note": "2019-panini-origins-football: 3723 -> 3397 cards, 95 -> 87 sections, covers 100.0% of current",
+  "tcdbSid": 207013
  },
  {
   "slug": "2019-panini-plates-and-patches-football",
