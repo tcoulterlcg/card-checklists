@@ -20,7 +20,7 @@ const renames = new Map()
 const SKIP = /^(index|search-index|rpa-index|patch-swaps|redirects)\.json$/
 const SPORTS = new Set(['Baseball', 'Football', 'Basketball', 'Hockey', 'Soccer', 'UFC', 'Boxing', 'Wrestling', 'Racing', 'Golf', 'Tennis', 'Lacrosse', 'Bowling', 'Cricket', 'Multi-Sport'])
 
-const JUNK = /adsbygoogle|window\.|\.push\(\{|^(toploaders?.*|sleeves|piece wall display)$|\beBay\b|\b\d{1,2}:\d\d\s?[AP]M by \S|^[A-Z][A-Z ]+ PARALLELS?:/i   // eBay listing titles, TCDB "recent uploads" lines and parallel headings scraped as cards
+const JUNK = /adsbygoogle|window\.|\.push\(\{|^(toploaders?.*|sleeves|piece wall display)$|\beBay\b|\b\d{1,2}:\d\d\s?[AP]M by \S|^[A-Z][A-Z ]+ PARALLELS?:|Check out the Overnight Auctions|^Autographs \| Breaks \|/i   // eBay listing titles, TCDB "recent uploads" lines and parallel headings scraped as cards
 const TEAM_TAG = /^(one of ones|all rookies|top rookies|retired players|no team|rookies|veterans|legends)$/i
 const key = (s) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9 ]+/g, '').replace(/\s+/g, ' ').trim()
 
