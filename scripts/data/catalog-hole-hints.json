@@ -3122,33 +3122,6 @@
    "state hometown"
   ]
  },
- "2007-08-fleer": {
-  "missingPlayers": [
-   "afflald",
-   "cooper",
-   "frazier",
-   "kerr",
-   "mihm",
-   "richards",
-   "russell",
-   "scott",
-   "used"
-  ],
-  "missingInserts": [
-   "1961 62 retro",
-   "1987 retro",
-   "hot prospects autographics",
-   "hot prospects class",
-   "hot prospects materials",
-   "hot prospects notable newcomers",
-   "hot prospects stat tracker",
-   "hot prospects supreme court",
-   "jordan box",
-   "jordan box award winners",
-   "jordan box playoff highlights",
-   "jordan box season achievements"
-  ]
- },
  "2018-topps-ufc-museum-collection-cards": {
   "missingPlayers": [
    "aguilar",
@@ -3644,6 +3617,21 @@
    "superstar sensations"
   ]
  },
+ "2004-05-upper-deck-exquisite-collection": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "access pass",
+   "dual jersey",
+   "dual logo autographed patch",
+   "dual scripted swatch",
+   "extra jersey",
+   "extra jersey dual",
+   "foursomes patch",
+   "patch quad",
+   "patch triple",
+   "signature shots patch"
+  ]
+ },
  "1990-score-football-cards": {
   "missingPlayers": [
    "baab",
@@ -4065,6 +4053,23 @@
    "1970 super box loaders",
    "combo",
    "high number"
+  ]
+ },
+ "2004-05-upper-deck-ultimate-collection": {
+  "missingPlayers": [
+   "b",
+   "jaso",
+   "st"
+  ],
+  "missingInserts": [
+   "achievements signature",
+   "autographed buyback",
+   "game jersey",
+   "game patch",
+   "jersey",
+   "premium patch",
+   "signature logo",
+   "signature patch"
   ]
  },
  "2013-14-fleer-showcase-hockey-cards": {
@@ -4681,6 +4686,25 @@
   ],
   "missingInserts": []
  },
+ "2007-08-fleer": {
+  "missingPlayers": [
+   "afflald",
+   "cooper",
+   "frazier",
+   "kerr",
+   "mihm",
+   "richards",
+   "russell",
+   "scott",
+   "used"
+  ],
+  "missingInserts": [
+   "hot prospects notable newcomers",
+   "hot prospects stat tracker",
+   "hot prospects supreme court",
+   "jordan box"
+  ]
+ },
  "1999-00-upper-deck-legends": {
   "missingPlayers": [
    "abduljabb",
@@ -4825,19 +4849,6 @@
   ],
   "missingInserts": [
    "nickname signature"
-  ]
- },
- "2007-08-sp-rookie-edition": {
-  "missingPlayers": [
-   "mcguire",
-   "rondo"
-  ],
-  "missingInserts": [
-   "limited jersey",
-   "threads",
-   "threads dual",
-   "threads scripted time",
-   "threads triple"
   ]
  },
  "2014-topps-finest-football-cards": {
@@ -5459,15 +5470,6 @@
    "wins united states championship"
   ]
  },
- "2007-08-bowman": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "elevation",
-   "elevation relics",
-   "elevation remnants relics",
-   "elevation writings"
-  ]
- },
  "2015-topps-opening-day-baseball": {
   "missingPlayers": [
    "angels",
@@ -5856,14 +5858,6 @@
   ],
   "missingInserts": [
    "update"
-  ]
- },
- "2007-08-topps-luxury-box": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "mazzanine relics",
-   "mezzanine relic",
-   "relic"
   ]
  },
  "2019-panini-chronicles-baseball": {
@@ -6317,6 +6311,16 @@
    "summit 2014"
   ]
  },
+ "2007-08-sp-rookie-edition": {
+  "missingPlayers": [
+   "mcguire",
+   "rondo"
+  ],
+  "missingInserts": [
+   "threads dual",
+   "threads scripted time"
+  ]
+ },
  "2003-04-upper-deck-triple-dimensions": {
   "missingPlayers": [
    "amethyst",
@@ -6420,6 +6424,15 @@
   ],
   "missingInserts": [
    "back"
+  ]
+ },
+ "2004-05-upper-deck-all-star-lineup": {
+  "missingPlayers": [
+   "manning"
+  ],
+  "missingInserts": [
+   "promo",
+   "promos e"
   ]
  },
  "1992-93-hoops": {
@@ -6543,18 +6556,11 @@
    "1965 tall boy"
   ]
  },
- "2003-04-fleer-mystique": {
+ "2004-05-fleer-showcase": {
   "missingPlayers": [],
   "missingInserts": [
-   "awe pairs dual jersey",
-   "rare finds jersey triple"
-  ]
- },
- "2003-04-fleer-platinum": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "game worn jersey",
-   "name patch"
+   "number",
+   "playmakers jersey"
   ]
  },
  "2015-bowman-draft-baseball-cards": {
@@ -7601,6 +7607,22 @@
    "lay up jersey"
   ]
  },
+ "2004-05-ultra": {
+  "missingPlayers": [
+   "hn"
+  ],
+  "missingInserts": [
+   "season crowns jersey"
+  ]
+ },
+ "2004-upper-deck-naxcom-lebron-james": {
+  "missingPlayers": [
+   "promo"
+  ],
+  "missingInserts": [
+   "promo"
+  ]
+ },
  "2004-05-upper-deck-r-class": {
   "missingPlayers": [
    "szxzerbiak"
@@ -7617,12 +7639,12 @@
    "game worn jersey"
   ]
  },
- "2002-03-fleer-tradition": {
+ "2003-04-upper-deck-rookie-exclusives": {
   "missingPlayers": [
-   "of"
+   "robison"
   ],
   "missingInserts": [
-   "star"
+   "jersey"
   ]
  },
  "2002-03-sp-game-used": {
@@ -7740,6 +7762,14 @@
  "1989-90-fleer": {
   "missingPlayers": [
    "set"
+  ],
+  "missingInserts": [
+   "sticker"
+  ]
+ },
+ "1988-89-fleer": {
+  "missingPlayers": [
+   "aquirre"
   ],
   "missingInserts": [
    "sticker"
@@ -8145,28 +8175,58 @@
   ],
   "missingInserts": []
  },
- "2007-08-spx": {
+ "2005-06-sp-game-used": {
   "missingPlayers": [],
   "missingInserts": [
-   "freshman orientation relics"
+   "extra significance"
   ]
  },
- "2006-07-upper-deck-hardcourt": {
+ "2004-05-topps-chrome": {
   "missingPlayers": [],
   "missingInserts": [
-   "futures"
+   "slice success jersey"
   ]
  },
- "2002-03-stadium-club": {
+ "2004-05-topps-pristine": {
   "missingPlayers": [],
   "missingInserts": [
-   "reprint relics"
+   "sign jersey"
   ]
  },
- "2002-03-upper-deck-finite": {
+ "2003-04-sp-signature-edition": {
   "missingPlayers": [],
   "missingInserts": [
-   "elements dual uniforms warm up"
+   "inkredible inkscriptions"
+  ]
+ },
+ "2003-04-topps-pristine": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "jersey"
+  ]
+ },
+ "2003-04-upper-deck-ultimate-collection": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "dual game jersey"
+  ]
+ },
+ "2003-04-upper-deck-hardcourt": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "game floor"
+  ]
+ },
+ "2003-upper-deck-lebron-james": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "hardcourt floor"
+  ]
+ },
+ "2002-03-topps-chrome": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "certified"
   ]
  },
  "1990-topps-traded-baseball-cards": {
@@ -9421,6 +9481,12 @@
   ],
   "missingInserts": []
  },
+ "2004-05-upper-deck-sweet-shot": {
+  "missingPlayers": [
+   "rush"
+  ],
+  "missingInserts": []
+ },
  "2003-04-bazooka": {
   "missingPlayers": [
    "number"
@@ -9442,6 +9508,30 @@
  "2003-04-spx": {
   "missingPlayers": [
    "stevenson"
+  ],
+  "missingInserts": []
+ },
+ "2003-04-topps-contemporary-collection": {
+  "missingPlayers": [
+   "pavlovac"
+  ],
+  "missingInserts": []
+ },
+ "2003-04-upper-deck-legends": {
+  "missingPlayers": [
+   "signatures"
+  ],
+  "missingInserts": []
+ },
+ "2003-04-upper-deck-sweet-shot": {
+  "missingPlayers": [
+   "ryan"
+  ],
+  "missingInserts": []
+ },
+ "2002-03-fleer-tradition": {
+  "missingPlayers": [
+   "of"
   ],
   "missingInserts": []
  },
