@@ -1,5 +1,17 @@
 [
  {
+  "slug": "2021-topps-holiday-mega-box-baseball",
+  "name": "2021 Topps Holiday Mega Box Baseball",
+  "year": 2021,
+  "sport": "Baseball",
+  "cards": 0,
+  "source": "breakninja.com",
+  "why": [
+   "source page was a copy of 2021 Topps Heritage High Number — needs the real Holiday Mega Box checklist"
+  ],
+  "status": "todo"
+ },
+ {
   "slug": "1955-topps-baseball-cards",
   "name": "1955 Topps Baseball",
   "year": 1955,
