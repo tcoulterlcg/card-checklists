@@ -995,7 +995,8 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
         if (t) openSet(t, false); else { goHome(false); setNotice('That set isn’t in the database (the link may be old). Browse or search below.') }
       })
     }
-    else if (sr) runGlobalSearch(sr, false)
+    else if (sr && sr.trim().length >= 3) runGlobalSearch(sr, false)
+    else if (sr) { goHome(false); setNotice('Type at least 3 letters to search.') }   // not an endless 'Loading…'
     else if (v && ['myplayers', 'community', 'collection', 'feedback'].includes(v)) openView(v, false, v === 'collection' && sp.get('cset') ? '&cset=' + encodeURIComponent(sp.get('cset')) : '')
     else {
       goHome(false)

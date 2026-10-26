@@ -248,20 +248,31 @@ for (const [f, s] of sets) {
       if (c.t) {
         const flag = (f) => { const x = (c.x || '').split(/\s+/).filter(Boolean); for (const t of f.split(/\s+/)) if (t && !x.includes(t)) x.push(t); c.x = x.join(' ') }
         let t = c.t.trim()
-        if (/^(VAR|UER)\1:?/.test(t)) { flag(t.slice(0, 3)); t = '' }   // TCDB variation / error note, not a team
-        else if (/^(?:(?:URA?|AUR?|MEM|RC|SP|SSP|SN\d+)(?:,\s*|$))+$/.test(t)) {   // flags, not a team
+        const vm = t.match(/^((?:(?:SP|SSP|RC|AU|MEM|SN\d+),\s*)*)(VAR|UER)\2:?/)
+        if (vm) {   // TCDB variation / error note, not a team ("VARVAR: Batting", "SP, VARVAR: Action Image")
+          for (const g of vm[1].split(/,\s*/).filter(Boolean)) flag(/^SN(\d+)$/.test(g) ? '/' + g.slice(2) : g)
+          flag(vm[2]); t = ''
+        }
+        else if (/^(?:(?:URA?|AUR?|MEM|RC|SP|SSP|SN\d+|CUT|COIN|FBC|MAS|EXCH|ASR)(?:,\s*|$))+$/.test(t)) {   // flags, not a team ("AU, CUT, SN1")
           for (const f of t.split(/,\s*/)) flag(/^SN(\d+)$/.test(f) ? '/' + f.slice(2) : f === 'URA' || f === 'AUR' ? 'AU' : f)
           t = ''
         }
         const run = t.match(/\s+#?\/\s*([\d,]+)$/)
         if (run) { flag('/' + run[1].replace(/,/g, '')); t = t.slice(0, run.index) }
-        t = t.replace(/\s+(FOIL|Auto|XRC|C \d+:\d+)$/i, '').replace(/\s*\*+$/, '').trim()
+        t = t.replace(/\s+\(?(FOIL|Auto|XRC|C \d+:\d+)\)?$/i, '').replace(/\s*\*+$/, '').trim()
+        if (/\s1st$/.test(t) && !/^\d/.test(t)) { flag('1st'); t = t.slice(0, -4).trim() }   // Bowman "1st" glued onto the school ("Alabama 1st")
         if (/\)$/.test(t) && !t.includes('(')) t = t.slice(0, -1).trim()
         if (t !== c.t) { if (t) c.t = t; else delete c.t; stats.team++; changed = true }
       }
       // team field: Break Ninja tags merged in ("Anaheim Ducks / All Rookies / One Of Ones"), repeated teams
       if (c.t && c.t.includes('/')) {
-        const segs = c.t.split(/\s+\/\s+/).map(x => x.trim()).filter(x => x && !TEAM_TAG.test(x))
+        const segs = c.t.split(/\s+\/\s+/).map(x => {
+          // a print run glued onto one team of a combo ("Colorado Avalanche #/ 199 / Colorado Avalanche")
+          const r = x.match(/\s+#?\/\s*([\d,]+)$/); if (!r) return x.trim()
+          const fx = (c.x || '').split(/\s+/).filter(Boolean), v = '/' + r[1].replace(/,/g, '')
+          if (!fx.some(f => /^\/\d/.test(f))) { fx.push(v); c.x = fx.join(' ') }   // the card's own print run wins
+          return x.slice(0, r.index).trim()
+        }).filter(x => x && !TEAM_TAG.test(x))
         const uniq = []; for (const x of segs) if (!uniq.some(u => key(u) === key(x))) uniq.push(x)
         const t = uniq.length ? uniq.join(' / ') : (segs[0] || c.t)
         if (t !== c.t) { c.t = t; stats.team++; changed = true }

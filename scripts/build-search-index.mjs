@@ -51,6 +51,8 @@ console.log('search index:', rows.length.toLocaleString(), 'cards |', slugs.leng
 // Each slice uses the same { slugs, sections, teams, rows } shape as search-index.json.
 const TCG = new Set(['Pokémon', 'Yu-Gi-Oh!', 'Magic', 'Lorcana', 'One Piece', 'Disney'])
 const isTeam = (t) => t && /[A-Za-z]{3,}/.test(t) && !/^#/.test(t) && !/\d\s*\/\s*\d/.test(t) && !/^\/?\s*\d/.test(t) && t.length >= 4
+  && !/^[a-z]/.test(t)            // TCDB variation notes in the team column ("bat knob", "correct photo")
+  && !/^AU\d|^AU, SN\d|\bSN\d{4,}/.test(t)   // flag text glued onto a year ("AU, SN1992012 Game")
 // Checklist tags that land in the team column; not teams.
 const NOT_TEAM = /^(all[- ]?rookies?|one of ones|no team|none|retired|rookie debut|team logo|letter|lace|third threads|team highlights|draft prospect|program of excellence|topps of the decade|topps hockey classics|veterans?|legends|rookies)$/i
 const fold = (t) => t.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[\u2018\u2019]/g, "'").toLowerCase().replace(/[^a-z0-9' ]+/g, ' ').replace(/\s+/g, ' ').trim()
