@@ -3551,34 +3551,6 @@
    "winter wonderland"
   ]
  },
- "1999-00-upper-deck-legends": {
-  "missingPlayers": [
-   "abduljabb",
-   "bryant",
-   "busschere",
-   "carter",
-   "garnett",
-   "hill",
-   "horn",
-   "marbury",
-   "olajuwon",
-   "oneal",
-   "payton",
-   "pippen",
-   "walker",
-   "williams"
-  ],
-  "missingInserts": [
-   "century generations",
-   "century legends",
-   "century mjs most memorable shots",
-   "century team",
-   "legendary jersey",
-   "legendary signature",
-   "original",
-   "player century"
-  ]
- },
  "2017-18-topps-chrome-uefa-champions-league-soccer-cards": {
   "missingPlayers": [
    "arnold",
@@ -4245,6 +4217,25 @@
    "picks top prospects"
   ]
  },
+ "2000-01-upper-deck-legends": {
+  "missingPlayers": [
+   "busschere",
+   "english",
+   "jabbar",
+   "mikan",
+   "nance",
+   "wilkins"
+  ],
+  "missingInserts": [
+   "century",
+   "century collection",
+   "century originals",
+   "century players",
+   "commemorative collection",
+   "history s heroes",
+   "u d yearbook"
+  ]
+ },
  "18-19-ud-upper-deck-sp-authentic-hockey": {
   "missingPlayers": [
    "bowey",
@@ -4815,6 +4806,29 @@
    "william"
   ],
   "missingInserts": []
+ },
+ "1999-00-upper-deck-legends": {
+  "missingPlayers": [
+   "abduljabb",
+   "bryant",
+   "busschere",
+   "carter",
+   "garnett",
+   "hill",
+   "horn",
+   "marbury",
+   "olajuwon",
+   "oneal",
+   "payton",
+   "pippen",
+   "walker",
+   "williams"
+  ],
+  "missingInserts": [
+   "century generations",
+   "century team",
+   "legendary signature"
+  ]
  },
  "2013-topps-ufc-finest-trading-cards": {
   "missingPlayers": [
@@ -5842,6 +5856,16 @@
    "glossy"
   ]
  },
+ "2006-07-fleer": {
+  "missingPlayers": [
+   "gervin"
+  ],
+  "missingInserts": [
+   "86 87 20th anniversary",
+   "greats game",
+   "hot prospects draft rewind"
+  ]
+ },
  "2003-04-topps-jersey-edition": {
   "missingPlayers": [
    "radmanovic"
@@ -5850,16 +5874,6 @@
    "chrome jersey",
    "jersey",
    "pristine generals"
-  ]
- },
- "2000-01-sp-authentic": {
-  "missingPlayers": [
-   "kirilenko"
-  ],
-  "missingInserts": [
-   "buyback",
-   "maximum force",
-   "sample"
   ]
  },
  "2017-18-mvp-hockey": {
@@ -5917,6 +5931,30 @@
   ],
   "missingInserts": [
    "update"
+  ]
+ },
+ "2002-03-flair": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "patch",
+   "wave future jersey",
+   "wave future patch"
+  ]
+ },
+ "2001-02-fleer-focus": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "jersey",
+   "jersey materialistic away",
+   "jersey roy collection"
+  ]
+ },
+ "2001-02-sp-authentic": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "authentics jersey",
+   "sample",
+   "sign times triple"
   ]
  },
  "2019-panini-chronicles-baseball": {
@@ -6227,17 +6265,6 @@
    "starburst"
   ]
  },
- "2000-press-pass": {
-  "missingPlayers": [
-   "guyton",
-   "mickeal",
-   "walls"
-  ],
-  "missingInserts": [
-   "alley oop",
-   "se"
-  ]
- },
  "1985-86-star": {
   "missingPlayers": [
    "colter",
@@ -6393,16 +6420,6 @@
   ],
   "missingInserts": [
    "reflections titanium"
-  ]
- },
- "2000-01-fleer-premium": {
-  "missingPlayers": [
-   "ng",
-   "st"
-  ],
-  "missingInserts": [
-   "1993 1994",
-   "1998 1999"
   ]
  },
  "1998-upper-deck-mjx": {
@@ -6617,18 +6634,18 @@
    "1965 tall boy"
   ]
  },
- "2004-05-upper-deck-black-diamond": {
+ "2006-07-bowman-elevation": {
   "missingPlayers": [],
   "missingInserts": [
-   "die cuts",
-   "jersey single"
+   "executive relic dual",
+   "writings"
   ]
  },
- "1999-ultra-wnba": {
+ "2001-02-topps-chrome": {
   "missingPlayers": [],
   "missingInserts": [
-   "attitude",
-   "world premier"
+   "certified",
+   "team jersey"
   ]
  },
  "2015-bowman-draft-baseball-cards": {
@@ -7665,20 +7682,12 @@
    "tifacts dual memorabilia"
   ]
  },
- "2001-sage": {
+ "2001-02-fleer-premium": {
   "missingPlayers": [
-   "jamison"
+   "vh"
   ],
   "missingInserts": [
-   "hit rarefied"
-  ]
- },
- "2000-01-spx": {
-  "missingPlayers": [
-   "paul"
-  ],
-  "missingInserts": [
-   "sample"
+   "peformers"
   ]
  },
  "2000-topps-team-usa": {
@@ -7703,14 +7712,6 @@
   ],
   "missingInserts": [
    "fx"
-  ]
- },
- "1999-00-upper-deck-hologrfx": {
-  "missingPlayers": [
-   "au"
-  ],
-  "missingInserts": [
-   "maximum hologrfx"
   ]
  },
  "1998-99-fleer-brilliants": {
@@ -8193,22 +8194,34 @@
   ],
   "missingInserts": []
  },
- "2005-06-topps-chrome": {
+ "2006-07-topps-luxury-box": {
   "missingPlayers": [],
   "missingInserts": [
-   "certified"
+   "relic"
   ]
  },
- "2004-sage": {
+ "2002-03-fleer-box-score": {
   "missingPlayers": [],
   "missingInserts": [
-   "hit write stuff"
+   "debut"
   ]
  },
- "2000-01-fleer-tradition": {
+ "2002-03-fleer-hot-shots": {
   "missingPlayers": [],
   "missingInserts": [
-   "game breakers"
+   "insert"
+  ]
+ },
+ "2000-skybox-dominion-wnba": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "cynthia cooper collection"
+  ]
+ },
+ "2000-01-upper-deck-ovation": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "ball"
   ]
  },
  "1990-topps-traded-baseball-cards": {
@@ -8738,6 +8751,13 @@
   "missingPlayers": [
    "vision",
    "wn"
+  ],
+  "missingInserts": []
+ },
+ "2000-01-fleer-premium": {
+  "missingPlayers": [
+   "ng",
+   "st"
   ],
   "missingInserts": []
  },
@@ -9413,6 +9433,18 @@
   ],
   "missingInserts": []
  },
+ "2006-07-bowman": {
+  "missingPlayers": [
+   "bdrkb"
+  ],
+  "missingInserts": []
+ },
+ "2005-press-pass": {
+  "missingPlayers": [
+   "simen"
+  ],
+  "missingInserts": []
+ },
  "2004-05-fleer-tradition": {
   "missingPlayers": [
    "ht"
@@ -9443,9 +9475,27 @@
   ],
   "missingInserts": []
  },
+ "2001-02-fleer-authentix": {
+  "missingPlayers": [
+   "of"
+  ],
+  "missingInserts": []
+ },
+ "2001-02-upper-deck-ultimate-collection": {
+  "missingPlayers": [
+   "conwell"
+  ],
+  "missingInserts": []
+ },
  "2001-02-ultra": {
   "missingPlayers": [
    "g"
+  ],
+  "missingInserts": []
+ },
+ "2000-01-sp-authentic": {
+  "missingPlayers": [
+   "kirilenko"
   ],
   "missingInserts": []
  },
@@ -9458,6 +9508,12 @@
  "2000-sp-top-prospects": {
   "missingPlayers": [
    "carrawel"
+  ],
+  "missingInserts": []
+ },
+ "2000-01-spx": {
+  "missingPlayers": [
+   "paul"
   ],
   "missingInserts": []
  },
@@ -9524,6 +9580,12 @@
  "1999-00-topps-tipoff": {
   "missingPlayers": [
    "number"
+  ],
+  "missingInserts": []
+ },
+ "1999-00-upper-deck-hologrfx": {
+  "missingPlayers": [
+   "au"
   ],
   "missingInserts": []
  },
