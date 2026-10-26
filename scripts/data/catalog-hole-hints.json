@@ -5809,14 +5809,6 @@
    "update"
   ]
  },
- "2014-15-panini-threads": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "freshman pairs jersey",
-   "jersey",
-   "team die cut"
-  ]
- },
  "2019-panini-chronicles-baseball": {
   "missingPlayers": [
    "astral",
@@ -6540,17 +6532,6 @@
   ],
   "missingInserts": [
    "update postseason heroes"
-  ]
- },
- "2018-19-panini-instant-nba": {
-  "missingPlayers": [
-   "beal",
-   "giannis",
-   "lebron",
-   "set"
-  ],
-  "missingInserts": [
-   "mountain dew ice rising stars"
   ]
  },
  "2016-17-donruss-optic-basketball-cards": {
@@ -8151,18 +8132,6 @@
   ],
   "missingInserts": []
  },
- "2017-18-panini-instant-nba": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "mountain dew rising stars team u s"
-  ]
- },
- "2014-15-upper-deck-ncaa-march-madness": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "final four winner"
-  ]
- },
  "1990-topps-traded-baseball-cards": {
   "missingPlayers": [
    "appier",
@@ -8187,6 +8156,15 @@
    "diop",
    "pope",
    "wahad"
+  ],
+  "missingInserts": []
+ },
+ "2018-19-panini-instant-nba": {
+  "missingPlayers": [
+   "beal",
+   "giannis",
+   "lebron",
+   "set"
   ],
   "missingInserts": []
  },
