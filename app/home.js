@@ -382,6 +382,10 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
   const [view, setView] = useState('browse') // browse | patchswaps | rpa | community | collection
   const account = useAccount()
   const [authOpen, setAuthOpen] = useState(false)
+  // signed out, "Track in My Collection" asks for sign-in right there and carries on after it
+  const pendingTrack = useRef(null)
+  useEffect(() => { if (account.session && account.profile !== undefined && pendingTrack.current) { const go = pendingTrack.current; pendingTrack.current = null; if (account.profile) setAuthOpen(false); openView('collection', undefined, go) } }, [account.session, account.profile])   // a new account still picks a username in the open dialog
+  useEffect(() => { if (!authOpen && !account.session) pendingTrack.current = null }, [authOpen])
   const [feedback, setFeedback] = useState(null)   // context of the open report form, or null
   const fbAdmin = useFeedbackAdmin(account)
   const [fixing, setFixing] = useState(null)   // { slug, feedback? } while the admin fix editor is open
@@ -1396,7 +1400,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
                 style={{ ...buttonText, background: ACCENT, color: '#fff', border: 'none', borderRadius: 9, padding: '9px 16px', cursor: 'pointer', fontSize: 13 }}>
                 + Wantlist this set
               </button>
-              <button onClick={() => { openView('collection', undefined, '&cset=' + encodeURIComponent(setData.slug)) }}
+              <button onClick={() => { const go = '&cset=' + encodeURIComponent(setData.slug); if (!account.session) { pendingTrack.current = go; setAuthOpen(true) } else openView('collection', undefined, go) }}
                 style={{ ...buttonText, background: 'transparent', color: '#A1A1AA', border: '1px solid #232A3E', borderRadius: 9, padding: '8px 15px', cursor: 'pointer', fontSize: 13 }}>
                 Track in My Collection
               </button>
