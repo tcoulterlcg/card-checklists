@@ -15,7 +15,10 @@ const GN = (q) => 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&
 // ESPN/CBS are only a fallback when a league has no hobby stories that week.
 const HOBBY_WORDS = '("trading card" OR "trading cards" OR "rookie card" OR "card sells" OR "card sold" OR PSA OR "1/1" OR "one-of-one" OR Panini OR Topps OR Bowman OR "Upper Deck" OR "card show" OR "card break")'
 const HOBBY_KEEP = /card|psa|\b1\/1\b|one-of-one|panini|topps|bowman|upper deck|prizm|chrome|autograph|auto\b|patch|rookie|collect|hobby|break|graded|auction|sells?\b|sold\b/i
-const league = (key, label, color, terms, fallback, must) => ({ key, label, color, feeds: [GN(terms + ' ' + HOBBY_WORDS)], keep: must ? { test: (t) => HOBBY_KEEP.test(t) && must.test(t) } : HOBBY_KEEP, fallback })
+// Game recaps that slip through the hobby words ("North Newton vs Bowman Academy | Football | 10/23/2026",
+// "No. 1/1 Football suffers first loss") aren't card news.
+const NOT_HOBBY = /\s\|\s.*\b\d{1,2}\/\d{1,2}\/\d{4}\b|\bsuffers?\b.*\bloss\b|^no\. ?\d+\/\d+\b|\bhigh school\b|\bpreps?\b/i
+const league = (key, label, color, terms, fallback, must) => ({ key, label, color, feeds: [GN(terms + ' ' + HOBBY_WORDS)], keep: must ? { test: (t) => HOBBY_KEEP.test(t) && must.test(t) } : HOBBY_KEEP, drop: NOT_HOBBY, fallback })
 
 const SEGMENTS = [
   {
@@ -102,7 +105,7 @@ async function buildSegment(seg) {
   let lists = await Promise.all(seg.feeds.map(pull))
   if (seg.fallback && lists.flat().filter(it => !seg.keep || seg.keep.test(it.title)).length < 2) {
     lists = lists.concat(await Promise.all(seg.fallback.map(pull)))
-    seg = { ...seg, keep: null }
+    seg = { ...seg, keep: null, drop: null }   // general league headlines: game results are the point
   }
   const seen = new Set()
   let items = []
