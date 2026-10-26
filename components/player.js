@@ -125,6 +125,21 @@ function Serial({ s }) {
   if (s > 0) return <span style={{ fontVariantNumeric: 'tabular-nums', fontWeight: 600 }}>/{s}</span>
   return <span style={{ color: '#8A93A8' }}>—</span>
 }
+// Edit distance between two names (accents and case ignored), capped: only small distances matter.
+const foldName = (s) => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9 ]/g, '')
+function nearName(a, b, max = 2) {
+  a = foldName(a); b = foldName(b)
+  if (Math.abs(a.length - b.length) > max) return false
+  let prev = Array.from({ length: b.length + 1 }, (_, j) => j)
+  for (let i = 1; i <= a.length; i++) {
+    const cur = [i]; let low = i
+    for (let j = 1; j <= b.length; j++) { cur[j] = Math.min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1)); low = Math.min(low, cur[j]) }
+    if (low > max) return false
+    prev = cur
+  }
+  return prev[b.length] <= max
+}
+
 function Initials({ name, color }) {
   const i = name.split(/\s+/).filter(Boolean).map(w => w[0]).slice(0, 2).join('').toUpperCase()
   return <span style={{ width: 34, height: 34, borderRadius: 999, background: color + '22', border: '1px solid ' + color + '55', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, color, fontSize: 13, flexShrink: 0 }}>{i}</span>
@@ -417,7 +432,8 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
   // "Also listed as" is for real alternate names (Shoeless Joe Jackson), not card text like
   // "Michael Jordan 1987-88 Fleer" (buybacks) or "PT Michael Jordan" (subset prefixes)
   const otherNames = labelList.map(([l]) => l).filter(l => l !== player.name && !/\d|[()\/#]/.test(l) && !/^[A-Z]{1,3}\s/.test(l)
-    && !l.toLowerCase().startsWith(player.name.toLowerCase() + ' '))   // "Connor McDavid Hart" = card text, not a name
+    && !l.toLowerCase().startsWith(player.name.toLowerCase() + ' ')   // "Connor McDavid Hart" = card text, not a name
+    && !(nearName(l, player.name) && facets.labels.get(l) * 10 < (facets.labels.get(player.name) || 0)))   // a rare one-letter slip ("Sidney Crosy") or accent-less copy is a typo, not another name
   const teamList = [...facets.teams.entries()].filter(([t]) => /[A-Za-z]{3,}/.test(t) && !/^\/|#|\d\/\d/.test(t)).sort((a, b) => b[1] - a[1]).slice(0, 12)
   const productOptions = useMemo(() => [...new Set(rows.map(r => r.set.replace(/^\d{4}(-\d{2})?\s*/, '').replace(/\s+(hockey|baseball|basketball|football|soccer).*$/i, '')))].sort(), [rows])
   const titleSuffix = quick !== 'all' ? ' · ' + VIEWS.find(v => v[0] === quick)[1] : parsed && parsed.serial === 1 ? ' · 1/1s' : ''
