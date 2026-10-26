@@ -1,6 +1,6 @@
 {
   "buildCommand": "npm run build",
-  "ignoreCommand": "git diff --quiet ${VERCEL_GIT_PREVIOUS_SHA:-HEAD^} HEAD -- . ':(exclude)scripts/data/tcdb-hole-jobs.json' ':(exclude)scripts/data/catalog-hole-hints.json' ':(exclude)*.md' ':(exclude)scripts/sql'",
+  "ignoreCommand": "P=${VERCEL_GIT_PREVIOUS_SHA:-HEAD^}; git cat-file -e $P 2>/dev/null || exit 1; git diff --quiet \"$P\" HEAD -- . ':(exclude)scripts/data/tcdb-hole-jobs.json' ':(exclude)scripts/data/catalog-hole-hints.json' ':(exclude)*.md' ':(exclude)scripts/sql'",
   "git": {
     "deploymentEnabled": {
       "catalog": false
