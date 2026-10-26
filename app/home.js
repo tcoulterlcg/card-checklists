@@ -704,6 +704,24 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
     return list
   }, [taggedSets, sportFilter, brandFilter, productFilter, dQuery, activeSet])
 
+  // Home grid order; memoized so typing in the search box doesn't re-sort 10k sets per keystroke
+  const sortedSets = useMemo(() => filteredSets.slice().sort((a, b) => {
+              // A–Z by the product name shown on the card (the season prefix is dropped there);
+              // sets with no year go last in both year orders.
+              const nm = () => a.name.replace(/^\d{4}(-\d{2})?\s*/, '').localeCompare(b.name.replace(/^\d{4}(-\d{2})?\s*/, '')) || (b.year || 0) - (a.year || 0)
+              if (sortBy === 'year-asc') return ((a.year || 9999) - (b.year || 9999)) || nm()
+              if (sortBy === 'name-asc') return nm()
+              if (sortBy === 'name-desc') return -nm()
+              if (sortBy === 'cards-desc') return ((b.cardCount || 0) - (a.cardCount || 0)) || nm()
+              if (sortBy === 'cards-asc') return ((a.cardCount || 0) - (b.cardCount || 0)) || nm()
+              if (sortBy === 'category') {
+                // Sports → TCGs → Other, then by sport/game name, newest first within each.
+                const grp = (x) => (TCG_SET.has(x.sport) ? 1 : OTHER_SET.has(x.sport) ? 2 : 0)
+                return (grp(a) - grp(b)) || (a.sport || '').localeCompare(b.sport || '') || ((b.year || 0) - (a.year || 0)) || nm()
+              }
+              if (sortBy === 'brand') return (a.brand || 'zzz').localeCompare(b.brand || 'zzz') || ((b.year || 0) - (a.year || 0)) || nm()
+              return ((b.year || 0) - (a.year || 0)) || nm() // year-desc default
+            }), [filteredSets, sortBy])
   useEffect(() => { setSetLimit(60) }, [sportFilter, brandFilter, productFilter, sortBy, dQuery])
   const oneSport = sportFilter !== 'All' && sportFilter !== 'Sports' && sportFilter !== 'TCG' && sportFilter !== 'Other'
 
@@ -875,12 +893,66 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
   // Stable callbacks for the (memoized) player page, so typing in the search box
   // doesn't re-render a 1,000-row player page on every keystroke.
   const cbRef = useRef({})
-  cbRef.current = { openSetBySlug, wantIt, runSearch, pickCandidate: (c) => openPlayer(c, playerParsed, playerCandidates), compare: (name) => openCompare([name, '']) }
+  cbRef.current = { openSetBySlug, wantIt, runSearch, openPlayerByName, pickCandidate: (c) => openPlayer(c, playerParsed, playerCandidates), compare: (name) => openCompare([name, '']) }
   const stableCb = useMemo(() => ({
     openSetBySlug: (...a) => cbRef.current.openSetBySlug(...a), wantIt: (...a) => cbRef.current.wantIt(...a),
     runSearch: (...a) => cbRef.current.runSearch(...a), pickCandidate: (...a) => cbRef.current.pickCandidate(...a),
     compare: (...a) => cbRef.current.compare(...a)
   }), [])
+  // The set's rows, memoized: typing in "Filter this set" re-renders only the box, and the (deferred)
+  // filter result re-renders the rows. A 40k-card set used to rebuild every row on every keystroke.
+  const renderedSections = useMemo(() => !setData ? null : visibleSections.slice(0, secLimit).map((sec, si) => {
+            const sorted = sec.cards.slice().sort(makeComparator(sortField, sortDir))
+            return (
+              <div key={si + '|' + sec.title} style={{ marginBottom: 26 }}>
+                <h2 style={{ ...title(18), margin: '0 0 6px' }}>
+                  {sec.title} <span style={{ color: '#8A93A8', fontSize: 16 }}>· {sec.cards.length}</span>
+                </h2>
+                {sec.mem && <div style={{ margin: '0 0 10px' }}><MemBadge mem={sec.mem} /></div>}
+                {sec.odds && (
+                  <div style={{ display: 'flex', gap: 8, alignItems: 'flex-start', margin: '0 0 10px', padding: '8px 12px', background: '#141109', border: '1px solid ' + ACCENT + '2e', borderRadius: 9 }}>
+                    <span style={{ ...eyebrow, color: ACCENT_TEXT, whiteSpace: 'nowrap', paddingTop: 1 }}>Pack Odds</span>
+                    <span style={{ color: '#A1A1AA', fontSize: 13, lineHeight: 1.5 }}>{sec.odds}</span>
+                  </div>
+                )}
+                <div style={{ border: '1px solid #222', borderRadius: 12, overflow: 'hidden' }}>
+                  <div className="hq-setrow" style={{ display: 'flex', gap: 14, padding: '9px 16px', background: '#121626', borderBottom: '1px solid #232A3E', alignItems: 'center' }}>
+                    <div className="hq-col-num" style={{ flex: '0 0 68px' }}><SortHeader label="Card #" field="n" sortField={sortField} sortDir={sortDir} onClick={toggleSort} /></div>
+                    <div style={{ flex: '1 1 0', minWidth: 0 }}><SortHeader label={setIsTcg ? 'Card' : 'Player'} field="p" sortField={sortField} sortDir={sortDir} onClick={toggleSort} grow /></div>
+                    <div className="hq-col-team" style={{ flex: '1 1 0', minWidth: 0 }}><SortHeader label={setIsTcg ? 'Type' : 'Team'} field="t" sortField={sortField} sortDir={sortDir} onClick={toggleSort} grow /></div>
+                    <div className="hq-col-flag" style={{ flex: setIsTcg ? '0 0 110px' : '0 0 70px' }}><SortHeader label={setIsTcg ? 'Rarity' : 'Flag'} field="x" sortField={sortField} sortDir={sortDir} onClick={toggleSort} align="right" /></div>
+                    <span aria-hidden="true" style={{ flex: '0 0 78px' }} />
+                  </div>
+                  {sorted.slice(0, openSecs.has(sec.title) ? 5000 : 200).map((c, i) => (
+                    <div key={i} className="hq-setrow" style={{
+                      display: 'flex', gap: 14, padding: '8px 16px', fontSize: 14,
+                      background: i % 2 === 0 ? '#0F1320' : '#121626', alignItems: 'center'
+                    }}>
+                      <span className="hq-col-num" style={{ flex: '0 0 68px', color: ACCENT_TEXT, fontWeight: 700, fontVariantNumeric: 'tabular-nums', overflowWrap: 'anywhere' }}>{c.n ? '#' + c.n : '—'}</span>
+                      <span style={{ flex: '1 1 0', minWidth: 0 }}>
+                        <button onClick={() => cbRef.current.openPlayerByName(c.p, null, true, setData?.sport)} title={'Open ' + c.p + "'s player page"} style={{ fontWeight: 600, background: 'none', border: 'none', color: isMine(c.p) ? ACCENT_TEXT : '#EDEDEF', cursor: 'pointer', padding: 0, textAlign: 'left', fontFamily: 'inherit', fontSize: 14 }}>{c.p}</button>
+                        {c.t && <span className="hq-mobile-only" style={{ color: '#8A93A8', fontSize: 12, marginTop: 2 }}>{c.t}</span>}
+                      </span>
+                      <span className="hq-col-team" style={{ flex: '1 1 0', minWidth: 0, color: '#8A93A8', fontSize: 13 }}>{c.t || ''}</span>
+                      <span className="hq-col-flag" style={{ flex: setIsTcg ? '0 0 110px' : '0 0 70px', textAlign: 'right' }}>{c.x ? <Chip color={/\bRC\b/.test(c.x) ? '#4ade80' : '#8A93A8'}>{c.x}</Chip> : null}</span>
+                      <a href={grailfindrFindUrl({ setName: setData.name, player: c.p, n: c.n, section: sec.title })} target="_blank" rel="noreferrer"
+                        title="Find this card for sale on GrailFindr (every marketplace)" aria-label={'Find ' + (c.p || 'this card') + ' on GrailFindr'}
+                        style={{ flex: '0 0 32px', height: 32, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', border: '1px solid #232A3E', borderRadius: 6, color: '#8A93A8', textDecoration: 'none' }}>
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
+                      </a>
+                      {(() => { const it = { set_slug: setData.slug, set_name: setData.name, card_n: c.n, section: sec.title, player: c.p }, on = isWanted(it); return (
+                      <button title={on ? 'On your wantlist — click to remove' : 'Add this card (and its parallel section) to your wantlist'}
+                        onClick={() => cbRef.current.wantIt(it)} aria-pressed={on}
+                        aria-label={on ? 'On your wantlist — remove' : 'Add to wantlist'} style={{ flex: '0 0 32px', height: 32, background: on ? ACCENT : 'none', border: '1px solid ' + (on ? ACCENT : '#232A3E'), color: on ? '#fff' : '#8A93A8', borderRadius: 6, fontSize: 14, cursor: 'pointer', padding: 0 }}>{on ? '✓' : '+'}</button>) })()}
+                    </div>
+                  ))}
+                  {sorted.length > 200 && !openSecs.has(sec.title) && (
+                    <button onClick={() => setOpenSecs(o => new Set([...o, sec.title]))} style={{ display: 'block', width: '100%', padding: '10px 16px', background: '#0F1320', border: 'none', borderTop: '1px solid #1A1F31', color: ACCENT_TEXT, fontSize: 13, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit', textAlign: 'left' }}>Show all {sorted.length.toLocaleString()} cards in this section →</button>
+                  )}
+                </div>
+              </div>
+            )
+          }), [setData, visibleSections, secLimit, sortField, sortDir, openSecs, setIsTcg, wanted, mineSet])
   const urlApplied = useRef(false)   // don't overwrite a shared ?sport=… link before applyUrl has read it
   useEffect(() => {
     if (!isLanding || sets.length === 0 || !urlApplied.current) return
@@ -1350,58 +1422,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
                 </table>
               </div>
             </div>
-          )) : visibleSections.slice(0, secLimit).map((sec, si) => {
-            const sorted = sec.cards.slice().sort(makeComparator(sortField, sortDir))
-            return (
-              <div key={si + '|' + sec.title} style={{ marginBottom: 26 }}>
-                <h2 style={{ ...title(18), margin: '0 0 6px' }}>
-                  {sec.title} <span style={{ color: '#8A93A8', fontSize: 16 }}>· {sec.cards.length}</span>
-                </h2>
-                {sec.mem && <div style={{ margin: '0 0 10px' }}><MemBadge mem={sec.mem} /></div>}
-                {sec.odds && (
-                  <div style={{ display: 'flex', gap: 8, alignItems: 'flex-start', margin: '0 0 10px', padding: '8px 12px', background: '#141109', border: '1px solid ' + ACCENT + '2e', borderRadius: 9 }}>
-                    <span style={{ ...eyebrow, color: ACCENT_TEXT, whiteSpace: 'nowrap', paddingTop: 1 }}>Pack Odds</span>
-                    <span style={{ color: '#A1A1AA', fontSize: 13, lineHeight: 1.5 }}>{sec.odds}</span>
-                  </div>
-                )}
-                <div style={{ border: '1px solid #222', borderRadius: 12, overflow: 'hidden' }}>
-                  <div className="hq-setrow" style={{ display: 'flex', gap: 14, padding: '9px 16px', background: '#121626', borderBottom: '1px solid #232A3E', alignItems: 'center' }}>
-                    <div className="hq-col-num" style={{ flex: '0 0 68px' }}><SortHeader label="Card #" field="n" sortField={sortField} sortDir={sortDir} onClick={toggleSort} /></div>
-                    <div style={{ flex: '1 1 0', minWidth: 0 }}><SortHeader label={setIsTcg ? 'Card' : 'Player'} field="p" sortField={sortField} sortDir={sortDir} onClick={toggleSort} grow /></div>
-                    <div className="hq-col-team" style={{ flex: '1 1 0', minWidth: 0 }}><SortHeader label={setIsTcg ? 'Type' : 'Team'} field="t" sortField={sortField} sortDir={sortDir} onClick={toggleSort} grow /></div>
-                    <div className="hq-col-flag" style={{ flex: setIsTcg ? '0 0 110px' : '0 0 70px' }}><SortHeader label={setIsTcg ? 'Rarity' : 'Flag'} field="x" sortField={sortField} sortDir={sortDir} onClick={toggleSort} align="right" /></div>
-                    <span aria-hidden="true" style={{ flex: '0 0 78px' }} />
-                  </div>
-                  {sorted.slice(0, openSecs.has(sec.title) ? 5000 : 200).map((c, i) => (
-                    <div key={i} className="hq-setrow" style={{
-                      display: 'flex', gap: 14, padding: '8px 16px', fontSize: 14,
-                      background: i % 2 === 0 ? '#0F1320' : '#121626', alignItems: 'center'
-                    }}>
-                      <span className="hq-col-num" style={{ flex: '0 0 68px', color: ACCENT_TEXT, fontWeight: 700, fontVariantNumeric: 'tabular-nums', overflowWrap: 'anywhere' }}>{c.n ? '#' + c.n : '—'}</span>
-                      <span style={{ flex: '1 1 0', minWidth: 0 }}>
-                        <button onClick={() => openPlayerByName(c.p, null, true, setData?.sport)} title={'Open ' + c.p + "'s player page"} style={{ fontWeight: 600, background: 'none', border: 'none', color: isMine(c.p) ? ACCENT_TEXT : '#EDEDEF', cursor: 'pointer', padding: 0, textAlign: 'left', fontFamily: 'inherit', fontSize: 14 }}>{c.p}</button>
-                        {c.t && <span className="hq-mobile-only" style={{ color: '#8A93A8', fontSize: 12, marginTop: 2 }}>{c.t}</span>}
-                      </span>
-                      <span className="hq-col-team" style={{ flex: '1 1 0', minWidth: 0, color: '#8A93A8', fontSize: 13 }}>{c.t || ''}</span>
-                      <span className="hq-col-flag" style={{ flex: setIsTcg ? '0 0 110px' : '0 0 70px', textAlign: 'right' }}>{c.x ? <Chip color={/\bRC\b/.test(c.x) ? '#4ade80' : '#8A93A8'}>{c.x}</Chip> : null}</span>
-                      <a href={grailfindrFindUrl({ setName: setData.name, player: c.p, n: c.n, section: sec.title })} target="_blank" rel="noreferrer"
-                        title="Find this card for sale on GrailFindr (every marketplace)" aria-label={'Find ' + (c.p || 'this card') + ' on GrailFindr'}
-                        style={{ flex: '0 0 32px', height: 32, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', border: '1px solid #232A3E', borderRadius: 6, color: '#8A93A8', textDecoration: 'none' }}>
-                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
-                      </a>
-                      {(() => { const it = { set_slug: setData.slug, set_name: setData.name, card_n: c.n, section: sec.title, player: c.p }, on = isWanted(it); return (
-                      <button title={on ? 'On your wantlist — click to remove' : 'Add this card (and its parallel section) to your wantlist'}
-                        onClick={() => wantIt(it)} aria-pressed={on}
-                        aria-label={on ? 'On your wantlist — remove' : 'Add to wantlist'} style={{ flex: '0 0 32px', height: 32, background: on ? ACCENT : 'none', border: '1px solid ' + (on ? ACCENT : '#232A3E'), color: on ? '#fff' : '#8A93A8', borderRadius: 6, fontSize: 14, cursor: 'pointer', padding: 0 }}>{on ? '✓' : '+'}</button>) })()}
-                    </div>
-                  ))}
-                  {sorted.length > 200 && !openSecs.has(sec.title) && (
-                    <button onClick={() => setOpenSecs(o => new Set([...o, sec.title]))} style={{ display: 'block', width: '100%', padding: '10px 16px', background: '#0F1320', border: 'none', borderTop: '1px solid #1A1F31', color: ACCENT_TEXT, fontSize: 13, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit', textAlign: 'left' }}>Show all {sorted.length.toLocaleString()} cards in this section →</button>
-                  )}
-                </div>
-              </div>
-            )
-          })}
+          )) : renderedSections}
           {!onlyMine && visibleSections.length > secLimit && (
             <div style={{ textAlign: 'center', margin: '4px 0 20px' }}>
               <button onClick={() => setSecLimit(n => n + 20)}
@@ -1657,23 +1678,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
       ) : (
         <section>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(260px, 100%), 1fr))', gap: 14 }}>
-            {filteredSets.slice().sort((a, b) => {
-              // A–Z by the product name shown on the card (the season prefix is dropped there);
-              // sets with no year go last in both year orders.
-              const nm = () => a.name.replace(/^\d{4}(-\d{2})?\s*/, '').localeCompare(b.name.replace(/^\d{4}(-\d{2})?\s*/, '')) || (b.year || 0) - (a.year || 0)
-              if (sortBy === 'year-asc') return ((a.year || 9999) - (b.year || 9999)) || nm()
-              if (sortBy === 'name-asc') return nm()
-              if (sortBy === 'name-desc') return -nm()
-              if (sortBy === 'cards-desc') return ((b.cardCount || 0) - (a.cardCount || 0)) || nm()
-              if (sortBy === 'cards-asc') return ((a.cardCount || 0) - (b.cardCount || 0)) || nm()
-              if (sortBy === 'category') {
-                // Sports → TCGs → Other, then by sport/game name, newest first within each.
-                const grp = (x) => (TCG_SET.has(x.sport) ? 1 : OTHER_SET.has(x.sport) ? 2 : 0)
-                return (grp(a) - grp(b)) || (a.sport || '').localeCompare(b.sport || '') || ((b.year || 0) - (a.year || 0)) || nm()
-              }
-              if (sortBy === 'brand') return (a.brand || 'zzz').localeCompare(b.brand || 'zzz') || ((b.year || 0) - (a.year || 0)) || nm()
-              return ((b.year || 0) - (a.year || 0)) || nm() // year-desc default
-            }).slice(0, setLimit).map((s) => {
+            {sortedSets.slice(0, setLimit).map((s) => {
               const c = SPORT_COLORS[s.sport] || ACCENT
               return (
                 <button key={s.slug} onClick={() => openSet(s)} className="hq-setcard"
