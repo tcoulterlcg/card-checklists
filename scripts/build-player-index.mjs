@@ -177,7 +177,10 @@ async function fetchCatalogSets() {
   const { HIDDEN_SOURCES, setPath, fixSeasonYear } = await import('../lib/catalog.js')
   const get = async (u) => { try { const r = await fetch(u, { signal: AbortSignal.timeout(15000) }); return r.ok ? await r.json() : null } catch { return null } }
   const m = await get(RAW + 'manifest.json'); if (!m) return []
-  const staticSlugs = new Set(readdirSync(dataDir).filter(f => f.endsWith('.json')).map(f => f.slice(0, -5)))
+  // static files shadow catalog sets with the same slug, unless they are hidden (incomplete) or empty
+  const staticSlugs = new Set(readdirSync(dataDir).filter(f => f.endsWith('.json')).filter(f => {
+    try { const s = JSON.parse(readFileSync(new URL(f, dataDir), 'utf8')); return !s.incomplete && (s.sections || []).some(x => x.cards?.length) } catch { return true }
+  }).map(f => f.slice(0, -5)))
   const wanted = []
   const files = m.visible && m.visible.file ? [m.visible.file] : Object.values(m.sports || {}).map(sp => sp.file)
   for (const f of files) { const ix = f && await get(RAW + f); for (const e of (ix && ix.sets) || []) if (!HIDDEN_SOURCES.has(e.source) && !staticSlugs.has(e.slug)) wanted.push(e.slug) }
