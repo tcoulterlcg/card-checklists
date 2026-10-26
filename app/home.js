@@ -63,6 +63,8 @@ const SPORT_COLORS = {
 const TCG_SET = new Set(['Pokémon', 'Yu-Gi-Oh!', 'Magic', 'Lorcana', 'One Piece', 'Disney'])
 // Non-sports, non-TCG cards (movies, TV, comics, toys, music, history…).
 const OTHER_SET = new Set(['Entertainment', 'Non-Sport'])
+// card names that aren't a person or character: no player-page link
+const NOT_A_PLAYER = /\bcheck ?lists?\b|^(header|title card|logo|puzzle|wrapper|redemption|unknown|tbd|n\/a)\b/i
 const TCG_EXAMPLE = { 'Pokémon': 'Charizard', 'Yu-Gi-Oh!': 'Dark Magician', Magic: 'Lightning Bolt', Lorcana: 'Stitch', 'One Piece': 'Monkey.D.Luffy' }
 // "Stitch — Rock Star" / "Sanji (SP)" / "A-Ancestral Katana" -> base card name.
 const tcgBaseName = (p) => String(p || '').replace(/\s+[—–-]\s+.*$/, '').replace(/\s*\([^)]*\)\s*$/, '').replace(/^A-(?=\S)/, '').trim()
@@ -526,8 +528,9 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
     if (my !== navSeq.current) return
     if (!data) { setSetLoadErr(true); return }
     if (st.sec && !(data.sections || []).some(x => x.title === st.sec)) setActiveSection('All')   // an old link's section was renamed
+    const backY = push === false && history.state && history.state.hqY   // Back/Forward: return to where the visitor was
     setSetData(data)
-    window.scrollTo(0, 0)
+    if (backY > 0) setTimeout(() => window.scrollTo(0, backY), 80); else window.scrollTo(0, 0)
   }
 
   // One compact index (loaded once, then cached) powers instant cross-set
@@ -965,7 +968,8 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
                     }}>
                       <span className="hq-col-num" style={{ flex: '0 0 68px', color: ACCENT_TEXT, fontWeight: 700, fontVariantNumeric: 'tabular-nums', overflowWrap: 'anywhere' }}>{c.n ? '#' + c.n : '—'}</span>
                       <span style={{ flex: '1 1 0', minWidth: 0 }}>
-                        <button onClick={() => cbRef.current.openPlayerByName(c.p, null, true, setData?.sport)} title={'Open ' + c.p + "'s player page"} style={{ fontWeight: 600, background: 'none', border: 'none', color: isMine(c.p) ? ACCENT_TEXT : '#EDEDEF', cursor: 'pointer', padding: 0, textAlign: 'left', fontFamily: 'inherit', fontSize: 14 }}>{c.p}</button>
+                        {NOT_A_PLAYER.test(c.p || '') ? <span style={{ fontWeight: 600, color: '#EDEDEF' }}>{c.p}</span>   /* checklist / header cards have no player page */
+                          : <button onClick={() => cbRef.current.openPlayerByName(c.p, null, true, setData?.sport)} title={'Open ' + c.p + "'s player page"} style={{ fontWeight: 600, background: 'none', border: 'none', color: isMine(c.p) ? ACCENT_TEXT : '#EDEDEF', cursor: 'pointer', padding: 0, textAlign: 'left', fontFamily: 'inherit', fontSize: 14 }}>{c.p}</button>}
                         {(c.v || c.d) && <span style={{ display: 'block', color: '#8A93A8', fontSize: 12, marginTop: 2 }}>{[c.v, c.d].filter(Boolean).join(' · ')}</span>}
                         {c.t && <span className="hq-mobile-only" style={{ color: '#8A93A8', fontSize: 12, marginTop: 2 }}>{c.t}</span>}
                       </span>
@@ -1093,7 +1097,10 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
   // uncontrolled: typing here must not re-render the whole page (a set page can hold thousands of rows)
   const headerInput = useRef(null)
   useEffect(() => {
-    const onScroll = () => { setScrolled(window.scrollY > 8); setPastHero(window.scrollY > 460) }
+    // remember the scroll position in this history entry, so Back returns to the same spot on a set page
+    let saveT = 0
+    const saveY = () => { saveT = 0; try { history.replaceState({ ...(history.state || {}), hqY: window.scrollY }, '', location.href) } catch {} }
+    const onScroll = () => { setScrolled(window.scrollY > 8); setPastHero(window.scrollY > 460); if (!saveT) saveT = setTimeout(saveY, 300) }
     const onKey = (e) => {
       if (e.key === 'Escape') setMenuOpen(false)
       if (e.key === '/' && !/^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement?.tagName || '')) {

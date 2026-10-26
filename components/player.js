@@ -281,21 +281,24 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
   const [quick, setQuick] = useState(() => fromUrl('qv', v => VIEWS.some(x => x[0] === v), 'all'))
   const [group, setGroup] = useState(() => fromUrl('group', v => ['set', 'season', 'flat'].includes(v), 'set'))
   const [sort, setSort] = useState(() => fromUrl('sort', v => ['newest', 'oldest', 'rarest', 'set'].includes(v), 'newest'))
-  const [types, setTypes] = useState(new Set()) // empty = any; checked boxes narrow
+  // the filter panel round-trips too (?ty=AU,RC&yf=2015&yt=2020&br=Topps|Panini&tm=…&mat=GU&par=SHIELD&np=1)
+  const listFromUrl = (k, sep, ok) => { const v = urlp().get(k); const a = v ? v.split(sep).filter(x => x && (!ok || ok(x))) : []; return a.length ? new Set(a) : null }
+  const [types, setTypes] = useState(() => listFromUrl('ty', ',', k => k in TYPE) || new Set()) // empty = any; checked boxes narrow
   const [run, setRun] = useState(() => fromUrl('run', v => /^(any|\d{1,5}|numbered|unnumbered)$/.test(v), 'any')) // any|1|10|25|99|numbered|unnumbered
   const [ignoreParsed, setIgnoreParsed] = useState(false)   // Reset also drops the filters the search words implied
-  const [brands, setBrands] = useState(null) // null = all
+  const [brands, setBrands] = useState(() => listFromUrl('br', '|')) // null = all
   const [products, setProducts] = useState([])
-  const [teams, setTeams] = useState(null)
+  const [teams, setTeams] = useState(() => listFromUrl('tm', '|'))
   const [labels, setLabels] = useState(null) // "Appears as": null = every name the player is printed under
-  const [yearFrom, setYearFrom] = useState(0)
-  const [yearTo, setYearTo] = useState(9999)
+  const yearUrl = (k, d) => { const v = parseInt(urlp().get(k)); return v >= 1800 && v <= 2100 ? v : d }
+  const [yearFrom, setYearFrom] = useState(() => yearUrl('yf', 0))
+  const [yearTo, setYearTo] = useState(() => yearUrl('yt', 9999))
   const [expanded, setExpanded] = useState(new Set())
   const [showAll, setShowAll] = useState(new Set())
   const [limit, setLimit] = useState(40)
-  const [hidePlates, setHidePlates] = useState(false)
-  const [mems, setMems] = useState(null) // null/empty = any; checked boxes narrow
-  const [pars, setPars] = useState(null) // named parallels / patch kinds; null/empty = any
+  const [hidePlates, setHidePlates] = useState(() => urlp().get('np') === '1')
+  const [mems, setMems] = useState(() => listFromUrl('mat', ',', k => ['GU', 'PW', 'EW', 'MX', 'MFG', 'UNK'].includes(k))) // null/empty = any; checked boxes narrow
+  const [pars, setPars] = useState(() => listFromUrl('par', ',', k => k in PAR)) // named parallels / patch kinds; null/empty = any
   const [statedOnly, setStatedOnly] = useState(false)
   const [filtersOpen, setFiltersOpen] = useState(false) // mobile only; desktop always shows filters
 
@@ -304,19 +307,23 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
     const sp = urlp(); if (!sp.get('player')) return
     const set = (k, v, dflt) => { if (v && v !== dflt) sp.set(k, v); else sp.delete(k) }
     set('qv', quick, 'all'); set('group', group, 'set'); set('sort', sort, 'newest'); set('run', run, 'any')
+    const list = (x, sep) => x && x.size ? [...x].join(sep) : ''
+    set('ty', list(types, ','), ''); set('br', list(brands, '|'), ''); set('tm', list(teams, '|'), ''); set('mat', list(mems, ','), ''); set('par', list(pars, ','), '')
+    set('yf', yearFrom ? String(yearFrom) : '', ''); set('yt', yearTo !== 9999 ? String(yearTo) : '', ''); set('np', hidePlates ? '1' : '', '')
     const url = location.pathname + '?' + sp.toString()
     if (url !== location.pathname + location.search) { try { history.replaceState(null, '', url) } catch {} }
-  }, [quick, group, sort, run])
+  }, [quick, group, sort, run, types, brands, teams, mems, pars, yearFrom, yearTo, hidePlates])
   // When the query itself carries filters (1/1, auto…), start from them.
   useEffect(() => {
     if (!parsed) return
     setIgnoreParsed(false)
     if (parsed.serial === 1) setRun('1'); else if (parsed.serialMax) setRun(String(parsed.serialMax)); else if (parsed.serial) setRun(String(parsed.serial))
     else if (parsed.types.has('NUMBERED')) setRun('numbered'); else if (parsed.types.has('UNNUMBERED')) setRun('unnumbered')
-    setYearFrom(parsed.season || 0); setYearTo(parsed.season || 9999)
+    // a value saved in the URL (Back from a set page) wins over the search's default
+    setYearFrom(parsed.season || yearUrl('yf', 0)); setYearTo(parsed.season || yearUrl('yt', 9999))
     setProducts(parsed.products.slice())
-    setMems(parsed.mem ? new Set([parsed.mem]) : null)
-    setPars(parsed.pars && parsed.pars.size ? new Set(parsed.pars) : null)
+    setMems(parsed.mem ? new Set([parsed.mem]) : listFromUrl('mat', ','))
+    setPars(parsed.pars && parsed.pars.size ? new Set(parsed.pars) : listFromUrl('par', ',', k => k in PAR))
   }, [parsed])
 
   const setMeta = useMemo(() => { const m = {}; for (const s of sets) m[s.slug] = s; return m }, [sets])
