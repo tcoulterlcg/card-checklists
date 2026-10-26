@@ -38,6 +38,7 @@ body { overflow-x: clip; }
 .hq-hsearch:hover { border-color: #2E3852; }
 .hq-hsearch:focus-within { border-color: #3B6EF5; }
 .hq-hsearch input { flex: 1; min-width: 0; background: none; border: 0; outline: none; color: #ECEEF3; font: 400 13px 'Inter', system-ui, sans-serif; }
+.hq-hsearch input:focus-visible, .hq-omni-input:focus-visible { outline: none !important; }   /* the box around it shows focus; an outline over the typed text hid it */
 .hq-hsearch input::placeholder { color: #6F788C; }
 .hq-hsearch kbd { font: 500 12px 'Inter', system-ui, sans-serif; color: #8A93A8; border: 1px solid #2A3247; border-radius: 4px; padding: 1px 5px; }
 .hq-hsearch.hq-hidden { opacity: 0; pointer-events: none; visibility: hidden; }
@@ -79,6 +80,9 @@ html.hq-deep .hq-main::before { content: 'Loading…'; display: block; text-alig
   .hq-col-num { flex: 0 0 64px !important; font-size: 13px; }
   .hq-col-flag { flex: 0 0 auto !important; min-width: 34px; }
   .hq-col-team { display: none !important; }
+  .hq-browse-row { flex-wrap: wrap; row-gap: 2px !important; }
+  .hq-browse-set { flex: 1 1 100% !important; padding-left: 72px; }
+  .hq-browse-head .hq-browse-set { display: none; }
   .hq-mobile-only { display: block !important; }
   .hq-aside { position: static; max-height: none; overflow: visible; max-width: none !important; flex-basis: 100% !important; }
   .hq-aside.hq-collapsed > *:not(:first-child) { display: none !important; }

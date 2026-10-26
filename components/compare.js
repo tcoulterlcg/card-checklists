@@ -86,10 +86,12 @@ const label = { ...eyebrow, fontSize: 14, color: '#A3ABBD' }
 const bigNum = { ...display, fontSize: 'clamp(30px, 6.5vw, 46px)', lineHeight: 1, fontVariantNumeric: 'tabular-nums' }
 const linkBtn = { background: 'none', border: 'none', padding: 0, color: '#EDEDEF', fontWeight: 600, cursor: 'pointer', textAlign: 'left', fontFamily: 'inherit', fontSize: 14 }
 
+// Who leads, judged on the numbers shown: 12.04 vs 12.01 per season both read 12.0 — that's Even, not "+0.0".
+const leadOf = (a, b, perSeason) => fmt(a, perSeason) === fmt(b, perSeason) ? -1 : a > b ? 0 : 1
 // One stat: big numbers at both ends, a short split bar and the edge under the label.
 function StatRow({ title, a, b, names, perSeason }) {
   const max = Math.max(a, b, 1e-9)
-  const lead = a > b ? 0 : b > a ? 1 : -1
+  const lead = leadOf(a, b, perSeason)
   return (
     <div style={{ ...tile, padding: '12px clamp(14px, 3vw, 22px)', display: 'grid', gridTemplateColumns: 'minmax(64px, 1fr) minmax(0, 220px) minmax(64px, 1fr)', alignItems: 'center', gap: 'clamp(8px, 2vw, 16px)' }}>
       <span style={{ ...bigNum, color: lead === 1 ? DIM : TXT[0] }}>{fmt(a, perSeason)}</span>
@@ -151,7 +153,7 @@ function Slot({ side, player, stats, onPick, other }) {
                 <button key={h.id} role="option" onClick={() => { onPick(h); setQ('') }}
                   style={{ display: 'block', width: '100%', textAlign: 'left', background: 'none', border: 'none', borderTop: '1px solid #1A1F31', padding: '9px 12px', color: '#EDEDEF', cursor: 'pointer', fontFamily: 'inherit', minHeight: 44 }}>
                   <span style={{ fontWeight: 600, fontSize: 14 }}>{h.name}</span>
-                  <span style={{ display: 'block', color: DIM, fontSize: 12 }}>{h.sport} · {h.cards.toLocaleString()} card{h.cards === 1 ? '' : 's'} · {h.minYear}{h.maxYear !== h.minYear ? '–' + h.maxYear : ''}</span>
+                  <span style={{ display: 'block', color: DIM, fontSize: 12 }}>{h.sport} · {h.cards.toLocaleString()} card{h.cards === 1 ? '' : 's'} · {seasonLabel(h.minYear, h.sport)}{h.maxYear !== h.minYear ? ' – ' + seasonLabel(h.maxYear, h.sport) : ''}</span>
                 </button>
               ))}
             </div>
@@ -193,7 +195,7 @@ export function ComparePage({ names, sets, onChange, onOpenSet, onOpenPlayer }) 
   const wins = useMemo(() => {
     const w = [0, 0]
     // the headline counts what the rows show (totals, or per season in Per-year mode)
-    for (const [k] of metrics) { const a = val(sA, k), b = val(sB, k); if (a > b) w[0]++; else if (b > a) w[1]++ }
+    for (const [k] of metrics) { const l = leadOf(val(sA, k), val(sB, k), perSeason && k !== 'seasons'); if (l >= 0) w[l]++ }
     return w
   }, [metrics, sA, sB, perSeason])
 
@@ -239,6 +241,7 @@ export function ComparePage({ names, sets, onChange, onOpenSet, onOpenPlayer }) 
         </div>
         <Slot side={1} player={players[1]} stats={sB} other={players[0]} onPick={(p) => pick(1, p)} />
       </div>
+      {players[0] && players[1] && players[0].id === players[1].id && <p style={{ color: '#FCA5A5', fontSize: 13, margin: 0, textAlign: 'center' }}>That’s the same player twice — pick someone else for Player 2.</p>}
       {missing.length > 0 && <p style={{ color: '#FCA5A5', fontSize: 13, margin: 0, textAlign: 'center' }}>No player called “{missing.join('”, “')}” in the database.</p>}
       {players[0] && players[1] && !ready && <p style={{ color: DIM, fontSize: 14, margin: '20px 0', textAlign: 'center' }}>Loading cards…</p>}
 

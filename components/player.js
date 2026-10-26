@@ -5,7 +5,8 @@
 import { memo, useDeferredValue, useEffect, useId, useMemo, useRef, useState } from 'react'
 import { supa } from '../lib/supa'
 import { Select, useIsMobile } from './dropdown'
-import { TYPE, norm, parseQuery, parseQueryFor, matchPlayers, akaOf, rowMatches, typeLabel, tagLabel, TAG_COLORS, TYPE_COLORS, serialLabel, MEM_LABEL, MEM_COLORS, memKind, memTypical } from '../lib/query'
+import { isMultiYear } from '../lib/catalog'
+import { TYPE, norm, setNameMatches, STOP_PLAYER, parseQuery, parseQueryFor, matchPlayers, akaOf, rowMatches, typeLabel, tagLabel, TAG_COLORS, TYPE_COLORS, serialLabel, MEM_LABEL, MEM_COLORS, memKind, memTypical } from '../lib/query'
 import { brandOf } from '../lib/brands'
 import { PAR, PAR_LABEL, parallelKinds } from '../lib/parallels'
 import { ACCENT, ACCENT_TEXT, BG, SURFACE, SURFACE_2, LINE, CHIP_LINE, TEXT, TEXT_2, LABEL, display, eyebrow, title, buttonText } from '../lib/theme'
@@ -170,11 +171,11 @@ export function Omnibox({ value, onChange, onSubmit, onPickPlayer, onPickSet, se
   // Suggestions follow the input a beat behind (the directory scan is ~160k names).
   const dValue = useDeferredValue(value)
   const parsed = useMemo(() => parseQueryFor(sdir, dValue), [dValue, sdir])
-  const playerHits = useMemo(() => (sdir && parsed.player.length >= 2) ? matchPlayers(sdir, parsed.player, 6, { fuzzy: !!dir && parsed.player.length >= 5 }) : [], [sdir, dir, parsed.player])
+  const playerHits = useMemo(() => (sdir && parsed.player.length >= 2 && !STOP_PLAYER.has(norm(parsed.player))) ? matchPlayers(sdir, parsed.player, 6, { fuzzy: !!dir && parsed.player.length >= 5 }) : [], [sdir, dir, parsed.player])
   const setHits = useMemo(() => {
     const t = norm(dValue); if (!wantDir || t.length < 3 || !sets) return []   // nothing to suggest until the box is used
     const toks = t.split(' ')
-    return sets.filter(s => { const n = norm(s.name); return toks.every(k => n.includes(k)) }).slice(0, 3)
+    return sets.filter(s => setNameMatches(s.name, toks)).slice(0, 3)
   }, [dValue, sets, wantDir])
   const refine = useMemo(() => {
     const p = playerHits[0]; if (!p) return []
@@ -213,7 +214,7 @@ export function Omnibox({ value, onChange, onSubmit, onPickPlayer, onPickSet, se
       <form role="search" aria-label="Player and set search" onSubmit={(e) => { e.preventDefault(); go(open && items.length && moved && dValue === value ? sel : -1) }}
         style={{ display: 'flex', alignItems: 'center', background: '#121626', border: '1px solid ' + (open ? ACCENT + '66' : '#232A3E'), borderRadius: open && items.length ? '14px 14px 0 0' : 14, padding: 6, boxShadow: open ? '0 0 0 4px ' + ACCENT + '14' : '0 20px 50px -20px rgba(0,0,0,0.8)' }}>
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={open ? ACCENT : '#8A93A8'} strokeWidth="2" aria-hidden="true" style={{ marginLeft: 10, flexShrink: 0 }}><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
-        <input value={value} autoFocus={autoFocus} aria-label="Search players, sets, serials"
+        <input className="hq-omni-input" value={value} autoFocus={autoFocus} aria-label="Search players, sets, serials"
           role="combobox" aria-autocomplete="list" aria-controls={listId} aria-expanded={!!(open && items.length)}
           aria-activedescendant={open && items[sel] ? listId + '-' + sel : undefined}
           onChange={(e) => { onChange(e.target.value); setOpen(true); setTouched(true); setSel(0); setMoved(false) }}
@@ -240,7 +241,7 @@ export function Omnibox({ value, onChange, onSubmit, onPickPlayer, onPickSet, se
               <span style={{ flex: 1, minWidth: 0 }}>
                 <span style={{ fontWeight: 600, fontSize: 14 }}>{it.p.via ? it.p.name : hl(it.p.name)}</span>
                 {it.p.via && <span style={{ display: 'block', color: '#8A93A8', fontSize: 12 }}>incl. {hl(it.p.via)}</span>}
-                <span style={{ display: 'block', color: '#8A93A8', fontSize: 12 }}>{it.p.sport} · {it.p.cards.toLocaleString()} card{it.p.cards === 1 ? '' : 's'} · {it.p.minYear}{it.p.maxYear !== it.p.minYear ? '–' + it.p.maxYear : ''}</span>
+                <span style={{ display: 'block', color: '#8A93A8', fontSize: 12 }}>{it.p.sport} · {it.p.cards.toLocaleString()} card{it.p.cards === 1 ? '' : 's'} · {seasonLabel(it.p.minYear, it.p.sport)}{it.p.maxYear !== it.p.minYear ? ' – ' + seasonLabel(it.p.maxYear, it.p.sport) : ''}</span>
               </span>
               {sel === i && <span style={{ color: '#8A93A8', fontSize: 12 }}>↵</span>}
             </button>
@@ -351,10 +352,18 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
     f.seasons = f.years.size
     return f
   }, [rows])
-  const topTeam = useMemo(() => [...facets.teams.entries()].filter(([t]) => /[A-Za-z]{3,}/.test(t) && !/^\/|#/.test(t)).sort((a, b) => b[1] - a[1])[0], [facets])
+  // Main team: the one on cards across the most seasons (Jordan's 47 Tar Heels cards come from a
+  // few college issues; his Bulls cards span his career), then by card count.
+  const topTeam = useMemo(() => {
+    const yrs = new Map()
+    for (const r of rows) if (r.team && r.year) { let y = yrs.get(r.team); if (!y) yrs.set(r.team, y = new Set()); y.add(r.year) }
+    return [...facets.teams.entries()].filter(([t]) => /[A-Za-z]{3,}/.test(t) && !/^\/|#/.test(t) && !/^(baseball|basketball|football|hockey|soccer)$/i.test(t))
+      .sort((a, b) => ((yrs.get(b[0]) || new Set()).size - (yrs.get(a[0]) || new Set()).size) || b[1] - a[1])[0]
+  }, [facets, rows])
   // Earliest season's card; within that season prefer a rookie-flagged base card.
   const firstCard = useMemo(() => {
-    let real = rows.filter(r => /^\d{4}/.test(r.set || '') && r.year)
+    // long-running issues ("1982-92 Nike Poster Cards", "1996-17 BBM ...") aren't a first card
+    let real = rows.filter(r => /^\d{4}/.test(r.set || '') && r.year && !isMultiYear(r.set))
     if (!real.length) real = rows.filter(r => r.year)   // TCG sets aren't named by year ("One Piece OP-01 Romance Dawn")
     if (!real.length) return null
     const y = Math.min(...real.map(r => r.year))
@@ -433,7 +442,8 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
   // "Also listed as" is for real alternate names (Shoeless Joe Jackson), not card text like
   // "Michael Jordan 1987-88 Fleer" (buybacks) or "PT Michael Jordan" (subset prefixes)
   const otherNames = labelList.map(([l]) => l).filter(l => l !== player.name && !/\d|[()\/#]/.test(l) && !/^[A-Z]{1,3}\s/.test(l)
-    && !l.toLowerCase().startsWith(player.name.toLowerCase() + ' ')   // "Connor McDavid Hart" = card text, not a name
+    && !l.toLowerCase().includes(player.name.toLowerCase())   // "Connor McDavid Hart", "Colin Moran Shohei Ohtani on back" = card text, not a name
+    && !player.name.toLowerCase().split(/\s+/).includes(l.toLowerCase())   // just the surname ("Ohtani") isn't another name
     && !(nearName(l, player.name) && facets.labels.get(l) * 10 < (facets.labels.get(player.name) || 0)))   // a rare one-letter slip ("Sidney Crosy") or accent-less copy is a typo, not another name
   const teamList = [...facets.teams.entries()].filter(([t]) => /[A-Za-z]{3,}/.test(t) && !/^\/|#|\d\/\d/.test(t)).sort((a, b) => b[1] - a[1]).slice(0, 12)
   const productOptions = useMemo(() => [...new Set(rows.map(r => r.set.replace(/^\d{4}(-\d{2})?\s*/, '').replace(/\s+(hockey|baseball|basketball|football|soccer).*$/i, '')))].sort(), [rows])
@@ -533,9 +543,9 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
           <div>
             <p style={legend}>Season</p>
             <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-              <Select ariaLabel="From season" value={yearFrom} onChange={(v) => setYearFrom(parseInt(v))} defaultValue={0} width={220} style={{ flex: 1, justifyContent: 'space-between' }} options={[[0, 'Any'], ...years.map(y => [y, seasonLabel(y, player.sport)])]} />
+              <Select ariaLabel="From season" value={yearFrom} onChange={(v) => { const y = parseInt(v); setYearFrom(y); if (y && yearTo !== 9999 && y > yearTo) setYearTo(y) }} defaultValue={0} width={220} style={{ flex: 1, justifyContent: 'space-between' }} options={[[0, 'Any'], ...years.map(y => [y, seasonLabel(y, player.sport)])]} />
               <span style={{ color: '#8A93A8' }}>–</span>
-              <Select ariaLabel="To season" value={yearTo} onChange={(v) => setYearTo(parseInt(v))} defaultValue={9999} width={220} style={{ flex: 1, justifyContent: 'space-between' }} options={[[9999, 'Any'], ...years.map(y => [y, seasonLabel(y, player.sport)])]} />
+              <Select ariaLabel="To season" value={yearTo} onChange={(v) => { const y = parseInt(v); setYearTo(y); if (y !== 9999 && yearFrom && y < yearFrom) setYearFrom(y) }} defaultValue={9999} width={220} style={{ flex: 1, justifyContent: 'space-between' }} options={[[9999, 'Any'], ...years.map(y => [y, seasonLabel(y, player.sport)])]} />
             </div>
           </div>
           <div>
@@ -615,6 +625,7 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
           )}
 
           {Object.keys(facets.mem).length > 0 && <p style={{ color: '#8A93A8', fontSize: 12, margin: 0 }}>* Material based on the maker's standard practice for that product line (hover for the source); no asterisk = stated for that card or insert.</p>}
+          {shard && sorted.length > 0 && <p className="hq-mobile-only" style={{ color: '#8A93A8', fontSize: 12, margin: '0 0 8px' }}>Card tables scroll sideways — swipe for type, material and print run →</p>}
           {!shard ? <p style={{ color: '#8A93A8' }}>Loading {player.name}…</p> : groups ? (
             <>
               {groups.slice(0, limit).map((g, gi) => {

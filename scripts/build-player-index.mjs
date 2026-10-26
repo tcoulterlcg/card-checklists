@@ -24,6 +24,7 @@
 //
 //   node scripts/build-player-index.mjs
 import { fixFlagTail } from '../lib/flag-tail.js'
+import { isMultiYear } from '../lib/catalog.js'
 import { readFileSync, writeFileSync, readdirSync, mkdirSync, existsSync } from 'node:fs'
 import { splitPlayers, subjects, mergePlayers, splitComposites, norm } from './player-names.mjs'
 
@@ -267,6 +268,7 @@ for (const f of setFiles) {
   if (!s.slug || !Array.isArray(s.sections) || s.incomplete) continue
   const setNo = files++
   const sp = intern(s.sport || '', sportsPool, sportIdx)
+  const multiYear = isMultiYear(s.name)
   const seen = new Set()
   // TCDB flags RC on the base card only; its parallels (same number, same player, same set —
   // "Black /1", "Gold Rainbow /10") are the same rookie card. Season and tribute/buyback/prospect
@@ -300,14 +302,16 @@ for (const f of setFiles) {
           if (seen.has(dk)) continue
           seen.add(dk)
           let pl = players.get(key)
-          if (!pl) { pl = { cards: 0, sports: new Map(), teams: new Map(), base: new Map(), labels: new Map(), sets: new Set(), minYear: s.year || 0, maxYear: s.year || 0 }; players.set(key, pl) }
+          if (!pl) { pl = { cards: 0, sports: new Map(), teams: new Map(), base: new Map(), labels: new Map(), sets: new Set(), minYear: 0, maxYear: 0, rMin: 0, rMax: 0 }; players.set(key, pl) }
           pl.cards++
           pl.sets.add(setNo)
           pl.sports.set(sp, (pl.sports.get(sp) || 0) + 1)
           pl.base.set(base, (pl.base.get(base) || 0) + 1)
           pl.labels.set(label, (pl.labels.get(label) || 0) + 1)
           if (c.t) pl.teams.set(c.t, (pl.teams.get(c.t) || 0) + 1)
-          if (s.year) { if (!pl.minYear || s.year < pl.minYear) pl.minYear = s.year; if (s.year > pl.maxYear) pl.maxYear = s.year }
+          // a multi-year issue ("1996-17 BBM ...") only sets the career span when nothing else does
+          if (s.year && !multiYear) { if (!pl.minYear || s.year < pl.minYear) pl.minYear = s.year; if (s.year > pl.maxYear) pl.maxYear = s.year }
+          else if (s.year) { if (!pl.rMin || s.year < pl.rMin) pl.rMin = s.year; if (s.year > pl.rMax) pl.rMax = s.year }
           const sh = shards[hash(key)]
           const vetMem = c.m ? memCode(c.m) : secMem
           let mem = vetMem
@@ -335,7 +339,9 @@ for (const [k, pl] of players) {
   for (const [l, n] of pl.labels) g.labels.set(l, (g.labels.get(l) || 0) + n)
   if (pl.minYear && (!g.minYear || pl.minYear < g.minYear)) g.minYear = pl.minYear
   if (pl.maxYear > g.maxYear) g.maxYear = pl.maxYear
+  if (!pl.minYear && pl.rMin) { g.rMin = g.rMin ? Math.min(g.rMin, pl.rMin) : pl.rMin; g.rMax = Math.max(g.rMax || 0, pl.rMax) }
 }
+for (const g of groups.values()) if (!g.minYear && g.rMin) { g.minYear = g.rMin; g.maxYear = g.rMax }
 // Cards naming several players / characters ("Elsa and Anna") go to each of them.
 const splits = splitComposites(groups, sportsPool)
 for (const [k, ts] of splits) {

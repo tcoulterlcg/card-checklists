@@ -3,6 +3,7 @@
 // collection tracker. Dark + electric blue to match the site shell. Data via lib/supa.
 import { loadSet, loadRedirects, sectionKey } from '../lib/catalog'
 import { useEffect, useMemo, useRef, useState } from 'react'
+import { useDialogFocus } from './dialog-focus'
 import { collectionCardN, supa, signOutHere, grailfindrConnectUrl, grailfindrSignupUrl, grailfindrForgotUrl, grailfindrFindUrl, GRAILFINDR_URL, getProfile, ensureProfile, updateProfile, addWant, removeWant, deletePost, myWantlist, toggleCollected, myCollection, uploadCardImage, setCollectionImage, forumFeed, createPost, react, comments, addComment } from '../lib/supa'
 import { ACCENT, ACCENT_TEXT, BG, SURFACE, SURFACE_2, LINE, CHIP_LINE, TEXT, TEXT_2, LABEL, display, eyebrow, title, buttonText } from '../lib/theme'
 
@@ -65,12 +66,14 @@ export function AuthModal({ open, onClose, account }) {
     document.addEventListener('keydown', onKey)
     return () => { document.removeEventListener('keydown', onKey); if (prev && prev.focus) prev.focus() }
   }, [open])
+  const boxRef = useRef(null)
+  useDialogFocus(boxRef, open)
   if (!open) return null
   const needsProfile = session && profile === null
   const profileLoading = session && profile === undefined
   return (
     <div onClick={onClose} style={{ position: 'fixed', inset: 0, background: '#000a', zIndex: 90, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      <div role="dialog" aria-modal="true" aria-label={session ? "Your profile" : "Sign in to CardHQ"} onClick={(e) => e.stopPropagation()} style={{ ...card, width: 'min(420px, 92vw)', padding: 28, position: 'relative' }}>
+      <div ref={boxRef} role="dialog" aria-modal="true" aria-label={session ? "Your profile" : "Sign in to CardHQ"} onClick={(e) => e.stopPropagation()} style={{ ...card, width: 'min(420px, 92vw)', padding: 28, position: 'relative' }}>
         <button aria-label="Close" onClick={onClose} style={{ position: 'absolute', top: 10, right: 10, width: 36, height: 36, background: 'none', border: 'none', color: '#8A93A8', fontSize: 20, cursor: 'pointer', borderRadius: 8 }}>×</button>
         {!session ? (
           <>

@@ -6,7 +6,9 @@
   shared links and Google show that page, not the home page.
 - **Set slugs are public URLs.** If an import renames or removes a set file, add `old-slug -> new-slug` to
   `public/data/redirects.json` (see `scripts/dedupe-sets.mjs`). Never delete a set file without a redirect.
-- **After any data import:** run `node scripts/cleanup-names.mjs` (name/team/junk hygiene), then the normal build.
+- **After any data import:** run `node scripts/cleanup-names.mjs` (name/team/junk hygiene; it ends with `fix-name-caps.mjs`,
+  which restores dropped apostrophes and stray capitals — "Ed ONeill" → "Ed O'Neill", "Red WIngs" → "Red Wings" — only where the
+  rest of the data backs the fix), then the normal build.
   After a Break Ninja import also run `node scripts/fix-breakninja.mjs` (its free preview stops at 250 rows — those sets
   are hidden and queued for TCDB — its tables repeat unnumbered rows, and its per-team tables come through as sections named after teams) and `node scripts/dedupe-near.mjs` (same product
   under two slugs). A set with `incompleteWhy` is hidden on purpose; cleanup scripts keep it hidden until a fuller copy replaces it.

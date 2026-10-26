@@ -5,6 +5,7 @@
 // triage them at ?view=feedback, everyone else sees the status of their own.
 import { useEffect, useRef, useState } from 'react'
 import { Select } from './dropdown'
+import { useDialogFocus } from './dialog-focus'
 import { submitFeedback, listFeedback, setFeedbackStatus, isAdmin, newFeedbackCount } from '../lib/supa'
 import { ACCENT, ACCENT_TEXT, TEXT, TEXT_2, LABEL, LINE, display, eyebrow, title, buttonText } from '../lib/theme'
 
@@ -55,6 +56,8 @@ export function FeedbackModal({ open, onClose, account, context = {}, onOpenAuth
     document.addEventListener('keydown', onKey)
     return () => { document.removeEventListener('keydown', onKey); if (prev && prev.focus) prev.focus() }
   }, [open])
+  const boxRef = useRef(null)
+  useDialogFocus(boxRef, open)
   if (!open) return null
 
   const isFeature = kind === 'feature'
@@ -98,7 +101,7 @@ export function FeedbackModal({ open, onClose, account, context = {}, onOpenAuth
 
   return (
     <div onClick={onClose} style={{ position: 'fixed', inset: 0, background: '#000a', zIndex: 90, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 16 }}>
-      <div role="dialog" aria-modal="true" aria-label="Send feedback" onClick={(e) => e.stopPropagation()}
+      <div ref={boxRef} role="dialog" aria-modal="true" aria-label="Send feedback" onClick={(e) => e.stopPropagation()}
         style={{ ...card, width: 'min(520px, 100%)', maxHeight: '92vh', overflowY: 'auto', padding: 26, position: 'relative', boxSizing: 'border-box' }}>
         <button aria-label="Close" onClick={onClose} style={{ position: 'absolute', top: 10, right: 10, width: 36, height: 36, background: 'none', border: 'none', color: LABEL, fontSize: 20, cursor: 'pointer', borderRadius: 8 }}>×</button>
         {done ? (

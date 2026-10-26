@@ -11,7 +11,7 @@ import { FeedbackModal, FeedbackView, useFeedbackAdmin } from '../components/fee
 import { FixEditor } from '../components/fix-editor'
 import { Omnibox, PlayerPage, MyPlayersPanel, useMyPlayers, loadPlayerDir, loadTopPlayers, seasonLabel, MemBadge, MemChip, memCodeOf } from '../components/player'
 import { ComparePage } from '../components/compare'
-import { norm, parseQuery, parseQueryFor, matchPlayers, TYPE, typeLabel, TYPE_COLORS, serialLabel } from '../lib/query'
+import { norm, setNameMatches, STOP_PLAYER, parseQuery, parseQueryFor, matchPlayers, TYPE, typeLabel, TYPE_COLORS, serialLabel } from '../lib/query'
 import { loadSet, loadIndex, loadRedirects, sectionKey } from '../lib/catalog'
 import { classifySet, brandSort, BRAND_COLORS } from '../lib/brands'
 import { ACCENT, ACCENT_TEXT, BG, SURFACE, SURFACE_2, LINE, CHIP_LINE, TEXT, TEXT_2, LABEL, display, eyebrow, title, buttonText } from '../lib/theme'
@@ -95,6 +95,12 @@ function makeComparator(field, dir) {
     const va = String(a[field] || '').toLowerCase()
     const vb = String(b[field] || '').toLowerCase()
     if (va === vb) return 0
+    if (field === 'x') {   // flags: print runs by number (/5 before /25), then the rest A–Z
+      const ra = va.match(/\/(\d+)/), rb = vb.match(/\/(\d+)/)
+      if (ra && rb && +ra[1] !== +rb[1]) return (ra[1] - rb[1]) * s
+      if (ra && !rb && vb) return -1 * s
+      if (rb && !ra && va) return 1 * s
+    }
     if (!va) return 1
     if (!vb) return -1
     return va.localeCompare(vb) * s
@@ -504,9 +510,14 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
   // (otherwise a late set/player load could replace the page you've since moved to).
   const navSeq = useRef(0)
   const nav = (url, push) => { navSeq.current++; if (push === false) return; try { history.pushState(null, '', url) } catch {} }
-  const openSet = async (s, push) => {
+  // st: filters from the link (?set=…&sec=…&ctype=…&run=…&rc=1&mem=…&f=…), so Back and shared links restore them
+  const openSet = async (s, push, st) => {
     setNotice('')
-    setActiveSet(s); setGlobalHits(null); setActiveSection('All'); setShowAllSecs(false); setQuery(''); setActivePlayer(null); setView('browse'); setSetTypeFilter('All'); setSetRunFilter('any'); setSetRcOnly(false); setSetMemFilter('any'); setSecLimit(20); setOpenSecs(new Set())
+    st = st || {}
+    setActiveSet(s); setGlobalHits(null); setActiveSection(st.sec || 'All'); setShowAllSecs(false); setQuery(st.f || ''); setActivePlayer(null); setView('browse')
+    setSetTypeFilter(['BASE', 'AU', 'PA', 'PATCH', 'RELIC', 'PLATE', 'OTHER'].includes(st.ctype) ? st.ctype : 'All')
+    setSetRunFilter(['1', '10', '25', '99', 'numbered', 'unnumbered'].includes(st.run) ? st.run : 'any')
+    setSetRcOnly(st.rc === '1'); setSetMemFilter(['MEMO', 'GU', 'PW', 'EW', 'MX', 'MFG', 'UNK', 'STATED'].includes(st.mem) ? st.mem : 'any'); setSecLimit(20); setOpenSecs(new Set())
     nav('?set=' + encodeURIComponent(s.slug), push)
     const my = navSeq.current
     setSetData(null); setSetLoadErr(false)
@@ -514,6 +525,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
     try { data = await loadSet(s.slug) } catch (e) {}
     if (my !== navSeq.current) return
     if (!data) { setSetLoadErr(true); return }
+    if (st.sec && !(data.sections || []).some(x => x.title === st.sec)) setActiveSection('All')   // an old link's section was renamed
     setSetData(data)
     window.scrollTo(0, 0)
   }
@@ -561,13 +573,13 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
     const dir = await loadPlayerDir()
     if (my !== navSeq.current) { setSearching(false); return }   // moved on while the directory loaded
     const parsed = parseQueryFor(dir, q)
-    if (parsed.player.length >= 2) {
+    if (parsed.player.length >= 2 && !STOP_PLAYER.has(norm(parsed.player))) {
       const hits = matchPlayers(dir, parsed.player, 8)
       // A product word ("prizm", "gold", "topps chrome 2024") shouldn't jump to a
       // 2-card "player": if set names match and the best player is minor or a
       // typo guess, show the results page (players + sets) instead.
       const toks = norm(q).split(' ').filter(Boolean)
-      const setMatch = toks.length && sets.some(x => { const n = norm(x.name); return toks.every(t => n.includes(t)) })
+      const setMatch = toks.length && sets.some(x => setNameMatches(x.name, toks))
       const weak = !hits.length || hits[0].fuzzy || hits[0].cards < 50
       if (hits.length && !(setMatch && weak)) { setSearching(false); openPlayer(hits[0], parsed, hits); return }
     }
@@ -592,7 +604,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
     players.sort((a, b) => b.cards - a.cards)
     const toks = norm(term).split(' ').filter(Boolean)
     // a punctuation-only search matches nothing, not every set
-    const setHits = !toks.length ? [] : sets.filter(x => { const n = norm(x.name); return toks.every(t => n.includes(t)) }).sort((a, b) => (b.year || 0) - (a.year || 0)).slice(0, 60)
+    const setHits = !toks.length ? [] : sets.filter(x => setNameMatches(x.name, toks)).sort((a, b) => (b.year || 0) - (a.year || 0)).slice(0, 60)
     // A product word ("prizm") matches scraped one-off "players" ("Prizm Fireworks", 1 card): when sets
     // match and no real player does, lead with the sets and drop the 1–4 card names.
     const minor = setHits.length > 0 && !(players[0] && players[0].cards >= 50)
@@ -701,8 +713,8 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
     if (term && !activeSet) {
       // word-by-word ("chrome 2024 topps"); a player name typed into the search
       // matches no set name, so it leaves the grid alone instead of emptying it
-      const toks = term.split(/\s+/).filter(Boolean)
-      const hit = list.filter(s => { const n = s.name.toLowerCase(); return toks.every(t => n.includes(t)) })
+      const toks = norm(term).split(' ').filter(Boolean)
+      const hit = toks.length ? list.filter(s => setNameMatches(s.name, toks)) : []
       if (hit.length) list = hit
     }
     return list
@@ -731,6 +743,22 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
 
   const isTcg = TCG_SET.has(sportFilter)
   const setIsTcg = !!(activeSet && TCG_SET.has(activeSet.sport))
+  // Columns and filters a set actually uses: Looney Tunes has no teams or flags, a TCG set has no
+  // rookies, autos or print runs — empty columns and do-nothing filters are hidden.
+  const setFacets = useMemo(() => {
+    const f = { team: false, flag: false, serial: false, kinds: new Set(), rc: false }
+    for (const sec of (setData && setData.sections) || []) {
+      f.kinds.add(secKind(sec.title))
+      if (/\/\s*\d|1\s*of\s*1|printing plate/i.test(sec.title || '') || /#\/\s*\d/.test(sec.odds || '')) f.serial = true
+      if (/rookie|young guns|\brc\b/i.test(sec.title || '')) f.rc = true
+      for (const c of sec.cards || []) {
+        if (c.t) f.team = true
+        if (c.x) { f.flag = true; if (/\//.test(c.x)) f.serial = true; if (/\bRC\b/.test(c.x)) f.rc = true; if (/\bAU\b/.test(c.x)) f.kinds.add('AU') }
+      }
+    }
+    return f
+  }, [setData])
+  const setIsSport = !!(setData && !TCG_SET.has(setData.sport) && !OTHER_SET.has(setData.sport))
   const tcgActive = isTcg && (teamFilter !== 'All' || tcgRarity !== 'All' || tcgType !== 'All')
   const browseActive = oneSport && (isTcg ? tcgActive : teamFilter !== 'All')
 
@@ -767,7 +795,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
   const teamHits = useMemo(() => {
     if (!searchIndex || !browseActive || searchIndex.__key !== (isTcg ? sportFilter : sportFilter + '|' + teamFilter)) return []
     const { slugs, sections, teams, rows } = searchIndex
-    const setMeta = {}; for (const s of sets) setMeta[s.slug] = s
+    const setMeta = {}; for (const s of taggedSets) setMeta[s.slug] = s
     const out = []
     const needle = teamFilter === 'All' ? '' : teamFilter.toLowerCase()
     for (const row of rows) {
@@ -779,6 +807,8 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
       const slug = slugs[row[1]]
       if (slugSport[slug] !== sportFilter) continue
       const m = setMeta[slug] || {}
+      if (brandFilter !== 'All' && m.brand !== brandFilter) continue   // the sidebar's Brand / Product menus narrow the cards too
+      if (productFilter !== 'All' && m.product !== productFilter) continue
       out.push({ p: row[0], slug, n: row[2], section: sections[row[3]] || '', x: row[5], t: row[4] >= 0 ? teams[row[4]] : '', set: m.name, year: m.year, sport: m.sport })
     }
     const bySet = (a, b) => (a.set || '').localeCompare(b.set || '')
@@ -789,7 +819,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
       return ((b.year || 0) - (a.year || 0)) || bySet(a, b) // year-desc
     })
     return out.slice(0, 2500)
-  }, [searchIndex, teamFilter, oneSport, sportFilter, slugSport, sets, teamSort, isTcg, browseActive, tcgRarity, tcgType])
+  }, [searchIndex, teamFilter, oneSport, sportFilter, slugSport, taggedSets, teamSort, isTcg, browseActive, tcgRarity, tcgType, brandFilter, productFilter])
 
   const rcCount = (j) => (j.sections || []).reduce((s, sec) => s + sec.cards.filter(c => /\bRC\b/.test(c.x || '')).length, 0)
 
@@ -924,8 +954,8 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
                   <div className="hq-setrow" style={{ display: 'flex', gap: 14, padding: '9px 16px', background: '#121626', borderBottom: '1px solid #232A3E', alignItems: 'center' }}>
                     <div className="hq-col-num" style={{ flex: '0 0 68px' }}><SortHeader label="Card #" field="n" sortField={sortField} sortDir={sortDir} onClick={toggleSort} /></div>
                     <div style={{ flex: '1 1 0', minWidth: 0 }}><SortHeader label={setIsTcg ? 'Card' : 'Player'} field="p" sortField={sortField} sortDir={sortDir} onClick={toggleSort} grow /></div>
-                    <div className="hq-col-team" style={{ flex: '1 1 0', minWidth: 0 }}><SortHeader label={setIsTcg ? 'Type' : 'Team'} field="t" sortField={sortField} sortDir={sortDir} onClick={toggleSort} grow /></div>
-                    <div className="hq-col-flag" style={{ flex: setIsTcg ? '0 0 110px' : '0 0 70px' }}><SortHeader label={setIsTcg ? 'Rarity' : 'Flag'} field="x" sortField={sortField} sortDir={sortDir} onClick={toggleSort} align="right" /></div>
+                    {setFacets.team && <div className="hq-col-team" style={{ flex: '1 1 0', minWidth: 0 }}><SortHeader label={setIsTcg ? 'Type' : 'Team'} field="t" sortField={sortField} sortDir={sortDir} onClick={toggleSort} grow /></div>}
+                    {setFacets.flag && <div className="hq-col-flag" style={{ flex: setIsTcg ? '0 0 110px' : '0 0 96px' }}><SortHeader label={setIsTcg ? 'Rarity' : 'Flag'} field="x" sortField={sortField} sortDir={sortDir} onClick={toggleSort} align="right" /></div>}
                     <span aria-hidden="true" style={{ flex: '0 0 78px' }} />
                   </div>
                   {sorted.slice(0, openSecs.has(sec.title) ? 5000 : 200).map((c, i) => (
@@ -939,8 +969,8 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
                         {(c.v || c.d) && <span style={{ display: 'block', color: '#8A93A8', fontSize: 12, marginTop: 2 }}>{[c.v, c.d].filter(Boolean).join(' · ')}</span>}
                         {c.t && <span className="hq-mobile-only" style={{ color: '#8A93A8', fontSize: 12, marginTop: 2 }}>{c.t}</span>}
                       </span>
-                      <span className="hq-col-team" style={{ flex: '1 1 0', minWidth: 0, color: '#8A93A8', fontSize: 13 }}>{c.t || ''}</span>
-                      <span className="hq-col-flag" style={{ flex: setIsTcg ? '0 0 110px' : '0 0 70px', textAlign: 'right' }}>{c.x ? <Chip color={/\bRC\b/.test(c.x) ? '#4ade80' : '#8A93A8'} title={flagTitle(c.x)}>{c.x}</Chip> : null}</span>
+                      {setFacets.team && <span className="hq-col-team" style={{ flex: '1 1 0', minWidth: 0, color: '#8A93A8', fontSize: 13 }}>{c.t || ''}</span>}
+                      {setFacets.flag && <span className="hq-col-flag" style={{ flex: setIsTcg ? '0 0 110px' : '0 0 96px', textAlign: 'right' }}>{c.x ? <Chip color={/\bRC\b/.test(c.x) ? '#4ade80' : '#8A93A8'} title={flagTitle(c.x)}>{c.x}</Chip> : null}</span>}
                       <a href={grailfindrFindUrl({ setName: setData.name, player: c.p, n: c.n, section: sec.title })} target="_blank" rel="noreferrer"
                         title="Find this card for sale on GrailFindr (every marketplace)" aria-label={'Find ' + (c.p || 'this card') + ' on GrailFindr'}
                         style={{ flex: '0 0 32px', height: 32, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', border: '1px solid #232A3E', borderRadius: 6, color: '#8A93A8', textDecoration: 'none' }}>
@@ -958,7 +988,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
                 </div>
               </div>
             )
-          }), [setData, visibleSections, secLimit, sortField, sortDir, openSecs, setIsTcg, wanted, mineSet])
+          }), [setData, visibleSections, secLimit, sortField, sortDir, openSecs, setIsTcg, setFacets, wanted, mineSet])
   const urlApplied = useRef(false)   // don't overwrite a shared ?sport=… link before applyUrl has read it
   useEffect(() => {
     if (!isLanding || sets.length === 0 || !urlApplied.current) return
@@ -972,9 +1002,26 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
     if (teamFilter !== 'All') q.set('team', teamFilter)
     if (tcgRarity !== 'All') q.set('rarity', tcgRarity)
     if (tcgType !== 'All') q.set('type', tcgType)
+    if (teamSort !== 'year-desc' && browseActive) q.set('tsort', teamSort)
     const url = location.pathname + (q.toString() ? '?' + q : '')
     if (url !== location.pathname + location.search) { try { history.replaceState(null, '', url) } catch {} }
-  }, [isLanding, sets.length, sportFilter, brandFilter, productFilter, sortBy, teamFilter, tcgRarity, tcgType])
+  }, [isLanding, sets.length, sportFilter, brandFilter, productFilter, sortBy, teamFilter, tcgRarity, tcgType, teamSort, browseActive])
+  // The set page's filters live in its URL (replaced, not pushed), so Back from a card's player page
+  // and shared links come back to the same view.
+  useEffect(() => {
+    if (!activeSet || !setData) return
+    const sp = new URLSearchParams(location.search)
+    if (sp.get('set') !== activeSet.slug) return
+    const q = new URLSearchParams(); q.set('set', activeSet.slug)
+    if (activeSection !== 'All' && (setData.sections || []).some(x => x.title === activeSection)) q.set('sec', activeSection)
+    if (setTypeFilter !== 'All') q.set('ctype', setTypeFilter)
+    if (setRunFilter !== 'any') q.set('run', setRunFilter)
+    if (setRcOnly) q.set('rc', '1')
+    if (setMemFilter !== 'any') q.set('mem', setMemFilter)
+    if (dQuery.trim()) q.set('f', dQuery.trim().slice(0, 100))
+    const url = location.pathname + '?' + q
+    if (url !== location.pathname + location.search) { try { history.replaceState(history.state, '', url) } catch {} }
+  }, [activeSet, setData, activeSection, setTypeFilter, setRunFilter, setRcOnly, setMemFilter, dQuery])
   // Tab / history title per view (shared links and browser history read better).
   useEffect(() => {
     const t = activeSet ? (setData ? setData.name : activeSet.name) + ' Checklist'
@@ -994,11 +1041,12 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
     else if (pl) { const q = sp.get('q'); setQuery(q || pl); openPlayerByName(pl, q, false, sp.get('sport') || undefined) }
     else if (st) {
       const s = sets.find(x => x.slug === st) || sets.find(x => x.slug.toLowerCase() === st.toLowerCase())
-      if (s) openSet(s, false)
+      const keep = { sec: sp.get('sec'), ctype: sp.get('ctype'), run: sp.get('run'), rc: sp.get('rc'), mem: sp.get('mem'), f: sp.get('f') }
+      if (s) openSet(s, false, keep)
       else loadRedirects().then(rd => {
         const to = rd[st] || rd[st.toLowerCase()]
         const t = to && sets.find(x => x.slug === to)
-        if (t) openSet(t, false); else { goHome(false); setNotice('That set isn’t in the database (the link may be old). Browse or search below.') }
+        if (t) openSet(t, false, keep); else { goHome(false); setNotice('That set isn’t in the database (the link may be old). Browse or search below.') }
       })
     }
     else if (sr && sr.trim().length >= 3) runGlobalSearch(sr, false)
@@ -1015,6 +1063,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
       const SORTS = ['year-desc', 'year-asc', 'name-asc', 'name-desc', 'cards-desc', 'cards-asc', 'category', 'brand']
       setSportFilter(sport); setBrandFilter(g('brand')); setProductFilter(g('product')); setSortBy(SORTS.includes(sp.get('sort')) ? sp.get('sort') : 'year-desc')
       setTcgRarity(g('rarity')); setTcgType(g('type'))
+      setTeamSort(['year-desc', 'year-asc', 'player', 'set'].includes(sp.get('tsort')) ? sp.get('tsort') : 'year-desc')
       const tm = sp.get('team')
       if ((tm || sp.get('rarity') || sp.get('type')) && sport !== 'All') { setTeamInput(tm || ''); setTeamFilter(tm || 'All'); openTeamBrowse(sport) }
     }
@@ -1353,22 +1402,22 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
 
           {/* FILTER BAR */}
           <div style={{ background: '#0F1320', border: '1px solid #232323', borderRadius: 14, padding: '10px 12px', display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center', marginBottom: 12 }}>
-            <button aria-pressed={onlyMine} onClick={() => setOnlyMine(v => !v)} title={myPlayers.list.length ? 'Only show cards of players you collect' : 'Add players from any player page first'}
+            {(onlyMine || !setIsTcg) && <button aria-pressed={onlyMine} onClick={() => setOnlyMine(v => !v)} title={myPlayers.list.length ? 'Only show cards of players you collect' : 'Add players from any player page first'}
               style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: onlyMine ? '#0e1630' : '#121626', border: '1px solid ' + (onlyMine ? ACCENT : '#232A3E'), color: onlyMine ? '#8fb0ff' : '#D4D4D8', borderRadius: 10, padding: '0 14px', height: 40, fontSize: 14, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit' }}>
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><path d="M20 21a8 8 0 0 0-16 0" /><circle cx="12" cy="8" r="4" /></svg>
               My players <span style={{ background: onlyMine ? ACCENT : '#232A3E', color: onlyMine ? '#fff' : '#A1A1AA', borderRadius: 999, padding: '1px 7px', fontSize: 12, fontWeight: 700 }}>{myPlayers.list.length}</span>
-            </button>
+            </button>}
             <Select ariaLabel="Section" value={activeSection} onChange={setActiveSection} defaultValue="All" width={340}
               options={[['All', 'All sections (' + (setData.sections || []).length + ')'], ...(setData.sections || []).map(s => [s.title, s.title + ' (' + s.cards.length + ')'])]} />
-            <Select ariaLabel="Card type" value={setTypeFilter} onChange={setSetTypeFilter} defaultValue="All" width={240}
-              options={[['All', 'Any type'], ['BASE', 'Base'], ['AU', 'Autographs'], ['PA', 'Patch autos'], ['PATCH', 'Patches'], ['RELIC', 'Relics'], ['PLATE', 'Printing plates'], ['OTHER', 'Inserts & parallels']]} />
-            <Select ariaLabel="Print run" value={setRunFilter} onChange={setSetRunFilter} defaultValue="any" width={220}
-              options={[['any', 'Any run'], ['1', '1/1 only'], ['10', '≤ /10'], ['25', '≤ /25'], ['99', '≤ /99'], ['numbered', 'Numbered'], ['unnumbered', 'Unnumbered']]} />
+            {(setTypeFilter !== 'All' || [...setFacets.kinds].some(k => k !== 'BASE' && k !== 'OTHER')) && <Select ariaLabel="Card type" value={setTypeFilter} onChange={setSetTypeFilter} defaultValue="All" width={240}
+              options={[['All', 'Any type'], ['BASE', 'Base'], ['AU', 'Autographs'], ['PA', 'Patch autos'], ['PATCH', 'Patches'], ['RELIC', 'Relics'], ['PLATE', 'Printing plates'], ['OTHER', 'Inserts & parallels']]} />}
+            {(setRunFilter !== 'any' || setFacets.serial) && <Select ariaLabel="Print run" value={setRunFilter} onChange={setSetRunFilter} defaultValue="any" width={220}
+              options={[['any', 'Any run'], ['1', '1/1 only'], ['10', '≤ /10'], ['25', '≤ /25'], ['99', '≤ /99'], ['numbered', 'Numbered'], ['unnumbered', 'Unnumbered']]} />}
             {(setData.sections || []).some(x => x.mem || x.cards.some(c => c.m)) && (
               <Select ariaLabel="Memorabilia" value={setMemFilter} onChange={setSetMemFilter} defaultValue="any" width={280}
                 options={[['any', 'Any material'], ['MEMO', 'Memorabilia only'], ['GU', 'Game-used'], ['PW', 'Player-worn'], ['EW', 'Event-worn'], ['MX', 'Varies by card'], ['MFG', 'Manufactured'], ['UNK', 'Unknown'], ['STATED', 'Stated by maker/source only']]} />
             )}
-            <label style={{ display: 'inline-flex', alignItems: 'center', gap: 8, fontSize: 14, color: '#A1A1AA', minHeight: 40, cursor: 'pointer' }}><input type="checkbox" checked={setRcOnly} onChange={(e) => setSetRcOnly(e.target.checked)} style={{ accentColor: ACCENT, width: 16, height: 16 }} />Rookies only</label>
+            {(setRcOnly || (setIsSport && setFacets.rc)) && <label style={{ display: 'inline-flex', alignItems: 'center', gap: 8, fontSize: 14, color: '#A1A1AA', minHeight: 40, cursor: 'pointer' }}><input type="checkbox" checked={setRcOnly} onChange={(e) => setSetRcOnly(e.target.checked)} style={{ accentColor: ACCENT, width: 16, height: 16 }} />Rookies only</label>}
             {(onlyMine || setTypeFilter !== 'All' || setRunFilter !== 'any' || setRcOnly || setMemFilter !== 'any' || activeSection !== 'All' || query) && (
               <button onClick={() => { setSetMemFilter('any'); setOnlyMine(false); setSetTypeFilter('All'); setSetRunFilter('any'); setSetRcOnly(false); setActiveSection('All'); setQuery('') }} style={{ background: 'none', border: 'none', color: ACCENT_TEXT, fontSize: 13, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit', marginLeft: 'auto' }}>Clear filters</button>
             )}
@@ -1664,19 +1713,19 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
             </h2>
           </div>
           <div style={{ border: '1px solid #222', borderRadius: 12, overflow: 'hidden' }}>
-            <div style={{ ...eyebrow, display: 'flex', gap: 12, padding: '9px 16px', background: '#121626', borderBottom: '1px solid #232A3E', color: '#8A93A8' }}>
-              <span style={{ flex: '0 0 60px' }}>Card</span>
-              <span style={{ flex: '1 1 auto', minWidth: 0 }}>{isTcg ? 'Card' : 'Player'}</span>
-              <span style={{ flex: isTcg ? '0 0 120px' : '0 0 54px' }}>{isTcg ? 'Rarity' : 'Flag'}</span>
-              <span style={{ flex: '2 1 0', minWidth: 0 }}>Set · Section</span>
+            <div className="hq-browse-row hq-browse-head" style={{ ...eyebrow, display: 'flex', gap: 12, padding: '9px 16px', background: '#121626', borderBottom: '1px solid #232A3E', color: '#8A93A8' }}>
+              <span style={{ flex: '0 0 60px' }}>Card #</span>
+              <span style={{ flex: '1 1 0', minWidth: 0 }}>{isTcg ? 'Name' : 'Player'}</span>
+              <span style={{ flex: isTcg ? '0 0 120px' : '0 0 96px' }}>{isTcg ? 'Rarity' : 'Flag'}</span>
+              <span className="hq-browse-set" style={{ flex: '2 1 0', minWidth: 0 }}>Set · Section</span>
             </div>
             {teamHits.map((c, i) => (
               <button key={i} onClick={() => { const s = sets.find(x => x.slug === c.slug); if (s) openSet(Object.assign({}, s, classifySet(s.name, s.year))) }}
-                style={{ width: '100%', textAlign: 'left', display: 'flex', gap: 12, padding: '8px 16px', fontSize: 14, alignItems: 'baseline', background: i % 2 === 0 ? '#0F1320' : '#121626', border: 'none', color: '#EDEDEF', cursor: 'pointer' }}>
-                <span style={{ flex: '0 0 60px', color: ACCENT_TEXT, fontWeight: 700, fontVariantNumeric: 'tabular-nums' }}>{c.n ? '#' + c.n : '—'}</span>
-                <span style={{ flex: '1 1 auto', minWidth: 0, fontWeight: 600 }}>{c.p}{isTcg && c.t ? <span style={{ color: '#8A93A8', fontWeight: 400, fontSize: 13 }}> · {c.t}</span> : null}</span>
-                <span style={{ flex: isTcg ? '0 0 120px' : '0 0 54px' }}>{c.x ? <Chip color={/\bRC\b/.test(c.x) ? '#4ade80' : '#8A93A8'}>{c.x}</Chip> : null}</span>
-                <span style={{ flex: '2 1 0', minWidth: 0, color: '#8A93A8', fontSize: 13 }}>{c.set}{c.section ? ' · ' + c.section : ''}</span>
+                className="hq-browse-row" style={{ width: '100%', textAlign: 'left', display: 'flex', gap: 12, padding: '8px 16px', fontSize: 14, alignItems: 'baseline', background: i % 2 === 0 ? '#0F1320' : '#121626', border: 'none', color: '#EDEDEF', cursor: 'pointer', fontFamily: 'inherit' }}>
+                <span style={{ flex: '0 0 60px', color: ACCENT_TEXT, fontWeight: 700, fontVariantNumeric: 'tabular-nums', overflowWrap: 'anywhere' }}>{c.n ? '#' + c.n : '—'}</span>
+                <span style={{ flex: '1 1 0', minWidth: 0, fontWeight: 600, overflowWrap: 'anywhere' }}>{c.p}{isTcg && c.t ? <span style={{ color: '#8A93A8', fontWeight: 400, fontSize: 13 }}> · {c.t}</span> : null}</span>
+                <span style={{ flex: isTcg ? '0 0 120px' : '0 0 96px' }}>{c.x ? <Chip color={/\bRC\b/.test(c.x) ? '#4ade80' : '#8A93A8'} title={flagTitle(c.x)}>{c.x}</Chip> : null}</span>
+                <span className="hq-browse-set" style={{ flex: '2 1 0', minWidth: 0, color: '#8A93A8', fontSize: 13 }}>{c.set}{c.section ? ' · ' + c.section : ''}</span>
               </button>
             ))}
             {sliceLoading && <p style={{ padding: 20, color: '#8A93A8', fontSize: 14 }}>Loading {teamFilter} cards…</p>}

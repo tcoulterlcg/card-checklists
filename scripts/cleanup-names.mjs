@@ -366,3 +366,5 @@ for (const [f, s] of sets) {
 console.log(`exact duplicate rows dropped ${stats.dupRows}, duplicate section titles fixed ${stats.dupSecs}, widget listings dropped ${widgetDropped}, affiliate text removed ${shopFixed}, duplicate rows merged ${stats.merged}, team fields cleaned ${stats.team}, junk rows dropped ${stats.junk}, names tidied ${stats.tidied}, flag tails moved ${stats.flagTails || 0}, encoding repaired ${stats.repaired}, spellings unified ${stats.unified}, files changed ${stats.files}${DRY ? ' (dry run)' : ''}`)
 if (REPORT) writeFileSync(REPORT.slice(9), [...renames.entries()].sort((a, b) => b[1] - a[1]).map(([k, n]) => n + '\t' + k).join('\n'))
 if (stats.unrepaired.size) console.log(`unrepaired (${stats.unrepaired.size}):`, [...stats.unrepaired].slice(0, 40).join(' | '))
+// stray double capitals ("Ed ONeill", "Red WIngs") in every static set, sports or not
+await import('./fix-name-caps.mjs')
