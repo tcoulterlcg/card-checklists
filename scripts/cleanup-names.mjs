@@ -41,6 +41,7 @@ function tidy(p) {
   s = s.replace(/\s+(19|20)\d\d$/, (m) => { const rest = s.slice(0, -m.length); return /^[A-Z][\w'.-]+( [A-Z][\w'.-]+)+$/.test(rest) && !/\d/.test(rest) ? '' : m })
   if (/\)$/.test(s) && !s.includes('(')) s = s.slice(0, -1).trim()
   if (/^\(/.test(s) && !s.includes(')')) s = s.slice(1).trim()
+  s = s.replace(/\s{2,}/g, ' ').replace(/(\S)\s?\/\s?(?=\S)/g, (m, a) => /\s/.test(m) ? a + ' / ' : m)   // "Tony D'Angelo  /Adriana Rizzo" -> " / "
   return s
 }
 
