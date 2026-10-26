@@ -588,7 +588,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
     }
     players.sort((a, b) => b.cards - a.cards)
     const toks = norm(term).split(' ').filter(Boolean)
-    const setHits = sets.filter(x => { const n = norm(x.name); return toks.every(t => n.includes(t)) }).sort((a, b) => (b.year || 0) - (a.year || 0)).slice(0, 60)
+    const setHits = !toks.length ? [] : sets.filter(x => { const n = norm(x.name); return toks.every(t => n.includes(t)) })   // punctuation-only search matches nothing, not every set.sort((a, b) => (b.year || 0) - (a.year || 0)).slice(0, 60)
     // A product word ("prizm") matches scraped one-off "players" ("Prizm Fireworks", 1 card): when sets
     // match and no real player does, lead with the sets and drop the 1–4 card names.
     const minor = setHits.length > 0 && !(players[0] && players[0].cards >= 50)
@@ -807,7 +807,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
   const [deepLoading, setDeepLoading] = useState(false)
   useEffect(() => {
     const unhide = () => document.documentElement.classList.remove('hq-deep')   // set by the inline script in layout.js
-    if (!/[?&](set|player|search|compare)=/.test(window.location.search)) { unhide(); return }
+    if (!/[?&](set|player|search|compare)=(?!(%20|\+)*(&|$))/.test(window.location.search)) { unhide(); return }   // a blank ?player= is the home page
     setDeepLoading(true); unhide()
     const t = setTimeout(() => setDeepLoading(false), 25000)
     return () => clearTimeout(t)
@@ -1004,8 +1004,9 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
       // browse filters live in the URL too (?sport=Hockey&team=...), so Back and shared links restore them
       const g = (k) => sp.get(k) || 'All'
       // hand-typed or lowercased links (?sport=hockey) still pick the real category; unknown ones show everything
-      const want = g('sport').toLowerCase()
-      const sport = ['All', 'Sports', 'TCG', 'Other', ...new Set(sets.map(x => x.sport))].find(x => x && x.toLowerCase() === want) || 'All'
+      const fold = (x) => String(x).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase()   // ?sport=pokemon finds Pokémon
+      const want = fold(g('sport'))
+      const sport = ['All', 'Sports', 'TCG', 'Other', ...new Set(sets.map(x => x.sport))].find(x => x && fold(x) === want) || 'All'
       const SORTS = ['year-desc', 'year-asc', 'name-asc', 'name-desc', 'cards-desc', 'cards-asc', 'category', 'brand']
       setSportFilter(sport); setBrandFilter(g('brand')); setProductFilter(g('product')); setSortBy(SORTS.includes(sp.get('sort')) ? sp.get('sort') : 'year-desc')
       setTcgRarity(g('rarity')); setTcgType(g('type'))
