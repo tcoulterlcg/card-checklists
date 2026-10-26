@@ -2649,6 +2649,96 @@
    "yale"
   ]
  },
+ "1990-pro-set": {
+  "missingPlayers": [
+   "adderley",
+   "art",
+   "blount",
+   "bowl",
+   "branch",
+   "bunz",
+   "buoniconti",
+   "casper",
+   "chandler",
+   "crowd",
+   "culp",
+   "dalby",
+   "fleming",
+   "flores",
+   "greenwood",
+   "gregg",
+   "guy",
+   "ham",
+   "hayes",
+   "holub",
+   "i",
+   "ix",
+   "jennings",
+   "kramer",
+   "kuechenberg",
+   "langer",
+   "lilly",
+   "lombardi",
+   "mcconkey",
+   "middle",
+   "mullins",
+   "mvp",
+   "nelms",
+   "networks",
+   "niland",
+   "nitschke",
+   "offer",
+   "over",
+   "page",
+   "puzzle",
+   "redskins",
+   "renfro",
+   "ribbon",
+   "right",
+   "rooney",
+   "rwhite",
+   "sauer",
+   "seiple",
+   "set",
+   "snell",
+   "stenerud",
+   "stephenson",
+   "theismann",
+   "ticket",
+   "unitas",
+   "upshaw",
+   "vi",
+   "victory",
+   "vii",
+   "viii",
+   "wagner",
+   "wersching",
+   "wood",
+   "x",
+   "xi",
+   "xiii",
+   "xiv",
+   "xix",
+   "xv",
+   "xvi",
+   "xvii",
+   "xviii",
+   "xx",
+   "xxi",
+   "xxii",
+   "xxiii",
+   "xxiv",
+   "xxv",
+   "yary",
+   "yepremian"
+  ],
+  "missingInserts": [
+   "chrome",
+   "official",
+   "super bowl 160",
+   "theme art"
+  ]
+ },
  "2016-bowman-chrome-baseball-cards": {
   "missingPlayers": [
    "aaron",
@@ -3562,6 +3652,41 @@
    "team mascots"
   ]
  },
+ "1989-pro-set": {
+  "missingPlayers": [
+   "bowl",
+   "ix",
+   "logo",
+   "number",
+   "superdome",
+   "vi",
+   "vii",
+   "viii",
+   "x",
+   "xi",
+   "xii",
+   "xiii",
+   "xiv",
+   "xix",
+   "xv",
+   "xvi",
+   "xvii",
+   "xviii",
+   "xx",
+   "xxi",
+   "xxii",
+   "xxiii",
+   "xxiv"
+  ],
+  "missingInserts": [
+   "announcers",
+   "gte super bowl album",
+   "promos",
+   "redskins overcome",
+   "super bowl inserts",
+   "superdome"
+  ]
+ },
  "1996-97-fleer": {
   "missingPlayers": [
    "card",
@@ -3688,57 +3813,6 @@
    "superstar sensations"
   ]
  },
- "1990-score-football-cards": {
-  "missingPlayers": [
-   "baab",
-   "bailey",
-   "beckles",
-   "blackmon",
-   "boyer",
-   "checklist",
-   "christie",
-   "clayborn",
-   "cobb",
-   "cornish",
-   "davidson",
-   "dupree",
-   "ellison",
-   "evans",
-   "fenner",
-   "francis",
-   "gash",
-   "goeas",
-   "grant",
-   "haddix",
-   "harmon",
-   "hoard",
-   "humphries",
-   "kauric",
-   "kidd",
-   "kinard",
-   "mckyer",
-   "montoya",
-   "moore",
-   "novacek",
-   "odom",
-   "set",
-   "smerlas",
-   "stanley",
-   "stargell",
-   "stryzinski",
-   "stubbs",
-   "tuten",
-   "walls",
-   "waymer",
-   "weathers",
-   "welch",
-   "wilder",
-   "word"
-  ],
-  "missingInserts": [
-   "supplemental"
-  ]
- },
  "2010-topps-wwe": {
   "missingPlayers": [
    "backlash",
@@ -3784,6 +3858,56 @@
   "missingInserts": [
    "slam attax",
    "town"
+  ]
+ },
+ "1990-score-football-cards": {
+  "missingPlayers": [
+   "baab",
+   "bailey",
+   "beckles",
+   "blackmon",
+   "boyer",
+   "christie",
+   "clayborn",
+   "cobb",
+   "cornish",
+   "davidson",
+   "dupree",
+   "ellison",
+   "evans",
+   "fenner",
+   "francis",
+   "gash",
+   "goeas",
+   "grant",
+   "haddix",
+   "harmon",
+   "hoard",
+   "humphries",
+   "kauric",
+   "kidd",
+   "kinard",
+   "mckyer",
+   "montoya",
+   "moore",
+   "novacek",
+   "odom",
+   "set",
+   "smerlas",
+   "stanley",
+   "stargell",
+   "stryzinski",
+   "stubbs",
+   "tuten",
+   "walls",
+   "waymer",
+   "weathers",
+   "welch",
+   "wilder",
+   "word"
+  ],
+  "missingInserts": [
+   "supplemental"
   ]
  },
  "2012-bowman-sterling-baseball-cards": {
@@ -3956,46 +4080,6 @@
   ],
   "missingInserts": [
    "merlin"
-  ]
- },
- "1989-score-football-cards": {
-  "missingPlayers": [
-   "bears",
-   "bengals",
-   "bills",
-   "broncos",
-   "browns",
-   "buccaneers",
-   "cardinals",
-   "chargers",
-   "chiefs",
-   "colts",
-   "cousins",
-   "cowboys",
-   "dolphins",
-   "eagles",
-   "ers",
-   "falcons",
-   "giants",
-   "jets",
-   "lions",
-   "oilers",
-   "packers",
-   "patriots",
-   "raiders",
-   "rams",
-   "redskins",
-   "saints",
-   "seahawks",
-   "set",
-   "steelers",
-   "vikings",
-   "wolfey"
-  ],
-  "missingInserts": [
-   "error photo actually gary hogeboom",
-   "franco harris",
-   "trivia quiz"
   ]
  },
  "2018-19-panini-prizm-basketball-nba-cards": {
@@ -4253,6 +4337,66 @@
    "young"
   ],
   "missingInserts": []
+ },
+ "1989-score-football-cards": {
+  "missingPlayers": [
+   "bears",
+   "bengals",
+   "bills",
+   "broncos",
+   "browns",
+   "buccaneers",
+   "cardinals",
+   "chargers",
+   "chiefs",
+   "colts",
+   "cousins",
+   "cowboys",
+   "dolphins",
+   "eagles",
+   "ers",
+   "falcons",
+   "giants",
+   "jets",
+   "lions",
+   "oilers",
+   "packers",
+   "patriots",
+   "raiders",
+   "rams",
+   "redskins",
+   "saints",
+   "seahawks",
+   "steelers",
+   "vikings"
+  ],
+  "missingInserts": [
+   "franco harris",
+   "trivia quiz"
+  ]
+ },
+ "1991-pro-set-wlaf": {
+  "missingPlayers": [
+   "bennett",
+   "gilbert",
+   "greene",
+   "hammel",
+   "lynn",
+   "maye",
+   "opener",
+   "pease",
+   "rider",
+   "savage",
+   "sweeney",
+   "witkowski"
+  ],
+  "missingInserts": [
+   "inserts",
+   "wlaf",
+   "wlaf helmet collectible",
+   "wlaf insert",
+   "wlaf inserts"
+  ]
  },
  "2018-panini-prizm-football": {
   "missingPlayers": [
@@ -4662,6 +4806,30 @@
    "into wild",
    "onyx",
    "transcendent touchdowns"
+  ]
+ },
+ "1991-pacific": {
+  "missingPlayers": [
+   "arnold",
+   "booty",
+   "brock",
+   "buford",
+   "carlson",
+   "dozier",
+   "guyton",
+   "kubiak",
+   "nelson",
+   "of",
+   "sapolu",
+   "skow",
+   "treadwell",
+   "watt",
+   "winston"
+  ],
+  "missingInserts": [
+   "different photo from regular",
+   "diffrent border from regular",
+   "flash"
   ]
  },
  "2018-topps-heritage-high-number-baseball-cards": {
@@ -5105,6 +5273,33 @@
    "sample"
   ]
  },
+ "1990-action-packed": {
+  "missingPlayers": [
+   "bahr",
+   "barnett",
+   "brock",
+   "cunningham",
+   "elliott",
+   "fagan",
+   "holt",
+   "howard",
+   "lachey",
+   "landeta",
+   "millen",
+   "mosebar",
+   "newton",
+   "parcells",
+   "paris",
+   "perry",
+   "shell",
+   "thompson",
+   "trophy",
+   "wisniewski"
+  ],
+  "missingInserts": [
+   "madden"
+  ]
+ },
  "2019-panini-diamond-kings-baseball-cards": {
   "missingPlayers": [
    "bauer",
@@ -5524,6 +5719,27 @@
    "star"
   ]
  },
+ "1991-fleer": {
+  "missingPlayers": [
+   "bunch",
+   "checklist",
+   "craver",
+   "dawsey",
+   "graham",
+   "justin",
+   "marinovich",
+   "mcghee",
+   "myles",
+   "nagle",
+   "obrien",
+   "poel",
+   "tuaolo",
+   "zorich"
+  ],
+  "missingInserts": [
+   "stars stripes"
+  ]
+ },
  "18-19-ud-upper-deck-clear-cut-hockey": {
   "missingPlayers": [
    "aho",
@@ -5638,6 +5854,26 @@
   ],
   "missingInserts": [
    "signature rps"
+  ]
+ },
+ "1990-fleer": {
+  "missingPlayers": [
+   "broussard",
+   "conlon",
+   "donaldson",
+   "hinton",
+   "hull",
+   "kraken",
+   "lee",
+   "mcdaniel",
+   "montoya",
+   "odomes",
+   "ross",
+   "seau",
+   "singleton"
+  ],
+  "missingInserts": [
+   "stars n stripes"
   ]
  },
  "2016-17-sp-game-used-hockey": {
@@ -5823,6 +6059,20 @@
    "pristine generals"
   ]
  },
+ "1991-pro-set": {
+  "missingPlayers": [
+   "andrellins",
+   "experience",
+   "metrodome",
+   "sbxxvi",
+   "shanenlan",
+   "standings"
+  ],
+  "missingInserts": [
+   "fact mobil",
+   "super bowl binder"
+  ]
+ },
  "2017-18-mvp-hockey": {
   "missingPlayers": [
    "checklist"
@@ -5878,14 +6128,6 @@
   ],
   "missingInserts": [
    "update"
-  ]
- },
- "1978-slim-jim": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "complete box",
-   "discs",
-   "panel"
   ]
  },
  "2019-panini-chronicles-baseball": {
@@ -6209,6 +6451,17 @@
   "missingInserts": [
    "artists",
    "starburst"
+  ]
+ },
+ "1989-kenner-starting-lineup-cards": {
+  "missingPlayers": [
+   "chamberlain",
+   "erving",
+   "havlicek"
+  ],
+  "missingInserts": [
+   "legends",
+   "one"
   ]
  },
  "1985-86-star": {
@@ -6965,16 +7218,6 @@
   ],
   "missingInserts": [
    "single"
-  ]
- },
- "1989-kenner-starting-lineup-cards": {
-  "missingPlayers": [
-   "chamberlain",
-   "erving",
-   "havlicek"
-  ],
-  "missingInserts": [
-   "legends"
   ]
  },
  "2018-panini-donruss-elite-football-nfl-cards": {
@@ -7963,6 +8206,22 @@
    "superstar combos"
   ]
  },
+ "1991-action-packed-all-madden": {
+  "missingPlayers": [
+   "dixson"
+  ],
+  "missingInserts": [
+   "24kt"
+  ]
+ },
+ "1991-action-packed-rookie-update": {
+  "missingPlayers": [
+   "waters"
+  ],
+  "missingInserts": [
+   "24kt"
+  ]
+ },
  "1972-o-pee-chee-cfl": {
   "missingPlayers": [
    "theisman"
@@ -8245,16 +8504,28 @@
   ],
   "missingInserts": []
  },
- "1984-jogo": {
+ "1991-action-packed": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "24kt"
+  ]
+ },
+ "1991-score": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "national 10"
+  ]
+ },
+ "1987-fleer-team-action": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "sticker"
+  ]
+ },
+ "1985-jogo": {
   "missingPlayers": [],
   "missingInserts": [
    "cfl"
-  ]
- },
- "1981-holsum-discs": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "msa"
   ]
  },
  "1990-topps-traded-baseball-cards": {
