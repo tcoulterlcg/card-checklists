@@ -12,7 +12,7 @@ import { FixEditor } from '../components/fix-editor'
 import { Omnibox, PlayerPage, MyPlayersPanel, useMyPlayers, loadPlayerDir, loadTopPlayers, seasonLabel, MemBadge, MemChip, memCodeOf } from '../components/player'
 import { ComparePage } from '../components/compare'
 import { norm, parseQuery, parseQueryFor, matchPlayers, TYPE, typeLabel, TYPE_COLORS, serialLabel } from '../lib/query'
-import { loadSet, loadIndex, loadRedirects } from '../lib/catalog'
+import { loadSet, loadIndex, loadRedirects, sectionKey } from '../lib/catalog'
 import { classifySet, brandSort, BRAND_COLORS } from '../lib/brands'
 import { ACCENT, ACCENT_TEXT, BG, SURFACE, SURFACE_2, LINE, CHIP_LINE, TEXT, TEXT_2, LABEL, display, eyebrow, title, buttonText } from '../lib/theme'
 
@@ -588,8 +588,11 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
     }
     players.sort((a, b) => b.cards - a.cards)
     const toks = norm(term).split(' ').filter(Boolean)
-    const setHits = sets.filter(x => { const n = x.name.toLowerCase(); return toks.every(t => n.includes(t)) }).sort((a, b) => (b.year || 0) - (a.year || 0)).slice(0, 60)
-    setGlobalHits({ players, sets: setHits }); setSearching(false); setQuery(raw == null ? query : raw)
+    const setHits = sets.filter(x => { const n = norm(x.name); return toks.every(t => n.includes(t)) }).sort((a, b) => (b.year || 0) - (a.year || 0)).slice(0, 60)
+    // A product word ("prizm") matches scraped one-off "players" ("Prizm Fireworks", 1 card): when sets
+    // match and no real player does, lead with the sets and drop the 1–4 card names.
+    const minor = setHits.length > 0 && !(players[0] && players[0].cards >= 50)
+    setGlobalHits({ players: minor ? players.filter(p => p.cards >= 5) : players, sets: setHits, setsFirst: minor }); setSearching(false); setQuery(raw == null ? query : raw)
     nav('?search=' + encodeURIComponent(term), push)
   }
 
@@ -768,6 +771,18 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
 
   const rcCount = (j) => (j.sections || []).reduce((s, sec) => s + sec.cards.filter(c => /\bRC\b/.test(c.x || '')).length, 0)
 
+  // search results: the matching sets (listed first when the query reads as a product, not a player)
+  const setRows = (first) => globalHits.sets.length > 0 && (
+            <div style={{ border: '1px solid #222', borderRadius: 12, overflow: 'hidden', marginBottom: first ? 18 : 0 }}>
+              {globalHits.sets.map((x, i) => (
+                <button key={x.slug} onClick={() => openSet(x)}
+                  style={{ width: '100%', textAlign: 'left', display: 'flex', gap: 12, padding: '11px 16px', fontSize: 14, alignItems: 'baseline', flexWrap: 'wrap', background: i % 2 === 0 ? '#0F1320' : '#121626', border: 'none', color: '#EDEDEF', cursor: 'pointer', fontFamily: 'inherit' }}>
+                  <span style={{ fontWeight: 600 }}>{x.name}</span>
+                  <span style={{ color: '#8A93A8', fontSize: 13 }}>Set · {(x.cardCount || 0).toLocaleString()} card{x.cardCount === 1 ? '' : 's'}</span>
+                </button>
+              ))}
+            </div>
+          )
   const isLanding = !activeSet && !globalHits && view === 'browse'
   // A shared link (?set= / ?player= / ?search=) shows a loading screen, not the
   // home page, while the index and player list download on a slow connection.
@@ -806,7 +821,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
   const [wanted, setWanted] = useState(() => new Map())   // key -> row id
   // Section titles shift when a checklist is re-imported ("Base" / "Base Set", letter case, punctuation),
   // so wantlist matching compares a normalized title — saved cards keep their check mark after data updates.
-  const secKey = (t) => String(t || '').toLowerCase().replace(/\s+(set|cards?)$/, '').replace(/[^a-z0-9/]+/g, ' ').trim()
+  const secKey = sectionKey
   const wantKey = (it) => [it.set_slug, it.card_n == null ? '' : String(it.card_n).replace(/^#/, ''), secKey(it.section)].join('|')
   const loadWanted = async (uid) => { const rows = await myWantlist(uid); setWanted(new Map(rows.map(r => [wantKey(r), r.id]))) }
   useEffect(() => { if (account.session?.user?.id) loadWanted(account.session.user.id); else setWanted(new Map()) }, [account.session?.user?.id])
@@ -1406,28 +1421,19 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
           <h2 style={{ ...title(20), margin: '0 0 14px' }}>
             {globalHits.players.length + globalHits.sets.length} results for “{query}”
           </h2>
+          {globalHits.setsFirst && setRows(true)}
           {globalHits.players.length > 0 && (
             <div style={{ border: '1px solid #222', borderRadius: 12, overflow: 'hidden', marginBottom: 18 }}>
               {globalHits.players.map((p, i) => (
                 <button key={p.id} onClick={() => openPlayer(p, null, [])}
                   style={{ width: '100%', textAlign: 'left', display: 'flex', gap: 12, padding: '11px 16px', fontSize: 14, alignItems: 'baseline', flexWrap: 'wrap', background: i % 2 === 0 ? '#0F1320' : '#121626', border: 'none', color: '#EDEDEF', cursor: 'pointer', fontFamily: 'inherit' }}>
                   <span style={{ fontWeight: 600 }}>{p.name}</span>
-                  <span style={{ color: '#8A93A8', fontSize: 13 }}>{p.sport} · {p.cards.toLocaleString()} cards</span>
+                  <span style={{ color: '#8A93A8', fontSize: 13 }}>{p.sport} · {p.cards.toLocaleString()} card{p.cards === 1 ? '' : 's'}</span>
                 </button>
               ))}
             </div>
           )}
-          {globalHits.sets.length > 0 && (
-            <div style={{ border: '1px solid #222', borderRadius: 12, overflow: 'hidden' }}>
-              {globalHits.sets.map((x, i) => (
-                <button key={x.slug} onClick={() => openSet(x)}
-                  style={{ width: '100%', textAlign: 'left', display: 'flex', gap: 12, padding: '11px 16px', fontSize: 14, alignItems: 'baseline', flexWrap: 'wrap', background: i % 2 === 0 ? '#0F1320' : '#121626', border: 'none', color: '#EDEDEF', cursor: 'pointer', fontFamily: 'inherit' }}>
-                  <span style={{ fontWeight: 600 }}>{x.name}</span>
-                  <span style={{ color: '#8A93A8', fontSize: 13 }}>Set · {(x.cardCount || 0).toLocaleString()} cards</span>
-                </button>
-              ))}
-            </div>
-          )}
+          {!globalHits.setsFirst && setRows(false)}
           {globalHits.players.length + globalHits.sets.length === 0 && <p style={{ padding: 20, color: '#8A93A8', fontSize: 14 }}>No players or sets match.</p>}
         </section>
       ) : view === 'player' && activePlayer ? (

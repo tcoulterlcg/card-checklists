@@ -1,7 +1,7 @@
 'use client'
 // Community + Collection features: auth chip, achievement forum, wantlist /
 // collection tracker. Dark + electric blue to match the site shell. Data via lib/supa.
-import { loadSet, loadRedirects } from '../lib/catalog'
+import { loadSet, loadRedirects, sectionKey } from '../lib/catalog'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { collectionCardN, supa, signOutHere, grailfindrConnectUrl, grailfindrSignupUrl, grailfindrForgotUrl, grailfindrFindUrl, GRAILFINDR_URL, getProfile, ensureProfile, updateProfile, addWant, removeWant, deletePost, myWantlist, toggleCollected, myCollection, uploadCardImage, setCollectionImage, forumFeed, createPost, react, comments, addComment } from '../lib/supa'
 import { ACCENT, ACCENT_TEXT, BG, SURFACE, SURFACE_2, LINE, CHIP_LINE, TEXT, TEXT_2, LABEL, display, eyebrow, title, buttonText } from '../lib/theme'
@@ -199,7 +199,7 @@ export function CollectionView({ account, indexSets, onOpenAuth, onOpenSet, onWa
     </div>
   )
 
-  const ckey = (slug, section, n) => slug + '||' + (section || '') + '||' + n
+  const ckey = (slug, section, n) => slug + '||' + sectionKey(section) + '||' + n   // tolerant of renamed section titles
   const collectedKeys = new Set((collected || []).map(c => ckey(c.set_slug, c.section, c.card_n)))
   const collectedRec = new Map((collected || []).map(c => [ckey(c.set_slug, c.section, c.card_n), c]))
   const wantsBySets = {}
@@ -245,7 +245,7 @@ export function CollectionView({ account, indexSets, onOpenAuth, onOpenSet, onWa
                   return (
                     <div key={ci} style={{ display: 'flex', alignItems: 'center', gap: 8, background: isC ? '#12200f' : '#121212', border: '1px solid ' + (isC ? '#2f5324' : '#222'), borderRadius: 8, padding: '7px 10px' }}>
                       <input type="checkbox" aria-label={'Collected ' + (c.n ? '#' + c.n + ' ' : '') + c.p} checked={isC} onChange={async (e) => {
-                        const { error } = await toggleCollected(session.user.id, { set_slug: activeSlug, card_n: cn, section: sec.title, player: c.p }, e.target.checked)
+                        const { error } = await toggleCollected(session.user.id, { set_slug: activeSlug, card_n: cn, section: !e.target.checked && rec ? rec.section : sec.title, player: c.p }, e.target.checked)   // uncheck the saved row, even if saved under an older title
                         if (error) setNotice('Couldn’t save that change — ' + error.message)
                         const next = await myCollection(session.user.id)
                         setCollected(next)
@@ -281,7 +281,7 @@ export function CollectionView({ account, indexSets, onOpenAuth, onOpenSet, onWa
               const mine = (collected || []).filter(c => c.set_slug === slug).length
               // base-set progress (what "completing a set" usually means) next to the master set (every parallel)
               const baseTotal = idx?.baseCount || 0
-              const baseMine = baseTotal ? (collected || []).filter(c => c.set_slug === slug && c.section === idx.baseTitle).length : 0
+              const baseMine = baseTotal ? (collected || []).filter(c => c.set_slug === slug && sectionKey(c.section) === sectionKey(idx.baseTitle)).length : 0
               return (
                 <div key={slug} style={{ ...card, padding: '18px 20px' }}>
                   <p style={{ ...title(16), margin: 0, color: '#fff' }}>{g.name}</p>

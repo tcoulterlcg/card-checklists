@@ -273,6 +273,7 @@ for (const f of setFiles) {
     const secMem = sec.mem ? memCode(sec.mem) : 0
     const secHint = sectionHints(sec.title, s, stype)
     for (const c of sec.cards || []) {
+      if (/\b\d{1,2}:\d\d\s?[AP]M by \S/.test(c.p || '')) continue   // TCDB "recent uploads" lines scraped into a catalog set
       const names = splitPlayers(c.p)
       if (!names.length) continue
       const flag = c.x || ''

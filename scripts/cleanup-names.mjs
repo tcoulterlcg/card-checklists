@@ -20,7 +20,7 @@ const renames = new Map()
 const SKIP = /^(index|search-index|rpa-index|patch-swaps|redirects)\.json$/
 const SPORTS = new Set(['Baseball', 'Football', 'Basketball', 'Hockey', 'Soccer', 'UFC', 'Boxing', 'Wrestling', 'Racing', 'Golf', 'Tennis', 'Lacrosse', 'Bowling', 'Cricket', 'Multi-Sport'])
 
-const JUNK = /adsbygoogle|window\.|\.push\(\{|^(toploaders?.*|sleeves|piece wall display)$|\beBay\b/i   // eBay listing titles scraped as cards
+const JUNK = /adsbygoogle|window\.|\.push\(\{|^(toploaders?.*|sleeves|piece wall display)$|\beBay\b|\b\d{1,2}:\d\d\s?[AP]M by \S|^[A-Z][A-Z ]+ PARALLELS?:/i   // eBay listing titles, TCDB "recent uploads" lines and parallel headings scraped as cards
 const TEAM_TAG = /^(one of ones|all rookies|top rookies|retired players|no team|rookies|veterans|legends)$/i
 const key = (s) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9 ]+/g, '').replace(/\s+/g, ' ').trim()
 
@@ -54,9 +54,13 @@ for (const f of files) {
       const re = new RegExp('^' + s.name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\s*(?:[–—:-]\\s*)?', 'i')
       const titles = new Set(s.sections.map(x => x.title))
       let renamed = false
+      // also "2021-22 Panini Prizm Premier League – Signatures Set" when the set name ends in a sport word
+      const nameL = s.name.toLowerCase()
+      const head = (t) => { const m = /^(\d{4}(?:-\d{2,4})?\s.+?)\s+[–—]\s+(.+)$/.exec(t || ''); return m && nameL.startsWith(m[1].toLowerCase()) ? m[2] : null }
       for (const sec of s.sections) {
-        if (!re.test(sec.title || '')) continue
-        const t = sec.title.replace(re, '').replace(/\s+Set$/, '').trim()
+        const rest = re.test(sec.title || '') ? sec.title.replace(re, '') : head(sec.title)
+        if (rest == null) continue
+        const t = rest.replace(/\s+Set$/, '').trim()
         if (t && !titles.has(t)) { titles.add(t); sec.title = t; renamed = true }
       }
       if (renamed && !DRY) writeFileSync(new URL(f, dataDir), JSON.stringify(s))
