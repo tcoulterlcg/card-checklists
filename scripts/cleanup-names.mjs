@@ -21,7 +21,7 @@ const SKIP = /^(index|search-index|rpa-index|patch-swaps|redirects)\.json$/
 const SPORTS = new Set(['Baseball', 'Football', 'Basketball', 'Hockey', 'Soccer', 'UFC', 'Boxing', 'Wrestling', 'Racing', 'Golf', 'Tennis', 'Lacrosse', 'Bowling', 'Cricket', 'Multi-Sport'])
 
 const JUNK = /adsbygoogle|window\.|\.push\(\{|^(toploaders?.*|sleeves|piece wall display)$|\beBay\b|\b\d{1,2}:\d\d\s?[AP]M by \S|^[A-Z][A-Z ]+ PARALLELS?:|Check out the Overnight Auctions|^Autographs \| Breaks \|/i   // eBay listing titles, TCDB "recent uploads" lines and parallel headings scraped as cards
-const TEAM_TAG = /^(one of ones|all rookies|top rookies|retired players|no team|rookies|veterans|legends)$/i
+const TEAM_TAG = /^(one of ones|all rookies|top rookies|retired players|no team(?: cut sigs)?|rookies|veterans|legends)$/i
 const key = (s) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9 ]+/g, '').replace(/\s+/g, ' ').trim()
 
 function tidy(p) {
@@ -273,8 +273,8 @@ for (const [f, s] of sets) {
           for (const g of vm[1].split(/,\s*/).filter(Boolean)) flag(/^SN(\d+)$/.test(g) ? '/' + g.slice(2) : g)
           flag(vm[2]); t = ''
         }
-        else if (/^(?:(?:URA?|AUR?|MEM|RC|SP|SSP|SN\d+|CUT|COIN|FBC|MAS|EXCH|ASR)(?:,\s*|$))+$/.test(t)) {   // flags, not a team ("AU, CUT, SN1")
-          for (const f of t.split(/,\s*/)) flag(/^SN(\d+)$/.test(f) ? '/' + f.slice(2) : f === 'URA' || f === 'AUR' ? 'AU' : f)
+        else if (/^(?:(?:URA?|AUR?|MEM|RC|SP|SSP|SN\d+|CUT|COIN|FBC|MAS|EXCH|ASR|HN|FS)(?:,\s*|$))+$/.test(t)) {   // flags, not a team ("AU, CUT, SN1")
+          for (const f of t.split(/,\s*/)) if (!/^(HN|FS)$/.test(f)) flag(/^SN(\d+)$/.test(f) ? '/' + f.slice(2) : f === 'URA' || f === 'AUR' ? 'AU' : f)   // HN (high number) / FS (future stars) are TCDB notes, not flags worth a chip
           t = ''
         }
         const run = t.match(/\s+#?\/\s*([\d,]+)$/)
@@ -282,6 +282,7 @@ for (const [f, s] of sets) {
         t = t.replace(/\s+\(?(FOIL|Auto|XRC|C \d+:\d+)\)?$/i, '').replace(/\s*\*+$/, '').trim()
         if (/\s1st$/.test(t) && !/^\d/.test(t)) { flag('1st'); t = t.slice(0, -4).trim() }   // Bowman "1st" glued onto the school ("Alabama 1st")
         if (/\)$/.test(t) && !t.includes('(')) t = t.slice(0, -1).trim()
+        if (TEAM_TAG.test(t)) t = ''   // a Break Ninja group label alone ("No Team Cut Sigs"), not a team
         if (t !== c.t) { if (t) c.t = t; else delete c.t; stats.team++; changed = true }
       }
       // team field: Break Ninja tags merged in ("Anaheim Ducks / All Rookies / One Of Ones"), repeated teams
@@ -294,8 +295,8 @@ for (const [f, s] of sets) {
           return x.slice(0, r.index).trim()
         }).filter(x => x && !TEAM_TAG.test(x))
         const uniq = []; for (const x of segs) if (!uniq.some(u => key(u) === key(x))) uniq.push(x)
-        const t = uniq.length ? uniq.join(' / ') : (segs[0] || c.t)
-        if (t !== c.t) { c.t = t; stats.team++; changed = true }
+        const t = uniq.join(' / ')   // only group labels ("One Of Ones / No Team") -> no team
+        if (t !== c.t) { if (t) c.t = t; else delete c.t; stats.team++; changed = true }
       }
       if (p !== raw) { const k2 = raw + ' -> ' + p; renames.set(k2, (renames.get(k2) || 0) + 1); c.p = p; changed = true }
       keep.push(c)
