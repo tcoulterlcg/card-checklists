@@ -1270,159 +1270,6 @@
    "tribute teams with rock to defeat awesome truth"
   ]
  },
- "2012-13-pee-chee-hockey-cards": {
-  "missingPlayers": [
-   "abdelkader",
-   "armstrong",
-   "aulie",
-   "avery",
-   "babchuk",
-   "bagnall",
-   "ballard",
-   "barker",
-   "benoit",
-   "bergfors",
-   "bernier",
-   "blake",
-   "blum",
-   "boll",
-   "boucher",
-   "bouillon",
-   "bouma",
-   "brule",
-   "brunette",
-   "burish",
-   "calvert",
-   "campanale",
-   "carkner",
-   "cizikas",
-   "colaiacovo",
-   "colborne",
-   "comrie",
-   "conklin",
-   "cormier",
-   "costa",
-   "courtnall",
-   "dadonov",
-   "demers",
-   "dibenedetto",
-   "dipietro",
-   "doornbosch",
-   "drury",
-   "eaves",
-   "ennis",
-   "fistric",
-   "ford",
-   "foster",
-   "frattin",
-   "frolik",
-   "gaunce",
-   "gaustad",
-   "gomez",
-   "gustafsson",
-   "halpern",
-   "hamrlik",
-   "hartikainen",
-   "hecht",
-   "hunter",
-   "huselius",
-   "iafrate",
-   "jessiman",
-   "joensuu",
-   "kadri",
-   "katic",
-   "klingberg",
-   "knuble",
-   "koskinen",
-   "kovalev",
-   "kubalik",
-   "kubina",
-   "larionov",
-   "larmer",
-   "leach",
-   "lebda",
-   "lehner",
-   "levasseur",
-   "lindback",
-   "macleish",
-   "madden",
-   "mair",
-   "mara",
-   "markstrom",
-   "martinek",
-   "martinez",
-   "mayers",
-   "mcclement",
-   "mccormick",
-   "mcdonald",
-   "mcmillan",
-   "mcquaid",
-   "miettinen",
-   "moss",
-   "nemisz",
-   "nicholls",
-   "niittymaki",
-   "nodl",
-   "omark",
-   "paajarvi",
-   "pahlsson",
-   "paille",
-   "palushaj",
-   "pelley",
-   "perreault",
-   "pielmeier",
-   "pisani",
-   "porter",
-   "postma",
-   "poti",
-   "pronger",
-   "rafalski",
-   "raycroft",
-   "reasoner",
-   "reddox",
-   "regin",
-   "repik",
-   "rinaldo",
-   "rozsival",
-   "saguin",
-   "samsonov",
-   "sarich",
-   "sauer",
-   "sceviour",
-   "scrivens",
-   "shannon",
-   "sims",
-   "skille",
-   "stalock",
-   "steckel",
-   "stillman",
-   "strait",
-   "tangradi",
-   "tanti",
-   "taylor",
-   "timmins",
-   "tyrell",
-   "vandevelde",
-   "vincour",
-   "vitale",
-   "weaver",
-   "wick",
-   "wiercioch",
-   "wishart",
-   "wolski",
-   "yip",
-   "zajac",
-   "zanon",
-   "zubarev",
-   "zuccarello"
-  ],
-  "missingInserts": [
-   "playoff beard",
-   "retro",
-   "retro blank back",
-   "shooting stars"
-  ]
- },
  "2016-topps-opening-baseball-cards": {
   "missingPlayers": [
    "box",
@@ -1575,6 +1422,154 @@
    "throwing",
    "throwing xfractor",
    "xfractor"
+  ]
+ },
+ "2012-13-pee-chee-hockey-cards": {
+  "missingPlayers": [
+   "abdelkader",
+   "armstrong",
+   "aulie",
+   "avery",
+   "babchuk",
+   "bagnall",
+   "ballard",
+   "barker",
+   "benoit",
+   "bergfors",
+   "bernier",
+   "blake",
+   "blum",
+   "boll",
+   "boucher",
+   "bouillon",
+   "bouma",
+   "brule",
+   "brunette",
+   "burish",
+   "calvert",
+   "campanale",
+   "carkner",
+   "colaiacovo",
+   "colborne",
+   "comrie",
+   "conklin",
+   "cormier",
+   "costa",
+   "courtnall",
+   "dadonov",
+   "demers",
+   "dibenedetto",
+   "dipietro",
+   "doornbosch",
+   "drury",
+   "eaves",
+   "ennis",
+   "fistric",
+   "ford",
+   "foster",
+   "frattin",
+   "gaunce",
+   "gaustad",
+   "gomez",
+   "gustafsson",
+   "halpern",
+   "hamrlik",
+   "hartikainen",
+   "hecht",
+   "hunter",
+   "huselius",
+   "iafrate",
+   "jessiman",
+   "joensuu",
+   "kadri",
+   "katic",
+   "klingberg",
+   "knuble",
+   "koskinen",
+   "kovalev",
+   "kubalik",
+   "kubina",
+   "larionov",
+   "larmer",
+   "leach",
+   "lebda",
+   "lehner",
+   "levasseur",
+   "lindback",
+   "macleish",
+   "madden",
+   "mair",
+   "mara",
+   "markstrom",
+   "martinek",
+   "martinez",
+   "mayers",
+   "mcclement",
+   "mccormick",
+   "mcdonald",
+   "mcmillan",
+   "mcquaid",
+   "miettinen",
+   "moss",
+   "nemisz",
+   "nicholls",
+   "niittymaki",
+   "nodl",
+   "omark",
+   "paajarvi",
+   "pahlsson",
+   "paille",
+   "palushaj",
+   "pelley",
+   "perreault",
+   "pielmeier",
+   "pisani",
+   "porter",
+   "postma",
+   "poti",
+   "pronger",
+   "rafalski",
+   "raycroft",
+   "reasoner",
+   "reddox",
+   "regin",
+   "repik",
+   "rozsival",
+   "saguin",
+   "samsonov",
+   "sarich",
+   "sauer",
+   "sceviour",
+   "scrivens",
+   "shannon",
+   "sims",
+   "skille",
+   "stalock",
+   "steckel",
+   "stillman",
+   "strait",
+   "tangradi",
+   "tanti",
+   "taylor",
+   "timmins",
+   "tyrell",
+   "vandevelde",
+   "vincour",
+   "vitale",
+   "weaver",
+   "wick",
+   "wiercioch",
+   "wishart",
+   "wolski",
+   "yip",
+   "zajac",
+   "zanon",
+   "zubarev",
+   "zuccarello"
+  ],
+  "missingInserts": [
+   "playoff beard",
+   "shooting stars"
   ]
  },
  "2016-topps-heritage-baseball-cards": {
@@ -4465,27 +4460,6 @@
    "unity relics"
   ]
  },
- "2013-14-o-pee-chee-hockey-cards": {
-  "missingPlayers": [
-   "back",
-   "barkov",
-   "beliveau",
-   "cizikas",
-   "dwightking",
-   "hanse",
-   "kudobin",
-   "mackinnon",
-   "perrault",
-   "rainbow",
-   "wick"
-  ],
-  "missingInserts": [
-   "retro",
-   "retro blank back",
-   "signatures",
-   "stickers"
-  ]
- },
  "2015-bowman-baseball-cards": {
   "missingPlayers": [
    "ajcole",
@@ -5156,24 +5130,6 @@
    "spiral"
   ]
  },
- "2014-15-o-pee-chee-hockey-cards": {
-  "missingPlayers": [
-   "dano",
-   "draisaitl",
-   "duclair",
-   "gostisbehere",
-   "horvat",
-   "mueller",
-   "percy",
-   "sekac",
-   "vasilevskiy",
-   "wingles"
-  ],
-  "missingInserts": [
-   "retro",
-   "update"
-  ]
- },
  "2016-topps-ufc-high-impact-cards": {
   "missingPlayers": [
    "alves",
@@ -5548,6 +5504,23 @@
   ],
   "missingInserts": [
    "winning standard"
+  ]
+ },
+ "2014-15-o-pee-chee-hockey-cards": {
+  "missingPlayers": [
+   "dano",
+   "draisaitl",
+   "duclair",
+   "gostisbehere",
+   "horvat",
+   "mueller",
+   "percy",
+   "sekac",
+   "vasilevskiy",
+   "wingles"
+  ],
+  "missingInserts": [
+   "update"
   ]
  },
  "2019-panini-chronicles-baseball": {
@@ -6156,17 +6129,6 @@
    "1965 tall boy"
   ]
  },
- "2018-topps-fire-baseball-mlb-cards": {
-  "missingPlayers": [
-   "dozier",
-   "gurriel",
-   "kipnis",
-   "matz"
-  ],
-  "missingInserts": [
-   "relic"
-  ]
- },
  "2015-bowman-draft-baseball-cards": {
   "missingPlayers": [
    "anderson",
@@ -6176,17 +6138,6 @@
   ],
   "missingInserts": [
    "dividends"
-  ]
- },
- "2015-topps-tribute-baseball-cards": {
-  "missingPlayers": [
-   "eckersley",
-   "ramirez",
-   "sandberg",
-   "smoltz"
-  ],
-  "missingInserts": [
-   "relics"
   ]
  },
  "2014-topps-stadium-club-baseball-cards": {
@@ -6220,17 +6171,6 @@
   ],
   "missingInserts": [
    "highlights"
-  ]
- },
- "2018-19-donruss-basketball-nba-cards": {
-  "missingPlayers": [
-   "alexander",
-   "diop",
-   "pope",
-   "wahad"
-  ],
-  "missingInserts": [
-   "flood"
   ]
  },
  "2016-17-donruss-optic-basketball-cards": {
@@ -6685,15 +6625,6 @@
    "1959"
   ]
  },
- "2013-topps-magic-football-cards": {
-  "missingPlayers": [
-   "enchantment",
-   "frame"
-  ],
-  "missingInserts": [
-   "enchantment"
-  ]
- },
  "2018-19-upper-deck-artifacts-hockey-cards": {
   "missingPlayers": [
    "mittelstadt",
@@ -6711,6 +6642,18 @@
   "missingInserts": [
    "profiles materials jersey"
   ]
+ },
+ "2013-14-o-pee-chee-hockey-cards": {
+  "missingPlayers": [
+   "barkov",
+   "dwightking",
+   "hanse",
+   "kudobin",
+   "mackinnon",
+   "perrault",
+   "rainbow"
+  ],
+  "missingInserts": []
  },
  "2013-14-panini-dominion-hockey-cards": {
   "missingPlayers": [
@@ -7092,14 +7035,6 @@
    "quad combo patches"
   ]
  },
- "2013-bowman-football-cards": {
-  "missingPlayers": [
-   "hawk"
-  ],
-  "missingInserts": [
-   "relic"
-  ]
- },
  "2013-panini-momentum-football-cards": {
   "missingPlayers": [
    "auto"
@@ -7380,6 +7315,18 @@
   ],
   "missingInserts": []
  },
+ "2018-topps-fire-baseball-mlb-cards": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "relic"
+  ]
+ },
+ "2013-bowman-football-cards": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "relic"
+  ]
+ },
  "1990-topps-traded-baseball-cards": {
   "missingPlayers": [
    "appier",
@@ -7395,6 +7342,15 @@
    "diop",
    "kowar",
    "town"
+  ],
+  "missingInserts": []
+ },
+ "2018-19-donruss-basketball-nba-cards": {
+  "missingPlayers": [
+   "alexander",
+   "diop",
+   "pope",
+   "wahad"
   ],
   "missingInserts": []
  },
@@ -7842,6 +7798,13 @@
   "missingPlayers": [
    "jurgensen",
    "moon"
+  ],
+  "missingInserts": []
+ },
+ "2013-topps-magic-football-cards": {
+  "missingPlayers": [
+   "enchantment",
+   "frame"
   ],
   "missingInserts": []
  },
