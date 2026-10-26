@@ -141,7 +141,11 @@ for (const f of readdirSync(dataDir)) {
     const hasMemFlag = (sec.cards || []).some(c => /\bMEM\b/.test(c.x || ''))
     // Printing plates (incl. The Cup "Rookie Plates - … Cyan/Magenta/Yellow") are metal plates, not memorabilia.
     const isPlate = /printing plate|\brookie plates\b|\bplates?\b.*\b(cyan|magenta|yellow)\b/i.test(title)
-    if (isPlate || !(MEM_SECTION.test(title) || hasMemFlag)) { if (sec.mem) { delete sec.mem; changed = true } continue }
+    if (isPlate || !(MEM_SECTION.test(title) || hasMemFlag)) {
+      if (sec.mem) { delete sec.mem; changed = true }
+      for (const c of sec.cards || []) if (c.m && c.m.f) { delete c.m; changed = true }
+      continue
+    }
     let mem = null
     const m = matchInsert(ins, title)
     if (m && m.k) mem = { k: m.k, src: 'tcdb', note: m.note.slice(0, 220) }
@@ -156,6 +160,24 @@ for (const f of readdirSync(dataDir)) {
       if (!o.slug.test(s.slug) || !o.section.test(title)) continue
       for (const c of sec.cards || []) if (o.player.test(c.p || '')) { if (JSON.stringify(c.m) !== JSON.stringify(o.mem)) { c.m = o.mem; changed = true } }
     }
+    // A section that is memorabilia only because some of its cards carry TCDB's MEM flag
+    // (The Cup "Base Set": plain veteran cards plus rookie patch autos) is tagged card by card,
+    // so the plain cards don't show "Unknown material".
+    const flagged = (sec.cards || []).filter(c => /\bMEM\b/.test(c.x || ''))
+    if (!MEM_SECTION.test(title) && flagged.length < (sec.cards || []).length) {
+      for (const c of sec.cards) {
+        const want = /\bMEM\b/.test(c.x || '') && !(c.m && !c.m.f)
+          ? (({ rk, ...rest }) => ({ ...rest, ...(rk && /\bRC\b/.test(c.x || '') ? { k: rk } : {}), f: 1 }))(mem)
+          : (c.m && !c.m.f ? c.m : undefined)
+        if (JSON.stringify(c.m) !== JSON.stringify(want)) { if (want) c.m = want; else delete c.m; changed = true }
+      }
+      if (sec.mem) { delete sec.mem; changed = true }
+      stats.memSecs++; stats.cards += flagged.length
+      stats.byK[mem.k] = (stats.byK[mem.k] || 0) + flagged.length
+      stats.bySrc[mem.src] = (stats.bySrc[mem.src] || 0) + 1
+      continue
+    }
+    for (const c of sec.cards || []) if (c.m && c.m.f) { delete c.m; changed = true }   // section is tagged as a whole again
     if (JSON.stringify(sec.mem) !== JSON.stringify(mem)) { sec.mem = mem; changed = true }
     stats.memSecs++; stats.cards += (sec.cards || []).length
     stats.byK[mem.k] = (stats.byK[mem.k] || 0) + (sec.cards || []).length

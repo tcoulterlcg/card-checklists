@@ -1260,7 +1260,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
               options={[['All', 'Any type'], ['BASE', 'Base'], ['AU', 'Autographs'], ['PA', 'Patch autos'], ['PATCH', 'Patches'], ['RELIC', 'Relics'], ['PLATE', 'Printing plates'], ['OTHER', 'Inserts & parallels']]} />
             <Select ariaLabel="Print run" value={setRunFilter} onChange={setSetRunFilter} defaultValue="any" width={220}
               options={[['any', 'Any run'], ['1', '1/1 only'], ['10', '≤ /10'], ['25', '≤ /25'], ['99', '≤ /99'], ['numbered', 'Numbered'], ['unnumbered', 'Unnumbered']]} />
-            {(setData.sections || []).some(x => x.mem) && (
+            {(setData.sections || []).some(x => x.mem || x.cards.some(c => c.m)) && (
               <Select ariaLabel="Memorabilia" value={setMemFilter} onChange={setSetMemFilter} defaultValue="any" width={280}
                 options={[['any', 'Any material'], ['MEMO', 'Memorabilia only'], ['GU', 'Game-used'], ['PW', 'Player-worn'], ['EW', 'Event-worn'], ['MX', 'Varies by card'], ['MFG', 'Manufactured'], ['UNK', 'Unknown'], ['STATED', 'Stated by maker/source only']]} />
             )}
