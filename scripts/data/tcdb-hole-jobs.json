@@ -1697,7 +1697,9 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "covered by TCDB catalog set 2025-leaf-metal-sports-heroes",
+  "at": "2026-10-26"
  },
  {
   "slug": "2025-leaf-metal-women-of-sport-multiple-sport",
@@ -2043,7 +2045,9 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "covered by TCDB catalog set 2026-leaf-metal-st-patrick-s-day",
+  "at": "2026-10-26"
  },
  {
   "slug": "2026-leaf-metal-women-of-sport-multiple-sport",
@@ -2093,7 +2097,9 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "covered by TCDB catalog set 2026-leaf-metal-signature-series-sports",
+  "at": "2026-10-26"
  },
  {
   "slug": "2026-leaf-sport-heroes-multiple-sport",
@@ -2105,7 +2111,9 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "covered by TCDB catalog set 2026-leaf-metal-sports-heroes",
+  "at": "2026-10-26"
  },
  {
   "slug": "2026-leaf-ultimate-sports-multiple-sport",
