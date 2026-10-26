@@ -38,6 +38,7 @@ export function splitPlayers(raw) {
   const inner = p.match(/^[^()]+\(([^()]*\/[^()]*)\)$/)
   if (inner) p = inner[1]
   if (!p) return []
+  if (/^[^\s/]{1,5}\/\/[^\s/]{1,5}$|^[A-Z0-9]{1,4}\/[A-Z0-9]{1,4}$/.test(p)) return [p]   // one name with a slash in it: "SP//dr", "AC/DC"
   return p.split(/\s*\/\s*|\s+\|\s+/)
     .map(x => {
       x = x.trim()
@@ -64,6 +65,7 @@ export function subjects(name, sport) {
       .trim()
   }
   label = label.replace(/\s+SN\d{1,5}$/, '').trim()   // print-run flag glued on: "Simba & Friends SN25"
+  label = label.replace(/\s*[-–—:]$/, '').trim()   // a number cut off the end left "Brisbane Lions Redemption -"
   if (!label) return []
   if (!ch) return [{ label, base: label }]
   // "Idina Menzel as Elsa": the card belongs to the character and to the actor.
