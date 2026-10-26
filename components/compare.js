@@ -228,6 +228,8 @@ export function ComparePage({ names, sets, onChange, onOpenSet, onOpenPlayer }) 
 
   return (
     <section style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+      {/* page heading for screen readers and outlines; the hero shows the names visually */}
+      <h1 style={{ position: 'absolute', width: 1, height: 1, overflow: 'hidden', clip: 'rect(0 0 0 0)', whiteSpace: 'nowrap', margin: 0 }}>{nm.filter(Boolean).join(' vs ') || 'Compare players'}</h1>
       {/* HERO */}
       <div className="hq-panel" style={{ background: 'linear-gradient(140deg, #191919, #0F1320)', border: '1px solid #232A3E', borderRadius: 18, padding: 'clamp(18px, 3vw, 26px) clamp(16px, 3vw, 28px)', display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) auto minmax(0, 1fr)', gap: 'clamp(10px, 2vw, 20px)', alignItems: 'end' }}>
         <Slot side={0} player={players[0]} stats={sA} other={players[1]} onPick={(p) => pick(0, p)} />

@@ -188,7 +188,7 @@ function Chip({ children, color, solid }) {
                   padding: '3px 10px',
                   borderRadius: 999,
                   background: solid ? (color || ACCENT) : 'transparent',
-                  color: solid ? '#fff' : (color || ACCENT_TEXT),
+                  color: solid ? '#0B0E17' : (color && color !== ACCENT ? color : ACCENT_TEXT),   // dark text on light sport colours (white on violet failed contrast)
                   border: '1px solid ' + (color || ACCENT) + (solid ? '' : '55'),
                   fontSize: 13,
                   fontWeight: 600
@@ -1071,7 +1071,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
             ))}
           </nav>
           <div className="hq-header-right">
-            <form className={'hq-hsearch' + (isLanding && !pastHero ? ' hq-hidden' : '')} role="search"
+            <form className={'hq-hsearch' + (isLanding && !pastHero ? ' hq-hidden' : '')} role="search" aria-label="Site search"
               onSubmit={(e) => { e.preventDefault(); const el = headerInput.current; const v = (el?.value || '').trim(); if (v) { searchFor(v); el.value = ''; el.blur(); window.scrollTo(0, 0) } }}>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6F788C" strokeWidth="2.2" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
               <input ref={headerInput} enterKeyHint="search" placeholder="Search sets, players..." aria-label="Search sets and players" />
@@ -1440,9 +1440,9 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
             style={{ background: 'none', border: 'none', color: ACCENT_TEXT, fontSize: 13, fontWeight: 600, cursor: 'pointer', padding: 0, marginBottom: 14 }}>
             ← Browse sets
           </button>
-          <h2 style={{ ...title(20), margin: '0 0 14px' }}>
+          <h1 style={{ ...title(20), margin: '0 0 14px' }}>
             {globalHits.players.length + globalHits.sets.length} results for “{query}”
-          </h2>
+          </h1>
           {globalHits.setsFirst && setRows(true)}
           {globalHits.players.length > 0 && (
             <div style={{ border: '1px solid #222', borderRadius: 12, overflow: 'hidden', marginBottom: 18 }}>

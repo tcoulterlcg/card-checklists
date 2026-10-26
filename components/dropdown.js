@@ -45,7 +45,9 @@ export const menuHeading = { ...eyebrow, fontSize: 12, color: SECONDARY, padding
 // The button that opens a dropdown: optional muted label, current value, chevron.
 export function Trigger({ label, value, active, open, onClick, triggerRef, ariaLabel, style }) {
   return (
-    <button ref={triggerRef} type="button" aria-haspopup="listbox" aria-expanded={!!open} aria-label={ariaLabel}
+    // The accessible name keeps the visible text (WCAG "label in name"): a visible label speaks for itself;
+    // an unlabelled trigger is announced as "Card type: Any type".
+    <button ref={triggerRef} type="button" aria-haspopup="listbox" aria-expanded={!!open} aria-label={label ? undefined : ariaLabel ? ariaLabel + ': ' + (typeof value === 'string' ? value : '') : undefined}
       onClick={onClick} style={{ ...triggerStyle(active), ...style }}>
       {label && <span style={{ color: active ? ACCENT_TEXT : SECONDARY, fontWeight: 500, whiteSpace: 'nowrap' }}>{label}</span>}
       <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', minWidth: 0 }}>{value}</span>

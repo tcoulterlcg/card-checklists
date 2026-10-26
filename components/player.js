@@ -81,7 +81,7 @@ function Chip({ children, color, solid, onClick, active }) {
   const style = {
     display: 'inline-flex', alignItems: 'center', gap: 6, padding: '4px 10px', borderRadius: 999, fontSize: 12, fontWeight: 700,
     letterSpacing: '0.06em', textTransform: 'uppercase', whiteSpace: 'nowrap',
-    background: solid || active ? c : 'transparent', color: solid || active ? '#0F1320' : c, border: '1px solid ' + c + (solid || active ? '' : '66'),
+    background: solid || active ? c : 'transparent', color: solid || active ? '#0F1320' : (c === ACCENT ? ACCENT_TEXT : c),   // accent blue as text is too dark on the page background border: '1px solid ' + c + (solid || active ? '' : '66'),
     cursor: onClick ? 'pointer' : 'default', fontFamily: 'inherit'
   }
   return onClick ? <button onClick={onClick} style={style}>{children}</button> : <span style={style}>{children}</span>
@@ -195,7 +195,7 @@ export function Omnibox({ value, onChange, onSubmit, onPickPlayer, onPickSet, se
   const listId = useId()   // the long example placeholder is cut off mid-word on phones
   return (
     <div ref={box} style={{ position: 'relative' }}>
-      <form role="search" onSubmit={(e) => { e.preventDefault(); go(open && items.length && moved && dValue === value ? sel : -1) }}
+      <form role="search" aria-label="Player and set search" onSubmit={(e) => { e.preventDefault(); go(open && items.length && moved && dValue === value ? sel : -1) }}
         style={{ display: 'flex', alignItems: 'center', background: '#121626', border: '1px solid ' + (open ? ACCENT + '66' : '#232A3E'), borderRadius: open && items.length ? '14px 14px 0 0' : 14, padding: 6, boxShadow: open ? '0 0 0 4px ' + ACCENT + '14' : '0 20px 50px -20px rgba(0,0,0,0.8)' }}>
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={open ? ACCENT : '#8A93A8'} strokeWidth="2" aria-hidden="true" style={{ marginLeft: 10, flexShrink: 0 }}><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
         <input value={value} autoFocus={autoFocus} aria-label="Search players, sets, serials"
