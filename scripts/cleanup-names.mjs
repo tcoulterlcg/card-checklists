@@ -326,7 +326,25 @@ for (const [f, s] of sets) {
     // scrapes sometimes repeat a row exactly (2017 Heritage buybacks: 600 repeats in 700 rows); identical rows are one card
     const exact = new Set(), uniqRows = []
     for (const c of merged) { const k = JSON.stringify(c); if (exact.has(k)) { stats.dupRows++; changed = true; continue } exact.add(k); uniqRows.push(c) }
-    if (uniqRows.length !== (sec.cards || []).length) sec.cards = uniqRows
+    // a second, poorer listing of the same card ("#119 Asa Newell" next to "#119 Asa Newell, Atlanta Hawks, /75"):
+    // same number and name, nothing the fuller row lacks, and the fuller row only adds a team, a print run or
+    // RC/AU/MEM (an SP/VAR flag would make it a different card, e.g. an image variation)
+    // (Break Ninja repeats rows this way)
+    const byNP = new Map(); if (s.source === 'breakninja.com') for (const c of uniqRows) if (c.n) { const k = c.n + '|' + c.p; if (!byNP.has(k)) byNP.set(k, []); byNP.get(k).push(c) }
+    const weak = new Set()
+    for (const g of byNP.values()) {
+      if (g.length < 2) continue
+      for (const c of g) for (const r of g) {
+        if (r === c || weak.has(r)) continue
+        const cx = (c.x || '').split(/\s+/).filter(Boolean), rx = (r.x || '').split(/\s+/).filter(Boolean)
+        const extra = rx.filter(f => !cx.includes(f))
+        if (cx.every(f => rx.includes(f)) && (!c.t || c.t === r.t) && (!c.d || c.d === r.d) && (!c.v || c.v === r.v) && (!c.m || JSON.stringify(c.m) === JSON.stringify(r.m)) &&
+            extra.every(f => /^\/\d+$|^(RC|AU|MEM)$/.test(f)) && (extra.length || (!c.t && r.t))) { weak.add(c); break }
+      }
+    }
+    const kept = weak.size ? uniqRows.filter(c => !weak.has(c)) : uniqRows
+    if (weak.size) { stats.dupRows += weak.size; changed = true }
+    if (kept.length !== (sec.cards || []).length) sec.cards = kept
   }
   // two sections with the same title: the site keys sections by title, so an exact copy is dropped
   // and a different list under the same title becomes "Title (2)"
