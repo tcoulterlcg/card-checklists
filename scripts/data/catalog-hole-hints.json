@@ -3038,80 +3038,6 @@
    "national"
   ]
  },
- "1993-fleer": {
-  "missingPlayers": [
-   "barrow",
-   "beuerlein",
-   "buchanan",
-   "centers",
-   "clayton",
-   "compton",
-   "drugs",
-   "dye",
-   "edmunds",
-   "everitt",
-   "fields",
-   "fit",
-   "footman",
-   "friesz",
-   "gordon",
-   "hastings",
-   "hawkins",
-   "highlights",
-   "hoard",
-   "hoge",
-   "holmes",
-   "howard",
-   "ilkin",
-   "jacke",
-   "kirby",
-   "kozerski",
-   "kramer",
-   "lang",
-   "lofton",
-   "london",
-   "lowdermilk",
-   "may",
-   "mirer",
-   "mosebar",
-   "of",
-   "parrella",
-   "pitts",
-   "potts",
-   "price",
-   "rivers",
-   "roaf",
-   "rolling",
-   "school",
-   "schroeder",
-   "searcy",
-   "shelley",
-   "shields",
-   "sims",
-   "slade",
-   "smart",
-   "stephens",
-   "stokes",
-   "strahan",
-   "swayne",
-   "tomczak",
-   "trudeau",
-   "tune",
-   "turnbull",
-   "walter",
-   "wyman",
-   "yourself"
-  ],
-  "missingInserts": [
-   "captain pain",
-   "fruit o loom",
-   "gameday",
-   "gameday game breakers",
-   "gameday second year stars",
-   "gameday standouts",
-   "shell fact"
-  ]
- },
  "2012-13-panini-certified-hockey-cards": {
   "missingPlayers": [
    "alzner",
@@ -3447,76 +3373,6 @@
    "piece puzzle 58 59 60"
   ]
  },
- "1992-pacific": {
-  "missingPlayers": [
-   "agen",
-   "baldassin",
-   "bergmann",
-   "black",
-   "boyf",
-   "bramwell",
-   "browning",
-   "bryan",
-   "bullard",
-   "cahill",
-   "cain",
-   "conklin",
-   "cope",
-   "cowan",
-   "davidson",
-   "dicks",
-   "dirks",
-   "divier",
-   "dobie",
-   "douglas",
-   "eckman",
-   "ericksen",
-   "erlandson",
-   "fitzpatrick",
-   "frankowski",
-   "greenwood",
-   "haines",
-   "heinrich",
-   "hivner",
-   "houston",
-   "hufford",
-   "jerue",
-   "kinnune",
-   "kupp",
-   "macdowell",
-   "mansfield",
-   "marsh",
-   "mcadams",
-   "mckasson",
-   "mcketa",
-   "meamber",
-   "medved",
-   "monlux",
-   "nisbet",
-   "of",
-   "olson",
-   "pelluer",
-   "redman",
-   "richardson",
-   "rohrbach",
-   "royal",
-   "schwegler",
-   "shiel",
-   "sixkiller",
-   "skaggs",
-   "skansi",
-   "sprague",
-   "steel",
-   "toews",
-   "tyler",
-   "yates"
-  ],
-  "missingInserts": [
-   "bob griese legends game",
-   "steve largent legends",
-   "washington greats"
-  ]
- },
  "2014-chee-platinum-hockey-cards": {
   "missingPlayers": [
    "morris"
@@ -3537,6 +3393,115 @@
    "jersey cubes",
    "jersey ice",
    "jersey prism"
+  ]
+ },
+ "1994-fleer": {
+  "missingPlayers": [
+   "aldridge",
+   "barrow",
+   "bavaro",
+   "beavers",
+   "bowens",
+   "brisby",
+   "bruce",
+   "checklist",
+   "curry",
+   "dawkins",
+   "duncan",
+   "emanuel",
+   "everitt",
+   "folston",
+   "ford",
+   "hamilton",
+   "hebron",
+   "howard",
+   "kasay",
+   "machine",
+   "mcmahon",
+   "mcmillian",
+   "morton",
+   "of",
+   "porter",
+   "sharp",
+   "steussie",
+   "stewart",
+   "thierry",
+   "woods",
+   "yarborough"
+  ],
+  "missingInserts": [
+   "award winner",
+   "gameday",
+   "gameday 2nd year stars",
+   "gameday flashing stars",
+   "gameday game breakers",
+   "gameday standouts",
+   "prospets",
+   "scoring machine"
+  ]
+ },
+ "1993-fleer": {
+  "missingPlayers": [
+   "barrow",
+   "beuerlein",
+   "buchanan",
+   "centers",
+   "clayton",
+   "compton",
+   "dye",
+   "edmunds",
+   "everitt",
+   "fields",
+   "footman",
+   "friesz",
+   "gordon",
+   "hastings",
+   "hawkins",
+   "highlights",
+   "hoard",
+   "hoge",
+   "holmes",
+   "howard",
+   "ilkin",
+   "jacke",
+   "kirby",
+   "kozerski",
+   "kramer",
+   "lang",
+   "lofton",
+   "london",
+   "lowdermilk",
+   "may",
+   "mirer",
+   "mosebar",
+   "of",
+   "parrella",
+   "pitts",
+   "potts",
+   "price",
+   "rivers",
+   "roaf",
+   "rolling",
+   "schroeder",
+   "searcy",
+   "shelley",
+   "shields",
+   "sims",
+   "slade",
+   "stephens",
+   "stokes",
+   "strahan",
+   "swayne",
+   "tomczak",
+   "trudeau",
+   "turnbull",
+   "walter",
+   "wyman"
+  ],
+  "missingInserts": [
+   "fruit o loom",
+   "gameday",
+   "gameday standouts"
   ]
  },
  "2013-bowman-baseball-cards": {
@@ -3641,6 +3606,74 @@
    "dual relic",
    "meaningful moments relics",
    "relic"
+  ]
+ },
+ "1992-pacific": {
+  "missingPlayers": [
+   "agen",
+   "baldassin",
+   "bergmann",
+   "black",
+   "boyf",
+   "bramwell",
+   "browning",
+   "bryan",
+   "bullard",
+   "cahill",
+   "cain",
+   "conklin",
+   "cope",
+   "cowan",
+   "davidson",
+   "dicks",
+   "dirks",
+   "divier",
+   "dobie",
+   "douglas",
+   "eckman",
+   "ericksen",
+   "erlandson",
+   "fitzpatrick",
+   "frankowski",
+   "greenwood",
+   "haines",
+   "heinrich",
+   "hivner",
+   "houston",
+   "hufford",
+   "jerue",
+   "kinnune",
+   "kupp",
+   "macdowell",
+   "mansfield",
+   "marsh",
+   "mcadams",
+   "mckasson",
+   "mcketa",
+   "meamber",
+   "medved",
+   "monlux",
+   "nisbet",
+   "of",
+   "olson",
+   "pelluer",
+   "redman",
+   "richardson",
+   "rohrbach",
+   "royal",
+   "schwegler",
+   "shiel",
+   "sixkiller",
+   "skaggs",
+   "skansi",
+   "sprague",
+   "steel",
+   "toews",
+   "tyler",
+   "yates"
+  ],
+  "missingInserts": [
+   "washington greats"
   ]
  },
  "2013-bowman-inception-baseball-cards": {
@@ -4629,22 +4662,6 @@
    "patch"
   ]
  },
- "1992-wild-card": {
-  "missingPlayers": [
-   "kingler",
-   "of"
-  ],
-  "missingInserts": [
-   "class back attack",
-   "promo",
-   "promo 10 stripe",
-   "promo 100 stripe",
-   "promo 1000 stripe",
-   "promo 20 stripe",
-   "promo 50 stripe",
-   "promo stripe"
-  ]
- },
  "2014-bowman-draft-baseball-cards": {
   "missingPlayers": [
    "box",
@@ -5441,6 +5458,23 @@
    "xfractor relic"
   ]
  },
+ "1993-wild-card-superchrome": {
+  "missingPlayers": [
+   "dubose",
+   "eveitt",
+   "hebron",
+   "mcgee",
+   "roaf",
+   "shields",
+   "strahan"
+  ],
+  "missingInserts": [
+   "back to",
+   "field force",
+   "hot",
+   "super chrome"
+  ]
+ },
  "2015-leaf-signature-series-hockey-cards": {
   "missingPlayers": [
    "christian",
@@ -5603,6 +5637,18 @@
    "wells"
   ],
   "missingInserts": []
+ },
+ "1993-stadium-club": {
+  "missingPlayers": [
+   "klinger"
+  ],
+  "missingInserts": [
+   "master photos i",
+   "master photos ii",
+   "members only super team",
+   "redeemed",
+   "redemption"
+  ]
  },
  "2017-topps-wwe-nxt-checklist-added": {
   "missingPlayers": [
@@ -6093,15 +6139,6 @@
    "wins united states championship"
   ]
  },
- "1993-pro-line-live": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "classic",
-   "future star",
-   "lps",
-   "portraits"
-  ]
- },
  "2015-topps-opening-day-baseball": {
   "missingPlayers": [
    "angels",
@@ -6394,6 +6431,17 @@
    "midnight"
   ]
  },
+ "1994-playoff": {
+  "missingPlayers": [
+   "card",
+   "of"
+  ],
+  "missingInserts": [
+   "barry sanders collection",
+   "julie bell art redemption",
+   "promo"
+  ]
+ },
  "2015-16-sp-authentic-hockey-cards": {
   "missingPlayers": [
    "box",
@@ -6476,6 +6524,16 @@
    "pristine generals"
   ]
  },
+ "1994-images": {
+  "missingPlayers": [
+   "checklist"
+  ],
+  "missingInserts": [
+   "classic marshall faulk",
+   "classic pro",
+   "tampa bay"
+  ]
+ },
  "2017-18-mvp-hockey": {
   "missingPlayers": [
    "checklist"
@@ -6531,6 +6589,14 @@
   ],
   "missingInserts": [
    "update"
+  ]
+ },
+ "1995-action-packed": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "24kt",
+   "24kt armed forces",
+   "24kt team"
   ]
  },
  "2019-panini-chronicles-baseball": {
@@ -6659,6 +6725,22 @@
    "wright"
   ],
   "missingInserts": []
+ },
+ "1994-signature-rookies": {
+  "missingPlayers": [
+   "bates",
+   "carver",
+   "covington",
+   "haws",
+   "levens",
+   "mitchell",
+   "morton",
+   "of",
+   "tubbs"
+  ],
+  "missingInserts": [
+   "superior authentic"
+  ]
  },
  "2017-18-o-pee-chee-platinum-hockey-cards": {
   "missingPlayers": [
@@ -6904,19 +6986,15 @@
    "bordered"
   ]
  },
- "1993-select": {
+ "1994-classic-nfl-experience": {
   "missingPlayers": [
-   "dotson",
-   "graham",
-   "haynes",
-   "lewis",
-   "maryland",
-   "odonnell",
-   "vardell",
-   "ware"
+   "ellard",
+   "lloyd",
+   "lp"
   ],
   "missingInserts": [
-   "young stars"
+   "lps",
+   "promo"
   ]
  },
  "2017-18-sp-authentic-hockey-nhl-cards": {
@@ -7150,44 +7228,13 @@
    "res"
   ]
  },
- "1993-action-packed": {
+ "1993-classic": {
   "missingPlayers": [
-   "givens"
+   "foster"
   ],
   "missingInserts": [
-   "24kt",
-   "update previews"
-  ]
- },
- "1992-jogo": {
-  "missingPlayers": [
-   "hc"
-  ],
-  "missingInserts": [
-   "cfl",
-   "cfl missing years"
-  ]
- },
- "1992-pro-set": {
-  "missingPlayers": [
-   "colts"
-  ],
-  "missingInserts": [
-   "hall fame inductees",
-   "hologram"
-  ]
- },
- "1992-pro-set-power": {
-  "missingPlayers": [
-   "buccaneers",
-   "lions",
-   "of",
-   "patriots",
-   "redskins",
-   "steelers"
-  ],
-  "missingInserts": [
-   "promo"
+   "acetate",
+   "lp"
   ]
  },
  "1991-pro-set": {
@@ -7291,20 +7338,6 @@
   ],
   "missingInserts": [
    "1965 tall boy"
-  ]
- },
- "1993-skybox-premium": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "poster",
-   "prime time"
-  ]
- },
- "1991-wild-card": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "prototype",
-   "redemption"
   ]
  },
  "2015-bowman-draft-baseball-cards": {
@@ -7440,6 +7473,17 @@
   ],
   "missingInserts": [
    "adrenaline rush"
+  ]
+ },
+ "1995-classic-nfl-experience": {
+  "missingPlayers": [
+   "bruce",
+   "card",
+   "legends",
+   "pickens"
+  ],
+  "missingInserts": [
+   "super bowl xxix"
   ]
  },
  "1991-jogo": {
@@ -7765,6 +7809,16 @@
    "hot franchise fabrics signatures"
   ]
  },
+ "1994-ultra": {
+  "missingPlayers": [
+   "langhman",
+   "of",
+   "risen"
+  ],
+  "missingInserts": [
+   "signature"
+  ]
+ },
  "2017-18-upper-deck-tim-hortons-hockey-cards": {
   "missingPlayers": [
    "action",
@@ -8058,22 +8112,13 @@
    "1959"
   ]
  },
- "1993-skybox-impact": {
+ "1994-pacific-prisms": {
   "missingPlayers": [
-   "impact",
-   "kingdom"
+   "richardson",
+   "spikes"
   ],
   "missingInserts": [
-   "promo"
-  ]
- },
- "1992-pro-line-portraits": {
-  "missingPlayers": [
-   "maddux",
-   "simth"
-  ],
-  "missingInserts": [
-   "quarterback"
+   "marquee"
   ]
  },
  "1981-jogo": {
@@ -8719,21 +8764,72 @@
    "superstar combos"
   ]
  },
- "1993-score": {
+ "1994-pacific": {
+  "missingPlayers": [
+   "gold"
+  ],
+  "missingInserts": [
+   "crystaline"
+  ]
+ },
+ "1994-score": {
+  "missingPlayers": [
+   "zone"
+  ],
+  "missingInserts": [
+   "redemption"
+  ]
+ },
+ "1994-pinnacle": {
+  "missingPlayers": [
+   "club"
+  ],
+  "missingInserts": [
+   "back to school"
+  ]
+ },
+ "1994-pro-line-live": {
+  "missingPlayers": [
+   "betts"
+  ],
+  "missingInserts": [
+   "metallic burst"
+  ]
+ },
+ "1993-ultra": {
   "missingPlayers": [
    "of"
   ],
   "missingInserts": [
-   "ore ida qb club"
+   "touchdown king"
   ]
  },
- "1993-pro-set": {
+ "1992-jogo": {
   "missingPlayers": [
-   "lofton"
+   "hc"
   ],
   "missingInserts": [
-   "quarterbacks running backs"
+   "cfl"
   ]
+ },
+ "1992-pro-set": {
+  "missingPlayers": [
+   "colts"
+  ],
+  "missingInserts": [
+   "hall fame inductees"
+  ]
+ },
+ "1992-pro-set-power": {
+  "missingPlayers": [
+   "buccaneers",
+   "lions",
+   "of",
+   "patriots",
+   "redskins",
+   "steelers"
+  ],
+  "missingInserts": []
  },
  "1991-action-packed-all-madden": {
   "missingPlayers": [
@@ -9033,34 +9129,76 @@
   ],
   "missingInserts": []
  },
- "1993-pacific": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "pick pros"
-  ]
- },
- "1993-pinnacle": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "men autumn"
-  ]
- },
- "1993-playoff-contenders": {
+ "1995-action-packed-monday-night-football": {
   "missingPlayers": [],
   "missingInserts": [
    "promo"
   ]
  },
- "1993-sp": {
+ "1995-bowman": {
   "missingPlayers": [],
   "missingInserts": [
-   "pros"
+   "best mirror image"
   ]
  },
- "1992-gameday": {
+ "1995-classic-images-limited-live": {
   "missingPlayers": [],
   "missingInserts": [
-   "national jim kelly"
+   "die cut"
+  ]
+ },
+ "1995-classic-images-limited": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "sculpted previews"
+  ]
+ },
+ "1994-action-packed": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "24kt"
+  ]
+ },
+ "1994-action-packed-all-madden": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "24kt"
+  ]
+ },
+ "1994-pro-tags": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "chris martin enterprises"
+  ]
+ },
+ "1994-playoff-contenders": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "throwback"
+  ]
+ },
+ "1994-stadium-club": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "expansion team redemption"
+  ]
+ },
+ "1994-topps-archives-1956": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "reprint"
+  ]
+ },
+ "1994-topps-archives-1957": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "reprint"
+  ]
+ },
+ "1993-classic-tonx": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "four sport"
   ]
  },
  "1990-topps-traded-baseball-cards": {
@@ -9406,6 +9544,14 @@
    "jeffrey",
    "singletary",
    "tennehill"
+  ],
+  "missingInserts": []
+ },
+ "1994-action-packed-monday-night-football": {
+  "missingPlayers": [
+   "don",
+   "gifford",
+   "givens"
   ],
   "missingInserts": []
  },
@@ -9842,6 +9988,20 @@
   ],
   "missingInserts": []
  },
+ "1994-classic-nfl-draft": {
+  "missingPlayers": [
+   "cornerback",
+   "end"
+  ],
+  "missingInserts": []
+ },
+ "1994-skybox-impact": {
+  "missingPlayers": [
+   "checklist",
+   "glen"
+  ],
+  "missingInserts": []
+ },
  "1993-pro-line-portraits": {
   "missingPlayers": [
    "doleman",
@@ -9853,6 +10013,27 @@
   "missingPlayers": [
    "emtman",
    "millburn"
+  ],
+  "missingInserts": []
+ },
+ "1993-skybox-impact": {
+  "missingPlayers": [
+   "impact",
+   "kingdom"
+  ],
+  "missingInserts": []
+ },
+ "1992-pro-line-portraits": {
+  "missingPlayers": [
+   "maddux",
+   "simth"
+  ],
+  "missingInserts": []
+ },
+ "1992-wild-card": {
+  "missingPlayers": [
+   "kingler",
+   "of"
   ],
   "missingInserts": []
  },
@@ -11080,6 +11261,24 @@
  "2000-bowman-chrome-football": {
   "missingPlayers": [
    "rhet"
+  ],
+  "missingInserts": []
+ },
+ "1994-skybox-premium": {
+  "missingPlayers": [
+   "stars"
+  ],
+  "missingInserts": []
+ },
+ "1993-action-packed": {
+  "missingPlayers": [
+   "givens"
+  ],
+  "missingInserts": []
+ },
+ "1993-pro-set": {
+  "missingPlayers": [
+   "lofton"
   ],
   "missingInserts": []
  },
