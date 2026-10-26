@@ -8,7 +8,7 @@
 //   desktop  — opens below the trigger (or above when there's more room there),
 //              clamped inside the viewport, scrolls when long
 //   mobile   — opens as a bottom sheet with a backdrop (< 640px wide)
-import { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { useEffect, useId, useLayoutEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { ACCENT, ACCENT_TEXT, BG, SURFACE, SURFACE_2, LINE, TEXT, eyebrow, buttonText } from '../lib/theme'
 
@@ -169,6 +169,7 @@ export function Select({ value, onChange, options, label, ariaLabel, defaultValu
   const ref = useRef(null)
   const listRef = useRef(null)
   const mobile = useIsMobile()
+  const uid = useId()
   const opts = options.map(o => Array.isArray(o) ? { value: o[0], label: o[1] } : o)
   const cur = opts.find(o => String(o.value) === String(value)) || opts[0]
   const def = defaultValue !== undefined ? defaultValue : opts[0]?.value
@@ -210,12 +211,13 @@ export function Select({ value, onChange, options, label, ariaLabel, defaultValu
               style={{ height: 40, padding: '0 12px', marginBottom: 4, background: BG, color: TEXT, border: '1px solid ' + LINE, borderRadius: 8, fontSize: 16, boxSizing: 'border-box', flexShrink: 0 }} />
           )}
           <div ref={listRef} role="listbox" aria-label={ariaLabel || label} tabIndex={searchable ? -1 : 0}
+            aria-activedescendant={focus >= 0 && shown[focus] ? uid + '-' + focus : undefined}
             style={{ display: 'flex', flexDirection: 'column', gap: 2, outline: 'none' }}>
             {shown.map((o, i) => {
               const on = String(o.value) === String(value)
               return (
-                <button key={String(o.value)} type="button" role="option" aria-selected={on}
-                  onClick={() => pick(o.value)} onMouseEnter={() => setFocus(i)} style={menuItem(on, i === focus)}>
+                <button key={String(o.value)} id={uid + '-' + i} type="button" role="option" aria-selected={on}
+                  onClick={() => pick(o.value)} onMouseEnter={() => setFocus(i)} onFocus={() => setFocus(i)} style={menuItem(on, i === focus)}>
                   <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{o.label}</span>{on && <Check />}
                 </button>
               )

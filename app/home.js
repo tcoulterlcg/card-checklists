@@ -635,7 +635,10 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
           if (!pool.length) return { ...s, cards: [] }
         }
       }
-      if (setTypeFilter !== 'All' && !(setTypeFilter === 'AU' ? (kind === 'AU' || kind === 'PA') : setTypeFilter === 'PATCH' ? (kind === 'PATCH' || kind === 'PA') : kind === setTypeFilter)) return { ...s, cards: [] }
+      // a card's own flags count too: TCDB marks "Black Laundry Tags /1" cards AU even when the section title doesn't say so
+      const kindOk = (k) => setTypeFilter === 'AU' ? (k === 'AU' || k === 'PA') : setTypeFilter === 'PATCH' ? (k === 'PATCH' || k === 'PA') : k === setTypeFilter
+      const cardKind = (c) => { const au = /\bAU\b/.test(c.x || ''); return !au ? kind : kind === 'PATCH' || kind === 'PA' ? 'PA' : kind === 'PLATE' ? 'PLATE' : 'AU' }
+      if (setTypeFilter !== 'All' && !kindOk(kind)) { pool = pool.filter(c => kindOk(cardKind(c))); if (!pool.length) return { ...s, cards: [] } }
       return {
         ...s,
         cards: pool.filter(c => {

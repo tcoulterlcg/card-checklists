@@ -45,14 +45,20 @@ export function useMyPlayers(account) {
     if (!userId) return
     supa.from('cardhq_followed_players').select('player_name').eq('user_id', userId).then(({ data }) => {
       if (!data) return
+      // Local-only follows are pushed to the account the first time this browser syncs with it.
+      // After that the account is the source of truth, so a player unfollowed on another device
+      // isn't re-added from this browser's old copy.
+      const syncedKey = LS_KEY + '.synced.' + userId
+      let synced = false
+      try { synced = !!localStorage.getItem(syncedKey) } catch {}
       setList(prev => {
-        const merged = [...new Set([...prev, ...data.map(d => d.player_name)])]
-        try { localStorage.setItem(LS_KEY, JSON.stringify(merged)) } catch {}
-        // push any local-only follows up to the account
-        const remote = new Set(data.map(d => d.player_name))
-        const missing = prev.filter(p => !remote.has(p))
+        const remoteList = data.map(d => d.player_name)
+        const remote = new Set(remoteList)
+        const missing = synced ? [] : prev.filter(p => !remote.has(p))
+        const next = [...new Set([...remoteList, ...missing])]
+        try { localStorage.setItem(LS_KEY, JSON.stringify(next)); localStorage.setItem(syncedKey, '1') } catch {}
         if (missing.length) supa.from('cardhq_followed_players').upsert(missing.map(player_name => ({ user_id: userId, player_name })), { onConflict: 'user_id,player_name' }).then(() => {})
-        return merged
+        return next
       })
     })
   }, [userId])
@@ -131,11 +137,13 @@ export function Omnibox({ value, onChange, onSubmit, onPickPlayer, onPickSet, se
   const [open, setOpen] = useState(false)
   const [dir, setDir] = useState(null)
   const [sel, setSel] = useState(0)
+  const [moved, setMoved] = useState(false)   // arrow keys used: Enter opens the highlighted suggestion
   const box = useRef(null)
   // The player directory is ~6 MB; fetch it once the visitor starts searching, not on page load.
   const wantDir = open || (value || '').trim().length >= 2
   const [topDir, setTopDir] = useState(null)
-  useEffect(() => { if (wantDir && !dir) { loadTopPlayers().then(t => t && setTopDir(t)); loadPlayerDir().then(setDir) } }, [wantDir, dir])
+  // a failed directory download comes back empty: keep suggesting from the top list and try again next time
+  useEffect(() => { if (wantDir && !dir) { loadTopPlayers().then(t => t && setTopDir(t)); loadPlayerDir().then(d => { if (d && d.players && d.players.length) setDir(d) }) } }, [wantDir, dir])
   const sdir = dir || topDir   // suggest from the top-players list until the full directory arrives
   useEffect(() => {
     const h = (e) => { if (box.current && !box.current.contains(e.target)) setOpen(false) }
@@ -184,15 +192,15 @@ export function Omnibox({ value, onChange, onSubmit, onPickPlayer, onPickSet, se
   const listId = useId()   // the long example placeholder is cut off mid-word on phones
   return (
     <div ref={box} style={{ position: 'relative' }}>
-      <form role="search" onSubmit={(e) => { e.preventDefault(); go(open && items.length ? sel : -1) }}
+      <form role="search" onSubmit={(e) => { e.preventDefault(); go(open && items.length && moved && dValue === value ? sel : -1) }}
         style={{ display: 'flex', alignItems: 'center', background: '#121626', border: '1px solid ' + (open ? ACCENT + '66' : '#232A3E'), borderRadius: open && items.length ? '14px 14px 0 0' : 14, padding: 6, boxShadow: open ? '0 0 0 4px ' + ACCENT + '14' : '0 20px 50px -20px rgba(0,0,0,0.8)' }}>
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={open ? ACCENT : '#8A93A8'} strokeWidth="2" aria-hidden="true" style={{ marginLeft: 10, flexShrink: 0 }}><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
         <input value={value} autoFocus={autoFocus} aria-label="Search players, sets, serials"
           role="combobox" aria-autocomplete="list" aria-controls={listId} aria-expanded={!!(open && items.length)}
           aria-activedescendant={open && items[sel] ? listId + '-' + sel : undefined}
-          onChange={(e) => { onChange(e.target.value); setOpen(true); setSel(0) }}
+          onChange={(e) => { onChange(e.target.value); setOpen(true); setSel(0); setMoved(false) }}
           onFocus={() => setOpen(true)}
-          onKeyDown={(e) => { if (e.key === 'ArrowDown') { e.preventDefault(); setSel(s => Math.min(s + 1, items.length - 1)) } else if (e.key === 'ArrowUp') { e.preventDefault(); setSel(s => Math.max(s - 1, 0)) } else if (e.key === 'Escape') setOpen(false) }}
+          onKeyDown={(e) => { if (e.key === 'ArrowDown') { e.preventDefault(); setMoved(true); setSel(s => Math.min(s + 1, items.length - 1)) } else if (e.key === 'ArrowUp') { e.preventDefault(); setMoved(true); setSel(s => Math.max(s - 1, 0)) } else if (e.key === 'Escape') setOpen(false) }}
           placeholder={narrow ? 'Search a player or set…' : 'Search any player, e.g. "Tom Brady Auto" or "Connor McDavid Game-Used 1/1"'}
           style={{ flex: 1, minWidth: 0, background: 'transparent', border: 'none', padding: compact ? '10px 12px' : '13px 14px', color: '#EDEDEF', fontSize: compact ? 15 : 16, outline: 'none', fontFamily: 'inherit' }} />
         <button type="submit" style={{ ...buttonText, background: ACCENT, color: '#fff', border: 'none', borderRadius: 10, padding: '0 22px', height: compact ? 38 : 44, cursor: 'pointer', fontSize: 14, opacity: busy ? 0.75 : 1 }} aria-busy={busy ? 'true' : undefined}>{busy ? 'Searching…' : 'Search'}</button>
@@ -249,11 +257,14 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
   // View choices round-trip through the URL (?qv=rookies&group=season&sort=rarest&run=25),
   // so Back from a set returns to the same view.
   const urlp = () => { try { return new URLSearchParams(location.search) } catch { return new URLSearchParams() } }
-  const [quick, setQuick] = useState(() => urlp().get('qv') || 'all')
-  const [group, setGroup] = useState(() => urlp().get('group') || 'set')
-  const [sort, setSort] = useState(() => urlp().get('sort') || 'newest')
+  // hand-edited or old links (?qv=rookies) fall back to the default instead of crashing the page
+  const fromUrl = (k, ok, dflt) => { const v = urlp().get(k); return v && ok(v) ? v : dflt }
+  const [quick, setQuick] = useState(() => fromUrl('qv', v => VIEWS.some(x => x[0] === v), 'all'))
+  const [group, setGroup] = useState(() => fromUrl('group', v => ['set', 'season', 'flat'].includes(v), 'set'))
+  const [sort, setSort] = useState(() => fromUrl('sort', v => ['newest', 'oldest', 'rarest', 'set'].includes(v), 'newest'))
   const [types, setTypes] = useState(new Set()) // empty = any; checked boxes narrow
-  const [run, setRun] = useState(() => urlp().get('run') || 'any') // any|1|10|25|99|numbered|unnumbered
+  const [run, setRun] = useState(() => fromUrl('run', v => /^(any|\d{1,5}|numbered|unnumbered)$/.test(v), 'any')) // any|1|10|25|99|numbered|unnumbered
+  const [ignoreParsed, setIgnoreParsed] = useState(false)   // Reset also drops the filters the search words implied
   const [brands, setBrands] = useState(null) // null = all
   const [products, setProducts] = useState([])
   const [teams, setTeams] = useState(null)
@@ -280,7 +291,9 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
   // When the query itself carries filters (1/1, auto…), start from them.
   useEffect(() => {
     if (!parsed) return
-    if (parsed.serial === 1) setRun('1'); else if (parsed.serialMax) setRun(String(parsed.serialMax)); else if (parsed.types.has('NUMBERED')) setRun('numbered')
+    setIgnoreParsed(false)
+    if (parsed.serial === 1) setRun('1'); else if (parsed.serialMax) setRun(String(parsed.serialMax)); else if (parsed.serial) setRun(String(parsed.serial))
+    else if (parsed.types.has('NUMBERED')) setRun('numbered'); else if (parsed.types.has('UNNUMBERED')) setRun('unnumbered')
     setYearFrom(parsed.season || 0); setYearTo(parsed.season || 9999)
     setProducts(parsed.products.slice())
     setMems(parsed.mem ? new Set([parsed.mem]) : null)
@@ -347,14 +360,14 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
       if (labels && labels.size && !labels.has(r.label)) return false
       if (!skipYear && r.year && (r.year < yearFrom || r.year > yearTo)) return false
       if (products.length) { const n = r.set.toLowerCase(); if (!products.every(p => n.includes(p.toLowerCase()))) return false }
-      if (parsed && parsed.types.size) { for (const t of parsed.types) { if (t === 'RPA' && !((r.type & TYPE.AU) && (r.type & TYPE.PATCH) && (r.type & TYPE.RC))) return false; if (TYPE[t] && !(r.type & TYPE[t])) return false } }
-      if (parsed && parsed.sport && r.sport !== parsed.sport) return false
+      if (parsed && !ignoreParsed && parsed.types.size) { for (const t of parsed.types) { if (t === 'RPA' && !((r.type & TYPE.AU) && (r.type & TYPE.PATCH) && (r.type & TYPE.RC))) return false; if (TYPE[t] && !(r.type & TYPE[t])) return false } }
+      if (parsed && !ignoreParsed && parsed.sport && r.sport !== parsed.sport) return false
       if (mems && mems.size && !(r.mem && mems.has(memKind(r.mem)))) return false
       if (statedOnly && r.mem && memTypical(r.mem)) return false
       if (pars && pars.size && ![...pars].some(k => r.par & PAR[k])) return false
       return true
     }
-  }, [quick, types, run, brands, teams, labels, yearFrom, yearTo, products, hidePlates, parsed, mems, statedOnly, pars])
+  }, [quick, types, run, brands, teams, labels, yearFrom, yearTo, products, hidePlates, parsed, ignoreParsed, mems, statedOnly, pars])
   const filtered = useMemo(() => rows.filter(r => matches(r, false)), [rows, matches])
   // Cards per season under every filter except the season range.
   const yearCounts = useMemo(() => {
@@ -389,7 +402,7 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
   const toggleType = (t) => setTypes(prev => { const n = new Set(prev); if (n.has(t)) n.delete(t); else n.add(t); return n })
   // Facet checkboxes: nothing checked = any; checking narrows to the checked values.
   const toggleIn = (setter, cur, v) => setter(() => { const n = new Set(cur || []); if (n.has(v)) n.delete(v); else n.add(v); return n.size ? n : null })
-  const resetAll = () => { setPars(null); setMems(null); setStatedOnly(false); setQuick('all'); setTypes(new Set()); setRun('any'); setBrands(null); setTeams(null); setLabels(null); setProducts([]); setYearFrom(0); setYearTo(9999); setHidePlates(false) }
+  const resetAll = () => { setIgnoreParsed(true); setPars(null); setMems(null); setStatedOnly(false); setQuick('all'); setTypes(new Set()); setRun('any'); setBrands(null); setTeams(null); setLabels(null); setProducts([]); setYearFrom(0); setYearTo(9999); setHidePlates(false) }
   const color = SPORT_COLORS[player.sport] || ACCENT
   const following = myPlayers.has(player.name)
   const nonSports = NON_SPORTS.has(player.sport)
@@ -570,10 +583,10 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
 
           {years.length > 1 && (
             <div aria-label="Cards per season" style={{ display: 'flex', gap: 3, alignItems: 'flex-end', height: 58, padding: '0 2px' }}>
-              {years.map(y => { const n = yearCounts.get(y) || 0; const active = y >= yearFrom && y <= yearTo; return (
-                <button key={y} onClick={() => { setYearFrom(y); setYearTo(y) }} title={n.toLocaleString() + (n === 1 ? ' card' : ' cards')} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-end', gap: 4, height: '100%', background: 'none', border: 'none', padding: 0, cursor: 'pointer', fontFamily: 'inherit' }}>
+              {years.map((y, yi) => { const n = yearCounts.get(y) || 0; const active = y >= yearFrom && y <= yearTo; const every = Math.ceil(years.length / 14); return (
+                <button key={y} onClick={() => { setYearFrom(y); setYearTo(y) }} title={seasonLabel(y, player.sport) + ': ' + n.toLocaleString() + (n === 1 ? ' card' : ' cards')} aria-label={seasonLabel(y, player.sport) + ', ' + n + ' cards'} style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-end', gap: 4, height: '100%', background: 'none', border: 'none', padding: 0, cursor: 'pointer', fontFamily: 'inherit' }}>
                   <span style={{ width: '100%', height: n ? 6 + Math.round(38 * n / maxYearCount) : 2, opacity: n ? 1 : 0.5, transition: 'height 300ms ease, background-color 200ms ease, opacity 200ms ease', background: active ? (yearFrom === yearTo && yearFrom === y ? ACCENT : '#2E3D6B') : '#1A1F31', borderRadius: '3px 3px 0 0' }} />
-                  <span style={{ fontSize: 12, color: active ? '#A1A1AA' : '#8A93A8' }}>{String(y).slice(2)}</span>
+                  <span style={{ fontSize: 12, color: active ? '#A1A1AA' : '#8A93A8', visibility: yi % every === 0 || yi === years.length - 1 ? 'visible' : 'hidden' }}>{String(y).slice(2)}</span>
                 </button>) })}
             </div>
           )}
@@ -601,7 +614,13 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
                         {g.gu > 0 && <Chip color={MEM_COLORS.GU}>{g.gu} game-used</Chip>}
                         {g.one > 0 && <Chip>{g.one} × 1/1</Chip>}
                       </div>
-                      <button aria-label={open ? 'Collapse' : 'Expand'} aria-expanded={open} onClick={() => setExpanded(s => { const n = new Set(s); if (n.has(g.key)) n.delete(g.key); else n.add(g.key); if (gi === 0 && s.size === 0) { /* first opens by default */ n.add('__init'); if (open) n.delete(g.key) } return n })}
+                      <button aria-label={open ? 'Collapse' : 'Expand'} aria-expanded={open} onClick={() => setExpanded(s => {
+                        // the first group is open by default; keep it that way when another group is toggled first
+                        const n = new Set(s); if (!n.size && groups[0]) n.add(groups[0].key)
+                        if (n.has(g.key)) n.delete(g.key); else n.add(g.key)
+                        if (!n.size) n.add('__none')
+                        return n
+                      })}
                         style={{ background: 'none', border: '1px solid #232A3E', color: '#A1A1AA', borderRadius: 8, width: 36, height: 36, cursor: 'pointer', fontSize: 16, fontFamily: 'inherit' }}>{open ? '▾' : '▸'}</button>
                     </div>
                     {open && (
@@ -669,7 +688,8 @@ export function MyPlayersPanel({ myPlayers, onOpenPlayer, onOpenSet, dirPlayers 
         const i = resolve(name); if (i < 0) continue
         const p = dir.players[i], sh = await loadShard(p[1])
         const per = new Map()
-        for (const r of sh.rows) if (r[0] === i) { const slug = sh.slugs[r[1]]; per.set(slug, (per.get(slug) || 0) + 1) }
+        const pid = p[6] ?? i   // shard rows carry the stable player id, not the directory position
+        for (const r of sh.rows) if (r[0] === pid) { const slug = sh.slugs[r[1]]; per.set(slug, (per.get(slug) || 0) + 1) }
         for (const [slug, n] of per) {
           const m = meta.get(slug); if (!m || !m.year || m.year < (latest[m.sport] || 0)) continue
           out.push({ player: name, slug, set: m.name, year: m.year, sport: m.sport, cards: n })

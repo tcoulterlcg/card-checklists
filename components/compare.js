@@ -192,9 +192,10 @@ export function ComparePage({ names, sets, onChange, onOpenSet, onOpenPlayer }) 
   const val = (s, k) => perSeason && k !== 'seasons' ? s[k] / Math.max(1, s.seasons) : s[k]
   const wins = useMemo(() => {
     const w = [0, 0]
-    for (const [k] of metrics) { if (sA[k] > sB[k]) w[0]++; else if (sB[k] > sA[k]) w[1]++ }
+    // the headline counts what the rows show (totals, or per season in Per-year mode)
+    for (const [k] of metrics) { const a = val(sA, k), b = val(sB, k); if (a > b) w[0]++; else if (b > a) w[1]++ }
     return w
-  }, [metrics, sA, sB])
+  }, [metrics, sA, sB, perSeason])
 
   // Sets both players appear in, biggest overlap first.
   const shared = useMemo(() => {
@@ -321,7 +322,7 @@ export function ComparePage({ names, sets, onChange, onOpenSet, onOpenPlayer }) 
                   <div key={y} style={{ display: 'grid', gridTemplateColumns: '52px 1fr 64px 1fr 52px', alignItems: 'center', gap: 8, padding: '3px 0', fontSize: 13, fontVariantNumeric: 'tabular-nums' }}>
                     <span style={{ color: a ? TXT[0] : DIM, fontWeight: 600 }}>{a ? a.toLocaleString() : '—'}</span>
                     <div style={{ display: 'flex', justifyContent: 'flex-end' }}><div style={{ width: (a / yearMax * 100) + '%', height: 8, borderRadius: 2, background: BAR[0] }} /></div>
-                    <span style={{ ...eyebrow, fontSize: 13, color: '#A3ABBD', textAlign: 'center' }}>{seasonLabel(y, sportOf)}</span>
+                    <span style={{ ...eyebrow, fontSize: 13, color: '#A3ABBD', textAlign: 'center' }}>{crossSport ? String(y) : seasonLabel(y, sportOf)}</span>
                     <div><div style={{ width: (b / yearMax * 100) + '%', height: 8, borderRadius: 2, background: BAR[1] }} /></div>
                     <span style={{ color: b ? TXT[1] : DIM, textAlign: 'right', fontWeight: 600 }}>{b ? b.toLocaleString() : '—'}</span>
                   </div>
