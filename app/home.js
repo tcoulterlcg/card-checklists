@@ -645,7 +645,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
       return {
         ...s,
         cards: pool.filter(c => {
-          if (term && !((c.p || '').toLowerCase().includes(term) || (c.t || '').toLowerCase().includes(term) || String(c.n || '').toLowerCase() === term || (s.title || '').toLowerCase().includes(term))) return false
+          if (term && !((c.p || '').toLowerCase().includes(term) || (c.t || '').toLowerCase().includes(term) || (c.d || '').toLowerCase().includes(term) || String(c.n || '').toLowerCase() === term || (s.title || '').toLowerCase().includes(term))) return false
           if (onlyMine && !isMine(c.p)) return false
           // rookie tributes, retrospectives and buybacks look like rookies but aren't
           if (setRcOnly && (!(/\bRC\b/.test(c.x || '') || (c.n && rcCards.has(c.n + '|' + c.p)) || /rookie|young guns|future watch|rated rookie|\brc\b/i.test(s.title || '')) || /tribute|renewed|rookie year|retrospective|remembrance|buy ?backs?\b/i.test((s.title || '') + ' ' + (setData?.name || '')))) return false
@@ -931,6 +931,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
                       <span className="hq-col-num" style={{ flex: '0 0 68px', color: ACCENT_TEXT, fontWeight: 700, fontVariantNumeric: 'tabular-nums', overflowWrap: 'anywhere' }}>{c.n ? '#' + c.n : '—'}</span>
                       <span style={{ flex: '1 1 0', minWidth: 0 }}>
                         <button onClick={() => cbRef.current.openPlayerByName(c.p, null, true, setData?.sport)} title={'Open ' + c.p + "'s player page"} style={{ fontWeight: 600, background: 'none', border: 'none', color: isMine(c.p) ? ACCENT_TEXT : '#EDEDEF', cursor: 'pointer', padding: 0, textAlign: 'left', fontFamily: 'inherit', fontSize: 14 }}>{c.p}</button>
+                        {(c.v || c.d) && <span style={{ display: 'block', color: '#8A93A8', fontSize: 12, marginTop: 2 }}>{[c.v, c.d].filter(Boolean).join(' · ')}</span>}
                         {c.t && <span className="hq-mobile-only" style={{ color: '#8A93A8', fontSize: 12, marginTop: 2 }}>{c.t}</span>}
                       </span>
                       <span className="hq-col-team" style={{ flex: '1 1 0', minWidth: 0, color: '#8A93A8', fontSize: 13 }}>{c.t || ''}</span>
