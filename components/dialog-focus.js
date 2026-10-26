@@ -21,7 +21,8 @@ export function useDialogFocus(ref, open) {
       if (!all.length) return
       const first = all[0], last = all[all.length - 1]
       if (!ref.current.contains(document.activeElement)) {
-        if (document.activeElement && document.activeElement.closest('[aria-modal="true"]')) return   // another dialog on top owns Tab
+        const owner = document.activeElement && document.activeElement.closest('[role="dialog"]')
+        if (owner && owner !== ref.current) return   // another dialog on top (or a dropdown menu opened from this one) owns Tab
         e.preventDefault(); first.focus()
       }
       else if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus() }

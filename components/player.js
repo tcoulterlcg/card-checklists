@@ -283,22 +283,22 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
   const [sort, setSort] = useState(() => fromUrl('sort', v => ['newest', 'oldest', 'rarest', 'set'].includes(v), 'newest'))
   // the filter panel round-trips too (?ty=AU,RC&yf=2015&yt=2020&br=Topps|Panini&tm=…&mat=GU&par=SHIELD&np=1)
   const listFromUrl = (k, sep, ok) => { const v = urlp().get(k); const a = v ? v.split(sep).filter(x => x && (!ok || ok(x))) : []; return a.length ? new Set(a) : null }
-  const [types, setTypes] = useState(() => listFromUrl('ty', ',', k => k in TYPE) || new Set()) // empty = any; checked boxes narrow
-  const [run, setRun] = useState(() => fromUrl('run', v => /^(any|\d{1,5}|numbered|unnumbered)$/.test(v), 'any')) // any|1|10|25|99|numbered|unnumbered
-  const [ignoreParsed, setIgnoreParsed] = useState(false)   // Reset also drops the filters the search words implied
+  const [types, setTypes] = useState(() => listFromUrl('ty', ',', k => Object.hasOwn(TYPE, k)) || new Set()) // empty = any; checked boxes narrow
+  const [run, setRun] = useState(() => fromUrl('run', v => /^(any|\d{1,5}|numbered|unnumbered)$/.test(v), impliedRun(parsed))) // any|1|10|25|99|numbered|unnumbered
+  const [ignoreParsed, setIgnoreParsed] = useState(() => urlp().get('ip') === '1')   // Reset also drops the filters the search words implied
   const [brands, setBrands] = useState(() => listFromUrl('br', '|')) // null = all
   const [products, setProducts] = useState([])
   const [teams, setTeams] = useState(() => listFromUrl('tm', '|'))
   const [labels, setLabels] = useState(null) // "Appears as": null = every name the player is printed under
   const yearUrl = (k, d) => { const v = parseInt(urlp().get(k)); return v >= 1800 && v <= 2100 ? v : d }
-  const [yearFrom, setYearFrom] = useState(() => yearUrl('yf', 0))
-  const [yearTo, setYearTo] = useState(() => yearUrl('yt', 9999))
+  const [yearFrom, setYearFrom] = useState(() => urlp().has('yf') ? yearUrl('yf', 0) : (parsed && parsed.season) || 0)
+  const [yearTo, setYearTo] = useState(() => urlp().has('yt') ? yearUrl('yt', 9999) : (parsed && parsed.season) || 9999)
   const [expanded, setExpanded] = useState(new Set())
   const [showAll, setShowAll] = useState(new Set())
   const [limit, setLimit] = useState(40)
   const [hidePlates, setHidePlates] = useState(() => urlp().get('np') === '1')
-  const [mems, setMems] = useState(() => listFromUrl('mat', ',', k => ['GU', 'PW', 'EW', 'MX', 'MFG', 'UNK'].includes(k))) // null/empty = any; checked boxes narrow
-  const [pars, setPars] = useState(() => listFromUrl('par', ',', k => k in PAR)) // named parallels / patch kinds; null/empty = any
+  const [mems, setMems] = useState(() => urlp().has('mat') ? listFromUrl('mat', ',', k => ['GU', 'PW', 'EW', 'MX', 'MFG', 'UNK'].includes(k)) : parsed && parsed.mem ? new Set([parsed.mem]) : null) // null/empty = any; checked boxes narrow
+  const [pars, setPars] = useState(() => urlp().has('par') ? listFromUrl('par', ',', k => Object.hasOwn(PAR, k)) : parsed && parsed.pars && parsed.pars.size ? new Set(parsed.pars) : null) // named parallels / patch kinds; null/empty = any
   const [statedOnly, setStatedOnly] = useState(false)
   const [filtersOpen, setFiltersOpen] = useState(false) // mobile only; desktop always shows filters
 
@@ -306,24 +306,31 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
   useEffect(() => {
     const sp = urlp(); if (!sp.get('player')) return
     const set = (k, v, dflt) => { if (v && v !== dflt) sp.set(k, v); else sp.delete(k) }
-    set('qv', quick, 'all'); set('group', group, 'set'); set('sort', sort, 'newest'); set('run', run, 'any')
+    // what the search words alone would set: a choice that differs from it is saved even when it's the
+    // plain default ("run=any" after "mcdavid 1/1"), so Back doesn't re-apply the search's filter
+    const P = parsed || { types: new Set(), products: [] }
+    const iRun = impliedRun(parsed)
     const list = (x, sep) => x && x.size ? [...x].join(sep) : ''
-    set('ty', list(types, ','), ''); set('br', list(brands, '|'), ''); set('tm', list(teams, '|'), ''); set('mat', list(mems, ','), ''); set('par', list(pars, ','), '')
-    set('yf', yearFrom ? String(yearFrom) : '', ''); set('yt', yearTo !== 9999 ? String(yearTo) : '', ''); set('np', hidePlates ? '1' : '', '')
+    const keep = (k, v, implied) => { if (v === implied) sp.delete(k); else sp.set(k, v || 'none') }
+    set('qv', quick, 'all'); set('group', group, 'set'); set('sort', sort, 'newest'); keep('run', run, iRun)
+    set('ty', list(types, ','), ''); set('br', list(brands, '|'), ''); set('tm', list(teams, '|'), '')
+    keep('mat', list(mems, ','), P.mem || ''); keep('par', list(pars, ','), list(P.pars, ','))
+    keep('yf', String(yearFrom), String(P.season || 0)); keep('yt', String(yearTo), String(P.season || 9999))
+    set('ip', ignoreParsed ? '1' : '', ''); set('np', hidePlates ? '1' : '', '')
     const url = location.pathname + '?' + sp.toString()
     if (url !== location.pathname + location.search) { try { history.replaceState(null, '', url) } catch {} }
-  }, [quick, group, sort, run, types, brands, teams, mems, pars, yearFrom, yearTo, hidePlates])
-  // When the query itself carries filters (1/1, auto…), start from them.
+  }, [quick, group, sort, run, types, brands, teams, mems, pars, yearFrom, yearTo, hidePlates, ignoreParsed, parsed])
+  // When the query itself carries filters (1/1, auto…), start from them — unless this history entry
+  // already saved the visitor's own choices (Back from a set page), which win key by key.
   useEffect(() => {
     if (!parsed) return
-    setIgnoreParsed(false)
-    if (parsed.serial === 1) setRun('1'); else if (parsed.serialMax) setRun(String(parsed.serialMax)); else if (parsed.serial) setRun(String(parsed.serial))
-    else if (parsed.types.has('NUMBERED')) setRun('numbered'); else if (parsed.types.has('UNNUMBERED')) setRun('unnumbered')
-    // a value saved in the URL (Back from a set page) wins over the search's default
-    setYearFrom(parsed.season || yearUrl('yf', 0)); setYearTo(parsed.season || yearUrl('yt', 9999))
+    const sp = urlp()
+    if (!sp.has('ip')) setIgnoreParsed(false)
+    if (!sp.has('run')) setRun(impliedRun(parsed))
+    if (!sp.has('yf') && !sp.has('yt')) { setYearFrom(parsed.season || 0); setYearTo(parsed.season || 9999) }
     setProducts(parsed.products.slice())
-    setMems(parsed.mem ? new Set([parsed.mem]) : listFromUrl('mat', ','))
-    setPars(parsed.pars && parsed.pars.size ? new Set(parsed.pars) : listFromUrl('par', ',', k => k in PAR))
+    if (!sp.has('mat')) setMems(parsed.mem ? new Set([parsed.mem]) : null)
+    if (!sp.has('par')) setPars(parsed.pars && parsed.pars.size ? new Set(parsed.pars) : null)
   }, [parsed])
 
   const setMeta = useMemo(() => { const m = {}; for (const s of sets) m[s.slug] = s; return m }, [sets])
@@ -453,7 +460,7 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
     && !player.name.toLowerCase().split(/\s+/).includes(l.toLowerCase())   // just the surname ("Ohtani") isn't another name
     && !(nearName(l, player.name) && facets.labels.get(l) * 10 < (facets.labels.get(player.name) || 0)))   // a rare one-letter slip ("Sidney Crosy") or accent-less copy is a typo, not another name
   const teamList = [...facets.teams.entries()].filter(([t]) => /[A-Za-z]{3,}/.test(t) && !/^\/|#|\d\/\d/.test(t)).sort((a, b) => b[1] - a[1]).slice(0, 12)
-  const productOptions = useMemo(() => [...new Set(rows.map(r => r.set.replace(/^\d{4}(-\d{2})?\s*/, '').replace(/\s+(hockey|baseball|basketball|football|soccer).*$/i, '')))].sort(), [rows])
+  const productOptions = useMemo(() => [...new Set(rows.map(r => r.set.replace(/^\d{4}(-\d{2})?(\s*[/&]\s*\d{4}(-\d{2})?)?\s*/, '').replace(/\s+(hockey|baseball|basketball|football|soccer).*$/i, '')))].sort(), [rows])
   const titleSuffix = quick !== 'all' ? ' · ' + VIEWS.find(v => v[0] === quick)[1] : parsed && parsed.serial === 1 ? ' · 1/1s' : ''
 
   const [copied, setCopied] = useState('')
@@ -474,7 +481,7 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
   const row = (r, withSet, key) => (
     <tr key={key} style={{ borderTop: '1px solid #1a1a1a' }}>
       {withSet && <td style={{ padding: '9px 12px', color: '#A1A1AA', fontVariantNumeric: 'tabular-nums', whiteSpace: 'nowrap' }}>{seasonLabel(r.year, r.sport)}</td>}
-      {withSet && <td style={{ padding: '9px 12px' }}><button onClick={() => onOpenSet(r.slug)} style={{ background: 'none', border: 'none', color: '#EDEDEF', fontWeight: 600, cursor: 'pointer', padding: 0, textAlign: 'left', fontFamily: 'inherit', fontSize: 14 }}>{r.set.replace(/^\d{4}(-\d{2})?\s*/, '')}</button></td>}
+      {withSet && <td style={{ padding: '9px 12px' }}><button onClick={() => onOpenSet(r.slug)} style={{ background: 'none', border: 'none', color: '#EDEDEF', fontWeight: 600, cursor: 'pointer', padding: 0, textAlign: 'left', fontFamily: 'inherit', fontSize: 14 }}>{r.set.replace(/^\d{4}(-\d{2})?(\s*[/&]\s*\d{4}(-\d{2})?)?\s*/, '')}</button></td>}
       <td style={{ padding: '9px 12px', color: ACCENT_TEXT, fontWeight: 700, fontVariantNumeric: 'tabular-nums', whiteSpace: 'nowrap' }}>{r.n ? '#' + r.n : '—'}</td>
       <td style={{ padding: '9px 12px' }}>{r.section}{r.label !== player.name && <span style={{ display: 'block', color: '#8A93A8', fontSize: 12 }}>as {r.label}</span>}</td>
       <td style={{ padding: '9px 12px' }}><TypeChip t={r.type} /></td>
@@ -506,7 +513,7 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
           </div>
           <h1 style={{ ...display, fontSize: 'clamp(36px, 5vw, 56px)', lineHeight: 0.95, margin: 0 }}>{player.name}{titleSuffix && <span style={{ color: ACCENT_TEXT }}>{titleSuffix}</span>}</h1>
           <p style={{ color: '#8A93A8', fontSize: 14, margin: '12px 0 0', lineHeight: 1.6 }}>
-            {!shard ? 'Loading cards…' : firstCard ? <>First card: {firstCard.year ? seasonLabel(firstCard.year, firstCard.sport) + ' ' : ''}{firstCard.set.replace(/^\d{4}(-\d{2})?\s*/, '')}{firstCard.n ? ' #' + firstCard.n : ''} · </> : null}
+            {!shard ? 'Loading cards…' : firstCard ? <>First card: {firstCard.year ? seasonLabel(firstCard.year, firstCard.sport) + ' ' : ''}{firstCard.set.replace(/^\d{4}(-\d{2})?(\s*[/&]\s*\d{4}(-\d{2})?)?\s*/, '')}{firstCard.n ? ' #' + firstCard.n : ''} · </> : null}
             {shard && <>Appears in {facets.sets.size.toLocaleString()} set{facets.sets.size === 1 ? '' : 's'}{facets.seasons > 1 ? ' across ' + facets.seasons + ' years' : ''}</>}
           </p>
           {otherNames.length > 0 && <p style={{ color: '#8A93A8', fontSize: 13, margin: '6px 0 0', lineHeight: 1.5 }}>Also listed as {otherNames.slice(0, 4).join(', ')}{otherNames.length > 4 ? ' and ' + (otherNames.length - 4) + ' more' : ''}</p>}
@@ -701,6 +708,11 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
   )
 }
 
+// the print-run filter a search implies ("mcdavid 1/1" -> '1')
+function impliedRun(p) {
+  if (!p) return 'any'
+  return p.serial === 1 ? '1' : p.serialMax ? String(p.serialMax) : p.serial ? String(p.serial) : p.types && p.types.has('NUMBERED') ? 'numbered' : p.types && p.types.has('UNNUMBERED') ? 'unnumbered' : 'any'
+}
 export function seasonLabel(y, sport) {
   if (!y) return ''
   return /Hockey|Basketball/.test(sport || '') ? (y - 1) + '-' + String(y).slice(2) : String(y)

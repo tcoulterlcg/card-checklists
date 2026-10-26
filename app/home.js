@@ -63,8 +63,9 @@ const SPORT_COLORS = {
 const TCG_SET = new Set(['Pokémon', 'Yu-Gi-Oh!', 'Magic', 'Lorcana', 'One Piece', 'Disney'])
 // Non-sports, non-TCG cards (movies, TV, comics, toys, music, history…).
 const OTHER_SET = new Set(['Entertainment', 'Non-Sport'])
+const ROOKIE_SECTION = /rookie|young guns|future watch|rated rookie|\brc\b/i   // sections whose cards count for "Rookies only"
 // card names that aren't a person or character: no player-page link
-const NOT_A_PLAYER = /\bcheck ?lists?\b|^(header|title card|logo|puzzle|wrapper|redemption|unknown|tbd|n\/a)\b/i
+const NOT_A_PLAYER = /\bcheck ?lists?\b|^(header( card)?|title card|logo|puzzle|wrapper|redemption|unknown|tbd|n\/a)$/i   // whole name: "Unknown Shores" is a Magic card
 const TCG_EXAMPLE = { 'Pokémon': 'Charizard', 'Yu-Gi-Oh!': 'Dark Magician', Magic: 'Lightning Bolt', Lorcana: 'Stitch', 'One Piece': 'Monkey.D.Luffy' }
 // "Stitch — Rock Star" / "Sanji (SP)" / "A-Ancestral Katana" -> base card name.
 const tcgBaseName = (p) => String(p || '').replace(/\s+[—–-]\s+.*$/, '').replace(/\s*\([^)]*\)\s*$/, '').replace(/^A-(?=\S)/, '').trim()
@@ -511,26 +512,45 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
   // Every navigation bumps navSeq; slow loads from an earlier navigation check it and drop their result
   // (otherwise a late set/player load could replace the page you've since moved to).
   const navSeq = useRef(0)
-  const nav = (url, push) => { navSeq.current++; if (push === false) return; try { history.pushState(null, '', url) } catch {} }
+  const holdY = useRef(false)   // a Back/Forward scroll restore is pending: don't save the in-between position
+  // the page being left keeps its scroll position (and how many set sections were open) for Back;
+  // navigations that load before they push (player pages) call this first, before the page shrinks
+  const leaving = () => {
+    if (holdY.current) return
+    try { history.replaceState({ ...(history.state || {}), hqY: window.scrollY, hqSecs: secLimit }, '', location.href) } catch {}
+    holdY.current = true
+  }
+  const nav = (url, push) => {
+    navSeq.current++; if (push === false) return
+    leaving()
+    holdY.current = false
+    try { history.pushState(null, '', url) } catch {}
+  }
   // st: filters from the link (?set=…&sec=…&ctype=…&run=…&rc=1&mem=…&f=…), so Back and shared links restore them
   const openSet = async (s, push, st) => {
     setNotice('')
     st = st || {}
+    const back = push === false && history.state ? history.state : null   // Back/Forward: return to where the visitor was
+    const backY = back && back.hqY > 0 ? back.hqY : 0
+    holdY.current = backY > 0
+    if (push === false) {   // a redirected / differently-cased slug: show the real one, so the filters below can be saved with it
+      const sp = new URLSearchParams(location.search)
+      if (sp.get('set') !== s.slug) { sp.set('set', s.slug); try { history.replaceState(history.state, '', location.pathname + '?' + sp) } catch {} }
+    }
     setActiveSet(s); setGlobalHits(null); setActiveSection(st.sec || 'All'); setShowAllSecs(false); setQuery(st.f || ''); setActivePlayer(null); setView('browse')
     setSetTypeFilter(['BASE', 'AU', 'PA', 'PATCH', 'RELIC', 'PLATE', 'OTHER'].includes(st.ctype) ? st.ctype : 'All')
     setSetRunFilter(['1', '10', '25', '99', 'numbered', 'unnumbered'].includes(st.run) ? st.run : 'any')
-    setSetRcOnly(st.rc === '1'); setSetMemFilter(['MEMO', 'GU', 'PW', 'EW', 'MX', 'MFG', 'UNK', 'STATED'].includes(st.mem) ? st.mem : 'any'); setSecLimit(20); setOpenSecs(new Set())
+    setSetRcOnly(st.rc === '1'); setSetMemFilter(['MEMO', 'GU', 'PW', 'EW', 'MX', 'MFG', 'UNK', 'STATED'].includes(st.mem) ? st.mem : 'any'); setSecLimit(back && back.hqSecs > 20 ? back.hqSecs : 20); setOpenSecs(new Set())
     nav('?set=' + encodeURIComponent(s.slug), push)
     const my = navSeq.current
     setSetData(null); setSetLoadErr(false)
     let data = null
     try { data = await loadSet(s.slug) } catch (e) {}
     if (my !== navSeq.current) return
-    if (!data) { setSetLoadErr(true); return }
+    if (!data) { holdY.current = false; setSetLoadErr(true); return }
     if (st.sec && !(data.sections || []).some(x => x.title === st.sec)) setActiveSection('All')   // an old link's section was renamed
-    const backY = push === false && history.state && history.state.hqY   // Back/Forward: return to where the visitor was
     setSetData(data)
-    if (backY > 0) setTimeout(() => window.scrollTo(0, backY), 80); else window.scrollTo(0, 0)
+    if (backY > 0) setTimeout(() => { window.scrollTo(0, backY); holdY.current = false }, 80); else window.scrollTo(0, 0)
   }
 
   // One compact index (loaded once, then cached) powers instant cross-set
@@ -546,6 +566,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
     window.scrollTo(0, 0)
   }
   const openPlayerByName = async (name, rawQuery, push, sport) => {
+    if (push !== false) leaving()
     // exact name, or a name rolled into another page ("Shoeless Joe Jackson" -> Joe Jackson)
     const is = (h) => h.name === name || h.via === name
     const pick = (hs) => hs.find(h => is(h) && (!sport || h.sport === sport)) || hs.find(is)
@@ -667,7 +688,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
           if (term && !((c.p || '').toLowerCase().includes(term) || (c.t || '').toLowerCase().includes(term) || (c.d || '').toLowerCase().includes(term) || String(c.n || '').toLowerCase() === term || (s.title || '').toLowerCase().includes(term))) return false
           if (onlyMine && !isMine(c.p)) return false
           // rookie tributes, retrospectives and buybacks look like rookies but aren't
-          if (setRcOnly && (!(/\bRC\b/.test(c.x || '') || (c.n && rcCards.has(c.n + '|' + c.p)) || /rookie|young guns|future watch|rated rookie|\brc\b/i.test(s.title || '')) || /tribute|renewed|rookie year|retrospective|remembrance|buy ?backs?\b/i.test((s.title || '') + ' ' + (setData?.name || '')))) return false
+          if (setRcOnly && (!(/\bRC\b/.test(c.x || '') || (c.n && rcCards.has(c.n + '|' + c.p)) || ROOKIE_SECTION.test(s.title || '')) || /tribute|renewed|rookie year|retrospective|remembrance|buy ?backs?\b/i.test((s.title || '') + ' ' + (setData?.name || '')))) return false
           if (setRunFilter !== 'any') {
             const sn = cardSerial(c, s)
             if (setRunFilter === '1' && sn !== 1) return false
@@ -727,7 +748,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
   const sortedSets = useMemo(() => filteredSets.slice().sort((a, b) => {
               // A–Z by the product name shown on the card (the season prefix is dropped there);
               // sets with no year go last in both year orders.
-              const nm = () => a.name.replace(/^\d{4}(-\d{2})?\s*/, '').localeCompare(b.name.replace(/^\d{4}(-\d{2})?\s*/, '')) || (b.year || 0) - (a.year || 0)
+              const nm = () => a.name.replace(/^\d{4}(-\d{2})?(\s*[/&]\s*\d{4}(-\d{2})?)?\s*/, '').localeCompare(b.name.replace(/^\d{4}(-\d{2})?(\s*[/&]\s*\d{4}(-\d{2})?)?\s*/, '')) || (b.year || 0) - (a.year || 0)
               if (sortBy === 'year-asc') return ((a.year || 9999) - (b.year || 9999)) || nm()
               if (sortBy === 'name-asc') return nm()
               if (sortBy === 'name-desc') return -nm()
@@ -753,7 +774,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
     for (const sec of (setData && setData.sections) || []) {
       f.kinds.add(secKind(sec.title))
       if (/\/\s*\d|1\s*of\s*1|printing plate/i.test(sec.title || '') || /#\/\s*\d/.test(sec.odds || '')) f.serial = true
-      if (/rookie|young guns|\brc\b/i.test(sec.title || '')) f.rc = true
+      if (ROOKIE_SECTION.test(sec.title || '')) f.rc = true
       for (const c of sec.cards || []) {
         if (c.t) f.team = true
         if (c.x) { f.flag = true; if (/\//.test(c.x)) f.serial = true; if (/\bRC\b/.test(c.x)) f.rc = true; if (/\bAU\b/.test(c.x)) f.kinds.add('AU') }
@@ -1099,7 +1120,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
   useEffect(() => {
     // remember the scroll position in this history entry, so Back returns to the same spot on a set page
     let saveT = 0
-    const saveY = () => { saveT = 0; try { history.replaceState({ ...(history.state || {}), hqY: window.scrollY }, '', location.href) } catch {} }
+    const saveY = () => { saveT = 0; if (holdY.current) return; try { history.replaceState({ ...(history.state || {}), hqY: window.scrollY }, '', location.href) } catch {} }
     const onScroll = () => { setScrolled(window.scrollY > 8); setPastHero(window.scrollY > 460); if (!saveT) saveT = setTimeout(saveY, 300) }
     const onKey = (e) => {
       if (e.key === 'Escape') setMenuOpen(false)
@@ -1416,7 +1437,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
             </button>}
             <Select ariaLabel="Section" value={activeSection} onChange={setActiveSection} defaultValue="All" width={340}
               options={[['All', 'All sections (' + (setData.sections || []).length + ')'], ...(setData.sections || []).map(s => [s.title, s.title + ' (' + s.cards.length + ')'])]} />
-            {(setTypeFilter !== 'All' || [...setFacets.kinds].some(k => k !== 'BASE' && k !== 'OTHER')) && <Select ariaLabel="Card type" value={setTypeFilter} onChange={setSetTypeFilter} defaultValue="All" width={240}
+            {(setTypeFilter !== 'All' || (!setIsTcg && setFacets.kinds.size > 1)) && <Select ariaLabel="Card type" value={setTypeFilter} onChange={setSetTypeFilter} defaultValue="All" width={240}
               options={[['All', 'Any type'], ['BASE', 'Base'], ['AU', 'Autographs'], ['PA', 'Patch autos'], ['PATCH', 'Patches'], ['RELIC', 'Relics'], ['PLATE', 'Printing plates'], ['OTHER', 'Inserts & parallels']]} />}
             {(setRunFilter !== 'any' || setFacets.serial) && <Select ariaLabel="Print run" value={setRunFilter} onChange={setSetRunFilter} defaultValue="any" width={220}
               options={[['any', 'Any run'], ['1', '1/1 only'], ['10', '≤ /10'], ['25', '≤ /25'], ['99', '≤ /99'], ['numbered', 'Numbered'], ['unnumbered', 'Unnumbered']]} />}
@@ -1759,7 +1780,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
                     <span style={{ ...eyebrow, color: c }}>{s.sport}{yearLabel(s) ? ' · ' + yearLabel(s) : ''}</span>
                     <span style={{ color: '#8A93A8', fontSize: 12 }}>{(s.sections || 0)} section{s.sections === 1 ? '' : 's'}</span>
                   </div>
-                  <p style={{ ...title(16), margin: '0 0 12px', lineHeight: 1.1, minHeight: 44 }}>{s.name.replace(/^\d{4}(-\d{2})?\s*/, '')}</p>
+                  <p style={{ ...title(16), margin: '0 0 12px', lineHeight: 1.1, minHeight: 44 }}>{s.name.replace(/^\d{4}(-\d{2})?(\s*[/&]\s*\d{4}(-\d{2})?)?\s*/, '')}</p>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', borderTop: '1px solid #222', paddingTop: 10 }}>
                     <span style={{ ...display, fontSize: 24, color: ACCENT_TEXT }}>{(s.cardCount || 0).toLocaleString()}</span>
                     <span style={{ ...eyebrow, color: '#8A93A8' }}>Cards</span>

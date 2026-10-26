@@ -87,6 +87,7 @@ const bigNum = { ...display, fontSize: 'clamp(30px, 6.5vw, 46px)', lineHeight: 1
 const linkBtn = { background: 'none', border: 'none', padding: 0, color: '#EDEDEF', fontWeight: 600, cursor: 'pointer', textAlign: 'left', fontFamily: 'inherit', fontSize: 14 }
 
 // Who leads, judged on the numbers shown: 12.04 vs 12.01 per season both read 12.0 — that's Even, not "+0.0".
+const shown = (v, perSeason) => Number(fmt(v, perSeason).replace(/,/g, ''))   // the value as printed (12.06 -> 12.1)
 const leadOf = (a, b, perSeason) => fmt(a, perSeason) === fmt(b, perSeason) ? -1 : a > b ? 0 : 1
 // One stat: big numbers at both ends, a short split bar and the edge under the label.
 function StatRow({ title, a, b, names, perSeason }) {
@@ -102,7 +103,7 @@ function StatRow({ title, a, b, names, perSeason }) {
           <div style={{ display: 'flex', background: '#1A1F31', borderRadius: 2 }}><div style={{ width: (b / max * 100) + '%', background: lead === 0 ? DIM_BAR : BAR[1], borderRadius: 2, transition: 'width .3s' }} /></div>
         </div>
         <span style={{ fontSize: 12, fontWeight: 600, color: lead < 0 ? DIM : TXT[lead], fontVariantNumeric: 'tabular-nums', textAlign: 'center' }}>
-          {lead < 0 ? 'Even' : '+' + fmt(Math.abs(a - b), perSeason) + ' ' + lastName(names[lead])}
+          {lead < 0 ? 'Even' : '+' + fmt(Math.abs(shown(a, perSeason) - shown(b, perSeason)), perSeason) + ' ' + lastName(names[lead])}
         </span>
       </div>
       <span style={{ ...bigNum, color: lead === 0 ? DIM : TXT[1], textAlign: 'right' }}>{fmt(b, perSeason)}</span>
@@ -302,7 +303,7 @@ export function ComparePage({ names, sets, onChange, onOpenSet, onOpenPlayer }) 
                   {together.slice(0, 40).map((r, i) => (
                     <div key={i} style={{ display: 'flex', justifyContent: 'space-between', gap: 10, padding: '9px 0', borderTop: '1px solid #1A1F31', fontSize: 14 }}>
                       <span style={{ minWidth: 0 }}>
-                        <button onClick={() => onOpenSet(r.slug)} style={linkBtn}>{seasonLabel(r.year, r.sport)} {r.set.replace(/^\d{4}(-\d{2})?\s*/, '')}</button>
+                        <button onClick={() => onOpenSet(r.slug)} style={linkBtn}>{seasonLabel(r.year, r.sport)} {r.set.replace(/^\d{4}(-\d{2})?(\s*[/&]\s*\d{4}(-\d{2})?)?\s*/, '')}</button>
                         <span style={{ display: 'block', color: DIM, fontSize: 12 }}>{r.section}</span>
                       </span>
                       <span style={{ textAlign: 'right', whiteSpace: 'nowrap' }}>
