@@ -2615,57 +2615,6 @@
    "swinging bat ink"
   ]
  },
- "1996-97-fleer": {
-  "missingPlayers": [
-   "blazers",
-   "bucks",
-   "card",
-   "checklist",
-   "christie",
-   "corbin",
-   "edwards",
-   "ellis",
-   "farnett",
-   "gill",
-   "hornets",
-   "hunter",
-   "knicks",
-   "magic",
-   "mavericks",
-   "mckie",
-   "neal",
-   "nuggets",
-   "of",
-   "peyton",
-   "pistons",
-   "polynice",
-   "rockets",
-   "seikaly",
-   "stackouse",
-   "suns",
-   "trademark",
-   "usa",
-   "wesley",
-   "west"
-  ],
-  "missingInserts": [
-   "brushed",
-   "european",
-   "expired trade",
-   "franchise futures",
-   "french",
-   "lucky 13 expired redemption",
-   "metal",
-   "metallized",
-   "polychrome",
-   "precious",
-   "special issue",
-   "tower power",
-   "usa",
-   "usa heroes",
-   "usa wrapper exchange"
-  ]
- },
  "2016-bowman-chrome-baseball-cards": {
   "missingPlayers": [
    "aaron",
@@ -2927,6 +2876,53 @@
    "willis"
   ],
   "missingInserts": []
+ },
+ "1996-97-fleer": {
+  "missingPlayers": [
+   "blazers",
+   "bucks",
+   "card",
+   "checklist",
+   "christie",
+   "corbin",
+   "edwards",
+   "ellis",
+   "farnett",
+   "gill",
+   "hornets",
+   "hunter",
+   "knicks",
+   "magic",
+   "mavericks",
+   "mckie",
+   "neal",
+   "nuggets",
+   "of",
+   "peyton",
+   "pistons",
+   "polynice",
+   "rockets",
+   "seikaly",
+   "stackouse",
+   "suns",
+   "trademark",
+   "usa",
+   "wesley",
+   "west"
+  ],
+  "missingInserts": [
+   "european",
+   "expired trade",
+   "franchise futures",
+   "french",
+   "lucky 13 expired redemption",
+   "metal",
+   "metallized",
+   "precious",
+   "special issue",
+   "tower power",
+   "usa"
+  ]
  },
  "2014-bowman-chome-mini-baseball-cards": {
   "missingPlayers": [
@@ -4028,44 +4024,6 @@
    "turkey"
   ]
  },
- "1983-donruss-baseball-cards": {
-  "missingPlayers": [
-   "aaron",
-   "appling",
-   "boudreau",
-   "brothers",
-   "campanella",
-   "clemente",
-   "cronin",
-   "dean",
-   "dickey",
-   "feller",
-   "foxx",
-   "gehringer",
-   "greenberg",
-   "grimes",
-   "hubbell",
-   "irvin",
-   "kaline",
-   "kiner",
-   "mantle",
-   "mathewson",
-   "mize",
-   "musial",
-   "ott",
-   "paige",
-   "ruffing",
-   "snider",
-   "stengel",
-   "wynn",
-   "young"
-  ],
-  "missingInserts": [
-   "action stars",
-   "hall fame heroes",
-   "stats"
-  ]
- },
  "2019-topps-heritage-baseball": {
   "missingPlayers": [
    "bohm",
@@ -4136,22 +4094,6 @@
    "patch"
   ]
  },
- "1996-97-finest": {
-  "missingPlayers": [
-   "mantle",
-   "mays"
-  ],
-  "missingInserts": [
-   "bordered",
-   "borderless",
-   "holochrome",
-   "mystery",
-   "reprint",
-   "super team champion bordered",
-   "super team champion borderless",
-   "super team finals"
-  ]
- },
  "2014-bowman-draft-baseball-cards": {
   "missingPlayers": [
    "box",
@@ -4212,32 +4154,6 @@
    "patch ink",
    "profiles",
    "signature"
-  ]
- },
- "1997-98-spx": {
-  "missingPlayers": [
-   "dampier",
-   "delk",
-   "gold",
-   "jones",
-   "jonson",
-   "kittles",
-   "mashburn",
-   "nash",
-   "potapenko",
-   "sprewell",
-   "stackhouse",
-   "sura",
-   "thomas",
-   "williams",
-   "wright"
-  ],
-  "missingInserts": [
-   "die cut",
-   "holoview heroes",
-   "promotion",
-   "rounded",
-   "sample"
   ]
  },
  "1985-topps-traded-baseball-cards": {
@@ -4319,6 +4235,42 @@
   ],
   "missingInserts": [
    "mojo"
+  ]
+ },
+ "1983-donruss-baseball-cards": {
+  "missingPlayers": [
+   "aaron",
+   "appling",
+   "boudreau",
+   "brothers",
+   "campanella",
+   "clemente",
+   "cronin",
+   "dean",
+   "dickey",
+   "feller",
+   "foxx",
+   "gehringer",
+   "greenberg",
+   "grimes",
+   "hubbell",
+   "irvin",
+   "kaline",
+   "kiner",
+   "mantle",
+   "mathewson",
+   "mize",
+   "musial",
+   "ott",
+   "paige",
+   "ruffing",
+   "snider",
+   "stengel",
+   "wynn",
+   "young"
+  ],
+  "missingInserts": [
+   "hall fame heroes"
   ]
  },
  "2016-panini-black-gold-football-cards": {
@@ -4969,6 +4921,49 @@
    "snapshots"
   ]
  },
+ "1998-99-spx-finite": {
+  "missingPlayers": [
+   "benjamin",
+   "bibby",
+   "carter",
+   "clark",
+   "dickerson",
+   "doleac",
+   "drew",
+   "garrity",
+   "harpring",
+   "harrington",
+   "hughes",
+   "jamison",
+   "lafrentz",
+   "lewis",
+   "lopez",
+   "lue",
+   "mccoy",
+   "mcleod",
+   "mohammed",
+   "nowitzki",
+   "olowokandi",
+   "patterson",
+   "pierce",
+   "skinner",
+   "traylor",
+   "wells"
+  ],
+  "missingInserts": []
+ },
+ "1992-93-hoops": {
+  "missingPlayers": [
+   "card"
+  ],
+  "missingInserts": [
+   "championship series",
+   "more magic moments",
+   "stamped",
+   "superstars",
+   "unstamped"
+  ]
+ },
  "2017-topps-wwe-nxt-checklist-added": {
   "missingPlayers": [
    "aries",
@@ -5004,23 +4999,27 @@
    "state hometown"
   ]
  },
- "1992-93-skybox": {
+ "1997-98-spx": {
   "missingPlayers": [
-   "card",
-   "carlesimo",
-   "checklist",
-   "christie",
-   "krzyzewski",
-   "magic",
-   "mullins",
-   "photo",
-   "pippin",
-   "ties"
+   "dampier",
+   "delk",
+   "gold",
+   "jones",
+   "jonson",
+   "kittles",
+   "mashburn",
+   "nash",
+   "potapenko",
+   "sprewell",
+   "stackhouse",
+   "sura",
+   "thomas",
+   "williams",
+   "wright"
   ],
   "missingInserts": [
-   "mark see",
-   "prototype",
-   "usa"
+   "die cut",
+   "sample"
   ]
  },
  "2019-panini-diamond-kings-baseball-cards": {
@@ -5096,40 +5095,6 @@
    "cracked ice",
    "draft preview",
    "road to finals 1st round"
-  ]
- },
- "1997-press-pass": {
-  "missingPlayers": [
-   "adburrahim",
-   "marbury",
-   "mcdyess",
-   "miller",
-   "of",
-   "pippen",
-   "robinson",
-   "walker"
-  ],
-  "missingInserts": [
-   "bonus",
-   "game jersey",
-   "teammates"
-  ]
- },
- "1997-98-ultra": {
-  "missingPlayers": [
-   "ar",
-   "autry",
-   "ht",
-   "nf",
-   "of",
-   "peyton",
-   "sd",
-   "vt"
-  ],
-  "missingInserts": [
-   "23k",
-   "98 greats",
-   "die cut"
   ]
  },
  "1990-91-michigan-state-spartans": {
@@ -5363,20 +5328,6 @@
    "spiral"
   ]
  },
- "1997-98-skybox-z-force": {
-  "missingPlayers": [
-   "askew",
-   "crotty",
-   "rahim",
-   "trent",
-   "zn"
-  ],
-  "missingInserts": [
-   "23k",
-   "franz portland trail blazers",
-   "printers"
-  ]
- },
  "2016-topps-ufc-high-impact-cards": {
   "missingPlayers": [
    "alves",
@@ -5519,6 +5470,22 @@
    "verdugo"
   ],
   "missingInserts": []
+ },
+ "1997-press-pass": {
+  "missingPlayers": [
+   "adburrahim",
+   "marbury",
+   "mcdyess",
+   "miller",
+   "of",
+   "pippen",
+   "robinson",
+   "walker"
+  ],
+  "missingInserts": [
+   "game jersey",
+   "teammates"
+  ]
  },
  "2017-panini-national-treasures-football-nfl-cards": {
   "missingPlayers": [
@@ -5711,16 +5678,6 @@
   "missingInserts": [
    "artist s",
    "glossy"
-  ]
- },
- "1997-98-hoops": {
-  "missingPlayers": [
-   "cb"
-  ],
-  "missingInserts": [
-   "911",
-   "headliner",
-   "poster"
   ]
  },
  "2017-18-mvp-hockey": {
@@ -6215,6 +6172,16 @@
    "summit 2014"
   ]
  },
+ "1996-97-finest": {
+  "missingPlayers": [
+   "mantle",
+   "mays"
+  ],
+  "missingInserts": [
+   "holochrome",
+   "reprint"
+  ]
+ },
  "2015-panini-prizm-football-cards": {
   "missingPlayers": [
    "payne",
@@ -6286,13 +6253,13 @@
    "back"
   ]
  },
- "1996-97-hoops": {
+ "1999-00-sp-authentic": {
   "missingPlayers": [
-   "mccarthy"
+   "peyton"
   ],
   "missingInserts": [
-   "head to",
-   "sheet"
+   "buyback",
+   "sample"
   ]
  },
  "2018-panini-classics-football-cards": {
@@ -6371,6 +6338,18 @@
   ],
   "missingInserts": []
  },
+ "1992-93-skybox": {
+  "missingPlayers": [
+   "christie",
+   "mullins",
+   "photo",
+   "pippin",
+   "ties"
+  ],
+  "missingInserts": [
+   "mark see"
+  ]
+ },
  "2018-panini-contenders-optic-football-cards": {
   "missingPlayers": [
    "clark",
@@ -6395,11 +6374,25 @@
    "1965 tall boy"
   ]
  },
- "1997-press-pass-double-threat": {
+ "1998-press-pass-double-threat": {
   "missingPlayers": [],
   "missingInserts": [
-   "die cut",
-   "retros"
+   "jersey",
+   "threads jersey"
+  ]
+ },
+ "1998-99-ud-choice": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "bobbing head",
+   "preview finals shot"
+  ]
+ },
+ "1998-99-upper-deck-black-diamond": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "diamond sample",
+   "sample"
   ]
  },
  "2015-bowman-draft-baseball-cards": {
@@ -6642,6 +6635,26 @@
   ],
   "missingInserts": []
  },
+ "1999-00-flair-showcase": {
+  "missingPlayers": [
+   "bf",
+   "c",
+   "gf"
+  ],
+  "missingInserts": [
+   "first"
+  ]
+ },
+ "1998-upper-deck-hardcourt": {
+  "missingPlayers": [
+   "mjordan",
+   "rahim",
+   "rmiller"
+  ],
+  "missingInserts": [
+   "jordan hld court"
+  ]
+ },
  "1997-98-metal-universe-championship": {
   "missingPlayers": [
    "fc",
@@ -6652,15 +6665,18 @@
    "millennium"
   ]
  },
- "1996-97-skybox-premium": {
+ "1997-98-ultra": {
   "missingPlayers": [
-   "declerq",
-   "elliot",
-   "hudson"
+   "ar",
+   "autry",
+   "ht",
+   "nf",
+   "of",
+   "peyton",
+   "sd",
+   "vt"
   ],
-  "missingInserts": [
-   "net sets"
-  ]
+  "missingInserts": []
  },
  "1995-96-flair": {
   "missingPlayers": [
@@ -6883,6 +6899,15 @@
   ],
   "missingInserts": [
    "team leaders 92 93"
+  ]
+ },
+ "1999-00-fleer-force": {
+  "missingPlayers": [
+   "ronartest",
+   "shareefabdurrahim"
+  ],
+  "missingInserts": [
+   "airforce"
   ]
  },
  "1995-signature-rookies-autobilia": {
@@ -7661,6 +7686,16 @@
   ],
   "missingInserts": []
  },
+ "1998-99-ultra": {
+  "missingPlayers": [
+   "box",
+   "canseco",
+   "chaney",
+   "na",
+   "white"
+  ],
+  "missingInserts": []
+ },
  "2017-panini-playoff-football-nfl-cards": {
   "missingPlayers": [
    "bellbrown",
@@ -7711,28 +7746,40 @@
   ],
   "missingInserts": []
  },
- "1996-score-board-autographed": {
+ "1998-99-upper-deck-encore": {
   "missingPlayers": [],
   "missingInserts": [
-   "collection"
+   "power"
   ]
  },
- "1996-score-board-rookies": {
+ "1997-upper-deck-nestle-slam-dunk": {
   "missingPlayers": [],
   "missingInserts": [
-   "college jersey"
+   "crunch contestants"
   ]
  },
- "1996-97-sp": {
+ "1992-classic-draft-picks": {
   "missingPlayers": [],
   "missingInserts": [
-   "holoviews"
+   "promo"
   ]
  },
- "1990-91-skybox": {
+ "1991-92-fleer-wheaties": {
   "missingPlayers": [],
   "missingInserts": [
-   "prototype"
+   "hand cut"
+  ]
+ },
+ "1991-92-skybox": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "promo"
+  ]
+ },
+ "1991-92-sports-educational": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "1992 national convention promo"
   ]
  },
  "1990-topps-traded-baseball-cards": {
@@ -7941,6 +7988,14 @@
   ],
   "missingInserts": []
  },
+ "1996-97-skybox-premium": {
+  "missingPlayers": [
+   "declerq",
+   "elliot",
+   "hudson"
+  ],
+  "missingInserts": []
+ },
  "1994-95-fleer-european": {
   "missingPlayers": [
    "ellison",
@@ -8144,6 +8199,20 @@
   "missingPlayers": [
    "box",
    "gilchrist"
+  ],
+  "missingInserts": []
+ },
+ "1998-99-skybox-molten-metal": {
+  "missingPlayers": [
+   "checklist",
+   "peyton"
+  ],
+  "missingInserts": []
+ },
+ "1997-98-skybox-z-force": {
+  "missingPlayers": [
+   "rahim",
+   "zn"
   ],
   "missingInserts": []
  },
@@ -8714,6 +8783,30 @@
   ],
   "missingInserts": []
  },
+ "1999-00-fleer-tradition": {
+  "missingPlayers": [
+   "rs"
+  ],
+  "missingInserts": []
+ },
+ "1998-99-metal-universe": {
+  "missingPlayers": [
+   "ne"
+  ],
+  "missingInserts": []
+ },
+ "1997-98-hoops": {
+  "missingPlayers": [
+   "cb"
+  ],
+  "missingInserts": []
+ },
+ "1996-97-hoops": {
+  "missingPlayers": [
+   "mccarthy"
+  ],
+  "missingInserts": []
+ },
  "1995-96-panini-nba-stickers-basketball": {
   "missingPlayers": [
    "rauf"
@@ -8735,6 +8828,12 @@
  "1992-93-ultra": {
   "missingPlayers": [
    "session"
+  ],
+  "missingInserts": []
+ },
+ "1991-92-fleer": {
+  "missingPlayers": [
+   "bush"
   ],
   "missingInserts": []
  },
