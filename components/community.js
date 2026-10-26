@@ -188,8 +188,14 @@ export function CollectionView({ account, indexSets, onOpenAuth, onOpenSet, onWa
   const reloadCollected = async () => {
     const my = ++loadSeq.current
     const rows = await myCollection(uid)
-    if (my === loadSeq.current && !rows.failed) setCollected(rows)   // a failed read keeps the marks we have
+    if (my !== loadSeq.current || rows.failed) return   // a failed read keeps the marks we have
+    // a box still saving keeps the state it was clicked to, even if this read started before its save landed
+    const k = (c) => c.set_slug + '||' + sectionKey(c.section) + '||' + c.card_n
+    let out = rows
+    for (const [key, op] of pendingOps.current) out = op.on ? (out.some(r => k(r) === key) ? out : [...out, op.row]) : out.filter(r => k(r) !== key)
+    setCollected(out)
   }
+  const pendingOps = useRef(new Map())   // key -> { on, row } while a checkbox change is saving
   useEffect(() => {
     setWants(null); setCollected(null)
     if (!uid) return
@@ -276,9 +282,13 @@ export function CollectionView({ account, indexSets, onOpenAuth, onOpenSet, onWa
                         const slug = !on && rec ? rec.set_slug : (setData.slug || activeSlug)
                         const item = { set_slug: slug, card_n: cn, section: !on && rec ? rec.section : sec.title, player: c.p }   // uncheck the saved row, even if saved under an older title or slug
                         // show the change right away; the reload below confirms it
-                        setCollected(cur => on ? [...(cur || []), { ...item, id: 'pending-' + key }] : (cur || []).filter(x => x !== rec))
+                        const pend = { ...item, id: 'pending-' + key }
+                        setCollected(cur => on ? [...(cur || []), pend] : (cur || []).filter(x => x !== rec))
+                        const opKey = item.set_slug + '||' + sectionKey(item.section) + '||' + cn
+                        pendingOps.current.set(opKey, { on, row: pend })
                         const { error } = await toggleCollected(session.user.id, item, on)
                         if (error) setNotice('Couldn’t save that change — ' + error.message)
+                        pendingOps.current.delete(opKey)
                         await reloadCollected()
                         busyKeys.current.delete(key)
                       }} style={{ accentColor: ACCENT, width: 18, height: 18, flexShrink: 0 }} />
