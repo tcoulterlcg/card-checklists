@@ -2257,115 +2257,6 @@
    "national convention prism"
   ]
  },
- "2002-03-ultra": {
-  "missingPlayers": [
-   "abrosimova",
-   "alehaleem",
-   "arcain",
-   "azzi",
-   "baranova",
-   "bevilaqua",
-   "bird",
-   "bolton",
-   "brondello",
-   "brumfield",
-   "buescher",
-   "bullett",
-   "burgess",
-   "byears",
-   "campbell",
-   "cash",
-   "catchings",
-   "caufield",
-   "checklist",
-   "crawley",
-   "crockrom",
-   "dales",
-   "douglas",
-   "dydek",
-   "edwards",
-   "enis",
-   "fallon",
-   "feaster",
-   "ferdinand",
-   "figgs",
-   "folkl",
-   "gillom",
-   "goodson",
-   "gortman",
-   "griffith",
-   "hammon",
-   "harrison",
-   "henning",
-   "hlede",
-   "holdsclaw",
-   "hollandcorn",
-   "kingi",
-   "klimesova",
-   "lambert",
-   "lassiter",
-   "lennox",
-   "leslie",
-   "lobo",
-   "luz",
-   "mabika",
-   "machanguana",
-   "maigaba",
-   "mapp",
-   "marques",
-   "mccray",
-   "mcdonald",
-   "mcwilliamsfranklin",
-   "melvin",
-   "milton",
-   "moore",
-   "ndiayediatta",
-   "nemcova",
-   "nolan",
-   "o",
-   "page",
-   "palmer",
-   "pe",
-   "penicheiro",
-   "pettis",
-   "phillips",
-   "powell",
-   "pride",
-   "randall",
-   "rasmussen",
-   "redd",
-   "riley",
-   "ross",
-   "sales",
-   "sam",
-   "scott",
-   "staffordodom",
-   "staley",
-   "stepanova",
-   "stiles",
-   "stinson",
-   "streimikyte",
-   "suttonbrown",
-   "swoopes",
-   "teasley",
-   "thompson",
-   "tornikidou",
-   "veal",
-   "vodichkova",
-   "washington",
-   "wauters",
-   "weatherspoon",
-   "wicks",
-   "witherspoon",
-   "yamasaki"
-  ],
-  "missingInserts": [
-   "memorabilia",
-   "wnba",
-   "wnba house stiles",
-   "wnba summer love"
-  ]
- },
  "2019-bowman-chrome-baseball": {
   "missingPlayers": [
    "aaron",
@@ -3229,6 +3120,33 @@
    "sapphire reprints",
    "state home",
    "state hometown"
+  ]
+ },
+ "2007-08-fleer": {
+  "missingPlayers": [
+   "afflald",
+   "cooper",
+   "frazier",
+   "kerr",
+   "mihm",
+   "richards",
+   "russell",
+   "scott",
+   "used"
+  ],
+  "missingInserts": [
+   "1961 62 retro",
+   "1987 retro",
+   "hot prospects autographics",
+   "hot prospects class",
+   "hot prospects materials",
+   "hot prospects notable newcomers",
+   "hot prospects stat tracker",
+   "hot prospects supreme court",
+   "jordan box",
+   "jordan box award winners",
+   "jordan box playoff highlights",
+   "jordan box season achievements"
   ]
  },
  "2018-topps-ufc-museum-collection-cards": {
@@ -4217,25 +4135,6 @@
    "picks top prospects"
   ]
  },
- "2000-01-upper-deck-legends": {
-  "missingPlayers": [
-   "busschere",
-   "english",
-   "jabbar",
-   "mikan",
-   "nance",
-   "wilkins"
-  ],
-  "missingInserts": [
-   "century",
-   "century collection",
-   "century originals",
-   "century players",
-   "commemorative collection",
-   "history s heroes",
-   "u d yearbook"
-  ]
- },
  "18-19-ud-upper-deck-sp-authentic-hockey": {
   "missingPlayers": [
    "bowey",
@@ -4654,31 +4553,6 @@
    "unity relics"
   ]
  },
- "2002-sage": {
-  "missingPlayers": [
-   "arenas",
-   "battier",
-   "brown",
-   "checklist",
-   "curry",
-   "gasol",
-   "greer",
-   "griffin",
-   "haywood",
-   "jefferson",
-   "murphy",
-   "randolph",
-   "richardson",
-   "tinsley",
-   "wallace",
-   "white"
-  ],
-  "missingInserts": [
-   "5th anniversary",
-   "hit",
-   "hit rarefied"
-  ]
- },
  "2015-bowman-baseball-cards": {
   "missingPlayers": [
    "ajcole",
@@ -4953,6 +4827,19 @@
    "nickname signature"
   ]
  },
+ "2007-08-sp-rookie-edition": {
+  "missingPlayers": [
+   "mcguire",
+   "rondo"
+  ],
+  "missingInserts": [
+   "limited jersey",
+   "threads",
+   "threads dual",
+   "threads scripted time",
+   "threads triple"
+  ]
+ },
  "2014-topps-finest-football-cards": {
   "missingPlayers": [
    "conley",
@@ -5080,6 +4967,22 @@
   "missingInserts": [
    "65th anniversary update",
    "snapshots"
+  ]
+ },
+ "2000-01-upper-deck-legends": {
+  "missingPlayers": [
+   "busschere",
+   "english",
+   "jabbar",
+   "mikan",
+   "nance",
+   "wilkins"
+  ],
+  "missingInserts": [
+   "century",
+   "century collection",
+   "commemorative collection",
+   "history s heroes"
   ]
  },
  "1998-99-spx-finite": {
@@ -5556,6 +5459,15 @@
    "wins united states championship"
   ]
  },
+ "2007-08-bowman": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "elevation",
+   "elevation relics",
+   "elevation remnants relics",
+   "elevation writings"
+  ]
+ },
  "2015-topps-opening-day-baseball": {
   "missingPlayers": [
    "angels",
@@ -5644,6 +5556,29 @@
    "thome",
    "toles",
    "verdugo"
+  ],
+  "missingInserts": []
+ },
+ "2003-04-fleer-tradition": {
+  "missingPlayers": [
+   "brook",
+   "cannon",
+   "crew",
+   "display",
+   "dy",
+   "franky",
+   "haredas",
+   "heracles",
+   "jinbe",
+   "monkeydluffy",
+   "nami",
+   "rifle",
+   "robin",
+   "sanji",
+   "sunny",
+   "tonychopper",
+   "usopp",
+   "zoro"
   ],
   "missingInserts": []
  },
@@ -5856,16 +5791,6 @@
    "glossy"
   ]
  },
- "2006-07-fleer": {
-  "missingPlayers": [
-   "gervin"
-  ],
-  "missingInserts": [
-   "86 87 20th anniversary",
-   "greats game",
-   "hot prospects draft rewind"
-  ]
- },
  "2003-04-topps-jersey-edition": {
   "missingPlayers": [
    "radmanovic"
@@ -5933,28 +5858,12 @@
    "update"
   ]
  },
- "2002-03-flair": {
+ "2007-08-topps-luxury-box": {
   "missingPlayers": [],
   "missingInserts": [
-   "patch",
-   "wave future jersey",
-   "wave future patch"
-  ]
- },
- "2001-02-fleer-focus": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "jersey",
-   "jersey materialistic away",
-   "jersey roy collection"
-  ]
- },
- "2001-02-sp-authentic": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "authentics jersey",
-   "sample",
-   "sign times triple"
+   "mazzanine relics",
+   "mezzanine relic",
+   "relic"
   ]
  },
  "2019-panini-chronicles-baseball": {
@@ -6634,18 +6543,18 @@
    "1965 tall boy"
   ]
  },
- "2006-07-bowman-elevation": {
+ "2003-04-fleer-mystique": {
   "missingPlayers": [],
   "missingInserts": [
-   "executive relic dual",
-   "writings"
+   "awe pairs dual jersey",
+   "rare finds jersey triple"
   ]
  },
- "2001-02-topps-chrome": {
+ "2003-04-fleer-platinum": {
   "missingPlayers": [],
   "missingInserts": [
-   "certified",
-   "team jersey"
+   "game worn jersey",
+   "name patch"
   ]
  },
  "2015-bowman-draft-baseball-cards": {
@@ -6931,6 +6840,16 @@
    "teal"
   ],
   "missingInserts": []
+ },
+ "2006-07-upper-deck-reflections": {
+  "missingPlayers": [
+   "afflalo",
+   "brooks",
+   "young"
+  ],
+  "missingInserts": [
+   "mirror images dual patch"
+  ]
  },
  "2003-04-upper-deck-honor-roll": {
   "missingPlayers": [
@@ -7658,6 +7577,14 @@
    "quads patch"
   ]
  },
+ "2006-07-fleer": {
+  "missingPlayers": [
+   "gervin"
+  ],
+  "missingInserts": [
+   "greats game"
+  ]
+ },
  "2005-06-upper-deck-reflections": {
   "missingPlayers": [
    "ripken"
@@ -7682,12 +7609,36 @@
    "tifacts dual memorabilia"
   ]
  },
- "2001-02-fleer-premium": {
+ "2003-04-flair": {
   "missingPlayers": [
-   "vh"
+   "wl"
   ],
   "missingInserts": [
-   "peformers"
+   "game worn jersey"
+  ]
+ },
+ "2002-03-fleer-tradition": {
+  "missingPlayers": [
+   "of"
+  ],
+  "missingInserts": [
+   "star"
+  ]
+ },
+ "2002-03-sp-game-used": {
+  "missingPlayers": [
+   "scalabrine"
+  ],
+  "missingInserts": [
+   "exclusives"
+  ]
+ },
+ "2002-03-upper-deck-ultimate-collection": {
+  "missingPlayers": [
+   "jabbar"
+  ],
+  "missingInserts": [
+   "ultimate signatures"
   ]
  },
  "2000-topps-team-usa": {
@@ -8194,34 +8145,28 @@
   ],
   "missingInserts": []
  },
- "2006-07-topps-luxury-box": {
+ "2007-08-spx": {
   "missingPlayers": [],
   "missingInserts": [
-   "relic"
+   "freshman orientation relics"
   ]
  },
- "2002-03-fleer-box-score": {
+ "2006-07-upper-deck-hardcourt": {
   "missingPlayers": [],
   "missingInserts": [
-   "debut"
+   "futures"
   ]
  },
- "2002-03-fleer-hot-shots": {
+ "2002-03-stadium-club": {
   "missingPlayers": [],
   "missingInserts": [
-   "insert"
+   "reprint relics"
   ]
  },
- "2000-skybox-dominion-wnba": {
+ "2002-03-upper-deck-finite": {
   "missingPlayers": [],
   "missingInserts": [
-   "cynthia cooper collection"
-  ]
- },
- "2000-01-upper-deck-ovation": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "ball"
+   "elements dual uniforms warm up"
   ]
  },
  "1990-topps-traded-baseball-cards": {
@@ -8744,6 +8689,13 @@
   "missingPlayers": [
    "cc",
    "ripped"
+  ],
+  "missingInserts": []
+ },
+ "2002-03-ultra": {
+  "missingPlayers": [
+   "o",
+   "pe"
   ],
   "missingInserts": []
  },
@@ -9439,6 +9391,12 @@
   ],
   "missingInserts": []
  },
+ "2006-upper-deck-all-star-game-houston-all-star-selections": {
+  "missingPlayers": [
+   "anthony"
+  ],
+  "missingInserts": []
+ },
  "2005-press-pass": {
   "missingPlayers": [
    "simen"
@@ -9469,15 +9427,39 @@
   ],
   "missingInserts": []
  },
+ "2003-04-fleer-authentix": {
+  "missingPlayers": [
+   "ts"
+  ],
+  "missingInserts": []
+ },
+ "2003-04-sp-authentic": {
+  "missingPlayers": [
+   "hill"
+  ],
+  "missingInserts": []
+ },
  "2003-04-spx": {
   "missingPlayers": [
    "stevenson"
   ],
   "missingInserts": []
  },
+ "2002-03-topps-xpectations": {
+  "missingPlayers": [
+   "baker"
+  ],
+  "missingInserts": []
+ },
  "2001-02-fleer-authentix": {
   "missingPlayers": [
    "of"
+  ],
+  "missingInserts": []
+ },
+ "2001-02-fleer-premium": {
+  "missingPlayers": [
+   "vh"
   ],
   "missingInserts": []
  },
