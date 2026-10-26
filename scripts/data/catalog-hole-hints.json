@@ -3528,6 +3528,24 @@
    "team mascots"
   ]
  },
+ "1995-96-sp": {
+  "missingPlayers": [
+   "checklist",
+   "dyess"
+  ],
+  "missingInserts": [
+   "1988 mvp",
+   "1991 mvp",
+   "1992 mvp",
+   "championship champions court",
+   "championship shots",
+   "die cut",
+   "holoviews",
+   "mvp seasons",
+   "protected",
+   "special fx"
+  ]
+ },
  "2017-18-leaf-masked-men-hockey-cards": {
   "missingPlayers": [
    "brathwaite",
@@ -4460,6 +4478,19 @@
    "unity relics"
   ]
  },
+ "1995-classic-rookies": {
+  "missingPlayers": [
+   "card"
+  ],
+  "missingInserts": [
+   "hanging rim",
+   "jumping with ball",
+   "running without ball",
+   "shooting follow through",
+   "shooting with ball",
+   "year interactive"
+  ]
+ },
  "2015-bowman-baseball-cards": {
   "missingPlayers": [
    "ajcole",
@@ -4838,18 +4869,6 @@
   "missingInserts": [
    "65th anniversary update",
    "snapshots"
-  ]
- },
- "1993-94-fleer": {
-  "missingPlayers": [
-   "of"
-  ],
-  "missingInserts": [
-   "1st year phenoms",
-   "international",
-   "learning ropes",
-   "phenom",
-   "sharpshooter"
   ]
  },
  "2017-topps-wwe-nxt-checklist-added": {
@@ -6020,6 +6039,26 @@
    "summit 2014"
   ]
  },
+ "1995-signature-rookies-autobilia": {
+  "missingPlayers": [
+   "declarcq",
+   "howard"
+  ],
+  "missingInserts": [
+   "kevin garnett promo",
+   "tetrad phonex promo"
+  ]
+ },
+ "1995-96-stadium-club": {
+  "missingPlayers": [
+   "neal",
+   "x"
+  ],
+  "missingInserts": [
+   "member s only",
+   "wizard"
+  ]
+ },
  "2015-panini-prizm-football-cards": {
   "missingPlayers": [
    "payne",
@@ -6089,15 +6128,6 @@
   ],
   "missingInserts": [
    "back"
-  ]
- },
- "1993-94-stadium-club": {
-  "missingPlayers": [
-   "wilkens"
-  ],
-  "missingInserts": [
-   "promo",
-   "super team"
   ]
  },
  "2018-panini-classics-football-cards": {
@@ -6428,6 +6458,16 @@
    "teal"
   ],
   "missingInserts": []
+ },
+ "1995-96-flair": {
+  "missingPlayers": [
+   "barkely",
+   "laettnex",
+   "wilkins"
+  ],
+  "missingInserts": [
+   "fleer hardwood leaders"
+  ]
  },
  "1994-95-ultra": {
   "missingPlayers": [
@@ -7037,6 +7077,22 @@
    "quads patch"
   ]
  },
+ "1996-skybox-usa": {
+  "missingPlayers": [
+   "usa"
+  ],
+  "missingInserts": [
+   "texaco"
+  ]
+ },
+ "1993-94-fleer": {
+  "missingPlayers": [
+   "of"
+  ],
+  "missingInserts": [
+   "learning ropes"
+  ]
+ },
  "1987-fleer-basketball-cards": {
   "missingPlayers": [
    "olajuwan"
@@ -7418,12 +7474,6 @@
    "sahlawi"
   ],
   "missingInserts": []
- },
- "1993-94-ultra": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "defense"
-  ]
  },
  "1990-topps-traded-baseball-cards": {
   "missingPlayers": [
@@ -8400,6 +8450,18 @@
  "1995-96-panini-nba-stickers-basketball": {
   "missingPlayers": [
    "rauf"
+  ],
+  "missingInserts": []
+ },
+ "1994-upper-deck-nothing-but-net": {
+  "missingPlayers": [
+   "barkely"
+  ],
+  "missingInserts": []
+ },
+ "1993-94-stadium-club": {
+  "missingPlayers": [
+   "wilkens"
   ],
   "missingInserts": []
  },
