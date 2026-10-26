@@ -151,7 +151,7 @@ function Slot({ side, player, stats, onPick, other }) {
                 <button key={h.id} role="option" onClick={() => { onPick(h); setQ('') }}
                   style={{ display: 'block', width: '100%', textAlign: 'left', background: 'none', border: 'none', borderTop: '1px solid #1A1F31', padding: '9px 12px', color: '#EDEDEF', cursor: 'pointer', fontFamily: 'inherit', minHeight: 44 }}>
                   <span style={{ fontWeight: 600, fontSize: 14 }}>{h.name}</span>
-                  <span style={{ display: 'block', color: DIM, fontSize: 12 }}>{h.sport} · {h.cards.toLocaleString()} cards · {h.minYear}{h.maxYear !== h.minYear ? '–' + h.maxYear : ''}</span>
+                  <span style={{ display: 'block', color: DIM, fontSize: 12 }}>{h.sport} · {h.cards.toLocaleString()} card{h.cards === 1 ? '' : 's'} · {h.minYear}{h.maxYear !== h.minYear ? '–' + h.maxYear : ''}</span>
                 </button>
               ))}
             </div>

@@ -6,7 +6,7 @@
 import { useCallback, useDeferredValue, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { Select, Popover, Trigger, Chevron, Check, menuItem, menuHeading, triggerStyle, useIsMobile } from '../components/dropdown'
 import { useAccount, AccountChip, AuthModal, CollectionView, CommunityView } from '../components/community'
-import { addWant, removeWant, myWantlist, grailfindrFindUrl, signOutHere } from '../lib/supa'
+import { addWant, removeWant, myWantlist, grailfindrFindUrl, signOutHere, noCardNumber } from '../lib/supa'
 import { FeedbackModal, FeedbackView, useFeedbackAdmin } from '../components/feedback'
 import { FixEditor } from '../components/fix-editor'
 import { Omnibox, PlayerPage, MyPlayersPanel, useMyPlayers, loadPlayerDir, loadTopPlayers, seasonLabel, MemBadge, MemChip, memCodeOf } from '../components/player'
@@ -843,7 +843,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
   const wantKey = (it) => [it.set_slug, it.card_n == null ? '' : String(it.card_n).replace(/^#/, ''), secKey(it.section)].join('|')
   const loadWanted = async (uid) => { const rows = await myWantlist(uid); setWanted(new Map(rows.map(r => [wantKey(r), r.id]))) }
   useEffect(() => { if (account.session?.user?.id) loadWanted(account.session.user.id); else setWanted(new Map()) }, [account.session?.user?.id])
-  const normWant = (item) => (item.section && (item.card_n == null || item.card_n === '')) ? { ...item, card_n: '—' + (item.player || '') } : item
+  const normWant = (item) => (item.section && noCardNumber(item.card_n)) ? { ...item, card_n: '—' + (item.player || '') } : item
   const isWanted = (item) => wanted.has(wantKey(normWant(item)))
   const flashTimer = useRef(0)
   const wantIt = async (item) => {
@@ -1279,12 +1279,12 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
             <div style={{ display: 'flex', gap: 8, marginBottom: 10, flexWrap: 'wrap' }}>
               <Chip color={SPORT_COLORS[activeSet.sport]} solid>{activeSet.sport}</Chip>
               <Chip>{yearLabel(activeSet)}</Chip>
-              <Chip>{(setData.sections || []).length} sections</Chip>
+              <Chip>{(setData.sections || []).length} section{(setData.sections || []).length === 1 ? '' : 's'}</Chip>
               {(setData.sections || []).some(s => s.odds) && <Chip>Pack odds</Chip>}
             </div>
             <h1 style={{ ...display, fontSize: 40, margin: 0, lineHeight: 1.05 }}>{setData.name}</h1>
             <p style={{ color: '#8A93A8', fontSize: 13, margin: '10px 0 0' }}>
-              {(setData.sections || []).reduce((s, x) => s + x.cards.length, 0).toLocaleString()} cards
+              {(n => n.toLocaleString() + (n === 1 ? ' card' : ' cards'))((setData.sections || []).reduce((s, x) => s + x.cards.length, 0))}
               {rcCount(setData) > 0 ? ' · ' + rcCount(setData) + ' rookies flagged' : ''} · source: {setData.source}
             </p>
             <div style={{ display: 'flex', gap: 10, marginTop: 14, flexWrap: 'wrap' }}>
@@ -1442,7 +1442,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
             ← Browse sets
           </button>
           <h1 style={{ ...title(20), margin: '0 0 14px' }}>
-            {globalHits.players.length + globalHits.sets.length} results for “{query}”
+            {globalHits.players.length + globalHits.sets.length} result{globalHits.players.length + globalHits.sets.length === 1 ? '' : 's'} for “{query}”
           </h1>
           {globalHits.setsFirst && setRows(true)}
           {globalHits.players.length > 0 && (
@@ -1522,7 +1522,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
 
           {!rpaData ? <p style={{ color: '#8A93A8' }}>Loading RPA database…</p> : (
             <>
-              <p style={{ color: '#8A93A8', fontSize: 12, margin: '0 0 10px' }}>{rpaResults.length >= 1200 ? '1,200+' : rpaResults.length.toLocaleString()} cards{rpaQuery ? ' for “' + rpaQuery + '”' : ''}</p>
+              <p style={{ color: '#8A93A8', fontSize: 12, margin: '0 0 10px' }}>{rpaResults.length >= 1200 ? '1,200+' : rpaResults.length.toLocaleString()} card{rpaResults.length === 1 ? '' : 's'}{rpaQuery ? ' for “' + rpaQuery + '”' : ''}</p>
               <div style={{ border: '1px solid #222', borderRadius: 12, overflow: 'hidden' }}>
                 <div style={{ ...eyebrow, display: 'flex', gap: 12, padding: '9px 16px', background: '#121626', borderBottom: '1px solid #232A3E', color: '#8A93A8' }}>
                   <span style={{ flex: '0 0 56px' }}>Card</span>
@@ -1654,7 +1654,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', flexWrap: 'wrap', gap: 8, marginBottom: 14 }}>
             <h2 style={{ ...title(20), margin: 0 }}>
               {isTcg ? ([teamFilter !== 'All' ? '“' + teamFilter + '”' : null, tcgRarity !== 'All' ? tcgRarity : null, tcgType !== 'All' ? tcgType : null].filter(Boolean).join(' · ')) : teamFilter} <span style={{ color: SPORT_COLORS[sportFilter] || ACCENT_TEXT, fontSize: 16 }}>· {sportFilter}</span>
-              <span style={{ color: '#8A93A8', fontSize: 16, marginLeft: 10 }}>{teamHits.length.toLocaleString()}{teamHits.length >= 2500 ? '+' : ''} cards</span>
+              <span style={{ color: '#8A93A8', fontSize: 16, marginLeft: 10 }}>{teamHits.length.toLocaleString()}{teamHits.length >= 2500 ? '+' : ''} card{teamHits.length === 1 ? '' : 's'}</span>
             </h2>
           </div>
           <div style={{ border: '1px solid #222', borderRadius: 12, overflow: 'hidden' }}>

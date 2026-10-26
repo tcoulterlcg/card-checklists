@@ -223,7 +223,7 @@ export function CollectionView({ account, indexSets, onOpenAuth, onOpenSet, onWa
       {notice && <div style={{ ...card, borderColor: ACCENT, padding: '14px 18px', marginBottom: 18, color: ACCENT_TEXT, fontWeight: 600, fontSize: 14 }}>{notice}</div>}
       <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', flexWrap: 'wrap', gap: 10, marginBottom: 18 }}>
         <h1 style={{ ...display, fontSize: 40, margin: 0 }}>My Collection</h1>
-        <span style={{ color: '#8A93A8', fontSize: 13 }}>{(wants || []).length} wantlist items · {(collected || []).length} cards collected</span>
+        <span style={{ color: '#8A93A8', fontSize: 13 }}>{(wants || []).length} wantlist item{(wants || []).length === 1 ? '' : 's'} · {(collected || []).length} card{(collected || []).length === 1 ? '' : 's'} collected</span>
       </div>
 
       {activeSlug && !setData ? (
@@ -417,7 +417,7 @@ export function CommunityView({ account, indexSets, onOpenAuth }) {
                 <div style={{ position: 'absolute', top: '100%', left: 0, right: 0, zIndex: 5, background: '#121626', border: '1px solid #232A3E', borderRadius: 10, overflow: 'hidden' }}>
                   {setMatches.map(s => (
                     <div key={s.slug} onClick={() => { setChosenSet(s); setSetQuery('') }} style={{ padding: '9px 13px', fontSize: 13, color: '#ccc', cursor: 'pointer', borderBottom: '1px solid #222' }}>
-                      {s.name} <span style={{ color: '#8A93A8' }}>({s.cardCount} cards)</span>
+                      {s.name} <span style={{ color: '#8A93A8' }}>({s.cardCount} card{s.cardCount === 1 ? '' : 's'})</span>
                     </div>
                   ))}
                 </div>

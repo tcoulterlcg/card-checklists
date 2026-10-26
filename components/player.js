@@ -240,7 +240,7 @@ export function Omnibox({ value, onChange, onSubmit, onPickPlayer, onPickSet, se
               <span style={{ flex: 1, minWidth: 0 }}>
                 <span style={{ fontWeight: 600, fontSize: 14 }}>{it.p.via ? it.p.name : hl(it.p.name)}</span>
                 {it.p.via && <span style={{ display: 'block', color: '#8A93A8', fontSize: 12 }}>incl. {hl(it.p.via)}</span>}
-                <span style={{ display: 'block', color: '#8A93A8', fontSize: 12 }}>{it.p.sport} · {it.p.cards.toLocaleString()} cards · {it.p.minYear}{it.p.maxYear !== it.p.minYear ? '–' + it.p.maxYear : ''}</span>
+                <span style={{ display: 'block', color: '#8A93A8', fontSize: 12 }}>{it.p.sport} · {it.p.cards.toLocaleString()} card{it.p.cards === 1 ? '' : 's'} · {it.p.minYear}{it.p.maxYear !== it.p.minYear ? '–' + it.p.maxYear : ''}</span>
               </span>
               {sel === i && <span style={{ color: '#8A93A8', fontSize: 12 }}>↵</span>}
             </button>
@@ -248,7 +248,7 @@ export function Omnibox({ value, onChange, onSubmit, onPickPlayer, onPickSet, se
             <button key={'s' + it.s.slug} id={listId + '-' + i} role="option" aria-selected={sel === i} onMouseEnter={() => setSel(i)} onClick={() => go(i)}
               style={{ width: '100%', textAlign: 'left', display: 'flex', alignItems: 'center', gap: 12, padding: '9px 16px', background: sel === i ? '#111a30' : 'transparent', border: 'none', borderTop: i === playerHits.length ? '1px solid #1A1F31' : 'none', color: '#EDEDEF', cursor: 'pointer', fontFamily: 'inherit', minHeight: 44 }}>
               <span style={{ width: 4, height: 28, background: SPORT_COLORS[it.s.sport] || ACCENT, borderRadius: 2 }} />
-              <span style={{ flex: 1 }}><span style={{ fontWeight: 600, fontSize: 14 }}>{it.s.name}</span><span style={{ display: 'block', color: '#8A93A8', fontSize: 12 }}>Set · {(it.s.cardCount || 0).toLocaleString()} cards · {it.s.sections} sections</span></span>
+              <span style={{ flex: 1 }}><span style={{ fontWeight: 600, fontSize: 14 }}>{it.s.name}</span><span style={{ display: 'block', color: '#8A93A8', fontSize: 12 }}>Set · {(it.s.cardCount || 0).toLocaleString()} card{it.s.cardCount === 1 ? '' : 's'} · {it.s.sections} section{it.s.sections === 1 ? '' : 's'}</span></span>
             </button>
           ))}
           {refine.length > 0 && (
@@ -486,7 +486,7 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
           <h1 style={{ ...display, fontSize: 'clamp(36px, 5vw, 56px)', lineHeight: 0.95, margin: 0 }}>{player.name}{titleSuffix && <span style={{ color: ACCENT_TEXT }}>{titleSuffix}</span>}</h1>
           <p style={{ color: '#8A93A8', fontSize: 14, margin: '12px 0 0', lineHeight: 1.6 }}>
             {!shard ? 'Loading cards…' : firstCard ? <>First card: {firstCard.year ? seasonLabel(firstCard.year, firstCard.sport) + ' ' : ''}{firstCard.set.replace(/^\d{4}(-\d{2})?\s*/, '')}{firstCard.n ? ' #' + firstCard.n : ''} · </> : null}
-            {shard && <>Appears in {facets.sets.size.toLocaleString()} sets across {facets.seasons} year{facets.seasons === 1 ? '' : 's'} of sets</>}
+            {shard && <>Appears in {facets.sets.size.toLocaleString()} set{facets.sets.size === 1 ? '' : 's'}{facets.seasons > 1 ? ' across ' + facets.seasons + ' years' : ''}</>}
           </p>
           {otherNames.length > 0 && <p style={{ color: '#8A93A8', fontSize: 13, margin: '6px 0 0', lineHeight: 1.5 }}>Also listed as {otherNames.slice(0, 4).join(', ')}{otherNames.length > 4 ? ' and ' + (otherNames.length - 4) + ' more' : ''}</p>}
           <div style={{ display: 'flex', gap: 10, marginTop: 18, flexWrap: 'wrap' }}>
@@ -591,7 +591,7 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
 
         <div style={{ flex: '999 1 320px', minWidth: 0, display: 'flex', flexDirection: 'column', gap: 14 }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
-            <span style={{ ...title(18) }}>{shard ? filtered.length.toLocaleString() : '…'} cards <span style={{ color: '#8A93A8', fontSize: 16 }}>in {new Set(filtered.map(r => r.slug)).size.toLocaleString()} sets</span></span>
+            <span style={{ ...title(18) }}>{shard ? filtered.length.toLocaleString() : '…'} card{shard && filtered.length === 1 ? '' : 's'} <span style={{ color: '#8A93A8', fontSize: 16 }}>in {(n => n.toLocaleString() + (n === 1 ? ' set' : ' sets'))(new Set(filtered.map(r => r.slug)).size)}</span></span>
             <div style={{ display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap' }}>
               <div role="group" aria-label="Group results" style={{ display: 'inline-flex', border: '1px solid #232A3E', borderRadius: 8, overflow: 'hidden' }}>
                 {[['set', 'By set'], ['season', 'By season'], ['flat', 'Flat list']].map(([k, l]) => <button key={k} onClick={() => setGroup(k)} style={{ background: group === k ? ACCENT : '#121626', color: group === k ? '#fff' : '#A1A1AA', border: 'none', padding: '0 12px', height: 36, fontSize: 12, fontWeight: 700, cursor: 'pointer', fontFamily: 'inherit' }}>{l}</button>)}
@@ -741,7 +741,7 @@ export function MyPlayersPanel({ myPlayers, onOpenPlayer, onOpenSet, dirPlayers 
                 <Initials name={name} color={SPORT_COLORS[sport] || ACCENT} />
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <button onClick={() => onOpenPlayer(name)} style={{ ...title(16), background: 'none', border: 'none', color: '#EDEDEF', cursor: 'pointer', padding: 0, textAlign: 'left', lineHeight: 1.05 }}>{name}</button>
-                  <p style={{ margin: '3px 0 0', color: '#8A93A8', fontSize: 12 }}>{p ? sport + ' · ' + p[2].toLocaleString() + ' cards' : dir ? 'Not found in the database' : '…'}</p>
+                  <p style={{ margin: '3px 0 0', color: '#8A93A8', fontSize: 12 }}>{p ? sport + ' · ' + p[2].toLocaleString() + (p[2] === 1 ? ' card' : ' cards') : dir ? 'Not found in the database' : '…'}</p>
                 </div>
                 <button aria-label={'Remove ' + name} onClick={() => myPlayers.toggle(name)} style={{ background: 'none', border: '1px solid #232A3E', color: '#8A93A8', borderRadius: 8, width: 32, height: 32, cursor: 'pointer', fontFamily: 'inherit' }}>×</button>
               </div>
