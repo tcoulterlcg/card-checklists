@@ -25,6 +25,9 @@
 - **Parallel / patch tags** (Shield, SuperFractor, Logoman…) come from section titles via `lib/parallels.js`; it only tags
   names Trevor has verified or that name patch material. Unverified look-alikes are held, not guessed. Never infer a
   SuperFractor or shield from a 1/1 print run.
+- **TCDB tags glued onto names** ("Nick Leddy AU, MEM, RC, SN249Exchange card") are split by `lib/flag-tail.js` (static data via
+  cleanup-names, catalog sets at load and in the player index; the description goes to the card's `d` field). Run
+  `node scripts/test-flag-tail.mjs` after changing it — real names must never be chopped.
 - **SuperFractor rows:** `node scripts/add-superfractors.mjs` adds them only where the set's checklist notes or
   `scripts/data/superfractor-research.json` (sourced) state them. Re-run it after any TCDB repair merge or re-import,
   since replacing a set drops these derived sections.
