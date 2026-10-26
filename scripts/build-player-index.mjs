@@ -23,6 +23,7 @@
 // plates) or the section's pack odds. `type` is a bit mask (TYPE below).
 //
 //   node scripts/build-player-index.mjs
+import { fixFlagTail } from '../lib/flag-tail.js'
 import { readFileSync, writeFileSync, readdirSync, mkdirSync, existsSync } from 'node:fs'
 import { splitPlayers, subjects, mergePlayers, splitComposites, norm } from './player-names.mjs'
 
@@ -201,6 +202,7 @@ async function fetchCatalogSets() {
 }
 // TCDB rows can carry their flags where the team goes ("AU, MEM, SN25"); same fix as cleanup-names.mjs.
 function tidyTcdbCard(c) {
+  fixFlagTail(c)   // "Pelé / Lionel Messi MEM, SN25": flags glued onto catalog names
   if (!c.t || !/^(?:(?:URA?|AUR?|MEM|RC|SP|SSP|SN\d+)(?:,\s*|$))+$/.test(c.t.trim())) return
   const x = (c.x || '').split(/\s+/).filter(Boolean)
   for (const f of c.t.split(/,\s*/)) { const v = /^SN(\d+)$/.test(f) ? '/' + f.slice(2) : (f === 'URA' || f === 'AUR') ? 'AU' : f; if (!x.includes(v)) x.push(v) }
@@ -219,6 +221,7 @@ for (const f of [...readdirSync(dataDir), ...catalogFiles]) {
     if (s.year) { st.min = Math.min(st.min, s.year); st.max = Math.max(st.max, s.year) }
   }
 }
+const GENERIC_SPORTS = new Set(['Multi-Sport', 'Misc Sports'])
 const primarySport = (st) => [...st.sports.entries()].filter(([sp]) => !NON_PERSON_SPORTS.has(sp)).sort((a, b) => b[1] - a[1])[0]?.[0] ?? ''
 const splitSports = new Map() // key -> Set(sports that are a different person)
 // Real two-sport athletes: one person, one page (their baseball cards stay with the main page).
@@ -354,7 +357,12 @@ const dir = [], pid = new Map(), dirIdx = new Map(), names = new Map(), usedIds 
 const stableId = (key) => { for (let n = 0; ; n++) { let h = 0x811c9dc5; const s = n ? key + '#' + n : key; for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 0x01000193) } h = (h >>> 1) || 1; if (!usedIds.has(h)) { usedIds.add(h); return h } } }
 const sorted = [...groups.entries()].sort((a, b) => b[1].cards - a[1].cards || (a[0] < b[0] ? -1 : 1))
 for (const [key, g] of sorted) {
-  const topSport = [...g.sports.entries()].sort((a, b) => b[1] - a[1])[0][0]
+  // Multi-sport / misc sets (Leaf, Panini Flawless Collegiate…) don't make Jordan a "Multi-Sport" player:
+  // a real sport with at least 5% of their cards labels the page.
+  const bySport = [...g.sports.entries()].sort((a, b) => b[1] - a[1])
+  const total = bySport.reduce((n, e) => n + e[1], 0)
+  const specific = bySport.find(([sp]) => { const n = sportsPool[sp]; return n && !GENERIC_SPORTS.has(n) && !NON_PERSON_SPORTS.has(n) })   // keys are sportsPool indexes
+  const topSport = specific && specific[1] >= total * 0.05 ? specific[0] : bySport[0][0]
   const name = displayName(key)
   names.set(key, name)
   const id = stableId(key)
