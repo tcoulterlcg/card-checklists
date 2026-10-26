@@ -66,8 +66,19 @@ for (const f of files) {
       // also "2021-22 Panini Prizm Premier League – Signatures Set" when the set name ends in a sport word
       const nameL = s.name.toLowerCase()
       const head = (t) => { const m = /^(\d{4}(?:-\d{2,4})?\s.+?)\s+[–—]\s+(.+)$/.exec(t || ''); return m && nameL.startsWith(m[1].toLowerCase()) ? m[2] : null }
+      // A page-wide prefix that spells the set name differently ("2020-21 UD Tim Hortons – Base Set" in
+      // "2020-21 Upper Deck Tim Hortons Hockey"): strip it when it starts with the set's year and at
+      // least half the sections carry it (mixed prefixes like "Overtime Wave 1 –" stay, they carry information).
+      const ym = /^(\d{4})(?:-(\d{2,4}))?/.exec(s.name)
+      const yrs = ym ? [ym[1], ym[2] ? String(+ym[1] + 1) : ym[1]] : []   // "2024-25": a page may say 2024 or 2025 ("2024 Topps Finest", "2024-24 …")
+      const pre = (t) => { const m = /^((\d{4})(?:-\d{2,4})?\s.+?)\s+[–—]\s+(.+)$/.exec(t || ''); return m && yrs.includes(m[2]) ? [m[0], m[1], m[3]] : null }
+      const preCount = new Map()
+      for (const sec of s.sections) { const m = pre(sec.title); if (m) preCount.set(m[1], (preCount.get(m[1]) || 0) + 1) }
+      const [common, cnt] = [...preCount.entries()].sort((a, b) => b[1] - a[1])[0] || []
+      const pageWide = common && cnt * 2 >= s.sections.length ? common : null
       for (const sec of s.sections) {
-        const rest = re.test(sec.title || '') ? sec.title.replace(re, '') : head(sec.title)
+        const pm = pageWide && pre(sec.title)
+        const rest = re.test(sec.title || '') ? sec.title.replace(re, '') : head(sec.title) ?? (pm && pm[1] === pageWide ? pm[2] : null)
         if (rest == null) continue
         const t = rest.replace(/\s+Set$/, '').trim()
         if (t && !titles.has(t)) { titles.add(t); sec.title = t; renamed = true }
