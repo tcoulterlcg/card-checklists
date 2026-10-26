@@ -4206,22 +4206,6 @@
    "mojo"
   ]
  },
- "1991-92-hoops": {
-  "missingPlayers": [
-   "error",
-   "pack",
-   "set",
-   "team"
-  ],
-  "missingInserts": [
-   "mcdonalds",
-   "metal",
-   "perforated",
-   "prototypes 00",
-   "superstars",
-   "team night sheets"
-  ]
- },
  "2016-panini-black-gold-football-cards": {
   "missingPlayers": [
    "adams",
@@ -4490,26 +4474,6 @@
    "crackle",
    "inception relic",
    "production error"
-  ]
- },
- "1992-93-skybox": {
-  "missingPlayers": [
-   "card",
-   "carlesimo",
-   "checklist",
-   "christie",
-   "krzyzewski",
-   "magic",
-   "mullins",
-   "photo",
-   "pippin",
-   "ties"
-  ],
-  "missingInserts": [
-   "mark see",
-   "nestle",
-   "prototype",
-   "usa"
   ]
  },
  "2015-score-football-cards": {
@@ -4876,6 +4840,18 @@
    "snapshots"
   ]
  },
+ "1993-94-fleer": {
+  "missingPlayers": [
+   "of"
+  ],
+  "missingInserts": [
+   "1st year phenoms",
+   "international",
+   "learning ropes",
+   "phenom",
+   "sharpshooter"
+  ]
+ },
  "2017-topps-wwe-nxt-checklist-added": {
   "missingPlayers": [
    "aries",
@@ -4909,6 +4885,25 @@
    "inception patch",
    "inception relic",
    "state hometown"
+  ]
+ },
+ "1992-93-skybox": {
+  "missingPlayers": [
+   "card",
+   "carlesimo",
+   "checklist",
+   "christie",
+   "krzyzewski",
+   "magic",
+   "mullins",
+   "photo",
+   "pippin",
+   "ties"
+  ],
+  "missingInserts": [
+   "mark see",
+   "prototype",
+   "usa"
   ]
  },
  "2019-panini-diamond-kings-baseball-cards": {
@@ -5229,15 +5224,6 @@
   "missingInserts": [
    "mat relic royal rumble",
    "wins united states championship"
-  ]
- },
- "1992-93-fleer": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "sharpshooter",
-   "sheets inside stuff perforated",
-   "spalding schoolyard stars",
-   "team sheets"
   ]
  },
  "2015-topps-opening-day-baseball": {
@@ -6105,6 +6091,15 @@
    "back"
   ]
  },
+ "1993-94-stadium-club": {
+  "missingPlayers": [
+   "wilkens"
+  ],
+  "missingInserts": [
+   "promo",
+   "super team"
+  ]
+ },
  "2018-panini-classics-football-cards": {
   "missingPlayers": [
    "ertz",
@@ -6238,17 +6233,6 @@
    "update postseason heroes"
   ]
  },
- "1985-donruss-baseball-cards": {
-  "missingPlayers": [
-   "checklist",
-   "coleman",
-   "guillen",
-   "mcdowell"
-  ],
-  "missingInserts": [
-   "highlights"
-  ]
- },
  "2016-17-donruss-optic-basketball-cards": {
   "missingPlayers": [
    "aqua",
@@ -6262,6 +6246,17 @@
    "red"
   ],
   "missingInserts": []
+ },
+ "1991-92-hoops": {
+  "missingPlayers": [
+   "error",
+   "pack",
+   "set",
+   "team"
+  ],
+  "missingInserts": [
+   "mcdonalds"
+  ]
  },
  "2015-bowman-football-cards": {
   "missingPlayers": [
@@ -6388,6 +6383,16 @@
    "tiffany"
   ]
  },
+ "1985-donruss-baseball-cards": {
+  "missingPlayers": [
+   "coleman",
+   "guillen",
+   "mcdowell"
+  ],
+  "missingInserts": [
+   "highlights"
+  ]
+ },
  "2016-17-panini-totally-certified-basketball": {
   "missingPlayers": [
    "box",
@@ -6423,6 +6428,16 @@
    "teal"
   ],
   "missingInserts": []
+ },
+ "1994-95-ultra": {
+  "missingPlayers": [
+   "card",
+   "of",
+   "peyton"
+  ],
+  "missingInserts": [
+   "single"
+  ]
  },
  "1989-kenner-starting-lineup-cards": {
   "missingPlayers": [
@@ -7022,14 +7037,6 @@
    "quads patch"
   ]
  },
- "1992-93-ultra": {
-  "missingPlayers": [
-   "session"
-  ],
-  "missingInserts": [
-   "playmaker"
-  ]
- },
  "1987-fleer-basketball-cards": {
   "missingPlayers": [
    "olajuwan"
@@ -7412,10 +7419,10 @@
   ],
   "missingInserts": []
  },
- "1991-front-row-italian-english": {
+ "1993-94-ultra": {
   "missingPlayers": [],
   "missingInserts": [
-   "promos"
+   "defense"
   ]
  },
  "1990-topps-traded-baseball-cards": {
@@ -7621,6 +7628,14 @@
    "jabbar",
    "odom",
    "prizm"
+  ],
+  "missingInserts": []
+ },
+ "1994-95-fleer-european": {
+  "missingPlayers": [
+   "ellison",
+   "of",
+   "prokhorov"
   ],
   "missingInserts": []
  },
@@ -8385,6 +8400,12 @@
  "1995-96-panini-nba-stickers-basketball": {
   "missingPlayers": [
    "rauf"
+  ],
+  "missingInserts": []
+ },
+ "1992-93-ultra": {
+  "missingPlayers": [
+   "session"
   ],
   "missingInserts": []
  },
