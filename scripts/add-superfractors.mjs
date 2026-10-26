@@ -5,7 +5,8 @@
 //             parallel note (Cardboard Connection pack-odds text), with no exception note.
 //   research  scripts/data/superfractor-research.json — sections a published checklist
 //             (Topps, Beckett, Checklist Insider, TCDB…) explicitly gives a SuperFractor,
-//             with the source URL. Only "yes" rows with no stated exceptions are used.
+//             with the source URL (or `confirmed_by` when Trevor confirmed it). Only "yes" rows with
+//             no stated exceptions are used.
 //
 // Each added section copies its parent's cards (number, player, team, RC/AU/MEM flags),
 // numbered /1, and carries `derived: { from, src, url? }` so it can be traced or removed.
@@ -54,10 +55,10 @@ function cloneCards(cards) {
 const research = new Map()
 if (existsSync(researchFile)) {
   for (const r of JSON.parse(readFileSync(researchFile, 'utf8'))) {
-    if (r.superfractor !== 'yes' || (r.exceptions && String(r.exceptions).trim()) || !r.url) continue
+    if (r.superfractor !== 'yes' || (r.exceptions && String(r.exceptions).trim()) || !(r.url || r.confirmed_by)) continue   // needs a source URL or Trevor's confirmation
     if (!(String(r.print_run || '1/1').replace(/\s/g, '') === '1/1')) continue
     const list = research.get(r.slug) || []
-    list.push({ section: r.section, name: (r.parallel_name || 'SuperFractor').replace(/super[\s-]?fractor/i, 'SuperFractor'), url: r.url })
+    list.push({ section: r.section, name: (r.parallel_name || 'SuperFractor').replace(/super[\s-]?fractor/i, 'SuperFractor'), url: r.url || '', by: r.confirmed_by || '' })
     research.set(r.slug, list)
   }
 }
@@ -103,7 +104,7 @@ for (const f of readdirSync(dataDir)) {
     const sec = scraped.find(x => x.title === r.section) || scraped.find(x => !SF.test(x.title || '') && sectionKey(x.title) === sectionKey(r.section))
     if (!sec || !(sec.cards || []).length) { stats.researchUnmatched.push(s.slug + ' :: ' + r.section); continue }
     if (covered(sec.title) || s.sections.some(x => x.derived && x.derived.from === sec.title && SF.test(x.title))) { stats.skippedExisting++; continue }
-    add(sec, r.name, 'research-superfractor', r.url); stats.research++
+    add(sec, r.name, 'research-superfractor', r.url); if (r.by) s.sections[s.sections.findIndex(x => x.derived && x.derived.from === sec.title && SF.test(x.title))].derived.by = r.by; stats.research++
   }
   if (JSON.stringify(s.sections) !== before) { stats.sets++; if (!DRY) writeFileSync(path, JSON.stringify(s)) }
 }

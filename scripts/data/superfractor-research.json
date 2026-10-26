@@ -1,5 +1,16 @@
 [
  {
+  "slug": "2017-bowman-chrome-national-convention-baseball",
+  "section": "*",
+  "superfractor": "no",
+  "parallel_name": "",
+  "print_run": "",
+  "exceptions": "",
+  "url": "",
+  "confirmed_by": "Trevor 2026-10-26",
+  "note": "No SuperFractor; the 1/1 is Black Refractor."
+ },
+ {
   "slug": "2017-bowman-mega-box-baseball-cards",
   "section": "Base Chrome Prospects",
   "superfractor": "no",
@@ -98,6 +109,17 @@
   "exceptions": "",
   "url": "https://www.cardboardconnection.com/2019-bowman-mega-box-chrome-baseball-cards/amp",
   "note": "Purple /250, Green /99, Orange /25, Black 1/1."
+ },
+ {
+  "slug": "2019-topps-nscc-bowman-chrome-national-convention-cards",
+  "section": "*",
+  "superfractor": "no",
+  "parallel_name": "",
+  "print_run": "",
+  "exceptions": "",
+  "url": "",
+  "confirmed_by": "Trevor 2026-10-26",
+  "note": "No SuperFractor; the 1/1 is Black Refractor."
  },
  {
   "slug": "2020-21-topps-chrome-bvb-borussia-dortmund-soccer",
@@ -778,6 +800,17 @@
   "exceptions": "",
   "url": "https://www.beckett.com/news/2021-topps-chrome-formula-1/",
   "note": "Beckett names the insert \"Redliners\" (15 cards); no \"Max Out\" mentioned."
+ },
+ {
+  "slug": "2021-topps-chrome-lite-baseball-cards",
+  "section": "Base",
+  "superfractor": "yes",
+  "parallel_name": "SuperFractor",
+  "print_run": "1/1",
+  "exceptions": "",
+  "url": "",
+  "confirmed_by": "Trevor 2026-10-26",
+  "note": "Beckett pack-odds sheet: base SuperFractor 1/1 at 1:28,598 Hobby Lite packs. Inserts (1986 Topps, Beisbol, Future Stars, Prismic Power) and image variations also have SuperFractors but are not on our checklist yet; some autograph parallels unavailable in Lite."
  },
  {
   "slug": "2021-topps-chrome-mls-soccer",
