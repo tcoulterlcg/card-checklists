@@ -174,11 +174,25 @@ export function CollectionView({ account, indexSets, onOpenAuth, onOpenSet, onWa
   const fileRef = useRef(null)
   const [uploadTarget, setUploadTarget] = useState(null)
 
+  // keyed on the user, not the session object (a token refresh isn't a new account); another account
+  // signing in this tab starts empty, and a late reply for the previous one is dropped
+  const uid = session?.user?.id
+  const loadSeq = useRef(0)
+  const reloadCollected = async () => {
+    const my = ++loadSeq.current
+    const rows = await myCollection(uid)
+    if (my === loadSeq.current && !rows.failed) setCollected(rows)   // a failed read keeps the marks we have
+  }
   useEffect(() => {
-    if (!session?.user) return
-    myWantlist(session.user.id).then(setWants)
-    myCollection(session.user.id).then(setCollected)
-  }, [session])
+    setWants(null); setCollected(null)
+    if (!uid) return
+    let live = true
+    myWantlist(uid).then(r => { if (live && !r.failed) setWants(r) })
+    const my = ++loadSeq.current
+    myCollection(uid).then(r => { if (live && my === loadSeq.current && !r.failed) setCollected(r) })
+    return () => { live = false }
+  }, [uid])
+  const busyKeys = useRef(new Set())   // a card whose change is still saving: ignore repeat clicks
   useEffect(() => {
     if (!activeSlug) { setSetData(null); return }
     setSecShown(12); setSetData(null)
@@ -219,7 +233,7 @@ export function CollectionView({ account, indexSets, onOpenAuth, onOpenSet, onWa
         else if (url) {
           const r = await setCollectionImage(uploadTarget, url)
           if (r.error) setNotice('Couldn’t save that photo — ' + r.error.message)
-          myCollection(session.user.id).then(setCollected)
+          reloadCollected()
         }
         e.target.value = ''
       }} />
@@ -242,16 +256,24 @@ export function CollectionView({ account, indexSets, onOpenAuth, onOpenSet, onWa
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(260px, 100%), 1fr))', gap: 6 }}>
                 {sec.cards.map((c, ci) => {
                   const cn = collectionCardN(c)
-                  const key = ckey(activeSlug, sec.title, cn)
-                  const isC = collectedKeys.has(key)
-                  const rec = collectedRec.get(key)
+                  // the set's slug today; rows saved under an older (renamed / merged) slug still count
+                  const key = ckey(setData.slug || activeSlug, sec.title, cn)
+                  const rec = collectedRec.get(key) || collectedRec.get(ckey(activeSlug, sec.title, cn))
+                  const isC = !!rec
                   return (
                     <div key={ci} style={{ display: 'flex', alignItems: 'center', gap: 8, background: isC ? '#12200f' : '#121212', border: '1px solid ' + (isC ? '#2f5324' : '#222'), borderRadius: 8, padding: '7px 10px' }}>
                       <input type="checkbox" aria-label={'Collected ' + (c.n ? '#' + c.n + ' ' : '') + c.p} checked={isC} onChange={async (e) => {
-                        const { error } = await toggleCollected(session.user.id, { set_slug: activeSlug, card_n: cn, section: !e.target.checked && rec ? rec.section : sec.title, player: c.p }, e.target.checked)   // uncheck the saved row, even if saved under an older title
+                        if (busyKeys.current.has(key)) return
+                        busyKeys.current.add(key)
+                        const on = e.target.checked
+                        const slug = !on && rec ? rec.set_slug : (setData.slug || activeSlug)
+                        const item = { set_slug: slug, card_n: cn, section: !on && rec ? rec.section : sec.title, player: c.p }   // uncheck the saved row, even if saved under an older title or slug
+                        // show the change right away; the reload below confirms it
+                        setCollected(cur => on ? [...(cur || []), { ...item, id: 'pending-' + key }] : (cur || []).filter(x => x !== rec))
+                        const { error } = await toggleCollected(session.user.id, item, on)
                         if (error) setNotice('Couldn’t save that change — ' + error.message)
-                        const next = await myCollection(session.user.id)
-                        setCollected(next)
+                        await reloadCollected()
+                        busyKeys.current.delete(key)
                       }} style={{ accentColor: ACCENT, width: 18, height: 18, flexShrink: 0 }} />
                       <span style={{ color: '#8A93A8', fontSize: 12, minWidth: 34 }}>{c.n || '—'}</span>
                       <span style={{ color: isC ? '#9fd18a' : '#D4D4D8', fontSize: 13, fontWeight: 600, flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{c.p}</span>
@@ -305,7 +327,7 @@ export function CollectionView({ account, indexSets, onOpenAuth, onOpenSet, onWa
                           <span style={{ color: ACCENT_TEXT, fontWeight: 700, minWidth: 44 }}>{String(i.card_n).startsWith('—') ? '—' : '#' + i.card_n}</span>
                           <span style={{ flex: 1, minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{i.player || ''}{i.section && i.section !== 'Base' ? <span style={{ color: '#8A93A8' }}> · {i.section}</span> : null}</span>
                           <a href={grailfindrFindUrl({ setName: g.name, player: i.player, n: i.card_n, section: i.section })} target="_blank" rel="noreferrer" title="Find it on GrailFindr" style={{ color: ACCENT_TEXT, fontSize: 12, fontWeight: 600, textDecoration: 'none', whiteSpace: 'nowrap' }}>Find ↗</a>
-                          <button aria-label={'Remove ' + (i.player || 'card') + ' from wantlist'} onClick={async () => { await removeWant(i.id); myWantlist(session.user.id).then(setWants); onWantsChanged?.() }}
+                          <button aria-label={'Remove ' + (i.player || 'card') + ' from wantlist'} onClick={async () => { const r = await removeWant(i.id); if (r.error) setNotice('Couldn’t remove that — ' + r.error.message); myWantlist(session.user.id).then(w => { if (!w.failed) setWants(w) }); onWantsChanged?.() }}
                             style={{ background: 'none', border: 'none', color: '#8A93A8', cursor: 'pointer', fontSize: 14, padding: '2px 6px' }}>✕</button>
                         </li>
                       ))}

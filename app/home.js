@@ -911,18 +911,22 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
   // so wantlist matching compares a normalized title — saved cards keep their check mark after data updates.
   const secKey = sectionKey
   const wantKey = (it) => [it.set_slug, it.card_n == null ? '' : String(it.card_n).replace(/^#/, ''), secKey(it.section)].join('|')
-  const loadWanted = async (uid) => { const rows = await myWantlist(uid); setWanted(new Map(rows.map(r => [wantKey(r), r.id]))) }
-  useEffect(() => { if (account.session?.user?.id) loadWanted(account.session.user.id); else setWanted(new Map()) }, [account.session?.user?.id])
+  const wantSeq = useRef(0)   // only the newest load lands; a failed one keeps what we have
+  const loadWanted = async (uid) => { const my = ++wantSeq.current; const rows = await myWantlist(uid); if (my === wantSeq.current && !rows.failed) setWanted(new Map(rows.map(r => [wantKey(r), r.id]))) }
+  useEffect(() => { if (account.session?.user?.id) { setWanted(new Map()); loadWanted(account.session.user.id) } else { wantSeq.current++; setWanted(new Map()) } }, [account.session?.user?.id])
   const normWant = (item) => (item.section && noCardNumber(item.card_n)) ? { ...item, card_n: '—' + (item.player || '') } : item
   const isWanted = (item) => wanted.has(wantKey(normWant(item)))
   const flashTimer = useRef(0)
-  const wantIt = async (item) => {
+  // addOnly: the player page's button only adds (it doesn't show what's already on the wantlist)
+  const wantIt = async (item, addOnly) => {
     if (!account.session) { setAuthOpen(true); return }
     // a single card with no number is still a single card, not the whole set
     item = normWant(item)
     const label = item.card_n ? (String(item.card_n).startsWith('—') ? item.player : '#' + item.card_n) : 'Set'
     const id = wanted.get(wantKey(item))
-    if (id != null && item.card_n) {
+    if (id != null && !item.card_n) { setWantFlash('This set is already on your wantlist') }   // a whole-set row has no card number, so the database can't stop a second copy
+    else if (id != null && addOnly) { setWantFlash('Already on your wantlist') }
+    else if (id != null && item.card_n) {
       const r = await removeWant(id)
       if (r.error) setWantFlash('Couldn’t remove — ' + r.error.message)
       else { setWanted(m => { const n = new Map(m); n.delete(wantKey(item)); return n }); setWantFlash(label + ' removed from your wantlist') }

@@ -487,7 +487,7 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
       <td style={{ padding: '9px 12px' }}><TypeChip t={r.type} /></td>
       <td style={{ padding: '9px 12px' }}>{r.mem ? <MemChip code={r.mem} /> : <span style={{ color: '#5C6478' }}>—</span>}</td>
       <td style={{ padding: '9px 12px', textAlign: 'right', whiteSpace: 'nowrap' }}><Serial s={r.serial} /></td>
-      <td style={{ padding: '9px 12px', textAlign: 'right' }}><button aria-label={'Add #' + r.n + ' ' + r.section + ' to wantlist'} onClick={() => onWant({ set_slug: r.slug, set_name: r.set, card_n: r.n, section: r.section, player: r.label || player.name })} style={{ background: 'none', border: '1px solid #232A3E', color: '#A1A1AA', borderRadius: 6, width: 32, height: 32, cursor: 'pointer', fontFamily: 'inherit' }}>+</button></td>
+      <td style={{ padding: '9px 12px', textAlign: 'right' }}><button aria-label={'Add #' + r.n + ' ' + r.section + ' to wantlist'} onClick={() => onWant({ set_slug: r.slug, set_name: r.set, card_n: r.n, section: r.section, player: r.label || player.name }, true)} style={{ background: 'none', border: '1px solid #232A3E', color: '#A1A1AA', borderRadius: 6, width: 32, height: 32, cursor: 'pointer', fontFamily: 'inherit' }}>+</button></td>
     </tr>
   )
   const th = { padding: '9px 12px', fontWeight: 700, textAlign: 'left', fontSize: 12, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#8A93A8', whiteSpace: 'nowrap' }
