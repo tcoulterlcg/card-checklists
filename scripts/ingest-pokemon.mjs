@@ -32,12 +32,13 @@ for (const set of sets) {
   // Group into sections by rarity (meaningful for TCG collectors).
   const groups = {}
   for (const c of cards) {
-    const rarity = c.rarity || 'Unlisted'
+    // the API sometimes returns a raw enum ('MEGA_ATTACK_RARE'): show it as 'Mega Attack Rare'
+    const rarity = /^[A-Z_]+$/.test(c.rarity || '') ? c.rarity.toLowerCase().split('_').map(w => w[0].toUpperCase() + w.slice(1)).join(' ') : (c.rarity || 'Unlisted')
     ;(groups[rarity] = groups[rarity] || []).push({
       n: c.number,
       p: c.name,
       t: (c.types && c.types.join('/')) || c.supertype || '',
-      x: c.rarity || undefined
+      x: c.rarity ? rarity : undefined
     })
   }
   // Order sections: base rarities first, then chase rarities.
