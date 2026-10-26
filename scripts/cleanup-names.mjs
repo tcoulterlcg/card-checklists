@@ -58,7 +58,9 @@ for (const f of files) {
       let tidied = false
       const seen = new Set(s.sections.map(x => x.title))
       for (const sec of s.sections) {
-        const t = String(sec.title || '').replace(/\s+/g, ' ').replace(/\s+[–—-]$/, '').trim()
+        let t = String(sec.title || '').replace(/\s+/g, ' ').replace(/\s+[–—-]$/, '').trim()
+        // "Base Set Young Guns Checklist", "UD Canvas Checklist", "Clear Cut Parallel Checklist": page wording, not part of the name
+        if (/ Checklist$/.test(t) && /^(Base|UD Canvas)\b|Parallel|Young Guns|Printing Plates/.test(t)) t = t.replace(/ Checklist$/, '').replace(/^Base Set$/, 'Base')
         if (t && t !== sec.title && !seen.has(t)) { seen.add(t); sec.title = t; tidied = true }
       }
       if (tidied && !DRY) writeFileSync(new URL(f, dataDir), JSON.stringify(s))
