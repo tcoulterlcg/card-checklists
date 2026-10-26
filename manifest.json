@@ -12,8 +12,8 @@
   },
   "Basketball": {
    "file": "index/basketball.json",
-   "sets": 4037,
-   "cards": 843486
+   "sets": 4056,
+   "cards": 904236
   },
   "Football": {
    "file": "index/football.json",
@@ -76,11 +76,11 @@
    "cards": 298210
   }
  },
- "sets": 24856,
- "cards": 4478369,
- "updated": "2026-10-26T17:26:55.731Z",
+ "sets": 24875,
+ "cards": 4539119,
+ "updated": "2026-10-26T17:59:50.034Z",
  "visible": {
   "file": "index/visible.json",
-  "sets": 8655
+  "sets": 8674
  }
 }
