@@ -13,6 +13,7 @@
 //
 //   node scripts/add-superfractors.mjs [--dry-run]
 import { readFileSync, writeFileSync, readdirSync, existsSync } from 'node:fs'
+import { sectionKey } from '../lib/catalog.js'
 
 const dataDir = new URL('../public/data/', import.meta.url)
 const researchFile = new URL('./data/superfractor-research.json', import.meta.url)
@@ -97,7 +98,9 @@ for (const f of readdirSync(dataDir)) {
     add(sec, name, 'odds-superfractor'); stats.odds++
   }
   for (const r of research.get(s.slug) || []) {
-    const sec = scraped.find(x => x.title === r.section)
+    // research rows name sections as the source page did ("2017 Topps UFC Chrome – Base Set");
+    // cleanup-names has since tidied many titles ("Base"), so fall back to the tolerant key
+    const sec = scraped.find(x => x.title === r.section) || scraped.find(x => !SF.test(x.title || '') && sectionKey(x.title) === sectionKey(r.section))
     if (!sec || !(sec.cards || []).length) { stats.researchUnmatched.push(s.slug + ' :: ' + r.section); continue }
     if (covered(sec.title) || s.sections.some(x => x.derived && x.derived.from === sec.title && SF.test(x.title))) { stats.skippedExisting++; continue }
     add(sec, r.name, 'research-superfractor', r.url); stats.research++
