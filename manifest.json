@@ -12,13 +12,13 @@
   },
   "Basketball": {
    "file": "index/basketball.json",
-   "sets": 4392,
-   "cards": 1103734
+   "sets": 4405,
+   "cards": 1115175
   },
   "Football": {
    "file": "index/football.json",
-   "sets": 4705,
-   "cards": 541792
+   "sets": 5073,
+   "cards": 559697
   },
   "Hockey": {
    "file": "index/hockey.json",
@@ -76,11 +76,11 @@
    "cards": 298210
   }
  },
- "sets": 25211,
- "cards": 4738617,
- "updated": "2026-10-26T20:48:49.940Z",
+ "sets": 25592,
+ "cards": 4767963,
+ "updated": "2026-10-26T21:23:10.004Z",
  "visible": {
   "file": "index/visible.json",
-  "sets": 9010
+  "sets": 9462
  }
 }
