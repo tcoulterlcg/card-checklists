@@ -3551,6 +3551,34 @@
    "winter wonderland"
   ]
  },
+ "1999-00-upper-deck-legends": {
+  "missingPlayers": [
+   "abduljabb",
+   "bryant",
+   "busschere",
+   "carter",
+   "garnett",
+   "hill",
+   "horn",
+   "marbury",
+   "olajuwon",
+   "oneal",
+   "payton",
+   "pippen",
+   "walker",
+   "williams"
+  ],
+  "missingInserts": [
+   "century generations",
+   "century legends",
+   "century mjs most memorable shots",
+   "century team",
+   "legendary jersey",
+   "legendary signature",
+   "original",
+   "player century"
+  ]
+ },
  "2017-18-topps-chrome-uefa-champions-league-soccer-cards": {
   "missingPlayers": [
    "arnold",
@@ -5824,6 +5852,16 @@
    "pristine generals"
   ]
  },
+ "2000-01-sp-authentic": {
+  "missingPlayers": [
+   "kirilenko"
+  ],
+  "missingInserts": [
+   "buyback",
+   "maximum force",
+   "sample"
+  ]
+ },
  "2017-18-mvp-hockey": {
   "missingPlayers": [
    "checklist"
@@ -5879,22 +5917,6 @@
   ],
   "missingInserts": [
    "update"
-  ]
- },
- "2004-05-sp-authentic": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "authentic fabric",
-   "authentics frabrics",
-   "fabric"
-  ]
- },
- "1997-98-score-board-autographed": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "accuracy",
-   "collection",
-   "strongbox"
   ]
  },
  "2019-panini-chronicles-baseball": {
@@ -5963,18 +5985,6 @@
   "missingInserts": [
    "camo",
    "mosaic"
-  ]
- },
- "2003-04-upper-deck-mvp": {
-  "missingPlayers": [
-   "bryan",
-   "magazine",
-   "rc",
-   "zoto"
-  ],
-  "missingInserts": [
-   "materials warm up",
-   "sports nut"
   ]
  },
  "1993-94-star": {
@@ -6228,17 +6238,6 @@
    "se"
   ]
  },
- "1999-00-stadium-club": {
-  "missingPlayers": [
-   "rc",
-   "refractor",
-   "young"
-  ],
-  "missingInserts": [
-   "chrome true colors",
-   "chrome visionaries"
-  ]
- },
  "1985-86-star": {
   "missingPlayers": [
    "colter",
@@ -6396,6 +6395,16 @@
    "reflections titanium"
   ]
  },
+ "2000-01-fleer-premium": {
+  "missingPlayers": [
+   "ng",
+   "st"
+  ],
+  "missingInserts": [
+   "1993 1994",
+   "1998 1999"
+  ]
+ },
  "1998-upper-deck-mjx": {
   "missingPlayers": [
    "live",
@@ -6485,24 +6494,6 @@
   ],
   "missingInserts": [
    "back"
-  ]
- },
- "1999-00-finest": {
-  "missingPlayers": [
-   "abdulrahim"
-  ],
-  "missingInserts": [
-   "w coating",
-   "with coating"
-  ]
- },
- "1998-99-fleer-brilliants": {
-  "missingPlayers": [
-   "byrant"
-  ],
-  "missingInserts": [
-   "illuminator",
-   "pulsar"
   ]
  },
  "1992-93-hoops": {
@@ -6626,25 +6617,18 @@
    "1965 tall boy"
   ]
  },
- "1998-99-finest": {
+ "2004-05-upper-deck-black-diamond": {
   "missingPlayers": [],
   "missingInserts": [
-   "oversized",
-   "promo"
+   "die cuts",
+   "jersey single"
   ]
  },
- "1998-99-stadium-club": {
+ "1999-ultra-wnba": {
   "missingPlayers": [],
   "missingInserts": [
-   "1st day issue",
-   "chrome previews"
-  ]
- },
- "1998-99-upper-deck-ionix": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "hologrxfx",
-   "skyionix"
+   "attitude",
+   "world premier"
   ]
  },
  "2015-bowman-draft-baseball-cards": {
@@ -6703,6 +6687,17 @@
   ],
   "missingInserts": [
    "elements triple warm ups"
+  ]
+ },
+ "2003-04-upper-deck-mvp": {
+  "missingPlayers": [
+   "bryan",
+   "magazine",
+   "rc",
+   "zoto"
+  ],
+  "missingInserts": [
+   "sports nut"
   ]
  },
  "1996-97-stadium-club": {
@@ -6948,16 +6943,6 @@
   ],
   "missingInserts": [
    "middlemen"
-  ]
- },
- "1999-press-pass": {
-  "missingPlayers": [
-   "carter",
-   "checklist",
-   "williams"
-  ],
-  "missingInserts": [
-   "authentics"
   ]
  },
  "1998-upper-deck-hardcourt": {
@@ -7232,6 +7217,15 @@
   ],
   "missingInserts": [
    "coverage nostalgic"
+  ]
+ },
+ "1999-00-ultra": {
+  "missingPlayers": [
+   "ht",
+   "wp"
+  ],
+  "missingInserts": [
+   "world premier"
   ]
  },
  "1996-upper-deck-usa": {
@@ -7647,12 +7641,28 @@
    "quads patch"
   ]
  },
+ "2005-06-upper-deck-reflections": {
+  "missingPlayers": [
+   "ripken"
+  ],
+  "missingInserts": [
+   "dual fabric"
+  ]
+ },
  "2004-05-topps-luxury-box": {
   "missingPlayers": [
    "garnet"
   ],
   "missingInserts": [
    "lay up jersey"
+  ]
+ },
+ "2004-05-upper-deck-r-class": {
+  "missingPlayers": [
+   "szxzerbiak"
+  ],
+  "missingInserts": [
+   "tifacts dual memorabilia"
   ]
  },
  "2001-sage": {
@@ -7663,12 +7673,52 @@
    "hit rarefied"
   ]
  },
+ "2000-01-spx": {
+  "missingPlayers": [
+   "paul"
+  ],
+  "missingInserts": [
+   "sample"
+  ]
+ },
+ "2000-topps-team-usa": {
+  "missingPlayers": [
+   "boltonholifie"
+  ],
+  "missingInserts": [
+   "nonrefractor"
+  ]
+ },
+ "1999-00-finest": {
+  "missingPlayers": [
+   "abdulrahim"
+  ],
+  "missingInserts": [
+   "w coating"
+  ]
+ },
  "1999-00-upper-deck-encore": {
   "missingPlayers": [
    "peyton"
   ],
   "missingInserts": [
    "fx"
+  ]
+ },
+ "1999-00-upper-deck-hologrfx": {
+  "missingPlayers": [
+   "au"
+  ],
+  "missingInserts": [
+   "maximum hologrfx"
+  ]
+ },
+ "1998-99-fleer-brilliants": {
+  "missingPlayers": [
+   "byrant"
+  ],
+  "missingInserts": [
+   "pulsar"
   ]
  },
  "1998-99-topps-chrome": {
@@ -8143,16 +8193,22 @@
   ],
   "missingInserts": []
  },
- "2004-05-skybox-e-xl": {
+ "2005-06-topps-chrome": {
   "missingPlayers": [],
   "missingInserts": [
-   "court authentics jersey"
+   "certified"
   ]
  },
- "1998-99-sp-authentic": {
+ "2004-sage": {
   "missingPlayers": [],
   "missingInserts": [
-   "back"
+   "hit write stuff"
+  ]
+ },
+ "2000-01-fleer-tradition": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "game breakers"
   ]
  },
  "1990-topps-traded-baseball-cards": {
@@ -8376,6 +8432,14 @@
    "jabbar",
    "odom",
    "prizm"
+  ],
+  "missingInserts": []
+ },
+ "2000-01-fleer-game-time": {
+  "missingPlayers": [
+   "ar",
+   "cg",
+   "vr"
   ],
   "missingInserts": []
  },
@@ -8670,6 +8734,13 @@
   ],
   "missingInserts": []
  },
+ "2000-01-fleer-focus": {
+  "missingPlayers": [
+   "vision",
+   "wn"
+  ],
+  "missingInserts": []
+ },
  "2000-01-fleer-showcase": {
   "missingPlayers": [
    "dunkin",
@@ -8702,6 +8773,13 @@
   "missingPlayers": [
    "of",
    "pp"
+  ],
+  "missingInserts": []
+ },
+ "1999-00-stadium-club-chrome": {
+  "missingPlayers": [
+   "refractor",
+   "young"
   ],
   "missingInserts": []
  },
@@ -9383,9 +9461,21 @@
   ],
   "missingInserts": []
  },
+ "2000-01-topps-gallery": {
+  "missingPlayers": [
+   "gugliotta"
+  ],
+  "missingInserts": []
+ },
  "2000-01-ultra": {
   "missingPlayers": [
    "yt"
+  ],
+  "missingInserts": []
+ },
+ "2000-01-upper-deck-encore": {
+  "missingPlayers": [
+   "kemp"
   ],
   "missingInserts": []
  },
@@ -9407,9 +9497,21 @@
   ],
   "missingInserts": []
  },
+ "1999-press-pass": {
+  "missingPlayers": [
+   "checklist"
+  ],
+  "missingInserts": []
+ },
  "1999-press-pass-se": {
   "missingPlayers": [
    "a"
+  ],
+  "missingInserts": []
+ },
+ "1999-00-skybox-dominion": {
+  "missingPlayers": [
+   "nowitski"
   ],
   "missingInserts": []
  },
@@ -9422,6 +9524,12 @@
  "1999-00-topps-tipoff": {
   "missingPlayers": [
    "number"
+  ],
+  "missingInserts": []
+ },
+ "1999-00-upper-deck-ovation": {
+  "missingPlayers": [
+   "rahim"
   ],
   "missingInserts": []
  },
