@@ -620,19 +620,19 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
     if (!anyFilter) return secs
     return secs.map(s => {
       const kind = secKind(s.title)
+      let pool = s.cards
       if (setMemFilter !== 'any') {
         const mk = s.mem ? s.mem.k : null
         if (setMemFilter === 'MEMO' ? !mk : setMemFilter === 'STATED' ? !(mk && s.mem.src !== 'typical' && mk !== 'UNK') : mk !== setMemFilter) {
-          // a card-level stated override can still match
-          const cards = s.cards.filter(c => c.m && c.m.k === setMemFilter)
-          if (!cards.length) return { ...s, cards: [] }
-          return { ...s, cards }
+          // a card-level stated override can still match (the other filters below still apply)
+          pool = s.cards.filter(c => c.m && (setMemFilter === 'MEMO' ? !!c.m.k : setMemFilter === 'STATED' ? !!(c.m.k && c.m.src !== 'typical' && c.m.k !== 'UNK') : c.m.k === setMemFilter))
+          if (!pool.length) return { ...s, cards: [] }
         }
       }
       if (setTypeFilter !== 'All' && !(setTypeFilter === 'AU' ? (kind === 'AU' || kind === 'PA') : setTypeFilter === 'PATCH' ? (kind === 'PATCH' || kind === 'PA') : kind === setTypeFilter)) return { ...s, cards: [] }
       return {
         ...s,
-        cards: s.cards.filter(c => {
+        cards: pool.filter(c => {
           if (term && !((c.p || '').toLowerCase().includes(term) || (c.t || '').toLowerCase().includes(term) || String(c.n || '').toLowerCase() === term || (s.title || '').toLowerCase().includes(term))) return false
           if (onlyMine && !isMine(c.p)) return false
           // rookie tributes, retrospectives and buybacks look like rookies but aren't
@@ -658,7 +658,6 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
       const owner = myPlayers.list.find(n => (c.p || '').toLowerCase().includes(n.toLowerCase())) || c.p
       let g = m.get(owner); if (!g) { g = { name: owner, team: c.t || '', rows: [], au: 0, one: 0 }; m.set(owner, g) }
       g.rows.push({ ...c, section: sec.title, serial: cardSerial(c, sec), kind: secKind(sec.title), memc: c.m ? memCodeOf(c.m) : memCodeOf(sec.mem) })
-      if (g.kind === 'AU' || g.kind === 'PA') g.au++
     }
     for (const g of m.values()) { g.au = g.rows.filter(r => r.kind === 'AU' || r.kind === 'PA').length; g.one = g.rows.filter(r => r.serial === 1).length }
     return [...m.values()].sort((a, b) => b.rows.length - a.rows.length)
@@ -834,7 +833,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
       if (rpaType !== 'All' && r[3] !== rpaType) continue
       if (term && !r[0].toLowerCase().includes(term)) continue
       const m = meta[rpaData.slugs[r[2]]] || {}
-      if (sportFilter !== 'All' && m.sport !== sportFilter) continue
+      if (!matchSport(m, sportFilter)) continue
       out.push({ p: r[0], n: r[1], type: r[3], serial: r[4], slug: rpaData.slugs[r[2]], set: m.name, year: m.year, sport: m.sport })
       if (out.length >= 1200) break
     }
@@ -906,10 +905,14 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
       goHome(false)
       // browse filters live in the URL too (?sport=Hockey&team=...), so Back and shared links restore them
       const g = (k) => sp.get(k) || 'All'
-      setSportFilter(g('sport')); setBrandFilter(g('brand')); setProductFilter(g('product')); setSortBy(sp.get('sort') || 'year-desc')
+      // hand-typed or lowercased links (?sport=hockey) still pick the real category; unknown ones show everything
+      const want = g('sport').toLowerCase()
+      const sport = ['All', 'Sports', 'TCG', 'Other', ...new Set(sets.map(x => x.sport))].find(x => x && x.toLowerCase() === want) || 'All'
+      const SORTS = ['year-desc', 'year-asc', 'name-asc', 'name-desc', 'cards-desc', 'cards-asc', 'category', 'brand']
+      setSportFilter(sport); setBrandFilter(g('brand')); setProductFilter(g('product')); setSortBy(SORTS.includes(sp.get('sort')) ? sp.get('sort') : 'year-desc')
       setTcgRarity(g('rarity')); setTcgType(g('type'))
       const tm = sp.get('team')
-      if (tm || sp.get('rarity') || sp.get('type')) { setTeamInput(tm || ''); setTeamFilter(tm || 'All'); openTeamBrowse(g('sport')) }
+      if ((tm || sp.get('rarity') || sp.get('type')) && sport !== 'All') { setTeamInput(tm || ''); setTeamFilter(tm || 'All'); openTeamBrowse(sport) }
     }
   }
   // Apply the URL once the index is in. A ?set= link that isn't a static set waits for the
@@ -1191,7 +1194,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
                 style={{ ...buttonText, background: ACCENT, color: '#fff', border: 'none', borderRadius: 9, padding: '9px 16px', cursor: 'pointer', fontSize: 13 }}>
                 + Wantlist this set
               </button>
-              <button onClick={() => { openView('collection') }}
+              <button onClick={() => { openView('collection', undefined, '&cset=' + encodeURIComponent(setData.slug)) }}
                 style={{ ...buttonText, background: 'transparent', color: '#A1A1AA', border: '1px solid #232A3E', borderRadius: 9, padding: '8px 15px', cursor: 'pointer', fontSize: 13 }}>
                 Track in My Collection
               </button>
@@ -1646,8 +1649,8 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
               if (sortBy === 'year-asc') return ((a.year || 9999) - (b.year || 9999)) || nm()
               if (sortBy === 'name-asc') return nm()
               if (sortBy === 'name-desc') return -nm()
-              if (sortBy === 'cards-desc') return (b.cardCount - a.cardCount) || nm()
-              if (sortBy === 'cards-asc') return (a.cardCount - b.cardCount) || nm()
+              if (sortBy === 'cards-desc') return ((b.cardCount || 0) - (a.cardCount || 0)) || nm()
+              if (sortBy === 'cards-asc') return ((a.cardCount || 0) - (b.cardCount || 0)) || nm()
               if (sortBy === 'category') {
                 // Sports → TCGs → Other, then by sport/game name, newest first within each.
                 const grp = (x) => (TCG_SET.has(x.sport) ? 1 : OTHER_SET.has(x.sport) ? 2 : 0)
