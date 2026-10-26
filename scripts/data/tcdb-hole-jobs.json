@@ -12231,7 +12231,7 @@
    "base skips 3 numbers in #1-60 (e.g. 31, 53, 54)"
   ],
   "status": "done",
-  "note": "merged into 2025-rittenhouse-twin-peaks-the-log-lady-entertainment (redirect)",
+  "note": "merged into 2025-rittenhouse-twin-peaks-the-log-lady-entertainment (redirect); job moved there",
   "at": "2026-10-26"
  },
  {
@@ -13853,6 +13853,18 @@
   "source": "cardboardconnection.com",
   "why": [
    "only 0 cards scraped — hidden until a full checklist is imported"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2025-rittenhouse-twin-peaks-the-log-lady-entertainment",
+  "name": "2025 Rittenhouse Twin Peaks The Log Lady",
+  "year": 2025,
+  "sport": "Entertainment",
+  "cards": 418,
+  "source": "breakninja.com",
+  "why": [
+   "base skips 2 numbers in #1-60 (53, 54)"
   ],
   "status": "todo"
  }
