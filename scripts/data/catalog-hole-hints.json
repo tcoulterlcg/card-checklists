@@ -5419,6 +5419,15 @@
    "wins united states championship"
   ]
  },
+ "2009-10-donruss-elite": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "jersey",
+   "jersey prime",
+   "relic",
+   "signature"
+  ]
+ },
  "2015-topps-opening-day-baseball": {
   "missingPlayers": [
    "angels",
@@ -6363,6 +6372,15 @@
   ],
   "missingInserts": [
    "back"
+  ]
+ },
+ "2009-10-panini-limited": {
+  "missingPlayers": [
+   "autograph"
+  ],
+  "missingInserts": [
+   "freshman jersey",
+   "glossy"
   ]
  },
  "1992-93-hoops": {
@@ -7525,20 +7543,28 @@
    "quads patch"
   ]
  },
- "2008-09-fleer": {
+ "2009-10-panini-certified": {
   "missingPlayers": [
-   "roberts"
+   "dragic"
   ],
   "missingInserts": [
-   "1988 retro"
+   "glossy"
   ]
  },
- "2007-08-upper-deck-first-edition": {
+ "2009-10-panini-classics": {
   "missingPlayers": [
-   "billwalton"
+   "derozan"
   ],
   "missingInserts": [
-   "durant exclusives"
+   "glossy"
+  ]
+ },
+ "2009-10-sp-game-used": {
+  "missingPlayers": [
+   "lebron"
+  ],
+  "missingInserts": [
+   "three star swatches"
   ]
  },
  "2006-07-fleer": {
@@ -8133,28 +8159,34 @@
   ],
   "missingInserts": []
  },
- "2007-topps-los-angeles-lakers": {
+ "2009-10-panini-studio": {
   "missingPlayers": [],
   "missingInserts": [
-   "lal"
+   "signature"
   ]
  },
- "2007-08-ultra": {
+ "2009-10-panini-timeless-treasures": {
   "missingPlayers": [],
   "missingInserts": [
-   "se court masters"
+   "hall fame signatures"
   ]
  },
- "2007-08-upper-deck-artifacts": {
+ "2009-10-panini-playoff-contenders": {
   "missingPlayers": [],
   "missingInserts": [
-   "conference pairings patches"
+   "classic ticket signature"
   ]
  },
- "2007-08-upper-deck-ultimate-collection": {
+ "2009-10-playoff-national-treasures": {
   "missingPlayers": [],
   "missingInserts": [
-   "quad signature"
+   "signature patch team"
+  ]
+ },
+ "2008-09-upper-deck-premier": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "letters"
   ]
  },
  "1990-topps-traded-baseball-cards": {
@@ -8656,6 +8688,13 @@
   "missingPlayers": [
    "box",
    "gilchrist"
+  ],
+  "missingInserts": []
+ },
+ "2009-10-panini-season-update": {
+  "missingPlayers": [
+   "pruitt",
+   "stouemire"
   ],
   "missingInserts": []
  },
@@ -9380,9 +9419,27 @@
   ],
   "missingInserts": []
  },
+ "2009-10-panini-absolute-memorabilia": {
+  "missingPlayers": [
+   "glossy"
+  ],
+  "missingInserts": []
+ },
+ "2009-10-panini-court-kings": {
+  "missingPlayers": [
+   "autograph"
+  ],
+  "missingInserts": []
+ },
  "2008-09-bowman": {
   "missingPlayers": [
    "noah"
+  ],
+  "missingInserts": []
+ },
+ "2008-09-fleer": {
+  "missingPlayers": [
+   "roberts"
   ],
   "missingInserts": []
  },
@@ -9401,6 +9458,12 @@
  "2007-08-fleer-hot-prospects": {
   "missingPlayers": [
    "afflald"
+  ],
+  "missingInserts": []
+ },
+ "2007-08-upper-deck-first-edition": {
+  "missingPlayers": [
+   "billwalton"
   ],
   "missingInserts": []
  },
