@@ -7,6 +7,10 @@
 //     some players (rookies/retired) under the same insert. A row with no card
 //     number whose player already has a numbered card in that section is a
 //     duplicate and is dropped.
+//  3. Team tables: the page ends with per-team tables (insert name in the number
+//     column, "No Team / One Of Ones" in the team column), scraped as sections named
+//     after teams. Rows already in their insert section are dropped; the rest (often
+//     legends on defunct teams) move into it, unnumbered, keeping the team.
 //   node scripts/fix-breakninja.mjs [--dry-run]
 import { readFileSync, writeFileSync, readdirSync } from 'node:fs'
 
@@ -19,7 +23,36 @@ const WHY = 'Break Ninja preview cut off at 250 cards (A–M players only)'
 const jobs = JSON.parse(readFileSync(jobsPath, 'utf8'))
 const jobSlugs = new Set(jobs.map(j => j.slug))
 const newJobs = []
-const stats = { truncated: 0, dupRows: 0, setsDeduped: 0, jobsAdded: 0 }
+const stats = { truncated: 0, dupRows: 0, setsDeduped: 0, jobsAdded: 0, teamSections: 0, teamRowsMoved: 0 }
+const insertish = (n) => String(n || '').length > 3 && /[a-z]{2}/.test(String(n)) && !/\d{2,}/.test(String(n))
+
+// 3. fold team-table sections back into their inserts; returns true when the set changed
+function foldTeamTables(s) {
+  const titles = new Set(s.sections.map(x => x.title))
+  const teamSecs = s.sections.filter(x => {
+    const ins = (x.cards || []).filter(c => insertish(c.n))
+    return x.cards?.length && ins.length / x.cards.length >= 0.5 && ins.filter(c => titles.has(String(c.n).trim())).length / ins.length >= 0.6
+  })
+  if (!teamSecs.length) return false
+  const byTitle = new Map(s.sections.map(x => [x.title, x]))
+  for (const sec of teamSecs) {
+    for (const c of sec.cards) {
+      if (!insertish(c.n)) continue
+      const ins = String(c.n).trim()
+      let target = byTitle.get(ins)
+      if (target && target.cards.some(k => k.p === c.p)) continue
+      if (!target) { target = { title: ins, cards: [] }; byTitle.set(ins, target); s.sections.push(target) }
+      const o = { n: '', p: c.p }
+      if (sec.title && !/^(no team|international)$/i.test(sec.title)) o.t = sec.title
+      if (c.x) o.x = c.x
+      target.cards.push(o); stats.teamRowsMoved++
+    }
+    sec.cards = sec.cards.filter(c => !insertish(c.n))
+  }
+  s.sections = s.sections.filter(x => x.cards.length)
+  stats.teamSections += teamSecs.length
+  return true
+}
 
 for (const f of readdirSync(dataDir)) {
   if (!f.endsWith('.json') || SKIP.test(f)) continue
@@ -39,6 +72,8 @@ for (const f of readdirSync(dataDir)) {
       jobSlugs.add(s.slug)
     }
   }
+
+  if (foldTeamTables(s)) changed = true
 
   let removed = 0
   for (const sec of s.sections) {
