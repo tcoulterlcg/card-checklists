@@ -3,6 +3,7 @@
 // Checklist HQ v2 — sectioned checklist database (Base / Inserts / Autos …)
 // imported from cardboardconnection.com. Static JSON under /public/data:
 // index.json lists sets; each set file carries sections -> cards.
+import { useDialogFocus } from '../components/dialog-focus'
 import { useCallback, useDeferredValue, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { Select, Popover, Trigger, Chevron, Check, menuItem, menuHeading, triggerStyle, useIsMobile } from '../components/dropdown'
 import { useAccount, AccountChip, AuthModal, CollectionView, CommunityView } from '../components/community'
@@ -143,6 +144,8 @@ const CRAWL_PX_PER_SEC = 90
 function BottomLine({ segments }) {
   const [seg, setSeg] = useState(0)
   const [run, setRun] = useState(null) // { from, to, dur } for the current crawl
+  const [lap, setLap] = useState(0)   // restarts the crawl even when the league doesn't change (only one league loaded)
+  const [paused, setPaused] = useState(false)
   const viewport = useRef(null)
   const track = useRef(null)
   const cur = segments.length ? segments[seg % segments.length] : null
@@ -151,10 +154,10 @@ function BottomLine({ segments }) {
     const from = viewport.current.offsetWidth
     const to = -track.current.scrollWidth
     setRun({ from, to, dur: (from - to) / CRAWL_PX_PER_SEC })
-  }, [seg, segments.length])
+  }, [seg, lap, segments.length])
   if (!cur) return null
-  const next = () => { setRun(null); setSeg(n => (n + 1) % segments.length) }
-  const jump = (i) => { setRun(null); setSeg(i) }
+  const next = () => { setRun(null); setLap(l => l + 1); setSeg(n => (n + 1) % segments.length) }
+  const jump = (i) => { setRun(null); setLap(l => l + 1); setSeg(i) }
   const anim = run ? 'hqcrawl ' + run.dur + 's linear forwards' : 'none'
   return (
     <div className="hq-bottomline" role="region" aria-label="Sports and card news">
@@ -163,9 +166,9 @@ function BottomLine({ segments }) {
         {cur.label}
       </button>
       <div ref={viewport} className="hq-bl-viewport" style={{ position: 'relative', flex: 1, minWidth: 0, overflow: 'hidden' }}>
-        <div ref={track} key={'t' + cur.key + seg} className="hq-bl-track" onAnimationEnd={next}
+        <div ref={track} key={'t' + cur.key + seg + '.' + lap} className="hq-bl-track" onAnimationEnd={next}
           style={{ position: 'absolute', top: 0, bottom: 0, left: 0, display: 'flex', alignItems: 'center', whiteSpace: 'nowrap', willChange: 'transform',
-            transform: 'translateX(' + (run ? run.from : 10000) + 'px)', '--from': (run ? run.from : 0) + 'px', '--to': (run ? run.to : 0) + 'px', animation: anim }}>
+            transform: 'translateX(' + (run ? run.from : 10000) + 'px)', '--from': (run ? run.from : 0) + 'px', '--to': (run ? run.to : 0) + 'px', animation: anim, animationPlayState: paused ? 'paused' : undefined }}>
           {cur.items.map((it, i) => (
             <a key={i} href={it.link} target="_blank" rel="noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '0 22px', textDecoration: 'none', color: TEXT, fontSize: 14, fontWeight: 500 }}>
               <span style={{ width: 6, height: 6, borderRadius: 999, background: cur.color, flexShrink: 0 }} />
@@ -176,6 +179,10 @@ function BottomLine({ segments }) {
         </div>
       </div>
       <div style={{ flexShrink: 0, display: 'flex', alignItems: 'center', gap: 2, padding: '0 10px', borderLeft: '1px solid #1C2233', background: '#0B0E17' }}>
+        <button className="hq-bl-pause" onClick={() => setPaused(v => !v)} aria-pressed={paused} aria-label={paused ? 'Play headlines' : 'Pause headlines'} title={paused ? 'Play' : 'Pause'}
+          style={{ width: 28, height: 28, padding: 0, marginRight: 4, background: 'none', border: 0, cursor: 'pointer', color: '#8A93A8', display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}>
+          {paused ? <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4l13 8-13 8z" /></svg> : <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 4h4v16H6zM14 4h4v16h-4z" /></svg>}
+        </button>
         {segments.map((sg, i) => {
           const on = i === seg % segments.length
           return (
@@ -977,7 +984,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
                 <div style={{ border: '1px solid #222', borderRadius: 12, overflow: 'hidden' }}>
                   <div className="hq-setrow" style={{ display: 'flex', gap: 14, padding: '9px 16px', background: '#121626', borderBottom: '1px solid #232A3E', alignItems: 'center' }}>
                     <div className="hq-col-num" style={{ flex: '0 0 68px' }}><SortHeader label="Card #" field="n" sortField={sortField} sortDir={sortDir} onClick={toggleSort} /></div>
-                    <div style={{ flex: '1 1 0', minWidth: 0 }}><SortHeader label={setIsTcg ? 'Card' : 'Player'} field="p" sortField={sortField} sortDir={sortDir} onClick={toggleSort} grow /></div>
+                    <div style={{ flex: '1 1 0', minWidth: 0 }}><SortHeader label={setIsTcg ? 'Card' : setIsSport ? 'Player' : 'Name'} field="p" sortField={sortField} sortDir={sortDir} onClick={toggleSort} grow /></div>
                     {setFacets.team && <div className="hq-col-team" style={{ flex: '1 1 0', minWidth: 0 }}><SortHeader label={setIsTcg ? 'Type' : 'Team'} field="t" sortField={sortField} sortDir={sortDir} onClick={toggleSort} grow /></div>}
                     {setFacets.flag && <div className="hq-col-flag" style={{ flex: setIsTcg ? '0 0 110px' : '0 0 96px' }}><SortHeader label={setIsTcg ? 'Rarity' : 'Flag'} field="x" sortField={sortField} sortDir={sortDir} onClick={toggleSort} align="right" /></div>}
                     <span aria-hidden="true" style={{ flex: '0 0 78px' }} />
@@ -1013,7 +1020,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
                 </div>
               </div>
             )
-          }), [setData, visibleSections, secLimit, sortField, sortDir, openSecs, setIsTcg, setFacets, wanted, mineSet])
+          }), [setData, visibleSections, secLimit, sortField, sortDir, openSecs, setIsTcg, setIsSport, setFacets, wanted, mineSet])
   const urlApplied = useRef(false)   // don't overwrite a shared ?sport=… link before applyUrl has read it
   useEffect(() => {
     if (!isLanding || sets.length === 0 || !urlApplied.current) return
@@ -1124,7 +1131,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
     const onScroll = () => { setScrolled(window.scrollY > 8); setPastHero(window.scrollY > 460); if (!saveT) saveT = setTimeout(saveY, 300) }
     const onKey = (e) => {
       if (e.key === 'Escape') setMenuOpen(false)
-      if (e.key === '/' && !/^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement?.tagName || '')) {
+      if (e.key === '/' && !e.ctrlKey && !e.metaKey && !e.altKey && !document.querySelector('[aria-modal="true"]') && !/^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement?.tagName || '')) {
         e.preventDefault()
         if (window.innerWidth < 640) return
         if (isLandingRef.current && window.scrollY <= 460) document.querySelector('.hq-hero input')?.focus()
@@ -1139,6 +1146,20 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
   const isLandingRef = useRef(isLanding)
   isLandingRef.current = isLanding
   useEffect(() => { document.body.style.overflow = menuOpen ? 'hidden' : ''; return () => { document.body.style.overflow = '' } }, [menuOpen])
+  // the menu sheet is a modal: focus goes in and stays; closing it returns focus to the menu button;
+  // widening the window past the menu's breakpoint (rotating a phone) closes it
+  const menuBtn = useRef(null), sheetRef = useRef(null), menuWasOpen = useRef(false)
+  useDialogFocus(sheetRef, menuOpen)
+  useEffect(() => {
+    if (menuOpen) { menuWasOpen.current = true; return }
+    if (menuWasOpen.current) { menuWasOpen.current = false; if (!document.activeElement || document.activeElement === document.body) menuBtn.current?.focus() }
+  }, [menuOpen])
+  useEffect(() => {
+    const mq = window.matchMedia('(min-width: 1100px)')
+    const h = () => { if (mq.matches) setMenuOpen(false) }
+    mq.addEventListener ? mq.addEventListener('change', h) : mq.addListener(h)
+    return () => { mq.removeEventListener ? mq.removeEventListener('change', h) : mq.removeListener(h) }
+  }, [])
 
   return (
     <>
@@ -1166,10 +1187,10 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
                 style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>Inbox<span style={{ background: ACCENT, color: '#fff', borderRadius: 999, padding: '1px 7px', fontSize: 12, fontWeight: 700 }}>{fbAdmin.count}</span></button>
             )}
             <AccountChip account={account} onOpenAuth={() => setAuthOpen(true)} />
-            <button className="hq-iconbtn" aria-label="Search" onClick={() => { setMenuOpen(false); goHome(); window.scrollTo(0, 0); setTimeout(() => document.querySelector('.hq-hero input')?.focus(), 50) }}>
+            <button className="hq-iconbtn hq-icon-search" aria-label="Search" onClick={() => { setMenuOpen(false); goHome(); window.scrollTo(0, 0); setTimeout(() => document.querySelector('.hq-hero input')?.focus(), 50) }}>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
             </button>
-            <button className="hq-iconbtn" aria-label={menuOpen ? 'Close menu' : 'Open menu'} aria-expanded={menuOpen} onClick={() => setMenuOpen(o => !o)}>
+            <button ref={menuBtn} className="hq-iconbtn hq-icon-menu" aria-label={menuOpen ? 'Close menu' : 'Open menu'} aria-expanded={menuOpen} onClick={() => setMenuOpen(o => !o)}>
               {menuOpen
                 ? <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" /></svg>
                 : <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" /></svg>}
@@ -1178,7 +1199,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
         </div>
       </header>
       {menuOpen && (
-        <div className="hq-sheet" role="dialog" aria-label="Menu">
+        <div ref={sheetRef} className="hq-sheet" role="dialog" aria-modal="true" aria-label="Menu">
           {NAV_ITEMS.map(([label, fn, v]) => (
             <button key={label} className="hq-sheet-row" aria-current={view === v ? 'page' : undefined} onClick={() => { setMenuOpen(false); fn() }}>{label}</button>
           ))}

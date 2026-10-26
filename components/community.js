@@ -90,7 +90,7 @@ export function AuthModal({ open, onClose, account }) {
               setBusy(false)
               if (error) setErr(error.message === 'Invalid login credentials' ? 'Wrong email or password.' : error.message)
             }}>
-              <input style={input} type="email" required autoFocus autoComplete="email" aria-label="Email address" placeholder="you@email.com" value={email} onChange={(e) => setEmail(e.target.value)} />
+              <input style={input} type="email" required autoComplete="email" aria-label="Email address" placeholder="you@email.com" value={email} onChange={(e) => setEmail(e.target.value)} />
               <input style={{ ...input, marginTop: 10 }} type="password" required autoComplete="current-password" aria-label="Password" placeholder="GrailFindr password" value={password} onChange={(e) => setPassword(e.target.value)} />
               {err && <p style={{ color: '#f87171', fontSize: 13, margin: '8px 0 0' }}>{err}</p>}
               <button type="submit" disabled={busy} style={{ ...btnGhost, width: '100%', marginTop: 12, color: '#EDEDEF' }}>{busy ? '…' : 'Sign in'}</button>

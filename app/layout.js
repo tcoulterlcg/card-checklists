@@ -58,7 +58,11 @@ body { overflow-x: clip; }
 /* Bottom line news ticker */
 .hq-bottomline { position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; height: 40px; display: flex; align-items: stretch; background: rgba(11,14,23,0.94); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border-top: 1px solid #1C2233; }
 @keyframes hqcrawl { from { transform: translateX(var(--from)) } to { transform: translateX(var(--to)) } }
-.hq-bottomline:hover .hq-bl-track { animation-play-state: paused !important; }
+.hq-bottomline:hover .hq-bl-track, .hq-bottomline:focus-within .hq-bl-track { animation-play-state: paused !important; }
+@media (prefers-reduced-motion: reduce) {   /* no crawl: headlines sit still; the league label steps to the next league */
+  .hq-bl-track { animation: none !important; transform: none !important; }
+  .hq-bl-pause { display: none !important; }
+}
 .hq-bl-track a:hover { color: #fff !important; text-decoration: underline !important; text-underline-offset: 3px; }
 @keyframes hqflip { from { transform: rotateX(90deg); opacity: 0 } to { transform: rotateX(0); opacity: 1 } }
 .hq-bl-label { animation: hqflip 260ms ease-out; transform-origin: 50% 50%; }
@@ -91,6 +95,14 @@ html.hq-deep .hq-main::before { content: 'Loading…'; display: block; text-alig
   input, select, textarea { font-size: 16px !important; }
   .hq-bl-label { min-width: 0 !important; padding: 0 12px !important; }
 }
+/* tablets: the full nav doesn't fit — nav links move into the menu, search and Sign in stay */
+@media (min-width: 640px) and (max-width: 1099px) {
+  .hq-navlinks { display: none !important; }
+  .hq-iconbtn.hq-icon-menu { display: inline-flex; }
+  .hq-hsearch { width: 200px; }
+  .hq-sheet { top: 76px; height: calc(100dvh - 76px); }
+}
+@media (min-width: 1100px) { .hq-sheet { display: none !important; } }
 @media (max-width: 639px) {
   .hq-header { border-bottom-color: #1C2233; }
   .hq-header-inner { height: 60px; padding: 0 6px 0 14px !important; }
