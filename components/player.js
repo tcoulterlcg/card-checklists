@@ -501,7 +501,7 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
 
       {/* BODY */}
       <div style={{ display: 'flex', gap: 20, flexWrap: 'wrap', alignItems: 'flex-start', marginTop: 18 }}>
-        <aside aria-label="Filters" className={'hq-aside' + (filtersOpen ? '' : ' hq-collapsed')} style={{ flex: '0 0 280px', maxWidth: 290, boxSizing: 'border-box', background: '#0F1320', border: '1px solid #232323', borderRadius: 14, padding: 16, display: 'flex', flexDirection: 'column', gap: 18 }}>
+        <aside aria-label="Filters" className={'hq-aside' + (filtersOpen ? '' : ' hq-collapsed')} style={{ flex: '0 0 280px', maxWidth: 290, minWidth: 0, boxSizing: 'border-box', background: '#0F1320', border: '1px solid #232323', borderRadius: 14, padding: 16, display: 'flex', flexDirection: 'column', gap: 18 }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 10 }}>
             <span style={{ ...eyebrow }}>Filters</span>
             <span style={{ display: 'inline-flex', gap: 14, alignItems: 'center' }}>
@@ -562,13 +562,13 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
           {labelList.length > 1 && (
             <div>
               <p style={legend}>Appears as</p>
-              {labelList.slice(0, 30).map(([l, n]) => <label key={l} style={lbl}><input type="checkbox" checked={!!labels && labels.has(l)} onChange={() => toggleIn(setLabels, labels, l)} style={cb} /><span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{l}</span><span style={cnt}>{n.toLocaleString()}</span></label>)}
+              {labelList.slice(0, 30).map(([l, n]) => <label key={l} style={lbl}><input type="checkbox" checked={!!labels && labels.has(l)} onChange={() => toggleIn(setLabels, labels, l)} style={cb} /><span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', minWidth: 0, flex: '0 1 auto' }}>{l}</span><span style={cnt}>{n.toLocaleString()}</span></label>)}
             </div>
           )}
           {teamList.length > 0 && (
             <div>
               <p style={legend}>Team on card</p>
-              {teamList.map(([t, n]) => <label key={t} style={lbl}><input type="checkbox" checked={!!teams && teams.has(t)} onChange={() => toggleIn(setTeams, teams, t)} style={cb} /><span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{t}</span><span style={cnt}>{n.toLocaleString()}</span></label>)}
+              {teamList.map(([t, n]) => <label key={t} style={lbl}><input type="checkbox" checked={!!teams && teams.has(t)} onChange={() => toggleIn(setTeams, teams, t)} style={cb} /><span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', minWidth: 0, flex: '0 1 auto' }}>{t}</span><span style={cnt}>{n.toLocaleString()}</span></label>)}
             </div>
           )}
         </aside>

@@ -71,6 +71,13 @@ function teamCanon(names) {
   for (const [t] of names) {
     let k = fold(t)
     if (TYPOS[k]) k = fold(TYPOS[k])
+    // singular spelling of a plural team name ("Acadie-Bathurst Titan" -> Titans) when the plural is the common one
+    // singular/plural spellings of one team ("Acadie-Bathurst Titan" / "Titans"): the more common spelling wins
+    if (k.includes(' ')) {
+      const n = (x) => (counts.get(x) || [0, 0])[1]
+      if (counts.has(k + 's') && n(k + 's') >= n(k)) k = k + 's'
+      else if (k.endsWith('s') && counts.has(k.slice(0, -1)) && n(k.slice(0, -1)) > n(k)) k = k.slice(0, -1)
+    }
     if (!counts.has(k) || !k.includes(' ')) {
       const big = (arr) => arr && arr.filter(x => counts.get(x)[1] >= 50)
       const byNick = big(tail.get(k)), byCity = big(head.get(k))
