@@ -27,6 +27,6 @@ for (const f of readdirSync(dataDir)) {
     sets.push(entry)
   } catch (e) { /* skip malformed */ }
 }
-sets.sort((a, b) => (b.year - a.year) || a.name.localeCompare(b.name))
+sets.sort((a, b) => ((b.year || 0) - (a.year || 0)) || a.name.localeCompare(b.name))
 writeFileSync(new URL('index.json', dataDir), JSON.stringify({ sets }))
 console.log('index:', sets.length, 'sets (' + hidden + ' incomplete hidden),', sets.reduce((n, s) => n + s.cardCount, 0).toLocaleString(), 'cards total')

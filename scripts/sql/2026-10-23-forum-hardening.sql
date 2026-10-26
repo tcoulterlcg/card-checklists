@@ -35,6 +35,22 @@ create trigger cardhq_posts_rate before insert on public.cardhq_forum_posts for 
 drop trigger if exists cardhq_comments_rate on public.cardhq_forum_comments;
 create trigger cardhq_comments_rate before insert on public.cardhq_forum_comments for each row execute function public.cardhq_forum_rate_limit();
 
+-- Rate limits count rows by created_at, and the API lets a client send its own created_at
+-- ('2000-01-01' would never count). Stamp the server time on every insert. (Added 2026-10-25.)
+create or replace function public.cardhq_stamp_created_at() returns trigger
+language plpgsql set search_path to 'public' as $$
+begin
+  new.created_at := now();
+  return new;
+end $$;
+drop trigger if exists cardhq_a_stamp on public.cardhq_feedback;
+create trigger cardhq_a_stamp before insert on public.cardhq_feedback for each row execute function public.cardhq_stamp_created_at();
+drop trigger if exists cardhq_a_stamp on public.cardhq_forum_posts;
+create trigger cardhq_a_stamp before insert on public.cardhq_forum_posts for each row execute function public.cardhq_stamp_created_at();
+drop trigger if exists cardhq_a_stamp on public.cardhq_forum_comments;
+create trigger cardhq_a_stamp before insert on public.cardhq_forum_comments for each row execute function public.cardhq_stamp_created_at();
+revoke execute on function public.cardhq_stamp_created_at() from anon, authenticated, public;
+
 -- Trigger functions aren't API endpoints (triggers still run without EXECUTE for these roles).
 revoke execute on function public.cardhq_feedback_rate_limit() from anon, authenticated, public;
 revoke execute on function public.cardhq_forum_rate_limit() from anon, authenticated, public;

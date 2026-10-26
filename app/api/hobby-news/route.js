@@ -52,13 +52,15 @@ const SEGMENTS = [
 
 const SOURCE_NAMES = { espn: 'ESPN', ripped: 'Topps', si: 'Sports Illustrated', sportscollectorsdaily: 'SC Daily', sportscollectorsdigest: 'SC Digest', cbssports: 'CBS Sports', paniniamerica: 'Panini', upperdeck: 'Upper Deck', pokemonblog: 'PokémonBlog', bleedingcool: 'Bleeding Cool', comicbook: 'ComicBook' }
 
+// a malformed entity (&#99999999;) becomes nothing instead of throwing and dropping the whole feed
+const cp = (n) => (n > 0 && n <= 0x10FFFF ? String.fromCodePoint(n) : '')
 function decode(s) {
   return (s || '').replace(/<!\[CDATA\[|\]\]>/g, '')
     .replace(/&amp;/g, '&').replace(/&#8217;|&#039;|&apos;|&rsquo;/g, "'").replace(/&#8216;|&lsquo;/g, "'")
     .replace(/&#8220;|&#8221;|&ldquo;|&rdquo;|&quot;/g, '"').replace(/&#8211;|&#8212;|&ndash;|&mdash;/g, '–')
     .replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&nbsp;/g, ' ')
     // any other numeric entity (&#39; &#x27; &#038; …) decoded, not blanked — "McDavid's", not "McDavid s"
-    .replace(/&#x([0-9a-f]+);/gi, (_, h) => String.fromCodePoint(parseInt(h, 16))).replace(/&#(\d+);/g, (_, d) => String.fromCodePoint(+d))
+    .replace(/&#x([0-9a-f]{1,6});/gi, (_, h) => cp(parseInt(h, 16))).replace(/&#(\d{1,7});/g, (_, d) => cp(+d))
     .replace(/[\u2018\u2019]/g, "'").replace(/[\u201C\u201D]/g, '"')
     .replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim()
 }

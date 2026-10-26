@@ -214,7 +214,9 @@ function repair(p) {
   repairCache.set(p, hit); return hit
 }
 
-const stats = { merged: 0, team: 0, junk: 0, tidied: 0, repaired: 0, unrepaired: new Set(), unified: 0, files: 0 }
+// Names too mangled to repair by rule (checked by hand).
+const FIXED_NAMES = { 'Nen_??_?ª': 'Nenê', 'Nen_??_ª': 'Nenê' }
+const stats = { dupRows: 0, dupSecs: 0, merged: 0, team: 0, junk: 0, tidied: 0, repaired: 0, unrepaired: new Set(), unified: 0, files: 0 }
 for (const [f, s] of sets) {
   let changed = false
   for (const sec of s.sections || []) {
@@ -225,6 +227,12 @@ for (const [f, s] of sets) {
       if (JUNK.test(raw.trim())) { stats.junk++; changed = true; continue }
       let p = tidy(raw)
       if (p !== raw.trim()) stats.tidied++
+      // UTF-8 read as Latin-1 ("NenÃª" -> "Nenê"); only when the round trip is clean
+      if (/Ã[\x80-\xBF]/.test(p) && ![...p].some(ch => ch.charCodeAt(0) > 0xff)) {
+        const d = Buffer.from(p, 'latin1').toString('utf8')
+        if (!d.includes('\uFFFD')) { p = d; stats.repaired++ }
+      }
+      if (FIXED_NAMES[p]) p = FIXED_NAMES[p]
       if (/\?/.test(p) && /[A-Za-z]\?|\?[A-Za-z]/.test(p)) {
         const r = repair(p)
         if (r) { p = r; stats.repaired++ } else stats.unrepaired.add(p)
@@ -275,13 +283,28 @@ for (const [f, s] of sets) {
       byKey.set(k, c); merged.push(c)
     }
     for (const c of merged) delete c._tag
-    if (merged.length !== (sec.cards || []).length) sec.cards = merged
+    // scrapes sometimes repeat a row exactly (2017 Heritage buybacks: 600 repeats in 700 rows); identical rows are one card
+    const exact = new Set(), uniqRows = []
+    for (const c of merged) { const k = JSON.stringify(c); if (exact.has(k)) { stats.dupRows++; changed = true; continue } exact.add(k); uniqRows.push(c) }
+    if (uniqRows.length !== (sec.cards || []).length) sec.cards = uniqRows
   }
+  // two sections with the same title: the site keys sections by title, so an exact copy is dropped
+  // and a different list under the same title becomes "Title (2)"
+  const titles = new Map()
+  s.sections = (s.sections || []).filter(sec => {
+    const prev = titles.get(sec.title)
+    if (!prev) { titles.set(sec.title, [sec]); return true }
+    const body = JSON.stringify(sec.cards)
+    if (prev.some(x => JSON.stringify(x.cards) === body)) { stats.dupSecs++; changed = true; return false }
+    let i = prev.length + 1; while (titles.has(sec.title + ' (' + i + ')')) i++
+    prev.push(sec); sec.title = sec.title + ' (' + i + ')'; titles.set(sec.title, [sec]); stats.dupSecs++; changed = true
+    return true
+  })
   const before = (s.sections || []).length
   s.sections = (s.sections || []).filter(x => (x.cards || []).length)
   if (s.sections.length !== before) changed = true
   if (changed) { stats.files++; if (!DRY) writeFileSync(new URL(f, dataDir), JSON.stringify(s)) }
 }
-console.log(`widget listings dropped ${widgetDropped}, affiliate text removed ${shopFixed}, duplicate rows merged ${stats.merged}, team fields cleaned ${stats.team}, junk rows dropped ${stats.junk}, names tidied ${stats.tidied}, flag tails moved ${stats.flagTails || 0}, encoding repaired ${stats.repaired}, spellings unified ${stats.unified}, files changed ${stats.files}${DRY ? ' (dry run)' : ''}`)
+console.log(`exact duplicate rows dropped ${stats.dupRows}, duplicate section titles fixed ${stats.dupSecs}, widget listings dropped ${widgetDropped}, affiliate text removed ${shopFixed}, duplicate rows merged ${stats.merged}, team fields cleaned ${stats.team}, junk rows dropped ${stats.junk}, names tidied ${stats.tidied}, flag tails moved ${stats.flagTails || 0}, encoding repaired ${stats.repaired}, spellings unified ${stats.unified}, files changed ${stats.files}${DRY ? ' (dry run)' : ''}`)
 if (REPORT) writeFileSync(REPORT.slice(9), [...renames.entries()].sort((a, b) => b[1] - a[1]).map(([k, n]) => n + '\t' + k).join('\n'))
 if (stats.unrepaired.size) console.log(`unrepaired (${stats.unrepaired.size}):`, [...stats.unrepaired].slice(0, 40).join(' | '))

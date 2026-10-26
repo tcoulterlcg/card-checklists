@@ -6,7 +6,7 @@
 import { readFileSync, writeFileSync } from 'node:fs'
 
 const jobs = JSON.parse(readFileSync(new URL('./data/tcdb-hole-jobs.json', import.meta.url), 'utf8'))
-const cap = (s) => s.replace(/\b\w/g, c => c.toUpperCase())
+const cap = (s) => s.replace(/(^|\s)\S/g, c => c.toUpperCase())   // word starts only: \"player's\" stays, not \"Player'S\"
 const out = {}
 for (const j of jobs) {
   if (!j.slug || j.status === 'done') continue

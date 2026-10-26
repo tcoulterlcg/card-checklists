@@ -10,6 +10,7 @@
 // Response: { ok, written: [{ slug, cards }], skipped: [slug] }
 import { NextResponse } from 'next/server'
 import { gunzipSync } from 'node:zlib'
+import { timingSafeEqual, createHash } from 'node:crypto'
 import { createClient } from '@supabase/supabase-js'
 
 export const runtime = 'nodejs'
@@ -30,12 +31,16 @@ export async function POST(req) {
   const secret = process.env.INGEST_SECRET
   const key = process.env.SUPABASE_SERVICE_ROLE_KEY
   if (!secret || !key) return NextResponse.json({ ok: false, error: 'ingest not configured' }, { status: 503, headers: CORS })
-  if (req.headers.get('x-ingest-secret') !== secret) return NextResponse.json({ ok: false, error: 'unauthorized' }, { status: 401, headers: CORS })
+  // constant-time compare (hash both sides so lengths match)
+  const h = (v) => createHash('sha256').update(String(v || '')).digest()
+  if (!timingSafeEqual(h(req.headers.get('x-ingest-secret')), h(secret))) return NextResponse.json({ ok: false, error: 'unauthorized' }, { status: 401, headers: CORS })
 
   let sets
   try {
     const buf = Buffer.from(await req.arrayBuffer())
-    const text = req.headers.get('content-encoding') === 'gzip' || (buf[0] === 0x1f && buf[1] === 0x8b) ? gunzipSync(buf).toString('utf8') : buf.toString('utf8')
+    if (buf.length > 20 * 1024 * 1024) throw new Error('too big')
+    // maxOutputLength caps a gzip bomb before it can exhaust the function's memory
+    const text = req.headers.get('content-encoding') === 'gzip' || (buf[0] === 0x1f && buf[1] === 0x8b) ? gunzipSync(buf, { maxOutputLength: 200 * 1024 * 1024 }).toString('utf8') : buf.toString('utf8')
     sets = JSON.parse(text)
     if (!Array.isArray(sets)) sets = [sets]
   } catch (e) {

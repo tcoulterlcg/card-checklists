@@ -6,7 +6,7 @@
 import { readFileSync, writeFileSync, readdirSync, mkdirSync, rmSync } from 'node:fs'
 
 const dataDir = new URL('../public/data/', import.meta.url)
-const skip = new Set(['index.json', 'search-index.json', 'patch-swaps.json'])
+const skip = new Set(['index.json', 'search-index.json', 'patch-swaps.json', 'rpa-index.json', 'redirects.json'])   // generated/aux files, not sets
 
 const slugs = [], sections = [], teams = []
 const slugId = new Map(), secId = new Map(), teamId = new Map()
@@ -33,7 +33,7 @@ for (const f of readdirSync(dataDir)) {
   const seen = new Set()
   for (const sec of (s.sections || [])) {
     const secIdx = intern(sec.title, sections, secId)
-    for (const c of sec.cards) {
+    for (const c of sec.cards || []) {
       const key = c.n + '' + c.p
       if (seen.has(key)) continue
       seen.add(key)

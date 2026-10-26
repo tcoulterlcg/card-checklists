@@ -262,6 +262,11 @@ for (const f of setFiles) {
   const setNo = files++
   const sp = intern(s.sport || '', sportsPool, sportIdx)
   const seen = new Set()
+  // TCDB flags RC on the base card only; its parallels (same number, same player, same set —
+  // "Black /1", "Gold Rainbow /10") are the same rookie card. Season and tribute/buyback/prospect
+  // rules below still decide whether each one counts.
+  const rcCards = new Set()
+  for (const sec of s.sections) for (const c of sec.cards || []) if (c.n && /\bRC\b/.test(c.x || '')) rcCards.add(c.n + '|' + c.p)
   for (const sec of s.sections) {
     const stype = sectionType(sec.title)
     const secSerial = serialFromText(sec.title) || serialFromText(sec.odds)
@@ -273,11 +278,12 @@ for (const f of setFiles) {
       const flag = c.x || ''
       const serial = serialFromText(flag) || secSerial
       let type = stype
-      if (/\bRC\b/.test(flag)) type |= TYPE.RC
+      const rcFlag = /\bRC\b/.test(flag) || (!!c.n && rcCards.has(c.n + '|' + c.p))
+      if (rcFlag) type |= TYPE.RC
       if (/\bAU\b/.test(flag)) type |= TYPE.AU
       if (/\bMEM\b/.test(flag) && !(type & TYPE.PATCH)) type |= TYPE.RELIC
       if (names.length > 1) type |= TYPE.MULTI
-      const hint = NON_SPORT.has(s.sport || '') ? 0 : secHint | (/\bRC\b/.test(flag) ? H.FLAG : 0)
+      const hint = NON_SPORT.has(s.sport || '') ? 0 : secHint | (rcFlag ? H.FLAG : 0)
       for (const name of names) {
         for (const { label, base } of subjects(name, s.sport)) {
           if (norm(base).length < 2) continue

@@ -3,7 +3,7 @@
 // info, missing parallels like shields / SuperFractors / game-used) and suggest
 // features. Rows land in cardhq_feedback (GrailFindr account project); admins
 // triage them at ?view=feedback, everyone else sees the status of their own.
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Select } from './dropdown'
 import { submitFeedback, listFeedback, setFeedbackStatus, isAdmin, newFeedbackCount } from '../lib/supa'
 import { ACCENT, ACCENT_TEXT, TEXT, TEXT_2, LABEL, LINE, display, eyebrow, title, buttonText } from '../lib/theme'
@@ -198,7 +198,9 @@ export function FeedbackView({ account, admin, onOpenAuth, onOpenSet, onNew, onC
   const [rows, setRows] = useState(null)
   const uid = account.session?.user?.id
   useEffect(() => { setStatus(admin ? 'new' : 'all') }, [admin])
-  const load = () => { setRows(null); listFeedback({ status }).then(setRows) }
+  // request id: when the filter flips (e.g. 'all' -> 'new' once admin status arrives), only the latest reply lands
+  const reqId = useRef(0)
+  const load = () => { const my = ++reqId.current; setRows(null); listFeedback({ status }).then(r => { if (my === reqId.current) setRows(r) }) }
   useEffect(() => { if (uid) load() }, [uid, status, version])
 
   if (!account.session) return (

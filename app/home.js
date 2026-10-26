@@ -6,7 +6,7 @@
 import { useCallback, useDeferredValue, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { Select, Popover, Trigger, Chevron, Check, menuItem, menuHeading, triggerStyle, useIsMobile } from '../components/dropdown'
 import { useAccount, AccountChip, AuthModal, CollectionView, CommunityView } from '../components/community'
-import { supa, addWant, removeWant, myWantlist, grailfindrFindUrl } from '../lib/supa'
+import { addWant, removeWant, myWantlist, grailfindrFindUrl, signOutHere } from '../lib/supa'
 import { FeedbackModal, FeedbackView, useFeedbackAdmin } from '../components/feedback'
 import { FixEditor } from '../components/fix-editor'
 import { Omnibox, PlayerPage, MyPlayersPanel, useMyPlayers, loadPlayerDir, loadTopPlayers, seasonLabel, MemBadge, MemChip, memCodeOf } from '../components/player'
@@ -611,6 +611,12 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
   }
   const mineSet = useMemo(() => new Set(myPlayers.list.map(n => n.toLowerCase())), [myPlayers.list])
   const isMine = (p) => { const n = (p || '').toLowerCase(); if (mineSet.has(n)) return true; for (const m of mineSet) if (n.includes(m)) return true; return false }
+  // TCDB flags RC on the base card only; same number + player elsewhere in the set is a parallel of that rookie card
+  const rcCards = useMemo(() => {
+    const k = new Set()
+    for (const sec of (setData && setData.sections) || []) for (const c of sec.cards) if (c.n && /\bRC\b/.test(c.x || '')) k.add(c.n + '|' + c.p)
+    return k
+  }, [setData])
   const visibleSections = useMemo(() => {
     if (!setData) return []
     let secs = setData.sections || []
@@ -636,7 +642,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
           if (term && !((c.p || '').toLowerCase().includes(term) || (c.t || '').toLowerCase().includes(term) || String(c.n || '').toLowerCase() === term || (s.title || '').toLowerCase().includes(term))) return false
           if (onlyMine && !isMine(c.p)) return false
           // rookie tributes, retrospectives and buybacks look like rookies but aren't
-          if (setRcOnly && (!(/\bRC\b/.test(c.x || '') || /rookie|young guns|future watch|rated rookie|\brc\b/i.test(s.title || '')) || /tribute|renewed|rookie year|retrospective|remembrance|buy ?backs?\b/i.test((s.title || '') + ' ' + (setData?.name || '')))) return false
+          if (setRcOnly && (!(/\bRC\b/.test(c.x || '') || (c.n && rcCards.has(c.n + '|' + c.p)) || /rookie|young guns|future watch|rated rookie|\brc\b/i.test(s.title || '')) || /tribute|renewed|rookie year|retrospective|remembrance|buy ?backs?\b/i.test((s.title || '') + ' ' + (setData?.name || '')))) return false
           if (setRunFilter !== 'any') {
             const sn = cardSerial(c, s)
             if (setRunFilter === '1' && sn !== 1) return false
@@ -648,7 +654,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
         })
       }
     }).filter(s => s.cards.length > 0)
-  }, [setData, activeSection, dQuery, onlyMine, setTypeFilter, setRunFilter, setRcOnly, setMemFilter, mineSet])
+  }, [setData, activeSection, dQuery, onlyMine, setTypeFilter, setRunFilter, setRcOnly, setMemFilter, mineSet, rcCards])
   useEffect(() => { setSecLimit(20) }, [activeSection, dQuery, onlyMine, setTypeFilter, setRunFilter, setRcOnly, setMemFilter])
   // Group the filtered cards by player (for the "My players" view of a set).
   const byPlayer = useMemo(() => {
@@ -757,7 +763,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
     return out.slice(0, 2500)
   }, [searchIndex, teamFilter, oneSport, sportFilter, slugSport, sets, teamSort, isTcg, browseActive, tcgRarity, tcgType])
 
-  const rcCount = (j) => (j.sections || []).reduce((s, sec) => s + sec.cards.filter(c => c.x === 'RC').length, 0)
+  const rcCount = (j) => (j.sections || []).reduce((s, sec) => s + sec.cards.filter(c => /\bRC\b/.test(c.x || '')).length, 0)
 
   const isLanding = !activeSet && !globalHits && view === 'browse'
   // A shared link (?set= / ?player= / ?search=) shows a loading screen, not the
@@ -1009,7 +1015,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
           ) : (
             <div className="hq-sheet-foot" style={{ display: 'grid', gap: 8 }}>
               <button className="hq-signin" onClick={() => { setMenuOpen(false); setAuthOpen(true) }}>Your profile{account.profile?.username ? ' · ' + account.profile.username : ''}</button>
-              <button className="hq-signin" style={{ background: 'none' }} onClick={() => { setMenuOpen(false); supa.auth.signOut() }}>Sign out</button>
+              <button className="hq-signin" style={{ background: 'none' }} onClick={() => { setMenuOpen(false); signOutHere() }}>Sign out</button>
             </div>
           )}
         </div>
@@ -1317,7 +1323,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
                     <tr key={i} style={{ borderTop: '1px solid #1a1a1a', background: i % 2 ? '#131313' : 'transparent' }}>
                       <td style={{ padding: '9px 14px', color: ACCENT_TEXT, fontWeight: 700, whiteSpace: 'nowrap' }}>{r.n ? '#' + r.n : '—'}</td>
                       <td style={{ padding: '9px 14px' }}>{r.section}</td>
-                      <td style={{ padding: '9px 14px' }}><Chip color={r.kind === 'PA' ? '#e11d48' : r.kind === 'AU' ? '#60a5fa' : r.kind === 'PATCH' ? '#16a34a' : r.kind === 'RELIC' ? '#f97316' : '#9ca3af'}>{r.kind === 'PA' ? 'PATCH AUTO' : r.kind === 'AU' ? 'AUTO' : r.kind === 'OTHER' ? (r.x === 'RC' ? 'RC' : 'INSERT') : r.kind}</Chip></td>
+                      <td style={{ padding: '9px 14px' }}><Chip color={r.kind === 'PA' ? '#e11d48' : r.kind === 'AU' ? '#60a5fa' : r.kind === 'PATCH' ? '#16a34a' : r.kind === 'RELIC' ? '#f97316' : '#9ca3af'}>{r.kind === 'PA' ? 'PATCH AUTO' : r.kind === 'AU' ? 'AUTO' : r.kind === 'OTHER' ? (/\bRC\b/.test(r.x || '') ? 'RC' : 'INSERT') : r.kind}</Chip></td>
                       <td style={{ padding: '9px 14px' }}>{r.memc ? <MemChip code={r.memc} /> : <span style={{ color: '#5C6478' }}>—</span>}</td>
                       <td style={{ padding: '9px 14px', textAlign: 'right', whiteSpace: 'nowrap' }}>{r.serial === 1 ? <span style={{ background: ACCENT, color: '#fff', padding: '2px 8px', borderRadius: 999, fontSize: 12, fontWeight: 700 }}>1/1</span> : r.serial > 0 ? '/' + r.serial : <span style={{ color: '#8A93A8' }}>—</span>}</td>
                       <td style={{ padding: '9px 14px', textAlign: 'right' }}>{(() => { const it = { set_slug: setData.slug, set_name: setData.name, card_n: r.n, section: r.section, player: r.p }, on = isWanted(it); return <button aria-label={on ? 'On your wantlist — remove' : 'Add to wantlist'} aria-pressed={on} onClick={() => wantIt(it)} style={{ background: on ? ACCENT : 'none', border: '1px solid ' + (on ? ACCENT : '#232A3E'), color: on ? '#fff' : '#A1A1AA', borderRadius: 6, width: 32, height: 32, cursor: 'pointer', fontFamily: 'inherit' }}>{on ? '✓' : '+'}</button> })()}</td>
@@ -1359,7 +1365,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
                         {c.t && <span className="hq-mobile-only" style={{ color: '#8A93A8', fontSize: 12, marginTop: 2 }}>{c.t}</span>}
                       </span>
                       <span className="hq-col-team" style={{ flex: '1 1 0', minWidth: 0, color: '#8A93A8', fontSize: 13 }}>{c.t || ''}</span>
-                      <span className="hq-col-flag" style={{ flex: setIsTcg ? '0 0 110px' : '0 0 70px', textAlign: 'right' }}>{c.x ? <Chip color={c.x === 'RC' ? '#4ade80' : '#8A93A8'}>{c.x}</Chip> : null}</span>
+                      <span className="hq-col-flag" style={{ flex: setIsTcg ? '0 0 110px' : '0 0 70px', textAlign: 'right' }}>{c.x ? <Chip color={/\bRC\b/.test(c.x) ? '#4ade80' : '#8A93A8'}>{c.x}</Chip> : null}</span>
                       <a href={grailfindrFindUrl({ setName: setData.name, player: c.p, n: c.n, section: sec.title })} target="_blank" rel="noreferrer"
                         title="Find this card for sale on GrailFindr (every marketplace)" aria-label={'Find ' + (c.p || 'this card') + ' on GrailFindr'}
                         style={{ flex: '0 0 32px', height: 32, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', border: '1px solid #232A3E', borderRadius: 6, color: '#8A93A8', textDecoration: 'none' }}>
@@ -1443,7 +1449,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
         <CommunityView account={account} indexSets={sets} onOpenAuth={() => setAuthOpen(true)} />
       ) : view === 'collection' ? (
         <CollectionView account={account} indexSets={sets} onOpenAuth={() => setAuthOpen(true)}
-          onOpenSet={openSetBySlug} />
+          onOpenSet={openSetBySlug} onWantsChanged={() => account.session && loadWanted(account.session.user.id)} />
       ) : view === 'rpa' ? (
         <section>
           <div style={{ background: 'linear-gradient(140deg, #0f1526, #0F1320)', border: '1px solid ' + ACCENT + '33', borderRadius: 18, padding: '30px 30px', marginBottom: 22 }}>
@@ -1631,7 +1637,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
                 style={{ width: '100%', textAlign: 'left', display: 'flex', gap: 12, padding: '8px 16px', fontSize: 14, alignItems: 'baseline', background: i % 2 === 0 ? '#0F1320' : '#121626', border: 'none', color: '#EDEDEF', cursor: 'pointer' }}>
                 <span style={{ flex: '0 0 60px', color: ACCENT_TEXT, fontWeight: 700, fontVariantNumeric: 'tabular-nums' }}>{c.n ? '#' + c.n : '—'}</span>
                 <span style={{ flex: '1 1 auto', minWidth: 0, fontWeight: 600 }}>{c.p}{isTcg && c.t ? <span style={{ color: '#8A93A8', fontWeight: 400, fontSize: 13 }}> · {c.t}</span> : null}</span>
-                <span style={{ flex: isTcg ? '0 0 120px' : '0 0 54px' }}>{c.x ? <Chip color={c.x === 'RC' ? '#4ade80' : '#8A93A8'}>{c.x}</Chip> : null}</span>
+                <span style={{ flex: isTcg ? '0 0 120px' : '0 0 54px' }}>{c.x ? <Chip color={/\bRC\b/.test(c.x) ? '#4ade80' : '#8A93A8'}>{c.x}</Chip> : null}</span>
                 <span style={{ flex: '2 1 0', minWidth: 0, color: '#8A93A8', fontSize: 13 }}>{c.set}{c.section ? ' · ' + c.section : ''}</span>
               </button>
             ))}

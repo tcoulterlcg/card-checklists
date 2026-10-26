@@ -16,17 +16,17 @@ export default async function sitemap() {
   const out = [{ url: BASE + '/', lastModified: now, changeFrequency: 'daily', priority: 1 }]
   const seen = new Set()
   const addSet = (slug) => { if (!seen.has(slug)) { seen.add(slug); out.push({ url: BASE + '/?set=' + encodeURIComponent(slug), lastModified: now, changeFrequency: 'weekly', priority: 0.7 }) } }
-  try {
-    const idx = JSON.parse(readFileSync(join(process.cwd(), 'public/data/index.json'), 'utf8'))
-    for (const s of idx.sets || []) addSet(s.slug)
-  } catch {}
+  // public/ may not be bundled with the function on an hourly revalidation: fall back to the deployed copy
+  const local = (p) => { try { return JSON.parse(readFileSync(join(process.cwd(), 'public', p), 'utf8')) } catch { return null } }
+  const idx = local('data/index.json') || await getJson(BASE + '/data/index.json')
+  for (const s of idx?.sets || []) addSet(s.slug)
   const m = await getJson(RAW + 'manifest.json')
   const files = m?.visible?.file ? [m.visible.file] : Object.values(m?.sports || {}).map(s => s.file)
   const parts = await Promise.all(files.map(f => f && getJson(RAW + f)))
   for (const p of parts) for (const s of (p && p.sets) || []) if (!HIDDEN_SOURCES.has(s.source)) addSet(s.slug)
-  try {
-    const top = JSON.parse(readFileSync(join(process.cwd(), 'public/data/players/top.json'), 'utf8'))
+  const top = local('data/players/top.json') || await getJson(BASE + '/data/players/top.json')
+  if (top) {
     for (const p of (top.players || []).slice(0, 3000)) out.push({ url: BASE + '/?player=' + encodeURIComponent(p[0]), lastModified: now, changeFrequency: 'weekly', priority: 0.6 })
-  } catch {}
+  }
   return out.slice(0, MAX)
 }

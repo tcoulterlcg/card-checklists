@@ -1,9 +1,9 @@
 'use client'
 // Community + Collection features: auth chip, achievement forum, wantlist /
 // collection tracker. Dark + electric blue to match the site shell. Data via lib/supa.
-import { loadSet } from '../lib/catalog'
+import { loadSet, loadRedirects } from '../lib/catalog'
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { collectionCardN, supa, grailfindrConnectUrl, grailfindrSignupUrl, grailfindrForgotUrl, grailfindrFindUrl, GRAILFINDR_URL, getProfile, ensureProfile, updateProfile, addWant, removeWant, deletePost, myWantlist, toggleCollected, myCollection, uploadCardImage, setCollectionImage, forumFeed, createPost, react, comments, addComment } from '../lib/supa'
+import { collectionCardN, supa, signOutHere, grailfindrConnectUrl, grailfindrSignupUrl, grailfindrForgotUrl, grailfindrFindUrl, GRAILFINDR_URL, getProfile, ensureProfile, updateProfile, addWant, removeWant, deletePost, myWantlist, toggleCollected, myCollection, uploadCardImage, setCollectionImage, forumFeed, createPost, react, comments, addComment } from '../lib/supa'
 import { ACCENT, ACCENT_TEXT, BG, SURFACE, SURFACE_2, LINE, CHIP_LINE, TEXT, TEXT_2, LABEL, display, eyebrow, title, buttonText } from '../lib/theme'
 
 const card = { background: 'linear-gradient(155deg, #121626, #0F1320)', border: '1px solid #232A3E', borderRadius: 14 }
@@ -14,16 +14,21 @@ const input = { background: '#0F1320', border: '1px solid #232A3E', borderRadius
 // --------------- auth hook + chip ---------------
 export function useAccount() {
   const [session, setSession] = useState(null)
-  const [profile, setProfile] = useState(null)
+  // profile: undefined while loading (or if the load failed), null when the account has none yet
+  const [profile, setProfile] = useState(undefined)
   useEffect(() => {
     supa.auth.getSession().then(({ data }) => setSession(data.session))
     const { data: sub } = supa.auth.onAuthStateChange((_e, s) => setSession(s))
     return () => sub.subscription.unsubscribe()
   }, [])
+  const uid = session?.user?.id
   useEffect(() => {
-    if (!session?.user) { setProfile(null); return }
-    getProfile(session.user.id).then(setProfile)
-  }, [session])
+    if (!uid) { setProfile(null); return }
+    let live = true   // a late reply for a previous account must not land on this one
+    setProfile(undefined)
+    getProfile(uid).then(p => { if (live) setProfile(p) })
+    return () => { live = false }
+  }, [uid])
   return { session, profile, setProfile }
 }
 
@@ -37,7 +42,7 @@ export function AccountChip({ account, onOpenAuth }) {
     <span className="hq-account" style={{ display: 'inline-flex', alignItems: 'center', gap: 10 }}>
       <button onClick={onOpenAuth} title={'Your profile (' + name + ')'} aria-label="Your profile" style={{ width: 32, height: 32, boxSizing: 'border-box', borderRadius: '50%', background: '#1E2A4A', border: '1px solid #2E3E6B', color: '#C9D6FF', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontWeight: 600, fontSize: 12, cursor: 'pointer', padding: 0, fontFamily: 'inherit' }}>{name.slice(0, 2).toUpperCase()}</button>
       <a href={GRAILFINDR_URL} title="Your account also works on GrailFindr" style={{ color: '#8A93A8', fontSize: 12, textDecoration: 'none' }}>GrailFindr ↗</a>
-      <button onClick={() => supa.auth.signOut()} style={{ background: 'none', border: 'none', color: '#8A93A8', fontSize: 12, cursor: 'pointer', fontFamily: 'inherit' }}>Sign out</button>
+      <button onClick={signOutHere} style={{ background: 'none', border: 'none', color: '#8A93A8', fontSize: 12, cursor: 'pointer', fontFamily: 'inherit' }}>Sign out</button>
     </span>
   )
 }
@@ -49,6 +54,9 @@ export function AuthModal({ open, onClose, account }) {
   const [username, setUsername] = useState('')
   const [err, setErr] = useState('')
   const { session, profile, setProfile } = account
+  // Closing (or signing in/out) clears the form, so a typed password never lingers on a shared computer.
+  useEffect(() => { if (!open) { setPassword(''); setErr(''); setBusy(false) } }, [open])
+  useEffect(() => { setPassword(''); setErr('') }, [session?.user?.id])
   // Escape closes; focus goes into the dialog and back to where it was after.
   useEffect(() => {
     if (!open) return
@@ -58,7 +66,8 @@ export function AuthModal({ open, onClose, account }) {
     return () => { document.removeEventListener('keydown', onKey); if (prev && prev.focus) prev.focus() }
   }, [open])
   if (!open) return null
-  const needsProfile = session && !profile
+  const needsProfile = session && profile === null
+  const profileLoading = session && profile === undefined
   return (
     <div onClick={onClose} style={{ position: 'fixed', inset: 0, background: '#000a', zIndex: 90, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       <div role="dialog" aria-modal="true" aria-label={session ? "Your profile" : "Sign in to CardHQ"} onClick={(e) => e.stopPropagation()} style={{ ...card, width: 'min(420px, 92vw)', padding: 28, position: 'relative' }}>
@@ -88,6 +97,8 @@ export function AuthModal({ open, onClose, account }) {
               <a href={grailfindrForgotUrl()} style={{ color: '#8A93A8', textDecoration: 'none' }}>Forgot password?</a>
             </p>
           </>
+        ) : profileLoading ? (
+          <p role="status" style={{ color: '#A1A1AA', fontSize: 14, margin: '8px 0' }}>Loading your profile…</p>
         ) : needsProfile ? (
           <>
             <h3 style={{ ...title(24), margin: 0, color: '#fff' }}>Pick a username</h3>
@@ -142,7 +153,7 @@ function ProfileEditor({ session, profile, setProfile, onClose }) {
 }
 
 // --------------- My Collection (wantlist + checkoff + uploads) ---------------
-export function CollectionView({ account, indexSets, onOpenAuth, onOpenSet }) {
+export function CollectionView({ account, indexSets, onOpenAuth, onOpenSet, onWantsChanged }) {
   const { session, profile } = account
   const [wants, setWants] = useState(null)
   const [collected, setCollected] = useState(null)
@@ -167,8 +178,17 @@ export function CollectionView({ account, indexSets, onOpenAuth, onOpenSet }) {
   }, [session])
   useEffect(() => {
     if (!activeSlug) { setSetData(null); return }
-    setSecShown(12)
-    loadSet(activeSlug).then(setSetData).catch(() => setSetData(null))
+    setSecShown(12); setSetData(null)
+    let live = true
+    // wantlist rows keep the slug they were saved under; follow renames/merges to today's set
+    ;(async () => {
+      let d = await loadSet(activeSlug).catch(() => null)
+      if (!d) { const to = (await loadRedirects())[activeSlug]; if (to) d = await loadSet(to).catch(() => null) }
+      if (!live) return
+      if (d) setSetData(d)
+      else { setNotice('That set’s checklist isn’t available right now (it may have been renamed or removed).'); setActiveSlug(null) }
+    })()
+    return () => { live = false }
   }, [activeSlug])
 
   if (!session) return (
@@ -206,7 +226,9 @@ export function CollectionView({ account, indexSets, onOpenAuth, onOpenSet }) {
         <span style={{ color: '#8A93A8', fontSize: 13 }}>{(wants || []).length} wantlist items · {(collected || []).length} cards collected</span>
       </div>
 
-      {activeSlug && setData ? (
+      {activeSlug && !setData ? (
+        <p role="status" style={{ color: '#8A93A8', fontSize: 14 }}>Loading checklist…</p>
+      ) : activeSlug && setData ? (
         <div>
           <button style={{ ...btnGhost, marginBottom: 16 }} onClick={() => setActiveSlug(null)}>← Back to wantlist</button>
           <h2 style={{ ...title(24), margin: '0 0 4px' }}>{setData.name}</h2>
@@ -280,7 +302,7 @@ export function CollectionView({ account, indexSets, onOpenAuth, onOpenSet }) {
                           <span style={{ color: ACCENT_TEXT, fontWeight: 700, minWidth: 44 }}>{String(i.card_n).startsWith('—') ? '—' : '#' + i.card_n}</span>
                           <span style={{ flex: 1, minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{i.player || ''}{i.section && i.section !== 'Base' ? <span style={{ color: '#8A93A8' }}> · {i.section}</span> : null}</span>
                           <a href={grailfindrFindUrl({ setName: g.name, player: i.player, n: i.card_n, section: i.section })} target="_blank" rel="noreferrer" title="Find it on GrailFindr" style={{ color: ACCENT_TEXT, fontSize: 12, fontWeight: 600, textDecoration: 'none', whiteSpace: 'nowrap' }}>Find ↗</a>
-                          <button aria-label={'Remove ' + (i.player || 'card') + ' from wantlist'} onClick={async () => { await removeWant(i.id); myWantlist(session.user.id).then(setWants) }}
+                          <button aria-label={'Remove ' + (i.player || 'card') + ' from wantlist'} onClick={async () => { await removeWant(i.id); myWantlist(session.user.id).then(setWants); onWantsChanged?.() }}
                             style={{ background: 'none', border: 'none', color: '#8A93A8', cursor: 'pointer', fontSize: 14, padding: '2px 6px' }}>✕</button>
                         </li>
                       ))}
@@ -296,7 +318,7 @@ export function CollectionView({ account, indexSets, onOpenAuth, onOpenSet }) {
                       <>
                         <button style={{ ...btnGhost, color: '#fff', background: '#7f1d1d', borderColor: '#7f1d1d' }} onClick={async () => {
                           for (const i of g.items) await removeWant(i.id)
-                          setConfirmRm(null); myWantlist(session.user.id).then(setWants)
+                          setConfirmRm(null); myWantlist(session.user.id).then(setWants); onWantsChanged?.()
                         }}>Remove all {g.items.length}</button>
                         <button style={btnGhost} onClick={() => setConfirmRm(null)}>Cancel</button>
                       </>
@@ -333,11 +355,17 @@ export function CommunityView({ account, indexSets, onOpenAuth }) {
   const [postErr, setPostErr] = useState('')
   const [commentErr, setCommentErr] = useState({})
   const [confirmDel, setConfirmDel] = useState(null)
+  const [busy, setBusy] = useState(false)          // a post is being sent (no double posts)
+  const [sending, setSending] = useState({})       // post id -> comment being sent
   useEffect(() => { if (profile) setPostErr(e => e.startsWith('Pick a username') ? '' : e) }, [profile])
   // Posts and comments need a username (forum rows reference the profile). People who
   // sign in through GrailFindr never saw the "Pick a username" step, so ask here
   // instead of letting the insert fail and silently throwing away their post.
-  const needName = () => { if (profile) return false; setPostErr('Pick a username first — it’s how you appear in the community. Your post is still here.'); onOpenAuth(); return true }
+  const needName = () => {
+    if (profile) return false
+    if (profile === undefined) { setPostErr('Still loading your profile — try again in a moment. Your post is still here.'); return true }
+    setPostErr('Pick a username first — it’s how you appear in the community. Your post is still here.'); onOpenAuth(); return true
+  }
 
   useEffect(() => { forumFeed().then(setFeed) }, [])
   const setMatches = useMemo(() => {
@@ -347,10 +375,13 @@ export function CommunityView({ account, indexSets, onOpenAuth }) {
   }, [setQuery, indexSets])
 
   async function submit() {
+    if (busy) return
     setPostErr('')
     if (!postTitle.trim()) { setPostErr('Add a title first.'); return }
     if (needName()) return
+    setBusy(true)
     const r = await createPost(session.user.id, { title: postTitle.trim(), body: body.trim() || null, set_slug: chosenSet?.slug || null, achievement: ach })
+    setBusy(false)
     if (r?.error) { setPostErr('Couldn’t post: ' + r.error.message + '. Your draft is still here.'); return }
     setPostTitle(''); setBody(''); setChosenSet(null); setSetQuery(''); setComposing(false)
     forumFeed().then(setFeed)
@@ -394,7 +425,7 @@ export function CommunityView({ account, indexSets, onOpenAuth }) {
             </div>
             <textarea style={{ ...input, minHeight: 90, resize: 'vertical' }} maxLength={5000} aria-label="Post text" placeholder="Tell the story — how long it took, the last card you needed…" value={body} onChange={(e) => setBody(e.target.value)} />
             {postErr && <p role="alert" style={{ color: '#f87171', fontSize: 13, margin: 0 }}>{postErr}</p>}
-            <button style={{ ...btnAccent, justifySelf: 'start' }} onClick={submit}>Post it</button>
+            <button style={{ ...btnAccent, justifySelf: 'start', opacity: busy ? 0.6 : 1 }} disabled={busy} onClick={submit}>{busy ? 'Posting…' : 'Post it'}</button>
           </div>
         </div>
       )}
@@ -431,7 +462,7 @@ export function CommunityView({ account, indexSets, onOpenAuth }) {
                     style={{ background: myFire ? 'rgba(249,115,22,0.15)' : 'none', border: '1px solid ' + (myFire ? '#f97316' : '#232A3E'), color: '#D4D4D8', borderRadius: 999, padding: '5px 12px', fontSize: 13, cursor: 'pointer' }}>🔥 {fires || ''}</button>
                   <button onClick={async () => {
                     const open = !openComments[p.id]
-                    setOpenComments({ ...openComments, [p.id]: open })
+                    setOpenComments(o => ({ ...o, [p.id]: open }))
                     if (open) { const cs = await comments(p.id); setOpenComments(o => ({ ...o, [p.id]: cs })) }
                   }} style={{ background: 'none', border: 'none', color: '#8A93A8', fontSize: 13, cursor: 'pointer' }}>💬 {nComments} comment{nComments === 1 ? '' : 's'}</button>
                   {session && p.user_id === session.user.id && (confirmDel === p.id ? (
@@ -451,14 +482,16 @@ export function CommunityView({ account, indexSets, onOpenAuth }) {
                     ))}
                     {session && (
                       <div style={{ display: 'flex', gap: 8 }}>
-                        <input style={{ ...input, padding: '8px 12px' }} maxLength={1000} aria-label="Add a comment" placeholder="Add a comment…" value={commentDraft[p.id] || ''} onChange={(e) => setCommentDraft({ ...commentDraft, [p.id]: e.target.value })} />
-                        <button style={{ ...btnGhost }} onClick={async () => {
-                          const t = (commentDraft[p.id] || '').trim(); if (!t) return
+                        <input style={{ ...input, padding: '8px 12px' }} maxLength={1000} aria-label="Add a comment" placeholder="Add a comment…" value={commentDraft[p.id] || ''} onChange={(e) => { const v = e.target.value; setCommentDraft(d => ({ ...d, [p.id]: v })) }} />
+                        <button style={{ ...btnGhost }} disabled={!!sending[p.id]} onClick={async () => {
+                          const t = (commentDraft[p.id] || '').trim(); if (!t || sending[p.id]) return
                           if (needName()) return
+                          setSending(x => ({ ...x, [p.id]: true }))
                           const r = await addComment(p.id, session.user.id, t)
+                          setSending(x => ({ ...x, [p.id]: false }))
                           if (r?.error) { setCommentErr(e => ({ ...e, [p.id]: 'Couldn’t comment: ' + r.error.message })); return }
                           setCommentErr(e => ({ ...e, [p.id]: '' })); forumFeed().then(setFeed)   // refresh the comment count
-                          setCommentDraft({ ...commentDraft, [p.id]: '' })
+                          setCommentDraft(d => ({ ...d, [p.id]: '' }))
                           const cs = await comments(p.id); setOpenComments(o => ({ ...o, [p.id]: cs }))
                         }}>Post</button>
                       </div>
