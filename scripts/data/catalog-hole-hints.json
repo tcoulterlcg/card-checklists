@@ -2615,6 +2615,40 @@
    "swinging bat ink"
   ]
  },
+ "1960-fleer": {
+  "missingPlayers": [
+   "bills",
+   "broncos",
+   "chargers",
+   "oilers",
+   "patriots",
+   "raiders",
+   "st",
+   "texans",
+   "titans"
+  ],
+  "missingInserts": [
+   "indiana",
+   "iowa",
+   "kentucky",
+   "mississippi",
+   "missouri",
+   "new mexico",
+   "north carolina",
+   "notre dame",
+   "oklahoma",
+   "penn state",
+   "pennsylvania",
+   "purdue",
+   "southern cal",
+   "stanford",
+   "u c l",
+   "utah",
+   "west virginia",
+   "wisconsin",
+   "yale"
+  ]
+ },
  "2016-bowman-chrome-baseball-cards": {
   "missingPlayers": [
    "aaron",
@@ -3590,6 +3624,43 @@
    "goalie graphs",
    "patch",
    "signature goalies"
+  ]
+ },
+ "1979-fleer-team-action": {
+  "missingPlayers": [
+   "bears",
+   "bengals",
+   "bills",
+   "broncos",
+   "browns",
+   "buccaneers",
+   "cardinals",
+   "chargers",
+   "chiefs",
+   "colts",
+   "dolphins",
+   "eagles",
+   "ers",
+   "falcons",
+   "giants",
+   "jets",
+   "lions",
+   "oilers",
+   "packers",
+   "raiders",
+   "rams",
+   "redskins",
+   "saints",
+   "seahawks",
+   "steelers",
+   "vikings"
+  ],
+  "missingInserts": [
+   "helmet",
+   "helmet border",
+   "logo",
+   "logo border",
+   "sticker"
   ]
  },
  "2018-19-topps-chrome-uefa-champions-league-cards": {
@@ -5809,6 +5880,14 @@
    "update"
   ]
  },
+ "1978-slim-jim": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "complete box",
+   "discs",
+   "panel"
+  ]
+ },
  "2019-panini-chronicles-baseball": {
   "missingPlayers": [
    "astral",
@@ -7241,6 +7320,24 @@
    "1959"
   ]
  },
+ "1981-jogo": {
+  "missingPlayers": [
+   "higbaugh",
+   "pettersen"
+  ],
+  "missingInserts": [
+   "cfl b w"
+  ]
+ },
+ "1963-post-cereal-cfl": {
+  "missingPlayers": [
+   "checklist",
+   "flemming"
+  ],
+  "missingInserts": [
+   "hand cut"
+  ]
+ },
  "2018-19-upper-deck-artifacts-hockey-cards": {
   "missingPlayers": [
    "mittelstadt",
@@ -7866,6 +7963,22 @@
    "superstar combos"
   ]
  },
+ "1972-o-pee-chee-cfl": {
+  "missingPlayers": [
+   "theisman"
+  ],
+  "missingInserts": [
+   "sticker"
+  ]
+ },
+ "1961-topps-cfl": {
+  "missingPlayers": [
+   "pennant"
+  ],
+  "missingInserts": [
+   "transfers"
+  ]
+ },
  "18-19-ud-upper-deck-ultimate-collection-hockey": {
   "missingPlayers": [
    "clifton"
@@ -8131,6 +8244,18 @@
    "sahlawi"
   ],
   "missingInserts": []
+ },
+ "1984-jogo": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "cfl"
+  ]
+ },
+ "1981-holsum-discs": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "msa"
+  ]
  },
  "1990-topps-traded-baseball-cards": {
   "missingPlayers": [
@@ -10135,6 +10260,12 @@
  "2000-bowman-chrome-football": {
   "missingPlayers": [
    "rhet"
+  ],
+  "missingInserts": []
+ },
+ "1984-fleer-team-action": {
+  "missingPlayers": [
+   "oilers"
   ],
   "missingInserts": []
  },
