@@ -4169,23 +4169,6 @@
   ],
   "missingInserts": []
  },
- "1985-86-star": {
-  "missingPlayers": [
-   "checklist",
-   "colter",
-   "nelson",
-   "porter"
-  ],
-  "missingInserts": [
-   "franz blazers",
-   "gatorade slam dunk",
-   "last 11 roy",
-   "lite",
-   "milwaukee bucks night",
-   "schick legends",
-   "team"
-  ]
- },
  "2018-panini-prizm-football": {
   "missingPlayers": [
    "bears",
@@ -4221,6 +4204,22 @@
   ],
   "missingInserts": [
    "mojo"
+  ]
+ },
+ "1991-92-hoops": {
+  "missingPlayers": [
+   "error",
+   "pack",
+   "set",
+   "team"
+  ],
+  "missingInserts": [
+   "mcdonalds",
+   "metal",
+   "perforated",
+   "prototypes 00",
+   "superstars",
+   "team night sheets"
   ]
  },
  "2016-panini-black-gold-football-cards": {
@@ -4491,6 +4490,26 @@
    "crackle",
    "inception relic",
    "production error"
+  ]
+ },
+ "1992-93-skybox": {
+  "missingPlayers": [
+   "card",
+   "carlesimo",
+   "checklist",
+   "christie",
+   "krzyzewski",
+   "magic",
+   "mullins",
+   "photo",
+   "pippin",
+   "ties"
+  ],
+  "missingInserts": [
+   "mark see",
+   "nestle",
+   "prototype",
+   "usa"
   ]
  },
  "2015-score-football-cards": {
@@ -4892,21 +4911,6 @@
    "state hometown"
   ]
  },
- "1984-85-star": {
-  "missingPlayers": [
-   "checklist",
-   "game",
-   "layden",
-   "leaders",
-   "team"
-  ],
-  "missingInserts": [
-   "award banquet",
-   "celtics champs",
-   "game",
-   "la lakers arena"
-  ]
- },
  "2019-panini-diamond-kings-baseball-cards": {
   "missingPlayers": [
    "bauer",
@@ -4937,20 +4941,6 @@
    "defying gravity die cut",
    "glossy",
    "teal"
-  ]
- },
- "1990-91-hoops": {
-  "missingPlayers": [
-   "checklist",
-   "jinx",
-   "parrish",
-   "set"
-  ],
-  "missingInserts": [
-   "1991 champions",
-   "action",
-   "superstars",
-   "team night sheets"
   ]
  },
  "2014-15-panini-nba-hoops-basketball-cards": {
@@ -5241,6 +5231,15 @@
    "wins united states championship"
   ]
  },
+ "1992-93-fleer": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "sharpshooter",
+   "sheets inside stuff perforated",
+   "spalding schoolyard stars",
+   "team sheets"
+  ]
+ },
  "2015-topps-opening-day-baseball": {
   "missingPlayers": [
    "angels",
@@ -5262,21 +5261,17 @@
    "stadium scenes"
   ]
  },
- "1990-91-fleer": {
+ "1985-86-star": {
   "missingPlayers": [
-   "abdelnaby",
-   "adelman",
-   "blazers",
-   "bryant",
-   "petrovic",
-   "playoffs",
-   "schalow",
-   "walton",
-   "wetzel"
+   "checklist",
+   "colter",
+   "nelson",
+   "porter"
   ],
   "missingInserts": [
-   "franz portland trail blazers",
-   "star"
+   "franz blazers",
+   "gatorade slam dunk",
+   "milwaukee bucks night"
   ]
  },
  "18-19-ud-upper-deck-clear-cut-hockey": {
@@ -5552,6 +5547,19 @@
    "snapshots"
   ]
  },
+ "1984-85-star": {
+  "missingPlayers": [
+   "checklist",
+   "game",
+   "layden",
+   "leaders",
+   "team"
+  ],
+  "missingInserts": [
+   "award banquet",
+   "celtics champs"
+  ]
+ },
  "2015-upper-deck-team-canada-master-collection-hockey": {
   "missingPlayers": [
    "bergeron",
@@ -5652,6 +5660,34 @@
   "missingInserts": [
    "camo",
    "mosaic"
+  ]
+ },
+ "1990-91-fleer": {
+  "missingPlayers": [
+   "abdelnaby",
+   "adelman",
+   "blazers",
+   "bryant",
+   "petrovic",
+   "playoffs",
+   "schalow",
+   "walton",
+   "wetzel"
+  ],
+  "missingInserts": [
+   "franz portland trail blazers"
+  ]
+ },
+ "1990-91-hoops": {
+  "missingPlayers": [
+   "checklist",
+   "jinx",
+   "parrish",
+   "set"
+  ],
+  "missingInserts": [
+   "superstars",
+   "team night sheets"
   ]
  },
  "2017-score-football-cards": {
@@ -6091,15 +6127,6 @@
    "res"
   ]
  },
- "2018-19-sp-hockey-cards": {
-  "missingPlayers": [
-   "mittelstadt"
-  ],
-  "missingInserts": [
-   "authentics jersey",
-   "authentics signature"
-  ]
- },
  "2018-19-panini-select-basketball-nba-cards": {
   "missingPlayers": [
    "alexander",
@@ -6176,13 +6203,6 @@
   ],
   "missingInserts": [
    "1965 tall boy"
-  ]
- },
- "1989-90-hoops": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "perforated",
-   "star panels"
   ]
  },
  "2015-bowman-draft-baseball-cards": {
@@ -6607,6 +6627,18 @@
    "team leaders 92 93"
   ]
  },
+ "1991-nike-michael-jordan-spike-lee": {
+  "missingPlayers": [
+   "earth",
+   "fly",
+   "flying",
+   "know",
+   "mars",
+   "richard",
+   "school"
+  ],
+  "missingInserts": []
+ },
  "2017-leaf-draft-football-checklist-added": {
   "missingPlayers": [
    "ford",
@@ -6737,15 +6769,6 @@
   ],
   "missingInserts": [
    "universal distribution promo"
-  ]
- },
- "2017-topps-ufc-knockout-checklist-added": {
-  "missingPlayers": [
-   "bader",
-   "pierre"
-  ],
-  "missingInserts": [
-   "relics"
   ]
  },
  "2018-topps-legends-of-wwe": {
@@ -6997,6 +7020,14 @@
   ],
   "missingInserts": [
    "quads patch"
+  ]
+ },
+ "1992-93-ultra": {
+  "missingPlayers": [
+   "session"
+  ],
+  "missingInserts": [
+   "playmaker"
   ]
  },
  "1987-fleer-basketball-cards": {
@@ -7381,10 +7412,10 @@
   ],
   "missingInserts": []
  },
- "1984-85-dallas-mavericks": {
+ "1991-front-row-italian-english": {
   "missingPlayers": [],
   "missingInserts": [
-   "star arena"
+   "promos"
   ]
  },
  "1990-topps-traded-baseball-cards": {
@@ -8780,6 +8811,12 @@
  "noir-soccer-checklist-added": {
   "missingPlayers": [
    "box"
+  ],
+  "missingInserts": []
+ },
+ "2017-topps-ufc-knockout": {
+  "missingPlayers": [
+   "pierre"
   ],
   "missingInserts": []
  },
