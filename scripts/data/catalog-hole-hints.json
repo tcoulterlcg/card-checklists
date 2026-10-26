@@ -5419,15 +5419,6 @@
    "wins united states championship"
   ]
  },
- "2006-07-upper-deck-ultimate-collection": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "achievements signature",
-   "debut jersey",
-   "debut patch",
-   "jersey"
-  ]
- },
  "2015-topps-opening-day-baseball": {
   "missingPlayers": [
    "angels",
@@ -6495,13 +6486,6 @@
    "1965 tall boy"
   ]
  },
- "2006-07-spx": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "winning combo",
-   "winning material"
-  ]
- },
  "2015-bowman-draft-baseball-cards": {
   "missingPlayers": [
    "anderson",
@@ -7541,6 +7525,22 @@
    "quads patch"
   ]
  },
+ "2008-09-fleer": {
+  "missingPlayers": [
+   "roberts"
+  ],
+  "missingInserts": [
+   "1988 retro"
+  ]
+ },
+ "2007-08-upper-deck-first-edition": {
+  "missingPlayers": [
+   "billwalton"
+  ],
+  "missingInserts": [
+   "durant exclusives"
+  ]
+ },
  "2006-07-fleer": {
   "missingPlayers": [
    "gervin"
@@ -8133,34 +8133,28 @@
   ],
   "missingInserts": []
  },
- "2007-08-stadium-club": {
+ "2007-topps-los-angeles-lakers": {
   "missingPlayers": [],
   "missingInserts": [
-   "promo"
+   "lal"
   ]
  },
- "2006-07-topps-full-court": {
+ "2007-08-ultra": {
   "missingPlayers": [],
   "missingInserts": [
-   "relic"
+   "se court masters"
   ]
  },
- "2005-06-finest": {
+ "2007-08-upper-deck-artifacts": {
   "missingPlayers": [],
   "missingInserts": [
-   "wade moments boxloader"
+   "conference pairings patches"
   ]
  },
- "2005-06-upper-deck-ultimate-collection": {
+ "2007-08-upper-deck-ultimate-collection": {
   "missingPlayers": [],
   "missingInserts": [
-   "signature"
-  ]
- },
- "2005-06-upper-deck-hardcourt": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "hard court"
+   "quad signature"
   ]
  },
  "1990-topps-traded-baseball-cards": {
@@ -8662,6 +8656,13 @@
   "missingPlayers": [
    "box",
    "gilchrist"
+  ],
+  "missingInserts": []
+ },
+ "2007-08-press-pass-legends": {
+  "missingPlayers": [
+   "dantley",
+   "theus"
   ],
   "missingInserts": []
  },
@@ -9376,6 +9377,24 @@
  "2012-13-panini-timeless-treasures-basketball-cards": {
   "missingPlayers": [
    "paxon"
+  ],
+  "missingInserts": []
+ },
+ "2008-09-bowman": {
+  "missingPlayers": [
+   "noah"
+  ],
+  "missingInserts": []
+ },
+ "2008-09-spx": {
+  "missingPlayers": [
+   "harrington"
+  ],
+  "missingInserts": []
+ },
+ "2008-09-topps-signature": {
+  "missingPlayers": [
+   "parrish"
   ],
   "missingInserts": []
  },
