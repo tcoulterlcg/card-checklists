@@ -4169,6 +4169,23 @@
   ],
   "missingInserts": []
  },
+ "1985-86-star": {
+  "missingPlayers": [
+   "checklist",
+   "colter",
+   "nelson",
+   "porter"
+  ],
+  "missingInserts": [
+   "franz blazers",
+   "gatorade slam dunk",
+   "last 11 roy",
+   "lite",
+   "milwaukee bucks night",
+   "schick legends",
+   "team"
+  ]
+ },
  "2018-panini-prizm-football": {
   "missingPlayers": [
    "bears",
@@ -4875,6 +4892,21 @@
    "state hometown"
   ]
  },
+ "1984-85-star": {
+  "missingPlayers": [
+   "checklist",
+   "game",
+   "layden",
+   "leaders",
+   "team"
+  ],
+  "missingInserts": [
+   "award banquet",
+   "celtics champs",
+   "game",
+   "la lakers arena"
+  ]
+ },
  "2019-panini-diamond-kings-baseball-cards": {
   "missingPlayers": [
    "bauer",
@@ -4905,6 +4937,20 @@
    "defying gravity die cut",
    "glossy",
    "teal"
+  ]
+ },
+ "1990-91-hoops": {
+  "missingPlayers": [
+   "checklist",
+   "jinx",
+   "parrish",
+   "set"
+  ],
+  "missingInserts": [
+   "1991 champions",
+   "action",
+   "superstars",
+   "team night sheets"
   ]
  },
  "2014-15-panini-nba-hoops-basketball-cards": {
@@ -5214,6 +5260,23 @@
   ],
   "missingInserts": [
    "stadium scenes"
+  ]
+ },
+ "1990-91-fleer": {
+  "missingPlayers": [
+   "abdelnaby",
+   "adelman",
+   "blazers",
+   "bryant",
+   "petrovic",
+   "playoffs",
+   "schalow",
+   "walton",
+   "wetzel"
+  ],
+  "missingInserts": [
+   "franz portland trail blazers",
+   "star"
   ]
  },
  "18-19-ud-upper-deck-clear-cut-hockey": {
@@ -6115,6 +6178,13 @@
    "1965 tall boy"
   ]
  },
+ "1989-90-hoops": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "perforated",
+   "star panels"
+  ]
+ },
  "2015-bowman-draft-baseball-cards": {
   "missingPlayers": [
    "anderson",
@@ -6333,6 +6403,16 @@
    "teal"
   ],
   "missingInserts": []
+ },
+ "1989-kenner-starting-lineup-cards": {
+  "missingPlayers": [
+   "chamberlain",
+   "erving",
+   "havlicek"
+  ],
+  "missingInserts": [
+   "legends"
+  ]
  },
  "2018-panini-donruss-elite-football-nfl-cards": {
   "missingPlayers": [
@@ -7301,6 +7381,12 @@
   ],
   "missingInserts": []
  },
+ "1984-85-dallas-mavericks": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "star arena"
+  ]
+ },
  "1990-topps-traded-baseball-cards": {
   "missingPlayers": [
    "appier",
@@ -8268,6 +8354,12 @@
  "1995-96-panini-nba-stickers-basketball": {
   "missingPlayers": [
    "rauf"
+  ],
+  "missingInserts": []
+ },
+ "1988-fournier-nba-estrellas": {
+  "missingPlayers": [
+   "jabbar"
   ],
   "missingInserts": []
  },
