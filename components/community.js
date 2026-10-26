@@ -27,8 +27,15 @@ export function useAccount() {
     if (!uid) { setProfile(null); return }
     let live = true   // a late reply for a previous account must not land on this one
     setProfile(undefined)
-    getProfile(uid).then(p => { if (live) setProfile(p) })
-    return () => { live = false }
+    // undefined back means the read failed: try again a few times rather than "Loading…" forever
+    let tries = 0, timer = 0
+    const load = () => getProfile(uid).then(p => {
+      if (!live) return
+      if (p === undefined && ++tries < 4) timer = setTimeout(load, 2000 * tries)
+      else setProfile(p)
+    })
+    load()
+    return () => { live = false; clearTimeout(timer) }
   }, [uid])
   return { session, profile, setProfile }
 }
@@ -342,8 +349,10 @@ export function CollectionView({ account, indexSets, onOpenAuth, onOpenSet, onWa
                     {confirmRm === slug ? (
                       <>
                         <button style={{ ...btnGhost, color: '#fff', background: '#7f1d1d', borderColor: '#7f1d1d' }} onClick={async () => {
-                          for (const i of g.items) await removeWant(i.id)
-                          setConfirmRm(null); myWantlist(session.user.id).then(setWants); onWantsChanged?.()
+                          let failed = 0
+                          for (const i of g.items) { const r = await removeWant(i.id); if (r.error) failed++ }
+                          if (failed) setNotice('Couldn’t remove ' + failed + ' of ' + g.items.length + ' — try again.')
+                          setConfirmRm(null); myWantlist(session.user.id).then(w => { if (!w.failed) setWants(w) }); onWantsChanged?.()
                         }}>Remove all {g.items.length}</button>
                         <button style={btnGhost} onClick={() => setConfirmRm(null)}>Cancel</button>
                       </>
@@ -493,7 +502,7 @@ export function CommunityView({ account, indexSets, onOpenAuth }) {
                   {session && p.user_id === session.user.id && (confirmDel === p.id ? (
                     <span style={{ marginLeft: 'auto', display: 'inline-flex', gap: 8, alignItems: 'center', fontSize: 13 }}>
                       <span style={{ color: '#A1A1AA' }}>Delete this post?</span>
-                      <button onClick={async () => { const r = await deletePost(p.id); setConfirmDel(null); if (!r.error) forumFeed().then(setFeed) }} style={{ background: '#7f1d1d', border: 'none', color: '#fff', borderRadius: 6, padding: '5px 10px', fontSize: 13, cursor: 'pointer', fontFamily: 'inherit' }}>Delete</button>
+                      <button onClick={async () => { const r = await deletePost(p.id); setConfirmDel(null); if (r.error) setPostErr('Couldn’t delete that post — ' + r.error.message); else forumFeed().then(setFeed) }} style={{ background: '#7f1d1d', border: 'none', color: '#fff', borderRadius: 6, padding: '5px 10px', fontSize: 13, cursor: 'pointer', fontFamily: 'inherit' }}>Delete</button>
                       <button onClick={() => setConfirmDel(null)} style={{ background: 'none', border: '1px solid #232A3E', color: '#A1A1AA', borderRadius: 6, padding: '5px 10px', fontSize: 13, cursor: 'pointer', fontFamily: 'inherit' }}>Cancel</button>
                     </span>
                   ) : (
