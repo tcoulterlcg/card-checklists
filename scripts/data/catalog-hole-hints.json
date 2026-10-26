@@ -871,6 +871,206 @@
    "with ball cracked ice"
   ]
  },
+ "1992-fleer": {
+  "missingPlayers": [
+   "aikman",
+   "alexander",
+   "ambrose",
+   "auzenne",
+   "barber",
+   "bayless",
+   "bentley",
+   "biasucci",
+   "billups",
+   "birden",
+   "bortz",
+   "boutte",
+   "boyd",
+   "briggs",
+   "brim",
+   "bruce",
+   "bryant",
+   "buford",
+   "burkett",
+   "burnett",
+   "call",
+   "caston",
+   "cherry",
+   "christie",
+   "chung",
+   "coleman",
+   "conner",
+   "coryatt",
+   "craig",
+   "cunningham",
+   "daniel",
+   "dawson",
+   "dickerson",
+   "dimry",
+   "dinkins",
+   "dixon",
+   "donaldson",
+   "dronett",
+   "dukes",
+   "dunbar",
+   "dwight",
+   "dykes",
+   "eatman",
+   "edmunds",
+   "emtman",
+   "ervins",
+   "esiason",
+   "ethridge",
+   "fagan",
+   "farren",
+   "feagles",
+   "fenner",
+   "fenney",
+   "fina",
+   "fox",
+   "fulhage",
+   "gash",
+   "gentry",
+   "george",
+   "gesek",
+   "gilbert",
+   "golic",
+   "goode",
+   "griffin",
+   "gruber",
+   "hanson",
+   "harrison",
+   "hawkins",
+   "henderson",
+   "hennings",
+   "heyward",
+   "hoard",
+   "hoge",
+   "holmes",
+   "howard",
+   "hunter",
+   "israel",
+   "jacke",
+   "jax",
+   "jenkins",
+   "jensen",
+   "jeter",
+   "junior",
+   "kay",
+   "kirkland",
+   "klingbeil",
+   "klingler",
+   "kosar",
+   "legette",
+   "lester",
+   "lincoln",
+   "lowery",
+   "lyles",
+   "maddox",
+   "mandarich",
+   "marino",
+   "maryland",
+   "mathis",
+   "mayberry",
+   "mcgee",
+   "mcglockton",
+   "mcgwire",
+   "mcjulien",
+   "mclemore",
+   "mcmillian",
+   "mcneal",
+   "mersereau",
+   "miles",
+   "milstead",
+   "montana",
+   "montgomery",
+   "morrissey",
+   "moss",
+   "myslinski",
+   "nagle",
+   "nash",
+   "newberry",
+   "noga",
+   "noonan",
+   "obrien",
+   "oglesby",
+   "olberding",
+   "oneal",
+   "patton",
+   "pawlawski",
+   "perryman",
+   "phifer",
+   "pickel",
+   "pickens",
+   "pope",
+   "porcher",
+   "price",
+   "prior",
+   "pro",
+   "proehl",
+   "redemption",
+   "reed",
+   "reeves",
+   "rembert",
+   "reynolds",
+   "rice",
+   "rio",
+   "rosenbach",
+   "royals",
+   "royster",
+   "ruettgers",
+   "rutland",
+   "sacca",
+   "scroggins",
+   "seale",
+   "seau",
+   "shelton",
+   "sherrard",
+   "siever",
+   "sikahema",
+   "sims",
+   "singletary",
+   "singleton",
+   "skrepenak",
+   "slaughter",
+   "snow",
+   "sparks",
+   "spellman",
+   "steed",
+   "stephens",
+   "stowe",
+   "swayne",
+   "thayer",
+   "tice",
+   "tolliver",
+   "toon",
+   "turnbull",
+   "vaughn",
+   "vincent",
+   "wallace",
+   "walls",
+   "ware",
+   "webster",
+   "west",
+   "wheeler",
+   "william",
+   "willis",
+   "woods",
+   "workman",
+   "wyman",
+   "zendejas",
+   "zimmerman"
+  ],
+  "missingInserts": [
+   "bowled over",
+   "end beginning",
+   "gameday",
+   "hills valleys",
+   "last line outfielder",
+   "promo sheets perforated",
+   "watching waiting"
+  ]
+ },
  "2018-topps-heritage-baseball-cards": {
   "missingPlayers": [
    "acevedo",
@@ -2838,6 +3038,80 @@
    "national"
   ]
  },
+ "1993-fleer": {
+  "missingPlayers": [
+   "barrow",
+   "beuerlein",
+   "buchanan",
+   "centers",
+   "clayton",
+   "compton",
+   "drugs",
+   "dye",
+   "edmunds",
+   "everitt",
+   "fields",
+   "fit",
+   "footman",
+   "friesz",
+   "gordon",
+   "hastings",
+   "hawkins",
+   "highlights",
+   "hoard",
+   "hoge",
+   "holmes",
+   "howard",
+   "ilkin",
+   "jacke",
+   "kirby",
+   "kozerski",
+   "kramer",
+   "lang",
+   "lofton",
+   "london",
+   "lowdermilk",
+   "may",
+   "mirer",
+   "mosebar",
+   "of",
+   "parrella",
+   "pitts",
+   "potts",
+   "price",
+   "rivers",
+   "roaf",
+   "rolling",
+   "school",
+   "schroeder",
+   "searcy",
+   "shelley",
+   "shields",
+   "sims",
+   "slade",
+   "smart",
+   "stephens",
+   "stokes",
+   "strahan",
+   "swayne",
+   "tomczak",
+   "trudeau",
+   "tune",
+   "turnbull",
+   "walter",
+   "wyman",
+   "yourself"
+  ],
+  "missingInserts": [
+   "captain pain",
+   "fruit o loom",
+   "gameday",
+   "gameday game breakers",
+   "gameday second year stars",
+   "gameday standouts",
+   "shell fact"
+  ]
+ },
  "2012-13-panini-certified-hockey-cards": {
   "missingPlayers": [
    "alzner",
@@ -3173,6 +3447,76 @@
    "piece puzzle 58 59 60"
   ]
  },
+ "1992-pacific": {
+  "missingPlayers": [
+   "agen",
+   "baldassin",
+   "bergmann",
+   "black",
+   "boyf",
+   "bramwell",
+   "browning",
+   "bryan",
+   "bullard",
+   "cahill",
+   "cain",
+   "conklin",
+   "cope",
+   "cowan",
+   "davidson",
+   "dicks",
+   "dirks",
+   "divier",
+   "dobie",
+   "douglas",
+   "eckman",
+   "ericksen",
+   "erlandson",
+   "fitzpatrick",
+   "frankowski",
+   "greenwood",
+   "haines",
+   "heinrich",
+   "hivner",
+   "houston",
+   "hufford",
+   "jerue",
+   "kinnune",
+   "kupp",
+   "macdowell",
+   "mansfield",
+   "marsh",
+   "mcadams",
+   "mckasson",
+   "mcketa",
+   "meamber",
+   "medved",
+   "monlux",
+   "nisbet",
+   "of",
+   "olson",
+   "pelluer",
+   "redman",
+   "richardson",
+   "rohrbach",
+   "royal",
+   "schwegler",
+   "shiel",
+   "sixkiller",
+   "skaggs",
+   "skansi",
+   "sprague",
+   "steel",
+   "toews",
+   "tyler",
+   "yates"
+  ],
+  "missingInserts": [
+   "bob griese legends game",
+   "steve largent legends",
+   "washington greats"
+  ]
+ },
  "2014-chee-platinum-hockey-cards": {
   "missingPlayers": [
    "morris"
@@ -3377,6 +3721,28 @@
    "rowdy roddy piper wins intercontinental championship",
    "rowdy roddy piper wins world tag team championship with ric flair",
    "wins wwe s first mixed tag team match"
+  ]
+ },
+ "1991-wild-card-draft": {
+  "missingPlayers": [
+   "checklist",
+   "clard",
+   "marinoovich",
+   "thomoson",
+   "tualo"
+  ],
+  "missingInserts": [
+   "50 point",
+   "coll draft pk 10 stripe",
+   "coll draft pk 100 stripe",
+   "coll draft pk 1000 stripe",
+   "coll draft pk 20 stripe",
+   "coll draft pk 50 stripe",
+   "coll draft pk stripe",
+   "coll draftpk 1000 stripe",
+   "college draft picks",
+   "college picks",
+   "point"
   ]
  },
  "2019-topps-opening-day-baseball": {
@@ -3650,41 +4016,6 @@
    "running",
    "t shirt",
    "team mascots"
-  ]
- },
- "1989-pro-set": {
-  "missingPlayers": [
-   "bowl",
-   "ix",
-   "logo",
-   "number",
-   "superdome",
-   "vi",
-   "vii",
-   "viii",
-   "x",
-   "xi",
-   "xii",
-   "xiii",
-   "xiv",
-   "xix",
-   "xv",
-   "xvi",
-   "xvii",
-   "xviii",
-   "xx",
-   "xxi",
-   "xxii",
-   "xxiii",
-   "xxiv"
-  ],
-  "missingInserts": [
-   "announcers",
-   "gte super bowl album",
-   "promos",
-   "redskins overcome",
-   "super bowl inserts",
-   "superdome"
   ]
  },
  "1996-97-fleer": {
@@ -4195,6 +4526,72 @@
    "high number"
   ]
  },
+ "1992-action-packed": {
+  "missingPlayers": [
+   "ballard",
+   "bates",
+   "butler",
+   "cruiser",
+   "daly",
+   "dixon",
+   "elliott",
+   "givens",
+   "jacoby",
+   "jefferies",
+   "johnston",
+   "mackey",
+   "manusky",
+   "mcmahon",
+   "mcmillian",
+   "patterson",
+   "perry",
+   "rice",
+   "rio",
+   "sapolu",
+   "sikahema",
+   "trophy",
+   "wolford"
+  ],
+  "missingInserts": [
+   "24k",
+   "madden",
+   "madden 24kt",
+   "madden team"
+  ]
+ },
+ "1989-pro-set": {
+  "missingPlayers": [
+   "bowl",
+   "ix",
+   "logo",
+   "number",
+   "superdome",
+   "vi",
+   "vii",
+   "viii",
+   "x",
+   "xi",
+   "xii",
+   "xiii",
+   "xiv",
+   "xix",
+   "xv",
+   "xvi",
+   "xvii",
+   "xviii",
+   "xx",
+   "xxi",
+   "xxii",
+   "xxiii",
+   "xxiv"
+  ],
+  "missingInserts": [
+   "gte super bowl album",
+   "redskins overcome",
+   "super bowl inserts",
+   "superdome"
+  ]
+ },
  "2013-14-fleer-showcase-hockey-cards": {
   "missingPlayers": [
    "bobkov",
@@ -4230,6 +4627,22 @@
    "glow jersey",
    "hot patch",
    "patch"
+  ]
+ },
+ "1992-wild-card": {
+  "missingPlayers": [
+   "kingler",
+   "of"
+  ],
+  "missingInserts": [
+   "class back attack",
+   "promo",
+   "promo 10 stripe",
+   "promo 100 stripe",
+   "promo 1000 stripe",
+   "promo 20 stripe",
+   "promo 50 stripe",
+   "promo stripe"
   ]
  },
  "2014-bowman-draft-baseball-cards": {
@@ -4808,30 +5221,6 @@
    "transcendent touchdowns"
   ]
  },
- "1991-pacific": {
-  "missingPlayers": [
-   "arnold",
-   "booty",
-   "brock",
-   "buford",
-   "carlson",
-   "dozier",
-   "guyton",
-   "kubiak",
-   "nelson",
-   "of",
-   "sapolu",
-   "skow",
-   "treadwell",
-   "watt",
-   "winston"
-  ],
-  "missingInserts": [
-   "different photo from regular",
-   "diffrent border from regular",
-   "flash"
-  ]
- },
  "2018-topps-heritage-high-number-baseball-cards": {
   "missingPlayers": [
    "abreu",
@@ -5273,6 +5662,25 @@
    "sample"
   ]
  },
+ "1993-pro-set-power": {
+  "missingPlayers": [
+   "brown",
+   "edmonds",
+   "esaison",
+   "harper",
+   "hill",
+   "howard",
+   "logo",
+   "of",
+   "pritchard",
+   "reich"
+  ],
+  "missingInserts": [
+   "cracked glass",
+   "e smith commemorative",
+   "misnumbered"
+  ]
+ },
  "1990-action-packed": {
   "missingPlayers": [
    "bahr",
@@ -5685,6 +6093,15 @@
    "wins united states championship"
   ]
  },
+ "1993-pro-line-live": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "classic",
+   "future star",
+   "lps",
+   "portraits"
+  ]
+ },
  "2015-topps-opening-day-baseball": {
   "missingPlayers": [
    "angels",
@@ -6057,20 +6474,6 @@
    "chrome jersey",
    "jersey",
    "pristine generals"
-  ]
- },
- "1991-pro-set": {
-  "missingPlayers": [
-   "andrellins",
-   "experience",
-   "metrodome",
-   "sbxxvi",
-   "shanenlan",
-   "standings"
-  ],
-  "missingInserts": [
-   "fact mobil",
-   "super bowl binder"
   ]
  },
  "2017-18-mvp-hockey": {
@@ -6453,17 +6856,6 @@
    "starburst"
   ]
  },
- "1989-kenner-starting-lineup-cards": {
-  "missingPlayers": [
-   "chamberlain",
-   "erving",
-   "havlicek"
-  ],
-  "missingInserts": [
-   "legends",
-   "one"
-  ]
- },
  "1985-86-star": {
   "missingPlayers": [
    "colter",
@@ -6510,6 +6902,21 @@
   ],
   "missingInserts": [
    "bordered"
+  ]
+ },
+ "1993-select": {
+  "missingPlayers": [
+   "dotson",
+   "graham",
+   "haynes",
+   "lewis",
+   "maryland",
+   "odonnell",
+   "vardell",
+   "ware"
+  ],
+  "missingInserts": [
+   "young stars"
   ]
  },
  "2017-18-sp-authentic-hockey-nhl-cards": {
@@ -6743,6 +7150,59 @@
    "res"
   ]
  },
+ "1993-action-packed": {
+  "missingPlayers": [
+   "givens"
+  ],
+  "missingInserts": [
+   "24kt",
+   "update previews"
+  ]
+ },
+ "1992-jogo": {
+  "missingPlayers": [
+   "hc"
+  ],
+  "missingInserts": [
+   "cfl",
+   "cfl missing years"
+  ]
+ },
+ "1992-pro-set": {
+  "missingPlayers": [
+   "colts"
+  ],
+  "missingInserts": [
+   "hall fame inductees",
+   "hologram"
+  ]
+ },
+ "1992-pro-set-power": {
+  "missingPlayers": [
+   "buccaneers",
+   "lions",
+   "of",
+   "patriots",
+   "redskins",
+   "steelers"
+  ],
+  "missingInserts": [
+   "promo"
+  ]
+ },
+ "1991-pro-set": {
+  "missingPlayers": [
+   "andrellins",
+   "experience",
+   "metrodome",
+   "sbxxvi",
+   "shanenlan",
+   "standings"
+  ],
+  "missingInserts": [
+   "super bowl binder"
+  ]
+ },
  "2018-19-panini-select-basketball-nba-cards": {
   "missingPlayers": [
    "alexander",
@@ -6831,6 +7291,20 @@
   ],
   "missingInserts": [
    "1965 tall boy"
+  ]
+ },
+ "1993-skybox-premium": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "poster",
+   "prime time"
+  ]
+ },
+ "1991-wild-card": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "prototype",
+   "redemption"
   ]
  },
  "2015-bowman-draft-baseball-cards": {
@@ -6966,6 +7440,17 @@
   ],
   "missingInserts": [
    "adrenaline rush"
+  ]
+ },
+ "1991-jogo": {
+  "missingPlayers": [
+   "cannop",
+   "checklist",
+   "draymond",
+   "stuman"
+  ],
+  "missingInserts": [
+   "cfl"
   ]
  },
  "2016-17-o-pee-chee-platinum-hockey": {
@@ -7218,6 +7703,16 @@
   ],
   "missingInserts": [
    "single"
+  ]
+ },
+ "1989-kenner-starting-lineup-cards": {
+  "missingPlayers": [
+   "chamberlain",
+   "erving",
+   "havlicek"
+  ],
+  "missingInserts": [
+   "legends"
   ]
  },
  "2018-panini-donruss-elite-football-nfl-cards": {
@@ -7561,6 +8056,24 @@
   ],
   "missingInserts": [
    "1959"
+  ]
+ },
+ "1993-skybox-impact": {
+  "missingPlayers": [
+   "impact",
+   "kingdom"
+  ],
+  "missingInserts": [
+   "promo"
+  ]
+ },
+ "1992-pro-line-portraits": {
+  "missingPlayers": [
+   "maddux",
+   "simth"
+  ],
+  "missingInserts": [
+   "quarterback"
   ]
  },
  "1981-jogo": {
@@ -8206,6 +8719,22 @@
    "superstar combos"
   ]
  },
+ "1993-score": {
+  "missingPlayers": [
+   "of"
+  ],
+  "missingInserts": [
+   "ore ida qb club"
+  ]
+ },
+ "1993-pro-set": {
+  "missingPlayers": [
+   "lofton"
+  ],
+  "missingInserts": [
+   "quarterbacks running backs"
+  ]
+ },
  "1991-action-packed-all-madden": {
   "missingPlayers": [
    "dixson"
@@ -8504,28 +9033,34 @@
   ],
   "missingInserts": []
  },
- "1991-action-packed": {
+ "1993-pacific": {
   "missingPlayers": [],
   "missingInserts": [
-   "24kt"
+   "pick pros"
   ]
  },
- "1991-score": {
+ "1993-pinnacle": {
   "missingPlayers": [],
   "missingInserts": [
-   "national 10"
+   "men autumn"
   ]
  },
- "1987-fleer-team-action": {
+ "1993-playoff-contenders": {
   "missingPlayers": [],
   "missingInserts": [
-   "sticker"
+   "promo"
   ]
  },
- "1985-jogo": {
+ "1993-sp": {
   "missingPlayers": [],
   "missingInserts": [
-   "cfl"
+   "pros"
+  ]
+ },
+ "1992-gameday": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "national jim kelly"
   ]
  },
  "1990-topps-traded-baseball-cards": {
@@ -9304,6 +9839,20 @@
   "missingPlayers": [
    "enchantment",
    "frame"
+  ],
+  "missingInserts": []
+ },
+ "1993-pro-line-portraits": {
+  "missingPlayers": [
+   "doleman",
+   "lott"
+  ],
+  "missingInserts": []
+ },
+ "1993-pro-set-power-update": {
+  "missingPlayers": [
+   "emtman",
+   "millburn"
   ],
   "missingInserts": []
  },
@@ -10531,6 +11080,12 @@
  "2000-bowman-chrome-football": {
   "missingPlayers": [
    "rhet"
+  ],
+  "missingInserts": []
+ },
+ "1992-score": {
+  "missingPlayers": [
+   "jeffiries"
   ],
   "missingInserts": []
  },
