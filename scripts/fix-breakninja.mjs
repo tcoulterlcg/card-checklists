@@ -1,7 +1,7 @@
 // Break Ninja data fixes. Safe to re-run.
 //  1. Truncated checklists: Break Ninja's free preview stops at 250 rows
 //     (sorted by player, so only A–M names come through). Any Break Ninja set
-//     with exactly 250/251 cards is marked incomplete (hidden) and queued in
+//     with exactly 250/251 cards (or 200-520 whose names never reach N) is marked incomplete (hidden) and queued in
 //     scripts/data/tcdb-hole-jobs.json for a full TCDB re-import.
 //  2. Repeated rows: Break Ninja tables append a second, unnumbered listing of
 //     some players (rookies/retired) under the same insert. A row with no card
@@ -74,7 +74,12 @@ for (const f of readdirSync(dataDir)) {
   let changed = false
   const total = s.sections.reduce((n, x) => n + (x.cards || []).length, 0)
 
-  if ((total === 250 || total === 251) && !s.incompleteWhy) {
+  // the same cut-off after repeated rows were dropped (229-249 rows, or two previews = 500): the
+  // names, sorted by first name, never reach N ("Topps Winners Collection Arsenal" ends at Declan Rice)
+  const names = [...new Set(s.sections.flatMap(x => (x.cards || []).map(c => String(c.p || '').trim())).filter(Boolean))]
+  const lastInitial = names.map(n => n.normalize('NFD').toUpperCase()[0]).filter(ch => /[A-Z]/.test(ch)).sort().pop()
+  const cutShort = total >= 200 && total <= 520 && names.length >= 5 && lastInitial && lastInitial <= 'M'
+  if ((total === 250 || total === 251 || cutShort) && !s.incompleteWhy) {
     s.incomplete = true
     s.incompleteWhy = WHY
     stats.truncated++
