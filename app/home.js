@@ -900,7 +900,8 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
     if (push === 'replace') { navSeq.current++; try { history.replaceState(null, '', url) } catch {} } else nav(url, push)
     if (push !== 'replace') window.scrollTo(0, 0)
   }
-  const openView = (v, push, extra = '') => { setNotice(''); nav('?view=' + v + extra, push); setView(v); setActiveSet(null); setSetData(null); setGlobalHits(null); setActivePlayer(null); window.scrollTo(0, 0) }
+  const [viewNonce, setViewNonce] = useState(0)   // remounts a view (Community) when it's opened again from the nav
+  const openView = (v, push, extra = '') => { setNotice(''); nav('?view=' + v + extra, push); setView(v); setViewNonce(n => n + 1); setActiveSet(null); setSetData(null); setGlobalHits(null); setActivePlayer(null); window.scrollTo(0, 0) }
   // Wantlist add — whole set or a single card/parallel from the set page.
   // What's already on the signed-in user's wantlist, so card rows can show ✓ (and toggle off).
   const [wanted, setWanted] = useState(() => new Map())   // key -> row id
@@ -1639,7 +1640,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
         <FeedbackView account={account} admin={fbAdmin.admin} onOpenAuth={() => setAuthOpen(true)} onOpenSet={openSetBySlug}
           onNew={(ctx) => setFeedback(ctx)} onChanged={fbAdmin.refresh} onFix={(r) => setFixing({ slug: r.set_slug, feedback: r })} version={fixVersion} />
       ) : view === 'community' ? (
-        <CommunityView account={account} indexSets={sets} onOpenAuth={() => setAuthOpen(true)} />
+        <CommunityView key={viewNonce} account={account} indexSets={sets} onOpenAuth={() => setAuthOpen(true)} onOpenSet={openSetBySlug} onOpenPlayer={(name) => openPlayerByName(name)} />
       ) : view === 'collection' ? (
         <CollectionView account={account} store={store} indexSets={sets} onOpenAuth={() => setAuthOpen(true)}
           onOpenSet={openSetBySlug} onWantsChanged={() => account.session && loadWanted(account.session.user.id)} />
