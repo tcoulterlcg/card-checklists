@@ -1305,7 +1305,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
 
           {/* big sets have hundreds of sections: show the first few as chips (the Section menu above lists all) */}
           <div style={{ display: 'flex', gap: 8, marginBottom: 18, flexWrap: 'wrap' }}>
-            {(() => { const all = ['All', ...(setData.sections || []).map(s => s.title)]; const LIMIT = 12; const shown = showAllSecs || all.length <= LIMIT + 2 ? all : [...all.slice(0, LIMIT), ...(all.indexOf(activeSection) >= LIMIT ? [activeSection] : [])]; return shown })().map(t => (
+            {(() => { const all = ['All', ...new Set((setData.sections || []).map(s => s.title))]; const LIMIT = 12; const shown = showAllSecs || all.length <= LIMIT + 2 ? all : [...all.slice(0, LIMIT), ...(all.indexOf(activeSection) >= LIMIT ? [activeSection] : [])]; return shown })().map(t => (
               <button key={t} onClick={() => setActiveSection(t)} aria-pressed={activeSection === t}
                 style={{
                   padding: '6px 13px', borderRadius: 8, fontSize: 12, fontWeight: 700, cursor: 'pointer',
@@ -1350,10 +1350,10 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
                 </table>
               </div>
             </div>
-          )) : visibleSections.slice(0, secLimit).map(sec => {
+          )) : visibleSections.slice(0, secLimit).map((sec, si) => {
             const sorted = sec.cards.slice().sort(makeComparator(sortField, sortDir))
             return (
-              <div key={sec.title} style={{ marginBottom: 26 }}>
+              <div key={si + '|' + sec.title} style={{ marginBottom: 26 }}>
                 <h2 style={{ ...title(18), margin: '0 0 6px' }}>
                   {sec.title} <span style={{ color: '#8A93A8', fontSize: 16 }}>· {sec.cards.length}</span>
                 </h2>

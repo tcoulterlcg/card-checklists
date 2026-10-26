@@ -216,7 +216,7 @@ export function Select({ value, onChange, options, label, ariaLabel, defaultValu
             {shown.map((o, i) => {
               const on = String(o.value) === String(value)
               return (
-                <button key={String(o.value)} id={uid + '-' + i} type="button" role="option" aria-selected={on}
+                <button key={i + '|' + String(o.value)} id={uid + '-' + i} type="button" role="option" aria-selected={on}
                   onClick={() => pick(o.value)} onMouseEnter={() => setFocus(i)} onFocus={() => setFocus(i)} style={menuItem(on, i === focus)}>
                   <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{o.label}</span>{on && <Check />}
                 </button>

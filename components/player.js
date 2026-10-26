@@ -140,7 +140,10 @@ export function Omnibox({ value, onChange, onSubmit, onPickPlayer, onPickSet, se
   const [moved, setMoved] = useState(false)   // arrow keys used: Enter opens the highlighted suggestion
   const box = useRef(null)
   // The player directory is ~6 MB; fetch it once the visitor starts searching, not on page load.
-  const wantDir = open || (value || '').trim().length >= 2
+  // A box prefilled with the page's player name (player and compare pages) mustn't pull 5 MB on load:
+  // only once the visitor focuses the box or types in it.
+  const [touched, setTouched] = useState(false)
+  const wantDir = open || (touched && (value || '').trim().length >= 2)
   const [topDir, setTopDir] = useState(null)
   // a failed directory download comes back empty: keep suggesting from the top list and try again next time
   useEffect(() => { if (wantDir && !dir) { loadTopPlayers().then(t => t && setTopDir(t)); loadPlayerDir().then(d => { if (d && d.players && d.players.length) setDir(d) }) } }, [wantDir, dir])
@@ -154,10 +157,10 @@ export function Omnibox({ value, onChange, onSubmit, onPickPlayer, onPickSet, se
   const parsed = useMemo(() => parseQueryFor(sdir, dValue), [dValue, sdir])
   const playerHits = useMemo(() => (sdir && parsed.player.length >= 2) ? matchPlayers(sdir, parsed.player, 6, { fuzzy: !!dir && parsed.player.length >= 5 }) : [], [sdir, dir, parsed.player])
   const setHits = useMemo(() => {
-    const t = norm(dValue); if (t.length < 3 || !sets) return []
+    const t = norm(dValue); if (!wantDir || t.length < 3 || !sets) return []   // nothing to suggest until the box is used
     const toks = t.split(' ')
     return sets.filter(s => { const n = norm(s.name); return toks.every(k => n.includes(k)) }).slice(0, 3)
-  }, [dValue, sets])
+  }, [dValue, sets, wantDir])
   const refine = useMemo(() => {
     const p = playerHits[0]; if (!p) return []
     const base = p.name.toLowerCase()
@@ -198,7 +201,7 @@ export function Omnibox({ value, onChange, onSubmit, onPickPlayer, onPickSet, se
         <input value={value} autoFocus={autoFocus} aria-label="Search players, sets, serials"
           role="combobox" aria-autocomplete="list" aria-controls={listId} aria-expanded={!!(open && items.length)}
           aria-activedescendant={open && items[sel] ? listId + '-' + sel : undefined}
-          onChange={(e) => { onChange(e.target.value); setOpen(true); setSel(0); setMoved(false) }}
+          onChange={(e) => { onChange(e.target.value); setOpen(true); setTouched(true); setSel(0); setMoved(false) }}
           onFocus={() => setOpen(true)}
           onKeyDown={(e) => { if (e.key === 'ArrowDown') { e.preventDefault(); setMoved(true); setSel(s => Math.min(s + 1, items.length - 1)) } else if (e.key === 'ArrowUp') { e.preventDefault(); setMoved(true); setSel(s => Math.max(s - 1, 0)) } else if (e.key === 'Escape') setOpen(false) }}
           placeholder={narrow ? 'Search a player or set…' : 'Search any player, e.g. "Tom Brady Auto" or "Connor McDavid Game-Used 1/1"'}
