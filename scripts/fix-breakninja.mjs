@@ -25,7 +25,11 @@ const jobSlugs = new Set(jobs.map(j => j.slug))
 const newJobs = []
 const stats = { truncated: 0, dupRows: 0, setsDeduped: 0, jobsAdded: 0, teamSections: 0, teamRowsMoved: 0 }
 // an insert name in the number column ("Mr. 3000 Black", "2023 World Baseball Classic Stars Gold"), not a card number
-const insertish = (n) => { const v = String(n || '').trim(); return v.length > 3 && /[a-z]{2}/.test(v) && !/\d{2,}/.test(v.replace(/^(?:19|20)\d\d\s/, '').replace(/\b\d{4}\b/g, '')) }
+const insertish = (n) => {
+  const v = String(n || '').trim()
+  if ((v.match(/\b[A-Za-z]*[a-z]{2,}\b/g) || []).length >= 2) return true   // two real words: "Treasure Chest 32 Booklet", "20-80 Scale Prizm"
+  return v.length > 3 && /[a-z]{2}/.test(v) && !/\d{2,}/.test(v.replace(/^(?:19|20)\d\d\s/, '').replace(/\b\d{4}\b/g, ''))
+}
 
 // 3. fold team-table sections back into their inserts; returns true when the set changed
 function foldTeamTables(s) {
