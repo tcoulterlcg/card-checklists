@@ -24,14 +24,20 @@ const jobs = JSON.parse(readFileSync(jobsPath, 'utf8'))
 const jobSlugs = new Set(jobs.map(j => j.slug))
 const newJobs = []
 const stats = { truncated: 0, dupRows: 0, setsDeduped: 0, jobsAdded: 0, teamSections: 0, teamRowsMoved: 0 }
-const insertish = (n) => String(n || '').length > 3 && /[a-z]{2}/.test(String(n)) && !/\d{2,}/.test(String(n))
+// an insert name in the number column ("Mr. 3000 Black", "2023 World Baseball Classic Stars Gold"), not a card number
+const insertish = (n) => { const v = String(n || '').trim(); return v.length > 3 && /[a-z]{2}/.test(v) && !/\d{2,}/.test(v.replace(/^(?:19|20)\d\d\s/, '').replace(/\b\d{4}\b/g, '')) }
 
 // 3. fold team-table sections back into their inserts; returns true when the set changed
 function foldTeamTables(s) {
   const titles = new Set(s.sections.map(x => x.title))
+  const teams = new Set()
+  for (const x of s.sections) for (const c of x.cards || []) if (c.t && !insertish(c.n)) teams.add(c.t)
   const teamSecs = s.sections.filter(x => {
-    const ins = (x.cards || []).filter(c => insertish(c.n))
-    return x.cards?.length && ins.length / x.cards.length >= 0.5 && ins.filter(c => titles.has(String(c.n).trim())).length / ins.length >= 0.6
+    const cards = x.cards || [], ins = cards.filter(c => insertish(c.n))
+    if (!cards.length || ins.length / cards.length < 0.5) return false
+    // titled like a team (a team this set's own cards name, "No Team", a country table), or most rows point at real inserts
+    return teams.has(x.title) || /^(no team|international|usa|canada|japan|mexico|[a-z .]+ republic|[a-z ]+ prospect league)$/i.test(x.title) ||
+      cards.some(c => /no team \/ one of ones/i.test(c.t || '')) || ins.filter(c => titles.has(String(c.n).trim())).length / ins.length >= 0.6
   })
   if (!teamSecs.length) return false
   const byTitle = new Map(s.sections.map(x => [x.title, x]))
@@ -44,6 +50,7 @@ function foldTeamTables(s) {
       if (!target) { target = { title: ins, cards: [] }; byTitle.set(ins, target); s.sections.push(target) }
       const o = { n: '', p: c.p }
       if (sec.title && !/^(no team|international)$/i.test(sec.title)) o.t = sec.title
+      else if (c.t && !/one of ones|no team/i.test(c.t)) o.t = c.t
       if (c.x) o.x = c.x
       target.cards.push(o); stats.teamRowsMoved++
     }
