@@ -261,7 +261,10 @@ function SetFilters({ sports, sportFilter, onPick, showBrand, brands, brandFilte
   const tcgCats = sports.filter(s => TCG_SET.has(s))
   const otherCats = sports.filter(s => OTHER_SET.has(s))
   const mainSports = MAIN_SPORTS.filter(s => sportCats.includes(s))
+  // A–Z, with the catch-all buckets (Misc Sports, Multi-Sport) last.
+  const catchAll = (s) => /^(misc|multi)/i.test(s) ? 1 : 0
   const moreSports = sportCats.filter(s => !MAIN_SPORTS.includes(s))
+    .sort((a, b) => catchAll(a) - catchAll(b) || a.localeCompare(b))
   const tabs = [['All', 'All'], ['Sports', 'Sports'], ...(tcgCats.length ? [['TCG', 'TCG']] : []), ...(otherCats.length ? [['Other', 'Other']] : [])]
   const chips = group === 'Sports' ? [['All sports', 'Sports'], ...mainSports.map(s => [s, s])]
     : group === 'TCG' ? [['All TCG', 'TCG'], ...tcgCats.map(s => [s, s])]
