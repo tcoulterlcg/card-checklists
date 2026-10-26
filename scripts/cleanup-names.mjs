@@ -51,6 +51,14 @@ for (const f of files) {
     const s = JSON.parse(readFileSync(new URL(f, dataDir), 'utf8'))
     // Section titles that repeat the set name ("2026 Fleer Ultra Golf – Base Set" -> "Base"), every sport.
     if (s.name && Array.isArray(s.sections)) {
+      // stray whitespace and dangling dashes in titles ("Timeless  Moments Signatures", "Autographs Inscription -")
+      let tidied = false
+      const seen = new Set(s.sections.map(x => x.title))
+      for (const sec of s.sections) {
+        const t = String(sec.title || '').replace(/\s+/g, ' ').replace(/\s+[–—-]$/, '').trim()
+        if (t && t !== sec.title && !seen.has(t)) { seen.add(t); sec.title = t; tidied = true }
+      }
+      if (tidied && !DRY) writeFileSync(new URL(f, dataDir), JSON.stringify(s))
       const re = new RegExp('^' + s.name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\s*(?:[–—:-]\\s*)?', 'i')
       const titles = new Set(s.sections.map(x => x.title))
       let renamed = false
