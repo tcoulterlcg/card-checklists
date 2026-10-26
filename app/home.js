@@ -181,9 +181,12 @@ function BottomLine({ segments }) {
   )
 }
 
-function Chip({ children, color, solid }) {
+// TCDB's short card tags, spelled out on hover in the set table's flag chip
+const FLAG_HELP = { RC: 'Rookie card', AU: 'Autograph', MEM: 'Memorabilia', SP: 'Short print', SSP: 'Super short print', VAR: 'Variation', UER: 'Uncorrected error', ERR: 'Error card', COR: 'Corrected', FS: 'Future Stars', LL: 'League Leaders', CL: 'Checklist', TC: 'Team card', HL: 'Highlight', ASR: 'All-Star Rookie', CUT: 'Cut signature', EXCH: 'Exchange / redemption', HOF: 'Hall of Fame', '1st': '1st Bowman', FOIL: 'Foil' }
+const flagTitle = (x) => String(x || '').split(/\s+/).map(f => /^\/\d+$/.test(f) ? 'Numbered ' + f : FLAG_HELP[f] || f).join(' · ')
+function Chip({ children, color, solid, title }) {
   return (
-    <span style={{
+    <span title={title} style={{
                   display: 'inline-block',
                   padding: '3px 10px',
                   borderRadius: 999,
@@ -937,7 +940,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
                         {c.t && <span className="hq-mobile-only" style={{ color: '#8A93A8', fontSize: 12, marginTop: 2 }}>{c.t}</span>}
                       </span>
                       <span className="hq-col-team" style={{ flex: '1 1 0', minWidth: 0, color: '#8A93A8', fontSize: 13 }}>{c.t || ''}</span>
-                      <span className="hq-col-flag" style={{ flex: setIsTcg ? '0 0 110px' : '0 0 70px', textAlign: 'right' }}>{c.x ? <Chip color={/\bRC\b/.test(c.x) ? '#4ade80' : '#8A93A8'}>{c.x}</Chip> : null}</span>
+                      <span className="hq-col-flag" style={{ flex: setIsTcg ? '0 0 110px' : '0 0 70px', textAlign: 'right' }}>{c.x ? <Chip color={/\bRC\b/.test(c.x) ? '#4ade80' : '#8A93A8'} title={flagTitle(c.x)}>{c.x}</Chip> : null}</span>
                       <a href={grailfindrFindUrl({ setName: setData.name, player: c.p, n: c.n, section: sec.title })} target="_blank" rel="noreferrer"
                         title="Find this card for sale on GrailFindr (every marketplace)" aria-label={'Find ' + (c.p || 'this card') + ' on GrailFindr'}
                         style={{ flex: '0 0 32px', height: 32, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', border: '1px solid #232A3E', borderRadius: 6, color: '#8A93A8', textDecoration: 'none' }}>

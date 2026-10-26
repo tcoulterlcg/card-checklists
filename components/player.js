@@ -354,7 +354,8 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
   const topTeam = useMemo(() => [...facets.teams.entries()].filter(([t]) => /[A-Za-z]{3,}/.test(t) && !/^\/|#/.test(t)).sort((a, b) => b[1] - a[1])[0], [facets])
   // Earliest season's card; within that season prefer a rookie-flagged base card.
   const firstCard = useMemo(() => {
-    const real = rows.filter(r => /^\d{4}/.test(r.set || '') && r.year)
+    let real = rows.filter(r => /^\d{4}/.test(r.set || '') && r.year)
+    if (!real.length) real = rows.filter(r => r.year)   // TCG sets aren't named by year ("One Piece OP-01 Romance Dawn")
     if (!real.length) return null
     const y = Math.min(...real.map(r => r.year))
     const first = real.filter(r => r.year === y)
@@ -445,8 +446,11 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
     setTimeout(() => setCopied(''), 2000)
   }
   const exportCsv = () => {
-    const lines = ['Player,Season,Set,Card #,Section,Type,Material,Print run,Team', ...sorted.map(r => [player.name, seasonLabel(r.year, r.sport), r.set, r.n, r.section, typeLabel(r.type) + (tagLabel(r.type) ? ' · ' + tagLabel(r.type) : ''), r.mem ? MEM_LABEL[r.mem & 7] + (memTypical(r.mem) ? ' (typical)' : '') : '', serialLabel(r.serial), r.team].map(v => '"' + String(v || '').replace(/"/g, '""') + '"').join(','))]
-    const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([lines.join('\n')], { type: 'text/csv' })); a.download = player.name.replace(/\s+/g, '-') + '-checklist.csv'; a.click()
+    const lines = ['Player,Season,Set,Card #,Section,Type,Material,Print run,Team', ...sorted.map(r => [player.name, seasonLabel(r.year, r.sport), r.set, r.n, r.section, typeLabel(r.type) + (tagLabel(r.type) ? ' · ' + tagLabel(r.type) : ''), r.mem ? MEM_LABEL[r.mem & 7] + (memTypical(r.mem) ? ' (typical)' : '') : '', serialLabel(r.serial), r.team].map(v => '"' + String(v || '').replace(/^[=+@\t]/, "'$&").replace(/"/g, '""') + '"').join(','))]   // a leading = + @ would run as a formula in Excel
+    // BOM so Excel reads UTF-8 (Lafrenière, Pelé) instead of mojibake
+    const url = URL.createObjectURL(new Blob(['\uFEFF' + lines.join('\r\n')], { type: 'text/csv;charset=utf-8' }))
+    const a = document.createElement('a'); a.href = url; a.download = player.name.replace(/[\s/\\:*?"<>|]+/g, '-') + '-checklist.csv'; a.click()
+    setTimeout(() => URL.revokeObjectURL(url), 10000)
   }
 
   // a plain render function, not a component defined in render (that remounted every row on each update)
