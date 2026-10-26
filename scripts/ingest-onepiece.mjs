@@ -57,7 +57,7 @@ for (const s of L.sets) {
   const rows = L.lt[s.href] || []
   if (rows.length !== parseInt(count)) throw new Error(code + ': expected ' + count + ' cards, got ' + rows.length)
   const groups = build(rows, norm(code))
-  for (const [i, label] of (donBy[norm(code)] || []).entries()) (groups['DON!! Cards'] = groups['DON!! Cards'] || []).push({ n: 'DON-' + (i + 1), p: 'DON!! Card ' + label, t: 'DON!!', x: 'DON!!' })
+  for (const [i, label] of (donBy[norm(code)] || []).entries()) (groups['DON!! Cards'] = groups['DON!! Cards'] || []).push({ n: 'DON-' + (i + 1), p: /^DON!! Card/.test(label) ? label : 'DON!! Card ' + label, t: 'DON!!', x: 'DON!!' })
   if (donBy[norm(code)]) seenDon.add(norm(code))
   let title = clean(name)
   if (/^ST/.test(code) && !/deck/i.test(title)) title = 'Starter Deck: ' + title
@@ -78,7 +78,7 @@ for (const p of L.promo) {
 const extraDon = Object.entries(donBy).filter(([c]) => !seenDon.has(c)).flatMap(([c, labels]) => labels.map(l => [c, l]))
 if (extraDon.length) {
   const misc = promoSets['Misc. Promos'] || Object.values(promoSets).find(s => !s.y)
-  misc.sections.push({ title: 'DON!! Cards', cards: extraDon.map(([c, l], i) => ({ n: 'DON-' + (i + 1), p: 'DON!! Card ' + l, t: 'DON!!', x: 'DON!!' })) })
+  misc.sections.push({ title: 'DON!! Cards', cards: extraDon.map(([c, l], i) => ({ n: 'DON-' + (i + 1), p: /^DON!! Card/.test(l) ? l : 'DON!! Card ' + l, t: 'DON!!', x: 'DON!!' })) })
 }
 for (const s of Object.values(promoSets)) {
   write({ slug: s.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/-$/, ''), name: s.name, year: s.y || 2026, sport: 'One Piece', source: 'limitlesstcg.com', sections: s.sections })
