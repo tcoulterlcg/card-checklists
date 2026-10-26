@@ -588,7 +588,8 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
     }
     players.sort((a, b) => b.cards - a.cards)
     const toks = norm(term).split(' ').filter(Boolean)
-    const setHits = !toks.length ? [] : sets.filter(x => { const n = norm(x.name); return toks.every(t => n.includes(t)) })   // punctuation-only search matches nothing, not every set.sort((a, b) => (b.year || 0) - (a.year || 0)).slice(0, 60)
+    // a punctuation-only search matches nothing, not every set
+    const setHits = !toks.length ? [] : sets.filter(x => { const n = norm(x.name); return toks.every(t => n.includes(t)) }).sort((a, b) => (b.year || 0) - (a.year || 0)).slice(0, 60)
     // A product word ("prizm") matches scraped one-off "players" ("Prizm Fireworks", 1 card): when sets
     // match and no real player does, lead with the sets and drop the 1–4 card names.
     const minor = setHits.length > 0 && !(players[0] && players[0].cards >= 50)
@@ -807,7 +808,8 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
   const [deepLoading, setDeepLoading] = useState(false)
   useEffect(() => {
     const unhide = () => document.documentElement.classList.remove('hq-deep')   // set by the inline script in layout.js
-    if (!/[?&](set|player|search|compare)=(?!(%20|\+)*(&|$))/.test(window.location.search)) { unhide(); return }   // a blank ?player= is the home page
+    const q = new URLSearchParams(window.location.search), val = (k) => (q.get(k) || '').trim().replace(/^\/+|\/+$/g, '')
+    if (!['set', 'player', 'search', 'compare', 'vs'].some(val)) { unhide(); return }   // a blank ?player= is the home page
     setDeepLoading(true); unhide()
     const t = setTimeout(() => setDeepLoading(false), 25000)
     return () => clearTimeout(t)
@@ -983,7 +985,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
   const applyUrl = () => {
     urlApplied.current = true
     const sp = new URLSearchParams(location.search)
-    const pl = sp.get('player'), v = sp.get('view'), sr = sp.get('search')
+    const pl = (sp.get('player') || '').trim(), v = sp.get('view'), sr = sp.get('search')
     const st = sp.get('set') && sp.get('set').trim().replace(/\/+$/, '')   // tolerate pasted links: case, trailing slash
     if (sp.has('compare')) openCompare([sp.get('compare'), sp.get('vs')], false)
     else if (pl) { const q = sp.get('q'); setQuery(q || pl); openPlayerByName(pl, q, false, sp.get('sport') || undefined) }

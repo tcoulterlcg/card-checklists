@@ -53,7 +53,8 @@ function foldTeamTables(s) {
       if (target && target.cards.some(k => k.p === c.p)) continue
       if (!target) { target = { title: ins, cards: [] }; byTitle.set(ins, target); s.sections.push(target) }
       const o = { n: '', p: c.p }
-      if (sec.title && !/^(no team|international)$/i.test(sec.title)) o.t = sec.title
+      // the table's title is the team, unless it's a group heading ("Cut Sigs", "Military", "No Team")
+      if (sec.title && !/^(no team|international|base|mock up|military|boxing|first lady|.*\bcut sig.*)$/i.test(sec.title)) o.t = sec.title
       else if (c.t && !/one of ones|no team/i.test(c.t)) o.t = c.t
       if (c.x) o.x = c.x
       target.cards.push(o); stats.teamRowsMoved++
