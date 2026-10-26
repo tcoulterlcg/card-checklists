@@ -91,12 +91,12 @@ export const MFG_LINES = [
     note: 'O-Pee-Chee patch inserts (trophies, team logos, mascots, draft patches) are manufactured patches.', url: 'https://www.cardboardconnection.com/2012-13-o-pee-chee-hockey-team-logo-patches-guide' },
   { re: /nhl glory/i, set: /the cup/i,
     note: 'The Cup NHL Glory shields are manufactured (verified by Trevor, 2026-10-23).' },
-  { re: /\bstickers?\b/i, note: 'Stickers are printed for the card, not memorabilia.' }
+  { re: /\bstickers?\b/i, orSet: true, note: 'Stickers are printed for the card, not memorabilia.' }   // a title in a sticker set ("Sweater Weather") or a sticker insert
 ]
 export function manufactured(set, title) {
   if (/manufactured|\bmfg\b/i.test(title)) return { k: 'MFG', src: 'title' }
   for (const r of MFG_LINES) {
-    if (!r.re.test(title) || (r.set && !r.set.test(set.name || '')) || (r.need && !r.need.test(title))) continue
+    if (!(r.re.test(title) || (r.orSet && r.re.test(set.name || ''))) || (r.set && !r.set.test(set.name || '')) || (r.need && !r.need.test(title))) continue
     return { k: 'MFG', src: 'source', note: r.note, ...(r.url ? { url: r.url } : {}) }
   }
   return null
