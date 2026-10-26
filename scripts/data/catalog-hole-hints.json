@@ -1424,6 +1424,43 @@
    "xfractor"
   ]
  },
+ "2010-11-playoff-national-treasures": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "biography material",
+   "champions signature combo",
+   "champions signature quad",
+   "colossal material",
+   "decade signatures combo",
+   "decade signatures quad",
+   "decade signatures trio",
+   "gear laundry tag combo",
+   "gear trio",
+   "hall fame signatures combo",
+   "hall fame signatures quad",
+   "hall fame signatures trio",
+   "jersey number",
+   "jersey number prime",
+   "jersey number prime signature",
+   "jersey number signature",
+   "logoman combo",
+   "logoman signature",
+   "material",
+   "material prime",
+   "material prime signature",
+   "materials prime signature",
+   "materials signature",
+   "prime signature",
+   "signature patch",
+   "souvenir cut",
+   "tag team logo combo",
+   "team nickname",
+   "team nickname prime",
+   "team nickname prime signature",
+   "team nickname signature",
+   "timeline material custom name"
+  ]
+ },
  "2012-13-pee-chee-hockey-cards": {
   "missingPlayers": [
    "abdelkader",
@@ -3617,6 +3654,21 @@
    "superstar sensations"
   ]
  },
+ "2010-11-donruss": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "die cut emerald",
+   "die cut ruby",
+   "die cut sapphire",
+   "emerald die cut",
+   "materials signature",
+   "materials signature prime",
+   "rack pack",
+   "signature",
+   "stats die cut material",
+   "stats die cut materials prime"
+  ]
+ },
  "1990-score-football-cards": {
   "missingPlayers": [
    "baab",
@@ -3885,6 +3937,22 @@
   ],
   "missingInserts": [
    "merlin"
+  ]
+ },
+ "2010-11-panini-limited": {
+  "missingPlayers": [
+   "uer"
+  ],
+  "missingInserts": [
+   "freshman",
+   "jersey number",
+   "jersey number prime",
+   "jersey number prime signature",
+   "jersey number signature",
+   "materials prime signature",
+   "materials signature",
+   "prime signature",
+   "signature"
   ]
  },
  "1989-score-football-cards": {
@@ -5419,15 +5487,6 @@
    "wins united states championship"
   ]
  },
- "2009-10-donruss-elite": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "jersey",
-   "jersey prime",
-   "relic",
-   "signature"
-  ]
- },
  "2015-topps-opening-day-baseball": {
   "missingPlayers": [
    "angels",
@@ -5447,6 +5506,19 @@
   ],
   "missingInserts": [
    "stadium scenes"
+  ]
+ },
+ "2011-12-panini-limited": {
+  "missingPlayers": [
+   "abdurrahim",
+   "miles",
+   "redd",
+   "stoudamire"
+  ],
+  "missingInserts": [
+   "11 12 trophy case signatures",
+   "2012 draft pick redemption",
+   "game worn fabric"
   ]
  },
  "2002-03-ud-authentics": {
@@ -5816,6 +5888,14 @@
   ],
   "missingInserts": [
    "update"
+  ]
+ },
+ "2010-11-upper-deck-ultimate-collection": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "big game signature",
+   "time draft signature",
+   "time team signature"
   ]
  },
  "2019-panini-chronicles-baseball": {
@@ -6269,6 +6349,16 @@
    "summit 2014"
   ]
  },
+ "2010-11-panini-classics": {
+  "missingPlayers": [
+   "olajuwom",
+   "oneal"
+  ],
+  "missingInserts": [
+   "10 11",
+   "blast from past jersey"
+  ]
+ },
  "2003-04-upper-deck-triple-dimensions": {
   "missingPlayers": [
    "amethyst",
@@ -6372,15 +6462,6 @@
   ],
   "missingInserts": [
    "back"
-  ]
- },
- "2009-10-panini-limited": {
-  "missingPlayers": [
-   "autograph"
-  ],
-  "missingInserts": [
-   "freshman jersey",
-   "glossy"
   ]
  },
  "1992-93-hoops": {
@@ -6502,6 +6583,20 @@
   ],
   "missingInserts": [
    "1965 tall boy"
+  ]
+ },
+ "2010-11-panini-adrenalyn-xl": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "dark",
+   "gray"
+  ]
+ },
+ "2010-11-panini-season-update": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "10 11 throwback threads",
+   "jersey"
   ]
  },
  "2015-bowman-draft-baseball-cards": {
@@ -7543,28 +7638,28 @@
    "quads patch"
   ]
  },
- "2009-10-panini-certified": {
+ "2011-12-panini-gold-standard": {
   "missingPlayers": [
-   "dragic"
+   "landry"
   ],
   "missingInserts": [
-   "glossy"
+   "golden 50 memorablia"
   ]
  },
- "2009-10-panini-classics": {
+ "2010-11-panini-absolute-memorabilia": {
   "missingPlayers": [
-   "derozan"
+   "casspi"
   ],
   "missingInserts": [
-   "glossy"
+   "10 11"
   ]
  },
- "2009-10-sp-game-used": {
+ "2010-11-panini-timeless-treasures": {
   "missingPlayers": [
-   "lebron"
+   "maynor"
   ],
   "missingInserts": [
-   "three star swatches"
+   "10 11"
   ]
  },
  "2006-07-fleer": {
@@ -8159,34 +8254,40 @@
   ],
   "missingInserts": []
  },
- "2009-10-panini-studio": {
+ "2011-12-hoops": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "slam dunk winners"
+  ]
+ },
+ "2011-12-panini-past-and-present": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "gamers material"
+  ]
+ },
+ "2010-11-panini-gold-standard": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "medalist"
+  ]
+ },
+ "2010-11-panini-prestige": {
   "missingPlayers": [],
   "missingInserts": [
    "signature"
   ]
  },
- "2009-10-panini-timeless-treasures": {
+ "2010-11-panini-stickers": {
   "missingPlayers": [],
   "missingInserts": [
-   "hall fame signatures"
+   "european"
   ]
  },
- "2009-10-panini-playoff-contenders": {
+ "2010-11-sp-authentic": {
   "missingPlayers": [],
   "missingInserts": [
-   "classic ticket signature"
-  ]
- },
- "2009-10-playoff-national-treasures": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "signature patch team"
-  ]
- },
- "2008-09-upper-deck-premier": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "letters"
+   "die cut"
   ]
  },
  "1990-topps-traded-baseball-cards": {
@@ -9419,15 +9520,57 @@
   ],
   "missingInserts": []
  },
+ "2010-11-panini-threads": {
+  "missingPlayers": [
+   "stojakovic"
+  ],
+  "missingInserts": []
+ },
+ "2010-11-upper-deck-north-carolina-tar-heels": {
+  "missingPlayers": [
+   "small"
+  ],
+  "missingInserts": []
+ },
  "2009-10-panini-absolute-memorabilia": {
   "missingPlayers": [
    "glossy"
   ],
   "missingInserts": []
  },
+ "2009-10-panini-certified": {
+  "missingPlayers": [
+   "dragic"
+  ],
+  "missingInserts": []
+ },
+ "2009-10-panini-classics": {
+  "missingPlayers": [
+   "derozan"
+  ],
+  "missingInserts": []
+ },
  "2009-10-panini-court-kings": {
   "missingPlayers": [
    "autograph"
+  ],
+  "missingInserts": []
+ },
+ "2009-10-panini-limited": {
+  "missingPlayers": [
+   "autograph"
+  ],
+  "missingInserts": []
+ },
+ "2009-10-sp-game-used": {
+  "missingPlayers": [
+   "lebron"
+  ],
+  "missingInserts": []
+ },
+ "2009-10-upper-deck-greats-of-the-game": {
+  "missingPlayers": [
+   "davis"
   ],
   "missingInserts": []
  },
