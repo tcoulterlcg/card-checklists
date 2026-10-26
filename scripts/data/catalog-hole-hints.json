@@ -1424,43 +1424,6 @@
    "xfractor"
   ]
  },
- "2010-11-playoff-national-treasures": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "biography material",
-   "champions signature combo",
-   "champions signature quad",
-   "colossal material",
-   "decade signatures combo",
-   "decade signatures quad",
-   "decade signatures trio",
-   "gear laundry tag combo",
-   "gear trio",
-   "hall fame signatures combo",
-   "hall fame signatures quad",
-   "hall fame signatures trio",
-   "jersey number",
-   "jersey number prime",
-   "jersey number prime signature",
-   "jersey number signature",
-   "logoman combo",
-   "logoman signature",
-   "material",
-   "material prime",
-   "material prime signature",
-   "materials prime signature",
-   "materials signature",
-   "prime signature",
-   "signature patch",
-   "souvenir cut",
-   "tag team logo combo",
-   "team nickname",
-   "team nickname prime",
-   "team nickname prime signature",
-   "team nickname signature",
-   "timeline material custom name"
-  ]
- },
  "2012-13-pee-chee-hockey-cards": {
   "missingPlayers": [
    "abdelkader",
@@ -3565,6 +3528,29 @@
    "team mascots"
   ]
  },
+ "2014-15-panini-excalibur": {
+  "missingPlayers": [
+   "blue",
+   "camouflage",
+   "cut",
+   "cuts",
+   "gold",
+   "purple",
+   "red",
+   "teal"
+  ],
+  "missingInserts": [
+   "die cuts",
+   "dunk co jersey",
+   "knights round die cuts",
+   "majestic marks signature",
+   "quest signatures",
+   "rampage dual materials",
+   "rampage patch",
+   "royalty jerseys",
+   "top flight jerseys"
+  ]
+ },
  "1996-97-fleer": {
   "missingPlayers": [
    "card",
@@ -3652,21 +3638,6 @@
    "shorts",
    "sitting",
    "superstar sensations"
-  ]
- },
- "2010-11-donruss": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "die cut emerald",
-   "die cut ruby",
-   "die cut sapphire",
-   "emerald die cut",
-   "materials signature",
-   "materials signature prime",
-   "rack pack",
-   "signature",
-   "stats die cut material",
-   "stats die cut materials prime"
   ]
  },
  "1990-score-football-cards": {
@@ -3937,22 +3908,6 @@
   ],
   "missingInserts": [
    "merlin"
-  ]
- },
- "2010-11-panini-limited": {
-  "missingPlayers": [
-   "uer"
-  ],
-  "missingInserts": [
-   "freshman",
-   "jersey number",
-   "jersey number prime",
-   "jersey number prime signature",
-   "jersey number signature",
-   "materials prime signature",
-   "materials signature",
-   "prime signature",
-   "signature"
   ]
  },
  "1989-score-football-cards": {
@@ -5508,19 +5463,6 @@
    "stadium scenes"
   ]
  },
- "2011-12-panini-limited": {
-  "missingPlayers": [
-   "abdurrahim",
-   "miles",
-   "redd",
-   "stoudamire"
-  ],
-  "missingInserts": [
-   "11 12 trophy case signatures",
-   "2012 draft pick redemption",
-   "game worn fabric"
-  ]
- },
  "2002-03-ud-authentics": {
   "missingPlayers": [
    "kbryant",
@@ -5890,12 +5832,12 @@
    "update"
   ]
  },
- "2010-11-upper-deck-ultimate-collection": {
+ "2014-15-panini-national-treasures": {
   "missingPlayers": [],
   "missingInserts": [
-   "big game signature",
-   "time draft signature",
-   "time team signature"
+   "colossal jersey",
+   "laundry tag",
+   "night moves materials"
   ]
  },
  "2019-panini-chronicles-baseball": {
@@ -6349,16 +6291,6 @@
    "summit 2014"
   ]
  },
- "2010-11-panini-classics": {
-  "missingPlayers": [
-   "olajuwom",
-   "oneal"
-  ],
-  "missingInserts": [
-   "10 11",
-   "blast from past jersey"
-  ]
- },
  "2003-04-upper-deck-triple-dimensions": {
   "missingPlayers": [
    "amethyst",
@@ -6583,20 +6515,6 @@
   ],
   "missingInserts": [
    "1965 tall boy"
-  ]
- },
- "2010-11-panini-adrenalyn-xl": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "dark",
-   "gray"
-  ]
- },
- "2010-11-panini-season-update": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "10 11 throwback threads",
-   "jersey"
   ]
  },
  "2015-bowman-draft-baseball-cards": {
@@ -7638,30 +7556,6 @@
    "quads patch"
   ]
  },
- "2011-12-panini-gold-standard": {
-  "missingPlayers": [
-   "landry"
-  ],
-  "missingInserts": [
-   "golden 50 memorablia"
-  ]
- },
- "2010-11-panini-absolute-memorabilia": {
-  "missingPlayers": [
-   "casspi"
-  ],
-  "missingInserts": [
-   "10 11"
-  ]
- },
- "2010-11-panini-timeless-treasures": {
-  "missingPlayers": [
-   "maynor"
-  ],
-  "missingInserts": [
-   "10 11"
-  ]
- },
  "2006-07-fleer": {
   "missingPlayers": [
    "gervin"
@@ -8254,40 +8148,10 @@
   ],
   "missingInserts": []
  },
- "2011-12-hoops": {
+ "2013-upper-deck-all-time-greats": {
   "missingPlayers": [],
   "missingInserts": [
-   "slam dunk winners"
-  ]
- },
- "2011-12-panini-past-and-present": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "gamers material"
-  ]
- },
- "2010-11-panini-gold-standard": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "medalist"
-  ]
- },
- "2010-11-panini-prestige": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "signature"
-  ]
- },
- "2010-11-panini-stickers": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "european"
-  ]
- },
- "2010-11-sp-authentic": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "die cut"
+   "forces signatures"
   ]
  },
  "1990-topps-traded-baseball-cards": {
@@ -8332,6 +8196,15 @@
    "proof",
    "scherzer",
    "timberwolves"
+  ],
+  "missingInserts": []
+ },
+ "2011-12-panini-limited": {
+  "missingPlayers": [
+   "abdurrahim",
+   "miles",
+   "redd",
+   "stoudamire"
   ],
   "missingInserts": []
  },
@@ -8789,6 +8662,13 @@
   "missingPlayers": [
    "box",
    "gilchrist"
+  ],
+  "missingInserts": []
+ },
+ "2010-11-panini-classics": {
+  "missingPlayers": [
+   "olajuwom",
+   "oneal"
   ],
   "missingInserts": []
  },
@@ -9520,9 +9400,33 @@
   ],
   "missingInserts": []
  },
+ "2011-12-panini-gold-standard": {
+  "missingPlayers": [
+   "landry"
+  ],
+  "missingInserts": []
+ },
+ "2010-11-panini-absolute-memorabilia": {
+  "missingPlayers": [
+   "casspi"
+  ],
+  "missingInserts": []
+ },
+ "2010-11-panini-limited": {
+  "missingPlayers": [
+   "uer"
+  ],
+  "missingInserts": []
+ },
  "2010-11-panini-threads": {
   "missingPlayers": [
    "stojakovic"
+  ],
+  "missingInserts": []
+ },
+ "2010-11-panini-timeless-treasures": {
+  "missingPlayers": [
+   "maynor"
   ],
   "missingInserts": []
  },
