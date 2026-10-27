@@ -5190,20 +5190,6 @@
    "wlaf inserts"
   ]
  },
- "2006-ultra": {
-  "missingPlayers": [
-   "cj"
-  ],
-  "missingInserts": [
-   "achievement",
-   "achievement jersey",
-   "postseason performers jersey",
-   "scoring kings jersey",
-   "stars jersey",
-   "ultra achievements jersey",
-   "ultra stars jersey"
-  ]
- },
  "2018-panini-prizm-football": {
   "missingPlayers": [
    "bears",
@@ -6338,18 +6324,6 @@
    "border",
    "skybox",
    "skybox star date 2000"
-  ]
- },
- "2006-playoff-absolute-memorabilia": {
-  "missingPlayers": [
-   "hagen",
-   "red"
-  ],
-  "missingInserts": [
-   "jersey",
-   "premiere materials autographed",
-   "tools trade materials",
-   "tools trade materials quad"
   ]
  },
  "2017-18-o-pee-chee-hockey-cards": {
@@ -7760,15 +7734,6 @@
    "res"
   ]
  },
- "2006-playoff-prestige": {
-  "missingPlayers": [
-   "alexanderbarber"
-  ],
-  "missingInserts": [
-   "jersey",
-   "patch"
-  ]
- },
  "1991-pro-set": {
   "missingPlayers": [
    "andrellins",
@@ -7882,27 +7847,6 @@
   ],
   "missingInserts": [
    "smash mouth xtra"
-  ]
- },
- "2006-sp-authentic": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "chirography signatures",
-   "exclusives jersey"
-  ]
- },
- "2006-topps-chrome": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "8306",
-   "ring honor"
-  ]
- },
- "2006-topps-heritage": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "gridiron collection relic",
-   "stadium seat"
   ]
  },
  "2015-bowman-draft-baseball-cards": {
@@ -8721,6 +8665,24 @@
    "1959"
   ]
  },
+ "2007-donruss-elite": {
+  "missingPlayers": [
+   "dooley",
+   "strahan"
+  ],
+  "missingInserts": [
+   "frito lay"
+  ]
+ },
+ "2006-playoff-absolute-memorabilia": {
+  "missingPlayers": [
+   "hagen",
+   "red"
+  ],
+  "missingInserts": [
+   "jersey"
+  ]
+ },
  "2003-playoff-prestige": {
   "missingPlayers": [
    "drake",
@@ -9490,12 +9452,28 @@
    "superstar combos"
   ]
  },
- "2006-donruss-classics": {
+ "2007-donruss-threads": {
   "missingPlayers": [
-   "larry"
+   "dynasty"
   ],
   "missingInserts": [
-   "thanksgiving"
+   "bengals"
+  ]
+ },
+ "2006-press-pass": {
+  "missingPlayers": [
+   "coyle"
+  ],
+  "missingInserts": [
+   "walmart"
+  ]
+ },
+ "2006-press-pass-legends": {
+  "missingPlayers": [
+   "ah"
+  ],
+  "missingInserts": [
+   "ink"
   ]
  },
  "2006-topps-total": {
@@ -9504,6 +9482,14 @@
   ],
   "missingInserts": [
    "fantasy"
+  ]
+ },
+ "2006-upper-deck-sweet-spot": {
+  "missingPlayers": [
+   "miller"
+  ],
+  "missingInserts": [
+   "sb ticket stub"
   ]
  },
  "2005-sage-hit": {
@@ -9991,22 +9977,34 @@
   ],
   "missingInserts": []
  },
- "2006-fleer-hot-prospects": {
+ "2007-donruss-gridiron-gear": {
   "missingPlayers": [],
   "missingInserts": [
-   "materials"
+   "player timeline jersey"
   ]
  },
- "2006-playoff-contenders": {
+ "2006-sage-aspire": {
   "missingPlayers": [],
   "missingInserts": [
-   "roy"
+   "national promos"
   ]
  },
- "2006-spx": {
+ "2006-sage-hit": {
   "missingPlayers": [],
   "missingInserts": [
-   "winning combos"
+   "jersey"
+  ]
+ },
+ "2006-upper-deck-rookie-debut": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "jersey collection"
+  ]
+ },
+ "2006-upper-deck-ultimate-collection": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "stat patch"
   ]
  },
  "1990-topps-traded-baseball-cards": {
@@ -10875,6 +10873,13 @@
   "missingPlayers": [
    "enchantment",
    "frame"
+  ],
+  "missingInserts": []
+ },
+ "2007-finest": {
+  "missingPlayers": [
+   "drew",
+   "guerrero"
   ],
   "missingInserts": []
  },
@@ -12268,6 +12273,12 @@
   ],
   "missingInserts": []
  },
+ "2006-donruss-classics": {
+  "missingPlayers": [
+   "larry"
+  ],
+  "missingInserts": []
+ },
  "2006-donruss-gridiron-gear": {
   "missingPlayers": [
    "roethisberger"
@@ -12277,6 +12288,18 @@
  "2006-donruss-threads": {
   "missingPlayers": [
    "legends"
+  ],
+  "missingInserts": []
+ },
+ "2006-playoff-prestige": {
+  "missingPlayers": [
+   "alexanderbarber"
+  ],
+  "missingInserts": []
+ },
+ "2006-ultra": {
+  "missingPlayers": [
+   "cj"
   ],
   "missingInserts": []
  },
