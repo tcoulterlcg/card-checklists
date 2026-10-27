@@ -49,6 +49,15 @@ const pz = { slug: 'p', name: 'x', sections: [{ title: 'Prizm', cards: [{ n: '9'
 assert.equal(findCard(pz, { section: 'Prizm Red', cardN: '9', player: 'Patrick Kane' }), null)
 assert.equal(findCard(pz, { section: 'Blue Line Autograph Jersey Relics', cardN: '55', player: 'Patrick Kane' }).conf, 'exact')
 
+// review findings: filler-only inserts never land on Base; sibling products don't match; one finish word is a different parallel
+const vb = { slug: 'v', name: '2021 Topps', sections: [{ title: 'Base', cards: [{ n: '1', p: 'Mike Trout' }] }, { title: 'Red', cards: [{ n: '1', p: 'Mike Trout' }] }, { title: 'Red Wave', cards: [{ n: '1', p: 'Mike Trout' }] }] }
+assert.equal(findCard(vb, { section: 'Variations', cardN: '1', player: 'Mike Trout' }), null)
+assert.equal(findCard(vb, { section: 'Red', cardN: '1', player: 'Mike Trout' }).section, 'Red')
+assert.equal(findCard({ ...vb, sections: [vb.sections[2]] }, { section: 'Red', cardN: '1', player: 'Mike Trout' }), null)
+const sib = buildSetIndex([{ slug: 'bw', name: '2019 Bowman Baseball', year: 2019, sport: 'Baseball' }, { slug: 'tcu', name: '2019 Topps Chrome Update Baseball', year: 2019, sport: 'Baseball' }])
+assert.ok(!(findSets(sib, { setName: '2019 Bowman Chrome', sport: 'Baseball' })[0]?.score >= 0.45))
+assert.ok(!(findSets(sib, { setName: '2019 Topps Chrome', sport: 'Baseball' })[0]?.score >= 0.45))
+
 // CSV
 const csv = toCsv(['Set', 'Card #', 'Notes'], [{ Set: 'A, "B"', 'Card #': '=1+1', Notes: 'line1\nline2' }])
 const back = parseCsv(csv)

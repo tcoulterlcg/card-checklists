@@ -7,8 +7,8 @@ import { useDialogFocus } from '../components/dialog-focus'
 import { useCallback, useDeferredValue, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { Select, Popover, Trigger, Chevron, Check, menuItem, menuHeading, triggerStyle, useIsMobile } from '../components/dropdown'
 import { useAccount, AccountChip, AuthModal, CommunityView } from '../components/community'
-import { CollectionView, CollectorView, RainbowDialog, useMyCollection } from '../components/collection'
-import { cardKeyOf, itemKey, insertItems, deleteItems } from '../lib/collection'
+import { CollectionView, CollectorView, RainbowDialog, useMyCollection, hasDetails } from '../components/collection'
+import { cardKeyOf, itemKey, insertItems, deleteItems, updateItem } from '../lib/collection'
 import { addWant, removeWant, myWantlist, grailfindrFindUrl, signOutHere, noCardNumber, collectionCardN } from '../lib/supa'
 import { FeedbackModal, FeedbackView, useFeedbackAdmin } from '../components/feedback'
 import { FixEditor } from '../components/fix-editor'
@@ -401,13 +401,21 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
     ownBusy.current.add(k)
     const say = (t) => { setWantFlash(t); clearTimeout(flashTimer.current); flashTimer.current = setTimeout(() => setWantFlash(''), 2500) }
     try {
-      const its = store.items.filter(it => itemKey(it) === k)
+      const all = store.items.filter(it => itemKey(it) === k)
+      const its = all.filter(it => ['have', 'trade', 'sale', 'in_transaction'].includes(it.status))   // in hand (what the ✓ shows)
       const label = (c.n ? '#' + c.n + ' ' : '') + (c.p || '')
       if (!its.length) {
+        const coming = all.find(it => it.status === 'in_transit_in')
+        if (coming) {   // it arrived: mark the incoming copy as in the collection instead of adding a second one
+          const { data, error } = await updateItem(coming.id, { status: 'have' })
+          if (error) say('Couldn’t save — ' + error.message)
+          else { store.setItems(cur => (cur || []).map(x => x.id === data.id ? data : x)); say(label + ' marked as arrived') }
+          return
+        }
         const { data, error } = await insertItems(account.session.user.id, [{ set_slug: sd.slug, set_name: sd.name, section: sec.title, card_n: collectionCardN(c), player: c.p, status: 'have', qty: 1 }])
         if (error) say('Couldn’t add — ' + error.message)
         else { store.setItems(cur => [...(cur || []), ...data]); say(label + ' added to your collection') }
-      } else if (its.length === 1 && its[0].qty === 1 && !its[0].grader && its[0].price_paid == null && its[0].value == null && !its[0].notes && !its[0].image_url) {
+      } else if (its.length === 1 && !hasDetails(its[0])) {
         const { error } = await deleteItems([its[0].id])
         if (error) say('Couldn’t remove — ' + error.message)
         else { store.setItems(cur => (cur || []).filter(x => x.id !== its[0].id)); say(label + ' removed from your collection') }

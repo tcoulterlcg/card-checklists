@@ -7,7 +7,7 @@ import { brandOf } from '../lib/brands'
 import { collectionCardN, grailfindrFindUrl, uploadCardImage, updateProfile, removeWant, noCardNumber, isAdmin } from '../lib/supa'
 import {
   STATUSES, STATUS_LABEL, STATUS_COLOR, CONDITIONS, GRADERS, GRADES, UNMATCHED, cardKey, itemKey, cardKeyOf,
-  listItems, insertItems, updateItem, updateItems, upsertItems, deleteItems,
+  listItems, insertItems, updateItem, updateItems, updateWholeItems, deleteItems,
   listCollections, createCollection, renameCollection, setCollectionPublic, deleteCollection, ensureCollections,
   listWants, insertWants, listRules, addRule, removeRule, tradeMatches, listTradeRequests, sendTradeRequest, setTradeStatus,
   collectorByName, publicItems, collectionStats, unmatchedSummary, fetchMarketValue,
@@ -33,6 +33,8 @@ const plural = (n, w) => n.toLocaleString() + ' ' + (n === 1 ? w : IRREGULAR[w] 
 const TCDB_ORIGINS = ['https://www.tcdb.com', 'https://tcdb.com']
 // "owned" = in hand (not wanted, not on its way in, not shipped out)
 const OWNED_STATUSES = new Set(['have', 'trade', 'sale', 'in_transaction'])
+// a copy with anything beyond "I have it" (removing it would lose information)
+export const hasDetails = (it) => it.qty > 1 || it.status !== 'have' || !!(it.grader || it.condition || it.serial_no || it.cert_no || it.notes || it.image_url || it.collection_id || it.acquired_on || it.source || (it.tags || []).length) || it.price_paid != null || it.value != null
 
 // ---------------- data hook (shared by My Collection, set pages and player pages) ----------------
 export function useMyCollection(account) {
@@ -41,23 +43,31 @@ export function useMyCollection(account) {
   const [collections, setCollections] = useState([])
   const [wants, setWants] = useState(null)
   const [rules, setRules] = useState([])
-  const seq = useRef(0)
-  const reloadItems = async () => { const my = ++seq.current; const r = await listItems(uid); if (my === seq.current && !r.failed) setItems(r); return r }
-  const reloadCollections = async () => { const r = await listCollections(uid); if (!r.failed) setCollections(r) }
-  const reloadWants = async () => { const r = await listWants(uid); if (!r.failed) setWants(r) }
-  const reloadRules = async () => { const r = await listRules(uid); if (!r.failed) setRules(r) }
+  // every load is tied to the account it started for: a late reply after sign-out or an account
+  // switch is dropped (account), and only the newest items load lands (seq)
+  const seq = useRef(0), account_ = useRef(uid)
+  account_.current = uid
+  const forMe = (fn) => async () => { const who = uid; const r = await fn(who); return who === account_.current ? r : Object.assign([], { failed: true }) }
+  const reloadItems = async () => { const my = ++seq.current; const r = await forMe(listItems)(); if (my === seq.current && !r.failed) setItems(r); return r }
+  const reloadCollections = async () => { const r = await forMe(listCollections)(); if (!r.failed) setCollections(r) }
+  const reloadWants = async () => { const r = await forMe(listWants)(); if (!r.failed) setWants(r) }
+  const reloadRules = async () => { const r = await forMe(listRules)(); if (!r.failed) setRules(r) }
   useEffect(() => {
     seq.current++
     setItems(null); setCollections([]); setWants(null); setRules([])
     if (!uid) return
     reloadItems(); reloadCollections(); reloadWants(); reloadRules()
   }, [uid]) // eslint-disable-line react-hooks/exhaustive-deps
+  // sets renamed or merged since a card was saved still count under today's slug
+  const [redirects, setRedirects] = useState(null)
+  useEffect(() => { if (uid && !redirects) loadRedirects().then(setRedirects) }, [uid]) // eslint-disable-line react-hooks/exhaustive-deps
   // card key -> copies owned (set pages, player pages, checklists)
   const owned = useMemo(() => {
     const m = new Map()
-    for (const it of items || []) if (it.set_slug !== UNMATCHED && OWNED_STATUSES.has(it.status)) m.set(itemKey(it), (m.get(itemKey(it)) || 0) + (it.qty || 1))
+    const now = (slug) => { let s = slug; for (let i = 0; i < 5 && redirects && redirects[s]; i++) s = redirects[s]; return s }
+    for (const it of items || []) if (it.set_slug !== UNMATCHED && OWNED_STATUSES.has(it.status)) { const k = cardKey(now(it.set_slug), it.section, it.card_n); m.set(k, (m.get(k) || 0) + (it.qty || 1)) }
     return m
-  }, [items])
+  }, [items, redirects])
   return { uid, items, setItems, collections, wants, rules, owned, reloadItems, reloadCollections, reloadWants, reloadRules }
 }
 
@@ -606,6 +616,7 @@ function Checklist({ slug, store, uid, say, onBack, onEdit, onOpenSet }) {
   const [coll, setColl] = useState('')   // new cards land in this collection
   const [filter, setFilter] = useState('all')
   const busy = useRef(new Set())
+  const pendingQty = useRef(new Map())
   useEffect(() => {
     let live = true
     setSetData(null); setSecShown(12)
@@ -640,7 +651,7 @@ function Checklist({ slug, store, uid, say, onBack, onEdit, onOpenSet }) {
       if (on) await add(sec, [c])
       else {
         const its = byKey.get(k) || []
-        const detailed = its.length > 1 || its.some(it => it.qty > 1 || it.grader || it.price_paid != null || it.notes || it.image_url || it.value != null)
+        const detailed = its.length > 1 || its.some(hasDetails)
         if (detailed && !window.confirm(`Remove ${plural(its.reduce((s, it) => s + it.qty, 0), 'copy')} of this card, with their details?`)) return
         const { error } = await deleteItems(its.map(it => it.id))
         if (error) say('Couldn’t save — ' + error.message, 'error'); else { const ids = new Set(its.map(it => it.id)); store.setItems(cur => (cur || []).filter(x => !ids.has(x.id))) }
@@ -648,10 +659,14 @@ function Checklist({ slug, store, uid, say, onBack, onEdit, onOpenSet }) {
     } finally { busy.current.delete(k) }
   }
   const bump = async (it, d) => {
-    const qty = Math.max(1, Math.min(9999, it.qty + d))
-    if (qty === it.qty) return
-    store.setItems(cur => cur.map(x => x.id === it.id ? { ...x, qty } : x))
+    // from the latest copy, not this render's (fast double clicks)
+    const cur = (store.items || []).find(x => x.id === it.id) || it
+    const qty = Math.max(1, Math.min(9999, (pendingQty.current.get(it.id) ?? cur.qty) + d))
+    if (qty === cur.qty && !pendingQty.current.has(it.id)) return
+    pendingQty.current.set(it.id, qty)
+    store.setItems(list => list.map(x => x.id === it.id ? { ...x, qty } : x))
     const { error } = await updateItem(it.id, { qty })
+    if (pendingQty.current.get(it.id) === qty) pendingQty.current.delete(it.id)
     if (error) { say('Couldn’t save — ' + error.message, 'error'); store.reloadItems() }
   }
   return (
@@ -896,27 +911,32 @@ function TradeRequest({ r, uid, say, onChanged, line }) {
 // The bookmark (public/tcdb-importer.js) opens ?view=collection&ctab=import&from=tcdb and posts the
 // collection here once it has read it. Only messages from tcdb.com are accepted. The payload is kept
 // in sessionStorage so it survives signing in (which leaves the page) and a reload.
+// Very large collections don't fit in sessionStorage (~5 MB); this tab keeps them in memory too.
 const TCDB_KEY = 'cardhq-tcdb-payload'
-export const readTcdbPayload = () => { try { return JSON.parse(sessionStorage.getItem(TCDB_KEY) || 'null') } catch { return null } }
-const clearTcdbPayload = () => { try { sessionStorage.removeItem(TCDB_KEY) } catch {} }
+let tcdbInMemory = null
+export const readTcdbPayload = () => { if (tcdbInMemory) return tcdbInMemory; try { return JSON.parse(sessionStorage.getItem(TCDB_KEY) || 'null') } catch { return null } }
+const clearTcdbPayload = () => { tcdbInMemory = null; try { sessionStorage.removeItem(TCDB_KEY) } catch {} }
 function validTcdbPayload(d) {
-  return d && d.type === 'cardhq-tcdb-import' && d.v === 1 && Array.isArray(d.items) && d.items.length <= 300000
-    && d.items.every(r => r && typeof r.title === 'string' && r.title.length < 400)
+  return !!d && d.type === 'cardhq-tcdb-import' && d.v === 1 && Array.isArray(d.items) && d.items.length <= 300000
+    && d.items.every(r => r && typeof r === 'object' && typeof r.title === 'string' && r.title.length < 400)
 }
 function TcdbReceiver({ onPayload }) {
   useEffect(() => {
     if (urlParam('from') !== 'tcdb') return
+    let got = !!readTcdbPayload()
     const onMsg = (e) => {
       if (!TCDB_ORIGINS.includes(e.origin) || !validTcdbPayload(e.data)) return
-      try { sessionStorage.setItem(TCDB_KEY, JSON.stringify(e.data)) } catch {}
+      tcdbInMemory = e.data
+      try { sessionStorage.setItem(TCDB_KEY, JSON.stringify(e.data)) } catch {}   // too big: the in-memory copy still works (just not across a sign-in)
+      got = true
       window.dispatchEvent(new Event('cardhq-tcdb'))
       onPayload(e.data)
     }
     window.addEventListener('message', onMsg)
     // tell the TCDB tab we're ready (it may still be reading; ask again until it answers)
     const ping = () => { if (window.opener) for (const o of TCDB_ORIGINS) try { window.opener.postMessage({ type: 'cardhq-tcdb-ready' }, o) } catch {} }
-    ping()
-    const t = setInterval(() => { if (readTcdbPayload()) clearInterval(t); else ping() }, 2000)
+    if (!got) ping()
+    const t = setInterval(() => { if (got) clearInterval(t); else ping() }, 2000)
     return () => { window.removeEventListener('message', onMsg); clearInterval(t) }
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
   return null
@@ -925,37 +945,43 @@ function TcdbReceiver({ onPayload }) {
 // ---------------- Import / Export ----------------
 // TCDB's condition codes -> ours
 const TCDB_COND = { gemmt: 'Gem Mint', mint: 'Mint', 'nm-mt': 'NM-MT', nrmt: 'NM', 'ex-mt': 'EX-MT', ex: 'EX', vgex: 'VG-EX', vg: 'VG', gdvg: 'Good', gd: 'Good', fr: 'Fair', pr: 'Poor' }
+const str = (v, n) => (v == null ? '' : String(v)).trim().slice(0, n)
 function tcdbRows(p) {
   return p.items.map(r => {
     const t = parseTcdbTitle(r.title)
-    const d = r.details || {}
+    const d = r.details && typeof r.details === 'object' ? r.details : {}
     const flags = new Set(t.flags)
     return {
-      kind: r.status === 'want' ? 'want' : 'have', source: 'tcdb', source_item_id: String(r.itemId || '').slice(0, 60) || null,
-      setName: t.setName, sport: r.sport, cardN: t.cardN, player: t.player, label: r.title,
-      qty: r.qty || 1, status: ['have', 'trade', 'in_transaction', 'in_transit_in', 'in_transit_out'].includes(r.status) ? r.status : 'have',
-      collection: r.collection || null, price_paid: money(d.price || r.price),
-      condition: TCDB_COND[String(d.condition || '').toLowerCase()] || null,
-      grader: d.graded && d.grader ? String(d.grader).slice(0, 20) : null, grade: d.graded && d.grade ? String(d.grade).slice(0, 10) : null,
-      autographed: !!d.autographed || flags.has('AU'), serial_no: d.serial ? String(d.serial).slice(0, 20) : null,
-      notes: d.comment ? String(d.comment).slice(0, 2000) : null, tags: (d.tags || []).slice(0, 20).map(x => String(x).slice(0, 40)),
-      tcdb_sid: r.sid || null, tcdb_cid: r.cid || null,
+      kind: r.status === 'want' ? 'want' : 'have', source: 'tcdb', source_item_id: str(r.itemId, 60) || null,
+      setName: t.setName.slice(0, 300), sport: str(r.sport, 40), cardN: t.cardN.slice(0, 100), player: t.player.slice(0, 300), label: r.title,
+      qty: Math.max(1, Math.min(9999, parseInt(r.qty, 10) || 1)), status: ['have', 'trade', 'in_transaction', 'in_transit_in', 'in_transit_out'].includes(r.status) ? r.status : 'have',
+      collection: str(r.collection, 60) || null, price_paid: money(d.price || r.price),
+      condition: TCDB_COND[str(d.condition, 20).toLowerCase()] || null,
+      grader: d.graded && d.grader ? str(d.grader, 20) : null, grade: d.graded && d.grade ? str(d.grade, 10) : null,
+      autographed: !!d.autographed || flags.has('AU'), serial_no: str(d.serial, 20) || null,
+      notes: str(d.comment, 2000) || null, tags: (Array.isArray(d.tags) ? d.tags : []).slice(0, 20).map(x => str(x, 40)).filter(Boolean),
+      acquired_on: isoDate(d.added), tcdb_sid: Number.isInteger(r.sid) ? r.sid : null, tcdb_cid: Number.isInteger(r.cid) ? r.cid : null,
     }
   })
 }
-function csvRows(rows, map) {
+// a short stable id for a CSV line, so importing the same file twice (or retrying) doesn't double it
+const hashStr = (t) => { let h = 0x811c9dc5, h2 = 0; for (let i = 0; i < t.length; i++) { h ^= t.charCodeAt(i); h = Math.imul(h, 0x01000193) >>> 0; h2 = (Math.imul(h2, 31) + t.charCodeAt(i)) >>> 0 } return h.toString(36) + h2.toString(36) }
+function csvRows(rows, map, fileName) {
   const g = (r, k) => (map[k] ? r[map[k]] : '') || ''
+  const seen = new Map()
   return rows.map((r, i) => {
+    const line = JSON.stringify(Object.values(r))
+    const n = (seen.get(line) || 0) + 1; seen.set(line, n)   // identical lines are separate copies
     let setName = g(r, 'set'); const year = g(r, 'year')
     if (year && !/\b(18|19|20)\d\d\b/.test(setName)) setName = year + ' ' + setName
     const st = g(r, 'status').toLowerCase()
     const want = /want/.test(st)
     return {
-      kind: want ? 'want' : 'have', source: null, source_item_id: null, row: i + 2,
-      setName, setSlug: g(r, 'set_slug') || null, sport: g(r, 'sport'), section: g(r, 'section'), cardN: g(r, 'card_n').replace(/^#/, ''), player: g(r, 'player'),
+      kind: want ? 'want' : 'have', source: 'csv', source_item_id: hashStr(String(fileName || '') + '|' + line + '|' + n).slice(0, 60), row: i + 2,
+      setName: setName.slice(0, 300), setSlug: g(r, 'set_slug').slice(0, 200) || null, sport: g(r, 'sport').slice(0, 40), section: g(r, 'section').slice(0, 300), cardN: g(r, 'card_n').replace(/^#/, '').slice(0, 100), player: g(r, 'player').slice(0, 300),
       label: [setName, g(r, 'section'), g(r, 'card_n') && '#' + g(r, 'card_n').replace(/^#/, ''), g(r, 'player')].filter(Boolean).join(' '),
       qty: Math.max(1, Math.min(9999, parseInt(g(r, 'qty'), 10) || 1)), status: /trade/.test(st) ? 'trade' : /sale|sell/.test(st) ? 'sale' : 'have',
-      collection: g(r, 'collection') || null, price_paid: money(g(r, 'price_paid')), value: money(g(r, 'value')),
+      collection: g(r, 'collection').trim().slice(0, 60) || null, price_paid: money(g(r, 'price_paid')), value: money(g(r, 'value')),
       condition: g(r, 'condition').slice(0, 20) || null, grader: g(r, 'grader').slice(0, 20) || null, grade: g(r, 'grade').slice(0, 10) || null, cert_no: g(r, 'cert_no').slice(0, 40) || null,
       serial_no: g(r, 'serial_no').slice(0, 20) || null, autographed: yesNo(g(r, 'autographed')), acquired_on: isoDate(g(r, 'acquired_on')),
       tags: g(r, 'tags').split(/[;,]/).map(t => t.trim()).filter(Boolean).slice(0, 20), notes: g(r, 'notes').slice(0, 2000) || null,
@@ -979,7 +1005,8 @@ function ImportTab({ store, uid, indexSets, say, onWantsChanged, goTab }) {
     return () => window.removeEventListener('cardhq-tcdb', on)
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => { isAdmin().then(a => { if (a) unmatchedSummary().then(setGaps) }) }, [])
-  const bookmarklet = tcdbCode ? 'javascript:' + encodeURIComponent(tcdbCode.replace(/^\s*\/\*[\s\S]*?\*\/\s*/, '')) : ''
+  // comments out (a browser that drops the newlines in a saved bookmark would comment out the rest)
+  const bookmarklet = tcdbCode ? 'javascript:' + encodeURIComponent(tcdbCode.replace(/\/\*[\s\S]*?\*\//g, ' ').replace(/^\s*\/\/.*$/gm, '').replace(/\s*\n\s*/g, '\n').trim()) : ''
   // React blocks javascript: links in href, so the bookmark's address is set on the element directly
   useEffect(() => { if (bmRef.current && bookmarklet) bmRef.current.setAttribute('href', bookmarklet) }, [bookmarklet, incoming, csv])
   const unmatched = (store.items || []).filter(it => it.set_slug === UNMATCHED)
@@ -1034,7 +1061,7 @@ function ImportTab({ store, uid, indexSets, say, onWantsChanged, goTab }) {
             </div>
             <p style={{ ...muted, fontSize: 12, margin: '10px 0 0' }}>First row: {csv.map.set ? csv.rows[0][csv.map.set] : '—'} {csv.map.card_n ? '#' + csv.rows[0][csv.map.card_n] : ''} {csv.map.player ? csv.rows[0][csv.map.player] : ''}</p>
             <div style={{ display: 'flex', gap: 10, marginTop: 12 }}>
-              <button style={btnAccent} disabled={!csv.map.set && !csv.map.set_slug} onClick={() => { const rows = csvRows(csv.rows, csv.map); if (!rows.length) { say('No rows have a set name.', 'error'); return } setIncoming({ src: 'csv', rows, label: csv.name }); setCsv(null) }}>Match cards</button>
+              <button style={btnAccent} disabled={!csv.map.set && !csv.map.set_slug} onClick={() => { const rows = csvRows(csv.rows, csv.map, csv.name); if (!rows.length) { say('No rows have a set name.', 'error'); return } setIncoming({ src: 'csv', rows, label: csv.name }); setCsv(null) }}>Match cards</button>
               <button style={btnGhost} onClick={() => setCsv(null)}>Cancel</button>
             </div>
           </div>
@@ -1100,7 +1127,7 @@ function ImportReview({ incoming, store, uid, indexSets, say, onDone, onCancel, 
           const it = (store.items || []).find(y => y.id === x.r.id)
           return { ...it, set_slug: x.m.slug, set_name: x.m.setName, section: x.m.section, card_n: collectionCardN({ n: x.m.card_n, p: x.m.player }), player: x.m.player }
         }).filter(x => x.id)
-        const { error } = await upsertItems(uid, upd)
+        const { error } = await updateWholeItems(upd)
         if (error) throw error
         await store.reloadItems()
         onDone(upd.length ? plural(upd.length, 'card') + ' matched.' : 'No new matches yet.')
@@ -1110,20 +1137,22 @@ function ImportReview({ incoming, store, uid, indexSets, say, onDone, onCancel, 
       const names = [...new Set(incoming.rows.map(r => r.collection).filter(Boolean))]
       const { map, error: ce } = await ensureCollections(uid, names, store.collections)
       if (ce) throw ce
-      const collId = (n) => (n && map.get(n.toLowerCase())?.id) || null
+      const collId = (n) => (n && map.get(String(n).trim().slice(0, 60).toLowerCase())?.id) || null
       const existing = new Map((store.items || []).filter(it => it.source && it.source_item_id).map(it => [it.source + ':' + it.source_item_id, it]))
-      const existingWants = new Set((store.wants || []).map(w => w.source && w.source_item_id ? w.source + ':' + w.source_item_id : [w.set_slug, w.card_n, sectionKey(w.section)].join('|')))
+      // the wantlist allows one row per card (set, number, section): check that key as well as the source id
+      const wantCardKey = (w) => [w.set_slug, w.card_n ?? '', w.section ?? ''].join('|')
+      const existingWants = new Set((store.wants || []).flatMap(w => [wantCardKey(w), w.source && w.source_item_id ? w.source + ':' + w.source_item_id : null].filter(Boolean)))
       const toInsert = [], toUpdate = [], wantRows = []
-      for (const { r, m, i } of rows) {
-        if (skip.has(i)) continue
+      for (const { r, m: m0, i } of rows) {
+        const m = skip.has(i) ? { conf: 'none' } : m0   // an unticked "check these" row is kept as not matched yet
         const matched = m.conf !== 'none'
         if (!matched && !keepUnmatched) continue
         const where = matched
           ? { set_slug: m.slug, set_name: m.setName, section: m.section, card_n: collectionCardN({ n: m.card_n, p: m.player }), player: m.player }
-          : { set_slug: UNMATCHED, set_name: (r.setName || '').slice(0, 300), section: r.section || null, card_n: (r.cardN || ('—' + (r.player || ''))).slice(0, 200), player: (r.player || '').slice(0, 300) }
+          : { set_slug: UNMATCHED, set_name: (r.setName || '').slice(0, 300), section: (r.section || '').slice(0, 300) || null, card_n: (r.cardN || ('—' + (r.player || ''))).slice(0, 200), player: (r.player || '').slice(0, 300) }
         if (r.kind === 'want') {
-          const k = r.source && r.source_item_id ? r.source + ':' + r.source_item_id : [where.set_slug, where.card_n, sectionKey(where.section)].join('|')
-          if (!existingWants.has(k)) { existingWants.add(k); wantRows.push({ ...where, source: r.source, source_item_id: r.source_item_id }) }
+          const ks = [wantCardKey(where), r.source && r.source_item_id ? r.source + ':' + r.source_item_id : null].filter(Boolean)
+          if (!ks.some(k => existingWants.has(k))) { ks.forEach(k => existingWants.add(k)); wantRows.push({ ...where, source: r.source, source_item_id: r.source_item_id }) }
           continue
         }
         const row = {
@@ -1134,12 +1163,23 @@ function ImportReview({ incoming, store, uid, indexSets, say, onDone, onCancel, 
         }
         const prev = r.source && r.source_item_id && existing.get(r.source + ':' + r.source_item_id)
         if (prev) {
-          // a re-import updates what the source knows; details only a full import reads stay if this one is quick
-          const keepDetail = (k) => row[k] == null || (Array.isArray(row[k]) && !row[k].length) ? prev[k] : row[k]
-          toUpdate.push({ ...prev, ...row, condition: keepDetail('condition'), grader: keepDetail('grader'), grade: keepDetail('grade'), serial_no: keepDetail('serial_no'), notes: keepDetail('notes'), tags: keepDetail('tags'), value: prev.value, image_url: prev.image_url, cert_no: prev.cert_no || row.cert_no })
+          // A re-import updates what the source knows and keeps what was done here: anything the
+          // source leaves blank (a quick import reads no grading), Card HQ-only collections, values,
+          // photos, and a match made by hand (unless the card was still unmatched).
+          const keep = (k) => row[k] == null || (Array.isArray(row[k]) && !row[k].length) ? prev[k] : row[k]
+          const placed = prev.set_slug !== UNMATCHED && prev.set_slug
+          toUpdate.push({
+            ...prev, ...row,
+            ...(placed ? { set_slug: prev.set_slug, set_name: prev.set_name, section: prev.section, card_n: prev.card_n, player: prev.player } : {}),
+            collection_id: r.collection ? row.collection_id : prev.collection_id,
+            status: r.status && r.status !== 'have' ? row.status : prev.status === 'have' ? row.status : prev.status,
+            condition: keep('condition'), grader: keep('grader'), grade: keep('grade'), serial_no: keep('serial_no'), notes: keep('notes'), tags: keep('tags'),
+            price_paid: keep('price_paid'), acquired_on: keep('acquired_on'), cert_no: keep('cert_no'),
+            value: prev.value, value_at: prev.value_at, image_url: prev.image_url,
+          })
         } else toInsert.push(row)
       }
-      if (toUpdate.length) { setBusy('Updating ' + plural(toUpdate.length, 'card') + '…'); const { error } = await upsertItems(uid, toUpdate); if (error) throw error }
+      if (toUpdate.length) { setBusy('Updating ' + plural(toUpdate.length, 'card') + '…'); const { error } = await updateWholeItems(toUpdate); if (error) throw error }
       if (toInsert.length) { const { error } = await insertItems(uid, toInsert, (d, t) => setBusy('Saving ' + d.toLocaleString() + ' of ' + t.toLocaleString() + '…')); if (error) throw error }
       if (wantRows.length) { setBusy('Saving wantlist…'); const { error } = await insertWants(uid, wantRows); if (error) throw error }
       await Promise.all([store.reloadItems(), store.reloadCollections(), store.reloadWants()])
@@ -1147,7 +1187,9 @@ function ImportReview({ incoming, store, uid, indexSets, say, onDone, onCancel, 
       onDone(`Imported from ${incoming.label}: ${plural(toInsert.length, 'new card')}${toUpdate.length ? ', ' + plural(toUpdate.length, 'updated card') : ''}${wantRows.length ? ', ' + plural(wantRows.length, 'wantlist card') : ''}.`)
     } catch (e) {
       setBusy('')
-      say('The import stopped — ' + (e.message || e) + '. Nothing is lost: run it again and saved cards are skipped.', 'error')
+      // what did save is reloaded, so pressing Import again skips it (the database skips repeats too)
+      await Promise.all([store.reloadItems(), store.reloadCollections(), store.reloadWants()]).catch(() => {})
+      say('The import stopped — ' + (e.message || e) + '. Press Import again to finish: cards already saved are skipped.', 'error')
     }
   }
   const review = showAll ? likely : likely.slice(0, 60)
@@ -1282,7 +1324,7 @@ export function RainbowDialog({ setData, card: c, onClose, owned, onToggleOwn, i
     const out = []
     for (const sec of setData.sections || []) for (const x of sec.cards || []) {
       if (nk ? numKey(x.n) !== nk : true) continue
-      if (String(x.p || '').toLowerCase() !== who && !(nk && sec.cards.length > 0 && String(x.p || '').toLowerCase().includes(who.split(' ').pop()))) continue
+      if (String(x.p || '').toLowerCase() !== who) continue   // same printed name: "Patrick Kane", not every Kane
       out.push({ sec, c: x, run: runOf(sec.title, x.x) })
     }
     // unnumbered parallels first, then by print run high -> low (the usual rainbow order)
