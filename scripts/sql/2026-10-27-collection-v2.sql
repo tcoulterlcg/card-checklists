@@ -221,3 +221,18 @@ create trigger cardhq_trade_req_guard before insert or update on public.cardhq_t
 
 revoke truncate on public.cardhq_collections, public.cardhq_want_rules, public.cardhq_trade_requests from anon, authenticated;
 commit;
+
+-- Admins: which sets collectors imported that Card HQ doesn't have yet (no user identities).
+-- Applied 2026-10-27 (migration cardhq_unmatched_summary).
+create or replace function public.cardhq_unmatched_summary()
+returns table (set_name text, cards bigint, collectors bigint)
+language sql stable security definer set search_path to 'public' as $$
+  select i.set_name, sum(i.qty)::bigint, count(distinct i.user_id)::bigint
+  from public.cardhq_collection_items i
+  where i.set_slug = 'unmatched' and public.cardhq_is_admin()
+  group by i.set_name
+  order by count(distinct i.user_id) desc, sum(i.qty) desc
+  limit 500
+$$;
+revoke execute on function public.cardhq_unmatched_summary() from anon, public;
+grant execute on function public.cardhq_unmatched_summary() to authenticated;

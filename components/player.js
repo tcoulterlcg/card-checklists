@@ -3,7 +3,8 @@
 // filters, and "My Players" (players the collector follows). Data comes from
 // public/data/players/ (built by scripts/build-player-index.mjs).
 import { memo, useDeferredValue, useEffect, useId, useMemo, useRef, useState } from 'react'
-import { supa } from '../lib/supa'
+import { supa, collectionCardN } from '../lib/supa'
+import { cardKey } from '../lib/collection'
 import { Select, useIsMobile } from './dropdown'
 import { isMultiYear } from '../lib/catalog'
 import { TYPE, norm, setNameMatches, STOP_PLAYER, parseQuery, parseQueryFor, matchPlayers, akaOf, rowMatches, typeLabel, tagLabel, TAG_COLORS, TYPE_COLORS, serialLabel, MEM_LABEL, MEM_COLORS, memKind, memTypical } from '../lib/query'
@@ -267,11 +268,14 @@ export function Omnibox({ value, onChange, onSubmit, onPickPlayer, onPickSet, se
 // ---------- Player page ----------
 // Games and non-sport categories: no autos/rookies/game-used to speak of.
 const NON_SPORTS = new Set(['Pokémon', 'Yu-Gi-Oh!', 'Magic', 'Lorcana', 'One Piece', 'Disney', 'Entertainment', 'Non-Sport', 'Other'])
-const VIEWS = [['all', 'All cards'], ['oneofone', '1/1s'], ['rc', 'Rookies'], ['auto', 'Autos'], ['pa', 'Patch autos'], ['gu', 'Game-used'], ['base', 'Base only'], ['rare', '/25 or rarer']]
-const quickFilter = { all: () => true, oneofone: r => r[5] === 1, rc: r => r[6] & TYPE.RC, auto: r => r[6] & TYPE.AU, pa: r => (r[6] & TYPE.AU) && (r[6] & TYPE.PATCH), gu: r => (r[7] & 7) === 1, base: r => r[6] & TYPE.BASE, rare: r => r[5] > 0 && r[5] <= 25 }
+const VIEWS = [['all', 'All cards'], ['mine', 'In my collection'], ['missing', 'Not in my collection'], ['oneofone', '1/1s'], ['rc', 'Rookies'], ['auto', 'Autos'], ['pa', 'Patch autos'], ['gu', 'Game-used'], ['base', 'Base only'], ['rare', '/25 or rarer']]
+const quickFilter = { all: () => true, mine: () => true, missing: () => true,   // mine/missing: decided in matches() from the collection
+  oneofone: r => r[5] === 1, rc: r => r[6] & TYPE.RC, auto: r => r[6] & TYPE.AU, pa: r => (r[6] & TYPE.AU) && (r[6] & TYPE.PATCH), gu: r => (r[7] & 7) === 1, base: r => r[6] & TYPE.BASE, rare: r => r[5] > 0 && r[5] <= 25 }
 
-export const PlayerPage = memo(PlayerPageInner, (a, b) => a.player === b.player && a.parsed === b.parsed && a.sets === b.sets && a.candidates === b.candidates && a.myPlayers.list === b.myPlayers.list && a.onWant === b.onWant && a.onCompare === b.onCompare)
-function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, onSearch, candidates, onPickCandidate, onCompare }) {
+export const PlayerPage = memo(PlayerPageInner, (a, b) => a.player === b.player && a.parsed === b.parsed && a.sets === b.sets && a.candidates === b.candidates && a.myPlayers.list === b.myPlayers.list && a.onWant === b.onWant && a.onCompare === b.onCompare && a.owned === b.owned)
+function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, onSearch, candidates, onPickCandidate, onCompare, owned }) {
+  // copies of this card in the signed-in collector's collection (0 when signed out)
+  const ownCount = (r) => (owned && owned.size ? owned.get(cardKey(r.slug, r.section, collectionCardN({ n: r.n, p: r.label || player.name }))) || 0 : 0)
   const [shard, setShard] = useState(null)
   // View choices round-trip through the URL (?qv=rookies&group=season&sort=rarest&run=25),
   // so Back from a set returns to the same view.
@@ -391,6 +395,8 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
     const qf = quickFilter[quick] || quickFilter.all
     return (r, skipYear) => {
       if (!qf(r.raw)) return false
+      if (quick === 'mine' && !ownCount(r)) return false
+      if (quick === 'missing' && ownCount(r)) return false
       if (hidePlates && (r.type & TYPE.PLATE)) return false
       if (types.size && ![...types].some(k => r.type & TYPE[k])) return false
       if (run === '1' && r.serial !== 1) return false
@@ -409,7 +415,7 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
       if (pars && pars.size && ![...pars].some(k => r.par & PAR[k])) return false
       return true
     }
-  }, [quick, types, run, brands, teams, labels, yearFrom, yearTo, products, hidePlates, parsed, ignoreParsed, mems, statedOnly, pars])
+  }, [quick, types, run, brands, teams, labels, yearFrom, yearTo, products, hidePlates, parsed, ignoreParsed, mems, statedOnly, pars, owned])
   const filtered = useMemo(() => rows.filter(r => matches(r, false)), [rows, matches])
   // Cards per season under every filter except the season range.
   const yearCounts = useMemo(() => {
@@ -487,7 +493,7 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
       <td style={{ padding: '9px 12px' }}><TypeChip t={r.type} /></td>
       <td style={{ padding: '9px 12px' }}>{r.mem ? <MemChip code={r.mem} /> : <span style={{ color: '#5C6478' }}>—</span>}</td>
       <td style={{ padding: '9px 12px', textAlign: 'right', whiteSpace: 'nowrap' }}><Serial s={r.serial} /></td>
-      <td style={{ padding: '9px 12px', textAlign: 'right' }}><button aria-label={'Add #' + r.n + ' ' + r.section + ' to wantlist'} onClick={() => onWant({ set_slug: r.slug, set_name: r.set, card_n: r.n, section: r.section, player: r.label || player.name }, true)} style={{ background: 'none', border: '1px solid #232A3E', color: '#A1A1AA', borderRadius: 6, width: 32, height: 32, cursor: 'pointer', fontFamily: 'inherit' }}>+</button></td>
+      <td style={{ padding: '9px 12px', textAlign: 'right', whiteSpace: 'nowrap' }}>{ownCount(r) > 0 && <span title={'In your collection' + (ownCount(r) > 1 ? ' (' + ownCount(r) + ' copies)' : '')} style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', minWidth: 32, height: 32, boxSizing: 'border-box', marginRight: 6, padding: '0 6px', borderRadius: 6, background: '#12200f', border: '1px solid #2f5324', color: '#9fd18a', fontSize: 13, fontWeight: 700, verticalAlign: 'middle' }}>✓{ownCount(r) > 1 ? ' ' + ownCount(r) : ''}</span>}<button aria-label={'Add #' + r.n + ' ' + r.section + ' to wantlist'} onClick={() => onWant({ set_slug: r.slug, set_name: r.set, card_n: r.n, section: r.section, player: r.label || player.name }, true)} style={{ background: 'none', border: '1px solid #232A3E', color: '#A1A1AA', borderRadius: 6, width: 32, height: 32, cursor: 'pointer', fontFamily: 'inherit' }}>+</button></td>
     </tr>
   )
   const th = { padding: '9px 12px', fontWeight: 700, textAlign: 'left', fontSize: 12, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#8A93A8', whiteSpace: 'nowrap' }
@@ -540,7 +546,7 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
       {/* QUICK VIEWS */}
       <div className="hq-chiprow" style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center', margin: '16px 0 0' }}>
         <span style={{ ...eyebrow, color: '#8A93A8', marginRight: 4 }}>Quick views</span>
-        {VIEWS.map(([k, l]) => { const n = rows.filter(r => quickFilter[k](r.raw)).length; if (nonSports && shard && k !== 'all' && !n && quick !== k) return null; return <button key={k} onClick={() => setQuick(k)} style={pill(quick === k)}>{l}{k !== 'all' ? ' · ' + n.toLocaleString() : ''}</button> })}
+        {VIEWS.map(([k, l]) => { if ((k === 'mine' || k === 'missing') && !(owned && owned.size) && quick !== k) return null; const n = k === 'mine' ? rows.filter(r => ownCount(r)).length : k === 'missing' ? rows.filter(r => !ownCount(r)).length : rows.filter(r => quickFilter[k](r.raw)).length; if (nonSports && shard && k !== 'all' && !n && quick !== k) return null; return <button key={k} onClick={() => setQuick(k)} style={pill(quick === k)}>{l}{k !== 'all' ? ' · ' + n.toLocaleString() : ''}</button> })}
       </div>
 
       {/* BODY */}
@@ -619,7 +625,7 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
 
         <div style={{ flex: '999 1 320px', minWidth: 0, display: 'flex', flexDirection: 'column', gap: 14 }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
-            <span style={{ ...title(18) }}>{shard ? filtered.length.toLocaleString() : '…'} card{shard && filtered.length === 1 ? '' : 's'} <span style={{ color: '#8A93A8', fontSize: 16 }}>in {(n => n.toLocaleString() + (n === 1 ? ' set' : ' sets'))(new Set(filtered.map(r => r.slug)).size)}</span></span>
+            <span style={{ ...title(18) }}>{shard ? filtered.length.toLocaleString() : '…'} card{shard && filtered.length === 1 ? '' : 's'} <span style={{ color: '#8A93A8', fontSize: 16 }}>in {(n => n.toLocaleString() + (n === 1 ? ' set' : ' sets'))(new Set(filtered.map(r => r.slug)).size)}</span>{shard && owned && owned.size > 0 && (n => n ? <span style={{ color: '#9fd18a', fontSize: 16 }}> · you own {n.toLocaleString()} ({Math.floor(100 * n / Math.max(1, filtered.length))}%)</span> : null)(filtered.filter(r => ownCount(r)).length)}</span>
             <div style={{ display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap' }}>
               <div role="group" aria-label="Group results" style={{ display: 'inline-flex', border: '1px solid #232A3E', borderRadius: 8, overflow: 'hidden' }}>
                 {[['set', 'By set'], ['season', 'By season'], ['flat', 'Flat list']].map(([k, l]) => <button key={k} onClick={() => setGroup(k)} style={{ background: group === k ? ACCENT : '#121626', color: group === k ? '#fff' : '#A1A1AA', border: 'none', padding: '0 12px', height: 36, fontSize: 12, fontWeight: 700, cursor: 'pointer', fontFamily: 'inherit' }}>{l}</button>)}

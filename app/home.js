@@ -6,8 +6,10 @@
 import { useDialogFocus } from '../components/dialog-focus'
 import { useCallback, useDeferredValue, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { Select, Popover, Trigger, Chevron, Check, menuItem, menuHeading, triggerStyle, useIsMobile } from '../components/dropdown'
-import { useAccount, AccountChip, AuthModal, CollectionView, CommunityView } from '../components/community'
-import { addWant, removeWant, myWantlist, grailfindrFindUrl, signOutHere, noCardNumber } from '../lib/supa'
+import { useAccount, AccountChip, AuthModal, CommunityView } from '../components/community'
+import { CollectionView, CollectorView, RainbowDialog, useMyCollection } from '../components/collection'
+import { cardKeyOf, itemKey, insertItems, deleteItems } from '../lib/collection'
+import { addWant, removeWant, myWantlist, grailfindrFindUrl, signOutHere, noCardNumber, collectionCardN } from '../lib/supa'
 import { FeedbackModal, FeedbackView, useFeedbackAdmin } from '../components/feedback'
 import { FixEditor } from '../components/fix-editor'
 import { Omnibox, PlayerPage, MyPlayersPanel, useMyPlayers, loadPlayerDir, loadTopPlayers, seasonLabel, MemBadge, MemChip, memCodeOf } from '../components/player'
@@ -382,8 +384,36 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
   const [brandFilter, setBrandFilter] = useState('All')
   const [productFilter, setProductFilter] = useState('All')
   const [sortBy, setSortBy] = useState('year-desc')
-  const [view, setView] = useState('browse') // browse | patchswaps | rpa | community | collection
+  const [view, setView] = useState('browse') // browse | patchswaps | rpa | community | collection | collector
   const account = useAccount()
+  const store = useMyCollection(account)   // My Collection data, also used for ✓ marks on set and player pages
+  const [collectorName, setCollectorName] = useState('')   // ?view=collector&u=<username>
+  const [rainbow, setRainbow] = useState(null)   // { sec, card }: every parallel of one card
+  useEffect(() => { setRainbow(null) }, [setData?.slug])
+  // Set pages: one click adds a card to My Collection; a second click removes it unless the copy has
+  // details (grading, price, photo…), which are only changed in My Collection.
+  const ownBusy = useRef(new Set())
+  const toggleOwn = async (sd, sec, c) => {
+    if (!account.session) { setAuthOpen(true); return }
+    if (!store.items) return
+    const k = cardKeyOf(sd.slug, sec.title, c)
+    if (ownBusy.current.has(k)) return
+    ownBusy.current.add(k)
+    const say = (t) => { setWantFlash(t); clearTimeout(flashTimer.current); flashTimer.current = setTimeout(() => setWantFlash(''), 2500) }
+    try {
+      const its = store.items.filter(it => itemKey(it) === k)
+      const label = (c.n ? '#' + c.n + ' ' : '') + (c.p || '')
+      if (!its.length) {
+        const { data, error } = await insertItems(account.session.user.id, [{ set_slug: sd.slug, set_name: sd.name, section: sec.title, card_n: collectionCardN(c), player: c.p, status: 'have', qty: 1 }])
+        if (error) say('Couldn’t add — ' + error.message)
+        else { store.setItems(cur => [...(cur || []), ...data]); say(label + ' added to your collection') }
+      } else if (its.length === 1 && its[0].qty === 1 && !its[0].grader && its[0].price_paid == null && its[0].value == null && !its[0].notes && !its[0].image_url) {
+        const { error } = await deleteItems([its[0].id])
+        if (error) say('Couldn’t remove — ' + error.message)
+        else { store.setItems(cur => (cur || []).filter(x => x.id !== its[0].id)); say(label + ' removed from your collection') }
+      } else say('You have ' + its.reduce((n, it) => n + it.qty, 0) + ' with details saved — change them in My Collection')
+    } finally { ownBusy.current.delete(k) }
+  }
   const [authOpen, setAuthOpen] = useState(false)
   // signed out, "Track in My Collection" asks for sign-in right there and carries on after it
   const pendingTrack = useRef(null)
@@ -970,7 +1000,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
   // Stable callbacks for the (memoized) player page, so typing in the search box
   // doesn't re-render a 1,000-row player page on every keystroke.
   const cbRef = useRef({})
-  cbRef.current = { openSetBySlug, wantIt, runSearch, openPlayerByName, pickCandidate: (c) => openPlayer(c, playerParsed, playerCandidates), compare: (name) => openCompare([name, '']) }
+  cbRef.current = { openSetBySlug, wantIt, runSearch, openPlayerByName, toggleOwn: (sec, c) => toggleOwn(setData, sec, c), rainbow: (sec, c) => setRainbow({ sec, card: c }), pickCandidate: (c) => openPlayer(c, playerParsed, playerCandidates), compare: (name) => openCompare([name, '']) }
   const stableCb = useMemo(() => ({
     openSetBySlug: (...a) => cbRef.current.openSetBySlug(...a), wantIt: (...a) => cbRef.current.wantIt(...a),
     runSearch: (...a) => cbRef.current.runSearch(...a), pickCandidate: (...a) => cbRef.current.pickCandidate(...a),
@@ -998,14 +1028,14 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
                     <div style={{ flex: '1 1 0', minWidth: 0 }}><SortHeader label={setIsTcg ? 'Card' : setIsSport ? 'Player' : 'Name'} field="p" sortField={sortField} sortDir={sortDir} onClick={toggleSort} grow /></div>
                     {setFacets.team && <div className="hq-col-team" style={{ flex: '1 1 0', minWidth: 0 }}><SortHeader label={setIsTcg ? 'Type' : 'Team'} field="t" sortField={sortField} sortDir={sortDir} onClick={toggleSort} grow /></div>}
                     {setFacets.flag && <div className="hq-col-flag" style={{ flex: setIsTcg ? '0 0 110px' : '0 0 96px' }}><SortHeader label={setIsTcg ? 'Rarity' : 'Flag'} field="x" sortField={sortField} sortDir={sortDir} onClick={toggleSort} align="right" /></div>}
-                    <span aria-hidden="true" style={{ flex: '0 0 78px' }} />
+                    <span aria-hidden="true" style={{ flex: '0 0 124px' }} />
                   </div>
                   {sorted.slice(0, openSecs.has(sec.title) ? 5000 : 200).map((c, i) => (
                     <div key={i} className="hq-setrow" style={{
                       display: 'flex', gap: 14, padding: '8px 16px', fontSize: 14,
                       background: i % 2 === 0 ? '#0F1320' : '#121626', alignItems: 'center'
                     }}>
-                      <span className="hq-col-num" style={{ flex: '0 0 68px', color: ACCENT_TEXT, fontWeight: 700, fontVariantNumeric: 'tabular-nums', overflowWrap: 'anywhere' }}>{c.n ? '#' + c.n : '—'}</span>
+                      <span className="hq-col-num" style={{ flex: '0 0 68px', overflowWrap: 'anywhere' }}><button onClick={() => cbRef.current.rainbow(sec, c)} title="See every parallel of this card (rainbow)" style={{ background: 'none', border: 'none', padding: 0, color: ACCENT_TEXT, fontWeight: 700, fontVariantNumeric: 'tabular-nums', cursor: 'pointer', fontFamily: 'inherit', fontSize: 14, textAlign: 'left', overflowWrap: 'anywhere' }}>{c.n ? '#' + c.n : '—'}</button></span>
                       <span style={{ flex: '1 1 0', minWidth: 0 }}>
                         {NOT_A_PLAYER.test(c.p || '') ? <span style={{ fontWeight: 600, color: '#EDEDEF' }}>{c.p}</span>   /* checklist / header cards have no player page */
                           : <button onClick={() => cbRef.current.openPlayerByName(c.p, null, true, setData?.sport)} title={'Open ' + c.p + "'s player page"} style={{ fontWeight: 600, background: 'none', border: 'none', color: isMine(c.p) ? ACCENT_TEXT : '#EDEDEF', cursor: 'pointer', padding: 0, textAlign: 'left', fontFamily: 'inherit', fontSize: 14 }}>{c.p}</button>}
@@ -1014,6 +1044,12 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
                       </span>
                       {setFacets.team && <span className="hq-col-team" style={{ flex: '1 1 0', minWidth: 0, color: '#8A93A8', fontSize: 13 }}>{c.t || ''}</span>}
                       {setFacets.flag && <span className="hq-col-flag" style={{ flex: setIsTcg ? '0 0 110px' : '0 0 96px', textAlign: 'right' }}>{c.x ? <Chip color={/\bRC\b/.test(c.x) ? '#4ade80' : '#8A93A8'} title={flagTitle(c.x)}>{c.x}</Chip> : null}</span>}
+                      {(() => { const n = store.owned.get(cardKeyOf(setData.slug, sec.title, c)) || 0; return (
+                      <button onClick={() => cbRef.current.toggleOwn(sec, c)} aria-pressed={n > 0} aria-label={n ? 'In your collection — remove' : 'Add to your collection'}
+                        title={n ? 'In your collection' + (n > 1 ? ' (' + n + ' copies)' : '') + ' — click to remove' : 'I have this card — add it to My Collection'}
+                        style={{ flex: '0 0 32px', height: 32, background: n ? '#12200f' : 'none', border: '1px solid ' + (n ? '#2f5324' : '#232A3E'), color: n ? '#9fd18a' : '#8A93A8', borderRadius: 6, fontSize: 13, fontWeight: 700, cursor: 'pointer', padding: 0, display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}>
+                        {n > 1 ? n : n ? '✓' : <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2" /><path d="M12 8v8M8 12h8" /></svg>}
+                      </button>) })()}
                       <a href={grailfindrFindUrl({ setName: setData.name, player: c.p, n: c.n, section: sec.title })} target="_blank" rel="noreferrer"
                         title="Find this card for sale on GrailFindr (every marketplace)" aria-label={'Find ' + (c.p || 'this card') + ' on GrailFindr'}
                         style={{ flex: '0 0 32px', height: 32, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', border: '1px solid #232A3E', borderRadius: 6, color: '#8A93A8', textDecoration: 'none' }}>
@@ -1031,7 +1067,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
                 </div>
               </div>
             )
-          }), [setData, visibleSections, secLimit, sortField, sortDir, openSecs, setIsTcg, setIsSport, setFacets, wanted, mineSet])
+          }), [setData, visibleSections, secLimit, sortField, sortDir, openSecs, setIsTcg, setIsSport, setFacets, wanted, mineSet, store.owned])
   const urlApplied = useRef(false)   // don't overwrite a shared ?sport=… link before applyUrl has read it
   useEffect(() => {
     if (!isLanding || sets.length === 0 || !urlApplied.current) return
@@ -1071,9 +1107,9 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
       : view === 'player' && activePlayer ? activePlayer.name + ' Cards'
       : view === 'compare' ? (compareNames.filter(Boolean).join(' vs ') || 'Compare players')
       : globalHits ? 'Search: ' + query
-      : view === 'community' ? 'Community' : view === 'collection' ? 'My Collection' : view === 'myplayers' ? 'My Players' : view === 'feedback' ? 'Feedback' : ''
+      : view === 'community' ? 'Community' : view === 'collection' ? 'My Collection' : view === 'collector' ? collectorName + '’s collection' : view === 'myplayers' ? 'My Players' : view === 'feedback' ? 'Feedback' : ''
     document.title = t ? t + ' — CardHQ' : 'CardHQ — Sports Card & TCG Checklists'
-  }, [activeSet, setData, view, activePlayer, globalHits, compareNames])
+  }, [activeSet, setData, view, activePlayer, globalHits, compareNames, collectorName])
   // Deep links and Back/Forward: ?player=Name[&q=raw] · ?set=slug · ?view=community · ?search=term
   const applyUrl = () => {
     urlApplied.current = true
@@ -1094,7 +1130,8 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
     }
     else if (sr && sr.trim().length >= 3) runGlobalSearch(sr, false)
     else if (sr) { goHome(false); setNotice('Type at least 3 letters to search.') }   // not an endless 'Loading…'
-    else if (v && ['myplayers', 'community', 'collection', 'feedback'].includes(v)) openView(v, false, v === 'collection' && sp.get('cset') ? '&cset=' + encodeURIComponent(sp.get('cset')) : '')
+    else if (v === 'collector' && sp.get('u')) { setCollectorName(sp.get('u').slice(0, 40)); openView('collector', false, '&u=' + encodeURIComponent(sp.get('u').slice(0, 40))) }
+    else if (v && ['myplayers', 'community', 'collection', 'feedback'].includes(v)) openView(v, false, v === 'collection' ? ['cset', 'ctab', 'from'].filter(k => sp.get(k)).map(k => '&' + k + '=' + encodeURIComponent(sp.get(k))).join('') : '')
     else {
       goHome(false)
       // browse filters live in the URL too (?sport=Hockey&team=...), so Back and shared links restore them
@@ -1233,6 +1270,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
       {notice && <div role="status" style={{ background: SURFACE, border: '1px solid ' + LINE, borderRadius: 12, padding: '12px 16px', margin: '0 0 16px', color: TEXT_2, fontSize: 14 }}>{notice}</div>}
       <FeedbackModal open={!!feedback} context={feedback || {}} onClose={() => setFeedback(null)} account={account} onOpenAuth={() => setAuthOpen(true)} />
       <AuthModal open={authOpen} onClose={() => setAuthOpen(false)} account={account} />
+      {rainbow && setData && <RainbowDialog setData={setData} card={rainbow.card} onClose={() => setRainbow(null)} owned={store.owned} onToggleOwn={(sec, c) => toggleOwn(setData, sec, c)} isWanted={isWanted} onWant={wantIt} />}
       {fbAdmin.admin && (
         <FixEditor open={!!fixing} slug={fixing?.slug} feedback={fixing?.feedback} onClose={() => setFixing(null)}
           onSaved={() => { fbAdmin.refresh(); setFixVersion(v => v + 1); if (setData && fixing?.slug === setData.slug) loadSet(setData.slug).then(d => d && setSetData(d)) }} />
@@ -1426,6 +1464,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
             <p style={{ color: '#8A93A8', fontSize: 13, margin: '10px 0 0' }}>
               {(n => n.toLocaleString() + (n === 1 ? ' card' : ' cards'))((setData.sections || []).reduce((s, x) => s + x.cards.length, 0))}
               {rcCount(setData) > 0 ? ' · ' + rcCount(setData) + ' rookies flagged' : ''} · source: {setData.source}
+              {store.owned.size > 0 && (n => n ? <span style={{ color: '#9fd18a' }}> · you own {n.toLocaleString()}</span> : null)((setData.sections || []).reduce((a, sec) => a + sec.cards.filter(c => store.owned.has(cardKeyOf(setData.slug, sec.title, c))).length, 0))}
             </p>
             <div style={{ display: 'flex', gap: 10, marginTop: 14, flexWrap: 'wrap' }}>
               <button onClick={() => wantIt({ set_slug: setData.slug, set_name: setData.name })}
@@ -1603,7 +1642,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
         <>
         <PlayerPage key={activePlayer.id + '|' + ((playerParsed && playerParsed.raw) || '')} player={activePlayer} parsed={playerParsed} sets={sets} myPlayers={myPlayers}
           onOpenSet={stableCb.openSetBySlug}
-          onWant={stableCb.wantIt} onSearch={stableCb.runSearch} candidates={playerCandidates} onPickCandidate={stableCb.pickCandidate} onCompare={stableCb.compare} />
+          onWant={stableCb.wantIt} onSearch={stableCb.runSearch} candidates={playerCandidates} onPickCandidate={stableCb.pickCandidate} onCompare={stableCb.compare} owned={store.owned} />
         <p style={{ color: '#8A93A8', fontSize: 13, margin: '18px 0 0' }}>
           Missing a card or parallel for {activePlayer.name}?{' '}
           <button onClick={() => setFeedback({ player: activePlayer.name })} style={{ background: 'none', border: 'none', padding: 0, color: ACCENT_TEXT, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit', fontSize: 13 }}>Report it</button>
@@ -1620,8 +1659,10 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
       ) : view === 'community' ? (
         <CommunityView account={account} indexSets={sets} onOpenAuth={() => setAuthOpen(true)} />
       ) : view === 'collection' ? (
-        <CollectionView account={account} indexSets={sets} onOpenAuth={() => setAuthOpen(true)}
+        <CollectionView account={account} store={store} indexSets={sets} onOpenAuth={() => setAuthOpen(true)}
           onOpenSet={openSetBySlug} onWantsChanged={() => account.session && loadWanted(account.session.user.id)} />
+      ) : view === 'collector' ? (
+        <CollectorView username={collectorName} indexSets={sets} onOpenSet={openSetBySlug} account={account} />
       ) : view === 'rpa' ? (
         <section>
           <div style={{ background: 'linear-gradient(140deg, #0f1526, #0F1320)', border: '1px solid ' + ACCENT + '33', borderRadius: 18, padding: '30px 30px', marginBottom: 22 }}>
