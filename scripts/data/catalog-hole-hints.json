@@ -1957,6 +1957,128 @@
    "twitter"
   ]
  },
+ "1996-score": {
+  "missingPlayers": [
+   "abduljabbar",
+   "abdurrahim",
+   "aitken",
+   "banks",
+   "barry",
+   "battaglia",
+   "berard",
+   "blair",
+   "bonds",
+   "briere",
+   "bryant",
+   "byer",
+   "camby",
+   "cedeno",
+   "checklist",
+   "cherry",
+   "cl",
+   "cleary",
+   "clemons",
+   "colagiacomo",
+   "colon",
+   "cruz",
+   "dampier",
+   "darkins",
+   "delk",
+   "devereaux",
+   "dome",
+   "drews",
+   "dudley",
+   "dunn",
+   "dvorak",
+   "dye",
+   "edney",
+   "evans",
+   "farmer",
+   "fata",
+   "feick",
+   "finley",
+   "fisher",
+   "fuller",
+   "garcia",
+   "green",
+   "grieve",
+   "guerrero",
+   "hamer",
+   "harrington",
+   "hartings",
+   "harvey",
+   "helms",
+   "hendrickson",
+   "hermansen",
+   "hernandez",
+   "hidalgo",
+   "holden",
+   "hoying",
+   "iginla",
+   "iverson",
+   "jabbar",
+   "jackman",
+   "jenkins",
+   "johnstone",
+   "jovanovski",
+   "kennison",
+   "kidd",
+   "kittles",
+   "knight",
+   "livingston",
+   "marbury",
+   "mayberry",
+   "mccarty",
+   "mcdyess",
+   "mcinnis",
+   "mcwilliams",
+   "mickens",
+   "milloy",
+   "minor",
+   "mourning",
+   "muhammad",
+   "mutombo",
+   "nash",
+   "norris",
+   "of",
+   "olajuwon",
+   "oneal",
+   "ordonez",
+   "payton",
+   "pippen",
+   "pope",
+   "potapenko",
+   "reese",
+   "riley",
+   "robinson",
+   "roche",
+   "rogers",
+   "rose",
+   "samsonov",
+   "sasser",
+   "sheffer",
+   "stoudamire",
+   "thornton",
+   "toomer",
+   "volchkov",
+   "wagner",
+   "wallace",
+   "wood",
+   "wright",
+   "zubrus",
+   "zyuzin"
+  ],
+  "missingInserts": [
+   "board 23k",
+   "board exxon ravens",
+   "board laser images",
+   "board sport ppf",
+   "board sport ppf retro",
+   "board sport ppf revivals",
+   "board washington redskins",
+   "br1 br8"
+  ]
+ },
  "2016-topps-chrome-baseball-cards": {
   "missingPlayers": [
    "aaron",
@@ -5010,26 +5132,6 @@
    "collegiate jersey"
   ]
  },
- "1995-pro-line": {
-  "missingPlayers": [
-   "beurlein",
-   "bills",
-   "broncos",
-   "browns",
-   "chiefs",
-   "dolphins",
-   "jets",
-   "jurgenson",
-   "oilers"
-  ],
-  "missingInserts": [
-   "game breakers previews",
-   "mvp redemption",
-   "precision cuts",
-   "sample promo",
-   "to 2398"
-  ]
- },
  "2014-topps-mini-baseball-cards": {
   "missingPlayers": [
    "banks",
@@ -6087,17 +6189,6 @@
    "patch"
   ]
  },
- "1995-ultra": {
-  "missingPlayers": [
-   "of"
-  ],
-  "missingInserts": [
-   "2nd year standout",
-   "achievement",
-   "first rounders",
-   "touchdown king"
-  ]
- },
  "2013-topps-ufc-bloodlines-trading-cards": {
   "missingPlayers": [
    "barry",
@@ -6399,6 +6490,18 @@
    "signature rps"
   ]
  },
+ "1996-playoff-contenders": {
+  "missingPlayers": [
+   "chrebet",
+   "freeman",
+   "jabbar"
+  ],
+  "missingInserts": [
+   "accent",
+   "leather",
+   "stallions"
+  ]
+ },
  "1990-fleer": {
   "missingPlayers": [
    "broussard",
@@ -6520,6 +6623,17 @@
    "midnight"
   ]
  },
+ "1996-stadium-club": {
+  "missingPlayers": [
+   "hickerson",
+   "watter"
+  ],
+  "missingInserts": [
+   "1966",
+   "1966 96",
+   "1970 150"
+  ]
+ },
  "2015-16-sp-authentic-hockey-cards": {
   "missingPlayers": [
    "box",
@@ -6602,16 +6716,6 @@
    "pristine generals"
   ]
  },
- "1995-pacific": {
-  "missingPlayers": [
-   "mamula"
-  ],
-  "missingInserts": [
-   "triple folders big guns",
-   "triple folders crystalline",
-   "triple folders teams"
-  ]
- },
  "1993-stadium-club": {
   "missingPlayers": [
    "klinger"
@@ -6677,14 +6781,6 @@
   ],
   "missingInserts": [
    "update"
-  ]
- },
- "1995-playoff-absolute": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "die cut helmets",
-   "pigskin preview",
-   "quads"
   ]
  },
  "2019-panini-chronicles-baseball": {
@@ -7334,6 +7430,24 @@
    "res"
   ]
  },
+ "1996-pacific-invincible": {
+  "missingPlayers": [
+   "heardst"
+  ],
+  "missingInserts": [
+   "die cut",
+   "promo"
+  ]
+ },
+ "1996-pinnacle": {
+  "missingPlayers": [
+   "of"
+  ],
+  "missingInserts": [
+   "die cut jersey",
+   "super bowl show"
+  ]
+ },
  "1991-pro-set": {
   "missingPlayers": [
    "andrellins",
@@ -7437,18 +7551,11 @@
    "1965 tall boy"
   ]
  },
- "1995-fleer-metal": {
+ "1996-pinnacle-mint": {
   "missingPlayers": [],
   "missingInserts": [
-   "blaster",
-   "flasher"
-  ]
- },
- "1995-pinnacle": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "promo",
-   "showcase team"
+   "limited",
+   "nickle"
   ]
  },
  "2015-bowman-draft-baseball-cards": {
@@ -7585,6 +7692,31 @@
   "missingInserts": [
    "adrenaline rush"
   ]
+ },
+ "1996-skybox-impact": {
+  "missingPlayers": [
+   "anderson",
+   "hughes",
+   "of",
+   "perkens"
+  ],
+  "missingInserts": [
+   "rewind"
+  ]
+ },
+ "1995-pro-line": {
+  "missingPlayers": [
+   "beurlein",
+   "bills",
+   "broncos",
+   "browns",
+   "chiefs",
+   "dolphins",
+   "jets",
+   "jurgenson",
+   "oilers"
+  ],
+  "missingInserts": []
  },
  "1991-jogo": {
   "missingPlayers": [
@@ -8220,6 +8352,15 @@
   ],
   "missingInserts": [
    "1959"
+  ]
+ },
+ "1996-pacific-gridiron": {
+  "missingPlayers": [
+   "burden",
+   "farve"
+  ],
+  "missingInserts": [
+   "driving gems"
   ]
  },
  "1994-pacific-prisms": {
@@ -8883,20 +9024,52 @@
    "superstar combos"
   ]
  },
- "1995-fleer": {
+ "1996-fleer": {
   "missingPlayers": [
-   "checklist"
+   "card"
   ],
   "missingInserts": [
-   "td sensation"
+   "shell fact"
   ]
  },
- "1995-sportflix": {
+ "1996-pacific": {
+  "missingPlayers": [
+   "terryglenn"
+  ],
+  "missingInserts": [
+   "supial"
+  ]
+ },
+ "1996-skybox-premium": {
+  "missingPlayers": [
+   "hill"
+  ],
+  "missingInserts": [
+   "acrylic"
+  ]
+ },
+ "1996-sp": {
+  "missingPlayers": [
+   "jabbar"
+  ],
+  "missingInserts": [
+   "die cut"
+  ]
+ },
+ "1995-pacific": {
+  "missingPlayers": [
+   "mamula"
+  ],
+  "missingInserts": [
+   "triple folders teams"
+  ]
+ },
+ "1995-ultra": {
   "missingPlayers": [
    "of"
   ],
   "missingInserts": [
-   "man to"
+   "first rounders"
   ]
  },
  "1994-score": {
@@ -9264,34 +9437,34 @@
   ],
   "missingInserts": []
  },
- "1995-classic-nfl-rookies": {
+ "1996-playoff-absolute": {
   "missingPlayers": [],
   "missingInserts": [
-   "roy redemption"
+   "quads"
   ]
  },
- "1995-playoff-contenders": {
+ "1996-pro-line": {
   "missingPlayers": [],
   "missingInserts": [
-   "kickoff"
+   "intense determined"
   ]
  },
- "1995-sp": {
+ "1996-select": {
   "missingPlayers": [],
   "missingInserts": [
-   "die cut"
+   "prime cuts"
   ]
  },
- "1995-stadium-club": {
+ "1996-skybox-impact-rookies": {
   "missingPlayers": [],
   "missingInserts": [
-   "mvp"
+   "96"
   ]
  },
- "1995-finest": {
+ "1996-finest": {
   "missingPlayers": [],
   "missingInserts": [
-   "w coating"
+   "futures"
   ]
  },
  "1990-topps-traded-baseball-cards": {
@@ -11398,7 +11571,37 @@
   ],
   "missingInserts": []
  },
+ "1996-leaf": {
+  "missingPlayers": [
+   "glen"
+  ],
+  "missingInserts": []
+ },
+ "1996-pacific-crown-royale": {
+  "missingPlayers": [
+   "xxiii"
+  ],
+  "missingInserts": []
+ },
+ "1996-topps-chrome": {
+  "missingPlayers": [
+   "anders"
+  ],
+  "missingInserts": []
+ },
+ "1995-fleer": {
+  "missingPlayers": [
+   "checklist"
+  ],
+  "missingInserts": []
+ },
  "1995-pinnacle-club-collection": {
+  "missingPlayers": [
+   "of"
+  ],
+  "missingInserts": []
+ },
+ "1995-sportflix": {
   "missingPlayers": [
    "of"
   ],
