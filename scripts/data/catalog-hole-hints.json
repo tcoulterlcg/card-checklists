@@ -1361,6 +1361,51 @@
    "toolboxes"
   ]
  },
+ "2001-sp-authentic": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "1000 yards rushing",
+   "1066 team tackles",
+   "1133 yards rushing",
+   "1204 yards rushing",
+   "1213 yards receiving",
+   "1219 receiving yards",
+   "1234 yards passing",
+   "1281 career receptions",
+   "129 yards passing",
+   "137 tackles",
+   "1424 yards receiving",
+   "165 passing tds",
+   "1681 yards rushing",
+   "194 yards passing",
+   "196 yards per game",
+   "223 yards passing",
+   "226 receptions",
+   "231 yards passing",
+   "236 yards rushing",
+   "237 career passing tds",
+   "26 tds",
+   "300 touchdowns",
+   "327 yards passing",
+   "33 season td passes",
+   "349 avg yards",
+   "403 yards passing",
+   "420 td passes",
+   "422 yards receiving",
+   "440 yards passing",
+   "48 td record",
+   "529 tackles",
+   "58 career sacks",
+   "787 yards receiving",
+   "87 career td passes",
+   "94 7 qb rating",
+   "99 rushing tds",
+   "995 tackles",
+   "team tackles",
+   "yds passing",
+   "yds rushing"
+  ]
+ },
  "2017-topps-wwe-wrestling-checklist-added": {
   "missingPlayers": [
    "alliance",
@@ -1957,128 +2002,6 @@
    "twitter"
   ]
  },
- "1996-score": {
-  "missingPlayers": [
-   "abduljabbar",
-   "abdurrahim",
-   "aitken",
-   "banks",
-   "barry",
-   "battaglia",
-   "berard",
-   "blair",
-   "bonds",
-   "briere",
-   "bryant",
-   "byer",
-   "camby",
-   "cedeno",
-   "checklist",
-   "cherry",
-   "cl",
-   "cleary",
-   "clemons",
-   "colagiacomo",
-   "colon",
-   "cruz",
-   "dampier",
-   "darkins",
-   "delk",
-   "devereaux",
-   "dome",
-   "drews",
-   "dudley",
-   "dunn",
-   "dvorak",
-   "dye",
-   "edney",
-   "evans",
-   "farmer",
-   "fata",
-   "feick",
-   "finley",
-   "fisher",
-   "fuller",
-   "garcia",
-   "green",
-   "grieve",
-   "guerrero",
-   "hamer",
-   "harrington",
-   "hartings",
-   "harvey",
-   "helms",
-   "hendrickson",
-   "hermansen",
-   "hernandez",
-   "hidalgo",
-   "holden",
-   "hoying",
-   "iginla",
-   "iverson",
-   "jabbar",
-   "jackman",
-   "jenkins",
-   "johnstone",
-   "jovanovski",
-   "kennison",
-   "kidd",
-   "kittles",
-   "knight",
-   "livingston",
-   "marbury",
-   "mayberry",
-   "mccarty",
-   "mcdyess",
-   "mcinnis",
-   "mcwilliams",
-   "mickens",
-   "milloy",
-   "minor",
-   "mourning",
-   "muhammad",
-   "mutombo",
-   "nash",
-   "norris",
-   "of",
-   "olajuwon",
-   "oneal",
-   "ordonez",
-   "payton",
-   "pippen",
-   "pope",
-   "potapenko",
-   "reese",
-   "riley",
-   "robinson",
-   "roche",
-   "rogers",
-   "rose",
-   "samsonov",
-   "sasser",
-   "sheffer",
-   "stoudamire",
-   "thornton",
-   "toomer",
-   "volchkov",
-   "wagner",
-   "wallace",
-   "wood",
-   "wright",
-   "zubrus",
-   "zyuzin"
-  ],
-  "missingInserts": [
-   "board 23k",
-   "board exxon ravens",
-   "board laser images",
-   "board sport ppf",
-   "board sport ppf retro",
-   "board sport ppf revivals",
-   "board washington redskins",
-   "br1 br8"
-  ]
- },
  "2016-topps-chrome-baseball-cards": {
   "missingPlayers": [
    "aaron",
@@ -2577,6 +2500,123 @@
    "mega box mojo",
    "national convention",
    "national convention prism"
+  ]
+ },
+ "1996-score": {
+  "missingPlayers": [
+   "abduljabbar",
+   "abdurrahim",
+   "aitken",
+   "banks",
+   "barry",
+   "battaglia",
+   "berard",
+   "blair",
+   "bonds",
+   "briere",
+   "bryant",
+   "byer",
+   "camby",
+   "cedeno",
+   "checklist",
+   "cherry",
+   "cl",
+   "cleary",
+   "clemons",
+   "colagiacomo",
+   "colon",
+   "cruz",
+   "dampier",
+   "darkins",
+   "delk",
+   "devereaux",
+   "dome",
+   "drews",
+   "dudley",
+   "dunn",
+   "dvorak",
+   "dye",
+   "edney",
+   "evans",
+   "farmer",
+   "fata",
+   "feick",
+   "finley",
+   "fisher",
+   "fuller",
+   "garcia",
+   "grieve",
+   "guerrero",
+   "hamer",
+   "harrington",
+   "hartings",
+   "harvey",
+   "helms",
+   "hendrickson",
+   "hermansen",
+   "hernandez",
+   "hidalgo",
+   "holden",
+   "hoying",
+   "iginla",
+   "iverson",
+   "jabbar",
+   "jackman",
+   "jenkins",
+   "johnstone",
+   "jovanovski",
+   "kennison",
+   "kidd",
+   "kittles",
+   "knight",
+   "livingston",
+   "marbury",
+   "mayberry",
+   "mccarty",
+   "mcdyess",
+   "mcinnis",
+   "mcwilliams",
+   "mickens",
+   "milloy",
+   "minor",
+   "mourning",
+   "muhammad",
+   "mutombo",
+   "nash",
+   "norris",
+   "of",
+   "olajuwon",
+   "oneal",
+   "ordonez",
+   "payton",
+   "pippen",
+   "pope",
+   "potapenko",
+   "reese",
+   "riley",
+   "robinson",
+   "roche",
+   "rogers",
+   "rose",
+   "samsonov",
+   "sasser",
+   "sheffer",
+   "stoudamire",
+   "thornton",
+   "toomer",
+   "volchkov",
+   "wagner",
+   "wallace",
+   "wood",
+   "wright",
+   "zubrus",
+   "zyuzin"
+  ],
+  "missingInserts": [
+   "board exxon ravens",
+   "board sport ppf",
+   "board sport ppf revivals",
+   "br1 br8"
   ]
  },
  "2019-bowman-chrome-baseball": {
@@ -3750,6 +3790,58 @@
    "relic"
   ]
  },
+ "1997-press-pass": {
+  "missingPlayers": [
+   "adburrahim",
+   "anderson",
+   "battie",
+   "billups",
+   "booth",
+   "cato",
+   "collins",
+   "croshere",
+   "daniels",
+   "duncan",
+   "elisma",
+   "fortson",
+   "foyle",
+   "freeman",
+   "garris",
+   "gray",
+   "horn",
+   "jackson",
+   "knight",
+   "marbury",
+   "mcdyess",
+   "mcgrady",
+   "mercer",
+   "miller",
+   "obannon",
+   "of",
+   "page",
+   "parker",
+   "pippen",
+   "pollard",
+   "saintjean",
+   "seals",
+   "sims",
+   "stewart",
+   "taylor",
+   "thomas",
+   "vaughn",
+   "walker",
+   "wells",
+   "willoughby",
+   "zwikker"
+  ],
+  "missingInserts": [
+   "game jersey",
+   "net burners",
+   "promo",
+   "teammates",
+   "your face"
+  ]
+ },
  "1992-pacific": {
   "missingPlayers": [
    "agen",
@@ -3876,6 +3968,26 @@
   "missingInserts": [
    "patch",
    "prospects"
+  ]
+ },
+ "1997-score": {
+  "missingPlayers": [
+   "abduljabar",
+   "dallas"
+  ],
+  "missingInserts": [
+   "board collection",
+   "board proline brett favre",
+   "board talk n sports essentials",
+   "board varsity club",
+   "board visions signings artistry",
+   "cowboys team",
+   "enhanced",
+   "packers team",
+   "panin specialist",
+   "specialists",
+   "strongbox",
+   "team"
   ]
  },
  "2016-topps-wwe-road-to-wrestlemania": {
@@ -4028,6 +4140,54 @@
    "relics",
    "scarlet signatures",
    "scarlet signatures relics"
+  ]
+ },
+ "1998-upper-deck-black-diamond": {
+  "missingPlayers": [
+   "avery",
+   "batch",
+   "chavous",
+   "cowart",
+   "crockett",
+   "crowell",
+   "dawkins",
+   "dyson",
+   "edwards",
+   "ellis",
+   "emanuel",
+   "enis",
+   "fair",
+   "garner",
+   "green",
+   "griese",
+   "holcombe",
+   "hoying",
+   "jabbar",
+   "lane",
+   "leaf",
+   "moss",
+   "nash",
+   "pathon",
+   "quadruple",
+   "rhett",
+   "ricks",
+   "shehee",
+   "shepherd",
+   "spikes",
+   "staley",
+   "starks",
+   "still",
+   "taylor",
+   "thigpen",
+   "wadsworth",
+   "williams",
+   "wistrom"
+  ],
+  "missingInserts": [
+   "onyx",
+   "quad",
+   "sheer brilliance",
+   "single"
   ]
  },
  "2016-17-o-pee-chee-hockey-cards": {
@@ -4257,6 +4417,31 @@
    "signature goalies"
   ]
  },
+ "1999-donruss": {
+  "missingPlayers": [
+   "esiason",
+   "everett",
+   "frerotte",
+   "kanell",
+   "kelly",
+   "kosar",
+   "kramer",
+   "mitchell",
+   "odonnell",
+   "of",
+   "simms"
+  ],
+  "missingInserts": [
+   "preferred",
+   "preferred chain reaction",
+   "preferred hard hats",
+   "preferred national treasures",
+   "preferred passing grade",
+   "preferred ponential power",
+   "preferred signatures",
+   "preferred staremasters"
+  ]
+ },
  "1994-fleer": {
   "missingPlayers": [
    "aldridge",
@@ -4358,6 +4543,50 @@
    "shorts",
    "sitting",
    "superstar sensations"
+  ]
+ },
+ "1998-press-pass": {
+  "missingPlayers": [
+   "anderson",
+   "bailey",
+   "bibby",
+   "braggs",
+   "carr",
+   "carter",
+   "checklist",
+   "clark",
+   "davis",
+   "dickerson",
+   "dolea",
+   "doleac",
+   "drew",
+   "duncan",
+   "garrity",
+   "harpring",
+   "henderson",
+   "horn",
+   "hughes",
+   "knight",
+   "lafrentz",
+   "louis",
+   "lue",
+   "mohammed",
+   "nailon",
+   "off",
+   "olowokandi",
+   "patterson",
+   "pierce",
+   "shields",
+   "simon",
+   "skinner",
+   "traylor",
+   "washington",
+   "wells"
+  ],
+  "missingInserts": [
+   "die cut",
+   "fastbreak",
+   "net burners"
   ]
  },
  "2010-topps-wwe": {
@@ -4506,6 +4735,35 @@
    "japan fractor"
   ]
  },
+ "2001-pacific": {
+  "missingPlayers": [
+   "alston",
+   "berlin",
+   "blaylock",
+   "clements",
+   "combs",
+   "galloway",
+   "germany",
+   "hearst",
+   "helming",
+   "kasper",
+   "mccants",
+   "mccord",
+   "ojo",
+   "paul",
+   "rambo",
+   "reynolds",
+   "shipp"
+  ],
+  "missingInserts": [
+   "impressions",
+   "titanium",
+   "titanium double sided jerseys",
+   "titanium fantasy",
+   "titanium monday knights",
+   "titanium post season"
+  ]
+ },
  "2017-topps-ufc-museum-collection-checklist-added": {
   "missingPlayers": [
    "aguilar",
@@ -4629,6 +4887,22 @@
    "merlin"
   ]
  },
+ "2000-topps-chrome": {
+  "missingPlayers": [
+   "reprint"
+  ],
+  "missingInserts": [
+   "1966 133",
+   "1967",
+   "dynamic duo",
+   "johnny unitas reprint",
+   "lone star legends",
+   "pre season picks",
+   "preview",
+   "reprint",
+   "super backs"
+  ]
+ },
  "2018-19-panini-prizm-basketball-nba-cards": {
   "missingPlayers": [
    "alexander",
@@ -4707,6 +4981,48 @@
    "paper prospects",
    "snow",
    "turkey"
+  ]
+ },
+ "1999-press-pass": {
+  "missingPlayers": [
+   "artest",
+   "avery",
+   "bender",
+   "booth",
+   "bramlett",
+   "brand",
+   "buford",
+   "celestand",
+   "checklist",
+   "clack",
+   "cummings",
+   "cut",
+   "davis",
+   "dc",
+   "ekezie",
+   "eschmeyer",
+   "francis",
+   "hamilton",
+   "herren",
+   "hill",
+   "jamison",
+   "ketner",
+   "langdon",
+   "levett",
+   "lewis",
+   "nailon",
+   "odom",
+   "okulaja",
+   "padgett",
+   "posey",
+   "ruffin",
+   "szczerbiak",
+   "terry",
+   "thomas"
+  ],
+  "missingInserts": [
+   "die cut",
+   "net burners"
   ]
  },
  "2019-topps-heritage-baseball": {
@@ -4843,6 +5159,22 @@
    "glow jersey",
    "hot patch",
    "patch"
+  ]
+ },
+ "1997-pinnacle": {
+  "missingPlayers": [
+   "adbuljabbar",
+   "brunnell"
+  ],
+  "missingInserts": [
+   "epic season",
+   "game",
+   "game emerald",
+   "moment",
+   "moment emerald",
+   "rembrandt",
+   "season",
+   "season emerald"
   ]
  },
  "2014-bowman-draft-baseball-cards": {
@@ -5421,6 +5753,17 @@
    "transcendent touchdowns"
   ]
  },
+ "1999-upper-deck-powerdeck": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "auxiliary",
+   "auxiliary power",
+   "cd rom",
+   "insert",
+   "powerdeck",
+   "powerful moments auxiliary"
+  ]
+ },
  "2018-topps-heritage-high-number-baseball-cards": {
   "missingPlayers": [
    "abreu",
@@ -5908,6 +6251,26 @@
    "madden"
   ]
  },
+ "2001-topps-chrome": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "jersey",
+   "payton reprint",
+   "perfect spiral",
+   "showtime",
+   "way"
+  ]
+ },
+ "1998-pinnacle-mint": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "collection gems",
+   "collection lasting impressions",
+   "collection minted moments",
+   "impeccables",
+   "promo"
+  ]
+ },
  "2019-panini-diamond-kings-baseball-cards": {
   "missingPlayers": [
    "bauer",
@@ -6019,6 +6382,19 @@
   ],
   "missingInserts": [
    "collegiate collection"
+  ]
+ },
+ "1998-playoff-contenders": {
+  "missingPlayers": [
+   "jabbar",
+   "maafala",
+   "meriweather"
+  ],
+  "missingInserts": [
+   "autographed",
+   "autographed registered exchange",
+   "grey",
+   "redemption"
   ]
  },
  "2014-topps-update-series-baseball-cards": {
@@ -6189,6 +6565,39 @@
    "patch"
   ]
  },
+ "2002-fleer-box-score": {
+  "missingPlayers": [
+   "bsd"
+  ],
+  "missingInserts": [
+   "debut",
+   "qb extra jersey",
+   "yard markers dual",
+   "yard markers jersey"
+  ]
+ },
+ "1998-finest": {
+  "missingPlayers": [
+   "of"
+  ],
+  "missingInserts": [
+   "futures",
+   "ref w coat",
+   "super bowl promos",
+   "w coating"
+  ]
+ },
+ "1997-action-packed": {
+  "missingPlayers": [
+   "mccardle"
+  ],
+  "missingInserts": [
+   "down dirty",
+   "frist impressions",
+   "pinnacle crash course",
+   "promo"
+  ]
+ },
  "2013-topps-ufc-bloodlines-trading-cards": {
   "missingPlayers": [
    "barry",
@@ -6317,6 +6726,24 @@
   "missingInserts": [
    "mat relic royal rumble",
    "wins united states championship"
+  ]
+ },
+ "2002-pacific-private-stock-reserve": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "game worn jersey",
+   "logo",
+   "number",
+   "patch"
+  ]
+ },
+ "1998-score": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "board hallmark keepsake",
+   "board playbook",
+   "moment emerald",
+   "star salute promo"
   ]
  },
  "2015-topps-opening-day-baseball": {
@@ -6454,22 +6881,6 @@
   ],
   "missingInserts": []
  },
- "1997-press-pass": {
-  "missingPlayers": [
-   "adburrahim",
-   "marbury",
-   "mcdyess",
-   "miller",
-   "of",
-   "pippen",
-   "robinson",
-   "walker"
-  ],
-  "missingInserts": [
-   "game jersey",
-   "teammates"
-  ]
- },
  "2017-panini-national-treasures-football-nfl-cards": {
   "missingPlayers": [
    "bridgewater",
@@ -6488,6 +6899,18 @@
   ],
   "missingInserts": [
    "signature rps"
+  ]
+ },
+ "2001-stadium-club": {
+  "missingPlayers": [
+   "bowl",
+   "championship",
+   "day"
+  ],
+  "missingInserts": [
+   "alan ameche",
+   "bart starr",
+   "bob griese"
   ]
  },
  "1996-playoff-contenders": {
@@ -6623,15 +7046,41 @@
    "midnight"
   ]
  },
- "1996-stadium-club": {
+ "2002-pacific": {
   "missingPlayers": [
-   "hickerson",
-   "watter"
+   "huard",
+   "mili"
   ],
   "missingInserts": [
-   "1966",
-   "1966 96",
-   "1970 150"
+   "game worn jersey",
+   "game worn jersey quads",
+   "inside numbers"
+  ]
+ },
+ "2000-fleer-e-x": {
+  "missingPlayers": [
+   "gx",
+   "xp"
+  ],
+  "missingInserts": [
+   "exceptional",
+   "exciting",
+   "explosive"
+  ]
+ },
+ "1999-pacific": {
+  "missingPlayers": [
+   "betts",
+   "cloud",
+   "connell",
+   "hobert",
+   "kirby",
+   "mcdonald",
+   "yeast"
+  ],
+  "missingInserts": [
+   "colts team",
+   "prisms"
   ]
  },
  "2015-16-sp-authentic-hockey-cards": {
@@ -6716,6 +7165,16 @@
    "pristine generals"
   ]
  },
+ "2001-fleer-hot-prospects": {
+  "missingPlayers": [
+   "hg"
+  ],
+  "missingInserts": [
+   "premiere postmarks jersey",
+   "scoring kings jersey",
+   "td fever goal post cover"
+  ]
+ },
  "1993-stadium-club": {
   "missingPlayers": [
    "klinger"
@@ -6781,6 +7240,22 @@
   ],
   "missingInserts": [
    "update"
+  ]
+ },
+ "2002-fleer-genuine": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "jersey",
+   "names game jersey",
+   "randy moss"
+  ]
+ },
+ "1999-topps-gold-label": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "race marino",
+   "race rice",
+   "race to payton"
   ]
  },
  "2019-panini-chronicles-baseball": {
@@ -7170,6 +7645,28 @@
    "bordered"
   ]
  },
+ "2001-ultra": {
+  "missingPlayers": [
+   "gc",
+   "of",
+   "tt"
+  ],
+  "missingInserts": [
+   "college greats preview",
+   "rose die cast"
+  ]
+ },
+ "2000-ultra": {
+  "missingPlayers": [
+   "fl",
+   "of",
+   "wo"
+  ],
+  "missingInserts": [
+   "fleer 23kt",
+   "millennium monster"
+  ]
+ },
  "1995-pacific-prisms": {
   "missingPlayers": [
    "bowl",
@@ -7324,6 +7821,36 @@
    "violet"
   ]
  },
+ "2002-donruss-gridiron-kings": {
+  "missingPlayers": [
+   "aikman",
+   "mahomes"
+  ],
+  "missingInserts": [
+   "authentic cut signature",
+   "time"
+  ]
+ },
+ "2001-pacific-private-stock": {
+  "missingPlayers": [
+   "matthews",
+   "miller"
+  ],
+  "missingInserts": [
+   "game worn jersey",
+   "ps2001"
+  ]
+ },
+ "2000-press-pass": {
+  "missingPlayers": [
+   "burris",
+   "irlacher"
+  ],
+  "missingInserts": [
+   "power pick",
+   "standout signature"
+  ]
+ },
  "1993-wild-card-superchrome": {
   "missingPlayers": [
    "dubose",
@@ -7430,22 +7957,67 @@
    "res"
   ]
  },
- "1996-pacific-invincible": {
+ "2002-upper-deck-piece-of-history": {
   "missingPlayers": [
-   "heardst"
+   "jersey"
   ],
   "missingInserts": [
-   "die cut",
+   "hitmakers jersey",
+   "national honor jersey"
+  ]
+ },
+ "2001-ud-game-gear": {
+  "missingPlayers": [
+   "dillow"
+  ],
+  "missingInserts": [
+   "jersey",
+   "uniform"
+  ]
+ },
+ "2000-donruss-preferred": {
+  "missingPlayers": [
+   "aikmen"
+  ],
+  "missingInserts": [
+   "letterman",
+   "staremaster"
+  ]
+ },
+ "2000-score": {
+  "missingPlayers": [
+   "toddhusak"
+  ],
+  "missingInserts": [
+   "anaheim national",
    "promo"
   ]
  },
- "1996-pinnacle": {
+ "1997-pacific-crown-royale": {
   "missingPlayers": [
-   "of"
+   "greene"
   ],
   "missingInserts": [
-   "die cut jersey",
-   "super bowl show"
+   "cel fusion",
+   "team"
+  ]
+ },
+ "1997-pinnacle-mint": {
+  "missingPlayers": [
+   "mayes"
+  ],
+  "missingInserts": [
+   "qb club",
+   "quarterback club brass coin"
+  ]
+ },
+ "1997-zenith": {
+  "missingPlayers": [
+   "dan"
+  ],
+  "missingInserts": [
+   "mirror promo",
+   "promo"
   ]
  },
  "1991-pro-set": {
@@ -7551,11 +8123,142 @@
    "1965 tall boy"
   ]
  },
- "1996-pinnacle-mint": {
+ "1997-pacific-invincible": {
+  "missingPlayers": [
+   "barmes",
+   "dixion",
+   "elroy",
+   "hillard",
+   "loudermilk"
+  ],
+  "missingInserts": [
+   "smash mouth xtra"
+  ]
+ },
+ "2002-donruss-classics": {
   "missingPlayers": [],
   "missingInserts": [
-   "limited",
-   "nickle"
+   "new millenium classics jersey",
+   "new millennium jersey"
+  ]
+ },
+ "2002-score": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "jersey",
+   "monday matchups"
+  ]
+ },
+ "2002-topps-chrome": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "bradshaw reprint",
+   "super bowl goal post relic"
+  ]
+ },
+ "2002-topps-pristine": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "driving force relics",
+   "premiere jersey"
+  ]
+ },
+ "2002-topps-reserve": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "patch",
+   "relics jersey"
+  ]
+ },
+ "2002-ud-graded": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "game jersey",
+   "jersey"
+  ]
+ },
+ "2002-upper-deck-honor-roll": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "jersey",
+   "up coming jersey"
+  ]
+ },
+ "2002-upper-deck-ovation": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "bound for glory jersey",
+   "jersey"
+  ]
+ },
+ "2001-bowman-chrome": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "certified",
+   "senior hula bowl relics"
+  ]
+ },
+ "2001-fleer-tradition-glossy": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "ball",
+   "retro threads"
+  ]
+ },
+ "2001-pacific-prism-atomic": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "game jersey",
+   "stratosphere"
+  ]
+ },
+ "2001-upper-deck-legends": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "memorable material",
+   "past patterns jersey"
+  ]
+ },
+ "2000-playoff-contenders": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "hawaii five o",
+   "roy"
+  ]
+ },
+ "2000-sage-hit": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "emarald die cut",
+   "sage hit"
+  ]
+ },
+ "1999-upper-deck-encore": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "livewires",
+   "superstar"
+  ]
+ },
+ "1998-pacific-aurora": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "die cut",
+   "gridiron ls ct"
+  ]
+ },
+ "1998-pacific-crown-royale": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "dynagon turf",
+   "pivotal player"
+  ]
+ },
+ "1997-playoff-contenders": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "leather helmet die cuts",
+   "performer plaques"
   ]
  },
  "2015-bowman-draft-baseball-cards": {
@@ -8041,6 +8744,26 @@
    "hot franchise fabrics signatures"
   ]
  },
+ "2000-skybox": {
+  "missingPlayers": [
+   "jonson",
+   "p",
+   "st"
+  ],
+  "missingInserts": [
+   "error skybox reversed"
+  ]
+ },
+ "1997-ultra": {
+  "missingPlayers": [
+   "ar",
+   "fr",
+   "of"
+  ],
+  "missingInserts": [
+   "play o t game"
+  ]
+ },
  "1995-flair": {
   "missingPlayers": [
    "matthews",
@@ -8352,6 +9075,42 @@
   ],
   "missingInserts": [
    "1959"
+  ]
+ },
+ "2001-topps-archives-reserve": {
+  "missingPlayers": [
+   "brooks",
+   "morgan"
+  ],
+  "missingInserts": [
+   "jerseys"
+  ]
+ },
+ "1999-topps-stars": {
+  "missingPlayers": [
+   "farve",
+   "jabbar"
+  ],
+  "missingInserts": [
+   "starcards"
+  ]
+ },
+ "1998-ultra": {
+  "missingPlayers": [
+   "of",
+   "rh"
+  ],
+  "missingInserts": [
+   "sensational 60"
+  ]
+ },
+ "1997-skybox-premium": {
+  "missingPlayers": [
+   "cu",
+   "rp"
+  ],
+  "missingInserts": [
+   "close ups"
   ]
  },
  "1996-pacific-gridiron": {
@@ -9024,28 +9783,92 @@
    "superstar combos"
   ]
  },
- "1996-fleer": {
+ "2002-fleer": {
   "missingPlayers": [
-   "card"
+   "gm"
   ],
   "missingInserts": [
-   "shell fact"
+   "classic combos"
   ]
  },
- "1996-pacific": {
+ "2002-fleer-premium": {
   "missingPlayers": [
-   "terryglenn"
+   "apt"
   ],
   "missingInserts": [
-   "supial"
+   "jersey"
   ]
  },
- "1996-skybox-premium": {
+ "2002-fleer-showcase": {
   "missingPlayers": [
-   "hill"
+   "white"
   ],
   "missingInserts": [
-   "acrylic"
+   "jersey"
+  ]
+ },
+ "2002-pacific-heads-up": {
+  "missingPlayers": [
+   "freeney"
+  ],
+  "missingInserts": [
+   "update"
+  ]
+ },
+ "2001-upper-deck-mvp": {
+  "missingPlayers": [
+   "mccaffery"
+  ],
+  "missingInserts": [
+   "game used souvenirs"
+  ]
+ },
+ "2000-finest": {
+  "missingPlayers": [
+   "lb"
+  ],
+  "missingInserts": [
+   "pacific hour"
+  ]
+ },
+ "1999-flair-showcase": {
+  "missingPlayers": [
+   "st"
+  ],
+  "missingInserts": [
+   "1st round"
+  ]
+ },
+ "1998-pro-line-dc-iii": {
+  "missingPlayers": [
+   "jabbar"
+  ],
+  "missingInserts": [
+   "decade drafts"
+  ]
+ },
+ "1998-skybox-premium": {
+  "missingPlayers": [
+   "maafala"
+  ],
+  "missingInserts": [
+   "redemption"
+  ]
+ },
+ "1997-pacific-philadelphia": {
+  "missingPlayers": [
+   "brunel"
+  ],
+  "missingInserts": [
+   "milestone"
+  ]
+ },
+ "1997-pro-line-dc-iii": {
+  "missingPlayers": [
+   "srewart"
+  ],
+  "missingInserts": [
+   "due cut"
   ]
  },
  "1996-sp": {
@@ -9437,34 +10260,322 @@
   ],
   "missingInserts": []
  },
- "1996-playoff-absolute": {
+ "2002-fleer-hot-prospects": {
   "missingPlayers": [],
   "missingInserts": [
-   "quads"
+   "materials jersey"
   ]
  },
- "1996-pro-line": {
+ "2002-playoff-absolute-memorabilia": {
   "missingPlayers": [],
   "missingInserts": [
-   "intense determined"
+   "leather laces combo"
   ]
  },
- "1996-select": {
+ "2002-playoff-contenders": {
   "missingPlayers": [],
   "missingInserts": [
-   "prime cuts"
+   "r o y"
   ]
  },
- "1996-skybox-impact-rookies": {
+ "2002-sp-authentic": {
   "missingPlayers": [],
   "missingInserts": [
-   "96"
+   "jersey"
   ]
  },
- "1996-finest": {
+ "2002-ud-authentics": {
   "missingPlayers": [],
   "missingInserts": [
-   "futures"
+   "glory bound jersey"
+  ]
+ },
+ "2002-upper-deck-mvp": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "game used souvenirs"
+  ]
+ },
+ "2002-upper-deck-sweet-spot": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "sunday stars jersey"
+  ]
+ },
+ "2001-fleer-e-x": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "extra yards"
+  ]
+ },
+ "2001-fleer-game-time": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "zone pylon"
+  ]
+ },
+ "2001-fleer-legacy": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "1000 yard club jersey"
+  ]
+ },
+ "2001-playoff-honors": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "tandems"
+  ]
+ },
+ "2001-spx": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "sample"
+  ]
+ },
+ "2001-finest": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "premiere jersey"
+  ]
+ },
+ "2001-topps-reserve": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "jersey"
+  ]
+ },
+ "2001-ud-graded": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "game jersey"
+  ]
+ },
+ "2001-upper-deck-rookie-f-x": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "game used jersy"
+  ]
+ },
+ "2000-leaf-limited": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "piece game previews"
+  ]
+ },
+ "2000-pacific-aurora": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "die cut"
+  ]
+ },
+ "2000-pacific-crown-royale": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "die cut"
+  ]
+ },
+ "2000-pacific-private-stock": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "private stock signings"
+  ]
+ },
+ "2000-donruss-elite": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "series legends"
+  ]
+ },
+ "2000-sp-authentic": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "promo"
+  ]
+ },
+ "2000-ud-graded": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "jersey"
+  ]
+ },
+ "2000-upper-deck-legends": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "special"
+  ]
+ },
+ "2000-upper-deck-montana-master-collection": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "joe"
+  ]
+ },
+ "2000-upper-deck-ovation": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "super signature"
+  ]
+ },
+ "1999-pacific-aurora": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "leatherbound"
+  ]
+ },
+ "1999-pacific-paramount": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "presonal best"
+  ]
+ },
+ "1999-donruss-elite": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "inserts"
+  ]
+ },
+ "1999-playoff-contenders-ssd": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "roy"
+  ]
+ },
+ "1999-sports-illustrated": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "collection"
+  ]
+ },
+ "1999-spx": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "spxmasters"
+  ]
+ },
+ "1999-stadium-club-chrome": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "preview"
+  ]
+ },
+ "1999-stadium-club": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "emerors zone"
+  ]
+ },
+ "1999-finest": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "w coating"
+  ]
+ },
+ "1999-upper-deck-hologrfx": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "authentic"
+  ]
+ },
+ "1998-bowman": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "certified"
+  ]
+ },
+ "1998-bowman-chrome": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "preview"
+  ]
+ },
+ "1998-pacific-omega": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "rising star"
+  ]
+ },
+ "1998-pacific-paramount": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "personal best"
+  ]
+ },
+ "1998-pacific-revolution": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "primetime performers"
+  ]
+ },
+ "1998-stadium-club": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "super chrome"
+  ]
+ },
+ "1998-topps-stars": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "reprint"
+  ]
+ },
+ "1998-ud-choice": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "starquest rookiequest"
+  ]
+ },
+ "1997-donruss-preferred": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "staremaster"
+  ]
+ },
+ "1997-pacific-revolution": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "proteges"
+  ]
+ },
+ "1997-playoff-absolute-beginnings": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "chip shot"
+  ]
+ },
+ "1997-playoff-zone": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "close ups"
+  ]
+ },
+ "1997-pro-line": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "memorabilia"
+  ]
+ },
+ "1997-spx": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "pro motion"
+  ]
+ },
+ "1997-stadium-club": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "ground control"
+  ]
+ },
+ "1997-finest": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "mystery"
+  ]
+ },
+ "1997-topps-stars": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "pro bowl star"
   ]
  },
  "1990-topps-traded-baseball-cards": {
@@ -9530,15 +10641,6 @@
   ],
   "missingInserts": []
  },
- "1998-press-pass": {
-  "missingPlayers": [
-   "checklist",
-   "davis",
-   "dolea",
-   "nailon"
-  ],
-  "missingInserts": []
- },
  "1996-97-flair-showcase": {
   "missingPlayers": [
    "rahim",
@@ -9563,6 +10665,15 @@
    "elliott",
    "gage",
    "okorafor"
+  ],
+  "missingInserts": []
+ },
+ "1999-fleer-tradition": {
+  "missingPlayers": [
+   "boys",
+   "gladsden",
+   "mays",
+   "oatmdonnell"
   ],
   "missingInserts": []
  },
@@ -9828,6 +10939,38 @@
    "jeffrey",
    "singletary",
    "tennehill"
+  ],
+  "missingInserts": []
+ },
+ "2000-fleer-mystique": {
+  "missingPlayers": [
+   "bb",
+   "dt",
+   "rm"
+  ],
+  "missingInserts": []
+ },
+ "2000-fleer-showcase": {
+  "missingPlayers": [
+   "at",
+   "mp",
+   "n"
+  ],
+  "missingInserts": []
+ },
+ "1999-skybox-molten-metal": {
+  "missingPlayers": [
+   "gg",
+   "pf",
+   "tn"
+  ],
+  "missingInserts": []
+ },
+ "1999-skybox-premium": {
+  "missingPlayers": [
+   "bt",
+   "conrad",
+   "pr"
   ],
   "missingInserts": []
  },
@@ -10285,6 +11428,83 @@
   "missingPlayers": [
    "enchantment",
    "frame"
+  ],
+  "missingInserts": []
+ },
+ "2002-fleer-authentix": {
+  "missingPlayers": [
+   "hh",
+   "ripped"
+  ],
+  "missingInserts": []
+ },
+ "2001-fleer-premium": {
+  "missingPlayers": [
+   "of",
+   "rr"
+  ],
+  "missingInserts": []
+ },
+ "2000-fleer-tradition": {
+  "missingPlayers": [
+   "throwbacks",
+   "yards"
+  ],
+  "missingInserts": []
+ },
+ "2000-playoff-prestige": {
+  "missingPlayers": [
+   "auto",
+   "cutler"
+  ],
+  "missingInserts": []
+ },
+ "2000-skybox-dominion": {
+  "missingPlayers": [
+   "g",
+   "hc"
+  ],
+  "missingInserts": []
+ },
+ "1999-playoff-prestige-ssd": {
+  "missingPlayers": [
+   "dawson",
+   "thierry"
+  ],
+  "missingInserts": []
+ },
+ "1999-ultra": {
+  "missingPlayers": [
+   "of",
+   "ot"
+  ],
+  "missingInserts": []
+ },
+ "1997-donruss": {
+  "missingPlayers": [
+   "card",
+   "farve"
+  ],
+  "missingInserts": []
+ },
+ "1997-fleer": {
+  "missingPlayers": [
+   "brockum",
+   "dorcett"
+  ],
+  "missingInserts": []
+ },
+ "1997-upper-deck-legends": {
+  "missingPlayers": [
+   "boulware",
+   "pace"
+  ],
+  "missingInserts": []
+ },
+ "1996-stadium-club": {
+  "missingPlayers": [
+   "hickerson",
+   "watter"
   ],
   "missingInserts": []
  },
@@ -11157,12 +12377,6 @@
   ],
   "missingInserts": []
  },
- "1999-press-pass": {
-  "missingPlayers": [
-   "checklist"
-  ],
-  "missingInserts": []
- },
  "1999-press-pass-se": {
   "missingPlayers": [
    "a"
@@ -11565,9 +12779,159 @@
   ],
   "missingInserts": []
  },
+ "2002-fleer-maximum": {
+  "missingPlayers": [
+   "kc"
+  ],
+  "missingInserts": []
+ },
+ "2002-fleer-platinum": {
+  "missingPlayers": [
+   "jp"
+  ],
+  "missingInserts": []
+ },
+ "2002-fleer-throwbacks": {
+  "missingPlayers": [
+   "fryer"
+  ],
+  "missingInserts": []
+ },
+ "2002-ultra": {
+  "missingPlayers": [
+   "ll"
+  ],
+  "missingInserts": []
+ },
+ "2001-fleer-authority": {
+  "missingPlayers": [
+   "of"
+  ],
+  "missingInserts": []
+ },
+ "2001-fleer-focus": {
+  "missingPlayers": [
+   "drees"
+  ],
+  "missingInserts": []
+ },
+ "2001-donruss-classics": {
+  "missingPlayers": [
+   "reed"
+  ],
+  "missingInserts": []
+ },
+ "2001-press-pass": {
+  "missingPlayers": [
+   "coleman"
+  ],
+  "missingInserts": []
+ },
+ "2001-quantum-leaf": {
+  "missingPlayers": [
+   "mar"
+  ],
+  "missingInserts": []
+ },
+ "2001-topps-archives": {
+  "missingPlayers": [
+   "of"
+  ],
+  "missingInserts": []
+ },
+ "2001-topps-gallery": {
+  "missingPlayers": [
+   "cd"
+  ],
+  "missingInserts": []
+ },
+ "2001-topps-xfl": {
+  "missingPlayers": [
+   "xfl"
+  ],
+  "missingInserts": []
+ },
  "2000-bowman-chrome-football": {
   "missingPlayers": [
    "rhet"
+  ],
+  "missingInserts": []
+ },
+ "2000-fleer-gamers": {
+  "missingPlayers": [
+   "cs"
+  ],
+  "missingInserts": []
+ },
+ "2000-fleer-greats-of-the-game": {
+  "missingPlayers": [
+   "cc"
+  ],
+  "missingInserts": []
+ },
+ "2000-ud-ionix": {
+  "missingPlayers": [
+   "westbroook"
+  ],
+  "missingInserts": []
+ },
+ "1999-pacific-prism": {
+  "missingPlayers": [
+   "bonds"
+  ],
+  "missingInserts": []
+ },
+ "1999-skybox-dominion": {
+  "missingPlayers": [
+   "aa"
+  ],
+  "missingInserts": []
+ },
+ "1999-sp-authentic": {
+  "missingPlayers": [
+   "keyshawn"
+  ],
+  "missingInserts": []
+ },
+ "1999-ud-ionix": {
+  "missingPlayers": [
+   "jabbar"
+  ],
+  "missingInserts": []
+ },
+ "1999-upper-deck-ovation": {
+  "missingPlayers": [
+   "crowell"
+  ],
+  "missingInserts": []
+ },
+ "1999-upper-deck-retro": {
+  "missingPlayers": [
+   "sosa"
+  ],
+  "missingInserts": []
+ },
+ "1998-fleer-brilliants": {
+  "missingPlayers": [
+   "i"
+  ],
+  "missingInserts": []
+ },
+ "1998-fleer-tradition": {
+  "missingPlayers": [
+   "rr"
+  ],
+  "missingInserts": []
+ },
+ "1997-flair-showcase": {
+  "missingPlayers": [
+   "flair"
+  ],
+  "missingInserts": []
+ },
+ "1997-pinnacle-inscriptions": {
+  "missingPlayers": [
+   "martin"
   ],
   "missingInserts": []
  },
@@ -11577,9 +12941,33 @@
   ],
   "missingInserts": []
  },
+ "1996-pacific": {
+  "missingPlayers": [
+   "terryglenn"
+  ],
+  "missingInserts": []
+ },
  "1996-pacific-crown-royale": {
   "missingPlayers": [
    "xxiii"
+  ],
+  "missingInserts": []
+ },
+ "1996-pacific-invincible": {
+  "missingPlayers": [
+   "heardst"
+  ],
+  "missingInserts": []
+ },
+ "1996-pinnacle": {
+  "missingPlayers": [
+   "of"
+  ],
+  "missingInserts": []
+ },
+ "1996-skybox-premium": {
+  "missingPlayers": [
+   "hill"
   ],
   "missingInserts": []
  },
