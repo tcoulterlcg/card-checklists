@@ -6594,6 +6594,24 @@
    "wins united states championship"
   ]
  },
+ "2007-press-pass": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "gridiron gamers jersey",
+   "insider insight",
+   "power pick",
+   "walmart"
+  ]
+ },
+ "2007-ultra": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "feel game jersey",
+   "jersey",
+   "paydirt jersey",
+   "stars jersey"
+  ]
+ },
  "2015-topps-opening-day-baseball": {
   "missingPlayers": [
    "angels",
@@ -7849,11 +7867,18 @@
    "smash mouth xtra"
   ]
  },
- "2007-playoff-prestige": {
+ "2007-topps-chrome": {
   "missingPlayers": [],
   "missingInserts": [
-   "materials patch",
-   "patch"
+   "chrome ring honor",
+   "ring honor"
+  ]
+ },
+ "2007-upper-deck-ultimate-collection": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "achievements patch",
+   "game patch"
   ]
  },
  "2015-bowman-draft-baseball-cards": {
@@ -9467,6 +9492,14 @@
    "bengals"
   ]
  },
+ "2007-press-pass-se": {
+  "missingPlayers": [
+   "gholston"
+  ],
+  "missingInserts": [
+   "game day gear jersey"
+  ]
+ },
  "2006-topps-total": {
   "missingPlayers": [
    "owen"
@@ -9968,10 +10001,16 @@
   ],
   "missingInserts": []
  },
- "2007-spx": {
+ "2007-topps-tx-exclusive": {
   "missingPlayers": [],
   "missingInserts": [
-   "winning materials stat"
+   "ticket to stardom jersey"
+  ]
+ },
+ "2007-upper-deck-artifacts": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "photo shoot flashback fabric"
   ]
  },
  "1990-topps-traded-baseball-cards": {
@@ -10847,6 +10886,13 @@
   "missingPlayers": [
    "drew",
    "guerrero"
+  ],
+  "missingInserts": []
+ },
+ "2007-topps-performance": {
+  "missingPlayers": [
+   "getsy",
+   "palko"
   ],
   "missingInserts": []
  },
@@ -12243,6 +12289,24 @@
  "2007-sp-authentic": {
   "missingPlayers": [
    "btlph"
+  ],
+  "missingInserts": []
+ },
+ "2007-topps-co-signers": {
+  "missingPlayers": [
+   "red"
+  ],
+  "missingInserts": []
+ },
+ "2007-upper-deck-first-edition": {
+  "missingPlayers": [
+   "leinhart"
+  ],
+  "missingInserts": []
+ },
+ "2007-upper-deck-premier": {
+  "missingPlayers": [
+   "leinert"
   ],
   "missingInserts": []
  },
