@@ -6,7 +6,8 @@
 import { useDialogFocus } from '../components/dialog-focus'
 import { useCallback, useDeferredValue, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { Select, Popover, Trigger, Chevron, Check, menuItem, menuHeading, triggerStyle, useIsMobile } from '../components/dropdown'
-import { useAccount, AccountChip, AuthModal, CollectionView, CommunityView } from '../components/community'
+import { useAccount, AccountChip, AuthModal, CommunityView } from '../components/community'
+import { CollectionView, useMyCollection } from '../components/collection'
 import { addWant, removeWant, myWantlist, grailfindrFindUrl, signOutHere, noCardNumber } from '../lib/supa'
 import { FeedbackModal, FeedbackView, useFeedbackAdmin } from '../components/feedback'
 import { FixEditor } from '../components/fix-editor'
@@ -384,6 +385,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
   const [sortBy, setSortBy] = useState('year-desc')
   const [view, setView] = useState('browse') // browse | patchswaps | rpa | community | collection
   const account = useAccount()
+  const store = useMyCollection(account)   // My Collection data
   const [authOpen, setAuthOpen] = useState(false)
   // signed out, "Track in My Collection" asks for sign-in right there and carries on after it
   const pendingTrack = useRef(null)
@@ -1094,7 +1096,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
     }
     else if (sr && sr.trim().length >= 3) runGlobalSearch(sr, false)
     else if (sr) { goHome(false); setNotice('Type at least 3 letters to search.') }   // not an endless 'Loading…'
-    else if (v && ['myplayers', 'community', 'collection', 'feedback'].includes(v)) openView(v, false, v === 'collection' && sp.get('cset') ? '&cset=' + encodeURIComponent(sp.get('cset')) : '')
+    else if (v && ['myplayers', 'community', 'collection', 'feedback'].includes(v)) openView(v, false, v === 'collection' ? ['cset', 'ctab', 'from'].filter(k => sp.get(k)).map(k => '&' + k + '=' + encodeURIComponent(sp.get(k))).join('') : '')
     else {
       goHome(false)
       // browse filters live in the URL too (?sport=Hockey&team=...), so Back and shared links restore them
@@ -1620,7 +1622,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
       ) : view === 'community' ? (
         <CommunityView account={account} indexSets={sets} onOpenAuth={() => setAuthOpen(true)} />
       ) : view === 'collection' ? (
-        <CollectionView account={account} indexSets={sets} onOpenAuth={() => setAuthOpen(true)}
+        <CollectionView account={account} store={store} indexSets={sets} onOpenAuth={() => setAuthOpen(true)}
           onOpenSet={openSetBySlug} onWantsChanged={() => account.session && loadWanted(account.session.user.id)} />
       ) : view === 'rpa' ? (
         <section>
