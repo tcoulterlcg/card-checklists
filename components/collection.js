@@ -1,6 +1,6 @@
 'use client'
 // My Collection v2: per-copy details, named collections, statuses, stats, set completion,
-// wantlist + rules, trading, and imports (TCDB, CSV) / export. Data: lib/collection.js.
+// wantlist, and imports (TCDB, CSV) / export. Data: lib/collection.js.
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { loadSet, loadRedirects, sectionKey } from '../lib/catalog'
 import { brandOf } from '../lib/brands'
@@ -8,9 +8,8 @@ import { collectionCardN, grailfindrFindUrl, uploadCardImage, updateProfile, rem
 import {
   STATUSES, STATUS_LABEL, STATUS_COLOR, CONDITIONS, GRADERS, GRADES, UNMATCHED, cardKey, itemKey, cardKeyOf,
   listItems, insertItems, updateItem, updateItems, updateWholeItems, deleteItems,
-  listCollections, createCollection, renameCollection, setCollectionPublic, deleteCollection, ensureCollections,
-  listWants, insertWants, listRules, addRule, removeRule,
-  collectorByName, publicItems, collectionStats, unmatchedSummary, fetchMarketValue,
+  listCollections, createCollection, renameCollection, deleteCollection, ensureCollections,
+  listWants, insertWants, collectionStats, unmatchedSummary,
 } from '../lib/collection'
 import { buildSetIndex, matchRows, parseTcdbTitle } from '../lib/match'
 import { parseCsv, toCsv, IMPORT_FIELDS, guessMapping, money, yesNo, isoDate } from '../lib/csv'
@@ -42,7 +41,6 @@ export function useMyCollection(account) {
   const [items, setItems] = useState(null)
   const [collections, setCollections] = useState([])
   const [wants, setWants] = useState(null)
-  const [rules, setRules] = useState([])
   // every load is tied to the account it started for: a late reply after sign-out or an account
   // switch is dropped (account), and only the newest items load lands (seq)
   const seq = useRef(0), account_ = useRef(uid)
@@ -51,12 +49,11 @@ export function useMyCollection(account) {
   const reloadItems = async () => { const my = ++seq.current; const r = await forMe(listItems)(); if (my === seq.current && !r.failed) setItems(r); return r }
   const reloadCollections = async () => { const r = await forMe(listCollections)(); if (!r.failed) setCollections(r) }
   const reloadWants = async () => { const r = await forMe(listWants)(); if (!r.failed) setWants(r) }
-  const reloadRules = async () => { const r = await forMe(listRules)(); if (!r.failed) setRules(r) }
   useEffect(() => {
     seq.current++
-    setItems(null); setCollections([]); setWants(null); setRules([])
+    setItems(null); setCollections([]); setWants(null)
     if (!uid) return
-    reloadItems(); reloadCollections(); reloadWants(); reloadRules()
+    reloadItems(); reloadCollections(); reloadWants()
   }, [uid]) // eslint-disable-line react-hooks/exhaustive-deps
   // sets renamed or merged since a card was saved still count under today's slug
   const [redirects, setRedirects] = useState(null)
@@ -68,7 +65,7 @@ export function useMyCollection(account) {
     for (const it of items || []) if (it.set_slug !== UNMATCHED && OWNED_STATUSES.has(it.status)) { const k = cardKey(now(it.set_slug), it.section, it.card_n); m.set(k, (m.get(k) || 0) + (it.qty || 1)) }
     return m
   }, [items, redirects])
-  return { uid, items, setItems, collections, wants, rules, owned, reloadItems, reloadCollections, reloadWants, reloadRules }
+  return { uid, items, setItems, collections, wants, owned, reloadItems, reloadCollections, reloadWants }
 }
 
 // ---------------- small pieces ----------------
@@ -159,7 +156,6 @@ function ItemEditor({ item, collections, uid, onClose, onSaved, onDeleted, onDup
   const [f, setF] = useState(() => ({ ...item, tags: (item.tags || []).join(', ') }))
   const [busy, setBusy] = useState(false)
   const [err, setErr] = useState('')
-  const [mv, setMv] = useState(null)   // market value lookup: null | 'loading' | result
   const fileRef = useRef(null)
   const set = (k) => (e) => setF(x => ({ ...x, [k]: e && e.target ? (e.target.type === 'checkbox' ? e.target.checked : e.target.value) : e }))
   const save = async () => {
@@ -196,18 +192,6 @@ function ItemEditor({ item, collections, uid, onClose, onSaved, onDeleted, onDup
         <div><label style={label} htmlFor="ie-sn">Serial # (e.g. 12/99)</label><input id="ie-sn" style={input} maxLength={20} value={f.serial_no || ''} onChange={set('serial_no')} /></div>
         <div style={{ display: 'flex', alignItems: 'flex-end', paddingBottom: 10 }}><Toggle checked={f.autographed} onChange={set('autographed')}>Autographed</Toggle></div>
       </div>
-      {!unmatched && (
-        <div style={{ marginTop: 12, padding: '10px 12px', border: '1px solid #232A3E', borderRadius: 10, display: 'flex', gap: 10, alignItems: 'center', flexWrap: 'wrap' }}>
-          <button style={btnSmall} disabled={mv === 'loading'} onClick={async () => { setMv('loading'); setMv(await fetchMarketValue({ ...item, grader: f.grader, grade: f.grade })) }}>{mv === 'loading' ? 'Checking sales…' : 'Get market value'}</button>
-          {mv && mv !== 'loading' && (mv.error ? <span style={{ ...muted, color: '#fca5a5' }}>{mv.error}</span>
-            : mv.count ? <>
-                <span style={{ color: '#EDEDEF', fontSize: 14 }}><b>{fmtMoney(mv.median)}</b> <span style={muted}>median of {plural(mv.count, 'sale')} in the last year ({fmtMoney(mv.low)}–{fmtMoney(mv.high)})</span></span>
-                <button style={btnSmall} onClick={() => setF(x => ({ ...x, value: mv.median }))}>Use {fmtMoney(mv.median)}</button>
-                <a href={mv.searchUrl} target="_blank" rel="noreferrer" style={{ color: ACCENT_TEXT, fontSize: 12 }}>See sales ↗</a>
-              </>
-            : <span style={muted}>No recent sales found{f.grader ? ' at this grade' : ''}. <a href={mv.searchUrl} target="_blank" rel="noreferrer" style={{ color: ACCENT_TEXT }}>Search GrailFindr ↗</a></span>)}
-        </div>
-      )}
       <label style={{ ...label, marginTop: 12 }} htmlFor="ie-tags">Tags (comma separated)</label>
       <input id="ie-tags" style={input} value={f.tags} onChange={set('tags')} placeholder="PC, signed in person, binder 3" />
       <label style={{ ...label, marginTop: 12 }} htmlFor="ie-notes">Notes</label>
@@ -344,7 +328,6 @@ function Overview({ stats, items, store, indexBySlug, profile, setProfile, uid, 
         <Tile label="Graded" value={stats.graded.toLocaleString()} sub={stats.graders.size ? stats.top(stats.graders, 3).map(([g, n]) => g + ' ' + n).join(' · ') : ''} />
         <Tile label="For trade / sale" value={((stats.statuses.get('trade') || 0) + (stats.statuses.get('sale') || 0)).toLocaleString()} sub="your own labels" />
       </div>
-      <ValueUpdater items={items} store={store} say={say} />
       <div style={{ display: 'grid', gap: 12, gridTemplateColumns: 'repeat(auto-fit, minmax(min(300px, 100%), 1fr))' }}>
         <Bars heading="Top players" rows={stats.top(stats.players, 8)} onPick={(p) => onFilter({ player: p })} />
         <Bars heading="Top sets" rows={stats.top(stats.sets, 8)} fmt={(s) => indexBySlug.get(s)?.name || items.find(i => i.set_slug === s)?.set_name || s} onPick={onOpenChecklist} />
@@ -375,46 +358,10 @@ function Overview({ stats, items, store, indexBySlug, profile, setProfile, uid, 
   )
 }
 
-// Values from recent sales, a batch at a time (cards with no value, or one older than 30 days).
-function ValueUpdater({ items, store, say }) {
-  const [run, setRun] = useState(null)   // { done, total, found } while running
-  const stop = useRef(false)
-  const stale = items.filter(it => it.set_slug !== UNMATCHED && OWNED_STATUSES.has(it.status) && (it.value == null || !it.value_at || Date.now() - Date.parse(it.value_at) > 30 * 86400000))
-  if (!stale.length && !run) return null
-  const BATCH = 100
-  const go = async () => {
-    stop.current = false
-    const todo = stale.slice(0, BATCH)
-    let found = 0
-    setRun({ done: 0, total: todo.length, found })
-    for (let i = 0; i < todo.length && !stop.current; i++) {
-      const it = todo[i]
-      const r = await fetchMarketValue(it)
-      if (r.error) { say(r.error, 'error'); break }
-      // no sales: stamp the date anyway so the next batch moves on to other cards
-      const fields = r.count ? { value: r.median, value_at: new Date().toISOString() } : { value_at: new Date().toISOString() }
-      if (r.count) found++
-      await updateItem(it.id, fields)
-      setRun({ done: i + 1, total: todo.length, found })
-      await new Promise(res => setTimeout(res, 700))
-    }
-    await store.reloadItems()
-    setRun(null)
-    say('Values updated from recent sales: ' + plural(found, 'card') + ' priced.')
-  }
-  return (
-    <div style={{ ...card, padding: '12px 16px', display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap' }}>
-      <span style={{ flex: 1, minWidth: 220, color: '#A1A1AA', fontSize: 14 }}>{run ? `Checking recent sales… ${run.done} of ${run.total} (${run.found} priced)` : `${plural(stale.length, 'card')} without a current value. GrailFindr can price them from recent sales.`}</span>
-      {run ? <button style={btnSmall} onClick={() => { stop.current = true }}>Stop</button> : <button style={btnGhost} onClick={go}>Update {Math.min(BATCH, stale.length)} values</button>}
-    </div>
-  )
-}
-
 function Collections({ store, uid, say, items, onFilter, profile, setProfile }) {
   const [name, setName] = useState('')
   const [renaming, setRenaming] = useState(null)
   const counts = useMemo(() => { const m = new Map(); for (const it of items) m.set(it.collection_id || 0, (m.get(it.collection_id || 0) || 0) + (it.qty || 1)); return m }, [items])
-  const shareUrl = profile?.username ? (typeof window !== 'undefined' ? window.location.origin : '') + '/?view=collector&u=' + encodeURIComponent(profile.username) : ''
   return (
     <div style={{ ...card, padding: '16px 18px' }}>
       <p style={{ ...eyebrow, color: '#8A93A8', margin: '0 0 10px' }}>Collections</p>
@@ -428,10 +375,9 @@ function Collections({ store, uid, say, items, onFilter, profile, setProfile }) 
               </form>
             ) : (
               <button onClick={() => onFilter({ collection: String(c.id) })} style={{ flex: '1 1 220px', minWidth: 0, background: 'none', border: 'none', color: '#EDEDEF', fontSize: 14, fontWeight: 600, textAlign: 'left', cursor: 'pointer', fontFamily: 'inherit', padding: 0 }}>
-                {c.name} <span style={{ ...muted, fontWeight: 400 }}>· {plural(counts.get(c.id) || 0, 'card')}{c.is_public ? ' · public' : ''}</span>
+                {c.name} <span style={{ ...muted, fontWeight: 400 }}>· {plural(counts.get(c.id) || 0, 'card')}</span>
               </button>
             )}
-            <button style={btnSmall} onClick={async () => { const { error } = await setCollectionPublic(c.id, !c.is_public); if (error) say(error.message, 'error'); store.reloadCollections() }}>{c.is_public ? 'Make private' : 'Make public'}</button>
             <button style={btnSmall} onClick={() => setRenaming(c.id)}>Rename</button>
             <button style={{ ...btnSmall, color: '#f87171' }} onClick={async () => { if (!window.confirm(`Delete “${c.name}”? Its cards stay in your collection, unfiled.`)) return; const { error } = await deleteCollection(c.id); if (error) say(error.message, 'error'); await store.reloadCollections(); store.reloadItems() }}>Delete</button>
           </div>
@@ -447,12 +393,6 @@ function Collections({ store, uid, say, items, onFilter, profile, setProfile }) 
         <input aria-label="New collection name" placeholder="New collection, e.g. Patrick Kane PC" maxLength={60} value={name} onChange={(e) => setName(e.target.value)} style={{ ...input, padding: '8px 12px' }} />
         <button style={btnGhost}>Add</button>
       </form>
-      <div style={{ borderTop: '1px solid #232A3E', marginTop: 16, paddingTop: 14, display: 'grid', gap: 10 }}>
-        <Toggle checked={profile?.is_public} onChange={async (v) => { const { data, error } = await updateProfile(uid, { is_public: v }); if (error) say(error.message, 'error'); else setProfile(data) }}
-          hint={profile?.is_public && shareUrl ? <>Anyone with your link can see it: <a href={shareUrl} style={{ color: ACCENT_TEXT }}>{shareUrl.replace(/^https?:\/\//, '')}</a></> : 'Off: only you see your collection (single collections can still be made public above).'}>
-          Public collection page
-        </Toggle>
-      </div>
     </div>
   )
 }
@@ -724,40 +664,12 @@ function Checklist({ slug, store, uid, say, onBack, onEdit, onOpenSet }) {
 function WantlistTab({ store, uid, say, indexBySlug, onOpenChecklist, onOpenSet, onWantsChanged }) {
   const wants = store.wants
   const [open, setOpen] = useState({})
-  const [rule, setRule] = useState({ kind: 'player', value: '', max_print_run: '', rookies_only: false, autos_only: false })
   const groups = useMemo(() => { const g = {}; for (const w of wants || []) (g[w.set_slug] = g[w.set_slug] || { name: w.set_name || w.set_slug, items: [] }).items.push(w); return g }, [wants])
   const completion = useMemo(() => new Map(setCompletion(store.items || [], indexBySlug).map(s => [s.slug, s])), [store.items, indexBySlug])
   const refresh = () => { store.reloadWants(); onWantsChanged?.() }
   if (wants === null) return <p role="status" style={muted}>Loading…</p>
   return (
     <div style={{ display: 'grid', gap: 16 }}>
-      <div style={{ ...card, padding: '16px 18px' }}>
-        <p style={{ ...eyebrow, color: '#8A93A8', margin: '0 0 4px' }}>Wantlist rules</p>
-        <p style={{ ...muted, margin: '0 0 12px' }}>Want everything of a player or team without adding cards one by one. Rules mark matching cards on set and player pages.</p>
-        <form style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center' }} onSubmit={async (e) => {
-          e.preventDefault()
-          if (!rule.value.trim()) return
-          const { error } = await addRule(uid, { kind: rule.kind, value: rule.value.trim(), max_print_run: rule.max_print_run ? +rule.max_print_run : null, rookies_only: rule.rookies_only, autos_only: rule.autos_only })
-          if (error) say('Couldn’t add the rule — ' + error.message, 'error'); else { setRule(r => ({ ...r, value: '' })); store.reloadRules() }
-        }}>
-          <Select ariaLabel="Rule type" value={rule.kind} onChange={(v) => setRule(r => ({ ...r, kind: v }))} width={200} options={[['player', 'Every card of player'], ['team', 'Every card of team']]} />
-          <input aria-label={rule.kind === 'player' ? 'Player name' : 'Team name'} placeholder={rule.kind === 'player' ? 'Patrick Kane' : 'Chicago Blackhawks'} value={rule.value} maxLength={200} onChange={(e) => setRule(r => ({ ...r, value: e.target.value }))} style={{ ...input, width: 220, padding: '8px 12px' }} />
-          <Select ariaLabel="Print run" value={rule.max_print_run} onChange={(v) => setRule(r => ({ ...r, max_print_run: v }))} width={200} options={[['', 'Any print run'], ['1', '1/1 only'], ['10', '/10 or less'], ['25', '/25 or less'], ['99', '/99 or less'], ['499', '/499 or less']]} />
-          <Toggle checked={rule.rookies_only} onChange={(v) => setRule(r => ({ ...r, rookies_only: v }))}>Rookies</Toggle>
-          <Toggle checked={rule.autos_only} onChange={(v) => setRule(r => ({ ...r, autos_only: v }))}>Autos</Toggle>
-          <button style={btnGhost}>Add rule</button>
-        </form>
-        {store.rules.length > 0 && (
-          <ul style={{ listStyle: 'none', margin: '12px 0 0', padding: 0, display: 'grid', gap: 6 }}>
-            {store.rules.map(r => (
-              <li key={r.id} style={{ display: 'flex', gap: 8, alignItems: 'center', fontSize: 14, color: '#D4D4D8' }}>
-                <span style={{ flex: 1 }}>Every <b>{r.value}</b> card{r.kind === 'team' ? ' (team)' : ''}{r.max_print_run ? (r.max_print_run === 1 ? ' · 1/1s' : ' · /' + r.max_print_run + ' or less') : ''}{r.rookies_only ? ' · rookies' : ''}{r.autos_only ? ' · autos' : ''}</span>
-                <button style={btnSmall} aria-label={'Remove rule ' + r.value} onClick={async () => { const { error } = await removeRule(r.id); if (error) say(error.message, 'error'); store.reloadRules() }}>Remove</button>
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
       {wants.length === 0 && <div style={{ ...card, padding: 24, color: '#A1A1AA', fontSize: 14 }}>Your wantlist is empty. Browse any set and hit <b style={{ color: ACCENT_TEXT }}>+</b> on a card, or “+ Wantlist this set”.</div>}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(340px, 100%), 1fr))', gap: 14 }}>
         {Object.entries(groups).map(([slug, g]) => {
@@ -1129,116 +1041,5 @@ function ImportReview({ incoming, store, uid, indexSets, say, onDone, onCancel, 
         </details>
       )}
     </div>
-  )
-}
-
-// ---------------- public collector page (?view=collector&u=name) ----------------
-export function CollectorView({ username, indexSets, onOpenSet, account }) {
-  const [p, setP] = useState(undefined)
-  const [items, setItems] = useState(null)
-  const [q, setQ] = useState('')
-  useEffect(() => {
-    let live = true
-    setP(undefined); setItems(null)
-    collectorByName(username || '').then(async (prof) => {
-      if (!live) return
-      setP(prof)
-      if (prof) { const r = await publicItems(prof.id); if (live) setItems(r.failed ? [] : r) }
-    })
-    return () => { live = false }
-  }, [username])
-  const indexBySlug = useMemo(() => new Map((indexSets || []).map(s => [s.slug, s])), [indexSets])
-  const stats = useMemo(() => collectionStats(items || [], indexBySlug, brandOf), [items, indexBySlug])
-  if (p === undefined) return <p role="status" style={muted}>Loading…</p>
-  if (!p) return <div style={{ ...card, padding: 28, color: '#A1A1AA' }}>No collector called “{username}”.</div>
-  const mine = account?.session?.user?.id === p.id
-  const needle = q.trim().toLowerCase()
-  const groups = new Map()
-  for (const it of items || []) {
-    if (it.set_slug === UNMATCHED) continue
-    if (needle && !(String(it.player) + ' ' + it.set_name).toLowerCase().includes(needle)) continue
-    if (!groups.has(it.set_slug)) groups.set(it.set_slug, [])
-    groups.get(it.set_slug).push(it)
-  }
-  return (
-    <section>
-      <h1 style={{ ...display, fontSize: 40, margin: 0 }}>{p.display_name || p.username}</h1>
-      <p style={{ ...muted, margin: '6px 0 16px' }}>@{p.username} · collecting on Card HQ since {new Date(p.created_at).getFullYear()}</p>
-      {items === null ? <p role="status" style={muted}>Loading collection…</p> : items.length === 0 ? (
-        <div style={{ ...card, padding: 24, color: '#A1A1AA', fontSize: 14 }}>{mine ? 'Nothing is public yet. Turn on “Public collection page” in My Collection → Overview, or make a single collection public.' : 'This collection is private.'}</div>
-      ) : (
-        <div style={{ display: 'grid', gap: 14 }}>
-          <div style={{ display: 'grid', gap: 12, gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))' }}>
-            <Tile label="Cards" value={stats.cards.toLocaleString()} />
-            <Tile label="Sets" value={stats.sets.size.toLocaleString()} />
-            <Tile label="Graded" value={stats.graded.toLocaleString()} />
-          </div>
-          <div style={{ display: 'grid', gap: 12, gridTemplateColumns: 'repeat(auto-fit, minmax(min(300px, 100%), 1fr))' }}>
-            <Bars heading="Top players" rows={stats.top(stats.players, 8)} onPick={setQ} />
-            <Bars heading="By sport" rows={stats.top(stats.sports, 8)} />
-          </div>
-          <input aria-label="Search this collection" placeholder="Search player or set…" value={q} onChange={(e) => setQ(e.target.value)} style={{ ...input, width: 'min(360px, 100%)' }} />
-          <div style={{ display: 'grid', gap: 10 }}>
-            {[...groups.entries()].slice(0, 200).map(([slug, its]) => (
-              <div key={slug} style={{ ...card, padding: '12px 16px' }}>
-                <button onClick={() => onOpenSet(slug)} style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer', fontFamily: 'inherit', ...title(15), color: '#fff', textAlign: 'left' }}>{indexBySlug.get(slug)?.name || its[0].set_name}</button>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px 14px', marginTop: 6 }}>
-                  {its.map(it => (
-                    <span key={it.id} style={{ fontSize: 13, color: '#D4D4D8' }}>
-                      {String(it.card_n).startsWith('—') ? '' : <span style={{ color: ACCENT_TEXT }}>#{it.card_n} </span>}{it.player}{it.section && !/^base( set)?$/i.test(it.section) ? <span style={muted}> · {it.section}</span> : null}
-                      {it.grader ? <span style={{ color: '#facc15' }}> {it.grader} {it.grade}</span> : null}{it.qty > 1 ? <span style={muted}> ×{it.qty}</span> : null}
-                      {it.image_url ? <a href={it.image_url} target="_blank" rel="noreferrer" style={{ marginLeft: 4 }}>📷</a> : null}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            ))}
-            {groups.size > 200 && <p style={muted}>Showing 200 of {groups.size} sets — search to narrow.</p>}
-          </div>
-        </div>
-      )}
-    </section>
-  )
-}
-
-// ---------------- Rainbow: every parallel of one card in a set ----------------
-const numKey = (n) => { const t = String(n ?? '').trim().replace(/^#/, '').toUpperCase(); return /^\d+$/.test(t) ? String(+t) : t }
-const runOf = (title, x) => { const m = /\/\s*(\d{1,5})\b/.exec(String(x || '')) || /\/\s*(\d{1,5})\b/.exec(String(title || '')); return m ? +m[1] : 0 }
-export function RainbowDialog({ setData, card: c, onClose, owned, onToggleOwn, isWanted, onWant }) {
-  const rows = useMemo(() => {
-    if (!setData || !c) return []
-    const nk = numKey(c.n), who = String(c.p || '').toLowerCase()
-    const out = []
-    for (const sec of setData.sections || []) for (const x of sec.cards || []) {
-      if (nk ? numKey(x.n) !== nk : true) continue
-      if (String(x.p || '').toLowerCase() !== who) continue   // same printed name: "Patrick Kane", not every Kane
-      out.push({ sec, c: x, run: runOf(sec.title, x.x) })
-    }
-    // unnumbered parallels first, then by print run high -> low (the usual rainbow order)
-    return out.sort((a, b) => (a.run || 1e9) === (b.run || 1e9) ? 0 : (b.run || 1e9) - (a.run || 1e9))
-  }, [setData, c])
-  const have = rows.filter(r => owned.get(cardKeyOf(setData.slug, r.sec.title, r.c))).length
-  return (
-    <Modal open={!!c} onClose={onClose} labelText="Rainbow" width={620}>
-      <p style={{ ...muted, margin: '0 40px 2px 0' }}>{setData?.name}</p>
-      <h3 style={{ ...title(22), margin: '0 40px 6px 0', color: '#fff' }}>{c?.n ? '#' + c.n + ' ' : ''}{c?.p} — rainbow</h3>
-      <p style={{ ...muted, margin: '0 0 10px' }}>{plural(rows.length, 'version')} in this set{have ? ` · you own ${have} of ${rows.length}` : ''}</p>
-      <div style={{ maxWidth: 400, marginBottom: 14 }}><Progress have={have} total={rows.length} /></div>
-      <div style={{ display: 'grid', gap: 6 }}>
-        {rows.map(({ sec, c: x, run }, i) => {
-          const n = owned.get(cardKeyOf(setData.slug, sec.title, x)) || 0
-          const it = { set_slug: setData.slug, set_name: setData.name, card_n: x.n, section: sec.title, player: x.p }
-          const w = isWanted(it)
-          return (
-            <div key={i} style={{ display: 'flex', gap: 10, alignItems: 'center', padding: '7px 10px', border: '1px solid ' + (n ? '#2f5324' : '#232A3E'), background: n ? '#12200f' : 'transparent', borderRadius: 8 }}>
-              <span style={{ flex: 1, minWidth: 0, color: n ? '#9fd18a' : '#D4D4D8', fontSize: 14, fontWeight: 600 }}>{sec.title}</span>
-              <span style={{ color: run === 1 ? '#fff' : '#A1A1AA', fontSize: 12, fontWeight: 700, background: run === 1 ? ACCENT : 'none', borderRadius: 999, padding: run === 1 ? '2px 8px' : 0 }}>{run === 1 ? '1/1' : run ? '/' + run : ''}</span>
-              <button style={{ ...btnSmall, color: n ? '#9fd18a' : '#A1A1AA' }} aria-pressed={n > 0} onClick={() => onToggleOwn(sec, x)}>{n ? (n > 1 ? n + ' owned' : 'Owned ✓') : 'I have it'}</button>
-              <button style={{ ...btnSmall, color: w ? '#fff' : '#A1A1AA', background: w ? ACCENT : 'transparent' }} aria-pressed={w} onClick={() => onWant(it)}>{w ? 'Wanted ✓' : 'Want'}</button>
-            </div>
-          )
-        })}
-      </div>
-    </Modal>
   )
 }

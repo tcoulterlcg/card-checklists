@@ -1,7 +1,6 @@
 -- Card HQ accounts project (kfudhwuyxtfkmwcolavs): collection v2 hardening (review findings, 2026-10-27).
 -- Replaces the last block of 2026-10-27-collection-v2.sql (signed-in trade visibility), which never ran.
---  * Tables return only the owner's rows. Other people's cards come through functions that return
---    only safe columns (no price paid, value, notes, cert #, tags, dates or TCDB ids).
+--  * Collections, wantlists and wantlist rules are readable by their owner only.
 --  * Row ids are always made by the database; imports insert/update through functions
 --    (insert skips rows already saved, so a retried import doesn't double up or fail).
 --  * Photos must live in Card HQ's own storage bucket.
@@ -16,25 +15,6 @@ drop policy if exists cardhq_wantlist_select on public.cardhq_wantlist_items;
 create policy cardhq_wantlist_select on public.cardhq_wantlist_items for select using ((select auth.uid()) = user_id);
 drop policy if exists cardhq_want_rules_select on public.cardhq_want_rules;
 create policy cardhq_want_rules_select on public.cardhq_want_rules for select using ((select auth.uid()) = user_id);
-
--- what a visitor may see of someone's collection (safe columns only): everything when the profile is
--- public, otherwise cards in collections made public
-create or replace function public.cardhq_public_items(p_user uuid)
-returns table (id bigint, set_slug text, set_name text, section text, card_n text, player text, status text, qty integer,
-               grader text, grade text, autographed boolean, serial_no text, image_url text, collection_id bigint)
-language sql stable security definer set search_path to 'public' as $$
-  select i.id, i.set_slug, i.set_name, i.section, i.card_n, i.player, i.status, i.qty, i.grader, i.grade, i.autographed, i.serial_no, i.image_url, i.collection_id
-  from public.cardhq_collection_items i
-  join public.cardhq_profiles p on p.id = i.user_id
-  left join public.cardhq_collections c on c.id = i.collection_id
-  where i.user_id = p_user
-    and i.status not in ('in_transit_in')
-    and (p.is_public or coalesce(c.is_public, false))
-  order by i.id
-  limit 100000
-$$;
-revoke execute on function public.cardhq_public_items(uuid) from public;
-grant execute on function public.cardhq_public_items(uuid) to anon, authenticated;
 
 -- trading is not part of launch (Trevor, 2026-10-27): remove the trade matcher and offers
 drop function if exists public.cardhq_trade_matches();
