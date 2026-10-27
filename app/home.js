@@ -246,7 +246,7 @@ const pill = (on) => ({
 // tab, a "More sports" menu, a searchable Brand menu, the Product menu and a
 // strip of active filters with one-click removal. All menus use the shared
 // dropdown in components/dropdown.js.
-function SetFilters({ sports, sportFilter, onPick, showBrand, brands, brandFilter, onBrand, products, productFilter, onProduct }) {
+function SetFilters({ sports, sportFilter, onPick, onClearAll, showBrand, brands, brandFilter, onBrand, products, productFilter, onProduct }) {
   const [menu, setMenu] = useState(null)          // 'more' | 'brand' | null
   const [brandQ, setBrandQ] = useState('')
   const moreBtn = useRef(null)
@@ -361,7 +361,7 @@ function SetFilters({ sports, sportFilter, onPick, showBrand, brands, brandFilte
               style={{ height: 32, padding: '0 10px 0 12px', borderRadius: 999, cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: 6,
                 fontSize: 13, fontWeight: 600, background: SURFACE_2, color: TEXT, border: '1px solid ' + CHIP_LINE }}>{label}<XIcon /></button>
           ))}
-          <button onClick={() => { setMenu(null); onPick('All') }}
+          <button onClick={() => { setMenu(null); onClearAll() }}
             style={{ height: 32, padding: '0 6px', background: 'none', border: 'none', cursor: 'pointer', color: ACCENT_TEXT, fontSize: 13, fontWeight: 600, textDecoration: 'underline' }}>Clear all</button>
         </div>
       )}
@@ -1285,7 +1285,32 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
 
           {/* FILTERS: category tabs, sport chips + "More sports", Brand menu, Product, active filters */}
           {(() => {
-            const pick = (v) => { setSportFilter(v); setBrandFilter('All'); setProductFilter('All'); setTeamFilter('All'); setTeamInput(''); setTeamBrowse(false); setTcgRarity('All'); setTcgType('All') }
+            // Filters build on each other: changing the sport keeps the Brand and Product picks
+            // (e.g. Upper Deck + Artifacts → Hockey) and only drops one that no set in the new
+            // sport has. Team / TCG rarity / type are per sport, so they reset only when the sport
+            // actually changes. TCG tabs have no Brand menu, so Brand/Product drop there.
+            const pick = (v) => {
+              if (v === sportFilter) return
+              const inSport = taggedSets.filter(s => matchSport(s, v))
+              const tcg = groupOf(v) === 'TCG'
+              const keepBrand = !tcg && brandFilter !== 'All' && inSport.some(s => s.brand === brandFilter)
+              const pool = keepBrand ? inSport.filter(s => s.brand === brandFilter) : inSport
+              const keepProduct = !tcg && productFilter !== 'All' && pool.some(s => s.product === productFilter)
+              setSportFilter(v)
+              if (!keepBrand) setBrandFilter('All')
+              if (!keepProduct) setProductFilter('All')
+              setTeamFilter('All'); setTeamInput(''); setTeamBrowse(false); setTcgRarity('All'); setTcgType('All')
+            }
+            // Picking a brand keeps the Product pick when that brand makes it in this sport.
+            const pickBrand = (b) => {
+              setBrandFilter(b)
+              if (b !== 'All' && productFilter !== 'All' &&
+                !taggedSets.some(s => matchSport(s, sportFilter) && s.brand === b && s.product === productFilter)) setProductFilter('All')
+            }
+            const clearAll = () => {
+              setSportFilter('All'); setBrandFilter('All'); setProductFilter('All')
+              setTeamFilter('All'); setTeamInput(''); setTeamBrowse(false); setTcgRarity('All'); setTcgType('All')
+            }
             return (
               <div style={{ margin: '38px 0 22px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', flexWrap: 'wrap', gap: 10, marginBottom: 16 }}>
@@ -1298,9 +1323,9 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
                       options={[['year-desc', 'Newest first'], ['year-asc', 'Oldest first'], ['name-asc', 'Name (A–Z)'], ['name-desc', 'Name (Z–A)'], ['cards-desc', 'Most cards'], ['cards-asc', 'Fewest cards'], ['category', 'Category'], ['brand', 'Brand']]} />
                   </div>
                 </div>
-                <SetFilters sports={sports} sportFilter={sportFilter} onPick={pick}
+                <SetFilters sports={sports} sportFilter={sportFilter} onPick={pick} onClearAll={clearAll}
                   showBrand={groupOf(sportFilter) !== 'TCG'}
-                  brands={brands} brandFilter={brandFilter} onBrand={(b) => { setBrandFilter(b); setProductFilter('All') }}
+                  brands={brands} brandFilter={brandFilter} onBrand={pickBrand}
                   products={products} productFilter={productFilter} onProduct={setProductFilter} />
               </div>
             )
