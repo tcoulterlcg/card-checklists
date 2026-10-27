@@ -7849,13 +7849,6 @@
    "smash mouth xtra"
   ]
  },
- "2008-upper-deck-masterpieces": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "captured canvas jersey",
-   "preview"
-  ]
- },
  "2015-bowman-draft-baseball-cards": {
   "missingPlayers": [
    "anderson",
@@ -7989,6 +7982,17 @@
   ],
   "missingInserts": [
    "adrenaline rush"
+  ]
+ },
+ "2009-sp-signature": {
+  "missingPlayers": [
+   "abrink",
+   "awoodson",
+   "jjohnson",
+   "mflynn"
+  ],
+  "missingInserts": [
+   "party four"
   ]
  },
  "1996-skybox-impact": {
@@ -9460,6 +9464,14 @@
    "superstar combos"
   ]
  },
+ "2009-topps-chrome": {
+  "missingPlayers": [
+   "refractor"
+  ],
+  "missingInserts": [
+   "stars"
+  ]
+ },
  "2007-donruss-threads": {
   "missingPlayers": [
    "dynasty"
@@ -9977,28 +9989,28 @@
   ],
   "missingInserts": []
  },
- "2009-donruss-elite": {
+ "2009-score": {
   "missingPlayers": [],
   "missingInserts": [
-   "jersey prime"
+   "1989 reprints"
   ]
  },
- "2008-sage-hit": {
+ "2009-playoff-prestige": {
   "missingPlayers": [],
   "missingInserts": [
-   "gray"
+   "touchdown sensations"
   ]
  },
- "2008-topps-green-bay-packers": {
+ "2009-sp-threads": {
   "missingPlayers": [],
   "missingInserts": [
-   "team"
+   "superstar die cuts"
   ]
  },
- "2008-upper-deck-ultimate-collection": {
+ "2009-topps-mayo": {
   "missingPlayers": [],
   "missingInserts": [
-   "futures foursome"
+   "united states governor"
   ]
  },
  "1990-topps-traded-baseball-cards": {
