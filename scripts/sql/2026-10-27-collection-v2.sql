@@ -236,3 +236,20 @@ language sql stable security definer set search_path to 'public' as $$
 $$;
 revoke execute on function public.cardhq_unmatched_summary() from anon, public;
 grant execute on function public.cardhq_unmatched_summary() to authenticated;
+
+-- Trade listings and wantlists of open-to-trade members: signed-in members only (not anonymous visitors).
+-- Run once (connector approval timed out on 2026-10-27).
+drop policy if exists cardhq_collection_select on public.cardhq_collection_items;
+create policy cardhq_collection_select on public.cardhq_collection_items for select using (
+  (select auth.uid()) = user_id
+  or exists (select 1 from public.cardhq_profiles p where p.id = cardhq_collection_items.user_id
+             and (p.is_public or (p.open_to_trade and (select auth.uid()) is not null and cardhq_collection_items.status in ('trade', 'sale')))))
+  or exists (select 1 from public.cardhq_collections c where c.id = cardhq_collection_items.collection_id and c.is_public));
+drop policy if exists cardhq_wantlist_select on public.cardhq_wantlist_items;
+create policy cardhq_wantlist_select on public.cardhq_wantlist_items for select using (
+  (select auth.uid()) = user_id
+  or exists (select 1 from public.cardhq_profiles p where p.id = cardhq_wantlist_items.user_id and (p.is_public or (p.open_to_trade and (select auth.uid()) is not null))));
+drop policy if exists cardhq_want_rules_select on public.cardhq_want_rules;
+create policy cardhq_want_rules_select on public.cardhq_want_rules for select using (
+  (select auth.uid()) = user_id
+  or exists (select 1 from public.cardhq_profiles p where p.id = cardhq_want_rules.user_id and (p.is_public or (p.open_to_trade and (select auth.uid()) is not null))));

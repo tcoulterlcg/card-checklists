@@ -10,7 +10,7 @@ import {
   listItems, insertItems, updateItem, updateItems, upsertItems, deleteItems,
   listCollections, createCollection, renameCollection, setCollectionPublic, deleteCollection, ensureCollections,
   listWants, insertWants, listRules, addRule, removeRule, tradeMatches, listTradeRequests, sendTradeRequest, setTradeStatus,
-  collectorByName, publicItems, collectionStats, unmatchedSummary,
+  collectorByName, publicItems, collectionStats, unmatchedSummary, fetchMarketValue,
 } from '../lib/collection'
 import { buildSetIndex, matchRows, parseTcdbTitle } from '../lib/match'
 import { parseCsv, toCsv, IMPORT_FIELDS, guessMapping, money, yesNo, isoDate } from '../lib/csv'
@@ -28,7 +28,8 @@ const muted = { color: '#8A93A8', fontSize: 13 }
 const th = { padding: '9px 10px', fontWeight: 700, textAlign: 'left', fontSize: 12, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#8A93A8', whiteSpace: 'nowrap' }
 const td = { padding: '8px 10px', verticalAlign: 'middle' }
 const fmtMoney = (n) => n == null || isNaN(n) ? '—' : '$' + (+n).toLocaleString('en-US', { minimumFractionDigits: n % 1 ? 2 : 0, maximumFractionDigits: 2 })
-const plural = (n, w) => n.toLocaleString() + ' ' + w + (n === 1 ? '' : 's')
+const IRREGULAR = { entry: 'entries', copy: 'copies', match: 'matches' }
+const plural = (n, w) => n.toLocaleString() + ' ' + (n === 1 ? w : IRREGULAR[w] || w + 's')
 const TCDB_ORIGINS = ['https://www.tcdb.com', 'https://tcdb.com']
 // "owned" = in hand (not wanted, not on its way in, not shipped out)
 const OWNED_STATUSES = new Set(['have', 'trade', 'sale', 'in_transaction'])
@@ -148,6 +149,7 @@ function ItemEditor({ item, collections, uid, onClose, onSaved, onDeleted, onDup
   const [f, setF] = useState(() => ({ ...item, tags: (item.tags || []).join(', ') }))
   const [busy, setBusy] = useState(false)
   const [err, setErr] = useState('')
+  const [mv, setMv] = useState(null)   // market value lookup: null | 'loading' | result
   const fileRef = useRef(null)
   const set = (k) => (e) => setF(x => ({ ...x, [k]: e && e.target ? (e.target.type === 'checkbox' ? e.target.checked : e.target.value) : e }))
   const save = async () => {
@@ -184,6 +186,18 @@ function ItemEditor({ item, collections, uid, onClose, onSaved, onDeleted, onDup
         <div><label style={label} htmlFor="ie-sn">Serial # (e.g. 12/99)</label><input id="ie-sn" style={input} maxLength={20} value={f.serial_no || ''} onChange={set('serial_no')} /></div>
         <div style={{ display: 'flex', alignItems: 'flex-end', paddingBottom: 10 }}><Toggle checked={f.autographed} onChange={set('autographed')}>Autographed</Toggle></div>
       </div>
+      {!unmatched && (
+        <div style={{ marginTop: 12, padding: '10px 12px', border: '1px solid #232A3E', borderRadius: 10, display: 'flex', gap: 10, alignItems: 'center', flexWrap: 'wrap' }}>
+          <button style={btnSmall} disabled={mv === 'loading'} onClick={async () => { setMv('loading'); setMv(await fetchMarketValue({ ...item, grader: f.grader, grade: f.grade })) }}>{mv === 'loading' ? 'Checking sales…' : 'Get market value'}</button>
+          {mv && mv !== 'loading' && (mv.error ? <span style={{ ...muted, color: '#fca5a5' }}>{mv.error}</span>
+            : mv.count ? <>
+                <span style={{ color: '#EDEDEF', fontSize: 14 }}><b>{fmtMoney(mv.median)}</b> <span style={muted}>median of {plural(mv.count, 'sale')} in the last year ({fmtMoney(mv.low)}–{fmtMoney(mv.high)})</span></span>
+                <button style={btnSmall} onClick={() => setF(x => ({ ...x, value: mv.median }))}>Use {fmtMoney(mv.median)}</button>
+                <a href={mv.searchUrl} target="_blank" rel="noreferrer" style={{ color: ACCENT_TEXT, fontSize: 12 }}>See sales ↗</a>
+              </>
+            : <span style={muted}>No recent sales found{f.grader ? ' at this grade' : ''}. <a href={mv.searchUrl} target="_blank" rel="noreferrer" style={{ color: ACCENT_TEXT }}>Search GrailFindr ↗</a></span>)}
+        </div>
+      )}
       <label style={{ ...label, marginTop: 12 }} htmlFor="ie-tags">Tags (comma separated)</label>
       <input id="ie-tags" style={input} value={f.tags} onChange={set('tags')} placeholder="PC, signed in person, binder 3" />
       <label style={{ ...label, marginTop: 12 }} htmlFor="ie-notes">Notes</label>
@@ -313,7 +327,7 @@ function Overview({ stats, items, store, indexBySlug, profile, setProfile, uid, 
   const statusRows = [...stats.statuses.entries()].sort((a, b) => b[1] - a[1])
   return (
     <div style={{ display: 'grid', gap: 14 }}>
-      {stats.unmatched > 0 && <Notice>{plural(stats.unmatched, 'imported card')} aren’t matched to a checklist yet (Card HQ doesn’t have those sets or parallels yet). They’re saved and will match as sets are added. <button style={{ ...btnSmall, marginLeft: 6 }} onClick={() => onFilter({ unmatched: true })}>See them</button></Notice>}
+      {stats.unmatched > 0 && <Notice>{plural(stats.unmatched, 'imported card')} {stats.unmatched === 1 ? 'isn’t' : 'aren’t'} matched to a checklist yet (Card HQ doesn’t have those sets or parallels yet). They’re saved and will match as sets are added. <button style={{ ...btnSmall, marginLeft: 6 }} onClick={() => onFilter({ unmatched: true })}>See them</button></Notice>}
       <div style={{ display: 'grid', gap: 12, gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))' }}>
         <Tile label="Cards" value={stats.cards.toLocaleString()} sub={plural(stats.entries, 'entry')} />
         <Tile label="Sets" value={stats.sets.size.toLocaleString()} sub={plural(stats.players.size, 'player')} />
@@ -322,6 +336,7 @@ function Overview({ stats, items, store, indexBySlug, profile, setProfile, uid, 
         <Tile label="Graded" value={stats.graded.toLocaleString()} sub={stats.graders.size ? stats.top(stats.graders, 3).map(([g, n]) => g + ' ' + n).join(' · ') : ''} />
         <Tile label="For trade / sale" value={((stats.statuses.get('trade') || 0) + (stats.statuses.get('sale') || 0)).toLocaleString()} sub={profile?.open_to_trade ? 'visible to traders' : 'not listed yet'} />
       </div>
+      <ValueUpdater items={items} store={store} say={say} />
       <div style={{ display: 'grid', gap: 12, gridTemplateColumns: 'repeat(auto-fit, minmax(min(300px, 100%), 1fr))' }}>
         <Bars heading="Top players" rows={stats.top(stats.players, 8)} onPick={(p) => onFilter({ player: p })} />
         <Bars heading="Top sets" rows={stats.top(stats.sets, 8)} fmt={(s) => indexBySlug.get(s)?.name || items.find(i => i.set_slug === s)?.set_name || s} onPick={onOpenChecklist} />
@@ -352,6 +367,41 @@ function Overview({ stats, items, store, indexBySlug, profile, setProfile, uid, 
   )
 }
 
+// Values from recent sales, a batch at a time (cards with no value, or one older than 30 days).
+function ValueUpdater({ items, store, say }) {
+  const [run, setRun] = useState(null)   // { done, total, found } while running
+  const stop = useRef(false)
+  const stale = items.filter(it => it.set_slug !== UNMATCHED && OWNED_STATUSES.has(it.status) && (it.value == null || !it.value_at || Date.now() - Date.parse(it.value_at) > 30 * 86400000))
+  if (!stale.length && !run) return null
+  const BATCH = 100
+  const go = async () => {
+    stop.current = false
+    const todo = stale.slice(0, BATCH)
+    let found = 0
+    setRun({ done: 0, total: todo.length, found })
+    for (let i = 0; i < todo.length && !stop.current; i++) {
+      const it = todo[i]
+      const r = await fetchMarketValue(it)
+      if (r.error) { say(r.error, 'error'); break }
+      // no sales: stamp the date anyway so the next batch moves on to other cards
+      const fields = r.count ? { value: r.median, value_at: new Date().toISOString() } : { value_at: new Date().toISOString() }
+      if (r.count) found++
+      await updateItem(it.id, fields)
+      setRun({ done: i + 1, total: todo.length, found })
+      await new Promise(res => setTimeout(res, 700))
+    }
+    await store.reloadItems()
+    setRun(null)
+    say('Values updated from recent sales: ' + plural(found, 'card') + ' priced.')
+  }
+  return (
+    <div style={{ ...card, padding: '12px 16px', display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap' }}>
+      <span style={{ flex: 1, minWidth: 220, color: '#A1A1AA', fontSize: 14 }}>{run ? `Checking recent sales… ${run.done} of ${run.total} (${run.found} priced)` : `${plural(stale.length, 'card')} without a current value. GrailFindr can price them from recent sales.`}</span>
+      {run ? <button style={btnSmall} onClick={() => { stop.current = true }}>Stop</button> : <button style={btnGhost} onClick={go}>Update {Math.min(BATCH, stale.length)} values</button>}
+    </div>
+  )
+}
+
 function Collections({ store, uid, say, items, onFilter, profile, setProfile }) {
   const [name, setName] = useState('')
   const [renaming, setRenaming] = useState(null)
@@ -369,7 +419,7 @@ function Collections({ store, uid, say, items, onFilter, profile, setProfile }) 
                 <button style={btnSmall}>Save</button>
               </form>
             ) : (
-              <button onClick={() => onFilter({ collection: String(c.id) })} style={{ flex: 1, minWidth: 0, background: 'none', border: 'none', color: '#EDEDEF', fontSize: 14, fontWeight: 600, textAlign: 'left', cursor: 'pointer', fontFamily: 'inherit', padding: 0 }}>
+              <button onClick={() => onFilter({ collection: String(c.id) })} style={{ flex: '1 1 220px', minWidth: 0, background: 'none', border: 'none', color: '#EDEDEF', fontSize: 14, fontWeight: 600, textAlign: 'left', cursor: 'pointer', fontFamily: 'inherit', padding: 0 }}>
                 {c.name} <span style={{ ...muted, fontWeight: 400 }}>· {plural(counts.get(c.id) || 0, 'card')}{c.is_public ? ' · public' : ''}</span>
               </button>
             )}
@@ -535,7 +585,7 @@ function SetsTab({ items, indexBySlug, onOpenChecklist, onOpenSet }) {
           {rows.map(s => (
             <div key={s.slug} style={{ ...card, padding: '14px 16px' }}>
               <p style={{ ...title(15), margin: 0, color: '#fff' }}>{s.name}</p>
-              <p style={{ ...muted, fontSize: 12, margin: '4px 0 8px' }}>{s.baseTotal ? `Base ${s.baseHave}/${s.baseTotal} · ` : ''}{s.total ? `Master ${s.have}/${s.total}` : plural(s.have, 'card')} · {plural(s.copies, 'copy').replace('copys', 'copies')}</p>
+              <p style={{ ...muted, fontSize: 12, margin: '4px 0 8px' }}>{s.baseTotal ? `Base ${s.baseHave}/${s.baseTotal} · ` : ''}{s.total ? `Master ${s.have}/${s.total}` : plural(s.have, 'card')} · {plural(s.copies, 'copy')}</p>
               {s.total > 0 && <Progress have={s.baseTotal ? s.baseHave : s.have} total={s.baseTotal || s.total} />}
               <div style={{ display: 'flex', gap: 8, marginTop: 12 }}>
                 <button style={{ ...btnAccent, padding: '7px 14px', fontSize: 13 }} onClick={() => onOpenChecklist(s.slug)}>Checklist</button>
@@ -591,7 +641,7 @@ function Checklist({ slug, store, uid, say, onBack, onEdit, onOpenSet }) {
       else {
         const its = byKey.get(k) || []
         const detailed = its.length > 1 || its.some(it => it.qty > 1 || it.grader || it.price_paid != null || it.notes || it.image_url || it.value != null)
-        if (detailed && !window.confirm(`Remove ${plural(its.reduce((s, it) => s + it.qty, 0), 'copy').replace('copys', 'copies')} of this card, with their details?`)) return
+        if (detailed && !window.confirm(`Remove ${plural(its.reduce((s, it) => s + it.qty, 0), 'copy')} of this card, with their details?`)) return
         const { error } = await deleteItems(its.map(it => it.id))
         if (error) say('Couldn’t save — ' + error.message, 'error'); else { const ids = new Set(its.map(it => it.id)); store.setItems(cur => (cur || []).filter(x => !ids.has(x.id))) }
       }
@@ -918,7 +968,7 @@ function ImportTab({ store, uid, indexSets, say, onWantsChanged, goTab }) {
   const [tcdbCode, setTcdbCode] = useState('')
   const [csv, setCsv] = useState(null)   // { headers, rows, map, name }
   const [gaps, setGaps] = useState(null)
-  const fileRef = useRef(null), jsonRef = useRef(null)
+  const fileRef = useRef(null), jsonRef = useRef(null), bmRef = useRef(null)
   // the bookmark's code, with this site's address filled in
   useEffect(() => { fetch('/tcdb-importer.js').then(r => r.ok ? r.text() : '').then(t => setTcdbCode(t.replace("'CARDHQ_ORIGIN'", JSON.stringify(window.location.origin)))).catch(() => {}) }, [])
   const takeTcdb = (p) => { if (validTcdbPayload(p)) setIncoming({ src: 'tcdb', rows: tcdbRows(p), label: 'TCDB' + (p.member ? ' (' + p.member + ')' : ''), full: p.full }) }
@@ -930,6 +980,8 @@ function ImportTab({ store, uid, indexSets, say, onWantsChanged, goTab }) {
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => { isAdmin().then(a => { if (a) unmatchedSummary().then(setGaps) }) }, [])
   const bookmarklet = tcdbCode ? 'javascript:' + encodeURIComponent(tcdbCode.replace(/^\s*\/\*[\s\S]*?\*\/\s*/, '')) : ''
+  // React blocks javascript: links in href, so the bookmark's address is set on the element directly
+  useEffect(() => { if (bmRef.current && bookmarklet) bmRef.current.setAttribute('href', bookmarklet) }, [bookmarklet, incoming, csv])
   const unmatched = (store.items || []).filter(it => it.set_slug === UNMATCHED)
   const exportCsv = () => {
     const coll = new Map(store.collections.map(c => [c.id, c.name]))
@@ -947,7 +999,7 @@ function ImportTab({ store, uid, indexSets, say, onWantsChanged, goTab }) {
         <p style={{ color: '#A1A1AA', fontSize: 14, lineHeight: 1.6, margin: '8px 0 12px' }}>Brings over every card in your TCDB collection — quantities, prices, named collections, your wantlist and trade list. Your TCDB account isn’t touched and we never see your TCDB password: the import runs in your own browser.</p>
         <ol style={{ color: '#D4D4D8', fontSize: 14, lineHeight: 1.7, margin: '0 0 12px', paddingLeft: 20 }}>
           <li>Drag this button to your bookmarks bar: {bookmarklet
-            ? <a href={bookmarklet} onClick={(e) => { e.preventDefault(); say('Drag the button to your bookmarks bar, then click it while you’re on tcdb.com.') }} draggable style={{ ...btnAccent, display: 'inline-block', padding: '5px 12px', fontSize: 13, textDecoration: 'none', margin: '0 4px', cursor: 'grab' }}>Card HQ import</a>
+            ? <a ref={bmRef} onClick={(e) => { e.preventDefault(); say('Drag the button to your bookmarks bar, then click it while you’re on tcdb.com.') }} draggable style={{ ...btnAccent, display: 'inline-block', padding: '5px 12px', fontSize: 13, textDecoration: 'none', margin: '0 4px', cursor: 'grab' }}>Card HQ import</a>
             : <span style={muted}>loading…</span>}
             <span style={{ ...muted, fontSize: 12 }}> (no bookmarks bar? Ctrl+Shift+B / ⌘+Shift+B shows it)</span></li>
           <li>Go to <a href="https://www.tcdb.com" target="_blank" rel="noreferrer" style={{ color: ACCENT_TEXT }}>tcdb.com</a>, sign in, and click the bookmark.</li>
@@ -1116,7 +1168,7 @@ function ImportReview({ incoming, store, uid, indexSets, say, onDone, onCancel, 
           </Toggle>
         )}
         <div style={{ display: 'flex', gap: 10, marginTop: 16, flexWrap: 'wrap', alignItems: 'center' }}>
-          <button style={btnAccent} disabled={!!busy} onClick={doImport}>{busy || (incoming.src === 'rematch' ? `Save ${plural(exact.length + likely.length - skip.size, 'match')}`.replace('matchs', 'matches') : 'Import')}</button>
+          <button style={btnAccent} disabled={!!busy} onClick={doImport}>{busy || (incoming.src === 'rematch' ? `Save ${plural(exact.length + likely.length - skip.size, 'match')}` : 'Import')}</button>
           <button style={btnGhost} disabled={!!busy} onClick={onCancel}>Cancel</button>
         </div>
       </div>
