@@ -7025,14 +7025,6 @@
    "update"
   ]
  },
- "2004-bazooka": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "originals jersey",
-   "roundup jersey",
-   "star jerseys"
-  ]
- },
  "2019-panini-chronicles-baseball": {
   "missingPlayers": [
    "astral",
@@ -7574,24 +7566,14 @@
    "violet"
   ]
  },
- "2003-playoff-prestige": {
+ "2004-fleer-greats-of-the-game": {
   "missingPlayers": [
-   "drake",
-   "owensriceholtprice"
-  ],
-  "missingInserts": [
-   "game day jersey",
-   "league leaders quad"
-  ]
- },
- "2003-ultra": {
-  "missingPlayers": [
-   "aw",
-   "tk"
+   "got",
+   "munson"
   ],
   "missingInserts": [
    "game worn jersey",
-   "game worn ultra swatch"
+   "game worn jersey patch"
   ]
  },
  "1999-pacific": {
@@ -7724,6 +7706,15 @@
    "res"
   ]
  },
+ "2004-playoff-contenders": {
+  "missingPlayers": [
+   "hasselback"
+  ],
+  "missingInserts": [
+   "r o y",
+   "roy toe"
+  ]
+ },
  "1991-pro-set": {
   "missingPlayers": [
    "andrellins",
@@ -7837,27 +7828,6 @@
   ],
   "missingInserts": [
    "smash mouth xtra"
-  ]
- },
- "2003-flair": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "canton calling jersey",
-   "sunday showdown jersey"
-  ]
- },
- "2003-topps-chrome": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "gridiron badges jersey",
-   "pro bowl relics jersey"
-  ]
- },
- "2002-upper-deck-xl": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "big time jersey",
-   "super swatch jersey"
   ]
  },
  "2015-bowman-draft-baseball-cards": {
@@ -8676,6 +8646,33 @@
    "1959"
   ]
  },
+ "2004-fleer-tradition": {
+  "missingPlayers": [
+   "gt",
+   "schockey"
+  ],
+  "missingInserts": [
+   "player day"
+  ]
+ },
+ "2004-ultra": {
+  "missingPlayers": [
+   "ru",
+   "up"
+  ],
+  "missingInserts": [
+   "game worn jersey"
+  ]
+ },
+ "2003-playoff-prestige": {
+  "missingPlayers": [
+   "drake",
+   "owensriceholtprice"
+  ],
+  "missingInserts": [
+   "league leaders quad"
+  ]
+ },
  "2003-topps-total": {
   "missingPlayers": [
    "packers",
@@ -9436,6 +9433,38 @@
    "superstar combos"
   ]
  },
+ "2004-fleer-e-x": {
+  "missingPlayers": [
+   "sharpre"
+  ],
+  "missingInserts": [
+   "classic connexions triple jersey"
+  ]
+ },
+ "2004-press-pass": {
+  "missingPlayers": [
+   "wr"
+  ],
+  "missingInserts": [
+   "ink"
+  ]
+ },
+ "2004-sp-game-used": {
+  "missingPlayers": [
+   "wr"
+  ],
+  "missingInserts": [
+   "authentic fabric"
+  ]
+ },
+ "2004-topps-chrome": {
+  "missingPlayers": [
+   "wr"
+  ],
+  "missingInserts": [
+   "pro bowl relics jersey"
+  ]
+ },
  "2003-leaf-limited": {
   "missingPlayers": [
    "sn"
@@ -9889,58 +9918,70 @@
   ],
   "missingInserts": []
  },
- "2003-fleer-focus": {
+ "2004-fleer-authentix": {
   "missingPlayers": [],
   "missingInserts": [
-   "emerald jersey"
+   "hot ticket jerseys"
   ]
  },
- "2003-fleer-hot-prospects": {
+ "2004-fleer-hot-prospects": {
   "missingPlayers": [],
   "missingInserts": [
    "materials jersey"
   ]
  },
- "2003-fleer-showcase": {
+ "2004-fleer-sweet-sigs": {
   "missingPlayers": [],
   "missingInserts": [
-   "hot hands jersey"
+   "gridion heroes"
   ]
  },
- "2003-fleer-snapshot": {
+ "2004-playoff-absolute-memorabilia": {
   "missingPlayers": [],
   "missingInserts": [
-   "projections jersey"
+   "tools trade materials"
   ]
  },
- "2003-donruss-gridiron-kings": {
+ "2004-playoff-honors": {
   "missingPlayers": [],
   "missingInserts": [
    "jersey"
   ]
  },
- "2003-sage-hit": {
+ "2004-sage-hit": {
   "missingPlayers": [],
   "missingInserts": [
-   "a18"
+   "jersey"
   ]
  },
- "2003-sp-authentic": {
+ "2004-topps-pristine": {
   "missingPlayers": [],
   "missingInserts": [
-   "threads triples"
+   "real deal jerseys"
   ]
  },
- "2003-spx": {
+ "2004-topps-total": {
   "missingPlayers": [],
   "missingInserts": [
-   "team logo"
+   "total award winner"
   ]
  },
- "2003-topps-pristine": {
+ "2004-upper-deck-foundations": {
   "missingPlayers": [],
   "missingInserts": [
-   "premiere jersey"
+   "signatures"
+  ]
+ },
+ "2004-upper-deck-legends": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "legendary signature"
+  ]
+ },
+ "2004-upper-deck-reflections": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "jersey"
   ]
  },
  "1990-topps-traded-baseball-cards": {
@@ -10809,6 +10850,20 @@
   "missingPlayers": [
    "enchantment",
    "frame"
+  ],
+  "missingInserts": []
+ },
+ "2004-sp-authentic": {
+  "missingPlayers": [
+   "s",
+   "wr"
+  ],
+  "missingInserts": []
+ },
+ "2003-ultra": {
+  "missingPlayers": [
+   "aw",
+   "tk"
   ],
   "missingInserts": []
  },
@@ -12168,6 +12223,24 @@
   "missingInserts": []
  },
  "2004-donruss-elite": {
+  "missingPlayers": [
+   "wr"
+  ],
+  "missingInserts": []
+ },
+ "2004-sage": {
+  "missingPlayers": [
+   "hendersn"
+  ],
+  "missingInserts": []
+ },
+ "2004-upper-deck-diamond-pro-sigs": {
+  "missingPlayers": [
+   "wr"
+  ],
+  "missingInserts": []
+ },
+ "2004-upper-deck-finite": {
   "missingPlayers": [
    "wr"
   ],
