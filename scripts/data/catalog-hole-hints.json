@@ -5752,20 +5752,6 @@
    "world champ pennant decals"
   ]
  },
- "2011-panini-certified": {
-  "missingPlayers": [
-   "decker",
-   "owens",
-   "starks"
-  ],
-  "missingInserts": [
-   "shirt off my back material",
-   "totally",
-   "totally future materials",
-   "totally piece game",
-   "totally stitches time"
-  ]
- },
  "2018-topps-ufc-knockout-mma-cards": {
   "missingPlayers": [
    "condit",
@@ -5833,6 +5819,38 @@
    "xfractor patch",
    "xfractor relic"
   ]
+ },
+ "2011-topps-chrome": {
+  "missingPlayers": [
+   "arencibia",
+   "barney",
+   "beachy",
+   "belt",
+   "britton",
+   "cashner",
+   "crow",
+   "dejesus",
+   "drabek",
+   "espinosa",
+   "hosmer",
+   "kimbrel",
+   "mcgee",
+   "minor",
+   "morel",
+   "nishioka",
+   "noesi",
+   "nunez",
+   "ogando",
+   "peguero",
+   "pineda",
+   "revere",
+   "sale",
+   "sogard",
+   "teheran",
+   "trumbo",
+   "walden"
+  ],
+  "missingInserts": []
  },
  "2001-pacific": {
   "missingPlayers": [
@@ -7067,6 +7085,14 @@
    "update"
   ]
  },
+ "2011-panini-threads": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "collection combo material",
+   "gameday jerseys",
+   "pro gridiron kings material"
+  ]
+ },
  "2019-panini-chronicles-baseball": {
   "missingPlayers": [
    "astral",
@@ -7748,6 +7774,15 @@
    "res"
   ]
  },
+ "2011-topps-prime": {
+  "missingPlayers": [
+   "vareen"
+  ],
+  "missingInserts": [
+   "dual combos",
+   "quad combos"
+  ]
+ },
  "1991-pro-set": {
   "missingPlayers": [
    "andrellins",
@@ -7861,6 +7896,13 @@
   ],
   "missingInserts": [
    "smash mouth xtra"
+  ]
+ },
+ "2011-topps-rising-rookies": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "freshman impression relic",
+   "team patch"
   ]
  },
  "2015-bowman-draft-baseball-cards": {
@@ -9467,6 +9509,14 @@
    "superstar combos"
   ]
  },
+ "2011-score": {
+  "missingPlayers": [
+   "mallet"
+  ],
+  "missingInserts": [
+   "jersey"
+  ]
+ },
  "2010-topps-etopps": {
   "missingPlayers": [
    "smith"
@@ -10000,28 +10050,34 @@
   ],
   "missingInserts": []
  },
- "2011-finest": {
+ "2011-panini-prestige": {
   "missingPlayers": [],
   "missingInserts": [
-   "relic"
+   "draft tickets signatures"
   ]
  },
- "2010-panini-adrenalyn-xl": {
+ "2011-panini-timeless-treasures": {
   "missingPlayers": [],
   "missingInserts": [
-   "gray"
+   "jersey"
   ]
  },
- "2010-sage-hit": {
+ "2011-topps-gridiron-legends": {
   "missingPlayers": [],
   "missingInserts": [
-   "a13"
+   "legends gridiron legacies"
   ]
  },
- "2010-spx": {
+ "2011-topps-platinum": {
   "missingPlayers": [],
   "missingInserts": [
-   "winning combos dual jersey"
+   "die cut"
+  ]
+ },
+ "2011-topps-precision": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "legend"
   ]
  },
  "1990-topps-traded-baseball-cards": {
