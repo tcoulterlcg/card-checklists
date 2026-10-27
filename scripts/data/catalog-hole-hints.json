@@ -3228,71 +3228,6 @@
    "path to cup stanley winner"
   ]
  },
- "2012-panini-certified": {
-  "missingPlayers": [
-   "beason",
-   "bentley",
-   "bolden",
-   "bradham",
-   "bufict",
-   "burris",
-   "butkus",
-   "casper",
-   "cooper",
-   "crawford",
-   "cribbs",
-   "demps",
-   "drew",
-   "driver",
-   "dumervil",
-   "dunbar",
-   "ellison",
-   "fleming",
-   "goode",
-   "gordon",
-   "hanna",
-   "hardin",
-   "hayward",
-   "hunter",
-   "joiner",
-   "keller",
-   "knox",
-   "lane",
-   "lee",
-   "mathis",
-   "moeaki",
-   "moreno",
-   "norman",
-   "polk",
-   "ratliff",
-   "reyes",
-   "rodriguez",
-   "sapp",
-   "sensabaugh",
-   "spence",
-   "spiller",
-   "streater",
-   "tenow",
-   "thimas",
-   "thompson",
-   "tucker",
-   "vernon",
-   "walsh",
-   "walter",
-   "wolfe",
-   "worthy",
-   "zuerlein"
-  ],
-  "missingInserts": [
-   "jersery",
-   "totally",
-   "totally future signature materials",
-   "totally material",
-   "totally materials",
-   "totally materials prime",
-   "totally stitches time"
-  ]
- },
  "13-14-panini-totally-certified-basketball": {
   "missingPlayers": [
    "aguirre",
@@ -5232,6 +5167,22 @@
    "trivia quiz"
   ]
  },
+ "2012-topps-chrome": {
+  "missingPlayers": [
+   "autographs",
+   "gresham",
+   "wheeden"
+  ],
+  "missingInserts": [
+   "1957 inserts",
+   "1965 inserts",
+   "1984 inserts",
+   "die cut",
+   "helmet",
+   "jersey",
+   "prism die cut"
+  ]
+ },
  "1991-pro-set-wlaf": {
   "missingPlayers": [
    "bennett",
@@ -6719,6 +6670,15 @@
    "wins united states championship"
   ]
  },
+ "2012-panini-gridiron": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "gems trio",
+   "gems trio material",
+   "jersey",
+   "jersey combo"
+  ]
+ },
  "2015-topps-opening-day-baseball": {
   "missingPlayers": [
    "angels",
@@ -6872,6 +6832,18 @@
   ],
   "missingInserts": [
    "signature rps"
+  ]
+ },
+ "2012-panini-prestige": {
+  "missingPlayers": [
+   "clairborne",
+   "hillmann",
+   "webster"
+  ],
+  "missingInserts": [
+   "draft city destinations",
+   "friday",
+   "team foundations trio materials"
   ]
  },
  "2001-stadium-club": {
@@ -7719,6 +7691,16 @@
    "violet"
   ]
  },
+ "2012-topps-prime-hobby": {
+  "missingPlayers": [
+   "w",
+   "weedon"
+  ],
+  "missingInserts": [
+   "level v relics",
+   "quad combos"
+  ]
+ },
  "2004-fleer-greats-of-the-game": {
   "missingPlayers": [
    "got",
@@ -7859,6 +7841,15 @@
    "res"
   ]
  },
+ "2012-panini-limited": {
+  "missingPlayers": [
+   "bray"
+  ],
+  "missingInserts": [
+   "chip materials",
+   "material phenom"
+  ]
+ },
  "1991-pro-set": {
   "missingPlayers": [
    "andrellins",
@@ -7974,25 +7965,11 @@
    "smash mouth xtra"
   ]
  },
- "2012-bowman": {
+ "2012-panini-prominence": {
   "missingPlayers": [],
   "missingInserts": [
-   "american stars",
-   "inside numbers jersey"
-  ]
- },
- "2012-panini-black": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "equipment relics",
-   "friday"
-  ]
- },
- "2012-panini-elite": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "hard hats signatures",
-   "new breed jersey"
+   "unlimited potential material combos",
+   "unlimited potential material signature"
   ]
  },
  "2015-bowman-draft-baseball-cards": {
@@ -9599,12 +9576,28 @@
    "superstar combos"
   ]
  },
+ "2012-panini-momentum": {
+  "missingPlayers": [
+   "hillmann"
+  ],
+  "missingInserts": [
+   "head class material"
+  ]
+ },
  "2012-finest": {
   "missingPlayers": [
    "kaepernick"
   ],
   "missingInserts": [
    "atomic die cut"
+  ]
+ },
+ "2012-topps-valor": {
+  "missingPlayers": [
+   "west"
+  ],
+  "missingInserts": [
+   "field armor patch"
   ]
  },
  "2011-topps-prime": {
@@ -10148,52 +10141,10 @@
   ],
   "missingInserts": []
  },
- "2012-bowman-sterling": {
+ "2012-topps-strata-hobby": {
   "missingPlayers": [],
   "missingInserts": [
-   "prism dual relic"
-  ]
- },
- "2012-panini-contenders": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "die cut"
-  ]
- },
- "2012-panini-crown-royale": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "legendary silhouttes material"
-  ]
- },
- "2011-press-pass": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "power pick"
-  ]
- },
- "2011-topps-triple-threads": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "unity relic"
-  ]
- },
- "2011-upper-deck-exquisite-collection": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "dimensions signature"
-  ]
- },
- "2011-upper-deck-sweet-spot": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "signature helmet"
-  ]
- },
- "2011-upper-deck-university-of-oklahoma": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "national champion duos"
+   "75 ra km"
   ]
  },
  "1990-topps-traded-baseball-cards": {
@@ -12527,6 +12478,24 @@
  "2013-topps-inception-football-cards": {
   "missingPlayers": [
    "watkins"
+  ],
+  "missingInserts": []
+ },
+ "2012-panini-prizm": {
+  "missingPlayers": [
+   "r"
+  ],
+  "missingInserts": []
+ },
+ "2012-topps-inception": {
+  "missingPlayers": [
+   "hillmann"
+  ],
+  "missingInserts": []
+ },
+ "2012-topps-magic": {
+  "missingPlayers": [
+   "combos"
   ],
   "missingInserts": []
  },
