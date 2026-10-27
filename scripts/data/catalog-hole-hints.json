@@ -6594,24 +6594,6 @@
    "wins united states championship"
   ]
  },
- "2007-press-pass": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "gridiron gamers jersey",
-   "insider insight",
-   "power pick",
-   "walmart"
-  ]
- },
- "2007-ultra": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "feel game jersey",
-   "jersey",
-   "paydirt jersey",
-   "stars jersey"
-  ]
- },
  "2015-topps-opening-day-baseball": {
   "missingPlayers": [
    "angels",
@@ -7867,18 +7849,11 @@
    "smash mouth xtra"
   ]
  },
- "2007-topps-chrome": {
+ "2008-donruss-gridiron-gear": {
   "missingPlayers": [],
   "missingInserts": [
-   "chrome ring honor",
-   "ring honor"
-  ]
- },
- "2007-upper-deck-ultimate-collection": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "achievements patch",
-   "game patch"
+   "jersey",
+   "jersey prime"
   ]
  },
  "2015-bowman-draft-baseball-cards": {
@@ -8697,15 +8672,6 @@
    "1959"
   ]
  },
- "2007-donruss-elite": {
-  "missingPlayers": [
-   "dooley",
-   "strahan"
-  ],
-  "missingInserts": [
-   "frito lay"
-  ]
- },
  "2006-playoff-absolute-memorabilia": {
   "missingPlayers": [
    "hagen",
@@ -9484,6 +9450,14 @@
    "superstar combos"
   ]
  },
+ "2008-donruss-classics": {
+  "missingPlayers": [
+   "roethlisbeger"
+  ],
+  "missingInserts": [
+   "membership vip jersey"
+  ]
+ },
  "2007-donruss-threads": {
   "missingPlayers": [
    "dynasty"
@@ -10001,16 +9975,10 @@
   ],
   "missingInserts": []
  },
- "2007-topps-tx-exclusive": {
+ "2007-topps-green-bay-packers": {
   "missingPlayers": [],
   "missingInserts": [
-   "ticket to stardom jersey"
-  ]
- },
- "2007-upper-deck-artifacts": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "photo shoot flashback fabric"
+   "team"
   ]
  },
  "1990-topps-traded-baseball-cards": {
@@ -12277,6 +12245,18 @@
  "2013-topps-inception-football-cards": {
   "missingPlayers": [
    "watkins"
+  ],
+  "missingInserts": []
+ },
+ "2008-donruss-elite": {
+  "missingPlayers": [
+   "red"
+  ],
+  "missingInserts": []
+ },
+ "2007-donruss-elite": {
+  "missingPlayers": [
+   "dooley"
   ],
   "missingInserts": []
  },
