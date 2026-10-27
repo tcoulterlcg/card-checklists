@@ -45,6 +45,10 @@ const res = await matchRows(rows, { index: idx, loadSet: (s) => data[s] || null 
 assert.deepEqual(res.map(r => [r.slug, r.section, r.conf]), [
   ['a', 'Holoview FX', 'exact'], ['c', 'Base Set', 'exact'], ['c', 'Rainbow', 'exact'], ['e', 'Base', 'exact'], ['a', 'Base', 'exact'], [undefined, undefined, 'none']])
 
+const pz = { slug: 'p', name: 'x', sections: [{ title: 'Prizm', cards: [{ n: '9', p: 'Patrick Kane' }] }, { title: 'Blue Line Auto Jersey Parallel', cards: [{ n: '55', p: 'Patrick Kane' }] }] }
+assert.equal(findCard(pz, { section: 'Prizm Red', cardN: '9', player: 'Patrick Kane' }), null)
+assert.equal(findCard(pz, { section: 'Blue Line Autograph Jersey Relics', cardN: '55', player: 'Patrick Kane' }).conf, 'likely')
+
 // CSV
 const csv = toCsv(['Set', 'Card #', 'Notes'], [{ Set: 'A, "B"', 'Card #': '=1+1', Notes: 'line1\nline2' }])
 const back = parseCsv(csv)
