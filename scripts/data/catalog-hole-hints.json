@@ -6036,6 +6036,18 @@
   ],
   "missingInserts": []
  },
+ "2010-topps-prime": {
+  "missingPlayers": [
+   "matthews"
+  ],
+  "missingInserts": [
+   "2nd quarter combos relics",
+   "3rd quarter combos",
+   "3rd quarter combos relics",
+   "4th quarter combos",
+   "4th quarter combos relics"
+  ]
+ },
  "2017-topps-wwe-nxt-checklist-added": {
   "missingPlayers": [
    "aries",
@@ -7849,27 +7861,6 @@
    "smash mouth xtra"
   ]
  },
- "2010-panini-classics": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "cuts signatures",
-   "membership relics"
-  ]
- },
- "2010-panini-crown-royale": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "die cut material signatures",
-   "majestic signatures"
-  ]
- },
- "2009-press-pass": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "authentics",
-   "gridiron graphs"
-  ]
- },
  "2015-bowman-draft-baseball-cards": {
   "missingPlayers": [
    "anderson",
@@ -8696,13 +8687,13 @@
    "1959"
   ]
  },
- "2010-bowman-sterling": {
+ "2010-panini-prestige": {
   "missingPlayers": [
-   "adams",
-   "paul"
+   "rogers",
+   "yards"
   ],
   "missingInserts": [
-   "relics"
+   "preferred signature"
   ]
  },
  "2006-playoff-absolute-memorabilia": {
@@ -10008,16 +9999,34 @@
   ],
   "missingInserts": []
  },
- "2009-press-pass-se": {
+ "2010-panini-limited": {
   "missingPlayers": [],
   "missingInserts": [
-   "game day gear jersey"
+   "initial steps jersey"
   ]
  },
- "2009-upper-deck-heroes": {
+ "2010-score": {
   "missingPlayers": [],
   "missingInserts": [
-   "jersey"
+   "factory bonus"
+  ]
+ },
+ "2010-panini-threads": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "collection combos"
+  ]
+ },
+ "2010-playoff-contenders": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "super bowl tickets"
+  ]
+ },
+ "2010-topps-unrivaled": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "greats jersey"
   ]
  },
  "1990-topps-traded-baseball-cards": {
@@ -10895,6 +10904,13 @@
   "missingPlayers": [
    "enchantment",
    "frame"
+  ],
+  "missingInserts": []
+ },
+ "2010-bowman-sterling": {
+  "missingPlayers": [
+   "adams",
+   "paul"
   ],
   "missingInserts": []
  },
@@ -12314,6 +12330,12 @@
  "2013-topps-inception-football-cards": {
   "missingPlayers": [
    "watkins"
+  ],
+  "missingInserts": []
+ },
+ "2010-topps-chrome": {
+  "missingPlayers": [
+   "demaryius"
   ],
   "missingInserts": []
  },
