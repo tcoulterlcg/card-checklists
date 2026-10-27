@@ -6749,6 +6749,18 @@
    "signature rps"
   ]
  },
+ "2008-playoff-absolute-memorabilia": {
+  "missingPlayers": [
+   "chargers",
+   "dougles",
+   "gonzales"
+  ],
+  "missingInserts": [
+   "premiere materials signatures",
+   "team quad material",
+   "tools trade materials"
+  ]
+ },
  "2001-stadium-club": {
   "missingPlayers": [
    "bowl",
@@ -7051,6 +7063,14 @@
   ],
   "missingInserts": [
    "update"
+  ]
+ },
+ "2008-topps-rookie-progression": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "game worn jersey",
+   "game worn jersey dual",
+   "legend"
   ]
  },
  "2019-panini-chronicles-baseball": {
@@ -7847,13 +7867,6 @@
   ],
   "missingInserts": [
    "smash mouth xtra"
-  ]
- },
- "2008-donruss-gridiron-gear": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "jersey",
-   "jersey prime"
   ]
  },
  "2015-bowman-draft-baseball-cards": {
@@ -8672,6 +8685,15 @@
    "1959"
   ]
  },
+ "2008-sp-authentic": {
+  "missingPlayers": [
+   "champbailey",
+   "crowmartie"
+  ],
+  "missingInserts": [
+   "numbers signature"
+  ]
+ },
  "2006-playoff-absolute-memorabilia": {
   "missingPlayers": [
    "hagen",
@@ -9450,14 +9472,6 @@
    "superstar combos"
   ]
  },
- "2008-donruss-classics": {
-  "missingPlayers": [
-   "roethlisbeger"
-  ],
-  "missingInserts": [
-   "membership vip jersey"
-  ]
- },
  "2007-donruss-threads": {
   "missingPlayers": [
    "dynasty"
@@ -9975,10 +9989,34 @@
   ],
   "missingInserts": []
  },
- "2007-topps-green-bay-packers": {
+ "2008-stadium-club": {
   "missingPlayers": [],
   "missingInserts": [
-   "team"
+   "beam team relics"
+  ]
+ },
+ "2008-topps-chrome": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "jersey"
+  ]
+ },
+ "2008-topps-mayo": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "retro"
+  ]
+ },
+ "2008-topps-triple-threads": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "combo relic"
+  ]
+ },
+ "2008-upper-deck-first-edition": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "game jersey"
   ]
  },
  "1990-topps-traded-baseball-cards": {
@@ -10847,6 +10885,13 @@
   "missingPlayers": [
    "enchantment",
    "frame"
+  ],
+  "missingInserts": []
+ },
+ "2008-score": {
+  "missingPlayers": [
+   "mendebhall",
+   "tate"
   ],
   "missingInserts": []
  },
@@ -12248,9 +12293,27 @@
   ],
   "missingInserts": []
  },
+ "2008-donruss-classics": {
+  "missingPlayers": [
+   "roethlisbeger"
+  ],
+  "missingInserts": []
+ },
  "2008-donruss-elite": {
   "missingPlayers": [
    "red"
+  ],
+  "missingInserts": []
+ },
+ "2008-playoff-prestige": {
+  "missingPlayers": [
+   "foil"
+  ],
+  "missingInserts": []
+ },
+ "2008-sp-rookie-threads": {
+  "missingPlayers": [
+   "farve"
   ],
   "missingInserts": []
  },
