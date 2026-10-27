@@ -46,3 +46,7 @@
   rookie-season cards inserted unchanged into a later product ("2020-21 Ice Premieres" in 2021-22 Ice) stay RC. Trevor's rules.
 - **Colors:** small secondary text uses `#8A93A8` (passes WCAG AA on the dark background); avoid darker greys for text.
 - **Grails:** collectors define their own grails; the site does not mark sets as grails.
+- **Showing owners on checklists:** collectors opt in with "Show my collection on checklists" (My Collection; `cardhq_profiles.show_owned`,
+  off by default). Set pages then show "Owned by @username" on cards they've checked off, via `cardhq_set_owners()`
+  (`scripts/sql/2026-10-27-show-owned.sql`). It returns username + card only — never price, value, grade, notes or photos — and
+  collection rows themselves stay owner-only. Keep it that way.

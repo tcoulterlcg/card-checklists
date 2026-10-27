@@ -273,6 +273,7 @@ export function CollectionView({ account, store, indexSets, onOpenAuth, onOpenSe
         ))}
       </div>
       <Notice tone={notice?.tone} onClose={() => setNotice(null)}>{notice?.text}</Notice>
+      <ShowOwnedToggle profile={profile} setProfile={setProfile} uid={uid} say={say} />
       <TcdbReceiver onPayload={() => { if (tab !== 'import') setTab('import') }} />
 
       {activeSlug ? (
@@ -294,6 +295,34 @@ export function CollectionView({ account, store, indexSets, onOpenAuth, onOpenSe
       {editing && <ItemEditor key={editing.id} item={editing} collections={store.collections} uid={uid} onClose={() => setEditing(null)}
         onSaved={(it) => { replaceItem(it); setEditing(null) }} onDeleted={(it) => { dropItems([it.id]); setEditing(null) }} onDuplicate={duplicate} />}
     </section>
+  )
+}
+
+// Opt-in: list me as an owner ("Owned by @username") on the public set pages for every card I've checked off.
+function ShowOwnedToggle({ profile, setProfile, uid, say }) {
+  const [busy, setBusy] = useState(false)
+  if (profile === undefined) return null
+  const on = !!profile?.show_owned
+  const flip = async (v) => {
+    if (busy || !profile) return
+    setBusy(true)
+    const { data, error } = await updateProfile(uid, { show_owned: v })
+    setBusy(false)
+    if (error) say('Couldn’t save — ' + error.message, 'error'); else setProfile?.(data)
+  }
+  return (
+    <div style={{ ...card, padding: '12px 16px', marginBottom: 16, display: 'flex', gap: 12, alignItems: 'flex-start' }}>
+      <input id="hq-show-owned" type="checkbox" checked={on} disabled={busy || !profile} onChange={(e) => flip(e.target.checked)}
+        style={{ accentColor: ACCENT, width: 18, height: 18, marginTop: 2, flexShrink: 0, cursor: profile ? 'pointer' : 'default' }} />
+      <label htmlFor="hq-show-owned" style={{ cursor: profile ? 'pointer' : 'default' }}>
+        <span style={{ display: 'block', color: '#EDEDEF', fontSize: 14, fontWeight: 600 }}>Show my collection on checklists</span>
+        <span style={{ display: 'block', ...muted, marginTop: 2, lineHeight: 1.5 }}>
+          {!profile ? 'Pick a username first (Your profile).'
+            : on ? `On — set pages show “Owned by @${profile.username}” on every card you’ve checked off. Only your username shows, never prices, grades or notes.`
+            : 'Off — your collection is private. Turn on to show “Owned by @' + profile.username + '” on the cards you’ve checked off, so other collectors can see who has what.'}
+        </span>
+      </label>
+    </div>
   )
 }
 

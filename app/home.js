@@ -8,7 +8,7 @@ import { useCallback, useDeferredValue, useEffect, useLayoutEffect, useMemo, use
 import { Select, Popover, Trigger, Chevron, Check, menuItem, menuHeading, triggerStyle, useIsMobile } from '../components/dropdown'
 import { useAccount, AccountChip, AuthModal, CommunityView } from '../components/community'
 import { CollectionView, useMyCollection } from '../components/collection'
-import { addWant, removeWant, myWantlist, grailfindrFindUrl, signOutHere, noCardNumber } from '../lib/supa'
+import { addWant, removeWant, myWantlist, grailfindrFindUrl, signOutHere, noCardNumber, setOwners, collectionCardN } from '../lib/supa'
 import { FeedbackModal, FeedbackView, useFeedbackAdmin } from '../components/feedback'
 import { FixEditor } from '../components/fix-editor'
 import { Omnibox, PlayerPage, MyPlayersPanel, useMyPlayers, loadPlayerDir, loadTopPlayers, seasonLabel, MemBadge, MemChip, memCodeOf } from '../components/player'
@@ -980,6 +980,28 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
   }), [])
   // The set's rows, memoized: typing in "Filter this set" re-renders only the box, and the (deferred)
   // filter result re-renders the rows. A 40k-card set used to rebuild every row on every keystroke.
+  // Collectors who chose "Show my collection on checklists": section|card -> usernames.
+  // Rows saved under an old (renamed/merged) slug count too.
+  const [owners, setOwnersMap] = useState(() => new Map())
+  const ownerKey = (section, cardN) => secKey(section) + '|' + String(cardN ?? '')
+  useEffect(() => {
+    setOwnersMap(new Map())
+    const slug = setData?.slug
+    if (!slug) return
+    let live = true
+    ;(async () => {
+      const rd = await loadRedirects().catch(() => ({}))
+      const final = (s) => { for (let i = 0; i < 6 && rd[s]; i++) s = rd[s]; return s }
+      const slugs = [slug, ...Object.keys(rd).filter(k => k !== slug && final(k) === slug)].slice(0, 20)
+      const rows = await setOwners(slugs)
+      if (!live || !rows) return
+      const m = new Map()
+      for (const r of rows) { const k = ownerKey(r.section, r.card_n); if (!m.has(k)) m.set(k, new Set()); m.get(k).add(r.username) }
+      setOwnersMap(new Map([...m].map(([k, v]) => [k, [...v].sort((a, b) => a.localeCompare(b))])))
+    })()
+    return () => { live = false }
+  }, [setData?.slug, account.profile?.show_owned]) // eslint-disable-line react-hooks/exhaustive-deps
+  const ownerCount = useMemo(() => { const u = new Set(); for (const v of owners.values()) for (const n of v) u.add(n); return u.size }, [owners])
   const renderedSections = useMemo(() => !setData ? null : visibleSections.slice(0, secLimit).map((sec, si) => {
             const sorted = sec.cards.slice().sort(makeComparator(sortField, sortDir))
             return (
@@ -1013,6 +1035,10 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
                           : <button onClick={() => cbRef.current.openPlayerByName(c.p, null, true, setData?.sport)} title={'Open ' + c.p + "'s player page"} style={{ fontWeight: 600, background: 'none', border: 'none', color: isMine(c.p) ? ACCENT_TEXT : '#EDEDEF', cursor: 'pointer', padding: 0, textAlign: 'left', fontFamily: 'inherit', fontSize: 14 }}>{c.p}</button>}
                         {(c.v || c.d) && <span style={{ display: 'block', color: '#8A93A8', fontSize: 12, marginTop: 2 }}>{[c.v, c.d].filter(Boolean).join(' · ')}</span>}
                         {c.t && <span className="hq-mobile-only" style={{ color: '#8A93A8', fontSize: 12, marginTop: 2 }}>{c.t}</span>}
+                        {(o => o && <span style={{ display: 'block', color: '#8A93A8', fontSize: 12, marginTop: 2 }} title={'Owned by ' + o.map(u => '@' + u).join(', ')}>
+                          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" aria-hidden="true" style={{ verticalAlign: '-1px', marginRight: 4 }}><circle cx="12" cy="8" r="4" /><path d="M4 21c0-4 4-6 8-6s8 2 8 6" /></svg>
+                          Owned by <span style={{ color: ACCENT_TEXT }}>{o.slice(0, 3).map(u => '@' + u).join(', ')}</span>{o.length > 3 ? ' +' + (o.length - 3) + ' more' : ''}
+                        </span>)(owners.get(ownerKey(sec.title, collectionCardN(c))))}
                       </span>
                       {setFacets.team && <span className="hq-col-team" style={{ flex: '1 1 0', minWidth: 0, color: '#8A93A8', fontSize: 13 }}>{c.t || ''}</span>}
                       {setFacets.flag && <span className="hq-col-flag" style={{ flex: setIsTcg ? '0 0 110px' : '0 0 96px', textAlign: 'right' }}>{c.x ? <Chip color={/\bRC\b/.test(c.x) ? '#4ade80' : '#8A93A8'} title={flagTitle(c.x)}>{c.x}</Chip> : null}</span>}
@@ -1033,7 +1059,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
                 </div>
               </div>
             )
-          }), [setData, visibleSections, secLimit, sortField, sortDir, openSecs, setIsTcg, setIsSport, setFacets, wanted, mineSet])
+          }), [setData, visibleSections, secLimit, sortField, sortDir, openSecs, setIsTcg, setIsSport, setFacets, wanted, mineSet, owners])
   const urlApplied = useRef(false)   // don't overwrite a shared ?sport=… link before applyUrl has read it
   useEffect(() => {
     if (!isLanding || sets.length === 0 || !urlApplied.current) return
@@ -1423,6 +1449,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
               <Chip>{yearLabel(activeSet)}</Chip>
               <Chip>{(setData.sections || []).length} section{(setData.sections || []).length === 1 ? '' : 's'}</Chip>
               {(setData.sections || []).some(s => s.odds) && <Chip>Pack odds</Chip>}
+              {ownerCount > 0 && <Chip title="Collectors who chose to show their collection on checklists">{ownerCount} collector{ownerCount === 1 ? '' : 's'} showing cards</Chip>}
             </div>
             <h1 style={{ ...display, fontSize: 40, margin: 0, lineHeight: 1.05 }}>{setData.name}</h1>
             <p style={{ color: '#8A93A8', fontSize: 13, margin: '10px 0 0' }}>
