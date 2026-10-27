@@ -6749,18 +6749,6 @@
    "signature rps"
   ]
  },
- "2008-playoff-absolute-memorabilia": {
-  "missingPlayers": [
-   "chargers",
-   "dougles",
-   "gonzales"
-  ],
-  "missingInserts": [
-   "premiere materials signatures",
-   "team quad material",
-   "tools trade materials"
-  ]
- },
  "2001-stadium-club": {
   "missingPlayers": [
    "bowl",
@@ -7063,14 +7051,6 @@
   ],
   "missingInserts": [
    "update"
-  ]
- },
- "2008-topps-rookie-progression": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "game worn jersey",
-   "game worn jersey dual",
-   "legend"
   ]
  },
  "2019-panini-chronicles-baseball": {
@@ -7869,6 +7849,13 @@
    "smash mouth xtra"
   ]
  },
+ "2008-upper-deck-masterpieces": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "captured canvas jersey",
+   "preview"
+  ]
+ },
  "2015-bowman-draft-baseball-cards": {
   "missingPlayers": [
    "anderson",
@@ -8352,6 +8339,16 @@
    "hot franchise fabrics signatures"
   ]
  },
+ "2008-playoff-absolute-memorabilia": {
+  "missingPlayers": [
+   "chargers",
+   "dougles",
+   "gonzales"
+  ],
+  "missingInserts": [
+   "team quad material"
+  ]
+ },
  "2000-skybox": {
   "missingPlayers": [
    "jonson",
@@ -8683,15 +8680,6 @@
   ],
   "missingInserts": [
    "1959"
-  ]
- },
- "2008-sp-authentic": {
-  "missingPlayers": [
-   "champbailey",
-   "crowmartie"
-  ],
-  "missingInserts": [
-   "numbers signature"
   ]
  },
  "2006-playoff-absolute-memorabilia": {
@@ -9989,34 +9977,28 @@
   ],
   "missingInserts": []
  },
- "2008-stadium-club": {
+ "2009-donruss-elite": {
   "missingPlayers": [],
   "missingInserts": [
-   "beam team relics"
+   "jersey prime"
   ]
  },
- "2008-topps-chrome": {
+ "2008-sage-hit": {
   "missingPlayers": [],
   "missingInserts": [
-   "jersey"
+   "gray"
   ]
  },
- "2008-topps-mayo": {
+ "2008-topps-green-bay-packers": {
   "missingPlayers": [],
   "missingInserts": [
-   "retro"
+   "team"
   ]
  },
- "2008-topps-triple-threads": {
+ "2008-upper-deck-ultimate-collection": {
   "missingPlayers": [],
   "missingInserts": [
-   "combo relic"
-  ]
- },
- "2008-upper-deck-first-edition": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "game jersey"
+   "futures foursome"
   ]
  },
  "1990-topps-traded-baseball-cards": {
@@ -10892,6 +10874,13 @@
   "missingPlayers": [
    "mendebhall",
    "tate"
+  ],
+  "missingInserts": []
+ },
+ "2008-sp-authentic": {
+  "missingPlayers": [
+   "champbailey",
+   "crowmartie"
   ],
   "missingInserts": []
  },
@@ -12314,6 +12303,12 @@
  "2008-sp-rookie-threads": {
   "missingPlayers": [
    "farve"
+  ],
+  "missingInserts": []
+ },
+ "2008-upper-deck-icons": {
+  "missingPlayers": [
+   "blue"
   ],
   "missingInserts": []
  },
