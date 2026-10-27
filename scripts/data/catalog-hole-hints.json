@@ -7849,6 +7849,13 @@
    "smash mouth xtra"
   ]
  },
+ "2007-playoff-prestige": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "materials patch",
+   "patch"
+  ]
+ },
  "2015-bowman-draft-baseball-cards": {
   "missingPlayers": [
    "anderson",
@@ -9460,22 +9467,6 @@
    "bengals"
   ]
  },
- "2006-press-pass": {
-  "missingPlayers": [
-   "coyle"
-  ],
-  "missingInserts": [
-   "walmart"
-  ]
- },
- "2006-press-pass-legends": {
-  "missingPlayers": [
-   "ah"
-  ],
-  "missingInserts": [
-   "ink"
-  ]
- },
  "2006-topps-total": {
   "missingPlayers": [
    "owen"
@@ -9977,34 +9968,10 @@
   ],
   "missingInserts": []
  },
- "2007-donruss-gridiron-gear": {
+ "2007-spx": {
   "missingPlayers": [],
   "missingInserts": [
-   "player timeline jersey"
-  ]
- },
- "2006-sage-aspire": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "national promos"
-  ]
- },
- "2006-sage-hit": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "jersey"
-  ]
- },
- "2006-upper-deck-rookie-debut": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "jersey collection"
-  ]
- },
- "2006-upper-deck-ultimate-collection": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "stat patch"
+   "winning materials stat"
   ]
  },
  "1990-topps-traded-baseball-cards": {
@@ -12267,6 +12234,18 @@
   ],
   "missingInserts": []
  },
+ "2007-playoff-absolute-memorabilia": {
+  "missingPlayers": [
+   "gold"
+  ],
+  "missingInserts": []
+ },
+ "2007-sp-authentic": {
+  "missingPlayers": [
+   "btlph"
+  ],
+  "missingInserts": []
+ },
  "2006-bowman-sterling": {
   "missingPlayers": [
    "tate"
@@ -12294,6 +12273,18 @@
  "2006-playoff-prestige": {
   "missingPlayers": [
    "alexanderbarber"
+  ],
+  "missingInserts": []
+ },
+ "2006-press-pass": {
+  "missingPlayers": [
+   "coyle"
+  ],
+  "missingInserts": []
+ },
+ "2006-press-pass-legends": {
+  "missingPlayers": [
+   "ah"
   ],
   "missingInserts": []
  },
