@@ -1,4 +1,5 @@
 -- Card HQ accounts project (kfudhwuyxtfkmwcolavs): collection v2 hardening (review findings, 2026-10-27).
+-- Applied 2026-10-27 (migration cardhq_collection_v2b).
 -- Replaces the last block of 2026-10-27-collection-v2.sql (signed-in trade visibility), which never ran.
 --  * Collections, wantlists and wantlist rules are readable by their owner only.
 --  * Row ids are always made by the database; imports insert/update through functions
