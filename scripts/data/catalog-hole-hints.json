@@ -7849,6 +7849,27 @@
    "smash mouth xtra"
   ]
  },
+ "2010-panini-classics": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "cuts signatures",
+   "membership relics"
+  ]
+ },
+ "2010-panini-crown-royale": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "die cut material signatures",
+   "majestic signatures"
+  ]
+ },
+ "2009-press-pass": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "authentics",
+   "gridiron graphs"
+  ]
+ },
  "2015-bowman-draft-baseball-cards": {
   "missingPlayers": [
    "anderson",
@@ -7982,17 +8003,6 @@
   ],
   "missingInserts": [
    "adrenaline rush"
-  ]
- },
- "2009-sp-signature": {
-  "missingPlayers": [
-   "abrink",
-   "awoodson",
-   "jjohnson",
-   "mflynn"
-  ],
-  "missingInserts": [
-   "party four"
   ]
  },
  "1996-skybox-impact": {
@@ -8684,6 +8694,15 @@
   ],
   "missingInserts": [
    "1959"
+  ]
+ },
+ "2010-bowman-sterling": {
+  "missingPlayers": [
+   "adams",
+   "paul"
+  ],
+  "missingInserts": [
+   "relics"
   ]
  },
  "2006-playoff-absolute-memorabilia": {
@@ -9464,12 +9483,12 @@
    "superstar combos"
   ]
  },
- "2009-topps-chrome": {
+ "2010-finest": {
   "missingPlayers": [
-   "refractor"
+   "relic"
   ],
   "missingInserts": [
-   "stars"
+   "dual relics"
   ]
  },
  "2007-donruss-threads": {
@@ -9989,28 +10008,16 @@
   ],
   "missingInserts": []
  },
- "2009-score": {
+ "2009-press-pass-se": {
   "missingPlayers": [],
   "missingInserts": [
-   "1989 reprints"
+   "game day gear jersey"
   ]
  },
- "2009-playoff-prestige": {
+ "2009-upper-deck-heroes": {
   "missingPlayers": [],
   "missingInserts": [
-   "touchdown sensations"
-  ]
- },
- "2009-sp-threads": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "superstar die cuts"
-  ]
- },
- "2009-topps-mayo": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "united states governor"
+   "jersey"
   ]
  },
  "1990-topps-traded-baseball-cards": {
@@ -10100,6 +10107,15 @@
    "elliott",
    "gage",
    "okorafor"
+  ],
+  "missingInserts": []
+ },
+ "2009-sp-signature": {
+  "missingPlayers": [
+   "abrink",
+   "awoodson",
+   "jjohnson",
+   "mflynn"
   ],
   "missingInserts": []
  },
@@ -10879,6 +10895,13 @@
   "missingPlayers": [
    "enchantment",
    "frame"
+  ],
+  "missingInserts": []
+ },
+ "2009-sage": {
+  "missingPlayers": [
+   "kemp",
+   "reed"
   ],
   "missingInserts": []
  },
@@ -12291,6 +12314,18 @@
  "2013-topps-inception-football-cards": {
   "missingPlayers": [
    "watkins"
+  ],
+  "missingInserts": []
+ },
+ "2009-topps-chrome": {
+  "missingPlayers": [
+   "refractor"
+  ],
+  "missingInserts": []
+ },
+ "2009-upper-deck-rookie-exclusives": {
+  "missingPlayers": [
+   "crotchery"
   ],
   "missingInserts": []
  },
