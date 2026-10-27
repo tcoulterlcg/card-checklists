@@ -4,7 +4,8 @@
 --    only safe columns (no price paid, value, notes, cert #, tags, dates or TCDB ids).
 --  * Row ids are always made by the database; imports insert/update through functions
 --    (insert skips rows already saved, so a retried import doesn't double up or fail).
---  * Photos must live in Card HQ's own storage bucket; trade offers have a size cap.
+--  * Photos must live in Card HQ's own storage bucket.
+--  * Trading is removed for launch (matcher function and offers table dropped).
 begin;
 set local lock_timeout = '5s';
 
@@ -16,9 +17,8 @@ create policy cardhq_wantlist_select on public.cardhq_wantlist_items for select 
 drop policy if exists cardhq_want_rules_select on public.cardhq_want_rules;
 create policy cardhq_want_rules_select on public.cardhq_want_rules for select using ((select auth.uid()) = user_id);
 
--- what a visitor may see of someone's collection: everything (safe columns) when the profile is
--- public, cards in a public collection, and — for signed-in members — cards listed for trade/sale
--- by members open to trades
+-- what a visitor may see of someone's collection (safe columns only): everything when the profile is
+-- public, otherwise cards in collections made public
 create or replace function public.cardhq_public_items(p_user uuid)
 returns table (id bigint, set_slug text, set_name text, section text, card_n text, player text, status text, qty integer,
                grader text, grade text, autographed boolean, serial_no text, image_url text, collection_id bigint)
@@ -29,39 +29,17 @@ language sql stable security definer set search_path to 'public' as $$
   left join public.cardhq_collections c on c.id = i.collection_id
   where i.user_id = p_user
     and i.status not in ('in_transit_in')
-    and (p.is_public or coalesce(c.is_public, false)
-         or (p.open_to_trade and auth.uid() is not null and i.status in ('trade', 'sale')))
+    and (p.is_public or coalesce(c.is_public, false))
   order by i.id
   limit 100000
 $$;
 revoke execute on function public.cardhq_public_items(uuid) from public;
 grant execute on function public.cardhq_public_items(uuid) to anon, authenticated;
 
--- trade matching reads other members' listings and wants, so it runs as definer and returns only safe columns
-create or replace function public.cardhq_trade_matches()
-returns table (direction text, other_user uuid, username text, item_id bigint, set_slug text, set_name text, section text, card_n text, player text, status text)
-language sql stable security definer set search_path to 'public' as $$
-  with me as (select auth.uid() as uid),
-  others as (select p.id, p.username from public.cardhq_profiles p, me where me.uid is not null and p.open_to_trade and p.id <> me.uid),
-  my_wants as (select w.* from public.cardhq_wantlist_items w, me where w.user_id = me.uid),
-  my_rules as (select r.* from public.cardhq_want_rules r, me where r.user_id = me.uid and r.kind = 'player'),
-  their_items as (select i.*, o.username from public.cardhq_collection_items i join others o on o.id = i.user_id where i.status in ('trade', 'sale')),
-  my_items as (select i.* from public.cardhq_collection_items i, me where i.user_id = me.uid and i.status in ('trade', 'sale')
-               and exists (select 1 from public.cardhq_profiles p where p.id = me.uid and p.open_to_trade))
-  (select distinct on (t.id) 'they_have'::text, t.user_id, t.username, t.id, t.set_slug, t.set_name, t.section, t.card_n, t.player, t.status
-  from their_items t
-  where exists (select 1 from my_wants w where w.set_slug = t.set_slug
-                  and (w.card_n is null or (w.card_n = t.card_n and public.cardhq_section_key(w.section) = public.cardhq_section_key(t.section))))
-     or exists (select 1 from my_rules r where lower(btrim(r.value)) = lower(btrim(t.player))))
-  union all
-  (select distinct on (o.id, i.id) 'they_want'::text, o.id, o.username, i.id, i.set_slug, i.set_name, i.section, i.card_n, i.player, i.status
-  from my_items i
-  join public.cardhq_wantlist_items w on w.set_slug = i.set_slug
-       and (w.card_n is null or (w.card_n = i.card_n and public.cardhq_section_key(w.section) = public.cardhq_section_key(i.section)))
-  join others o on o.id = w.user_id)
-$$;
-revoke execute on function public.cardhq_trade_matches() from anon, public;
-grant execute on function public.cardhq_trade_matches() to authenticated;
+-- trading is not part of launch (Trevor, 2026-10-27): remove the trade matcher and offers
+drop function if exists public.cardhq_trade_matches();
+drop table if exists public.cardhq_trade_requests;
+drop function if exists public.cardhq_trade_req_guard();
 
 -- ---------- ids made by the database ----------
 alter table public.cardhq_collection_items alter column id set generated always;
@@ -124,5 +102,4 @@ grant execute on function public.cardhq_insert_wants(jsonb) to authenticated;
 -- ---------- limits ----------
 alter table public.cardhq_collection_items add constraint cardhq_items_image_url check (
   image_url is null or image_url like 'https://kfudhwuyxtfkmwcolavs.supabase.co/storage/v1/object/public/cardhq-images/%');
-alter table public.cardhq_trade_requests add constraint cardhq_trade_req_size check (pg_column_size(give) < 32768 and pg_column_size(get) < 32768);
 commit;

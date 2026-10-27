@@ -9,7 +9,7 @@ import {
   STATUSES, STATUS_LABEL, STATUS_COLOR, CONDITIONS, GRADERS, GRADES, UNMATCHED, cardKey, itemKey, cardKeyOf,
   listItems, insertItems, updateItem, updateItems, updateWholeItems, deleteItems,
   listCollections, createCollection, renameCollection, setCollectionPublic, deleteCollection, ensureCollections,
-  listWants, insertWants, listRules, addRule, removeRule, tradeMatches, listTradeRequests, sendTradeRequest, setTradeStatus,
+  listWants, insertWants, listRules, addRule, removeRule,
   collectorByName, publicItems, collectionStats, unmatchedSummary, fetchMarketValue,
 } from '../lib/collection'
 import { buildSetIndex, matchRows, parseTcdbTitle } from '../lib/match'
@@ -237,7 +237,7 @@ function ItemEditor({ item, collections, uid, onClose, onSaved, onDeleted, onDup
 }
 
 // ---------------- main view ----------------
-const TABS = [['overview', 'Overview'], ['cards', 'Cards'], ['sets', 'Sets'], ['wantlist', 'Wantlist'], ['trades', 'Trades'], ['import', 'Import / Export']]
+const TABS = [['overview', 'Overview'], ['cards', 'Cards'], ['sets', 'Sets'], ['wantlist', 'Wantlist'], ['import', 'Import / Export']]
 
 export function CollectionView({ account, store, indexSets, onOpenAuth, onOpenSet, onWantsChanged }) {
   const { session, profile, setProfile } = account
@@ -261,7 +261,7 @@ export function CollectionView({ account, store, indexSets, onOpenAuth, onOpenSe
       <TcdbReceiver onPayload={() => {}} />
       <div className="hq-panel" style={{ ...card, padding: 40, textAlign: 'center' }}>
         <h2 style={{ ...title(32), margin: 0, color: '#fff' }}>Track your collection</h2>
-        <p style={{ color: '#A1A1AA', maxWidth: 520, margin: '12px auto 20px', fontSize: 14, lineHeight: 1.6 }}>Every copy you own with quantity, price, condition and grading; named collections for your PCs; set completion; a wantlist that finds trade partners. Already on TCDB? Bring your whole collection over in a minute.</p>
+        <p style={{ color: '#A1A1AA', maxWidth: 520, margin: '12px auto 20px', fontSize: 14, lineHeight: 1.6 }}>Every copy you own with quantity, price, condition and grading; named collections for your PCs; set completion and a wantlist. Already on TCDB? Bring your whole collection over in a minute.</p>
         <button style={btnAccent} onClick={onOpenAuth}>Sign in to start</button>
         {urlParam('from') === 'tcdb' && <p style={{ ...muted, marginTop: 14 }}>Your TCDB cards are waiting — sign in and they’ll be ready to import.</p>}
       </div>
@@ -304,8 +304,6 @@ export function CollectionView({ account, store, indexSets, onOpenAuth, onOpenSe
         <SetsTab items={items} indexBySlug={indexBySlug} onOpenChecklist={setActiveSlug} onOpenSet={onOpenSet} />
       ) : tab === 'wantlist' ? (
         <WantlistTab store={store} uid={uid} say={say} indexBySlug={indexBySlug} onOpenChecklist={setActiveSlug} onOpenSet={onOpenSet} onWantsChanged={onWantsChanged} />
-      ) : tab === 'trades' ? (
-        <TradesTab store={store} uid={uid} profile={profile} setProfile={setProfile} say={say} onFilter={(f) => { setCardFilter(f); setTab('cards') }} />
       ) : (
         <ImportTab store={store} uid={uid} indexSets={indexSets} say={say} onWantsChanged={onWantsChanged} goTab={setTab} />
       )}
@@ -344,7 +342,7 @@ function Overview({ stats, items, store, indexBySlug, profile, setProfile, uid, 
         <Tile label="Value" value={stats.valued ? fmtMoney(stats.value) : '—'} sub={stats.valued ? plural(stats.valued, 'card') + ' valued' : 'add values to cards'} />
         <Tile label="Paid" value={stats.paid ? fmtMoney(stats.paid) : '—'} sub={stats.valued && stats.paid ? (stats.value >= stats.paid ? '+' : '−') + fmtMoney(Math.abs(stats.value - stats.paid)) + ' vs paid' : ''} />
         <Tile label="Graded" value={stats.graded.toLocaleString()} sub={stats.graders.size ? stats.top(stats.graders, 3).map(([g, n]) => g + ' ' + n).join(' · ') : ''} />
-        <Tile label="For trade / sale" value={((stats.statuses.get('trade') || 0) + (stats.statuses.get('sale') || 0)).toLocaleString()} sub={profile?.open_to_trade ? 'visible to traders' : 'not listed yet'} />
+        <Tile label="For trade / sale" value={((stats.statuses.get('trade') || 0) + (stats.statuses.get('sale') || 0)).toLocaleString()} sub="your own labels" />
       </div>
       <ValueUpdater items={items} store={store} say={say} />
       <div style={{ display: 'grid', gap: 12, gridTemplateColumns: 'repeat(auto-fit, minmax(min(300px, 100%), 1fr))' }}>
@@ -735,7 +733,7 @@ function WantlistTab({ store, uid, say, indexBySlug, onOpenChecklist, onOpenSet,
     <div style={{ display: 'grid', gap: 16 }}>
       <div style={{ ...card, padding: '16px 18px' }}>
         <p style={{ ...eyebrow, color: '#8A93A8', margin: '0 0 4px' }}>Wantlist rules</p>
-        <p style={{ ...muted, margin: '0 0 12px' }}>Want everything of a player or team without adding cards one by one. Rules mark matching cards on set and player pages and find trade partners.</p>
+        <p style={{ ...muted, margin: '0 0 12px' }}>Want everything of a player or team without adding cards one by one. Rules mark matching cards on set and player pages.</p>
         <form style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center' }} onSubmit={async (e) => {
           e.preventDefault()
           if (!rule.value.trim()) return
@@ -794,114 +792,6 @@ function WantlistTab({ store, uid, say, indexBySlug, onOpenChecklist, onOpenSet,
             </div>
           )
         })}
-      </div>
-    </div>
-  )
-}
-
-// ---------------- Trades ----------------
-function TradesTab({ store, uid, profile, setProfile, say, onFilter }) {
-  const [matches, setMatches] = useState(null)
-  const [reqs, setReqs] = useState(null)
-  const [composer, setComposer] = useState(null)   // { user, username, give:Set, get:Set, msg }
-  const listed = (store.items || []).filter(it => it.status === 'trade' || it.status === 'sale')
-  const load = async () => { setMatches(await tradeMatches()); setReqs(await listTradeRequests(uid)) }
-  useEffect(() => { load() }, [uid, profile?.open_to_trade]) // eslint-disable-line react-hooks/exhaustive-deps
-  const byUser = useMemo(() => {
-    const m = new Map()
-    for (const r of matches || []) { if (!m.has(r.other_user)) m.set(r.other_user, { user: r.other_user, username: r.username, have: [], want: [] }); m.get(r.other_user)[r.direction === 'they_have' ? 'have' : 'want'].push(r) }
-    return [...m.values()].sort((a, b) => (b.have.length && b.want.length) - (a.have.length && a.want.length) || (b.have.length + b.want.length) - (a.have.length + a.want.length))
-  }, [matches])
-  const line = (r) => (String(r.card_n).startsWith('—') ? '' : '#' + r.card_n + ' ') + (r.player || '') + ' · ' + (r.set_name || r.set_slug) + (r.section && !/^base( set)?$/i.test(r.section) ? ' · ' + r.section : '')
-  return (
-    <div style={{ display: 'grid', gap: 16 }}>
-      <div style={{ ...card, padding: '16px 18px', display: 'grid', gap: 12 }}>
-        <Toggle checked={profile?.open_to_trade} onChange={async (v) => { const { data, error } = await updateProfile(uid, { open_to_trade: v }); if (error) say(error.message, 'error'); else setProfile(data) }}
-          hint="Lets other traders see the cards you mark For trade / For sale and your wantlist, and send you offers. Nothing else in your collection is shown.">
-          Open to trades
-        </Toggle>
-        <p style={{ ...muted, margin: 0 }}>You have {plural(listed.length, 'card')} listed for trade or sale. <button style={btnSmall} onClick={() => onFilter({ status: 'trade' })}>Manage</button> — mark cards in the Cards tab (select → Set status).</p>
-      </div>
-      {!profile?.open_to_trade ? null : matches === null ? <p role="status" style={muted}>Finding trade partners…</p> : matches.failed ? <Notice tone="error">Couldn’t load trade matches right now.</Notice> : byUser.length === 0 ? (
-        <div style={{ ...card, padding: 22, color: '#A1A1AA', fontSize: 14 }}>No matches yet. Add cards to your wantlist (or a wantlist rule) and list your extras for trade — matches show up here as other collectors do the same.</div>
-      ) : (
-        <div style={{ display: 'grid', gap: 12 }}>
-          <p style={{ ...eyebrow, color: '#8A93A8', margin: 0 }}>Trade partners</p>
-          {byUser.map(u => (
-            <div key={u.user} style={{ ...card, padding: '14px 16px' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', gap: 10, flexWrap: 'wrap', alignItems: 'center' }}>
-                <a href={'/?view=collector&u=' + encodeURIComponent(u.username)} style={{ ...title(16), color: '#fff', textDecoration: 'none' }}>{u.username}</a>
-                <button style={{ ...btnAccent, padding: '7px 14px', fontSize: 13 }} onClick={() => setComposer({ user: u.user, username: u.username, give: new Set(u.want.map(r => r.item_id)), get: new Set(u.have.map(r => r.item_id)), msg: '', u })}>Propose a trade</button>
-              </div>
-              <div style={{ display: 'grid', gap: 10, gridTemplateColumns: 'repeat(auto-fit, minmax(min(280px, 100%), 1fr))', marginTop: 10 }}>
-                <div><p style={{ ...muted, fontSize: 12, margin: '0 0 4px' }}>They have, you want ({u.have.length})</p>{u.have.slice(0, 8).map(r => <p key={r.item_id} style={{ color: '#D4D4D8', fontSize: 13, margin: '2px 0' }}>{line(r)}</p>)}{u.have.length > 8 && <p style={muted}>+{u.have.length - 8} more</p>}</div>
-                <div><p style={{ ...muted, fontSize: 12, margin: '0 0 4px' }}>You have, they want ({u.want.length})</p>{u.want.slice(0, 8).map(r => <p key={r.item_id} style={{ color: '#D4D4D8', fontSize: 13, margin: '2px 0' }}>{line(r)}</p>)}{u.want.length > 8 && <p style={muted}>+{u.want.length - 8} more</p>}</div>
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
-      {reqs && reqs.length > 0 && (
-        <div style={{ display: 'grid', gap: 10 }}>
-          <p style={{ ...eyebrow, color: '#8A93A8', margin: 0 }}>Offers</p>
-          {reqs.map(r => <TradeRequest key={r.id} r={r} uid={uid} say={say} onChanged={load} line={line} />)}
-        </div>
-      )}
-      {composer && (
-        <Modal open onClose={() => setComposer(null)} labelText={'Trade offer to ' + composer.username} width={640}>
-          <h3 style={{ ...title(20), margin: '0 40px 12px 0', color: '#fff' }}>Offer a trade to {composer.username}</h3>
-          {[['You give', 'want', 'give'], ['You get', 'have', 'get']].map(([h, src, key]) => (
-            <div key={key} style={{ marginBottom: 12 }}>
-              <p style={{ ...label }}>{h}</p>
-              <div style={{ display: 'grid', gap: 4, maxHeight: 200, overflowY: 'auto' }}>
-                {composer.u[src].map(r => (
-                  <label key={r.item_id} style={{ display: 'flex', gap: 8, fontSize: 13, color: '#D4D4D8', alignItems: 'center' }}>
-                    <input type="checkbox" checked={composer[key].has(r.item_id)} onChange={(e) => setComposer(c => { const s = new Set(c[key]); e.target.checked ? s.add(r.item_id) : s.delete(r.item_id); return { ...c, [key]: s } })} style={{ accentColor: ACCENT }} />{line(r)}
-                  </label>
-                ))}
-                {composer.u[src].length === 0 && <p style={muted}>Nothing matched — say what you’re after in the message.</p>}
-              </div>
-            </div>
-          ))}
-          <label style={label} htmlFor="tr-msg">Message (how to reach you, shipping, cash to even it out…)</label>
-          <textarea id="tr-msg" maxLength={2000} value={composer.msg} onChange={(e) => setComposer(c => ({ ...c, msg: e.target.value }))} style={{ ...input, minHeight: 80 }} />
-          <div style={{ display: 'flex', gap: 10, marginTop: 14 }}>
-            <button style={btnAccent} onClick={async () => {
-              const pickRows = (src, set) => composer.u[src].filter(r => set.has(r.item_id)).map(r => ({ item_id: r.item_id, set_slug: r.set_slug, set_name: r.set_name, section: r.section, card_n: r.card_n, player: r.player }))
-              const { error } = await sendTradeRequest(uid, composer.user, pickRows('want', composer.give), pickRows('have', composer.get), composer.msg)
-              if (error) say('Couldn’t send — ' + error.message, 'error'); else { say('Offer sent to ' + composer.username + '.'); setComposer(null); load() }
-            }}>Send offer</button>
-            <button style={btnGhost} onClick={() => setComposer(null)}>Cancel</button>
-          </div>
-        </Modal>
-      )}
-    </div>
-  )
-}
-function TradeRequest({ r, uid, say, onChanged, line }) {
-  const [reply, setReply] = useState('')
-  const mine = r.from_user === uid
-  const act = async (status, withReply) => { const { error } = await setTradeStatus(r.id, status, withReply ? reply.trim() || null : undefined); if (error) say(error.message, 'error'); onChanged() }
-  return (
-    <div style={{ ...card, padding: '14px 16px' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', gap: 10, flexWrap: 'wrap' }}>
-        <span style={{ color: '#EDEDEF', fontWeight: 600, fontSize: 14 }}>{mine ? 'You → ' + r.to_name : r.from_name + ' → you'}</span>
-        <span style={{ ...muted, fontSize: 12 }}>{r.status} · {new Date(r.created_at).toLocaleDateString()}</span>
-      </div>
-      <div style={{ display: 'grid', gap: 10, gridTemplateColumns: 'repeat(auto-fit, minmax(min(260px, 100%), 1fr))', marginTop: 8 }}>
-        <div><p style={{ ...muted, fontSize: 12, margin: '0 0 4px' }}>{mine ? 'You give' : 'They give'}</p>{(r.give || []).map((x, i) => <p key={i} style={{ color: '#D4D4D8', fontSize: 13, margin: '2px 0' }}>{line(x)}</p>)}</div>
-        <div><p style={{ ...muted, fontSize: 12, margin: '0 0 4px' }}>{mine ? 'You get' : 'You give'}</p>{(r.get || []).map((x, i) => <p key={i} style={{ color: '#D4D4D8', fontSize: 13, margin: '2px 0' }}>{line(x)}</p>)}</div>
-      </div>
-      {r.message && <p style={{ color: '#A1A1AA', fontSize: 13, margin: '8px 0 0', whiteSpace: 'pre-wrap' }}>“{r.message}”</p>}
-      {r.reply && <p style={{ color: '#A1A1AA', fontSize: 13, margin: '6px 0 0', whiteSpace: 'pre-wrap' }}>Reply: “{r.reply}”</p>}
-      <div style={{ display: 'flex', gap: 8, marginTop: 10, flexWrap: 'wrap', alignItems: 'center' }}>
-        {!mine && r.status === 'open' && <>
-          <input aria-label="Reply" placeholder="Reply (optional)" maxLength={2000} value={reply} onChange={(e) => setReply(e.target.value)} style={{ ...input, width: 'min(320px, 100%)', padding: '6px 10px' }} />
-          <button style={btnSmall} onClick={() => act('accepted', true)}>Accept</button>
-          <button style={btnSmall} onClick={() => act('declined', true)}>Decline</button>
-        </>}
-        {mine && r.status === 'open' && <button style={btnSmall} onClick={() => act('cancelled')}>Cancel offer</button>}
-        {r.status === 'accepted' && <><button style={btnSmall} onClick={() => act('completed')}>Mark completed</button><button style={btnSmall} onClick={() => act('cancelled')}>Call it off</button></>}
       </div>
     </div>
   )
@@ -1262,7 +1152,6 @@ export function CollectorView({ username, indexSets, onOpenSet, account }) {
   if (p === undefined) return <p role="status" style={muted}>Loading…</p>
   if (!p) return <div style={{ ...card, padding: 28, color: '#A1A1AA' }}>No collector called “{username}”.</div>
   const mine = account?.session?.user?.id === p.id
-  const trade = (items || []).filter(it => it.status === 'trade' || it.status === 'sale')
   const needle = q.trim().toLowerCase()
   const groups = new Map()
   for (const it of items || []) {
@@ -1274,7 +1163,7 @@ export function CollectorView({ username, indexSets, onOpenSet, account }) {
   return (
     <section>
       <h1 style={{ ...display, fontSize: 40, margin: 0 }}>{p.display_name || p.username}</h1>
-      <p style={{ ...muted, margin: '6px 0 16px' }}>@{p.username}{p.open_to_trade ? ' · open to trades' : ''} · collecting on Card HQ since {new Date(p.created_at).getFullYear()}</p>
+      <p style={{ ...muted, margin: '6px 0 16px' }}>@{p.username} · collecting on Card HQ since {new Date(p.created_at).getFullYear()}</p>
       {items === null ? <p role="status" style={muted}>Loading collection…</p> : items.length === 0 ? (
         <div style={{ ...card, padding: 24, color: '#A1A1AA', fontSize: 14 }}>{mine ? 'Nothing is public yet. Turn on “Public collection page” in My Collection → Overview, or make a single collection public.' : 'This collection is private.'}</div>
       ) : (
@@ -1283,7 +1172,6 @@ export function CollectorView({ username, indexSets, onOpenSet, account }) {
             <Tile label="Cards" value={stats.cards.toLocaleString()} />
             <Tile label="Sets" value={stats.sets.size.toLocaleString()} />
             <Tile label="Graded" value={stats.graded.toLocaleString()} />
-            <Tile label="For trade" value={trade.length.toLocaleString()} />
           </div>
           <div style={{ display: 'grid', gap: 12, gridTemplateColumns: 'repeat(auto-fit, minmax(min(300px, 100%), 1fr))' }}>
             <Bars heading="Top players" rows={stats.top(stats.players, 8)} onPick={setQ} />
@@ -1299,7 +1187,6 @@ export function CollectorView({ username, indexSets, onOpenSet, account }) {
                     <span key={it.id} style={{ fontSize: 13, color: '#D4D4D8' }}>
                       {String(it.card_n).startsWith('—') ? '' : <span style={{ color: ACCENT_TEXT }}>#{it.card_n} </span>}{it.player}{it.section && !/^base( set)?$/i.test(it.section) ? <span style={muted}> · {it.section}</span> : null}
                       {it.grader ? <span style={{ color: '#facc15' }}> {it.grader} {it.grade}</span> : null}{it.qty > 1 ? <span style={muted}> ×{it.qty}</span> : null}
-                      {(it.status === 'trade' || it.status === 'sale') && <span style={{ color: '#4ade80' }}> · {STATUS_LABEL[it.status].toLowerCase()}</span>}
                       {it.image_url ? <a href={it.image_url} target="_blank" rel="noreferrer" style={{ marginLeft: 4 }}>📷</a> : null}
                     </span>
                   ))}
