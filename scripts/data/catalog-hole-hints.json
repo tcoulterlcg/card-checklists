@@ -5533,6 +5533,35 @@
    "unity relics"
   ]
  },
+ "2005-press-pass": {
+  "missingPlayers": [
+   "bogut",
+   "coppenrath",
+   "ewing",
+   "felton",
+   "gilchrist",
+   "gomes",
+   "graham",
+   "granger",
+   "head",
+   "hodge",
+   "lee",
+   "may",
+   "paul",
+   "schenscher",
+   "simen",
+   "simien",
+   "taft",
+   "thomas",
+   "thompson",
+   "villanueva",
+   "warrick"
+  ],
+  "missingInserts": [
+   "old school",
+   "power pick"
+  ]
+ },
  "2015-bowman-baseball-cards": {
   "missingPlayers": [
    "ajcole",
@@ -6564,6 +6593,15 @@
   "missingInserts": [
    "mat relic royal rumble",
    "wins united states championship"
+  ]
+ },
+ "2005-ultra": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "die cut",
+   "team jersey",
+   "touchdown kings",
+   "touchdown kings jersey"
   ]
  },
  "2015-topps-opening-day-baseball": {
@@ -7706,13 +7744,22 @@
    "res"
   ]
  },
- "2004-playoff-contenders": {
+ "2005-sage-hit": {
   "missingPlayers": [
-   "hasselback"
+   "russell"
   ],
   "missingInserts": [
-   "r o y",
-   "roy toe"
+   "jersey",
+   "sec special"
+  ]
+ },
+ "2005-upper-deck-reflections": {
+  "missingPlayers": [
+   "wr"
+  ],
+  "missingInserts": [
+   "future fabrics",
+   "signatures"
   ]
  },
  "1991-pro-set": {
@@ -7828,6 +7875,13 @@
   ],
   "missingInserts": [
    "smash mouth xtra"
+  ]
+ },
+ "2005-upper-deck-rookie-debut": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "pro",
+   "r o y predictor"
   ]
  },
  "2015-bowman-draft-baseball-cards": {
@@ -8646,24 +8700,6 @@
    "1959"
   ]
  },
- "2004-fleer-tradition": {
-  "missingPlayers": [
-   "gt",
-   "schockey"
-  ],
-  "missingInserts": [
-   "player day"
-  ]
- },
- "2004-ultra": {
-  "missingPlayers": [
-   "ru",
-   "up"
-  ],
-  "missingInserts": [
-   "game worn jersey"
-  ]
- },
  "2003-playoff-prestige": {
   "missingPlayers": [
    "drake",
@@ -9433,36 +9469,52 @@
    "superstar combos"
   ]
  },
+ "2005-donruss-zenith": {
+  "missingPlayers": [
+   "losmann"
+  ],
+  "missingInserts": [
+   "jersey"
+  ]
+ },
+ "2005-press-pass-se": {
+  "missingPlayers": [
+   "green"
+  ],
+  "missingInserts": [
+   "game used jersey"
+  ]
+ },
+ "2005-sage": {
+  "missingPlayers": [
+   "rothlisberger"
+  ],
+  "missingInserts": [
+   "jersey combos"
+  ]
+ },
+ "2005-topps-heritage": {
+  "missingPlayers": [
+   "je"
+  ],
+  "missingInserts": [
+   "gridiron collection relic"
+  ]
+ },
+ "2005-upper-deck-espn": {
+  "missingPlayers": [
+   "unitad"
+  ],
+  "missingInserts": [
+   "insider magazine cover"
+  ]
+ },
  "2004-fleer-e-x": {
   "missingPlayers": [
    "sharpre"
   ],
   "missingInserts": [
    "classic connexions triple jersey"
-  ]
- },
- "2004-press-pass": {
-  "missingPlayers": [
-   "wr"
-  ],
-  "missingInserts": [
-   "ink"
-  ]
- },
- "2004-sp-game-used": {
-  "missingPlayers": [
-   "wr"
-  ],
-  "missingInserts": [
-   "authentic fabric"
-  ]
- },
- "2004-topps-chrome": {
-  "missingPlayers": [
-   "wr"
-  ],
-  "missingInserts": [
-   "pro bowl relics jersey"
   ]
  },
  "2003-leaf-limited": {
@@ -9918,67 +9970,43 @@
   ],
   "missingInserts": []
  },
- "2004-fleer-authentix": {
+ "2005-bazooka": {
   "missingPlayers": [],
   "missingInserts": [
-   "hot ticket jerseys"
+   "star jerseys"
   ]
  },
- "2004-fleer-hot-prospects": {
+ "2005-leaf-limited": {
   "missingPlayers": [],
   "missingInserts": [
-   "materials jersey"
+   "jersey number"
   ]
  },
- "2004-fleer-sweet-sigs": {
+ "2005-donruss-gridiron-gear": {
   "missingPlayers": [],
   "missingInserts": [
-   "gridion heroes"
+   "playoff prestige"
   ]
  },
- "2004-playoff-absolute-memorabilia": {
+ "2005-playoff-contenders": {
   "missingPlayers": [],
   "missingInserts": [
-   "tools trade materials"
+   "r o y"
   ]
  },
- "2004-playoff-honors": {
+ "2005-topps-pristine": {
   "missingPlayers": [],
   "missingInserts": [
-   "jersey"
+   "50th anniversary patch relics"
   ]
  },
- "2004-sage-hit": {
+ "2005-upper-deck-kickoff": {
   "missingPlayers": [],
   "missingInserts": [
-   "jersey"
+   "game jersey"
   ]
  },
- "2004-topps-pristine": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "real deal jerseys"
-  ]
- },
- "2004-topps-total": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "total award winner"
-  ]
- },
- "2004-upper-deck-foundations": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "signatures"
-  ]
- },
- "2004-upper-deck-legends": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "legendary signature"
-  ]
- },
- "2004-upper-deck-reflections": {
+ "2005-upper-deck-rookie-materials": {
   "missingPlayers": [],
   "missingInserts": [
    "jersey"
@@ -10853,10 +10881,24 @@
   ],
   "missingInserts": []
  },
+ "2004-fleer-tradition": {
+  "missingPlayers": [
+   "gt",
+   "schockey"
+  ],
+  "missingInserts": []
+ },
  "2004-sp-authentic": {
   "missingPlayers": [
    "s",
    "wr"
+  ],
+  "missingInserts": []
+ },
+ "2004-ultra": {
+  "missingPlayers": [
+   "ru",
+   "up"
   ],
   "missingInserts": []
  },
@@ -11628,12 +11670,6 @@
   ],
   "missingInserts": []
  },
- "2005-press-pass": {
-  "missingPlayers": [
-   "simen"
-  ],
-  "missingInserts": []
- },
  "2005-06-upper-deck-espn": {
   "missingPlayers": [
    "leb"
@@ -12222,7 +12258,49 @@
   ],
   "missingInserts": []
  },
+ "2005-leaf-certified-materials": {
+  "missingPlayers": [
+   "skills"
+  ],
+  "missingInserts": []
+ },
+ "2005-donruss-classics": {
+  "missingPlayers": [
+   "hot"
+  ],
+  "missingInserts": []
+ },
+ "2005-playoff-prestige": {
+  "missingPlayers": [
+   "heroes"
+  ],
+  "missingInserts": []
+ },
+ "2005-sp-authentic": {
+  "missingPlayers": [
+   "wr"
+  ],
+  "missingInserts": []
+ },
+ "2005-topps-chrome": {
+  "missingPlayers": [
+   "gold"
+  ],
+  "missingInserts": []
+ },
  "2004-donruss-elite": {
+  "missingPlayers": [
+   "wr"
+  ],
+  "missingInserts": []
+ },
+ "2004-playoff-contenders": {
+  "missingPlayers": [
+   "hasselback"
+  ],
+  "missingInserts": []
+ },
+ "2004-press-pass": {
   "missingPlayers": [
    "wr"
   ],
@@ -12231,6 +12309,18 @@
  "2004-sage": {
   "missingPlayers": [
    "hendersn"
+  ],
+  "missingInserts": []
+ },
+ "2004-sp-game-used": {
+  "missingPlayers": [
+   "wr"
+  ],
+  "missingInserts": []
+ },
+ "2004-topps-chrome": {
+  "missingPlayers": [
+   "wr"
   ],
   "missingInserts": []
  },
