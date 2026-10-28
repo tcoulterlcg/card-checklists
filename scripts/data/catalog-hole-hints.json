@@ -7514,6 +7514,21 @@
    "bordered"
   ]
  },
+ "2014-panini-nfl-stickers": {
+  "missingPlayers": [
+   "browns",
+   "cardinals",
+   "game",
+   "induction",
+   "jets",
+   "raiders",
+   "series",
+   "xlviii"
+  ],
+  "missingInserts": [
+   "collection"
+  ]
+ },
  "1995-pacific-prisms": {
   "missingPlayers": [
    "bowl",
@@ -9546,14 +9561,6 @@
    "superstar combos"
   ]
  },
- "2012-leaf-draft": {
-  "missingPlayers": [
-   "heyward"
-  ],
-  "missingInserts": [
-   "robert griffin iii"
-  ]
- },
  "2012-panini-limited": {
   "missingPlayers": [
    "bray"
@@ -10119,22 +10126,16 @@
   ],
   "missingInserts": []
  },
- "2012-press-pass": {
+ "2014-press-pass": {
   "missingPlayers": [],
   "missingInserts": [
-   "gray"
+   "signings"
   ]
  },
- "2012-upper-deck-exquisite-collection": {
+ "2014-topps-five-star": {
   "missingPlayers": [],
   "missingInserts": [
-   "endorsement signatures"
-  ]
- },
- "2012-upper-deck-university-of-alabama": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "crimson tide icons"
+   "patch"
   ]
  },
  "1990-topps-traded-baseball-cards": {
@@ -10224,6 +10225,15 @@
    "elliott",
    "gage",
    "okorafor"
+  ],
+  "missingInserts": []
+ },
+ "2014-leaf-metal-draft": {
+  "missingPlayers": [
+   "dix",
+   "ferguson",
+   "jenkins",
+   "lynch"
   ],
   "missingInserts": []
  },
@@ -10993,6 +11003,13 @@
   "missingPlayers": [
    "dix",
    "jenkins"
+  ],
+  "missingInserts": []
+ },
+ "2014-sage-hit": {
+  "missingPlayers": [
+   "benwikjere",
+   "hopkins"
   ],
   "missingInserts": []
  },
@@ -12387,12 +12404,6 @@
   ],
   "missingInserts": []
  },
- "2015-upper-deck-football-cards": {
-  "missingPlayers": [
-   "sherman"
-  ],
-  "missingInserts": []
- },
  "2014-panini-absolute-football-cards": {
   "missingPlayers": [
    "culter"
@@ -12468,6 +12479,12 @@
  "2012-fleer-ultra-retro": {
   "missingPlayers": [
    "holmes"
+  ],
+  "missingInserts": []
+ },
+ "2012-leaf-draft": {
+  "missingPlayers": [
+   "heyward"
   ],
   "missingInserts": []
  },
