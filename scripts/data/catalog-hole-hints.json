@@ -2236,105 +2236,6 @@
    "xfractor"
   ]
  },
- "2016-panini-prizm-football-cards": {
-  "missingPlayers": [
-   "addison",
-   "aguayo",
-   "atkins",
-   "billings",
-   "boddycalhoun",
-   "boykin",
-   "brothers",
-   "bush",
-   "cajuste",
-   "calhoun",
-   "canady",
-   "canzeri",
-   "carson",
-   "cash",
-   "chancellor",
-   "coker",
-   "conklin",
-   "crawley",
-   "drango",
-   "dumervil",
-   "engram",
-   "everett",
-   "fackrell",
-   "fanaika",
-   "ferguson",
-   "foles",
-   "fournette",
-   "garoppolo",
-   "garrett",
-   "haden",
-   "houston",
-   "houstoncarson",
-   "ifedi",
-   "kamara",
-   "kizer",
-   "kuechly",
-   "lattimore",
-   "lawrencestample",
-   "lomax",
-   "mack",
-   "madden",
-   "maddy",
-   "mahomes",
-   "martinez",
-   "mccaffrey",
-   "mcgee",
-   "mckay",
-   "mickens",
-   "mills",
-   "mixon",
-   "morris",
-   "morrison",
-   "nassib",
-   "nicolas",
-   "njoku",
-   "norris",
-   "oakman",
-   "ochi",
-   "perry",
-   "q",
-   "reddick",
-   "redmond",
-   "rogers",
-   "ross",
-   "samuel",
-   "scheu",
-   "shaheen",
-   "sharp",
-   "spriggs",
-   "spruce",
-   "stample",
-   "striker",
-   "suh",
-   "trubisky",
-   "tuerk",
-   "tunsil",
-   "wake",
-   "waller",
-   "watson",
-   "webb",
-   "whitehair",
-   "zettel"
-  ],
-  "missingInserts": [
-   "camo",
-   "die cut",
-   "disco",
-   "draft picks",
-   "draft picks stained glass",
-   "flash",
-   "mojo",
-   "select draft xrc redemption",
-   "select swatch",
-   "tie dyed",
-   "wave"
-  ]
- },
  "2018-bowman-chrome-baseball-cards": {
   "missingPlayers": [
    "aaron",
@@ -4501,6 +4402,40 @@
    "town"
   ]
  },
+ "2016-panini-prizm-football-cards": {
+  "missingPlayers": [
+   "atkins",
+   "bush",
+   "engram",
+   "everett",
+   "fournette",
+   "garoppolo",
+   "garrett",
+   "kamara",
+   "kizer",
+   "lattimore",
+   "mahomes",
+   "mccaffrey",
+   "mixon",
+   "morris",
+   "njoku",
+   "reddick",
+   "redmond",
+   "ross",
+   "samuel",
+   "shaheen",
+   "trubisky",
+   "watson",
+   "webb"
+  ],
+  "missingInserts": [
+   "disco",
+   "flash",
+   "select draft xrc redemption",
+   "select swatch",
+   "wave"
+  ]
+ },
  "1990-score-football-cards": {
   "missingPlayers": [
    "baab",
@@ -5277,38 +5212,6 @@
    "classic kareem abdul jabbar",
    "promo",
    "roger staubach"
-  ]
- },
- "2016-panini-black-gold-football-cards": {
-  "missingPlayers": [
-   "adams",
-   "addison",
-   "alexander",
-   "ayers",
-   "bullard",
-   "burbridge",
-   "calhoun",
-   "dodd",
-   "duarte",
-   "ferguson",
-   "flutie",
-   "foster",
-   "garrett",
-   "hargreaves",
-   "higbee",
-   "jersey",
-   "lasco",
-   "listenbee",
-   "ogbah",
-   "perry",
-   "rankins",
-   "spruce",
-   "tunsil",
-   "yeldon"
-  ],
-  "missingInserts": [
-   "collegiate",
-   "collegiate jersey"
   ]
  },
  "2014-topps-mini-baseball-cards": {
@@ -7673,16 +7576,6 @@
    "reprint"
   ]
  },
- "2015-panini-prizm-football-cards": {
-  "missingPlayers": [
-   "payne",
-   "rogers"
-  ],
-  "missingInserts": [
-   "draft picks stained glass",
-   "violet"
-  ]
- },
  "2004-fleer-greats-of-the-game": {
   "missingPlayers": [
    "got",
@@ -9513,6 +9406,14 @@
   ],
   "missingInserts": []
  },
+ "2015-panini-prizm-football-cards": {
+  "missingPlayers": [
+   "payne"
+  ],
+  "missingInserts": [
+   "violet"
+  ]
+ },
  "2015-topps-finest-football-cards": {
   "missingPlayers": [
    "payne"
@@ -10126,16 +10027,16 @@
   ],
   "missingInserts": []
  },
- "2014-press-pass": {
+ "2015-leaf-ultimate-draft": {
   "missingPlayers": [],
   "missingInserts": [
-   "signings"
+   "numbers"
   ]
  },
- "2014-topps-five-star": {
+ "2015-topps-take-it-to-the-house": {
   "missingPlayers": [],
   "missingInserts": [
-   "patch"
+   "redemption"
   ]
  },
  "1990-topps-traded-baseball-cards": {
@@ -12332,6 +12233,12 @@
   ],
   "missingInserts": []
  },
+ "2016-panini-black-gold-football-cards": {
+  "missingPlayers": [
+   "jersey"
+  ],
+  "missingInserts": []
+ },
  "2016-panini-classics-football-cards": {
   "missingPlayers": [
    "ll"
@@ -12374,6 +12281,12 @@
   ],
   "missingInserts": []
  },
+ "2016-panini-prizm-draft-picks": {
+  "missingPlayers": [
+   "rogers"
+  ],
+  "missingInserts": []
+ },
  "2016-panini-select-football-cards": {
   "missingPlayers": [
    "trevor"
@@ -12395,6 +12308,18 @@
  "2015-panini-national-treasures-football": {
   "missingPlayers": [
    "norwood"
+  ],
+  "missingInserts": []
+ },
+ "2015-panini-prizm-draft-picks": {
+  "missingPlayers": [
+   "rogers"
+  ],
+  "missingInserts": []
+ },
+ "2015-sage-hit": {
+  "missingPlayers": [
+   "harrison"
   ],
   "missingInserts": []
  },
