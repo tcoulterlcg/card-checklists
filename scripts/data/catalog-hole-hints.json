@@ -4042,6 +4042,70 @@
    "top 100 prospects"
   ]
  },
+ "2000-01-upper-deck-legends": {
+  "missingPlayers": [
+   "archibald",
+   "barry",
+   "baylor",
+   "bellamy",
+   "bird",
+   "boone",
+   "busschere",
+   "chamberlain",
+   "cousy",
+   "cowens",
+   "davis",
+   "drexler",
+   "english",
+   "erving",
+   "frazier",
+   "gervin",
+   "greer",
+   "havlicek",
+   "hayes",
+   "haywood",
+   "heinsohn",
+   "jabbar",
+   "johnson",
+   "jordan",
+   "karl",
+   "kupchak",
+   "lanier",
+   "lemeiux",
+   "lucas",
+   "malone",
+   "maravich",
+   "mchale",
+   "mikan",
+   "monroe",
+   "nance",
+   "parish",
+   "pettit",
+   "reed",
+   "robertson",
+   "russell",
+   "schayes",
+   "sharman",
+   "silas",
+   "thomas",
+   "thompson",
+   "thorton",
+   "thurmond",
+   "unseld",
+   "walton",
+   "west",
+   "white",
+   "wilkins",
+   "worthy"
+  ],
+  "missingInserts": [
+   "century",
+   "century collection",
+   "commemorative collection",
+   "history s heroes",
+   "legendary game jersey"
+  ]
+ },
  "1984-donruss-baseball-cards": {
   "missingPlayers": [
    "aaron",
@@ -5817,46 +5881,6 @@
    "sticker star"
   ]
  },
- "1999-00-upper-deck-mvp": {
-  "missingPlayers": [
-   "barkley",
-   "bryant",
-   "duncan",
-   "finley",
-   "hardaway",
-   "hill",
-   "horn",
-   "iverson",
-   "jamison",
-   "jordan",
-   "kemp",
-   "laettner",
-   "malone",
-   "marbury",
-   "mcdyess",
-   "miller",
-   "mourning",
-   "olajuwon",
-   "oneal",
-   "pierce",
-   "rahim",
-   "rice",
-   "robinson",
-   "saprykin",
-   "sedin",
-   "shvidki",
-   "stefan",
-   "stockton",
-   "vanhorn",
-   "walker",
-   "webber",
-   "williams"
-  ],
-  "missingInserts": [
-   "jam time",
-   "sc clutch performers"
-  ]
- },
  "2014-bowman-draft-baseball-cards": {
   "missingPlayers": [
    "box",
@@ -6031,6 +6055,45 @@
   "missingInserts": [
    "franco harris",
    "trivia quiz"
+  ]
+ },
+ "1999-00-upper-deck-mvp": {
+  "missingPlayers": [
+   "barkley",
+   "bryant",
+   "duncan",
+   "finley",
+   "hardaway",
+   "hill",
+   "horn",
+   "iverson",
+   "jamison",
+   "jordan",
+   "kemp",
+   "laettner",
+   "malone",
+   "marbury",
+   "mcdyess",
+   "miller",
+   "mourning",
+   "olajuwon",
+   "oneal",
+   "pierce",
+   "rahim",
+   "rice",
+   "robinson",
+   "saprykin",
+   "sedin",
+   "shvidki",
+   "stefan",
+   "stockton",
+   "vanhorn",
+   "walker",
+   "webber",
+   "williams"
+  ],
+  "missingInserts": [
+   "jam time"
   ]
  },
  "1991-pro-set-wlaf": {
@@ -6655,6 +6718,32 @@
    "world champ pennant decals"
   ]
  },
+ "2000-01-upper-deck-mvp": {
+  "missingPlayers": [
+   "bryant",
+   "carter",
+   "duncan",
+   "garnett",
+   "horn",
+   "jones",
+   "kemp",
+   "kev",
+   "lewis",
+   "marbury",
+   "marion",
+   "odom",
+   "rahim",
+   "stackhouse",
+   "stoudamire",
+   "szczerbiak",
+   "szezerbiak",
+   "webber"
+  ],
+  "missingInserts": [
+   "electrifying",
+   "world jam"
+  ]
+ },
  "2012-topps-chrome": {
   "missingPlayers": [
    "autographs",
@@ -6991,22 +7080,6 @@
   ],
   "missingInserts": [
    "old school"
-  ]
- },
- "2000-01-upper-deck-legends": {
-  "missingPlayers": [
-   "busschere",
-   "english",
-   "jabbar",
-   "mikan",
-   "nance",
-   "wilkins"
-  ],
-  "missingInserts": [
-   "century",
-   "century collection",
-   "commemorative collection",
-   "history s heroes"
   ]
  },
  "2011-topps-super-bowl-xlv": {
@@ -7591,24 +7664,6 @@
    "spiral"
   ]
  },
- "1999-00-upper-deck-hologrfx": {
-  "missingPlayers": [
-   "au",
-   "bird",
-   "bryant",
-   "carter",
-   "duncan",
-   "garnett",
-   "george",
-   "gervin",
-   "jordan",
-   "williams"
-  ],
-  "missingInserts": [
-   "holofame",
-   "pure skills"
-  ]
- },
  "1996-97-score": {
   "missingPlayers": [
    "briere",
@@ -8173,6 +8228,23 @@
   "missingInserts": [
    "signatures series",
    "snapshots"
+  ]
+ },
+ "1999-00-upper-deck-hologrfx": {
+  "missingPlayers": [
+   "au",
+   "bird",
+   "bryant",
+   "carter",
+   "duncan",
+   "garnett",
+   "george",
+   "gervin",
+   "jordan",
+   "williams"
+  ],
+  "missingInserts": [
+   "holofame"
   ]
  },
  "1999-00-upper-deck-ovation": {
@@ -9074,6 +9146,20 @@
    "smash mouth xtra"
   ]
  },
+ "2000-01-pacific": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "crown die cut",
+   "jersey patch"
+  ]
+ },
+ "2000-01-upper-deck-heroes": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "vintage mark messier",
+   "vintage national"
+  ]
+ },
  "2015-bowman-draft-baseball-cards": {
   "missingPlayers": [
    "anderson",
@@ -9455,6 +9541,16 @@
    "middlemen"
   ]
  },
+ "2000-01-sp-authentic": {
+  "missingPlayers": [
+   "bryant",
+   "duncan",
+   "kirilenko"
+  ],
+  "missingInserts": [
+   "spectacular"
+  ]
+ },
  "1998-upper-deck-hardcourt": {
   "missingPlayers": [
    "mjordan",
@@ -9627,6 +9723,19 @@
   "missingInserts": [
    "jonathan toews"
   ]
+ },
+ "2000-01-ud-reserve": {
+  "missingPlayers": [
+   "biron",
+   "bouillon",
+   "comrie",
+   "musil",
+   "niedermayer",
+   "pushor",
+   "rachunek",
+   "smolinski"
+  ],
+  "missingInserts": []
  },
  "1994-95-classic": {
   "missingPlayers": [
@@ -11386,28 +11495,28 @@
   ],
   "missingInserts": []
  },
- "1999-00-pacific-dynagon-ice": {
+ "2000-01-topps-chrome": {
   "missingPlayers": [],
   "missingInserts": [
-   "star fantasy toronto 2000 promo"
+   "mario lemieux reprint"
   ]
  },
- "1999-00-topps-chrome": {
+ "2000-01-topps-gold-label": {
   "missingPlayers": [],
   "missingInserts": [
-   "post masters"
+   "game worn jersey"
   ]
  },
- "1999-00-upper-deck-mvp-stanley-cup-edition": {
+ "2000-01-topps-heritage": {
   "missingPlayers": [],
   "missingInserts": [
-   "sc talent"
+   "original six relic"
   ]
  },
- "1999-00-upper-deck-wayne-gretzky": {
+ "2000-01-upper-deck-ice": {
   "missingPlayers": [],
   "missingInserts": [
-   "dynamics"
+   "game jersey update"
   ]
  },
  "1990-topps-traded-baseball-cards": {
@@ -11720,14 +11829,6 @@
    "ar",
    "cg",
    "vr"
-  ],
-  "missingInserts": []
- },
- "2000-01-upper-deck-mvp": {
-  "missingPlayers": [
-   "kev",
-   "rahim",
-   "szezerbiak"
   ],
   "missingInserts": []
  },
@@ -12146,6 +12247,13 @@
   "missingPlayers": [
    "h",
    "hil"
+  ],
+  "missingInserts": []
+ },
+ "2000-01-spx": {
+  "missingPlayers": [
+   "fizer",
+   "paul"
   ],
   "missingInserts": []
  },
@@ -13323,12 +13431,6 @@
   ],
   "missingInserts": []
  },
- "2000-01-sp-authentic": {
-  "missingPlayers": [
-   "kirilenko"
-  ],
-  "missingInserts": []
- },
  "2000-01-sp-game-floor": {
   "missingPlayers": [
    "peyton"
@@ -13338,12 +13440,6 @@
  "2000-sp-top-prospects": {
   "missingPlayers": [
    "carrawel"
-  ],
-  "missingInserts": []
- },
- "2000-01-spx": {
-  "missingPlayers": [
-   "paul"
   ],
   "missingInserts": []
  },
@@ -14574,6 +14670,12 @@
  "1999-upper-deck-century-legends": {
   "missingPlayers": [
    "bourgue"
+  ],
+  "missingInserts": []
+ },
+ "1999-00-upper-deck-prospects": {
+  "missingPlayers": [
+   "berezin"
   ],
   "missingInserts": []
  },
