@@ -4042,6 +4042,58 @@
    "top 100 prospects"
   ]
  },
+ "1984-donruss-baseball-cards": {
+  "missingPlayers": [
+   "aaron",
+   "bench",
+   "checklist",
+   "cobb",
+   "fingers",
+   "hornsby",
+   "hubbell",
+   "mantle",
+   "ruth",
+   "set",
+   "yastrzemski"
+  ],
+  "missingInserts": [
+   "action stars",
+   "champions",
+   "piece puzzle 10 11 12",
+   "piece puzzle 13 14 15",
+   "piece puzzle 16 17 18",
+   "piece puzzle 22 23 24",
+   "piece puzzle 25 26 27",
+   "piece puzzle 31 32 33",
+   "piece puzzle 34 35 36",
+   "piece puzzle 40 41 42",
+   "piece puzzle 43 44 45",
+   "piece puzzle 49 50 51",
+   "piece puzzle 58 59 60"
+  ]
+ },
+ "2014-chee-platinum-hockey-cards": {
+  "missingPlayers": [
+   "morris"
+  ],
+  "missingInserts": [
+   "brown frame",
+   "frame",
+   "frame cubes",
+   "frame ice",
+   "frame prism",
+   "frame seismic",
+   "frame traxx",
+   "full body",
+   "full body cubes",
+   "full body seismic",
+   "jersey",
+   "jersey cube",
+   "jersey cubes",
+   "jersey ice",
+   "jersey prism"
+  ]
+ },
  "2000-01-upper-deck-legends": {
   "missingPlayers": [
    "archibald",
@@ -4102,60 +4154,7 @@
    "century",
    "century collection",
    "commemorative collection",
-   "history s heroes",
-   "legendary game jersey"
-  ]
- },
- "1984-donruss-baseball-cards": {
-  "missingPlayers": [
-   "aaron",
-   "bench",
-   "checklist",
-   "cobb",
-   "fingers",
-   "hornsby",
-   "hubbell",
-   "mantle",
-   "ruth",
-   "set",
-   "yastrzemski"
-  ],
-  "missingInserts": [
-   "action stars",
-   "champions",
-   "piece puzzle 10 11 12",
-   "piece puzzle 13 14 15",
-   "piece puzzle 16 17 18",
-   "piece puzzle 22 23 24",
-   "piece puzzle 25 26 27",
-   "piece puzzle 31 32 33",
-   "piece puzzle 34 35 36",
-   "piece puzzle 40 41 42",
-   "piece puzzle 43 44 45",
-   "piece puzzle 49 50 51",
-   "piece puzzle 58 59 60"
-  ]
- },
- "2014-chee-platinum-hockey-cards": {
-  "missingPlayers": [
-   "morris"
-  ],
-  "missingInserts": [
-   "brown frame",
-   "frame",
-   "frame cubes",
-   "frame ice",
-   "frame prism",
-   "frame seismic",
-   "frame traxx",
-   "full body",
-   "full body cubes",
-   "full body seismic",
-   "jersey",
-   "jersey cube",
-   "jersey cubes",
-   "jersey ice",
-   "jersey prism"
+   "history s heroes"
   ]
  },
  "1995-signature-rookies": {
@@ -9146,18 +9145,18 @@
    "smash mouth xtra"
   ]
  },
- "2000-01-pacific": {
+ "2001-02-upper-deck-playmakers": {
   "missingPlayers": [],
   "missingInserts": [
-   "crown die cut",
-   "jersey patch"
+   "players club jersey",
+   "practice jersey"
   ]
  },
- "2000-01-upper-deck-heroes": {
+ "2001-02-upper-deck-top-shelf": {
   "missingPlayers": [],
   "missingInserts": [
-   "vintage mark messier",
-   "vintage national"
+   "stick",
+   "triple stick"
   ]
  },
  "2015-bowman-draft-baseball-cards": {
@@ -10262,6 +10261,15 @@
    "universal distribution promo"
   ]
  },
+ "2001-02-be-a-player-signature-series": {
+  "missingPlayers": [
+   "brylin",
+   "rozsival"
+  ],
+  "missingInserts": [
+   "update"
+  ]
+ },
  "1996-97-skybox-impact": {
   "missingPlayers": [
    "bassen",
@@ -11261,6 +11269,14 @@
    "authentic fabrics"
   ]
  },
+ "2001-02-upper-deck-mvp": {
+  "missingPlayers": [
+   "federov"
+  ],
+  "missingInserts": [
+   "authentic goalies stick"
+  ]
+ },
  "1997-98-donruss-limited": {
   "missingPlayers": [
    "nicholls"
@@ -11495,28 +11511,82 @@
   ],
   "missingInserts": []
  },
- "2000-01-topps-chrome": {
+ "2002-03-be-a-player-all-star-edition": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "game jersey"
+  ]
+ },
+ "2001-02-be-a-player-memorabilia": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "star jersey double"
+  ]
+ },
+ "2001-02-fleer-greats-of-the-game": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "jersey"
+  ]
+ },
+ "2001-02-pacific-heads-up": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "authentic game worn jersey quads"
+  ]
+ },
+ "2001-02-pacific": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "jersey"
+  ]
+ },
+ "2001-02-pacific-vanguard": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "high voltage"
+  ]
+ },
+ "2001-02-topps-chrome": {
   "missingPlayers": [],
   "missingInserts": [
    "mario lemieux reprint"
   ]
  },
- "2000-01-topps-gold-label": {
+ "2001-02-topps-heritage": {
   "missingPlayers": [],
   "missingInserts": [
-   "game worn jersey"
+   "certified"
   ]
  },
- "2000-01-topps-heritage": {
+ "2001-02-topps-o-pee-chee-archives": {
   "missingPlayers": [],
   "missingInserts": [
-   "original six relic"
+   "game used relic"
   ]
  },
- "2000-01-upper-deck-ice": {
+ "2001-02-topps-reserve": {
   "missingPlayers": [],
   "missingInserts": [
-   "game jersey update"
+   "jersey relics"
+  ]
+ },
+ "2001-02-upper-deck-ice": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "jersey"
+  ]
+ },
+ "2001-02-upper-deck-legends": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "pieces history stick"
+  ]
+ },
+ "2001-02-upper-deck-vintage": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "jersey"
   ]
  },
  "1990-topps-traded-baseball-cards": {
@@ -14664,6 +14734,12 @@
  "2012-13-upper-deck-artifacts-hockey": {
   "missingPlayers": [
    "cizikas"
+  ],
+  "missingInserts": []
+ },
+ "2001-02-sp-game-used": {
+  "missingPlayers": [
+   "authentic"
   ],
   "missingInserts": []
  },
