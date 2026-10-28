@@ -1331,6 +1331,181 @@
    "watching waiting"
   ]
  },
+ "1996-97-fleer": {
+  "missingPlayers": [
+   "abdulrauf",
+   "abdurrahim",
+   "allen",
+   "anderson",
+   "anthony",
+   "augmon",
+   "baker",
+   "barkley",
+   "barros",
+   "barry",
+   "best",
+   "blaylock",
+   "brandon",
+   "brown",
+   "bryant",
+   "camby",
+   "campbell",
+   "card",
+   "cassell",
+   "ceballos",
+   "checklist",
+   "childs",
+   "christie",
+   "coleman",
+   "corbin",
+   "curry",
+   "dampier",
+   "danilovic",
+   "davis",
+   "divac",
+   "douglas",
+   "drexler",
+   "dumars",
+   "edney",
+   "edwards",
+   "ehlo",
+   "elliott",
+   "ellis",
+   "ewing",
+   "exel",
+   "farnett",
+   "ferry",
+   "finley",
+   "fox",
+   "fuller",
+   "garnett",
+   "gatling",
+   "geiger",
+   "gill",
+   "gilliam",
+   "grant",
+   "gugliotta",
+   "hardaway",
+   "harper",
+   "harrington",
+   "harris",
+   "hawkins",
+   "hill",
+   "hornacek",
+   "horry",
+   "houston",
+   "howard",
+   "hunter",
+   "iverson",
+   "jackson",
+   "johnson",
+   "jones",
+   "jordan",
+   "kemp",
+   "kerr",
+   "kittles",
+   "kukoc",
+   "laettner",
+   "lang",
+   "long",
+   "longley",
+   "majerle",
+   "malone",
+   "maloney",
+   "manning",
+   "marbury",
+   "mashburn",
+   "mason",
+   "maxwell",
+   "mccloud",
+   "mcdyess",
+   "mcilvaine",
+   "mckey",
+   "mckie",
+   "miller",
+   "mills",
+   "mourning",
+   "mullin",
+   "muresan",
+   "murray",
+   "mutombo",
+   "nash",
+   "negro",
+   "oakley",
+   "obannon",
+   "of",
+   "olajuwon",
+   "oneal",
+   "owens",
+   "pack",
+   "parish",
+   "payton",
+   "perkins",
+   "person",
+   "peyton",
+   "phills",
+   "pippen",
+   "polynice",
+   "potapenko",
+   "price",
+   "radja",
+   "ratliff",
+   "reeves",
+   "rice",
+   "richmond",
+   "rider",
+   "robinson",
+   "rodman",
+   "rogers",
+   "rose",
+   "russell",
+   "sabonis",
+   "schrempf",
+   "scott",
+   "sealy",
+   "seikaly",
+   "shaw",
+   "smith",
+   "smits",
+   "sprewell",
+   "stackhouse",
+   "stackouse",
+   "starks",
+   "stith",
+   "stockton",
+   "stoudamire",
+   "strickland",
+   "sura",
+   "thorpe",
+   "trent",
+   "vaught",
+   "vrankovic",
+   "walker",
+   "wallace",
+   "weatherspoon",
+   "webber",
+   "wesley",
+   "west",
+   "wilkins",
+   "williams",
+   "williamson",
+   "willis",
+   "wright"
+  ],
+  "missingInserts": [
+   "expired trade",
+   "franchise futures",
+   "lucky 13",
+   "lucky 13 expired redemption",
+   "metal",
+   "metallized",
+   "precious",
+   "rewind",
+   "swing shift",
+   "total o",
+   "tower power"
+  ]
+ },
  "2018-topps-heritage-baseball-cards": {
   "missingPlayers": [
    "acevedo",
@@ -1620,6 +1795,194 @@
    "retro name scratch off",
    "toolboxes"
   ]
+ },
+ "1996-97-ultra": {
+  "missingPlayers": [
+   "abdulrauf",
+   "abdurrahim",
+   "allen",
+   "allrookie",
+   "anderson",
+   "anthony",
+   "augmon",
+   "baker",
+   "barkley",
+   "barros",
+   "barry",
+   "best",
+   "blaylock",
+   "brandon",
+   "bryant",
+   "caffey",
+   "camby",
+   "cassell",
+   "ceballos",
+   "chapman",
+   "cheaney",
+   "checklist",
+   "childs",
+   "christie",
+   "coleman",
+   "corbin",
+   "curry",
+   "dampier",
+   "danilovic",
+   "davis",
+   "day",
+   "delk",
+   "divac",
+   "douglas",
+   "drexler",
+   "dumars",
+   "edney",
+   "edwards",
+   "ehlo",
+   "elie",
+   "elliott",
+   "ellis",
+   "evans",
+   "ewing",
+   "exel",
+   "ferry",
+   "finley",
+   "fisher",
+   "fox",
+   "fuller",
+   "garnett",
+   "gatling",
+   "geiger",
+   "gill",
+   "gilliam",
+   "grant",
+   "gugliotta",
+   "hardaway",
+   "harper",
+   "harrington",
+   "harris",
+   "hawkins",
+   "heal",
+   "henderson",
+   "hill",
+   "hornacek",
+   "horry",
+   "houston",
+   "howard",
+   "hunter",
+   "iverson",
+   "jackson",
+   "johnson",
+   "jones",
+   "jordan",
+   "kemp",
+   "kerr",
+   "kittles",
+   "knight",
+   "kukoc",
+   "laettner",
+   "lang",
+   "lankford",
+   "lauderdale",
+   "long",
+   "longley",
+   "lynch",
+   "maclean",
+   "majerle",
+   "malone",
+   "maloney",
+   "manning",
+   "marbury",
+   "marciulionis",
+   "mashburn",
+   "mason",
+   "maxwell",
+   "mccarty",
+   "mccaskill",
+   "mccloud",
+   "mcdyess",
+   "mcilvaine",
+   "mckey",
+   "mckie",
+   "mcmillan",
+   "miller",
+   "mills",
+   "minor",
+   "montross",
+   "morris",
+   "moten",
+   "mourning",
+   "mullin",
+   "muresan",
+   "mutombo",
+   "muursepp",
+   "nash",
+   "negro",
+   "newman",
+   "oakley",
+   "obannon",
+   "olajuwon",
+   "oneal",
+   "ostertag",
+   "owens",
+   "owes",
+   "pack",
+   "payton",
+   "peeler",
+   "perkins",
+   "person",
+   "phills",
+   "pippen",
+   "polynice",
+   "potapenko",
+   "price",
+   "radja",
+   "ratliff",
+   "recasner",
+   "reeves",
+   "rice",
+   "richardson",
+   "richmond",
+   "rider",
+   "roberts",
+   "robinson",
+   "rodman",
+   "rogers",
+   "rose",
+   "russell",
+   "sabonis",
+   "schrempf",
+   "scott",
+   "sealy",
+   "seikaly",
+   "smith",
+   "smits",
+   "spencer",
+   "sprewell",
+   "stackhouse",
+   "starks",
+   "stith",
+   "stockton",
+   "stoudamire",
+   "strickland",
+   "sura",
+   "tabak",
+   "thorpe",
+   "trent",
+   "vaught",
+   "vrankovic",
+   "walker",
+   "wallace",
+   "ward",
+   "weatherspoon",
+   "webber",
+   "wesley",
+   "west",
+   "wilkins",
+   "williams",
+   "williamson",
+   "willis",
+   "wright"
+  ],
+  "missingInserts": []
  },
  "2017-topps-wwe-wrestling-checklist-added": {
   "missingPlayers": [
@@ -3479,6 +3842,64 @@
   ],
   "missingInserts": []
  },
+ "1995-96-finest": {
+  "missingPlayers": [
+   "abdulrauf",
+   "anderson",
+   "baker",
+   "barkley",
+   "borderless",
+   "bronze",
+   "coleman",
+   "drexler",
+   "dumars",
+   "ewing",
+   "exel",
+   "finley",
+   "grant",
+   "graves",
+   "hardaway",
+   "hill",
+   "howard",
+   "johnson",
+   "jordan",
+   "kemp",
+   "kidd",
+   "malone",
+   "mashburn",
+   "mason",
+   "mcdyess",
+   "miller",
+   "mourning",
+   "mutombo",
+   "olajuwon",
+   "oneal",
+   "pippen",
+   "rauf",
+   "rice",
+   "richmond",
+   "robinson",
+   "rodman",
+   "smith",
+   "sprewell",
+   "stackhouse",
+   "starks",
+   "stockton",
+   "stoudamire",
+   "weatherspoon",
+   "webber"
+  ],
+  "missingInserts": [
+   "border test",
+   "border test issue",
+   "bordered",
+   "borderless",
+   "borderless refractora",
+   "divisions clear cut",
+   "mystery",
+   "unpeeled"
+  ]
+ },
  "2014-bowman-chome-mini-baseball-cards": {
   "missingPlayers": [
    "baez",
@@ -4446,36 +4867,6 @@
    "quad",
    "sheer brilliance",
    "single"
-  ]
- },
- "1996-97-fleer": {
-  "missingPlayers": [
-   "card",
-   "checklist",
-   "christie",
-   "corbin",
-   "edwards",
-   "ellis",
-   "farnett",
-   "gill",
-   "hunter",
-   "mckie",
-   "of",
-   "peyton",
-   "polynice",
-   "seikaly",
-   "stackouse",
-   "wesley",
-   "west"
-  ],
-  "missingInserts": [
-   "expired trade",
-   "franchise futures",
-   "lucky 13 expired redemption",
-   "metal",
-   "metallized",
-   "precious",
-   "tower power"
   ]
  },
  "2017-18-leaf-masked-men-hockey-cards": {
@@ -5759,6 +6150,32 @@
    "light"
   ]
  },
+ "1995-96-ultra": {
+  "missingPlayers": [
+   "barkley",
+   "barros",
+   "burton",
+   "ceballos",
+   "ewing",
+   "jackson",
+   "jordan",
+   "kemp",
+   "malone",
+   "mashburn",
+   "medallion",
+   "mourning",
+   "mutumbo",
+   "olajuwon",
+   "oneal",
+   "rice",
+   "robinson"
+  ],
+  "missingInserts": [
+   "fabulous fifties",
+   "hot pack",
+   "power"
+  ]
+ },
  "1994-95-fleer": {
   "missingPlayers": [
    "blaylock",
@@ -6138,6 +6555,19 @@
    "nickname signature"
   ]
  },
+ "1995-96-sp": {
+  "missingPlayers": [
+   "checklist",
+   "jordan"
+  ],
+  "missingInserts": [
+   "1988 mvp",
+   "1991 mvp",
+   "1992 mvp",
+   "jordan collection",
+   "mvp seasons"
+  ]
+ },
  "2014-topps-finest-football-cards": {
   "missingPlayers": [
    "conley",
@@ -6399,28 +6829,28 @@
   ],
   "missingInserts": []
  },
- "1993-94-stadium-club": {
+ "1995-96-stadium-club": {
   "missingPlayers": [
+   "baker",
    "barkley",
    "coleman",
-   "drexler",
+   "divac",
    "ewing",
-   "flyers",
-   "harper",
+   "jordan",
    "kemp",
-   "majerle",
    "malone",
+   "miller",
+   "mourning",
+   "neal",
+   "olajuwon",
    "oneal",
    "pippen",
-   "robinson",
-   "rodman",
    "starks",
-   "webber",
-   "wilkens"
+   "x"
   ],
   "missingInserts": [
-   "frequent flyer points",
-   "master photos winner redemption"
+   "extreme corps",
+   "spike says"
   ]
  },
  "2011-topps-super-bowl-xlv": {
@@ -6629,6 +7059,20 @@
    "jogo"
   ]
  },
+ "1996-97-pinnacle": {
+  "missingPlayers": [
+   "campbell",
+   "checklist",
+   "iginla",
+   "sackic"
+  ],
+  "missingInserts": [
+   "coin",
+   "mint",
+   "mint coins brass",
+   "promo"
+  ]
+ },
  "2014-15-panini-nba-hoops-basketball-cards": {
   "missingPlayers": [
    "a",
@@ -6644,19 +7088,6 @@
    "cracked ice",
    "draft preview",
    "road to finals 1st round"
-  ]
- },
- "1995-96-finest": {
-  "missingPlayers": [
-   "borderless",
-   "bronze",
-   "rauf"
-  ],
-  "missingInserts": [
-   "border test",
-   "border test issue",
-   "borderless refractora",
-   "unpeeled"
   ]
  },
  "1990-91-michigan-state-spartans": {
@@ -6867,15 +7298,27 @@
    "winter"
   ]
  },
- "1995-96-sp": {
+ "1993-94-stadium-club": {
   "missingPlayers": [
-   "checklist"
+   "barkley",
+   "coleman",
+   "drexler",
+   "ewing",
+   "flyers",
+   "harper",
+   "kemp",
+   "majerle",
+   "malone",
+   "oneal",
+   "pippen",
+   "robinson",
+   "rodman",
+   "starks",
+   "webber",
+   "wilkens"
   ],
   "missingInserts": [
-   "1988 mvp",
-   "1991 mvp",
-   "1992 mvp",
-   "mvp seasons"
+   "frequent flyer points"
   ]
  },
  "2014-bowman-sterling-football-cards": {
@@ -6992,6 +7435,24 @@
    "spiral"
   ]
  },
+ "1996-97-score": {
+  "missingPlayers": [
+   "briere",
+   "cleary",
+   "colagiacomo",
+   "dome",
+   "iginla",
+   "jackman",
+   "samsonov",
+   "thornton",
+   "zubrus",
+   "zyuzin"
+  ],
+  "missingInserts": [
+   "board",
+   "sport ppf"
+  ]
+ },
  "2016-topps-ufc-high-impact-cards": {
   "missingPlayers": [
    "alves",
@@ -7055,6 +7516,15 @@
   "missingInserts": [
    "mat relic royal rumble",
    "wins united states championship"
+  ]
+ },
+ "1996-97-leaf-preferred": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "w coating",
+   "w film",
+   "with coating",
+   "with film"
   ]
  },
  "2015-topps-opening-day-baseball": {
@@ -7389,17 +7859,6 @@
    "limited patch"
   ]
  },
- "1994-95-finest": {
-  "missingPlayers": [
-   "kudelski",
-   "reichel"
-  ],
-  "missingInserts": [
-   "division",
-   "inserts",
-   "premier top goal scorer"
-  ]
- },
  "1998-topps-wcw-nwo": {
   "missingPlayers": [
    "bigelow",
@@ -7721,18 +8180,6 @@
    "violet pixels"
   ]
  },
- "1993-94-ultra": {
-  "missingPlayers": [
-   "bruins",
-   "oatyes",
-   "set",
-   "wings"
-  ],
-  "missingInserts": [
-   "light special",
-   "prospect"
-  ]
- },
  "2006-panini-world-cup-germany-cards": {
   "missingPlayers": [
    "cahill",
@@ -8025,21 +8472,6 @@
    "trophied talent die cut"
   ]
  },
- "1994-95-classic": {
-  "missingPlayers": [
-   "bechard",
-   "checklist",
-   "namestikov",
-   "rucinsky",
-   "savoie",
-   "stlouis",
-   "t",
-   "zemlak"
-  ],
-  "missingInserts": [
-   "roy sweepstakes"
-  ]
- },
  "1984-85-o-pee-chee": {
   "missingPlayers": [
    "gilmore",
@@ -8317,6 +8749,15 @@
    "super bowl binder"
   ]
  },
+ "1996-97-metal-universe": {
+  "missingPlayers": [
+   "checklist"
+  ],
+  "missingInserts": [
+   "skybox",
+   "skybox lethal weapon"
+  ]
+ },
  "1993-94-score": {
   "missingPlayers": [
    "brunet",
@@ -8430,13 +8871,6 @@
   ],
   "missingInserts": [
    "smash mouth xtra"
-  ]
- },
- "1993-94-topps-premier": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "certified",
-   "redemption"
   ]
  },
  "2015-bowman-draft-baseball-cards": {
@@ -8993,15 +9427,18 @@
    "jonathan toews"
   ]
  },
- "1993-94-pinnacle": {
+ "1994-95-classic": {
   "missingPlayers": [
-   "bite",
-   "macinnes",
-   "set"
+   "bechard",
+   "checklist",
+   "namestikov",
+   "rucinsky",
+   "savoie",
+   "stlouis",
+   "t",
+   "zemlak"
   ],
-  "missingInserts": [
-   "nifty fifty"
-  ]
+  "missingInserts": []
  },
  "1982-83-o-pee-chee": {
   "missingPlayers": [
@@ -9513,6 +9950,24 @@
   ],
   "missingInserts": [
    "universal distribution promo"
+  ]
+ },
+ "1996-97-skybox-impact": {
+  "missingPlayers": [
+   "bassen",
+   "straka"
+  ],
+  "missingInserts": [
+   "promos"
+  ]
+ },
+ "1994-95-finest": {
+  "missingPlayers": [
+   "kudelski",
+   "reichel"
+  ],
+  "missingInserts": [
+   "premier top goal scorer"
   ]
  },
  "1970-71-o-pee-chee": {
@@ -10496,6 +10951,22 @@
    "authentic fabrics"
   ]
  },
+ "1997-98-donruss-limited": {
+  "missingPlayers": [
+   "nicholls"
+  ],
+  "missingInserts": [
+   "counterparts"
+  ]
+ },
+ "1995-classic-hockey-draft": {
+  "missingPlayers": [
+   "wesley"
+  ],
+  "missingInserts": [
+   "images premier choice"
+  ]
+ },
  "1994-95-upper-deck-be-a-player": {
   "missingPlayers": [
    "snow"
@@ -10706,22 +11177,70 @@
   ],
   "missingInserts": []
  },
- "1994-95-donruss": {
+ "1997-98-donruss-elite": {
   "missingPlayers": [],
   "missingInserts": [
-   "w coating"
+   "prime numbers promo"
   ]
  },
- "1994-95-leaf-limited": {
+ "1997-98-donruss": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "promo"
+  ]
+ },
+ "1997-98-donruss-preferred": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "precious metal"
+  ]
+ },
+ "1997-98-pacific-dynagon": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "dynamic duo"
+  ]
+ },
+ "1996-97-donruss-elite": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "inserts"
+  ]
+ },
+ "1996-97-leaf": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "promo"
+  ]
+ },
+ "1996-97-topps-nhl-picks": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "95 96 stars"
+  ]
+ },
+ "1996-97-upper-deck-kraft": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "jell o award winner"
+  ]
+ },
+ "1995-96-donruss-elite": {
   "missingPlayers": [],
   "missingInserts": [
    "insert"
   ]
  },
- "1994-95-stadium-club": {
+ "1995-96-parkhurst-international": {
   "missingPlayers": [],
   "missingInserts": [
-   "finest inserts"
+   "signature"
+  ]
+ },
+ "1995-96-skybox-e-motion": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "generation next"
   ]
  },
  "1990-topps-traded-baseball-cards": {
@@ -10904,6 +11423,15 @@
   ],
   "missingInserts": []
  },
+ "1993-94-ultra": {
+  "missingPlayers": [
+   "bruins",
+   "oatyes",
+   "set",
+   "wings"
+  ],
+  "missingInserts": []
+ },
  "premier-gold-soccer-full": {
   "missingPlayers": [
    "box",
@@ -11068,14 +11596,6 @@
   ],
   "missingInserts": []
  },
- "1996-97-ultra": {
-  "missingPlayers": [
-   "allrookie",
-   "checklist",
-   "lankford"
-  ],
-  "missingInserts": []
- },
  "1994-95-fleer-european": {
   "missingPlayers": [
    "ellison",
@@ -11193,6 +11713,14 @@
    "langhman",
    "of",
    "risen"
+  ],
+  "missingInserts": []
+ },
+ "1993-94-pinnacle": {
+  "missingPlayers": [
+   "bite",
+   "macinnes",
+   "set"
   ],
   "missingInserts": []
  },
@@ -11528,20 +12056,6 @@
   "missingPlayers": [
    "box",
    "stacey"
-  ],
-  "missingInserts": []
- },
- "1995-96-stadium-club": {
-  "missingPlayers": [
-   "neal",
-   "x"
-  ],
-  "missingInserts": []
- },
- "1995-96-ultra": {
-  "missingPlayers": [
-   "medallion",
-   "mutumbo"
   ],
   "missingInserts": []
  },
@@ -11920,6 +12434,20 @@
   "missingPlayers": [
    "hockey",
    "stall"
+  ],
+  "missingInserts": []
+ },
+ "1996-97-donruss": {
+  "missingPlayers": [
+   "nemirovsky",
+   "phillips"
+  ],
+  "missingInserts": []
+ },
+ "1995-96-upper-deck-be-a-player": {
+  "missingPlayers": [
+   "box",
+   "brodeur"
   ],
   "missingInserts": []
  },
@@ -13898,6 +14426,24 @@
  "2012-13-upper-deck-artifacts-hockey": {
   "missingPlayers": [
    "cizikas"
+  ],
+  "missingInserts": []
+ },
+ "1997-98-pacific-invincible": {
+  "missingPlayers": [
+   "amour"
+  ],
+  "missingInserts": []
+ },
+ "1995-96-pinnacle": {
+  "missingPlayers": [
+   "fuhr"
+  ],
+  "missingInserts": []
+ },
+ "1995-96-skybox-impact": {
+  "missingPlayers": [
+   "of"
   ],
   "missingInserts": []
  },
