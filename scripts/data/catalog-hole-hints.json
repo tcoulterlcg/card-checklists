@@ -7716,6 +7716,15 @@
    "res"
   ]
  },
+ "2017-sage-hit": {
+  "missingPlayers": [
+   "jh"
+  ],
+  "missingInserts": [
+   "premier draft",
+   "premier draft peak performance platinized"
+  ]
+ },
  "1991-pro-set": {
   "missingPlayers": [
    "andrellins",
@@ -9379,14 +9388,6 @@
    "turquoise"
   ]
  },
- "2016-panini-playbook-football-cards": {
-  "missingPlayers": [
-   "elliot"
-  ],
-  "missingInserts": [
-   "player day"
-  ]
- },
  "2016-panini-spectra-football-cards": {
   "missingPlayers": [
    "elliot"
@@ -10027,16 +10028,28 @@
   ],
   "missingInserts": []
  },
- "2015-leaf-ultimate-draft": {
+ "2017-leaf-trinity": {
   "missingPlayers": [],
   "missingInserts": [
-   "numbers"
+   "signature spectrum"
   ]
  },
- "2015-topps-take-it-to-the-house": {
+ "2017-panini-black-friday": {
   "missingPlayers": [],
   "missingInserts": [
-   "redemption"
+   "happy holidays"
+  ]
+ },
+ "2016-panini-black-friday-football": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "instant"
+  ]
+ },
+ "2016-panini-day": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "kickoff"
   ]
  },
  "1990-topps-traded-baseball-cards": {
@@ -10876,6 +10889,13 @@
   "missingPlayers": [
    "prizm",
    "run"
+  ],
+  "missingInserts": []
+ },
+ "2017-leaf-metal-draft": {
+  "missingPlayers": [
+   "schuster",
+   "wims"
   ],
   "missingInserts": []
  },
