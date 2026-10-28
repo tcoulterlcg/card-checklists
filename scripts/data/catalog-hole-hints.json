@@ -8117,6 +8117,19 @@
    "signature placards"
   ]
  },
+ "2006-07-be-a-player": {
+  "missingPlayers": [
+   "boogaard",
+   "filppula",
+   "parise",
+   "prolov"
+  ],
+  "missingInserts": [
+   "first exposure",
+   "first exposures jersey",
+   "signature foursome"
+  ]
+ },
  "1981-82-o-pee-chee": {
   "missingPlayers": [
    "barnes",
@@ -8379,17 +8392,6 @@
    "limited patch"
   ]
  },
- "2005-06-upper-deck-ice": {
-  "missingPlayers": [
-   "dtasyuk",
-   "ribiero"
-  ],
-  "missingInserts": [
-   "fresh glass patch",
-   "label",
-   "premieres patch"
-  ]
- },
  "1998-topps-wcw-nwo": {
   "missingPlayers": [
    "bigelow",
@@ -8489,16 +8491,6 @@
    "mcdavid",
    "puzzle back",
    "signature"
-  ]
- },
- "2005-06-upper-deck-black-diamond": {
-  "missingPlayers": [
-   "iginal"
-  ],
-  "missingInserts": [
-   "au",
-   "dual jerseys",
-   "jersey single"
   ]
  },
  "1994-95-signature-rookies": {
@@ -9357,6 +9349,15 @@
    "super bowl binder"
   ]
  },
+ "2006-07-sp-game-used": {
+  "missingPlayers": [
+   "gold"
+  ],
+  "missingInserts": [
+   "authentic fabric",
+   "authentic fabric dual"
+  ]
+ },
  "2004-05-pacific": {
   "missingPlayers": [
    "ayder",
@@ -9515,11 +9516,16 @@
    "smash mouth xtra"
   ]
  },
- "2005-06-upper-deck-trilogy": {
-  "missingPlayers": [],
+ "2006-07-upper-deck-bee-hive": {
+  "missingPlayers": [
+   "cashman",
+   "hall",
+   "joseph",
+   "kelly",
+   "kurri"
+  ],
   "missingInserts": [
-   "script one",
-   "script two"
+   "7 photo"
   ]
  },
  "2015-bowman-draft-baseball-cards": {
@@ -10264,6 +10270,15 @@
    "jordan box"
   ]
  },
+ "2006-07-fleer": {
+  "missingPlayers": [
+   "gervin",
+   "olajuwon"
+  ],
+  "missingInserts": [
+   "greats game"
+  ]
+ },
  "2003-04-fleer-patchworks": {
   "missingPlayers": [
    "btn",
@@ -10921,14 +10936,6 @@
   ],
   "missingInserts": [
    "quads patch"
-  ]
- },
- "2006-07-fleer": {
-  "missingPlayers": [
-   "gervin"
-  ],
-  "missingInserts": [
-   "greats game"
   ]
  },
  "2006-07-topps-big-game": {
@@ -11644,12 +11651,28 @@
    "authentic fabrics"
   ]
  },
- "2005-06-upper-deck-bee-hive": {
+ "2006-07-upper-deck-artifacts": {
   "missingPlayers": [
-   "steward"
+   "federov"
   ],
   "missingInserts": [
-   "photo graphs"
+   "redemption"
+  ]
+ },
+ "2006-07-upper-deck-mini-jersey": {
+  "missingPlayers": [
+   "checklist"
+  ],
+  "missingInserts": [
+   "collection"
+  ]
+ },
+ "2005-06-upper-deck-black-diamond": {
+  "missingPlayers": [
+   "iginal"
+  ],
+  "missingInserts": [
+   "dual jerseys"
   ]
  },
  "2003-04-upper-deck-rookie-update": {
@@ -11902,22 +11925,10 @@
   ],
   "missingInserts": []
  },
- "2005-06-sp-authentic": {
+ "2006-07-upper-deck-black-diamond": {
   "missingPlayers": [],
   "missingInserts": [
-   "sign times dual"
-  ]
- },
- "2005-06-upper-deck-be-a-player": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "signatures dual"
-  ]
- },
- "2005-06-upper-deck-rookie-update": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "inspirations dual jersey"
+   "jersey"
   ]
  },
  "1990-topps-traded-baseball-cards": {
@@ -13103,6 +13114,13 @@
   "missingPlayers": [
    "hockey",
    "stall"
+  ],
+  "missingInserts": []
+ },
+ "2005-06-upper-deck-ice": {
+  "missingPlayers": [
+   "dtasyuk",
+   "ribiero"
   ],
   "missingInserts": []
  },
@@ -15078,6 +15096,12 @@
  "2005-06-upper-deck-artifacts": {
   "missingPlayers": [
    "ribiero"
+  ],
+  "missingInserts": []
+ },
+ "2005-06-upper-deck-bee-hive": {
+  "missingPlayers": [
+   "steward"
   ],
   "missingInserts": []
  },
