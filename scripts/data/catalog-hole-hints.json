@@ -8379,6 +8379,17 @@
    "limited patch"
   ]
  },
+ "2005-06-upper-deck-ice": {
+  "missingPlayers": [
+   "dtasyuk",
+   "ribiero"
+  ],
+  "missingInserts": [
+   "fresh glass patch",
+   "label",
+   "premieres patch"
+  ]
+ },
  "1998-topps-wcw-nwo": {
   "missingPlayers": [
    "bigelow",
@@ -8480,14 +8491,14 @@
    "signature"
   ]
  },
- "2004-05-sp-authentic": {
+ "2005-06-upper-deck-black-diamond": {
   "missingPlayers": [
-   "card"
+   "iginal"
   ],
   "missingInserts": [
-   "buyback",
-   "fulfilled redemption",
-   "redemption"
+   "au",
+   "dual jerseys",
+   "jersey single"
   ]
  },
  "1994-95-signature-rookies": {
@@ -9359,13 +9370,13 @@
    "quest for cup"
   ]
  },
- "2003-04-upper-deck-trilogy": {
+ "2004-05-sp-authentic": {
   "missingPlayers": [
-   "carter"
+   "card"
   ],
   "missingInserts": [
-   "script one",
-   "script two"
+   "fulfilled redemption",
+   "redemption"
   ]
  },
  "1997-98-upper-deck-black-diamond": {
@@ -9502,6 +9513,13 @@
   ],
   "missingInserts": [
    "smash mouth xtra"
+  ]
+ },
+ "2005-06-upper-deck-trilogy": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "script one",
+   "script two"
   ]
  },
  "2015-bowman-draft-baseball-cards": {
@@ -11626,6 +11644,14 @@
    "authentic fabrics"
   ]
  },
+ "2005-06-upper-deck-bee-hive": {
+  "missingPlayers": [
+   "steward"
+  ],
+  "missingInserts": [
+   "photo graphs"
+  ]
+ },
  "2003-04-upper-deck-rookie-update": {
   "missingPlayers": [
    "zalesak"
@@ -11876,10 +11902,22 @@
   ],
   "missingInserts": []
  },
- "2004-05-in-the-game-franchises-canadian": {
+ "2005-06-sp-authentic": {
   "missingPlayers": [],
   "missingInserts": [
-   "used memorabilia"
+   "sign times dual"
+  ]
+ },
+ "2005-06-upper-deck-be-a-player": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "signatures dual"
+  ]
+ },
+ "2005-06-upper-deck-rookie-update": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "inspirations dual jersey"
   ]
  },
  "1990-topps-traded-baseball-cards": {
@@ -15025,9 +15063,33 @@
   ],
   "missingInserts": []
  },
+ "2005-06-sp-game-used": {
+  "missingPlayers": [
+   "jiprusoff"
+  ],
+  "missingInserts": []
+ },
+ "2005-06-spx": {
+  "missingPlayers": [
+   "oireilly"
+  ],
+  "missingInserts": []
+ },
+ "2005-06-upper-deck-artifacts": {
+  "missingPlayers": [
+   "ribiero"
+  ],
+  "missingInserts": []
+ },
  "2003-04-upper-deck-premier-collection": {
   "missingPlayers": [
    "mb"
+  ],
+  "missingInserts": []
+ },
+ "2003-04-upper-deck-trilogy": {
+  "missingPlayers": [
+   "carter"
   ],
   "missingInserts": []
  },
