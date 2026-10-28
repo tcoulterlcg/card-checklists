@@ -643,6 +643,266 @@
    "xfractor"
   ]
  },
+ "1994-95-parkhurst": {
+  "missingPlayers": [
+   "abel",
+   "action",
+   "aldcorn",
+   "angotti",
+   "another",
+   "arbour",
+   "armstrong",
+   "awerey",
+   "awrey",
+   "backstrom",
+   "balfour",
+   "balon",
+   "barkley",
+   "bathgate",
+   "battle",
+   "baun",
+   "beckett",
+   "beliveau",
+   "benson",
+   "berenson",
+   "bergman",
+   "bionda",
+   "bolton",
+   "bonin",
+   "bower",
+   "brewer",
+   "broden",
+   "bucyk",
+   "caffery",
+   "cahan",
+   "canadiens",
+   "cashman",
+   "chadwick",
+   "champions",
+   "checklist",
+   "cheevers",
+   "chevrefils",
+   "chic",
+   "ciesla",
+   "clancy",
+   "cline",
+   "close",
+   "costello",
+   "cournoyer",
+   "crease",
+   "crozier",
+   "cullen",
+   "curry",
+   "dea",
+   "dejordy",
+   "delvecchio",
+   "dewsbury",
+   "disc",
+   "dornhoefer",
+   "douglas",
+   "duel",
+   "duff",
+   "ellis",
+   "entertains",
+   "esposito",
+   "evans",
+   "faceoff",
+   "federov",
+   "ferguson",
+   "field",
+   "finals",
+   "flaman",
+   "fleming",
+   "foley",
+   "fonteyne",
+   "fontinato",
+   "gadsby",
+   "game",
+   "gardner",
+   "gendron",
+   "geoffrion",
+   "gilbert",
+   "girard",
+   "godfrey",
+   "goegan",
+   "goyette",
+   "ground",
+   "guard",
+   "habs",
+   "hadfield",
+   "hall",
+   "harper",
+   "harris",
+   "harvey",
+   "hawrlik",
+   "hay",
+   "hebenton",
+   "henderson",
+   "henry",
+   "hergesheimer",
+   "hicke",
+   "hillman",
+   "hiull",
+   "hodge",
+   "hollingworth",
+   "horton",
+   "horvath",
+   "howe",
+   "howell",
+   "ingarfield",
+   "ingram",
+   "irwin",
+   "ivan",
+   "james",
+   "jarrett",
+   "jeffrey",
+   "johns",
+   "johnson",
+   "johnston",
+   "kachur",
+   "kelly",
+   "kennedy",
+   "keon",
+   "kurtenbach",
+   "labine",
+   "lalande",
+   "langlois",
+   "laperriere",
+   "laurent",
+   "leafs",
+   "leiter",
+   "lemaire",
+   "lewicki",
+   "lindsay",
+   "line",
+   "litzenberger",
+   "macdonald",
+   "macgregor",
+   "mackell",
+   "macneil",
+   "mahovlich",
+   "maki",
+   "marshall",
+   "martin",
+   "mccord",
+   "mcdonald",
+   "mcintyre",
+   "mckenney",
+   "mcneill",
+   "meeker",
+   "mickoski",
+   "migay",
+   "mikita",
+   "mikol",
+   "mohns",
+   "moore",
+   "morrison",
+   "mortson",
+   "mosdell",
+   "neilson",
+   "nesterenko",
+   "nesterrenko",
+   "nevin",
+   "nykoluk",
+   "oliver",
+   "olmstead",
+   "outhustles",
+   "paille",
+   "pappin",
+   "parent",
+   "pavelich",
+   "peirson",
+   "picard",
+   "pilote",
+   "pocket",
+   "popein",
+   "prentice",
+   "price",
+   "probovost",
+   "pronovost",
+   "provost",
+   "prystai",
+   "puck",
+   "pulford",
+   "race",
+   "ratelle",
+   "ravlich",
+   "reaume",
+   "reay",
+   "regan",
+   "reibel",
+   "reibiel",
+   "richard",
+   "richardson",
+   "robinson",
+   "rollins",
+   "rookie",
+   "rousseau",
+   "save",
+   "sawchuk",
+   "schmidt",
+   "schock",
+   "seibert",
+   "seiling",
+   "selby",
+   "selke",
+   "semifinals",
+   "shack",
+   "shot",
+   "skinner",
+   "skov",
+   "sloan",
+   "stanfield",
+   "stanley",
+   "stasiuk",
+   "stemkowski",
+   "stewart",
+   "stretch",
+   "sullivan",
+   "talbot",
+   "tall",
+   "teeder",
+   "thomson",
+   "toppazzini",
+   "tremblay",
+   "turner",
+   "ullman",
+   "vachon",
+   "vasko",
+   "watson",
+   "westfall",
+   "wharram",
+   "williams",
+   "woit",
+   "worsley",
+   "woytowich",
+   "yzermam"
+  ],
+  "missingInserts": [
+   "1st team star",
+   "2nd team star",
+   "90",
+   "91 180",
+   "art ross trophy",
+   "canadian american greats",
+   "first team star",
+   "future star",
+   "hart trophy",
+   "hart trophy winner",
+   "lady biyng trophy",
+   "missing link",
+   "missing link future stars",
+   "missing link pop ups",
+   "norris trophy winner",
+   "scoring leader",
+   "second team star",
+   "secord team star",
+   "tall boys",
+   "tall boys future stars",
+   "tall boys greats",
+   "vezina trophy winner"
+  ]
+ },
  "2019-topps-holiday-baseball": {
   "missingPlayers": [
    "box"
@@ -4355,21 +4615,6 @@
    "superstar sensations"
   ]
  },
- "1991-92-stadium-club": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "2000",
-   "50 club",
-   "700 club",
-   "charter member",
-   "charter members club mvp",
-   "hart",
-   "mvp",
-   "nets 1000",
-   "top goalie",
-   "vezina"
-  ]
- },
  "2010-topps-wwe": {
   "missingPlayers": [
    "backlash",
@@ -4766,6 +5011,53 @@
    "star date die cut"
   ]
  },
+ "1994-95-sp": {
+  "missingPlayers": [
+   "abdulrauf",
+   "anderson",
+   "augmon",
+   "barros",
+   "benjamin",
+   "bogues",
+   "cassell",
+   "chapman",
+   "drexler",
+   "elliott",
+   "excel",
+   "federov",
+   "grant",
+   "johnson",
+   "kemp",
+   "koslov",
+   "kukoc",
+   "manning",
+   "maxwell",
+   "mayberry",
+   "mcmillan",
+   "oakley",
+   "polynice",
+   "price",
+   "radja",
+   "rider",
+   "rogers",
+   "royal",
+   "sealy",
+   "seikaly",
+   "smith",
+   "smits",
+   "spencer",
+   "starks",
+   "tyler",
+   "vaught",
+   "ward",
+   "wesley",
+   "west",
+   "williams"
+  ],
+  "missingInserts": [
+   "die cuts"
+  ]
+ },
  "2018-bowman-baseball-cards": {
   "missingPlayers": [
    "altuve",
@@ -5113,6 +5405,39 @@
   ],
   "missingInserts": []
  },
+ "1994-95-ultra": {
+  "missingPlayers": [
+   "barkley",
+   "card",
+   "coleman",
+   "ellis",
+   "ewing",
+   "federov",
+   "hardaway",
+   "kemp",
+   "kukoc",
+   "lafontine",
+   "malone",
+   "mashburn",
+   "mourning",
+   "of",
+   "olajuwon",
+   "oneal",
+   "peyton",
+   "pippen",
+   "price",
+   "richmond",
+   "robinson",
+   "sprewell",
+   "stockton",
+   "wilkins"
+  ],
+  "missingInserts": [
+   "double trouble",
+   "promo sheet",
+   "single"
+  ]
+ },
  "1989-score-football-cards": {
   "missingPlayers": [
    "bears",
@@ -5432,6 +5757,32 @@
   ],
   "missingInserts": [
    "light"
+  ]
+ },
+ "1994-95-fleer": {
+  "missingPlayers": [
+   "blaylock",
+   "curry",
+   "dumars",
+   "federov",
+   "grant",
+   "majerle",
+   "mcmillan",
+   "oakley",
+   "of",
+   "olajuwon",
+   "payton",
+   "price",
+   "rice",
+   "richmond",
+   "rodman",
+   "sprewell",
+   "yasmin"
+  ],
+  "missingInserts": [
+   "defensive",
+   "headliner",
+   "sharpshooter"
   ]
  },
  "2018-19-ud-mvp-hockey": {
@@ -6047,6 +6398,30 @@
    "wells"
   ],
   "missingInserts": []
+ },
+ "1993-94-stadium-club": {
+  "missingPlayers": [
+   "barkley",
+   "coleman",
+   "drexler",
+   "ewing",
+   "flyers",
+   "harper",
+   "kemp",
+   "majerle",
+   "malone",
+   "oneal",
+   "pippen",
+   "robinson",
+   "rodman",
+   "starks",
+   "webber",
+   "wilkens"
+  ],
+  "missingInserts": [
+   "frequent flyer points",
+   "master photos winner redemption"
+  ]
  },
  "2011-topps-super-bowl-xlv": {
   "missingPlayers": [
@@ -7014,6 +7389,17 @@
    "limited patch"
   ]
  },
+ "1994-95-finest": {
+  "missingPlayers": [
+   "kudelski",
+   "reichel"
+  ],
+  "missingInserts": [
+   "division",
+   "inserts",
+   "premier top goal scorer"
+  ]
+ },
  "1998-topps-wcw-nwo": {
   "missingPlayers": [
    "bigelow",
@@ -7115,6 +7501,24 @@
    "signature"
   ]
  },
+ "1994-95-signature-rookies": {
+  "missingPlayers": [
+   "butenschon",
+   "jablonski",
+   "karpov",
+   "khabibulin",
+   "klimentiev",
+   "oliwa",
+   "riabykin",
+   "risidore",
+   "sharifjanov",
+   "stromberg",
+   "young"
+  ],
+  "missingInserts": [
+   "tetrad"
+  ]
+ },
  "2017-topps-archives-baseball-cards": {
   "missingPlayers": [
    "baerga",
@@ -7160,14 +7564,6 @@
   ],
   "missingInserts": [
    "update"
-  ]
- },
- "1991-92-pinnacle": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "b",
-   "canadian",
-   "french"
   ]
  },
  "2019-panini-chronicles-baseball": {
@@ -7323,6 +7719,18 @@
   "missingInserts": [
    "color wheel",
    "violet pixels"
+  ]
+ },
+ "1993-94-ultra": {
+  "missingPlayers": [
+   "bruins",
+   "oatyes",
+   "set",
+   "wings"
+  ],
+  "missingInserts": [
+   "light special",
+   "prospect"
   ]
  },
  "2006-panini-world-cup-germany-cards": {
@@ -7617,6 +8025,21 @@
    "trophied talent die cut"
   ]
  },
+ "1994-95-classic": {
+  "missingPlayers": [
+   "bechard",
+   "checklist",
+   "namestikov",
+   "rucinsky",
+   "savoie",
+   "stlouis",
+   "t",
+   "zemlak"
+  ],
+  "missingInserts": [
+   "roy sweepstakes"
+  ]
+ },
  "1984-85-o-pee-chee": {
   "missingPlayers": [
    "gilmore",
@@ -7725,16 +8148,6 @@
   "missingInserts": [
    "holochrome",
    "reprint"
-  ]
- },
- "1992-93-ultra": {
-  "missingPlayers": [
-   "session",
-   "woolridge"
-  ],
-  "missingInserts": [
-   "jam session exchange",
-   "star"
   ]
  },
  "2004-fleer-greats-of-the-game": {
@@ -7904,13 +8317,17 @@
    "super bowl binder"
   ]
  },
- "1991-92-pro-set": {
+ "1993-94-score": {
   "missingPlayers": [
-   "federov"
+   "brunet",
+   "cloutier",
+   "federov",
+   "lamelin",
+   "roberge",
+   "savage"
   ],
   "missingInserts": [
-   "award specail",
-   "cc"
+   "durivage"
   ]
  },
  "2018-19-panini-select-basketball-nba-cards": {
@@ -8015,11 +8432,11 @@
    "smash mouth xtra"
   ]
  },
- "1992-93-o-pee-chee": {
+ "1993-94-topps-premier": {
   "missingPlayers": [],
   "missingInserts": [
-   "25th anniversary inserts",
-   "box bottom"
+   "certified",
+   "redemption"
   ]
  },
  "2015-bowman-draft-baseball-cards": {
@@ -8446,16 +8863,6 @@
    "fleer hardwood leaders"
   ]
  },
- "1994-95-ultra": {
-  "missingPlayers": [
-   "card",
-   "of",
-   "peyton"
-  ],
-  "missingInserts": [
-   "single"
-  ]
- },
  "1989-kenner-starting-lineup-cards": {
   "missingPlayers": [
    "chamberlain",
@@ -8584,6 +8991,16 @@
   ],
   "missingInserts": [
    "jonathan toews"
+  ]
+ },
+ "1993-94-pinnacle": {
+  "missingPlayers": [
+   "bite",
+   "macinnes",
+   "set"
+  ],
+  "missingInserts": [
+   "nifty fifty"
   ]
  },
  "1982-83-o-pee-chee": {
@@ -8781,6 +9198,15 @@
   ],
   "missingInserts": [
    "tetrad phonex promo"
+  ]
+ },
+ "1992-93-ultra": {
+  "missingPlayers": [
+   "session",
+   "woolridge"
+  ],
+  "missingInserts": [
+   "jam session exchange"
   ]
  },
  "1991-nike-michael-jordan-spike-lee": {
@@ -9501,22 +9927,6 @@
    "year interactive"
   ]
  },
- "1994-95-fleer": {
-  "missingPlayers": [
-   "of"
-  ],
-  "missingInserts": [
-   "sharpshooter"
-  ]
- },
- "1994-95-sp": {
-  "missingPlayers": [
-   "excel"
-  ],
-  "missingInserts": [
-   "die cuts"
-  ]
- },
  "1993-94-fleer": {
   "missingPlayers": [
    "of"
@@ -10086,6 +10496,14 @@
    "authentic fabrics"
   ]
  },
+ "1994-95-upper-deck-be-a-player": {
+  "missingPlayers": [
+   "snow"
+  ],
+  "missingInserts": [
+   "die cut"
+  ]
+ },
  "1991-classic-draft-picks": {
   "missingPlayers": [
    "ismail"
@@ -10100,6 +10518,14 @@
   ],
   "missingInserts": [
    "phc"
+  ]
+ },
+ "1991-92-pro-set": {
+  "missingPlayers": [
+   "federov"
+  ],
+  "missingInserts": [
+   "award specail"
   ]
  },
  "1991-92-bowman": {
@@ -10280,22 +10706,22 @@
   ],
   "missingInserts": []
  },
- "1992-93-pro-set": {
+ "1994-95-donruss": {
   "missingPlayers": [],
   "missingInserts": [
-   "french"
+   "w coating"
   ]
  },
- "1992-93-parkhurst": {
+ "1994-95-leaf-limited": {
   "missingPlayers": [],
   "missingInserts": [
-   "pro previews"
+   "insert"
   ]
  },
- "1991-92-pro-set-platinum": {
+ "1994-95-stadium-club": {
   "missingPlayers": [],
   "missingInserts": [
-   "pc"
+   "finest inserts"
   ]
  },
  "1990-topps-traded-baseball-cards": {
@@ -10466,6 +10892,15 @@
    "reilly",
    "rookies",
    "soshnikov"
+  ],
+  "missingInserts": []
+ },
+ "1993-94-donruss": {
+  "missingPlayers": [
+   "kualevog",
+   "niedermeyer",
+   "set",
+   "siitler"
   ],
   "missingInserts": []
  },
@@ -11488,6 +11923,13 @@
   ],
   "missingInserts": []
  },
+ "1993-94-parkhurst": {
+  "missingPlayers": [
+   "bautin",
+   "ice"
+  ],
+  "missingInserts": []
+ },
  "certified-nascar-full": {
   "missingPlayers": [
    "box",
@@ -12352,12 +12794,6 @@
  "1993-classic-futures": {
   "missingPlayers": [
    "huhoc"
-  ],
-  "missingInserts": []
- },
- "1993-94-stadium-club": {
-  "missingPlayers": [
-   "wilkens"
   ],
   "missingInserts": []
  },
@@ -13462,6 +13898,30 @@
  "2012-13-upper-deck-artifacts-hockey": {
   "missingPlayers": [
    "cizikas"
+  ],
+  "missingInserts": []
+ },
+ "1994-95-parkhurst-se": {
+  "missingPlayers": [
+   "lemieux"
+  ],
+  "missingInserts": []
+ },
+ "1994-95-score": {
+  "missingPlayers": [
+   "brindarmour"
+  ],
+  "missingInserts": []
+ },
+ "1994-95-select": {
+  "missingPlayers": [
+   "robataille"
+  ],
+  "missingInserts": []
+ },
+ "1993-classic-pro-prospects": {
+  "missingPlayers": [
+   "yashin"
   ],
   "missingInserts": []
  },
