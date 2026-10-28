@@ -6497,6 +6497,33 @@
    "1989 die cut"
   ]
  },
+ "2003-04-upper-deck-mvp": {
+  "missingPlayers": [
+   "bryan",
+   "bryant",
+   "duncan",
+   "james",
+   "jordan",
+   "magazine",
+   "marbury",
+   "mashburn",
+   "mcgrady",
+   "milicic",
+   "ming",
+   "mutombo",
+   "oneal",
+   "pierce",
+   "rc",
+   "richardson",
+   "rose",
+   "zoto"
+  ],
+  "missingInserts": [
+   "diary",
+   "rising to occasion",
+   "sports nut"
+  ]
+ },
  "2018-panini-limited-football-nfl-cards": {
   "missingPlayers": [
    "bennett",
@@ -8233,18 +8260,6 @@
    "star skills relic blends"
   ]
  },
- "2003-04-upper-deck-ice": {
-  "missingPlayers": [
-   "dipietrp",
-   "domi",
-   "macinnis"
-  ],
-  "missingInserts": [
-   "breakers jersey",
-   "clear cut winners jersey",
-   "icons"
-  ]
- },
  "2014-topps-ufc-champions-trading-cards": {
   "missingPlayers": [
    "franklin",
@@ -8463,6 +8478,16 @@
    "mcdavid",
    "puzzle back",
    "signature"
+  ]
+ },
+ "2004-05-sp-authentic": {
+  "missingPlayers": [
+   "card"
+  ],
+  "missingInserts": [
+   "buyback",
+   "fulfilled redemption",
+   "redemption"
   ]
  },
  "1994-95-signature-rookies": {
@@ -9321,6 +9346,28 @@
    "super bowl binder"
   ]
  },
+ "2004-05-pacific": {
+  "missingPlayers": [
+   "ayder",
+   "datsydk",
+   "drigle",
+   "king",
+   "raycroet",
+   "scorers"
+  ],
+  "missingInserts": [
+   "quest for cup"
+  ]
+ },
+ "2003-04-upper-deck-trilogy": {
+  "missingPlayers": [
+   "carter"
+  ],
+  "missingInserts": [
+   "script one",
+   "script two"
+  ]
+ },
  "1997-98-upper-deck-black-diamond": {
   "missingPlayers": [
    "alias"
@@ -9524,17 +9571,6 @@
   ],
   "missingInserts": [
    "elements triple warm ups"
-  ]
- },
- "2003-04-upper-deck-mvp": {
-  "missingPlayers": [
-   "bryan",
-   "magazine",
-   "rc",
-   "zoto"
-  ],
-  "missingInserts": [
-   "sports nut"
   ]
  },
  "1996-97-stadium-club": {
@@ -10020,6 +10056,16 @@
   ],
   "missingInserts": [
    "jonathan toews"
+  ]
+ },
+ "2003-04-upper-deck-ice": {
+  "missingPlayers": [
+   "dipietrp",
+   "domi",
+   "macinnis"
+  ],
+  "missingInserts": [
+   "icons"
   ]
  },
  "2000-01-ud-reserve": {
@@ -11580,6 +11626,14 @@
    "authentic fabrics"
   ]
  },
+ "2003-04-upper-deck-rookie-update": {
+  "missingPlayers": [
+   "zalesak"
+  ],
+  "missingInserts": [
+   "inspirations dual"
+  ]
+ },
  "2002-03-spx": {
   "missingPlayers": [
    "bergeron"
@@ -11822,22 +11876,10 @@
   ],
   "missingInserts": []
  },
- "2003-04-pacific-crown-royale": {
+ "2004-05-in-the-game-franchises-canadian": {
   "missingPlayers": [],
   "missingInserts": [
-   "patch"
-  ]
- },
- "2003-04-pacific-heads-up": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "game worn jersey"
-  ]
- },
- "2003-04-upper-deck-bee-hive": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "promo"
+   "used memorabilia"
   ]
  },
  "1990-topps-traded-baseball-cards": {
@@ -14980,6 +15022,18 @@
  "2012-13-upper-deck-artifacts-hockey": {
   "missingPlayers": [
    "cizikas"
+  ],
+  "missingInserts": []
+ },
+ "2003-04-upper-deck-premier-collection": {
+  "missingPlayers": [
+   "mb"
+  ],
+  "missingInserts": []
+ },
+ "2003-04-upper-deck-victory": {
+  "missingPlayers": [
+   "hockey"
   ],
   "missingInserts": []
  },
