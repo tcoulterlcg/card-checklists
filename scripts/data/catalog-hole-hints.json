@@ -7978,6 +7978,26 @@
    "star skills relic blends"
   ]
  },
+ "2002-03-pacific-heads-up": {
+  "missingPlayers": [
+   "beech",
+   "doan",
+   "hentunen",
+   "kallio",
+   "nedorost",
+   "sanderson",
+   "smolinski",
+   "stevens",
+   "sullivan",
+   "sweeney",
+   "tucker",
+   "varlamov",
+   "williams"
+  ],
+  "missingInserts": [
+   "hd"
+  ]
+ },
  "2014-topps-ufc-champions-trading-cards": {
   "missingPlayers": [
    "franklin",
@@ -9145,18 +9165,11 @@
    "smash mouth xtra"
   ]
  },
- "2001-02-upper-deck-playmakers": {
+ "2002-03-upper-deck-mask-collection": {
   "missingPlayers": [],
   "missingInserts": [
-   "players club jersey",
-   "practice jersey"
-  ]
- },
- "2001-02-upper-deck-top-shelf": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "stick",
-   "triple stick"
+   "masked marvels jersey",
+   "super stoppers jersey"
   ]
  },
  "2015-bowman-draft-baseball-cards": {
@@ -10261,6 +10274,18 @@
    "universal distribution promo"
   ]
  },
+ "2002-03-be-a-player-memorabilia": {
+  "missingPlayers": [
+   "braithwaite",
+   "bucyk",
+   "handzus",
+   "kozlov",
+   "rolston",
+   "yushkevich",
+   "zubov"
+  ],
+  "missingInserts": []
+ },
  "2001-02-be-a-player-signature-series": {
   "missingPlayers": [
    "brylin",
@@ -11269,12 +11294,20 @@
    "authentic fabrics"
   ]
  },
- "2001-02-upper-deck-mvp": {
+ "2002-03-spx": {
   "missingPlayers": [
-   "federov"
+   "bergeron"
   ],
   "missingInserts": [
-   "authentic goalies stick"
+   "redemption"
+  ]
+ },
+ "2002-03-upper-deck-piece-of-history": {
+  "missingPlayers": [
+   "hockey"
+  ],
+  "missingInserts": [
+   "1987 lester b pearson award"
   ]
  },
  "1997-98-donruss-limited": {
@@ -11511,79 +11544,37 @@
   ],
   "missingInserts": []
  },
- "2002-03-be-a-player-all-star-edition": {
+ "2002-03-o-pee-chee": {
   "missingPlayers": [],
   "missingInserts": [
-   "game jersey"
+   "box topper"
   ]
  },
- "2001-02-be-a-player-memorabilia": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "star jersey double"
-  ]
- },
- "2001-02-fleer-greats-of-the-game": {
+ "2002-03-pacific-calder": {
   "missingPlayers": [],
   "missingInserts": [
    "jersey"
   ]
  },
- "2001-02-pacific-heads-up": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "authentic game worn jersey quads"
-  ]
- },
- "2001-02-pacific": {
+ "2002-03-pacific-exclusive": {
   "missingPlayers": [],
   "missingInserts": [
    "jersey"
   ]
  },
- "2001-02-pacific-vanguard": {
+ "2002-03-pacific-vanguard": {
   "missingPlayers": [],
   "missingInserts": [
-   "high voltage"
+   "authentic game worn jersey"
   ]
  },
- "2001-02-topps-chrome": {
+ "2002-03-upper-deck-mvp": {
   "missingPlayers": [],
   "missingInserts": [
-   "mario lemieux reprint"
+   "skate around jersey"
   ]
  },
- "2001-02-topps-heritage": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "certified"
-  ]
- },
- "2001-02-topps-o-pee-chee-archives": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "game used relic"
-  ]
- },
- "2001-02-topps-reserve": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "jersey relics"
-  ]
- },
- "2001-02-upper-deck-ice": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "jersey"
-  ]
- },
- "2001-02-upper-deck-legends": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "pieces history stick"
-  ]
- },
- "2001-02-upper-deck-vintage": {
+ "2002-03-upper-deck-vintage": {
   "missingPlayers": [],
   "missingInserts": [
    "jersey"
@@ -12772,6 +12763,13 @@
   "missingPlayers": [
    "hockey",
    "stall"
+  ],
+  "missingInserts": []
+ },
+ "2002-03-be-a-player-signature-series": {
+  "missingPlayers": [
+   "gold",
+   "player"
   ],
   "missingInserts": []
  },
@@ -14737,9 +14735,21 @@
   ],
   "missingInserts": []
  },
+ "2002-03-be-a-player-first-edition": {
+  "missingPlayers": [
+   "kelleher"
+  ],
+  "missingInserts": []
+ },
  "2001-02-sp-game-used": {
   "missingPlayers": [
    "authentic"
+  ],
+  "missingInserts": []
+ },
+ "2001-02-upper-deck-mvp": {
+  "missingPlayers": [
+   "federov"
   ],
   "missingInserts": []
  },
