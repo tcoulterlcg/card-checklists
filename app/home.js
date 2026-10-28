@@ -247,7 +247,7 @@ const pill = (on) => ({
 // tab, a "More sports" menu, a searchable Brand menu, the Product menu and a
 // strip of active filters with one-click removal. All menus use the shared
 // dropdown in components/dropdown.js.
-function SetFilters({ sports, sportFilter, onPick, onClearAll, showBrand, brands, brandFilter, onBrand, products, productFilter, onProduct }) {
+function SetFilters({ sports, sportFilter, onPick, onClearAll, showBrand, brands, brandFilter, onBrand, products, productFilter, onProduct, extra, extraActive }) {
   const [menu, setMenu] = useState(null)          // 'more' | 'brand' | null
   const [brandQ, setBrandQ] = useState('')
   const moreBtn = useRef(null)
@@ -279,10 +279,9 @@ function SetFilters({ sports, sportFilter, onPick, onClearAll, showBrand, brands
   const rest = (q ? shown : shown.filter(b => !popular.includes(b))).slice().sort((a, b) => a.localeCompare(b))
   const pickBrand = (b) => { onBrand(b); setMenu(null) }
 
-  const active = []
-  if (sportFilter !== 'All' && !['Sports', 'TCG', 'Other'].includes(sportFilter)) active.push([sportFilter, () => onPick(group)])
-  if (brandFilter !== 'All') active.push([brandFilter, () => onBrand('All')])
-  if (productFilter !== 'All') active.push([productFilter, () => onProduct('All')])
+  // Every active filter already shows as a selected chip or menu, so one "Clear all" link is enough.
+  const anyActive = extraActive || brandFilter !== 'All' || productFilter !== 'All' ||
+    (sportFilter !== 'All' && !['Sports', 'TCG', 'Other'].includes(sportFilter))
 
   const brandItems = (list) => list.map(b => (
     <button key={b} type="button" onClick={() => pickBrand(b)} style={menuItem(brandFilter === b)}>
@@ -298,13 +297,13 @@ function SetFilters({ sports, sportFilter, onPick, onClearAll, showBrand, brands
           const on = group === value
           return (
             <button key={value} role="tab" aria-selected={on} onClick={() => { setMenu(null); onPick(value) }}
-              style={{ ...eyebrow, fontSize: 17, background: 'none', border: 'none', cursor: 'pointer', padding: '12px 0', marginBottom: -1,
+              style={{ ...eyebrow, fontSize: 17, background: 'none', border: 'none', cursor: 'pointer', padding: '8px 0 10px', marginBottom: -1,
                 borderBottom: '3px solid ' + (on ? ACCENT : 'transparent'), color: on ? TEXT : SECONDARY, whiteSpace: 'nowrap' }}>{label}</button>
           )
         })}
       </div>
 
-      <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: 12, marginTop: 16 }}>
+      <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: 10, marginTop: 14 }}>
         <div className="hq-chiprow" style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 8, minWidth: 0, maxWidth: '100%' }}>
           {chips.map(([label, value]) => (
             <button key={value} onClick={() => { setMenu(null); onPick(value) }} style={pill(sportFilter === value)}>{label}</button>
@@ -318,6 +317,7 @@ function SetFilters({ sports, sportFilter, onPick, onClearAll, showBrand, brands
         </div>
 
         <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 8, minWidth: 0, maxWidth: '100%' }}>
+          {extra}
           {showBrand && brandList.length > 0 && (
             <Trigger triggerRef={brandBtn} label="Brand" value={brandFilter === 'All' ? 'Any' : brandFilter}
               active={brandFilter !== 'All'} open={menu === 'brand'} onClick={() => setMenu(menu === 'brand' ? null : 'brand')} />
@@ -325,6 +325,10 @@ function SetFilters({ sports, sportFilter, onPick, onClearAll, showBrand, brands
           {showBrand && products.length > 1 && (
             <Select label="Product" ariaLabel="Product line" value={productFilter} onChange={onProduct} defaultValue="All" width={300}
               options={[['All', 'All (' + (products.length - 1) + ')'], ...products.slice(1).map(p => [p, p])]} />
+          )}
+          {anyActive && (
+            <button type="button" onClick={() => { setMenu(null); onClearAll() }}
+              style={{ height: 40, padding: '0 6px', background: 'none', border: 'none', cursor: 'pointer', color: ACCENT_TEXT, fontSize: 13, fontWeight: 600, textDecoration: 'underline' }}>Clear all</button>
           )}
         </div>
       </div>
@@ -354,18 +358,6 @@ function SetFilters({ sports, sportFilter, onPick, onClearAll, showBrand, brands
         </div>
       </Popover>
 
-      {active.length > 0 && (
-        <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 8, marginTop: 14 }}>
-          <span style={{ fontSize: 13, color: SECONDARY }}>Filtered by</span>
-          {active.map(([label, remove]) => (
-            <button key={label} onClick={remove} aria-label={'Remove filter ' + label}
-              style={{ height: 32, padding: '0 10px 0 12px', borderRadius: 999, cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: 6,
-                fontSize: 13, fontWeight: 600, background: SURFACE_2, color: TEXT, border: '1px solid ' + CHIP_LINE }}>{label}<XIcon /></button>
-          ))}
-          <button onClick={() => { setMenu(null); onClearAll() }}
-            style={{ height: 32, padding: '0 6px', background: 'none', border: 'none', cursor: 'pointer', color: ACCENT_TEXT, fontSize: 13, fontWeight: 600, textDecoration: 'underline' }}>Clear all</button>
-        </div>
-      )}
     </div>
   )
 }
@@ -1274,7 +1266,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
       ) : isLanding ? (
         <>
           {/* HERO */}
-          <section className="hq-hero" style={{ padding: '72px 0 48px', marginBottom: 8, borderBottom: '1px solid ' + LINE }}>
+          <section className="hq-hero" style={{ padding: '72px 0 36px', marginBottom: 0, borderBottom: '1px solid ' + LINE }}>
             <p style={{ ...eyebrow, color: ACCENT_TEXT, margin: '0 0 18px' }}>
               The definitive card set database{yearRange ? ' · ' + yearRange : ''}
             </p>
@@ -1300,7 +1292,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
             </p>
 
             {/* STATS */}
-            <div className="hq-stats" style={{ display: 'flex', flexWrap: 'wrap', gap: '20px 48px', margin: '40px 0 0' }}>
+            <div className="hq-stats" style={{ display: 'flex', flexWrap: 'wrap', gap: '20px 48px', margin: '32px 0 0' }}>
               {[[statN.sets ? statN.sets.toLocaleString() : null, 'Sets indexed'], [statN.cards ? (statN.cards >= 1000000 ? (statN.cards / 1000000).toFixed(1) + 'M' : statN.cards >= 1000 ? Math.round(statN.cards / 1000) + 'K' : String(statN.cards)) : null, 'Cards + parallels'], [sports.length > 1 ? String(sports.length - 1) : null, 'Categories']].map(([n, label]) => (
                 <div key={label}>
                   {n ? <p style={{ ...display, margin: 0, fontSize: 40, color: ACCENT_TEXT, lineHeight: 1 }}>{n}</p>
@@ -1339,9 +1331,32 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
               setSportFilter('All'); setBrandFilter('All'); setProductFilter('All')
               setTeamFilter('All'); setTeamInput(''); setTeamBrowse(false); setTcgRarity('All'); setTcgType('All')
             }
+            const teamFilters = oneSport && !isTcg && !OTHER_SET.has(sportFilter) ? (
+              <>
+              {!teamBrowse ? (
+                <Trigger label="Team" value="Any team" onClick={() => { teamOpenOnLoad.current = true; openTeamBrowse() }} ariaLabel="Filter by team" />
+              ) : teamLoading ? (
+                <span style={{ color: '#8A93A8', fontSize: 13 }}>Loading teams…</span>
+              ) : (
+                <>
+                  <Select label="Team" ariaLabel="Filter by team" value={teamFilter} width={280} searchAbove={8} initialOpen={teamOpenOnLoad.current}
+                    onChange={(v) => { setTeamFilter(v); setTeamInput(v === 'All' ? '' : v) }}
+                    options={[['All', 'Any team'], ...teamsForSport.map(t => [t, t])]} />
+                  {teamFilter !== 'All' && (
+                    <>
+                      <Select label="Sort" ariaLabel="Sort cards" value={teamSort} onChange={setTeamSort} width={220}
+                        options={[['year-desc', 'Newest first'], ['year-asc', 'Oldest first'], ['player', 'Player (A–Z)'], ['set', 'Set name']]} />
+                      <button onClick={() => { setTeamFilter('All'); setTeamInput('') }}
+                        style={{ background: 'none', border: 'none', color: ACCENT_TEXT, fontSize: 13, fontWeight: 600, cursor: 'pointer' }}>Clear</button>
+                    </>
+                  )}
+                </>
+              )}
+              </>
+            ) : null
             return (
-              <div style={{ margin: '38px 0 22px' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', flexWrap: 'wrap', gap: 10, marginBottom: 16 }}>
+              <div style={{ margin: '28px 0 20px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 10, marginBottom: 8 }}>
                   <h2 style={{ ...title(20), margin: 0 }}>
                     {productFilter !== 'All' ? productFilter + ' Sets' : sportFilter === 'All' ? 'All Sets' : sportFilter === 'TCG' ? 'Trading Card Games' : sportFilter === 'Other' ? 'Other Cards' : sportFilter === 'Sports' ? 'Sports Cards' : sportFilter + ' Sets'}
                     {sets.length > 0 && <span style={{ color: LABEL, fontSize: 16, fontWeight: 500, marginLeft: 10 }}>{filteredSets.length.toLocaleString()}</span>}
@@ -1354,7 +1369,8 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
                 <SetFilters sports={sports} sportFilter={sportFilter} onPick={pick} onClearAll={clearAll}
                   showBrand={groupOf(sportFilter) !== 'TCG'}
                   brands={brands} brandFilter={brandFilter} onBrand={pickBrand}
-                  products={products} productFilter={productFilter} onProduct={setProductFilter} />
+                  products={products} productFilter={productFilter} onProduct={setProductFilter}
+                  extra={teamFilters} extraActive={teamFilter !== 'All'} />
               </div>
             )
           })()}
@@ -1381,30 +1397,6 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
                       <Select label="Sort" ariaLabel="Sort cards" value={teamSort} onChange={setTeamSort} width={220}
                         options={[['year-desc', 'Newest first'], ['year-asc', 'Oldest first'], ['player', 'Card name (A–Z)'], ['set', 'Set name']]} />
                       <button onClick={() => { setTeamFilter('All'); setTeamInput(''); setTcgRarity('All'); setTcgType('All') }}
-                        style={{ background: 'none', border: 'none', color: ACCENT_TEXT, fontSize: 13, fontWeight: 600, cursor: 'pointer' }}>Clear</button>
-                    </>
-                  )}
-                </>
-              )}
-            </div>
-          )}
-          {/* TEAM FILTER + SORT (after a specific sport is selected) */}
-          {oneSport && !isTcg && !OTHER_SET.has(sportFilter) && (
-            <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap', marginBottom: 22 }}>
-              {!teamBrowse ? (
-                <Trigger label="Team" value="Any team" onClick={() => { teamOpenOnLoad.current = true; openTeamBrowse() }} ariaLabel="Filter by team" />
-              ) : teamLoading ? (
-                <span style={{ color: '#8A93A8', fontSize: 13 }}>Loading teams…</span>
-              ) : (
-                <>
-                  <Select label="Team" ariaLabel="Filter by team" value={teamFilter} width={280} searchAbove={8} initialOpen={teamOpenOnLoad.current}
-                    onChange={(v) => { setTeamFilter(v); setTeamInput(v === 'All' ? '' : v) }}
-                    options={[['All', 'Any team'], ...teamsForSport.map(t => [t, t])]} />
-                  {teamFilter !== 'All' && (
-                    <>
-                      <Select label="Sort" ariaLabel="Sort cards" value={teamSort} onChange={setTeamSort} width={220}
-                        options={[['year-desc', 'Newest first'], ['year-asc', 'Oldest first'], ['player', 'Player (A–Z)'], ['set', 'Set name']]} />
-                      <button onClick={() => { setTeamFilter('All'); setTeamInput('') }}
                         style={{ background: 'none', border: 'none', color: ACCENT_TEXT, fontSize: 13, fontWeight: 600, cursor: 'pointer' }}>Clear</button>
                     </>
                   )}
