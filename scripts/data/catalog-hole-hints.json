@@ -4274,65 +4274,6 @@
    "state hometown"
   ]
  },
- "1997-98-spx": {
-  "missingPlayers": [
-   "abdurrahim",
-   "baker",
-   "barkley",
-   "barry",
-   "blaylock",
-   "bryant",
-   "camby",
-   "dampier",
-   "delk",
-   "drexler",
-   "dumars",
-   "ewing",
-   "garnett",
-   "gold",
-   "hardaway",
-   "hill",
-   "howard",
-   "iverson",
-   "johnson",
-   "jones",
-   "jonson",
-   "jordan",
-   "kemp",
-   "kittles",
-   "malone",
-   "marbury",
-   "mashburn",
-   "mcdyess",
-   "miller",
-   "mourning",
-   "nash",
-   "olajuwon",
-   "oneal",
-   "payton",
-   "potapenko",
-   "reeves",
-   "richmond",
-   "robinson",
-   "rodman",
-   "smith",
-   "sprewell",
-   "stackhouse",
-   "stockton",
-   "stoudamire",
-   "sura",
-   "thomas",
-   "walker",
-   "williams",
-   "wright"
-  ],
-  "missingInserts": [
-   "die cut",
-   "dimensions",
-   "sample",
-   "sky"
-  ]
- },
  "2018-topps-ufc-museum-collection-cards": {
   "missingPlayers": [
    "aguilar",
@@ -4575,6 +4516,64 @@
   ],
   "missingInserts": []
  },
+ "1997-98-spx": {
+  "missingPlayers": [
+   "abdurrahim",
+   "baker",
+   "barkley",
+   "barry",
+   "blaylock",
+   "bryant",
+   "camby",
+   "dampier",
+   "delk",
+   "drexler",
+   "dumars",
+   "ewing",
+   "garnett",
+   "gold",
+   "hardaway",
+   "hill",
+   "howard",
+   "iverson",
+   "johnson",
+   "jones",
+   "jonson",
+   "jordan",
+   "kemp",
+   "kittles",
+   "malone",
+   "marbury",
+   "mashburn",
+   "mcdyess",
+   "miller",
+   "mourning",
+   "nash",
+   "olajuwon",
+   "oneal",
+   "payton",
+   "potapenko",
+   "reeves",
+   "richmond",
+   "robinson",
+   "rodman",
+   "smith",
+   "sprewell",
+   "stackhouse",
+   "stockton",
+   "stoudamire",
+   "sura",
+   "thomas",
+   "walker",
+   "williams",
+   "wright"
+  ],
+  "missingInserts": [
+   "die cut",
+   "sample",
+   "sky"
+  ]
+ },
  "2013-bowman-inception-baseball-cards": {
   "missingPlayers": [
    "almora",
@@ -4785,24 +4784,6 @@
    "relics",
    "scarlet signatures",
    "scarlet signatures relics"
-  ]
- },
- "1997-98-pinnacle": {
-  "missingPlayers": [
-   "herbert"
-  ],
-  "missingInserts": [
-   "coins",
-   "epix game",
-   "epix moment",
-   "epix play",
-   "epix season",
-   "fantasy fanfest house",
-   "mint coins brass",
-   "mint coins nickel",
-   "mint coins plated",
-   "mint coins solid",
-   "mint minternational"
   ]
  },
  "2016-17-o-pee-chee-hockey-cards": {
@@ -5834,6 +5815,46 @@
    "dineen gagner mullen turgeon",
    "sticker",
    "sticker star"
+  ]
+ },
+ "1999-00-upper-deck-mvp": {
+  "missingPlayers": [
+   "barkley",
+   "bryant",
+   "duncan",
+   "finley",
+   "hardaway",
+   "hill",
+   "horn",
+   "iverson",
+   "jamison",
+   "jordan",
+   "kemp",
+   "laettner",
+   "malone",
+   "marbury",
+   "mcdyess",
+   "miller",
+   "mourning",
+   "olajuwon",
+   "oneal",
+   "pierce",
+   "rahim",
+   "rice",
+   "robinson",
+   "saprykin",
+   "sedin",
+   "shvidki",
+   "stefan",
+   "stockton",
+   "vanhorn",
+   "walker",
+   "webber",
+   "williams"
+  ],
+  "missingInserts": [
+   "jam time",
+   "sc clutch performers"
   ]
  },
  "2014-bowman-draft-baseball-cards": {
@@ -7570,6 +7591,24 @@
    "spiral"
   ]
  },
+ "1999-00-upper-deck-hologrfx": {
+  "missingPlayers": [
+   "au",
+   "bird",
+   "bryant",
+   "carter",
+   "duncan",
+   "garnett",
+   "george",
+   "gervin",
+   "jordan",
+   "williams"
+  ],
+  "missingInserts": [
+   "holofame",
+   "pure skills"
+  ]
+ },
  "1996-97-score": {
   "missingPlayers": [
    "briere",
@@ -7974,6 +8013,25 @@
    "midnight"
   ]
  },
+ "1999-00-sp-authentic": {
+  "missingPlayers": [
+   "abdurrahim",
+   "duncan",
+   "finley",
+   "garnett",
+   "horn",
+   "iverson",
+   "jamison",
+   "malone",
+   "mcdyess",
+   "mourning",
+   "peyton",
+   "webber"
+  ],
+  "missingInserts": [
+   "maximum force"
+  ]
+ },
  "2015-16-sp-authentic-hockey-cards": {
   "missingPlayers": [
    "box",
@@ -8117,6 +8175,23 @@
    "snapshots"
   ]
  },
+ "1999-00-upper-deck-ovation": {
+  "missingPlayers": [
+   "bryant",
+   "carter",
+   "duncan",
+   "garnett",
+   "horn",
+   "jamison",
+   "marbury",
+   "pierce",
+   "rahim",
+   "williams"
+  ],
+  "missingInserts": [
+   "spotlight"
+  ]
+ },
  "2015-upper-deck-team-canada-master-collection-hockey": {
   "missingPlayers": [
    "bergeron",
@@ -8149,22 +8224,6 @@
   ],
   "missingInserts": [
    "update"
-  ]
- },
- "1998-99-pacific-paramount": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "glove side laser cut",
-   "special delivery die cut",
-   "team die cut"
-  ]
- },
- "1998-99-pacific-revolution": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "chalk talk laser cut",
-   "icon",
-   "star die cut"
   ]
  },
  "2019-panini-chronicles-baseball": {
@@ -11327,28 +11386,28 @@
   ],
   "missingInserts": []
  },
- "1998-99-o-pee-chee-chrome": {
+ "1999-00-pacific-dynagon-ice": {
   "missingPlayers": [],
   "missingInserts": [
-   "seasons best"
+   "star fantasy toronto 2000 promo"
   ]
  },
- "1998-99-pacific-dynagon-ice": {
+ "1999-00-topps-chrome": {
   "missingPlayers": [],
   "missingInserts": [
-   "insert"
+   "post masters"
   ]
  },
- "1998-99-upper-deck-mvp": {
+ "1999-00-upper-deck-mvp-stanley-cup-edition": {
   "missingPlayers": [],
   "missingInserts": [
-   "overtime heroes"
+   "sc talent"
   ]
  },
- "1997-98-sp-authentic": {
+ "1999-00-upper-deck-wayne-gretzky": {
   "missingPlayers": [],
   "missingInserts": [
-   "die cut"
+   "dynamics"
   ]
  },
  "1990-topps-traded-baseball-cards": {
@@ -12115,13 +12174,6 @@
   "missingPlayers": [
    "refractor",
    "young"
-  ],
-  "missingInserts": []
- },
- "1999-00-upper-deck-mvp": {
-  "missingPlayers": [
-   "rahim",
-   "vanhorn"
   ],
   "missingInserts": []
  },
@@ -13343,27 +13395,9 @@
   ],
   "missingInserts": []
  },
- "1999-00-sp-authentic": {
-  "missingPlayers": [
-   "peyton"
-  ],
-  "missingInserts": []
- },
  "1999-00-topps-tipoff": {
   "missingPlayers": [
    "number"
-  ],
-  "missingInserts": []
- },
- "1999-00-upper-deck-hologrfx": {
-  "missingPlayers": [
-   "au"
-  ],
-  "missingInserts": []
- },
- "1999-00-upper-deck-ovation": {
-  "missingPlayers": [
-   "rahim"
   ],
   "missingInserts": []
  },
@@ -14537,6 +14571,12 @@
   ],
   "missingInserts": []
  },
+ "1999-upper-deck-century-legends": {
+  "missingPlayers": [
+   "bourgue"
+  ],
+  "missingInserts": []
+ },
  "1997-98-pacific-invincible": {
   "missingPlayers": [
    "amour"
@@ -14546,6 +14586,12 @@
  "1997-98-pinnacle-certified": {
   "missingPlayers": [
    "roussel"
+  ],
+  "missingInserts": []
+ },
+ "1997-98-pinnacle": {
+  "missingPlayers": [
+   "herbert"
   ],
   "missingInserts": []
  },
