@@ -965,6 +965,261 @@
    "wearing scarf"
   ]
  },
+ "2003-04-pacific": {
+  "missingPlayers": [
+   "adams",
+   "afanasenkov",
+   "afinogenov",
+   "allen",
+   "armstrong",
+   "aubin",
+   "aucoin",
+   "auld",
+   "babchuk",
+   "bacashihua",
+   "backman",
+   "balej",
+   "barnes",
+   "barney",
+   "belanger",
+   "berehowsky",
+   "bergenheim",
+   "bergeron",
+   "bergevin",
+   "berglund",
+   "bootland",
+   "boughner",
+   "brathwaite",
+   "brendl",
+   "brookbank",
+   "brylin",
+   "bryzgalov",
+   "burnett",
+   "burns",
+   "cajanek",
+   "campbell",
+   "carney",
+   "caron",
+   "chubarov",
+   "clark",
+   "clemmensen",
+   "clymer",
+   "conklin",
+   "cross",
+   "czerkawski",
+   "dackell",
+   "daigle",
+   "daley",
+   "danton",
+   "dempsey",
+   "devereaux",
+   "dimaio",
+   "dingman",
+   "divis",
+   "doig",
+   "donovan",
+   "dowd",
+   "downey",
+   "draper",
+   "dvorak",
+   "eastwood",
+   "eaton",
+   "ehrhoff",
+   "ekman",
+   "emery",
+   "erat",
+   "exelby",
+   "finley",
+   "fitzgerald",
+   "fritsche",
+   "gamache",
+   "gill",
+   "gleason",
+   "green",
+   "hagman",
+   "hajt",
+   "hale",
+   "hamhuis",
+   "hannan",
+   "hasek",
+   "hecht",
+   "hedican",
+   "hedin",
+   "henry",
+   "higgins",
+   "hinote",
+   "horcoff",
+   "huml",
+   "hunter",
+   "hutchinson",
+   "jillson",
+   "jonsson",
+   "juneau",
+   "kalinin",
+   "kapanen",
+   "karpovtsev",
+   "khavanov",
+   "king",
+   "klee",
+   "knutsen",
+   "kolanos",
+   "koltsov",
+   "kondratiev",
+   "konowalchuk",
+   "kraft",
+   "krahn",
+   "krog",
+   "kubina",
+   "kukkonen",
+   "kunitz",
+   "kvasha",
+   "kwiatkowski",
+   "labarbera",
+   "lachance",
+   "laperriere",
+   "leahy",
+   "leeb",
+   "lehtonen",
+   "leighton",
+   "letowski",
+   "liles",
+   "lindsay",
+   "low",
+   "lowry",
+   "lundmark",
+   "lynch",
+   "macmillan",
+   "mair",
+   "malakhov",
+   "malhotra",
+   "maltby",
+   "mara",
+   "marshall",
+   "martensson",
+   "martin",
+   "mason",
+   "matvichuk",
+   "may",
+   "mccabe",
+   "mccarthy",
+   "mccormick",
+   "mcdonald",
+   "mcgillis",
+   "mckee",
+   "mckenna",
+   "mclaren",
+   "mcneill",
+   "melichar",
+   "miettinen",
+   "mitchell",
+   "moen",
+   "moore",
+   "moreau",
+   "munro",
+   "murley",
+   "neil",
+   "nichol",
+   "nickulas",
+   "nieminen",
+   "niinimaa",
+   "nikolishin",
+   "nycholat",
+   "odelein",
+   "ohlund",
+   "oliwa",
+   "orszagh",
+   "ortmeyer",
+   "ouellet",
+   "pandolfo",
+   "peters",
+   "petrovicky",
+   "phillips",
+   "pihlman",
+   "pirjeta",
+   "pitkanen",
+   "plekanec",
+   "pohl",
+   "pominville",
+   "preissing",
+   "quint",
+   "quintal",
+   "radivojevic",
+   "ragnarsson",
+   "rathje",
+   "raycroft",
+   "reasoner",
+   "regehr",
+   "rivet",
+   "robinson",
+   "rossiter",
+   "rucinsky",
+   "ryder",
+   "ryn",
+   "sabourin",
+   "salei",
+   "salmelainen",
+   "saprykin",
+   "sarno",
+   "sauve",
+   "savage",
+   "schaefer",
+   "schastlivy",
+   "schnabel",
+   "schultz",
+   "schwab",
+   "semin",
+   "shelley",
+   "shishkanov",
+   "skoula",
+   "skrastins",
+   "smith",
+   "souray",
+   "spacek",
+   "spiller",
+   "staios",
+   "stana",
+   "stewart",
+   "stoll",
+   "stuart",
+   "suchy",
+   "suglobov",
+   "sutherby",
+   "sutton",
+   "sydor",
+   "tanabe",
+   "tapper",
+   "taylor",
+   "tellqvist",
+   "timander",
+   "tjarnqvist",
+   "torres",
+   "tremblay",
+   "trnka",
+   "vasicek",
+   "vauclair",
+   "vermette",
+   "vigier",
+   "visnovsky",
+   "walser",
+   "ward",
+   "weinrich",
+   "wellwood",
+   "wesley",
+   "williams",
+   "wilson",
+   "wiseman",
+   "witt",
+   "woolley",
+   "yakubov",
+   "zamuner",
+   "zidlicky",
+   "zinovjev",
+   "zyuzin"
+  ],
+  "missingInserts": [
+   "complete"
+  ]
+ },
  "1935-goudey-baseball-cards": {
   "missingPlayers": [
    "brickell",
@@ -7978,24 +8233,16 @@
    "star skills relic blends"
   ]
  },
- "2002-03-pacific-heads-up": {
+ "2003-04-upper-deck-ice": {
   "missingPlayers": [
-   "beech",
-   "doan",
-   "hentunen",
-   "kallio",
-   "nedorost",
-   "sanderson",
-   "smolinski",
-   "stevens",
-   "sullivan",
-   "sweeney",
-   "tucker",
-   "varlamov",
-   "williams"
+   "dipietrp",
+   "domi",
+   "macinnis"
   ],
   "missingInserts": [
-   "hd"
+   "breakers jersey",
+   "clear cut winners jersey",
+   "icons"
   ]
  },
  "2014-topps-ufc-champions-trading-cards": {
@@ -8656,6 +8903,21 @@
    "starburst"
   ]
  },
+ "2003-04-upper-deck-honor-roll": {
+  "missingPlayers": [
+   "bryant",
+   "dm",
+   "houston",
+   "mutombo",
+   "pierce",
+   "sv",
+   "vranes",
+   "webber"
+  ],
+  "missingInserts": [
+   "authentic combo jersey"
+  ]
+ },
  "1985-86-star": {
   "missingPlayers": [
    "colter",
@@ -8763,6 +9025,24 @@
   "missingInserts": [
    "trophied talent die cut"
   ]
+ },
+ "2002-03-pacific-heads-up": {
+  "missingPlayers": [
+   "beech",
+   "doan",
+   "hentunen",
+   "kallio",
+   "nedorost",
+   "sanderson",
+   "smolinski",
+   "stevens",
+   "sullivan",
+   "sweeney",
+   "tucker",
+   "varlamov",
+   "williams"
+  ],
+  "missingInserts": []
  },
  "1984-85-o-pee-chee": {
   "missingPlayers": [
@@ -9117,6 +9397,18 @@
   ],
   "missingInserts": []
  },
+ "2003-04-spx": {
+  "missingPlayers": [
+   "boozer",
+   "kirilenko",
+   "miles",
+   "milicic",
+   "stevenson"
+  ],
+  "missingInserts": [
+   "winning combos"
+  ]
+ },
  "1992-93-skybox": {
   "missingPlayers": [
    "christie",
@@ -9165,13 +9457,6 @@
    "smash mouth xtra"
   ]
  },
- "2002-03-upper-deck-mask-collection": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "masked marvels jersey",
-   "super stoppers jersey"
-  ]
- },
  "2015-bowman-draft-baseball-cards": {
   "missingPlayers": [
    "anderson",
@@ -9218,6 +9503,17 @@
    "red"
   ],
   "missingInserts": []
+ },
+ "2003-04-sp-authentic": {
+  "missingPlayers": [
+   "ginobili",
+   "hill",
+   "mason",
+   "odom"
+  ],
+  "missingInserts": [
+   "fabrics"
+  ]
  },
  "2003-04-upper-deck-finite": {
   "missingPlayers": [
@@ -9521,16 +9817,6 @@
   ],
   "missingInserts": [
    "autographed buyback"
-  ]
- },
- "2003-04-upper-deck-honor-roll": {
-  "missingPlayers": [
-   "dm",
-   "mutombo",
-   "sv"
-  ],
-  "missingInserts": [
-   "authentic combo jersey"
   ]
  },
  "2003-ud-top-prospects": {
@@ -11302,14 +11588,6 @@
    "redemption"
   ]
  },
- "2002-03-upper-deck-piece-of-history": {
-  "missingPlayers": [
-   "hockey"
-  ],
-  "missingInserts": [
-   "1987 lester b pearson award"
-  ]
- },
  "1997-98-donruss-limited": {
   "missingPlayers": [
    "nicholls"
@@ -11544,40 +11822,22 @@
   ],
   "missingInserts": []
  },
- "2002-03-o-pee-chee": {
+ "2003-04-pacific-crown-royale": {
   "missingPlayers": [],
   "missingInserts": [
-   "box topper"
+   "patch"
   ]
  },
- "2002-03-pacific-calder": {
+ "2003-04-pacific-heads-up": {
   "missingPlayers": [],
   "missingInserts": [
-   "jersey"
+   "game worn jersey"
   ]
  },
- "2002-03-pacific-exclusive": {
+ "2003-04-upper-deck-bee-hive": {
   "missingPlayers": [],
   "missingInserts": [
-   "jersey"
-  ]
- },
- "2002-03-pacific-vanguard": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "authentic game worn jersey"
-  ]
- },
- "2002-03-upper-deck-mvp": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "skate around jersey"
-  ]
- },
- "2002-03-upper-deck-vintage": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "jersey"
+   "promo"
   ]
  },
  "1990-topps-traded-baseball-cards": {
@@ -13427,18 +13687,6 @@
   ],
   "missingInserts": []
  },
- "2003-04-sp-authentic": {
-  "missingPlayers": [
-   "hill"
-  ],
-  "missingInserts": []
- },
- "2003-04-spx": {
-  "missingPlayers": [
-   "stevenson"
-  ],
-  "missingInserts": []
- },
  "2003-04-topps-contemporary-collection": {
   "missingPlayers": [
    "pavlovac"
@@ -14738,6 +14986,12 @@
  "2002-03-be-a-player-first-edition": {
   "missingPlayers": [
    "kelleher"
+  ],
+  "missingInserts": []
+ },
+ "2002-03-upper-deck-piece-of-history": {
+  "missingPlayers": [
+   "hockey"
   ],
   "missingInserts": []
  },
