@@ -8877,6 +8877,15 @@
    "universal distribution promo"
   ]
  },
+ "1970-71-o-pee-chee": {
+  "missingPlayers": [
+   "favelle",
+   "lapierriere"
+  ],
+  "missingInserts": [
+   "laperriere"
+  ]
+ },
  "2018-topps-legends-of-wwe": {
   "missingPlayers": [
    "a",
@@ -10018,6 +10027,18 @@
    "sahlawi"
   ],
   "missingInserts": []
+ },
+ "1972-73-o-pee-chee": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "players crests"
+  ]
+ },
+ "1970-71-esso-power-players": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "w tab"
+  ]
  },
  "1990-topps-traded-baseball-cards": {
   "missingPlayers": [
@@ -13189,6 +13210,12 @@
  "2012-13-upper-deck-artifacts-hockey": {
   "missingPlayers": [
    "cizikas"
+  ],
+  "missingInserts": []
+ },
+ "1969-70-o-pee-chee": {
+  "missingPlayers": [
+   "kaprizov"
   ],
   "missingInserts": []
  },
