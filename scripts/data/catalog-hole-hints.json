@@ -4355,6 +4355,21 @@
    "superstar sensations"
   ]
  },
+ "1991-92-stadium-club": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "2000",
+   "50 club",
+   "700 club",
+   "charter member",
+   "charter members club mvp",
+   "hart",
+   "mvp",
+   "nets 1000",
+   "top goalie",
+   "vezina"
+  ]
+ },
  "2010-topps-wwe": {
   "missingPlayers": [
    "backlash",
@@ -4959,6 +4974,39 @@
    "patch"
   ]
  },
+ "1989-90-o-pee-chee": {
+  "missingPlayers": [
+   "action",
+   "blues",
+   "bozek",
+   "bruins",
+   "canadiens",
+   "canucks",
+   "checklist",
+   "devils",
+   "essensa",
+   "flames",
+   "hrdina",
+   "joseph",
+   "lafrate",
+   "oilers",
+   "panel",
+   "rangers",
+   "reid",
+   "riendeau",
+   "right",
+   "stars",
+   "sticker",
+   "trophy",
+   "winner"
+  ],
+  "missingInserts": [
+   "box bottoms hand cut",
+   "dineen gagner mullen turgeon",
+   "sticker",
+   "sticker star"
+  ]
+ },
  "2014-bowman-draft-baseball-cards": {
   "missingPlayers": [
    "box",
@@ -5100,22 +5148,6 @@
   "missingInserts": [
    "franco harris",
    "trivia quiz"
-  ]
- },
- "1988-89-o-pee-chee": {
-  "missingPlayers": [
-   "action",
-   "kyte",
-   "vanbiesbrouk"
-  ],
-  "missingInserts": [
-   "box bottoms hand cut",
-   "brian leetch",
-   "craig janney",
-   "doug brown",
-   "rob brown",
-   "sticker",
-   "tony hrkac"
   ]
  },
  "1991-pro-set-wlaf": {
@@ -5328,6 +5360,21 @@
   "missingInserts": [
    "border",
    "update"
+  ]
+ },
+ "1988-89-o-pee-chee": {
+  "missingPlayers": [
+   "action",
+   "kyte",
+   "vanbiesbrouk"
+  ],
+  "missingInserts": [
+   "brian leetch",
+   "craig janney",
+   "doug brown",
+   "rob brown",
+   "sticker",
+   "tony hrkac"
   ]
  },
  "2015-topps-ufc-chronicles-trading-cards": {
@@ -6029,6 +6076,22 @@
    "packers"
   ]
  },
+ "1990-91-o-pee-chee": {
+  "missingPlayers": [
+   "byalsin",
+   "card",
+   "nhl",
+   "p",
+   "panel",
+   "series"
+  ],
+  "missingInserts": [
+   "bourque yzerman turcotte vernon",
+   "box bottoms hand cut",
+   "mogilny casey coffey gretzky",
+   "roy modano lemieux macinnis"
+  ]
+ },
  "2017-topps-wwe-nxt-checklist-added": {
   "missingPlayers": [
    "aries",
@@ -6341,6 +6404,22 @@
   ],
   "missingInserts": [
    "update"
+  ]
+ },
+ "1990-91-bowman": {
+  "missingPlayers": [
+   "chaisson",
+   "checklist",
+   "eetch",
+   "nichols",
+   "of",
+   "reid",
+   "voler"
+  ],
+  "missingInserts": [
+   "chris chelios pictured",
+   "correct spelling",
+   "incorrect spelling"
   ]
  },
  "1985-86-o-pee-chee": {
@@ -6935,21 +7014,6 @@
    "limited patch"
   ]
  },
- "1987-88-o-pee-chee": {
-  "missingPlayers": [
-   "apedersen",
-   "bruins",
-   "frycer",
-   "lafreniere",
-   "mason",
-   "peplinksi",
-   "sticker"
-  ],
-  "missingInserts": [
-   "box bottoms hand cut",
-   "sticker"
-  ]
- },
  "1998-topps-wcw-nwo": {
   "missingPlayers": [
    "bigelow",
@@ -7096,6 +7160,14 @@
   ],
   "missingInserts": [
    "update"
+  ]
+ },
+ "1991-92-pinnacle": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "b",
+   "canadian",
+   "french"
   ]
  },
  "2019-panini-chronicles-baseball": {
@@ -7251,18 +7323,6 @@
   "missingInserts": [
    "color wheel",
    "violet pixels"
-  ]
- },
- "1986-87-o-pee-chee": {
-  "missingPlayers": [
-   "action",
-   "crossman",
-   "eklund",
-   "sticker"
-  ],
-  "missingInserts": [
-   "box bottoms hand cut",
-   "sticker"
   ]
  },
  "2006-panini-world-cup-germany-cards": {
@@ -7667,6 +7727,16 @@
    "reprint"
   ]
  },
+ "1992-93-ultra": {
+  "missingPlayers": [
+   "session",
+   "woolridge"
+  ],
+  "missingInserts": [
+   "jam session exchange",
+   "star"
+  ]
+ },
  "2004-fleer-greats-of-the-game": {
   "missingPlayers": [
    "got",
@@ -7713,6 +7783,20 @@
   ],
   "missingInserts": [
    "back to"
+  ]
+ },
+ "1987-88-o-pee-chee": {
+  "missingPlayers": [
+   "apedersen",
+   "bruins",
+   "frycer",
+   "lafreniere",
+   "mason",
+   "peplinksi",
+   "sticker"
+  ],
+  "missingInserts": [
+   "sticker"
   ]
  },
  "2016-17-donruss-soccer-full": {
@@ -7820,6 +7904,15 @@
    "super bowl binder"
   ]
  },
+ "1991-92-pro-set": {
+  "missingPlayers": [
+   "federov"
+  ],
+  "missingInserts": [
+   "award specail",
+   "cc"
+  ]
+ },
  "2018-19-panini-select-basketball-nba-cards": {
   "missingPlayers": [
    "alexander",
@@ -7920,6 +8013,13 @@
   ],
   "missingInserts": [
    "smash mouth xtra"
+  ]
+ },
+ "1992-93-o-pee-chee": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "25th anniversary inserts",
+   "box bottom"
   ]
  },
  "2015-bowman-draft-baseball-cards": {
@@ -8139,6 +8239,17 @@
    "zolnierczyk"
   ],
   "missingInserts": []
+ },
+ "1986-87-o-pee-chee": {
+  "missingPlayers": [
+   "action",
+   "crossman",
+   "eklund",
+   "sticker"
+  ],
+  "missingInserts": [
+   "sticker"
+  ]
  },
  "2019-bowman-sterling-baseball": {
   "missingPlayers": [
@@ -9975,6 +10086,30 @@
    "authentic fabrics"
   ]
  },
+ "1991-classic-draft-picks": {
+  "missingPlayers": [
+   "ismail"
+  ],
+  "missingInserts": [
+   "promo"
+  ]
+ },
+ "1991-92-parkhurst": {
+  "missingPlayers": [
+   "federov"
+  ],
+  "missingInserts": [
+   "phc"
+  ]
+ },
+ "1991-92-bowman": {
+  "missingPlayers": [
+   "giillis"
+  ],
+  "missingInserts": [
+   "preview sheet"
+  ]
+ },
  "1983-84-o-pee-chee": {
   "missingPlayers": [
    "finals"
@@ -10145,16 +10280,22 @@
   ],
   "missingInserts": []
  },
- "1980-81-o-pee-chee": {
+ "1992-93-pro-set": {
   "missingPlayers": [],
   "missingInserts": [
-   "super"
+   "french"
   ]
  },
- "1977-78-o-pee-chee": {
+ "1992-93-parkhurst": {
   "missingPlayers": [],
   "missingInserts": [
-   "round corners"
+   "pro previews"
+  ]
+ },
+ "1991-92-pro-set-platinum": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "pc"
   ]
  },
  "1990-topps-traded-baseball-cards": {
@@ -12220,12 +12361,6 @@
   ],
   "missingInserts": []
  },
- "1992-93-ultra": {
-  "missingPlayers": [
-   "session"
-  ],
-  "missingInserts": []
- },
  "1991-92-fleer": {
   "missingPlayers": [
    "bush"
@@ -13327,6 +13462,30 @@
  "2012-13-upper-deck-artifacts-hockey": {
   "missingPlayers": [
    "cizikas"
+  ],
+  "missingInserts": []
+ },
+ "1992-93-o-pee-chee-premier": {
+  "missingPlayers": [
+   "federov"
+  ],
+  "missingInserts": []
+ },
+ "1992-93-score": {
+  "missingPlayers": [
+   "roenckk"
+  ],
+  "missingInserts": []
+ },
+ "1991-92-o-pee-chee": {
+  "missingPlayers": [
+   "checklist"
+  ],
+  "missingInserts": []
+ },
+ "1991-92-pro-set-french": {
+  "missingPlayers": [
+   "draft"
   ],
   "missingInserts": []
  },
