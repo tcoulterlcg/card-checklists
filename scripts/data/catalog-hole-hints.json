@@ -5167,22 +5167,6 @@
    "trivia quiz"
   ]
  },
- "2012-topps-chrome": {
-  "missingPlayers": [
-   "autographs",
-   "gresham",
-   "wheeden"
-  ],
-  "missingInserts": [
-   "1957 inserts",
-   "1965 inserts",
-   "1984 inserts",
-   "die cut",
-   "helmet",
-   "jersey",
-   "prism die cut"
-  ]
- },
  "1991-pro-set-wlaf": {
   "missingPlayers": [
    "bennett",
@@ -5766,6 +5750,20 @@
   "missingInserts": [
    "team logo decals",
    "world champ pennant decals"
+  ]
+ },
+ "2012-topps-chrome": {
+  "missingPlayers": [
+   "autographs",
+   "gresham",
+   "wheeden"
+  ],
+  "missingInserts": [
+   "1957 inserts",
+   "1965 inserts",
+   "1984 inserts",
+   "die cut",
+   "prism die cut"
   ]
  },
  "2018-topps-ufc-knockout-mma-cards": {
@@ -6670,15 +6668,6 @@
    "wins united states championship"
   ]
  },
- "2012-panini-gridiron": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "gems trio",
-   "gems trio material",
-   "jersey",
-   "jersey combo"
-  ]
- },
  "2015-topps-opening-day-baseball": {
   "missingPlayers": [
    "angels",
@@ -6832,18 +6821,6 @@
   ],
   "missingInserts": [
    "signature rps"
-  ]
- },
- "2012-panini-prestige": {
-  "missingPlayers": [
-   "clairborne",
-   "hillmann",
-   "webster"
-  ],
-  "missingInserts": [
-   "draft city destinations",
-   "friday",
-   "team foundations trio materials"
   ]
  },
  "2001-stadium-club": {
@@ -7691,16 +7668,6 @@
    "violet"
   ]
  },
- "2012-topps-prime-hobby": {
-  "missingPlayers": [
-   "w",
-   "weedon"
-  ],
-  "missingInserts": [
-   "level v relics",
-   "quad combos"
-  ]
- },
  "2004-fleer-greats-of-the-game": {
   "missingPlayers": [
    "got",
@@ -7841,15 +7808,6 @@
    "res"
   ]
  },
- "2012-panini-limited": {
-  "missingPlayers": [
-   "bray"
-  ],
-  "missingInserts": [
-   "chip materials",
-   "material phenom"
-  ]
- },
  "1991-pro-set": {
   "missingPlayers": [
    "andrellins",
@@ -7963,13 +7921,6 @@
   ],
   "missingInserts": [
    "smash mouth xtra"
-  ]
- },
- "2012-panini-prominence": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "unlimited potential material combos",
-   "unlimited potential material signature"
   ]
  },
  "2015-bowman-draft-baseball-cards": {
@@ -8455,6 +8406,16 @@
    "hot franchise fabrics signatures"
   ]
  },
+ "2012-panini-prestige": {
+  "missingPlayers": [
+   "clairborne",
+   "hillmann",
+   "webster"
+  ],
+  "missingInserts": [
+   "friday"
+  ]
+ },
  "2008-playoff-absolute-memorabilia": {
   "missingPlayers": [
    "chargers",
@@ -8796,6 +8757,15 @@
   ],
   "missingInserts": [
    "1959"
+  ]
+ },
+ "2012-topps-prime-hobby": {
+  "missingPlayers": [
+   "w",
+   "weedon"
+  ],
+  "missingInserts": [
+   "quad combos"
   ]
  },
  "2006-playoff-absolute-memorabilia": {
@@ -9576,6 +9546,22 @@
    "superstar combos"
   ]
  },
+ "2012-leaf-draft": {
+  "missingPlayers": [
+   "heyward"
+  ],
+  "missingInserts": [
+   "robert griffin iii"
+  ]
+ },
+ "2012-panini-limited": {
+  "missingPlayers": [
+   "bray"
+  ],
+  "missingInserts": [
+   "material phenom"
+  ]
+ },
  "2012-panini-momentum": {
   "missingPlayers": [
    "hillmann"
@@ -9590,14 +9576,6 @@
   ],
   "missingInserts": [
    "atomic die cut"
-  ]
- },
- "2012-topps-valor": {
-  "missingPlayers": [
-   "west"
-  ],
-  "missingInserts": [
-   "field armor patch"
   ]
  },
  "2011-topps-prime": {
@@ -10141,10 +10119,22 @@
   ],
   "missingInserts": []
  },
- "2012-topps-strata-hobby": {
+ "2012-press-pass": {
   "missingPlayers": [],
   "missingInserts": [
-   "75 ra km"
+   "gray"
+  ]
+ },
+ "2012-upper-deck-exquisite-collection": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "endorsement signatures"
+  ]
+ },
+ "2012-upper-deck-university-of-alabama": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "crimson tide icons"
   ]
  },
  "1990-topps-traded-baseball-cards": {
@@ -12439,12 +12429,6 @@
   ],
   "missingInserts": []
  },
- "2013-panini-limited-football-cards-2": {
-  "missingPlayers": [
-   "legends"
-  ],
-  "missingInserts": []
- },
  "2013-panini-national-treasures-football-cards": {
   "missingPlayers": [
    "silver"
@@ -12481,9 +12465,21 @@
   ],
   "missingInserts": []
  },
+ "2012-fleer-ultra-retro": {
+  "missingPlayers": [
+   "holmes"
+  ],
+  "missingInserts": []
+ },
  "2012-panini-prizm": {
   "missingPlayers": [
    "r"
+  ],
+  "missingInserts": []
+ },
+ "2012-spx": {
+  "missingPlayers": [
+   "bledsoe"
   ],
   "missingInserts": []
  },
@@ -12496,6 +12492,12 @@
  "2012-topps-magic": {
   "missingPlayers": [
    "combos"
+  ],
+  "missingInserts": []
+ },
+ "2012-topps-valor": {
+  "missingPlayers": [
+   "west"
   ],
   "missingInserts": []
  },
