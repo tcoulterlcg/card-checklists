@@ -7030,6 +7030,14 @@
    "update"
   ]
  },
+ "2018-sage-hit": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "premier draft",
+   "premier draft peak performance",
+   "premier draft premium portrait"
+  ]
+ },
  "2019-panini-chronicles-baseball": {
   "missingPlayers": [
    "astral",
@@ -7714,15 +7722,6 @@
   "missingInserts": [
    "phenom jersey",
    "res"
-  ]
- },
- "2017-sage-hit": {
-  "missingPlayers": [
-   "jh"
-  ],
-  "missingInserts": [
-   "premier draft",
-   "premier draft peak performance platinized"
   ]
  },
  "1991-pro-set": {
@@ -9345,14 +9344,6 @@
    "game"
   ]
  },
- "2018-panini-elite-draft-picks-football-checklist-added": {
-  "missingPlayers": [
-   "box"
-  ],
-  "missingInserts": [
-   "throwing"
-  ]
- },
  "2018-panini-phoenix-football-nfl-cards": {
   "missingPlayers": [
    "keenum"
@@ -9386,6 +9377,14 @@
   ],
   "missingInserts": [
    "turquoise"
+  ]
+ },
+ "2017-sage-hit": {
+  "missingPlayers": [
+   "jh"
+  ],
+  "missingInserts": [
+   "premier draft"
   ]
  },
  "2016-panini-spectra-football-cards": {
@@ -10027,30 +10026,6 @@
    "sahlawi"
   ],
   "missingInserts": []
- },
- "2017-leaf-trinity": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "signature spectrum"
-  ]
- },
- "2017-panini-black-friday": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "happy holidays"
-  ]
- },
- "2016-panini-black-friday-football": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "instant"
-  ]
- },
- "2016-panini-day": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "kickoff"
-  ]
  },
  "1990-topps-traded-baseball-cards": {
   "missingPlayers": [
