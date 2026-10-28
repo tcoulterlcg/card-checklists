@@ -4274,6 +4274,65 @@
    "state hometown"
   ]
  },
+ "1997-98-spx": {
+  "missingPlayers": [
+   "abdurrahim",
+   "baker",
+   "barkley",
+   "barry",
+   "blaylock",
+   "bryant",
+   "camby",
+   "dampier",
+   "delk",
+   "drexler",
+   "dumars",
+   "ewing",
+   "garnett",
+   "gold",
+   "hardaway",
+   "hill",
+   "howard",
+   "iverson",
+   "johnson",
+   "jones",
+   "jonson",
+   "jordan",
+   "kemp",
+   "kittles",
+   "malone",
+   "marbury",
+   "mashburn",
+   "mcdyess",
+   "miller",
+   "mourning",
+   "nash",
+   "olajuwon",
+   "oneal",
+   "payton",
+   "potapenko",
+   "reeves",
+   "richmond",
+   "robinson",
+   "rodman",
+   "smith",
+   "sprewell",
+   "stackhouse",
+   "stockton",
+   "stoudamire",
+   "sura",
+   "thomas",
+   "walker",
+   "williams",
+   "wright"
+  ],
+  "missingInserts": [
+   "die cut",
+   "dimensions",
+   "sample",
+   "sky"
+  ]
+ },
  "2018-topps-ufc-museum-collection-cards": {
   "missingPlayers": [
    "aguilar",
@@ -4446,6 +4505,75 @@
   "missingInserts": [
    "washington greats"
   ]
+ },
+ "1998-99-spx-finite": {
+  "missingPlayers": [
+   "abdurrahim",
+   "anderson",
+   "baker",
+   "barkley",
+   "benjamin",
+   "bibby",
+   "billups",
+   "blaylock",
+   "bryant",
+   "carter",
+   "clark",
+   "dampier",
+   "davis",
+   "dickerson",
+   "doleac",
+   "drew",
+   "duncan",
+   "garnett",
+   "garrity",
+   "grant",
+   "hardaway",
+   "harpring",
+   "harrington",
+   "hill",
+   "hornacek",
+   "hughes",
+   "ilgauskas",
+   "iverson",
+   "jamison",
+   "jones",
+   "jordan",
+   "kemp",
+   "lafrentz",
+   "lewis",
+   "lopez",
+   "lue",
+   "malone",
+   "marbury",
+   "mccoy",
+   "mcgrady",
+   "mcleod",
+   "mercer",
+   "miller",
+   "mohammed",
+   "mourning",
+   "murray",
+   "mutombo",
+   "nowitzki",
+   "olowokandi",
+   "oneal",
+   "patterson",
+   "payton",
+   "pierce",
+   "pippen",
+   "robinson",
+   "rogers",
+   "schrempf",
+   "skinner",
+   "smith",
+   "stackhouse",
+   "stockton",
+   "traylor",
+   "wells",
+   "williams"
+  ],
+  "missingInserts": []
  },
  "2013-bowman-inception-baseball-cards": {
   "missingPlayers": [
@@ -4657,6 +4785,24 @@
    "relics",
    "scarlet signatures",
    "scarlet signatures relics"
+  ]
+ },
+ "1997-98-pinnacle": {
+  "missingPlayers": [
+   "herbert"
+  ],
+  "missingInserts": [
+   "coins",
+   "epix game",
+   "epix moment",
+   "epix play",
+   "epix season",
+   "fantasy fanfest house",
+   "mint coins brass",
+   "mint coins nickel",
+   "mint coins plated",
+   "mint coins solid",
+   "mint minternational"
   ]
  },
  "2016-17-o-pee-chee-hockey-cards": {
@@ -6150,32 +6296,6 @@
    "light"
   ]
  },
- "1995-96-ultra": {
-  "missingPlayers": [
-   "barkley",
-   "barros",
-   "burton",
-   "ceballos",
-   "ewing",
-   "jackson",
-   "jordan",
-   "kemp",
-   "malone",
-   "mashburn",
-   "medallion",
-   "mourning",
-   "mutumbo",
-   "olajuwon",
-   "oneal",
-   "rice",
-   "robinson"
-  ],
-  "missingInserts": [
-   "fabulous fifties",
-   "hot pack",
-   "power"
-  ]
- },
  "1994-95-fleer": {
   "missingPlayers": [
    "blaylock",
@@ -6332,6 +6452,34 @@
    "into wild",
    "onyx",
    "transcendent touchdowns"
+  ]
+ },
+ "1998-99-ud-choice": {
+  "missingPlayers": [
+   "alavaara",
+   "berglund",
+   "bjorn",
+   "brown",
+   "checklist",
+   "draper",
+   "gilchrist",
+   "hammarstrom",
+   "hodson",
+   "holmstrom",
+   "knuble",
+   "kocur",
+   "larsson",
+   "maltby",
+   "molin",
+   "nilimaa",
+   "soutokorva",
+   "stoltz",
+   "svedberg",
+   "varvio"
+  ],
+  "missingInserts": [
+   "hometeam heroes",
+   "shl"
   ]
  },
  "2018-topps-heritage-high-number-baseball-cards": {
@@ -6568,6 +6716,31 @@
    "mvp seasons"
   ]
  },
+ "1995-96-ultra": {
+  "missingPlayers": [
+   "barkley",
+   "barros",
+   "burton",
+   "ceballos",
+   "ewing",
+   "jackson",
+   "jordan",
+   "kemp",
+   "malone",
+   "mashburn",
+   "medallion",
+   "mourning",
+   "mutumbo",
+   "olajuwon",
+   "oneal",
+   "rice",
+   "robinson"
+  ],
+  "missingInserts": [
+   "fabulous fifties",
+   "power"
+  ]
+ },
  "2014-topps-finest-football-cards": {
   "missingPlayers": [
    "conley",
@@ -6661,6 +6834,23 @@
   "missingInserts": [
    "decades",
    "miracle team"
+  ]
+ },
+ "1997-98-score": {
+  "missingPlayers": [
+   "baker",
+   "craig",
+   "hendrickson",
+   "king",
+   "kurri",
+   "modin",
+   "yushkevich"
+  ],
+  "missingInserts": [
+   "premier club",
+   "team",
+   "team avalanche",
+   "team maple leafs"
   ]
  },
  "2018-19-topps-chrome-premier-league-soccer-cards": {
@@ -6798,61 +6988,6 @@
    "history s heroes"
   ]
  },
- "1998-99-spx-finite": {
-  "missingPlayers": [
-   "benjamin",
-   "bibby",
-   "carter",
-   "clark",
-   "dickerson",
-   "doleac",
-   "drew",
-   "garrity",
-   "harpring",
-   "harrington",
-   "hughes",
-   "jamison",
-   "lafrentz",
-   "lewis",
-   "lopez",
-   "lue",
-   "mccoy",
-   "mcleod",
-   "mohammed",
-   "nowitzki",
-   "olowokandi",
-   "patterson",
-   "pierce",
-   "skinner",
-   "traylor",
-   "wells"
-  ],
-  "missingInserts": []
- },
- "1995-96-stadium-club": {
-  "missingPlayers": [
-   "baker",
-   "barkley",
-   "coleman",
-   "divac",
-   "ewing",
-   "jordan",
-   "kemp",
-   "malone",
-   "miller",
-   "mourning",
-   "neal",
-   "olajuwon",
-   "oneal",
-   "pippen",
-   "starks",
-   "x"
-  ],
-  "missingInserts": [
-   "extreme corps",
-   "spike says"
-  ]
- },
  "2011-topps-super-bowl-xlv": {
   "missingPlayers": [
    "bishop",
@@ -6930,29 +7065,6 @@
    "inception patch",
    "inception relic",
    "state hometown"
-  ]
- },
- "1997-98-spx": {
-  "missingPlayers": [
-   "dampier",
-   "delk",
-   "gold",
-   "jones",
-   "jonson",
-   "kittles",
-   "mashburn",
-   "nash",
-   "potapenko",
-   "sprewell",
-   "stackhouse",
-   "sura",
-   "thomas",
-   "williams",
-   "wright"
-  ],
-  "missingInserts": [
-   "die cut",
-   "sample"
   ]
  },
  "1993-pro-set-power": {
@@ -7298,6 +7410,29 @@
    "winter"
   ]
  },
+ "1995-96-stadium-club": {
+  "missingPlayers": [
+   "baker",
+   "barkley",
+   "coleman",
+   "divac",
+   "ewing",
+   "jordan",
+   "kemp",
+   "malone",
+   "miller",
+   "mourning",
+   "neal",
+   "olajuwon",
+   "oneal",
+   "pippen",
+   "starks",
+   "x"
+  ],
+  "missingInserts": [
+   "spike says"
+  ]
+ },
  "1993-94-stadium-club": {
   "missingPlayers": [
    "barkley",
@@ -7516,15 +7651,6 @@
   "missingInserts": [
    "mat relic royal rumble",
    "wins united states championship"
-  ]
- },
- "1996-97-leaf-preferred": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "w coating",
-   "w film",
-   "with coating",
-   "with film"
   ]
  },
  "2015-topps-opening-day-baseball": {
@@ -8023,6 +8149,22 @@
   ],
   "missingInserts": [
    "update"
+  ]
+ },
+ "1998-99-pacific-paramount": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "glove side laser cut",
+   "special delivery die cut",
+   "team die cut"
+  ]
+ },
+ "1998-99-pacific-revolution": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "chalk talk laser cut",
+   "icon",
+   "star die cut"
   ]
  },
  "2019-panini-chronicles-baseball": {
@@ -8749,13 +8891,13 @@
    "super bowl binder"
   ]
  },
- "1996-97-metal-universe": {
+ "1997-98-upper-deck-black-diamond": {
   "missingPlayers": [
-   "checklist"
+   "alias"
   ],
   "missingInserts": [
-   "skybox",
-   "skybox lethal weapon"
+   "quadruple vertical",
+   "single"
   ]
  },
  "1993-94-score": {
@@ -10959,6 +11101,14 @@
    "counterparts"
   ]
  },
+ "1996-97-metal-universe": {
+  "missingPlayers": [
+   "checklist"
+  ],
+  "missingInserts": [
+   "skybox"
+  ]
+ },
  "1995-classic-hockey-draft": {
   "missingPlayers": [
    "wesley"
@@ -11177,70 +11327,28 @@
   ],
   "missingInserts": []
  },
- "1997-98-donruss-elite": {
+ "1998-99-o-pee-chee-chrome": {
   "missingPlayers": [],
   "missingInserts": [
-   "prime numbers promo"
+   "seasons best"
   ]
  },
- "1997-98-donruss": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "promo"
-  ]
- },
- "1997-98-donruss-preferred": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "precious metal"
-  ]
- },
- "1997-98-pacific-dynagon": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "dynamic duo"
-  ]
- },
- "1996-97-donruss-elite": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "inserts"
-  ]
- },
- "1996-97-leaf": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "promo"
-  ]
- },
- "1996-97-topps-nhl-picks": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "95 96 stars"
-  ]
- },
- "1996-97-upper-deck-kraft": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "jell o award winner"
-  ]
- },
- "1995-96-donruss-elite": {
+ "1998-99-pacific-dynagon-ice": {
   "missingPlayers": [],
   "missingInserts": [
    "insert"
   ]
  },
- "1995-96-parkhurst-international": {
+ "1998-99-upper-deck-mvp": {
   "missingPlayers": [],
   "missingInserts": [
-   "signature"
+   "overtime heroes"
   ]
  },
- "1995-96-skybox-e-motion": {
+ "1997-98-sp-authentic": {
   "missingPlayers": [],
   "missingInserts": [
-   "generation next"
+   "die cut"
   ]
  },
  "1990-topps-traded-baseball-cards": {
@@ -14432,6 +14540,12 @@
  "1997-98-pacific-invincible": {
   "missingPlayers": [
    "amour"
+  ],
+  "missingInserts": []
+ },
+ "1997-98-pinnacle-certified": {
+  "missingPlayers": [
+   "roussel"
   ],
   "missingInserts": []
  },
