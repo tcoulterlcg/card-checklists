@@ -11619,6 +11619,14 @@
    "2008 09 retro autographed"
   ]
  },
+ "2018-upper-deck-nhl-draft": {
+  "missingPlayers": [
+   "mcdavid"
+  ],
+  "missingInserts": [
+   "day gems"
+  ]
+ },
  "2017-18-sp-game-used-hockey-cards": {
   "missingPlayers": [
    "nyquist"
@@ -11996,6 +12004,12 @@
    "sahlawi"
   ],
   "missingInserts": []
+ },
+ "2017-18-upper-deck-mj-holdings": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "top"
+  ]
  },
  "1990-topps-traded-baseball-cards": {
   "missingPlayers": [
@@ -15028,12 +15042,6 @@
  "18-19-ud-upper-deck-chronology-hockey": {
   "missingPlayers": [
    "shelley"
-  ],
-  "missingInserts": []
- },
- "2018-upper-deck-national-hockey-card-day": {
-  "missingPlayers": [
-   "sang"
   ],
   "missingInserts": []
  },
