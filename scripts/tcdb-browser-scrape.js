@@ -22,10 +22,10 @@
 // narrows slowly on success. Long runs keep going in the background; the
 // javascript_tool call itself must return within 45 s, so always poll.
 (() => {
-  if (window.__tcdb && window.__tcdb.version >= 2) return
+  if (window.__tcdb && window.__tcdb.version >= 3) return
   const sleep = (ms) => new Promise(r => setTimeout(r, ms))
   const parse = (h) => new DOMParser().parseFromString(h, 'text/html')
-  const st = { version: 2, gap: 6000, minGap: 4000, maxGap: 120000, todo: [], done: [], failed: [], current: null, requests: 0, throttled: 0, running: false, log: [] }
+  const st = { version: 3, verified: [], vtodo: [], vrunning: false, gap: 6000, minGap: 4000, maxGap: 120000, todo: [], done: [], failed: [], current: null, requests: 0, throttled: 0, running: false, log: [] }
 
   async function get(url) {
     for (let attempt = 0; attempt < 8; attempt++) {
@@ -187,7 +187,78 @@
   }
   const sliceJson = (i, size = 40000) => st.staged ? st.staged.json.slice(i * size, (i + 1) * size) : ''
 
-  const status = () => ({ gap: st.gap, requests: st.requests, throttled: st.throttled, running: st.running, todo: st.todo.length, done: st.done.length, failed: st.failed.map(f => f.slug + ': ' + f.error), current: st.current && { slug: st.current.slug, ...st.current.progress, mins: Math.round((Date.now() - st.current.started) / 60000) } })
 
-  window.__tcdb = { version: 2, st, find, queue: (jobs) => { st.todo.push(...jobs); run(); return st.todo.length }, status, take, stage, slice, stageJson, sliceJson, compact, checklist, rowsOf, flagsToX }
+  // ---- verify mode (scripts/make-verify-jobs.mjs) ----
+  // For each job { slug, name, year, sport, base, sections }: find the TCDB set, read its
+  // base size (first + last checklist page) and insert count, and queue a full scrape only
+  // when TCDB has clearly more. ≈4 requests a set. Results: st.verified (all verdicts) and
+  // st.done (full scrapes, export as usual and merge with tcdb-repair-merge.mjs).
+  const CAT = { Entertainment: 'Non-Sport' }
+  const norm = (t, sport) => String(t || '').toLowerCase()
+    .replace(/&/g, ' and ').replace(/['’.]/g, '')
+    .replace(new RegExp('\\b(' + [sport, 'cards?', 'checklist', 'trading', 'football', 'baseball', 'basketball', 'hockey', 'soccer', 'racing', 'ufc', 'mma', 'wrestling', 'golf', 'tennis', 'nfl', 'nba', 'nhl', 'mlb'].filter(Boolean).join('|').toLowerCase() + ')\\b', 'g'), ' ')
+    .replace(/[^a-z0-9]+/g, ' ').trim()
+  async function locate(job) {
+    const want = norm(job.name, job.sport)
+    for (const cat of [CAT[job.sport] || job.sport, '']) {
+      const hits = await find(job.name.replace(/\b(cards?|checklist)\b/gi, '').trim(), cat)
+      const exact = hits.filter(h => norm(h.name, job.sport) === want || norm(h.path.replace(/-/g, ' '), job.sport) === want)
+      if (exact.length) return exact[0]
+      // "Upper Deck Series 1" -> TCDB lists both series as one "Upper Deck" set
+      const noSeries = want.replace(/\bseries (1|2|3|one|two|three|i|ii|iii)\b/g, ' ').replace(/\s+/g, ' ').trim()
+      const whole = noSeries !== want && hits.find(h => norm(h.name, job.sport) === noSeries)
+      if (whole) return whole
+    }
+    return null
+  }
+  async function baseSize(sid, path) {
+    const url = '/Checklist.cfm/sid/' + sid + '/' + path
+    const first = await get(url)
+    const pages = Math.max(1, ...[...first.querySelectorAll('a[href*="PageIndex="]')].map(a => +((a.getAttribute('href') || '').match(/PageIndex=(\d+)/) || [0, 1])[1]))
+    const n1 = rowsOf(first).length
+    if (pages === 1) return n1
+    return (pages - 1) * n1 + rowsOf(await get(url + '?PageIndex=' + pages)).length
+  }
+  async function verifyOne(job) {
+    const hit = await locate(job)
+    if (!hit) return { slug: job.slug, verdict: 'nomatch' }
+    const ins = await get('/Inserts.cfm/sid/' + hit.sid + '/' + hit.path)
+    const subs = new Set()
+    for (const a of ins.querySelectorAll('a[href*="/sid/"]')) {
+      const m = (a.getAttribute('href') || '').match(/^\/(?:Checklist|ViewSet)\.cfm\/sid\/(\d+)\//)
+      if (m && m[1] !== String(hit.sid)) subs.add(m[1])
+    }
+    const tBase = await baseSize(hit.sid, hit.path)
+    const ourBase = job.base || 0, ourSecs = job.sections || 0
+    const baseShort = tBase > ourBase + Math.max(2, Math.round(ourBase * 0.03))
+    const secsShort = subs.size + 1 > ourSecs * 1.5 + 3
+    const r = { slug: job.slug, sid: hit.sid, path: hit.path, tcdbName: hit.name, tBase, ourBase, tSecs: subs.size + 1, ourSecs, verdict: baseShort || secsShort ? 'short' : 'ok' }
+    if (r.verdict === 'short') {
+      try { const set = await scrape({ ...job, sid: hit.sid, path: hit.path }); st.done.push(set); r.scraped = set.sections.reduce((n, x) => n + x.cards.length, 0) }
+      catch (e) { r.verdict = 'error'; r.error = String(e) }
+    }
+    return r
+  }
+  async function vrun() {
+    if (st.vrunning) return
+    st.vrunning = true
+    while (st.vtodo.length) {
+      const job = st.current = st.vtodo.shift()
+      job.started = Date.now()
+      try { st.verified.push(await verifyOne(job)) }
+      catch (e) { st.verified.push({ slug: job.slug, verdict: 'error', error: String(e) }) }
+    }
+    st.current = null
+    st.vrunning = false
+  }
+  // Verdicts not yet exported (call with mark=true once saved).
+  function verdicts(mark) {
+    const out = st.verified.filter(v => !v.exported)
+    if (mark) out.forEach(v => { v.exported = true })
+    return out
+  }
+
+  const status = () => ({ gap: st.gap, requests: st.requests, throttled: st.throttled, running: st.running, todo: st.todo.length, vtodo: st.vtodo.length, verified: st.verified.length, short: st.verified.filter(v => v.verdict === 'short').length, done: st.done.length, failed: st.failed.map(f => f.slug + ': ' + f.error), current: st.current && { slug: st.current.slug, ...st.current.progress, mins: Math.round((Date.now() - st.current.started) / 60000) } })
+
+  window.__tcdb = { version: 3, st, find, queue: (jobs) => { st.todo.push(...jobs); run(); return st.todo.length }, verify: (jobs) => { st.vtodo.push(...jobs); vrun(); return st.vtodo.length }, verdicts, locate, status, take, stage, slice, stageJson, sliceJson, compact, checklist, rowsOf, flagsToX }
 })()

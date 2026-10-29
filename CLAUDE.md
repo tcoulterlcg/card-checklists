@@ -24,6 +24,11 @@
   ≥95% of the current ones, and marks the job. Before scraping, claim the jobs you'll take (status `claimed-<tag>`, commit +
   push) and skip any job that isn't `todo` — two agents scraping the same set doubles the TCDB cost. TCDB's rate limit is shared by every agent on this computer: run ONE
   TCDB scraper at a time, and commit job-status changes promptly so other agents skip finished sets.
+- **Verify pass (partial non-TCDB sets):** the bottom-up TCDB import skips products the site already has, so partial
+  Cardboard Connection / Break Ninja / Checklist Center copies block TCDB's full ones. `node scripts/make-verify-jobs.mjs --write`
+  queues them as status `verify` in `tcdb-hole-jobs.json`; claim them like other jobs, run `__tcdb.verify(jobs)` in a tcdb.com tab
+  (≈4 requests a set; full scrape only when TCDB has more), save `__tcdb.verdicts()` and run `node scripts/tcdb-verify-mark.mjs <file>`,
+  then merge the scrapes with `tcdb-repair-merge.mjs` as usual.
 - **Parallel / patch tags** (Shield, SuperFractor, Logoman…) come from section titles via `lib/parallels.js`; it only tags
   names Trevor has verified or that name patch material. Unverified look-alikes are held, not guessed. Never infer a
   SuperFractor or shield from a 1/1 print run.
