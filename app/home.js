@@ -247,7 +247,7 @@ const pill = (on) => ({
 // tab, a "More sports" menu, a searchable Brand menu, the Product menu and a
 // strip of active filters with one-click removal. All menus use the shared
 // dropdown in components/dropdown.js.
-function SetFilters({ sports, sportFilter, onPick, onClearAll, showBrand, brands, brandFilter, onBrand, products, productFilter, onProduct, extra, extraActive }) {
+function SetFilters({ sports, sportFilter, onPick, onClearAll, showBrand, brands, brandFilter, onBrand, products, productFilter, onProduct, extra, extraActive, sort }) {
   const [menu, setMenu] = useState(null)          // 'more' | 'brand' | null
   const [brandQ, setBrandQ] = useState('')
   const moreBtn = useRef(null)
@@ -292,19 +292,20 @@ function SetFilters({ sports, sportFilter, onPick, onClearAll, showBrand, brands
 
   return (
     <div>
-      <div role="tablist" aria-label="Category" className="hq-chiprow" style={{ display: 'flex', gap: 32, borderBottom: '1px solid ' + LINE }}>
+      <div role="tablist" aria-label="Category" className="hq-chiprow" style={{ display: 'flex', gap: 28, borderBottom: '1px solid ' + LINE }}>
         {tabs.map(([label, value]) => {
           const on = group === value
           return (
             <button key={value} role="tab" aria-selected={on} onClick={() => { setMenu(null); onPick(value) }}
-              style={{ ...eyebrow, fontSize: 17, background: 'none', border: 'none', cursor: 'pointer', padding: '8px 0 10px', marginBottom: -1,
+              style={{ ...eyebrow, fontSize: 14, background: 'none', border: 'none', cursor: 'pointer', padding: '4px 0 10px', marginBottom: -1,
                 borderBottom: '3px solid ' + (on ? ACCENT : 'transparent'), color: on ? TEXT : SECONDARY, whiteSpace: 'nowrap' }}>{label}</button>
           )
         })}
       </div>
 
-      <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: 10, marginTop: 14 }}>
-        <div className="hq-chiprow" style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 8, minWidth: 0, maxWidth: '100%' }}>
+      {/* Sport chips get their own row; every dropdown (filters left, Sort right) shares one toolbar row below. */}
+      {chips.length > 0 && (
+        <div className="hq-chiprow" style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 8, minWidth: 0, maxWidth: '100%', marginTop: 16 }}>
           {chips.map(([label, value]) => (
             <button key={value} onClick={() => { setMenu(null); onPick(value) }} style={pill(sportFilter === value)}>{label}</button>
           ))}
@@ -315,8 +316,10 @@ function SetFilters({ sports, sportFilter, onPick, onClearAll, showBrand, brands
             </button>
           )}
         </div>
+      )}
 
-        <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 8, minWidth: 0, maxWidth: '100%' }}>
+      <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: 8, marginTop: chips.length > 0 ? 10 : 16 }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 8, minWidth: 0, flex: '1 1 auto' }}>
           {extra}
           {showBrand && brandList.length > 0 && (
             <Trigger triggerRef={brandBtn} label="Brand" value={brandFilter === 'All' ? 'Any' : brandFilter}
@@ -330,6 +333,7 @@ function SetFilters({ sports, sportFilter, onPick, onClearAll, showBrand, brands
             <button type="button" onClick={() => { setMenu(null); onClearAll() }}
               style={{ height: 40, padding: '0 6px', background: 'none', border: 'none', cursor: 'pointer', color: ACCENT_TEXT, fontSize: 13, fontWeight: 600, textDecoration: 'underline' }}>Clear all</button>
           )}
+          {sort && <div style={{ marginLeft: mobile ? 0 : 'auto' }}>{sort}</div>}
         </div>
       </div>
 
@@ -1355,22 +1359,20 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
               </>
             ) : null
             return (
-              <div style={{ margin: '28px 0 20px' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 10, marginBottom: 8 }}>
-                  <h2 style={{ ...title(20), margin: 0 }}>
+              <div style={{ margin: '32px 0 20px' }}>
+                <div style={{ marginBottom: 12 }}>
+                  <h2 style={{ ...title(22), margin: 0 }}>
                     {productFilter !== 'All' ? productFilter + ' Sets' : sportFilter === 'All' ? 'All Sets' : sportFilter === 'TCG' ? 'Trading Card Games' : sportFilter === 'Other' ? 'Other Cards' : sportFilter === 'Sports' ? 'Sports Cards' : sportFilter + ' Sets'}
                     {sets.length > 0 && <span style={{ color: LABEL, fontSize: 16, fontWeight: 500, marginLeft: 10 }}>{filteredSets.length.toLocaleString()}</span>}
                   </h2>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                    <Select label="Sort" ariaLabel="Sort sets" value={sortBy} onChange={setSortBy} width={220}
-                      options={[['year-desc', 'Newest first'], ['year-asc', 'Oldest first'], ['name-asc', 'Name (A–Z)'], ['name-desc', 'Name (Z–A)'], ['cards-desc', 'Most cards'], ['cards-asc', 'Fewest cards'], ['category', 'Category'], ['brand', 'Brand']]} />
-                  </div>
                 </div>
                 <SetFilters sports={sports} sportFilter={sportFilter} onPick={pick} onClearAll={clearAll}
                   showBrand={groupOf(sportFilter) !== 'TCG'}
                   brands={brands} brandFilter={brandFilter} onBrand={pickBrand}
                   products={products} productFilter={productFilter} onProduct={setProductFilter}
-                  extra={teamFilters} extraActive={teamFilter !== 'All'} />
+                  extra={teamFilters} extraActive={teamFilter !== 'All'}
+                  sort={teamFilter !== 'All' ? null : <Select label="Sort" ariaLabel="Sort sets" value={sortBy} onChange={setSortBy} width={220}
+                      options={[['year-desc', 'Newest first'], ['year-asc', 'Oldest first'], ['name-asc', 'Name (A–Z)'], ['name-desc', 'Name (Z–A)'], ['cards-desc', 'Most cards'], ['cards-asc', 'Fewest cards'], ['category', 'Category'], ['brand', 'Brand']]} />} />
               </div>
             )
           })()}
@@ -1854,14 +1856,14 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
                   <span style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: 4, background: 'linear-gradient(180deg, ' + c + ', ' + c + '44)' }} />
                   {/* holographic sheen */}
                   <span style={{ position: 'absolute', inset: 0, background: 'linear-gradient(120deg, transparent 40%, ' + c + '10 50%, transparent 60%)', pointerEvents: 'none' }} />
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>
-                    <span style={{ ...eyebrow, color: c }}>{s.sport}{yearLabel(s) ? ' · ' + yearLabel(s) : ''}</span>
-                    <span style={{ color: '#8A93A8', fontSize: 12 }}>{(s.sections || 0)} section{s.sections === 1 ? '' : 's'}</span>
-                  </div>
+                  <div style={{ ...eyebrow, color: c, marginBottom: 10, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{s.sport}{yearLabel(s) ? ' · ' + yearLabel(s) : ''}</div>
                   <p style={{ ...title(16), margin: '0 0 12px', lineHeight: 1.1, minHeight: 44 }}>{s.name.replace(/^\d{4}(-\d{2})?(\s*[/&]\s*\d{4}(-\d{2})?)?\s*/, '')}</p>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', borderTop: '1px solid #222', paddingTop: 10 }}>
-                    <span style={{ ...display, fontSize: 24, color: ACCENT_TEXT }}>{(s.cardCount || 0).toLocaleString()}</span>
-                    <span style={{ ...eyebrow, color: '#8A93A8' }}>Cards</span>
+                    <span style={{ display: 'inline-flex', alignItems: 'baseline', gap: 8 }}>
+                      <span style={{ ...display, fontSize: 24, color: ACCENT_TEXT }}>{(s.cardCount || 0).toLocaleString()}</span>
+                      <span style={{ ...eyebrow, color: '#8A93A8' }}>Cards</span>
+                    </span>
+                    <span style={{ color: '#8A93A8', fontSize: 12, whiteSpace: 'nowrap' }}>{(s.sections || 0)} section{s.sections === 1 ? '' : 's'}</span>
                   </div>
                 </button>
               )
