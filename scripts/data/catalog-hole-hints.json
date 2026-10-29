@@ -5591,6 +5591,59 @@
    "town"
   ]
  },
+ "2010-11-panini-limited": {
+  "missingPlayers": [
+   "archibald",
+   "battier",
+   "bird",
+   "brooks",
+   "bryant",
+   "dantley",
+   "davis",
+   "derozan",
+   "douglas",
+   "english",
+   "evans",
+   "flynn",
+   "gallatin",
+   "gasol",
+   "gervin",
+   "gilmore",
+   "goodrich",
+   "greer",
+   "griffin",
+   "hagan",
+   "hamilton",
+   "hansbrough",
+   "harden",
+   "harris",
+   "hawkins",
+   "hayes",
+   "holiday",
+   "hornacek",
+   "iguodala",
+   "jefferson",
+   "jennings",
+   "jones",
+   "landry",
+   "lanier",
+   "mcadoo",
+   "murphy",
+   "olajuwon",
+   "parish",
+   "payton",
+   "pettit",
+   "reed",
+   "russell",
+   "stoudemire",
+   "thurmond",
+   "uer",
+   "wilkens",
+   "wilkins",
+   "worthy"
+  ],
+  "missingInserts": []
+ },
  "2016-panini-prizm-football-cards": {
   "missingPlayers": [
    "atkins",
@@ -7579,6 +7632,16 @@
   ],
   "missingInserts": [
    "madden"
+  ]
+ },
+ "2010-11-panini-certified": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "junior legacy combo",
+   "material",
+   "material prime",
+   "prime material",
+   "shirt off my back combo"
   ]
  },
  "2019-panini-diamond-kings-baseball-cards": {
@@ -9662,6 +9725,13 @@
   ],
   "missingInserts": [
    "7 photo"
+  ]
+ },
+ "2010-11-spx": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "flashback fabrics",
+   "winning combos materials"
   ]
  },
  "2015-bowman-draft-baseball-cards": {
@@ -11787,6 +11857,14 @@
    "authentic fabrics"
   ]
  },
+ "2010-11-upper-deck-artifacts": {
+  "missingPlayers": [
+   "trios"
+  ],
+  "missingInserts": [
+   "treasure swatches jersey patch"
+  ]
+ },
  "2008-09-upper-deck-masterpieces": {
   "missingPlayers": [
    "howelll"
@@ -12061,16 +12139,10 @@
   ],
   "missingInserts": []
  },
- "2009-10-upper-deck-be-a-player": {
+ "2010-11-sp-authentic": {
   "missingPlayers": [],
   "missingInserts": [
-   "jersey"
-  ]
- },
- "2009-10-upper-deck-black-diamond": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "quad jersey"
+   "holoview fx"
   ]
  },
  "1990-topps-traded-baseball-cards": {
@@ -13775,12 +13847,6 @@
  "2010-11-panini-absolute-memorabilia": {
   "missingPlayers": [
    "casspi"
-  ],
-  "missingInserts": []
- },
- "2010-11-panini-limited": {
-  "missingPlayers": [
-   "uer"
   ],
   "missingInserts": []
  },
