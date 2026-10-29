@@ -2502,154 +2502,6 @@
    "xfractor"
   ]
  },
- "2012-13-pee-chee-hockey-cards": {
-  "missingPlayers": [
-   "abdelkader",
-   "armstrong",
-   "aulie",
-   "avery",
-   "babchuk",
-   "bagnall",
-   "ballard",
-   "barker",
-   "benoit",
-   "bergfors",
-   "bernier",
-   "blake",
-   "blum",
-   "boll",
-   "boucher",
-   "bouillon",
-   "bouma",
-   "brule",
-   "brunette",
-   "burish",
-   "calvert",
-   "campanale",
-   "carkner",
-   "colaiacovo",
-   "colborne",
-   "comrie",
-   "conklin",
-   "cormier",
-   "costa",
-   "courtnall",
-   "dadonov",
-   "demers",
-   "dibenedetto",
-   "dipietro",
-   "doornbosch",
-   "drury",
-   "eaves",
-   "ennis",
-   "fistric",
-   "ford",
-   "foster",
-   "frattin",
-   "gaunce",
-   "gaustad",
-   "gomez",
-   "gustafsson",
-   "halpern",
-   "hamrlik",
-   "hartikainen",
-   "hecht",
-   "hunter",
-   "huselius",
-   "iafrate",
-   "jessiman",
-   "joensuu",
-   "kadri",
-   "katic",
-   "klingberg",
-   "knuble",
-   "koskinen",
-   "kovalev",
-   "kubalik",
-   "kubina",
-   "larionov",
-   "larmer",
-   "leach",
-   "lebda",
-   "lehner",
-   "levasseur",
-   "lindback",
-   "macleish",
-   "madden",
-   "mair",
-   "mara",
-   "markstrom",
-   "martinek",
-   "martinez",
-   "mayers",
-   "mcclement",
-   "mccormick",
-   "mcdonald",
-   "mcmillan",
-   "mcquaid",
-   "miettinen",
-   "moss",
-   "nemisz",
-   "nicholls",
-   "niittymaki",
-   "nodl",
-   "omark",
-   "paajarvi",
-   "pahlsson",
-   "paille",
-   "palushaj",
-   "pelley",
-   "perreault",
-   "pielmeier",
-   "pisani",
-   "porter",
-   "postma",
-   "poti",
-   "pronger",
-   "rafalski",
-   "raycroft",
-   "reasoner",
-   "reddox",
-   "regin",
-   "repik",
-   "rozsival",
-   "saguin",
-   "samsonov",
-   "sarich",
-   "sauer",
-   "sceviour",
-   "scrivens",
-   "shannon",
-   "sims",
-   "skille",
-   "stalock",
-   "steckel",
-   "stillman",
-   "strait",
-   "tangradi",
-   "tanti",
-   "taylor",
-   "timmins",
-   "tyrell",
-   "vandevelde",
-   "vincour",
-   "vitale",
-   "weaver",
-   "wick",
-   "wiercioch",
-   "wishart",
-   "wolski",
-   "yip",
-   "zajac",
-   "zanon",
-   "zubarev",
-   "zuccarello"
-  ],
-  "missingInserts": [
-   "playoff beard",
-   "shooting stars"
-  ]
- },
  "2016-topps-heritage-baseball-cards": {
   "missingPlayers": [
    "bashers",
@@ -9760,13 +9612,6 @@
    "7 photo"
   ]
  },
- "2011-12-panini-pinnacle": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "draft jersey",
-   "patch"
-  ]
- },
  "2015-bowman-draft-baseball-cards": {
   "missingPlayers": [
    "anderson",
@@ -12144,6 +11989,16 @@
   ],
   "missingInserts": []
  },
+ "2011-upper-deck-nhl-winter-classic": {
+  "missingPlayers": [
+   "erskine",
+   "fehr",
+   "letang",
+   "rupp",
+   "talbot"
+  ],
+  "missingInserts": []
+ },
  "2018-panini-prizm-world-cup-soccer-cards": {
   "missingPlayers": [
    "falcao",
@@ -12154,10 +12009,10 @@
   ],
   "missingInserts": []
  },
- "2011-12-panini-certified": {
+ "2012-13-in-the-game-between-the-pipes": {
   "missingPlayers": [],
   "missingInserts": [
-   "potential material"
+   "authentic goaliegraph"
   ]
  },
  "1990-topps-traded-baseball-cards": {
@@ -15287,12 +15142,6 @@
  "2013-14-panini-playbook-hockey-cards": {
   "missingPlayers": [
    "johansen"
-  ],
-  "missingInserts": []
- },
- "2012-13-panini-classic-signatures-hockey-cards": {
-  "missingPlayers": [
-   "fleury"
   ],
   "missingInserts": []
  },
