@@ -22,8 +22,8 @@
   },
   "Hockey": {
    "file": "index/hockey.json",
-   "sets": 5233,
-   "cards": 793802
+   "sets": 5380,
+   "cards": 827546
   },
   "Racing": {
    "file": "index/racing.json",
@@ -76,11 +76,11 @@
    "cards": 298210
   }
  },
- "sets": 29266,
- "cards": 7154877,
- "updated": "2026-10-29T02:37:09.540Z",
+ "sets": 29413,
+ "cards": 7188621,
+ "updated": "2026-10-29T03:10:30.746Z",
  "visible": {
   "file": "index/visible.json",
-  "sets": 17400
+  "sets": 17595
  }
 }
