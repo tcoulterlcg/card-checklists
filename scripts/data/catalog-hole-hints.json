@@ -7581,6 +7581,16 @@
    "madden"
   ]
  },
+ "2009-10-ultra": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "fleer",
+   "fleer crowning achievements",
+   "fleer go to players",
+   "fleer scoring kings",
+   "fleer uniformity"
+  ]
+ },
  "2019-panini-diamond-kings-baseball-cards": {
   "missingPlayers": [
    "bauer",
@@ -7750,6 +7760,30 @@
   ],
   "missingInserts": [
    "1964 bazooka inserts"
+  ]
+ },
+ "2009-10-sp-game-used": {
+  "missingPlayers": [
+   "beasley",
+   "bryant",
+   "durant",
+   "gray",
+   "iverson",
+   "james",
+   "landry",
+   "lebron",
+   "mayo",
+   "mcroberts",
+   "okafor",
+   "oneal",
+   "paul",
+   "pruitt",
+   "rose",
+   "stockton",
+   "westbrook"
+  ],
+  "missingInserts": [
+   "fabric foursome"
   ]
  },
  "1996-97-e-x2000": {
@@ -9858,6 +9892,17 @@
   ],
   "missingInserts": []
  },
+ "2009-10-o-pee-chee": {
+  "missingPlayers": [
+   "blackhawks",
+   "ducks",
+   "hurricanes",
+   "stlouis"
+  ],
+  "missingInserts": [
+   "star team"
+  ]
+ },
  "1986-87-o-pee-chee": {
   "missingPlayers": [
    "action",
@@ -10749,6 +10794,15 @@
   ],
   "missingInserts": [
    "universal distribution promo"
+  ]
+ },
+ "2008-09-upper-deck-black-diamond": {
+  "missingPlayers": [
+   "bdjgm",
+   "demitra"
+  ],
+  "missingInserts": [
+   "premier die cuts"
   ]
  },
  "2002-03-be-a-player-memorabilia": {
@@ -11763,6 +11817,22 @@
    "authentic fabrics"
   ]
  },
+ "2008-09-upper-deck-be-a-player": {
+  "missingPlayers": [
+   "ranger"
+  ],
+  "missingInserts": [
+   "redeemed"
+  ]
+ },
+ "2008-09-upper-deck-masterpieces": {
+  "missingPlayers": [
+   "howelll"
+  ],
+  "missingInserts": [
+   "brushstrok"
+  ]
+ },
  "2006-07-upper-deck-mini-jersey": {
   "missingPlayers": [
    "checklist"
@@ -12029,10 +12099,16 @@
   ],
   "missingInserts": []
  },
- "2008-09-sp-game-used": {
+ "2009-10-sp-authentic": {
   "missingPlayers": [],
   "missingInserts": [
-   "exclusives"
+   "holoview fx"
+  ]
+ },
+ "2008-09-upper-deck-trilogy": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "scripted swatches 3rd star"
   ]
  },
  "1990-topps-traded-baseball-cards": {
@@ -13778,12 +13854,6 @@
   ],
   "missingInserts": []
  },
- "2009-10-sp-game-used": {
-  "missingPlayers": [
-   "lebron"
-  ],
-  "missingInserts": []
- },
  "2009-10-upper-deck-greats-of-the-game": {
   "missingPlayers": [
    "davis"
@@ -15185,6 +15255,18 @@
  "2008-09-o-pee-chee": {
   "missingPlayers": [
    "kings"
+  ],
+  "missingInserts": []
+ },
+ "2008-09-upper-deck-ice": {
+  "missingPlayers": [
+   "chipchura"
+  ],
+  "missingInserts": []
+ },
+ "2008-09-upper-deck-mvp": {
+  "missingPlayers": [
+   "stlouis"
   ],
   "missingInserts": []
  },
