@@ -12,6 +12,7 @@ import {
   listWants, insertWants, collectionStats, unmatchedSummary,
 } from '../lib/collection'
 import { buildSetIndex, matchRows, parseTcdbTitle } from '../lib/match'
+import { readInstagramExport, instagramQuota, shrinkPhoto, identifyPhoto, instagramRows } from '../lib/instagram'
 import { parseCsv, toCsv, IMPORT_FIELDS, guessMapping, money, yesNo, isoDate } from '../lib/csv'
 import { Select } from './dropdown'
 import { useDialogFocus } from './dialog-focus'
@@ -820,6 +821,121 @@ function csvRows(rows, map, fileName) {
   }).filter(r => r.setName || r.setSlug)
 }
 
+// ---- Import from Instagram (data download → AI card check → review) ----
+// Progress is kept in this browser per account, so a big account can be done over several
+// sittings (or months, if it's over the monthly allowance): photos already checked are skipped.
+const IG_DONE_KEY = (uid) => 'cardhq-ig-done-' + uid
+const igLoad = (uid) => { try { return JSON.parse(localStorage.getItem(IG_DONE_KEY(uid)) || '{}') || {} } catch { return {} } }
+const igSave = (uid, m) => { try { localStorage.setItem(IG_DONE_KEY(uid), JSON.stringify(m)) } catch { /* storage full or blocked: progress just isn't remembered */ } }
+
+function InstagramImport({ uid, say, onRows }) {
+  const [shown, setShown] = useState(false)
+  useEffect(() => {
+    fetch('/api/instagram/identify').then(r => r.ok ? r.json() : {}).then(async (c) => { if (c.enabled && (!c.adminOnly || await isAdmin())) setShown(true) }).catch(() => {})
+  }, [])
+  const [phase, setPhase] = useState('idle')   // idle | reading | ready | running | stopped
+  const [exp, setExp] = useState(null)         // { posts, skippedVideos, close }
+  const [archived, setArchived] = useState(true)
+  const [quota, setQuota] = useState(null)
+  const [prog, setProg] = useState({ done: 0, total: 0, cards: 0, failed: 0 })
+  const [stopWhy, setStopWhy] = useState('')
+  const fileRef = useRef(null), stopRef = useRef(false)
+  useEffect(() => () => exp?.close?.(), [exp])
+  const photosOf = (posts) => posts.filter(p => archived || !p.archived).flatMap(p => p.photos.map((ph, k) => ({ post: p, ph, k, uri: ph.uri })))
+  const pick = async (f) => {
+    if (!f) return
+    setPhase('reading')
+    const r = await readInstagramExport(f)
+    if (r.error) { say(r.error, 'error'); setPhase('idle'); return }
+    if (!r.posts.length) { say('No photo posts found in that download.', 'error'); setPhase('idle'); return }
+    setExp(r); setQuota(await instagramQuota()); setPhase('ready')
+  }
+  const all = exp ? photosOf(exp.posts) : []
+  const doneMap = phase === 'idle' ? {} : igLoad(uid)
+  const todo = all.filter(x => !doneMap[x.uri])
+  const finish = (map) => {
+    const done = all.filter(x => map[x.uri]).map(x => ({ ...map[x.uri], postId: x.post.id, photo: x.k, takenAt: x.post.takenAt }))
+    const rows = instagramRows(done)
+    if (!rows.length) { say('No cards were found in those photos.', 'error'); return }
+    onRows(rows, 'Instagram')
+  }
+  const run = async () => {
+    stopRef.current = false; setStopWhy(''); setPhase('running')
+    const map = igLoad(uid)
+    const queue = all.filter(x => !map[x.uri])
+    let done = 0, cards = 0, failed = 0, i = 0, why = ''
+    setProg({ done, total: queue.length, cards, failed })
+    const worker = async () => {
+      while (i < queue.length && !stopRef.current) {
+        const x = queue[i++]
+        let res
+        try {
+          const image = await shrinkPhoto(x.ph.entry)
+          res = await identifyPhoto({ image, caption: x.post.caption, takenAt: x.post.takenAt })
+          if (res.error && res.retry) { await new Promise(r => setTimeout(r, 4000)); res = await identifyPhoto({ image, caption: x.post.caption, takenAt: x.post.takenAt }) }
+        } catch (e) { res = { error: e.message || 'Couldn’t read that photo' } }
+        if (res.error) {
+          failed++
+          if (res.quota || /sign in|switched on/i.test(res.error)) { why = res.error; stopRef.current = true }
+        } else {
+          map[x.uri] = { status: res.status, cards: res.cards, photoUrl: res.photoUrl }
+          cards += (res.cards || []).length
+          igSave(uid, map)
+        }
+        done++
+        setProg({ done, total: queue.length, cards, failed })
+      }
+    }
+    await Promise.all([worker(), worker(), worker()])
+    instagramQuota().then(setQuota)
+    if (stopRef.current) { setStopWhy(why || 'Paused.'); setPhase('stopped'); return }
+    setPhase('ready')
+    if (failed) say(plural(failed, 'photo') + ' couldn’t be checked — press Continue to try them again.', 'error')
+    else finish(map)
+  }
+  const doneCount = all.length - todo.length
+  if (!shown) return null
+  return (
+    <div style={{ ...card, padding: '18px 20px' }}>
+      <h3 style={{ ...title(18), margin: 0, color: '#fff' }}>Import from Instagram</h3>
+      <p style={{ color: '#A1A1AA', fontSize: 14, lineHeight: 1.6, margin: '8px 0 12px' }}>Post your cards on Instagram? Card HQ reads your posts, works out which card is in each photo, and adds them to your collection with your photos attached. You check everything before it’s saved.</p>
+      {phase === 'idle' || phase === 'reading' ? (<>
+        <ol style={{ color: '#D4D4D8', fontSize: 14, lineHeight: 1.7, margin: '0 0 12px', paddingLeft: 20 }}>
+          <li>In Instagram open <a href="https://accountscenter.instagram.com/info_and_permissions/dyi/" target="_blank" rel="noreferrer" style={{ color: ACCENT_TEXT }}>Download your information</a> (Accounts Center → Your information and permissions).</li>
+          <li>Choose <b>Download to device</b>, your Instagram account, <b>Some of your information → Content</b> (or all of it), <b>Format: JSON</b>, <b>Media quality: High</b>.</li>
+          <li>Instagram emails you when it’s ready (usually minutes, sometimes a few hours). Download the .zip — don’t unzip it — and choose it here.</li>
+        </ol>
+        <button style={btnGhost} disabled={phase === 'reading'} onClick={() => fileRef.current?.click()}>{phase === 'reading' ? 'Reading your download…' : 'Choose the Instagram .zip'}</button>
+        <p style={{ ...muted, fontSize: 12, margin: '10px 0 0' }}>The zip stays on your computer; only your post photos are sent, one at a time, to be read. Run it again after new posts — cards already imported aren’t doubled.</p>
+        <input ref={fileRef} type="file" accept=".zip,application/zip" style={{ display: 'none' }} onChange={(e) => { const f = e.target.files?.[0]; e.target.value = ''; pick(f) }} />
+      </>) : (<>
+        <div style={{ display: 'grid', gap: 12, gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', margin: '4px 0 14px' }}>
+          <Tile label="Posts" value={exp.posts.filter(p => archived || !p.archived).length.toLocaleString()} sub={exp.skippedVideos ? plural(exp.skippedVideos, 'video') + ' skipped' : 'photo posts'} />
+          <Tile label="Photos" value={all.length.toLocaleString()} sub={doneCount ? doneCount.toLocaleString() + ' already checked' : 'to check'} />
+          {quota && <Tile label="Checks left" value={quota.unlimited ? '∞' : quota.left.toLocaleString()} sub={quota.unlimited ? 'admin' : 'this month, of ' + quota.limit} />}
+          {phase !== 'ready' && <Tile label="Cards found" value={prog.cards.toLocaleString()} sub={prog.failed ? plural(prog.failed, 'photo') + ' failed' : 'so far'} />}
+        </div>
+        {exp.posts.some(p => p.archived) && phase === 'ready' && <Toggle checked={archived} onChange={setArchived} hint="Posts you archived on Instagram are in the download too.">Include archived posts</Toggle>}
+        {phase === 'running' && (<div style={{ maxWidth: 480, margin: '10px 0' }}>
+          <p role="status" style={{ ...muted, margin: '0 0 6px' }}>Checking photo {Math.min(prog.done + 1, prog.total).toLocaleString()} of {prog.total.toLocaleString()} — you can leave this tab open and come back.</p>
+          <Progress have={prog.done} total={prog.total} />
+        </div>)}
+        {phase === 'stopped' && <p style={{ ...muted, color: '#facc15', margin: '8px 0' }}>{stopWhy}</p>}
+        <div style={{ display: 'flex', gap: 10, marginTop: 14, flexWrap: 'wrap' }}>
+          {phase === 'running'
+            ? <button style={btnGhost} onClick={() => { stopRef.current = true }}>Pause</button>
+            : <>
+                {todo.length > 0 && <button style={btnAccent} disabled={!!quota && !quota.unlimited && quota.left <= 0} onClick={run}>{doneCount ? 'Continue — ' + plural(todo.length, 'photo') + ' left' : 'Find my cards (' + plural(todo.length, 'photo') + ')'}</button>}
+                {doneCount > 0 && <button style={todo.length ? btnGhost : btnAccent} onClick={() => finish(igLoad(uid))}>Review {plural(doneCount, 'checked photo')}</button>}
+                <button style={btnGhost} onClick={() => { exp?.close?.(); setExp(null); setPhase('idle') }}>Cancel</button>
+              </>}
+        </div>
+        {quota && !quota.unlimited && todo.length > quota.left && phase !== 'running' && <p style={{ ...muted, fontSize: 12, margin: '10px 0 0' }}>That’s more photos than this month’s checks. Card HQ does {quota.left.toLocaleString()} now and remembers where it stopped — review those, then continue next month.</p>}
+      </>)}
+    </div>
+  )
+}
+
 function ImportTab({ store, uid, indexSets, say, onWantsChanged, goTab }) {
   const [incoming, setIncoming] = useState(null)   // { src, rows, label }
   const [tcdbCode, setTcdbCode] = useState('')
@@ -869,6 +985,8 @@ function ImportTab({ store, uid, indexSets, say, onWantsChanged, goTab }) {
           try { const p = JSON.parse(await f.text()); if (!validTcdbPayload(p)) throw new Error(); takeTcdb(p) } catch { say('That file isn’t a Card HQ import file from the TCDB bookmark.', 'error') }
         }} />
       </div>
+
+      <InstagramImport uid={uid} say={say} onRows={(rows, lbl) => setIncoming({ src: 'instagram', rows, label: lbl })} />
 
       <div style={{ ...card, padding: '18px 20px' }}>
         <h3 style={{ ...title(18), margin: 0, color: '#fff' }}>Import a spreadsheet (CSV)</h3>
@@ -933,6 +1051,7 @@ function ImportReview({ incoming, store, uid, indexSets, say, onDone, onCancel, 
   const [keepUnmatched, setKeepUnmatched] = useState(true)
   const [busy, setBusy] = useState('')
   const [showAll, setShowAll] = useState(false)
+  const [skipSold, setSkipSold] = useState(true)   // Instagram: cards the caption says are sold / traded / not theirs
   useEffect(() => {
     let live = true
     const index = buildSetIndex(indexSets || [])
@@ -947,7 +1066,9 @@ function ImportReview({ incoming, store, uid, indexSets, say, onDone, onCancel, 
       <div style={{ maxWidth: 480 }}><Progress have={prog[0]} total={prog[1]} /></div>
     </div>
   )
-  const rows = incoming.rows.map((r, i) => ({ r, m: res[i], i }))
+  // a card the photo reader wasn't sure about is never auto-matched: it goes to "Check these"
+  const rows = incoming.rows.map((r, i) => ({ r, m: r.unsure && res[i].conf === 'exact' ? { ...res[i], conf: 'likely' } : res[i], i }))
+  const soldN = rows.filter(x => x.r.sold).length
   const exact = rows.filter(x => x.m.conf === 'exact'), likely = rows.filter(x => x.m.conf === 'likely'), none = rows.filter(x => x.m.conf === 'none')
   const haves = rows.filter(x => x.r.kind !== 'want'), wantsN = rows.length - haves.length
   const doImport = async () => {
@@ -978,6 +1099,7 @@ function ImportReview({ incoming, store, uid, indexSets, say, onDone, onCancel, 
         const m = skip.has(i) ? { conf: 'none' } : m0   // an unticked "check these" row is kept as not matched yet
         const matched = m.conf !== 'none'
         if (!matched && !keepUnmatched) continue
+        if (r.sold && skipSold) continue
         const where = matched
           ? { set_slug: m.slug, set_name: m.setName, section: m.section, card_n: collectionCardN({ n: m.card_n, p: m.player }), player: m.player }
           : { set_slug: UNMATCHED, set_name: (r.setName || '').slice(0, 300), section: (r.section || '').slice(0, 300) || null, card_n: (r.cardN || ('—' + (r.player || ''))).slice(0, 200), player: (r.player || '').slice(0, 300) }
@@ -991,6 +1113,7 @@ function ImportReview({ incoming, store, uid, indexSets, say, onDone, onCancel, 
           condition: r.condition || null, grader: r.grader || null, grade: r.grade || null, cert_no: r.cert_no || null, serial_no: r.serial_no || null,
           autographed: !!r.autographed, notes: r.notes || null, tags: r.tags || [], acquired_on: r.acquired_on || null,
           source: r.source, source_item_id: r.source_item_id, tcdb_sid: r.tcdb_sid || null, tcdb_cid: r.tcdb_cid || null,
+          image_url: r.image_url || null,
         }
         const prev = r.source && r.source_item_id && existing.get(r.source + ':' + r.source_item_id)
         if (prev) {
@@ -1006,7 +1129,7 @@ function ImportReview({ incoming, store, uid, indexSets, say, onDone, onCancel, 
             status: r.status && r.status !== 'have' ? row.status : prev.status === 'have' ? row.status : prev.status,
             condition: keep('condition'), grader: keep('grader'), grade: keep('grade'), serial_no: keep('serial_no'), notes: keep('notes'), tags: keep('tags'),
             price_paid: keep('price_paid'), acquired_on: keep('acquired_on'), cert_no: keep('cert_no'),
-            value: prev.value, value_at: prev.value_at, image_url: prev.image_url,
+            value: prev.value, value_at: prev.value_at, image_url: prev.image_url || row.image_url,
           })
         } else toInsert.push(row)
       }
@@ -1035,6 +1158,11 @@ function ImportReview({ incoming, store, uid, indexSets, say, onDone, onCancel, 
           {incoming.src !== 'rematch' && <Tile label="Includes" value={plural(haves.length, 'card')} sub={wantsN ? plural(wantsN, 'wantlist card') : 'no wantlist cards'} />}
         </div>
         {incoming.src === 'tcdb' && !incoming.full && <p style={{ ...muted, margin: '0 0 10px' }}>Quick import: condition, grading, serial # and notes weren’t read. Run the bookmark’s Full import later to add them — your cards are updated, not doubled.</p>}
+        {soldN > 0 && (
+          <Toggle checked={skipSold} onChange={setSkipSold} hint="Read from your captions (“sold”, “traded”, a card that isn’t yours). Turn this off to import them too.">
+            Skip {plural(soldN, 'card')} your posts say are sold, traded or not yours
+          </Toggle>
+        )}
         {incoming.src !== 'rematch' && none.length > 0 && (
           <Toggle checked={keepUnmatched} onChange={setKeepUnmatched} hint="Saved with the description from your file, marked “not matched yet”, and matched automatically when you re-match after those sets are added. Nothing you had is left behind.">
             Keep the {plural(none.length, 'card')} Card HQ doesn’t have yet
@@ -1053,7 +1181,7 @@ function ImportReview({ incoming, store, uid, indexSets, say, onDone, onCancel, 
             {review.map(({ r, m, i }) => (
               <label key={i} style={{ display: 'grid', gridTemplateColumns: '22px minmax(0,1fr)', gap: 8, fontSize: 13, alignItems: 'start', cursor: 'pointer' }}>
                 <input type="checkbox" checked={!skip.has(i)} onChange={(e) => setSkip(s => { const n = new Set(s); e.target.checked ? n.delete(i) : n.add(i); return n })} style={{ accentColor: ACCENT, marginTop: 2 }} />
-                <span><span style={{ color: '#A1A1AA' }}>{r.label}</span><br /><span style={{ color: '#EDEDEF' }}>→ {m.setName}{m.section && !/^base( set)?$/i.test(m.section) ? ' · ' + m.section : ''} · {m.card_n ? '#' + m.card_n + ' ' : ''}{m.player}</span></span>
+                <span style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>{r.image_url && <a href={r.image_url} target="_blank" rel="noreferrer" onClick={(e) => e.stopPropagation()}><img src={r.image_url} alt="" loading="lazy" style={{ width: 52, height: 52, objectFit: 'cover', borderRadius: 6, border: '1px solid #232A3E', flex: 'none' }} /></a>}<span><span style={{ color: '#A1A1AA' }}>{r.label}{r.unsure ? ' (photo unclear)' : ''}</span><br /><span style={{ color: '#EDEDEF' }}>→ {m.setName}{m.section && !/^base( set)?$/i.test(m.section) ? ' · ' + m.section : ''} · {m.card_n ? '#' + m.card_n + ' ' : ''}{m.player}</span></span></span>
               </label>
             ))}
             {likely.length > 60 && !showAll && <button style={btnSmall} onClick={() => setShowAll(true)}>Show all {likely.length}</button>}
@@ -1064,7 +1192,7 @@ function ImportReview({ incoming, store, uid, indexSets, say, onDone, onCancel, 
         <details style={{ ...card, padding: '14px 18px' }}>
           <summary style={{ cursor: 'pointer', color: '#EDEDEF', fontWeight: 600, fontSize: 14 }}>Not on Card HQ yet ({none.length})</summary>
           <div style={{ display: 'grid', gap: 3, marginTop: 10, maxHeight: 360, overflowY: 'auto' }}>
-            {none.slice(0, 500).map(({ r, i }) => <p key={i} style={{ margin: 0, fontSize: 13, color: '#A1A1AA' }}>{r.label}</p>)}
+            {none.slice(0, 500).map(({ r, i }) => <p key={i} style={{ margin: 0, fontSize: 13, color: '#A1A1AA', display: 'flex', gap: 8, alignItems: 'center' }}>{r.image_url && <a href={r.image_url} target="_blank" rel="noreferrer"><img src={r.image_url} alt="" loading="lazy" style={{ width: 36, height: 36, objectFit: 'cover', borderRadius: 4, border: '1px solid #232A3E' }} /></a>}{r.label}{r.sold ? ' · sold/traded per caption' : ''}</p>)}
             {none.length > 500 && <p style={muted}>…and {none.length - 500} more</p>}
           </div>
         </details>
