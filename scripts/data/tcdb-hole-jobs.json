@@ -1,5 +1,149 @@
 [
  {
+  "slug": "1962-topps-football-cards",
+  "name": "1962 Topps Football",
+  "year": 1962,
+  "sport": "Football",
+  "cards": 48,
+  "source": "cardboardconnection.com",
+  "why": [
+   "base checklist missing: only 48 insert/variation cards, base set is about 176 cards"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "1964-topps-baseball-cards",
+  "name": "1964 Topps Baseball",
+  "year": 1964,
+  "sport": "Baseball",
+  "cards": 164,
+  "source": "cardboardconnection.com",
+  "why": [
+   "base checklist missing: only 164 insert/variation cards, base set is about 587 cards"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "1965-topps-baseball-cards",
+  "name": "1965 Topps Baseball",
+  "year": 1965,
+  "sport": "Baseball",
+  "cards": 72,
+  "source": "cardboardconnection.com",
+  "why": [
+   "base checklist missing: only 72 insert/variation cards, base set is about 598 cards"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "1966-topps-baseball-cards",
+  "name": "1966 Topps Baseball",
+  "year": 1966,
+  "sport": "Baseball",
+  "cards": 13,
+  "source": "cardboardconnection.com",
+  "why": [
+   "base checklist missing: only 13 insert/variation cards, base set is about 598 cards"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "1967-topps-baseball-cards",
+  "name": "1967 Topps Baseball",
+  "year": 1967,
+  "sport": "Baseball",
+  "cards": 48,
+  "source": "cardboardconnection.com",
+  "why": [
+   "base checklist missing: only 48 insert/variation cards, base set is about 609 cards"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "1968-topps-baseball-cards",
+  "name": "1968 Topps Baseball",
+  "year": 1968,
+  "sport": "Baseball",
+  "cards": 42,
+  "source": "cardboardconnection.com",
+  "why": [
+   "base checklist missing: only 42 insert/variation cards, base set is about 598 cards"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "1970-topps-baseball-cards",
+  "name": "1970 Topps Baseball",
+  "year": 1970,
+  "sport": "Baseball",
+  "cards": 54,
+  "source": "cardboardconnection.com",
+  "why": [
+   "base checklist missing: only 54 insert/variation cards, base set is about 720 cards"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "1971-topps-baseball-cards",
+  "name": "1971 Topps Baseball",
+  "year": 1971,
+  "sport": "Baseball",
+  "cards": 159,
+  "source": "cardboardconnection.com",
+  "why": [
+   "base checklist missing: only 159 insert/variation cards, base set is about 752 cards"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "1973-topps-baseball-cards",
+  "name": "1973 Topps Baseball",
+  "year": 1973,
+  "sport": "Baseball",
+  "cards": 17,
+  "source": "cardboardconnection.com",
+  "why": [
+   "base checklist missing: only 17 insert/variation cards, base set is about 660 cards"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "1977-topps-baseball-cards",
+  "name": "1977 Topps Baseball",
+  "year": 1977,
+  "sport": "Baseball",
+  "cards": 73,
+  "source": "cardboardconnection.com",
+  "why": [
+   "base checklist missing: only 73 insert/variation cards, base set is about 660 cards"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "1982-donruss-baseball-cards",
+  "name": "1982 Donruss Baseball",
+  "year": 1982,
+  "sport": "Baseball",
+  "cards": 14,
+  "source": "cardboardconnection.com",
+  "why": [
+   "base checklist missing: only 14 insert/variation cards, base set is about 660 cards"
+  ],
+  "status": "todo"
+ },
+ {
+  "slug": "2015-16-upper-deck-series-hockey-cards",
+  "name": "2015-16 Upper Deck Hockey",
+  "year": 2016,
+  "sport": "Hockey",
+  "cards": 665,
+  "source": "cardboardconnection.com",
+  "why": [
+   "only Series 2 is on the site (base 251-500); Series 1 missing — replace with TCDB 2015-16 Upper Deck (both series)"
+  ],
+  "status": "todo"
+ },
+ {
   "slug": "25-26-topps-winners-collection-arsenal-soccer-card",
   "name": "2025-26 Topps Winners Collection Arsenal Soccer",
   "year": 2026,
