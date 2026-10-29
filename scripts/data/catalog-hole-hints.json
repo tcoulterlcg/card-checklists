@@ -6534,37 +6534,6 @@
    "tie dye"
   ]
  },
- "2015-chee-hockey-cards": {
-  "missingPlayers": [
-   "athanasiou",
-   "brickley",
-   "condon",
-   "domi",
-   "donskoi",
-   "ehlers",
-   "eichel",
-   "fabbri",
-   "faksa",
-   "forbort",
-   "fucale",
-   "goldobin",
-   "hanifin",
-   "hellebuyck",
-   "janmark",
-   "larkin",
-   "mcdavid",
-   "panarin",
-   "petan",
-   "plotnikov",
-   "rantanen",
-   "ullmark",
-   "virtanen"
-  ],
-  "missingInserts": [
-   "border",
-   "update"
-  ]
- },
  "1988-89-o-pee-chee": {
   "missingPlayers": [
    "action",
@@ -6679,6 +6648,36 @@
    "player credentials entry level access",
    "puzzke back",
    "puzzle piece"
+  ]
+ },
+ "2015-chee-hockey-cards": {
+  "missingPlayers": [
+   "athanasiou",
+   "condon",
+   "domi",
+   "donskoi",
+   "ehlers",
+   "eichel",
+   "fabbri",
+   "faksa",
+   "forbort",
+   "fucale",
+   "goldobin",
+   "hanifin",
+   "hellebuyck",
+   "janmark",
+   "larkin",
+   "mcdavid",
+   "panarin",
+   "petan",
+   "plotnikov",
+   "rantanen",
+   "ullmark",
+   "virtanen"
+  ],
+  "missingInserts": [
+   "border",
+   "update"
   ]
  },
  "2015-topps-ufc-knockout-trading-cards": {
@@ -11986,6 +11985,12 @@
    "sahlawi"
   ],
   "missingInserts": []
+ },
+ "2015-in-the-game-chl-draft": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "leaf"
+  ]
  },
  "1990-topps-traded-baseball-cards": {
   "missingPlayers": [
