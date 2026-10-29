@@ -9760,6 +9760,17 @@
    "cfl"
   ]
  },
+ "2017-upper-deck-nhl-draft": {
+  "missingPlayers": [
+   "doughty",
+   "lundqvist",
+   "mackinnon",
+   "stamkos"
+  ],
+  "missingInserts": [
+   "top pick"
+  ]
+ },
  "2016-17-o-pee-chee-platinum-hockey": {
   "missingPlayers": [
    "box",
@@ -15059,12 +15070,6 @@
  "2016-17-fleer-showcase-hockey-cards": {
   "missingPlayers": [
    "oregan"
-  ],
-  "missingInserts": []
- },
- "2016-17-upper-deck-biography-season-hockey": {
-  "missingPlayers": [
-   "mcdavid"
   ],
   "missingInserts": []
  },
