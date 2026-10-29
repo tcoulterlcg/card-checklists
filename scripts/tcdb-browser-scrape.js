@@ -1,6 +1,6 @@
 // TCDB set scraper — runs INSIDE a tcdb.com tab (Claude in Chrome javascript_tool),
 // because TCDB blocks server-side fetches. Load it once per tab:
-//   eval(await (await fetch("https://raw.githubusercontent.com/tcoulterlcg/card-checklists/main/scripts/tcdb-browser-scrape.js")).text())
+//   eval(await (await fetch("https://raw.githubusercontent.com/trevorcoulter42-creator/card-checklists/main/scripts/tcdb-browser-scrape.js")).text())
 // then:
 //
 //   __tcdb.find("2018 Topps Chrome", "Baseball")   -> Promise<[{sid, path, name}]>  (search)

@@ -174,7 +174,7 @@ const setFiles = []
 const catalogFiles = await fetchCatalogSets()
 async function fetchCatalogSets() {
   if (process.env.SKIP_CATALOG) return []
-  const RAW = 'https://raw.githubusercontent.com/tcoulterlcg/card-checklists/catalog/'
+  const RAW = 'https://raw.githubusercontent.com/trevorcoulter42-creator/card-checklists/catalog/'
   const { HIDDEN_SOURCES, setPath, fixSeasonYear } = await import('../lib/catalog.js')
   const get = async (u) => { try { const r = await fetch(u, { signal: AbortSignal.timeout(15000) }); return r.ok ? await r.json() : null } catch { return null } }
   const m = await get(RAW + 'manifest.json'); if (!m) return []

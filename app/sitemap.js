@@ -5,7 +5,7 @@ import { join } from 'node:path'
 import { HIDDEN_SOURCES } from '../lib/catalog'
 
 const BASE = 'https://cardhq.vercel.app'
-const RAW = 'https://raw.githubusercontent.com/tcoulterlcg/card-checklists/catalog/'
+const RAW = 'https://raw.githubusercontent.com/trevorcoulter42-creator/card-checklists/catalog/'
 const MAX = 50000   // one sitemap file's URL limit; split with generateSitemaps before this is reached
 export const revalidate = 3600
 
