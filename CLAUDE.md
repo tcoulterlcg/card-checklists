@@ -55,12 +55,12 @@
   off by default). Set pages then show "Owned by @username" on cards they've checked off, via `cardhq_set_owners()`
   (`scripts/sql/2026-10-27-show-owned.sql`). It returns username + card only — never price, value, grade, notes or photos — and
   collection rows themselves stay owner-only. Keep it that way.
-- **Import from Instagram** (My Collection → Import): the collector picks Instagram's "Download your information" zip
-  (JSON format); `lib/instagram-export.js` reads it in the browser (posts + archived posts, captions, photos — test with
-  `node scripts/test-instagram.mjs`), `lib/instagram.js` shrinks each photo to ≤1600 px JPEG and posts it to
-  `app/api/instagram/identify`, which checks sign-in, takes one photo from the collector's monthly allowance
-  (`cardhq_ai_claim_photo`, limit in `cardhq_ai_photo_limit()`; admins unlimited), saves the photo to Cloudflare R2 and
-  asks the vision model which cards it shows. Answers are cached in R2 by photo + caption, so retries and re-imports are
-  free. Rows then go through the normal matcher and review screen with the photo as `image_url`; captions saying sold /
-  traded / not mine are skipped by default. The option stays hidden until `ANTHROPIC_API_KEY` and the `R2_*` env vars are
-  set (`INSTAGRAM_IMPORT_ADMIN_ONLY=1` shows it to admins only). Bump `PROMPT_VERSION` in the route when the prompt changes.
+- **Import from Instagram** (My Collection → Import) is free — no AI, no server route: the collector picks Instagram's
+  "Download your information" zip (JSON format); `lib/instagram-export.js` reads it in the browser (posts + archived posts,
+  captions, photos), `lib/instagram-caption.js` reads each caption against Card HQ's own data (player directory + that
+  player's rows in the player index, then the caption's year / product / insert / serial words pick the card; a surname
+  alone only counts inside a set the caption names), and `lib/instagram.js` shrinks the photos of posts that name a card to
+  ≤1280 px JPEG and uploads them to the collector's own folder in the Supabase `cardhq-images` bucket
+  (`<uid>/ig-<hash>.jpg`, so a photo is stored once). Every caption-placed card lands in "Check these", never auto-matched;
+  captions saying sold / traded / not mine are skipped by default. Test with `node scripts/test-instagram.mjs ["caption" …]`
+  (the caption part needs the player index built).
