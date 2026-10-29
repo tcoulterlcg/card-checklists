@@ -7634,16 +7634,6 @@
    "madden"
   ]
  },
- "2010-11-panini-certified": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "junior legacy combo",
-   "material",
-   "material prime",
-   "prime material",
-   "shirt off my back combo"
-  ]
- },
  "2019-panini-diamond-kings-baseball-cards": {
   "missingPlayers": [
    "bauer",
@@ -8125,6 +8115,28 @@
    "spiral"
   ]
  },
+ "2011-12-o-pee-chee": {
+  "missingPlayers": [
+   "couturier",
+   "eakin",
+   "gudbranson",
+   "jagr",
+   "johansen",
+   "kassian",
+   "landeskog",
+   "larsson",
+   "leblanc",
+   "nugenthopkins",
+   "read",
+   "rundblad",
+   "scheifele",
+   "smith",
+   "zibanejad"
+  ],
+  "missingInserts": [
+   "2011 update"
+  ]
+ },
  "1996-97-score": {
   "missingPlayers": [
    "briere",
@@ -8227,6 +8239,27 @@
   ],
   "missingInserts": [
    "stadium scenes"
+  ]
+ },
+ "2011-12-panini-limited": {
+  "missingPlayers": [
+   "abdurrahim",
+   "bryant",
+   "duncan",
+   "garnett",
+   "iverson",
+   "martin",
+   "mcgrady",
+   "miles",
+   "nowitzki",
+   "oneal",
+   "redd",
+   "richardson",
+   "season",
+   "stoudamire"
+  ],
+  "missingInserts": [
+   "masterful marks"
   ]
  },
  "2002-03-ud-authentics": {
@@ -9727,11 +9760,11 @@
    "7 photo"
   ]
  },
- "2010-11-spx": {
+ "2011-12-panini-pinnacle": {
   "missingPlayers": [],
   "missingInserts": [
-   "flashback fabrics",
-   "winning combos materials"
+   "draft jersey",
+   "patch"
   ]
  },
  "2015-bowman-draft-baseball-cards": {
@@ -11857,14 +11890,6 @@
    "authentic fabrics"
   ]
  },
- "2010-11-upper-deck-artifacts": {
-  "missingPlayers": [
-   "trios"
-  ],
-  "missingInserts": [
-   "treasure swatches jersey patch"
-  ]
- },
  "2008-09-upper-deck-masterpieces": {
   "missingPlayers": [
    "howelll"
@@ -12119,16 +12144,6 @@
   ],
   "missingInserts": []
  },
- "2011-12-upper-deck-artifacts-hockey-2": {
-  "missingPlayers": [
-   "box",
-   "nugenthopki",
-   "pack",
-   "smithpel",
-   "voyno"
-  ],
-  "missingInserts": []
- },
  "2018-panini-prizm-world-cup-soccer-cards": {
   "missingPlayers": [
    "falcao",
@@ -12139,10 +12154,10 @@
   ],
   "missingInserts": []
  },
- "2010-11-sp-authentic": {
+ "2011-12-panini-certified": {
   "missingPlayers": [],
   "missingInserts": [
-   "holoview fx"
+   "potential material"
   ]
  },
  "1990-topps-traded-baseball-cards": {
@@ -12196,15 +12211,6 @@
    "proof",
    "scherzer",
    "timberwolves"
-  ],
-  "missingInserts": []
- },
- "2011-12-panini-limited": {
-  "missingPlayers": [
-   "abdurrahim",
-   "miles",
-   "redd",
-   "stoudamire"
   ],
   "missingInserts": []
  },
@@ -15293,6 +15299,12 @@
  "2012-13-upper-deck-artifacts-hockey": {
   "missingPlayers": [
    "cizikas"
+  ],
+  "missingInserts": []
+ },
+ "2010-11-upper-deck-artifacts": {
+  "missingPlayers": [
+   "trios"
   ],
   "missingInserts": []
  },
