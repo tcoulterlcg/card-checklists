@@ -7581,16 +7581,6 @@
    "madden"
   ]
  },
- "2009-10-ultra": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "fleer",
-   "fleer crowning achievements",
-   "fleer go to players",
-   "fleer scoring kings",
-   "fleer uniformity"
-  ]
- },
  "2019-panini-diamond-kings-baseball-cards": {
   "missingPlayers": [
    "bauer",
@@ -9892,17 +9882,6 @@
   ],
   "missingInserts": []
  },
- "2009-10-o-pee-chee": {
-  "missingPlayers": [
-   "blackhawks",
-   "ducks",
-   "hurricanes",
-   "stlouis"
-  ],
-  "missingInserts": [
-   "star team"
-  ]
- },
  "1986-87-o-pee-chee": {
   "missingPlayers": [
    "action",
@@ -10794,15 +10773,6 @@
   ],
   "missingInserts": [
    "universal distribution promo"
-  ]
- },
- "2008-09-upper-deck-black-diamond": {
-  "missingPlayers": [
-   "bdjgm",
-   "demitra"
-  ],
-  "missingInserts": [
-   "premier die cuts"
   ]
  },
  "2002-03-be-a-player-memorabilia": {
@@ -11817,14 +11787,6 @@
    "authentic fabrics"
   ]
  },
- "2008-09-upper-deck-be-a-player": {
-  "missingPlayers": [
-   "ranger"
-  ],
-  "missingInserts": [
-   "redeemed"
-  ]
- },
  "2008-09-upper-deck-masterpieces": {
   "missingPlayers": [
    "howelll"
@@ -12099,16 +12061,16 @@
   ],
   "missingInserts": []
  },
- "2009-10-sp-authentic": {
+ "2009-10-upper-deck-be-a-player": {
   "missingPlayers": [],
   "missingInserts": [
-   "holoview fx"
+   "jersey"
   ]
  },
- "2008-09-upper-deck-trilogy": {
+ "2009-10-upper-deck-black-diamond": {
   "missingPlayers": [],
   "missingInserts": [
-   "scripted swatches 3rd star"
+   "quad jersey"
   ]
  },
  "1990-topps-traded-baseball-cards": {
@@ -12279,6 +12241,15 @@
    "reilly",
    "rookies",
    "soshnikov"
+  ],
+  "missingInserts": []
+ },
+ "2009-10-o-pee-chee": {
+  "missingPlayers": [
+   "blackhawks",
+   "ducks",
+   "hurricanes",
+   "stlouis"
   ],
   "missingInserts": []
  },
@@ -13296,6 +13267,13 @@
   "missingPlayers": [
    "box",
    "hopkins"
+  ],
+  "missingInserts": []
+ },
+ "2008-09-upper-deck-black-diamond": {
+  "missingPlayers": [
+   "bdjgm",
+   "demitra"
   ],
   "missingInserts": []
  },
@@ -15252,9 +15230,21 @@
   ],
   "missingInserts": []
  },
+ "2009-10-upper-deck-artifacts": {
+  "missingPlayers": [
+   "bieska"
+  ],
+  "missingInserts": []
+ },
  "2008-09-o-pee-chee": {
   "missingPlayers": [
    "kings"
+  ],
+  "missingInserts": []
+ },
+ "2008-09-upper-deck-be-a-player": {
+  "missingPlayers": [
+   "ranger"
   ],
   "missingInserts": []
  },
