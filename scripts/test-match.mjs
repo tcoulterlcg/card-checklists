@@ -58,6 +58,12 @@ const sib = buildSetIndex([{ slug: 'bw', name: '2019 Bowman Baseball', year: 201
 assert.ok(!(findSets(sib, { setName: '2019 Bowman Chrome', sport: 'Baseball' })[0]?.score >= 0.45))
 assert.ok(!(findSets(sib, { setName: '2019 Topps Chrome', sport: 'Baseball' })[0]?.score >= 0.45))
 
+// unnumbered checklists (Break Ninja): a numbered TCDB card matches by name when the name is printed once
+const bn = { slug: 'bn', name: 'x', sections: [{ title: 'Arctic Freeze Parallel', cards: [{ n: '', p: 'Patrick Kane' }, { n: '', p: 'Evander Kane' }] }, { title: 'Base Set', cards: [{ n: '', p: 'Sam Smith' }, { n: '', p: 'Sam Smith' }] }] }
+assert.equal(findCard(bn, { section: 'Arctic Freeze', cardN: '40', player: 'Patrick Kane' }).conf, 'exact')
+assert.equal(findCard(bn, { cardN: '5', player: 'Sam Smith' }), null)
+assert.equal(findCard(pz, { section: 'Prizm', cardN: '10', player: 'Patrick Kane' }), null)   // numbered section: number still has to agree
+
 // CSV
 const csv = toCsv(['Set', 'Card #', 'Notes'], [{ Set: 'A, "B"', 'Card #': '=1+1', Notes: 'line1\nline2' }])
 const back = parseCsv(csv)
