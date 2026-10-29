@@ -1,4 +1,5 @@
-// Tests lib/instagram-export.js on a made-up Instagram download: node scripts/test-instagram.mjs
+// Tests lib/instagram-export.js on a made-up Instagram download and lib/instagram-caption.js on
+// sample captions: node scripts/test-instagram.mjs ["a caption" …]
 import { ZipWriter, BlobWriter, TextReader, Uint8ArrayReader, configure } from '@zip.js/zip.js'
 configure({ useWebWorkers: false })
 const { readInstagramExport, instagramRows, fixText } = await import('../lib/instagram-export.js')
@@ -26,7 +27,50 @@ const p2 = await readInstagramExport(await (async () => { const z = new ZipWrite
 console.log('photos-only part:', p2.error)
 if (!ok) process.exitCode = 1
 console.log(JSON.stringify(r.posts.map(p => ({ id: p.id, cap: p.caption, at: p.takenAt, arch: p.archived, photos: p.photos.map(x => x.uri) })), null, 1), 'videos', r.skippedVideos)
-const rows = instagramRows([{ postId: 'aaa', photo: 0, takenAt: '2024-01-01', status: 'owned', photoUrl: 'https://x/p.jpg', cards: [{ year: '2018-19', set: 'Upper Deck The Cup', insert_or_parallel: 'Rookie Auto Patch', card_number: '#105', player: 'Andrei Vasilevskiy', serial_number: '23/99', grader: 'psa', grade: '10', confidence: 'high' }, { set: '', player: '', confidence: 'low' }] }, { postId: 'ddd', photo: 0, status: 'sold_or_traded', cards: [{ set: 'Panini Prizm', player: 'X', confidence: 'medium' }] }])
-console.log(rows)
+const rows = instagramRows([
+  { postId: 'aaa', takenAt: '2024-01-01', caption: 'Vasy shield', status: 'owned', photoUrls: ['https://x/p.jpg'], cards: [{ setSlug: 'x', setName: '2018-19 Upper Deck The Cup', section: 'Rookie Auto Patch', cardN: '105', player: 'Andrei Vasilevskiy', serial_number: '23/99', grader: 'PSA', grade: '10' }] },
+  { postId: 'ddd', status: 'sold_or_traded', photoUrls: ['https://x/1.jpg', 'https://x/2.jpg'], cards: [{ setName: '2019 Panini Prizm', player: 'A' }, { setName: '2019 Panini Prizm', player: 'B' }] },
+  { postId: 'eee', caption: 'beach day', status: 'owned', photoUrls: ['https://x/3.jpg'], cards: [], keepEmpty: true },
+  { postId: 'fff', caption: 'lunch', status: 'owned', photoUrls: [], cards: [] },
+])
+const rowsOk = rows.length === 4 && rows[2].image_url === 'https://x/2.jpg' && rows[1].sold && rows[3].label.includes('beach') && rows.every(r => r.unsure)
+console.log('rows:', rowsOk ? 'OK' : 'FAIL', rows.map(r => r.label + ' → ' + r.image_url))
+if (!rowsOk) process.exitCode = 1
+
+// caption reader on Card HQ's real data (needs the player index: npm run prebuild, or build-player-index.mjs)
+const { captionFacts, captionReader } = await import('../lib/instagram-caption.js')
+const facts = [
+  ['2015-16 The Cup Connor McDavid RPA 23/99 PSA 10 #oilers', { status: 'owned', serial_number: '23/99', grader: 'PSA', grade: '10', autographed: true }],
+  ['SOLD! thanks @buyer', { status: 'sold_or_traded' }],
+  ['FS $250 shipped, DM offers', { status: 'for_sale' }],
+  ['Trade bait 🔥 /25', { status: 'for_trade', serial_number: '/25' }],
+  ['love these trading cards', { status: 'owned' }],
+]
+for (const [c, want] of facts) {
+  const f = captionFacts(fixText(c))
+  const bad = Object.entries(want).filter(([k, v]) => f[k] !== v)
+  console.log('facts:', bad.length ? 'FAIL' : 'OK', JSON.stringify(c), bad.length ? bad.map(([k, v]) => k + '=' + f[k] + ' (want ' + v + ')') : '')
+  if (bad.length) process.exitCode = 1
+}
+const { readFileSync, existsSync } = await import('node:fs')
+const pdir = new URL('../public/data/players/', import.meta.url)
+if (!existsSync(new URL('dir.json', pdir))) console.log('caption reader: skipped (no player index built)')
+else {
+  const dir = JSON.parse(readFileSync(new URL('dir.json', pdir)))
+  const index = JSON.parse(readFileSync(new URL('../public/data/index.json', import.meta.url)))
+  const sets = index.sets || index
+  const loadShard = async (n) => JSON.parse(readFileSync(new URL(n + '.json', pdir)))
+  const loadSet = async (slug) => { const u = new URL('../public/data/' + slug + '.json', import.meta.url); return existsSync(u) ? JSON.parse(readFileSync(u)) : null }
+  const reader = captionReader({ dir, loadShard, sets, loadSet })
+  const caps = process.argv.slice(2).length ? process.argv.slice(2) : [
+    '2015-16 Upper Deck The Cup Connor McDavid Rookie Auto Patch /99 🔥 #oilers #thecup',
+    'Young Guns Auston Matthews 2016-17 Upper Deck',
+    'Pulled this 2018 Topps Chrome Shohei Ohtani rookie!',
+    'Sunday vibes #hockeycards #connormcdavid #sidneycrosby #alexovechkin #nathanmackinnon #caleMakar',
+    'Beautiful day at the lake',
+  ]
+  for (const c of caps) console.log(JSON.stringify(c), '→', JSON.stringify(await reader.read(c)))
+}
+
 const bad = await readInstagramExport(new Blob(['not a zip']))
 console.log(bad.error, fixText('plain'))
