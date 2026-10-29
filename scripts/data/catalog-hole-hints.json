@@ -2835,112 +2835,6 @@
    "twitter"
   ]
  },
- "2007-08-in-the-game-heroes-and-prospects": {
-  "missingPlayers": [
-   "admirals",
-   "aeros",
-   "ahl",
-   "americans",
-   "attack",
-   "battalion",
-   "bears",
-   "blades",
-   "blazers",
-   "broncos",
-   "bruins",
-   "bulldogs",
-   "bulls",
-   "cataractes",
-   "chiefs",
-   "chl",
-   "colts",
-   "cougars",
-   "crunch",
-   "devils",
-   "dogs",
-   "drakkar",
-   "eagles",
-   "falcons",
-   "flames",
-   "foreurs",
-   "frontenacs",
-   "generals",
-   "giants",
-   "greyhounds",
-   "griffins",
-   "hitmen",
-   "hurricanes",
-   "huskies",
-   "ice",
-   "icedogs",
-   "icehogs",
-   "kings",
-   "knights",
-   "lhjmq",
-   "maineiacs",
-   "majors",
-   "marlies",
-   "monarchs",
-   "monsters",
-   "moose",
-   "mooseheads",
-   "oceanic",
-   "ohl",
-   "olympiques",
-   "otters",
-   "pack",
-   "pats",
-   "penguins",
-   "petes",
-   "phantoms",
-   "phpa",
-   "pirates",
-   "raiders",
-   "rampage",
-   "rangers",
-   "rats",
-   "rebels",
-   "remparts",
-   "rivermen",
-   "rocket",
-   "rockets",
-   "s",
-   "sagueneens",
-   "senators",
-   "sharks",
-   "silvertips",
-   "spirit",
-   "spitfires",
-   "stars",
-   "sting",
-   "storm",
-   "thunderbirds",
-   "tigers",
-   "tigres",
-   "titan",
-   "voltigeurs",
-   "warriors",
-   "whalers",
-   "whl",
-   "wildcats",
-   "winterhawks",
-   "wolves"
-  ],
-  "missingInserts": [
-   "complete logo",
-   "emblem",
-   "error",
-   "first adt canada russia challenge",
-   "first assist",
-   "first game",
-   "first goal",
-   "first multi point game",
-   "first ohl star classic",
-   "first playoff game",
-   "used jersey",
-   "used number"
-  ]
- },
  "2016-topps-chrome-baseball-cards": {
   "missingPlayers": [
    "aaron",
@@ -4112,6 +4006,99 @@
    "path to cup stanley finals",
    "path to cup stanley winner"
   ]
+ },
+ "2007-08-in-the-game-heroes-and-prospects": {
+  "missingPlayers": [
+   "admirals",
+   "aeros",
+   "ahl",
+   "americans",
+   "attack",
+   "battalion",
+   "bears",
+   "blades",
+   "blazers",
+   "broncos",
+   "bruins",
+   "bulldogs",
+   "bulls",
+   "cataractes",
+   "chiefs",
+   "chl",
+   "colts",
+   "cougars",
+   "crunch",
+   "devils",
+   "dogs",
+   "drakkar",
+   "eagles",
+   "falcons",
+   "flames",
+   "foreurs",
+   "frontenacs",
+   "generals",
+   "giants",
+   "greyhounds",
+   "griffins",
+   "hitmen",
+   "hurricanes",
+   "huskies",
+   "ice",
+   "icedogs",
+   "icehogs",
+   "kings",
+   "knights",
+   "lhjmq",
+   "maineiacs",
+   "majors",
+   "marlies",
+   "monarchs",
+   "monsters",
+   "moose",
+   "mooseheads",
+   "oceanic",
+   "ohl",
+   "olympiques",
+   "otters",
+   "pack",
+   "pats",
+   "penguins",
+   "petes",
+   "phantoms",
+   "phpa",
+   "pirates",
+   "raiders",
+   "rampage",
+   "rangers",
+   "rats",
+   "rebels",
+   "remparts",
+   "rivermen",
+   "rocket",
+   "rockets",
+   "s",
+   "sagueneens",
+   "senators",
+   "sharks",
+   "silvertips",
+   "spirit",
+   "spitfires",
+   "stars",
+   "sting",
+   "storm",
+   "thunderbirds",
+   "tigers",
+   "tigres",
+   "titan",
+   "voltigeurs",
+   "warriors",
+   "whalers",
+   "whl",
+   "wildcats",
+   "winterhawks",
+   "wolves"
+  ],
+  "missingInserts": []
  },
  "13-14-panini-totally-certified-basketball": {
   "missingPlayers": [
@@ -6514,18 +6501,6 @@
   ],
   "missingInserts": [
    "mojo"
-  ]
- },
- "2007-08-in-the-game-o-canada": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "complete jersey",
-   "dual jersey",
-   "emblem",
-   "international goalies jersey",
-   "used emblem",
-   "used jersey",
-   "used number"
   ]
  },
  "1983-donruss-baseball-cards": {
@@ -9438,6 +9413,19 @@
    "back"
   ]
  },
+ "2008-09-spx": {
+  "missingPlayers": [
+   "bynum",
+   "davis",
+   "farmar",
+   "foye",
+   "harrington",
+   "jefferson"
+  ],
+  "missingInserts": [
+   "winning materials combos"
+  ]
+ },
  "1992-93-hoops": {
   "missingPlayers": [
    "card"
@@ -12041,22 +12029,10 @@
   ],
   "missingInserts": []
  },
- "2007-08-upper-deck-black-diamond": {
+ "2008-09-sp-game-used": {
   "missingPlayers": [],
   "missingInserts": [
-   "jersey"
-  ]
- },
- "2007-08-upper-deck-mini-jersey": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "collection"
-  ]
- },
- "2007-08-upper-deck-ovation": {
-  "missingPlayers": [],
-  "missingInserts": [
-   "xl"
+   "exclusives"
   ]
  },
  "1990-topps-traded-baseball-cards": {
@@ -13826,12 +13802,6 @@
   ],
   "missingInserts": []
  },
- "2008-09-spx": {
-  "missingPlayers": [
-   "harrington"
-  ],
-  "missingInserts": []
- },
  "2008-09-topps-signature": {
   "missingPlayers": [
    "parrish"
@@ -15209,6 +15179,12 @@
  "2012-13-upper-deck-artifacts-hockey": {
   "missingPlayers": [
    "cizikas"
+  ],
+  "missingInserts": []
+ },
+ "2008-09-o-pee-chee": {
+  "missingPlayers": [
+   "kings"
   ],
   "missingInserts": []
  },
