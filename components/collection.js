@@ -826,7 +826,7 @@ function csvRows(rows, map, fileName) {
 // sittings (or months, if it's over the monthly allowance): photos already checked are skipped.
 const IG_DONE_KEY = (uid) => 'cardhq-ig-done-' + uid
 const igLoad = (uid) => { try { return JSON.parse(localStorage.getItem(IG_DONE_KEY(uid)) || '{}') || {} } catch { return {} } }
-const igSave = (uid, m) => { try { localStorage.setItem(IG_DONE_KEY(uid), JSON.stringify(m)) } catch { /* storage full or blocked: progress just isn't remembered */ } }
+const igSave = (uid, m) => { try { localStorage.setItem(IG_DONE_KEY(uid), JSON.stringify(m)); return true } catch { return false } }
 
 function InstagramImport({ uid, say, onRows }) {
   const [shown, setShown] = useState(false)
@@ -842,19 +842,20 @@ function InstagramImport({ uid, say, onRows }) {
   const fileRef = useRef(null), stopRef = useRef(false)
   useEffect(() => () => exp?.close?.(), [exp])
   const photosOf = (posts) => posts.filter(p => archived || !p.archived).flatMap(p => p.photos.map((ph, k) => ({ post: p, ph, k, uri: ph.uri })))
-  const pick = async (f) => {
-    if (!f) return
+  const pick = async (fs) => {
+    if (!fs.length) return
     setPhase('reading')
-    const r = await readInstagramExport(f)
+    const r = await readInstagramExport(fs)
     if (r.error) { say(r.error, 'error'); setPhase('idle'); return }
-    if (!r.posts.length) { say('No photo posts found in that download.', 'error'); setPhase('idle'); return }
+    if (!r.posts.length) { r.close(); say(r.missingPhotos ? 'The photos are in another part of your download — choose all the parts together.' : 'No photo posts found in that download.', 'error'); setPhase('idle'); return }
     setExp(r); setQuota(await instagramQuota()); setPhase('ready')
   }
   const all = exp ? photosOf(exp.posts) : []
   const doneMap = phase === 'idle' ? {} : igLoad(uid)
   const todo = all.filter(x => !doneMap[x.uri])
+  const unreadable = all.filter(x => doneMap[x.uri]?.failed).length
   const finish = (map) => {
-    const done = all.filter(x => map[x.uri]).map(x => ({ ...map[x.uri], postId: x.post.id, photo: x.k, takenAt: x.post.takenAt }))
+    const done = all.filter(x => map[x.uri] && !map[x.uri].failed).map(x => ({ ...map[x.uri], postId: x.post.id, photo: x.k, takenAt: x.post.takenAt }))
     const rows = instagramRows(done)
     if (!rows.length) { say('No cards were found in those photos.', 'error'); return }
     onRows(rows, 'Instagram')
@@ -863,35 +864,41 @@ function InstagramImport({ uid, say, onRows }) {
     stopRef.current = false; setStopWhy(''); setPhase('running')
     const map = igLoad(uid)
     const queue = all.filter(x => !map[x.uri])
-    let done = 0, cards = 0, failed = 0, i = 0, why = ''
+    let done = 0, cards = 0, failed = 0, i = 0, why = '', dirty = 0, warned = false
     setProg({ done, total: queue.length, cards, failed })
     const worker = async () => {
       while (i < queue.length && !stopRef.current) {
         const x = queue[i++]
         let res
         try {
-          const image = await shrinkPhoto(x.ph.entry)
-          res = await identifyPhoto({ image, caption: x.post.caption, takenAt: x.post.takenAt })
-          if (res.error && res.retry) { await new Promise(r => setTimeout(r, 4000)); res = await identifyPhoto({ image, caption: x.post.caption, takenAt: x.post.takenAt }) }
-        } catch (e) { res = { error: e.message || 'Couldn’t read that photo' } }
+          const shot = await shrinkPhoto(x.ph.entry)
+          const ask = () => identifyPhoto({ ...shot, caption: x.post.caption, takenAt: x.post.takenAt })
+          res = await ask()
+          if (res.error && res.retry) { await new Promise(r => setTimeout(r, 4000)); res = await ask() }
+        } catch (e) { res = { error: e.message || 'Couldn’t read that photo', permanent: !!e.permanent } }
         if (res.error) {
           failed++
+          // a photo that can never be read is set aside so it doesn't block finishing
+          if (res.permanent) { map[x.uri] = { failed: true, error: res.error }; dirty++ }
           if (res.quota || /sign in|switched on/i.test(res.error)) { why = res.error; stopRef.current = true }
         } else {
           map[x.uri] = { status: res.status, cards: res.cards, photoUrl: res.photoUrl }
           cards += (res.cards || []).length
-          igSave(uid, map)
+          dirty++
         }
+        if (dirty >= 10) { dirty = 0; if (!igSave(uid, map) && !warned) { warned = true; say('This browser can’t remember progress (storage is full). Finish in one sitting, or review now.', 'error') } }
         done++
         setProg({ done, total: queue.length, cards, failed })
       }
     }
     await Promise.all([worker(), worker(), worker()])
+    igSave(uid, map)
+    const permanent = queue.filter(x => map[x.uri]?.failed).length
     instagramQuota().then(setQuota)
     if (stopRef.current) { setStopWhy(why || 'Paused.'); setPhase('stopped'); return }
     setPhase('ready')
-    if (failed) say(plural(failed, 'photo') + ' couldn’t be checked — press Continue to try them again.', 'error')
-    else finish(map)
+    if (failed > permanent) say(plural(failed - permanent, 'photo') + ' couldn’t be checked — press Continue to try them again.', 'error')
+    else { if (permanent) say(plural(permanent, 'photo') + ' couldn’t be opened and were skipped.'); finish(map) }
   }
   const doneCount = all.length - todo.length
   if (!shown) return null
@@ -903,18 +910,19 @@ function InstagramImport({ uid, say, onRows }) {
         <ol style={{ color: '#D4D4D8', fontSize: 14, lineHeight: 1.7, margin: '0 0 12px', paddingLeft: 20 }}>
           <li>In Instagram open <a href="https://accountscenter.instagram.com/info_and_permissions/dyi/" target="_blank" rel="noreferrer" style={{ color: ACCENT_TEXT }}>Download your information</a> (Accounts Center → Your information and permissions).</li>
           <li>Choose <b>Download to device</b>, your Instagram account, <b>Some of your information → Content</b> (or all of it), <b>Format: JSON</b>, <b>Media quality: High</b>.</li>
-          <li>Instagram emails you when it’s ready (usually minutes, sometimes a few hours). Download the .zip — don’t unzip it — and choose it here.</li>
+          <li>Instagram emails you when it’s ready (usually minutes, sometimes a few hours). Download the .zip — don’t unzip it — and choose it here. Big accounts come in several parts: choose them all at once.</li>
         </ol>
-        <button style={btnGhost} disabled={phase === 'reading'} onClick={() => fileRef.current?.click()}>{phase === 'reading' ? 'Reading your download…' : 'Choose the Instagram .zip'}</button>
+        <button style={btnGhost} disabled={phase === 'reading'} onClick={() => fileRef.current?.click()}>{phase === 'reading' ? 'Reading your download…' : 'Choose the Instagram .zip file(s)'}</button>
         <p style={{ ...muted, fontSize: 12, margin: '10px 0 0' }}>The zip stays on your computer; only your post photos are sent, one at a time, to be read. Run it again after new posts — cards already imported aren’t doubled.</p>
-        <input ref={fileRef} type="file" accept=".zip,application/zip" style={{ display: 'none' }} onChange={(e) => { const f = e.target.files?.[0]; e.target.value = ''; pick(f) }} />
+        <input ref={fileRef} type="file" multiple accept=".zip,application/zip" style={{ display: 'none' }} onChange={(e) => { const fs = [...(e.target.files || [])]; e.target.value = ''; pick(fs) }} />
       </>) : (<>
         <div style={{ display: 'grid', gap: 12, gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', margin: '4px 0 14px' }}>
           <Tile label="Posts" value={exp.posts.filter(p => archived || !p.archived).length.toLocaleString()} sub={exp.skippedVideos ? plural(exp.skippedVideos, 'video') + ' skipped' : 'photo posts'} />
-          <Tile label="Photos" value={all.length.toLocaleString()} sub={doneCount ? doneCount.toLocaleString() + ' already checked' : 'to check'} />
+          <Tile label="Photos" value={all.length.toLocaleString()} sub={doneCount ? doneCount.toLocaleString() + ' already checked' + (unreadable ? ' (' + unreadable + ' unreadable)' : '') : 'to check'} />
           {quota && <Tile label="Checks left" value={quota.unlimited ? '∞' : quota.left.toLocaleString()} sub={quota.unlimited ? 'admin' : 'this month, of ' + quota.limit} />}
           {phase !== 'ready' && <Tile label="Cards found" value={prog.cards.toLocaleString()} sub={prog.failed ? plural(prog.failed, 'photo') + ' failed' : 'so far'} />}
         </div>
+        {exp.missingPhotos > 0 && <p style={{ ...muted, color: '#facc15', margin: '0 0 10px' }}>{plural(exp.missingPhotos, 'photo')} from your posts aren’t in the file(s) you chose — they’re probably in another part of your download. Cancel and choose all the parts together to include them.</p>}
         {exp.posts.some(p => p.archived) && phase === 'ready' && <Toggle checked={archived} onChange={setArchived} hint="Posts you archived on Instagram are in the download too.">Include archived posts</Toggle>}
         {phase === 'running' && (<div style={{ maxWidth: 480, margin: '10px 0' }}>
           <p role="status" style={{ ...muted, margin: '0 0 6px' }}>Checking photo {Math.min(prog.done + 1, prog.total).toLocaleString()} of {prog.total.toLocaleString()} — you can leave this tab open and come back.</p>
@@ -926,7 +934,7 @@ function InstagramImport({ uid, say, onRows }) {
             ? <button style={btnGhost} onClick={() => { stopRef.current = true }}>Pause</button>
             : <>
                 {todo.length > 0 && <button style={btnAccent} disabled={!!quota && !quota.unlimited && quota.left <= 0} onClick={run}>{doneCount ? 'Continue — ' + plural(todo.length, 'photo') + ' left' : 'Find my cards (' + plural(todo.length, 'photo') + ')'}</button>}
-                {doneCount > 0 && <button style={todo.length ? btnGhost : btnAccent} onClick={() => finish(igLoad(uid))}>Review {plural(doneCount, 'checked photo')}</button>}
+                {doneCount - unreadable > 0 && <button style={todo.length ? btnGhost : btnAccent} onClick={() => finish(igLoad(uid))}>Review {plural(doneCount - unreadable, 'checked photo')}</button>}
                 <button style={btnGhost} onClick={() => { exp?.close?.(); setExp(null); setPhase('idle') }}>Cancel</button>
               </>}
         </div>

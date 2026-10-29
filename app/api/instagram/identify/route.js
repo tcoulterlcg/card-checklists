@@ -3,8 +3,8 @@
 // The browser (lib/instagram.js) sends a photo from the collector's Instagram download, already
 // shrunk to ≤1600 px JPEG, plus that post's caption. This route:
 //   1. checks the Card HQ sign-in (Bearer token from the shared GrailFindr/Card HQ account)
-//   2. returns the saved answer if this exact photo + caption was identified before (retries,
-//      re-imports and the same photo in two posts cost nothing)
+//   2. returns the saved answer if this collector's photo + caption was identified before
+//      (retries and re-imports cost nothing)
 //   3. takes one photo from the collector's monthly allowance (cardhq_ai_claim_photo, SQL in
 //      scripts/sql/2026-10-29-instagram-import.sql)
 //   4. saves the photo to Card HQ's photo storage (Cloudflare R2) and asks the vision model
@@ -122,24 +122,28 @@ export async function POST(req) {
   if (!(img[0] === 0xff && img[1] === 0xd8 && img[2] === 0xff)) return fail(415, 'Photos are sent as JPEG.')
 
   const imgHash = createHash('sha256').update(img).digest('hex')
-  const key = createHash('sha256').update(PROMPT_VERSION + '|' + imgHash + '|' + caption).digest('hex')
+  // The browser sends a hash of the original photo file too: the re-encoded JPEG differs between
+  // browsers, the original doesn't, so the same photo is recognised from any device.
+  const srcHash = /^[0-9a-f]{64}$/.test(body?.srcHash || '') ? body.srcHash : imgHash
+  // per collector: a hash sent by one browser can never pull up or overwrite someone else's answer
+  const key = createHash('sha256').update(PROMPT_VERSION + '|' + uid + '|' + srcHash + '|' + caption).digest('hex')
   const photoKey = `photos/${uid}/${imgHash.slice(0, 32)}.jpg`
   const photoUrl = env('R2_PUBLIC_URL').replace(/\/+$/, '') + '/' + photoKey
 
-  // 2. seen before (by anyone): reuse the answer; make sure this collector has their own copy of the photo
+  // 2. seen before: reuse the answer (and make sure the photo is stored)
   const saved = await r2Get(`ai/${key}.json`).catch(() => null)
   if (saved && Array.isArray(saved.cards)) {
-    await r2Put(photoKey, img, 'image/jpeg').catch(() => {})
+    try { await r2Put(photoKey, img, 'image/jpeg') } catch { return fail(502, 'Couldn’t save the photo — try again.') }
     return NextResponse.json({ ...saved, photoUrl, takenAt, cached: true })
   }
 
-  // 3. monthly allowance
-  const { data: claim, error: ce } = await db.rpc('cardhq_ai_claim_photo')
+  // 3. monthly allowance — charged once per photo, so a retry after a failure below is free
+  const { data: claim, error: ce } = await db.rpc('cardhq_ai_claim_photo', { p_key: key })
   if (ce) return fail(500, 'Couldn’t check your photo allowance — try again.')
   if (!claim?.ok) return fail(429, `You’ve used this month’s ${claim?.limit ?? ''} photo checks. More open on the 1st.`.replace('  ', ' '))
 
   // 4. store the photo, then ask the model
-  try { await r2Put(photoKey, img, 'image/jpeg') } catch (e) { return fail(502, 'Couldn’t save the photo — try again.') }
+  try { await r2Put(photoKey, img, 'image/jpeg') } catch { return fail(502, 'Couldn’t save the photo — try again.') }
   const content = [
     { type: 'image', source: { type: 'base64', media_type: 'image/jpeg', data: img.toString('base64') } },
     { type: 'text', text: (caption ? 'Instagram caption (collector\'s own words):\n"""' + caption + '"""\n\n' : 'No caption.\n\n') + 'Report the cards in this photo.' },
@@ -150,10 +154,11 @@ export async function POST(req) {
       method: 'POST',
       headers: { 'x-api-key': env('ANTHROPIC_API_KEY'), 'anthropic-version': '2023-06-01', 'content-type': 'application/json' },
       body: JSON.stringify({
-        model: env('CARDHQ_VISION_MODEL') || 'claude-sonnet-5-5', max_tokens: 2000, system: SYSTEM,
+        model: env('CARDHQ_VISION_MODEL') || 'claude-sonnet-5-5', max_tokens: 6000, system: SYSTEM,
         tools: [CARD_TOOL], tool_choice: { type: 'tool', name: 'report_cards' },
         messages: [{ role: 'user', content }],
       }),
+      signal: AbortSignal.timeout(50_000),   // answer before Vercel's 60 s limit cuts the request off
     })
   } catch { return fail(502, 'The card reader didn’t answer — try again.') }
   const j = await res.json().catch(() => null)
@@ -161,10 +166,15 @@ export async function POST(req) {
     console.error('vision error', res.status, j?.error?.message)
     return fail(res.status === 429 || res.status === 529 ? 503 : 502, 'The card reader is busy — try again in a minute.')
   }
-  const out = j?.content?.find(c => c.type === 'tool_use')?.input || {}
+  const out = j?.content?.find(c => c.type === 'tool_use')?.input
+  // a cut-off answer is never saved (it would read as "no cards" forever)
+  if (j?.stop_reason !== 'tool_use' || !out || !Array.isArray(out.cards)) {
+    console.error('vision incomplete', j?.stop_reason)
+    return fail(502, 'The card reader didn’t finish — try again.')
+  }
   const result = {
     status: ['owned', 'for_sale', 'for_trade', 'sold_or_traded', 'not_mine', 'unknown'].includes(out.status) ? out.status : 'unknown',
-    cards: (Array.isArray(out.cards) ? out.cards : []).slice(0, 40),
+    cards: out.cards.filter(c => c && typeof c === 'object').slice(0, 40),
   }
   await r2Put(`ai/${key}.json`, JSON.stringify(result), 'application/json').catch(() => {})
   return NextResponse.json({ ...result, photoUrl, takenAt, cached: false })
