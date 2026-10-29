@@ -9,7 +9,7 @@
   "why": [
    "base checklist missing: only 48 insert/variation cards, base set is about 176 cards"
   ],
-  "status": "todo"
+  "status": "claimed-l2v"
  },
  {
   "slug": "1964-topps-baseball-cards",
@@ -21,7 +21,7 @@
   "why": [
    "base checklist missing: only 164 insert/variation cards, base set is about 587 cards"
   ],
-  "status": "todo"
+  "status": "claimed-l2v"
  },
  {
   "slug": "1965-topps-baseball-cards",
@@ -33,7 +33,7 @@
   "why": [
    "base checklist missing: only 72 insert/variation cards, base set is about 598 cards"
   ],
-  "status": "todo"
+  "status": "claimed-l2v"
  },
  {
   "slug": "1966-topps-baseball-cards",
@@ -45,7 +45,7 @@
   "why": [
    "base checklist missing: only 13 insert/variation cards, base set is about 598 cards"
   ],
-  "status": "todo"
+  "status": "claimed-l2v"
  },
  {
   "slug": "1967-topps-baseball-cards",
@@ -57,7 +57,7 @@
   "why": [
    "base checklist missing: only 48 insert/variation cards, base set is about 609 cards"
   ],
-  "status": "todo"
+  "status": "claimed-l2v"
  },
  {
   "slug": "1968-topps-baseball-cards",
@@ -69,7 +69,7 @@
   "why": [
    "base checklist missing: only 42 insert/variation cards, base set is about 598 cards"
   ],
-  "status": "todo"
+  "status": "claimed-l2v"
  },
  {
   "slug": "1970-topps-baseball-cards",
@@ -81,7 +81,7 @@
   "why": [
    "base checklist missing: only 54 insert/variation cards, base set is about 720 cards"
   ],
-  "status": "todo"
+  "status": "claimed-l2v"
  },
  {
   "slug": "1971-topps-baseball-cards",
@@ -93,7 +93,7 @@
   "why": [
    "base checklist missing: only 159 insert/variation cards, base set is about 752 cards"
   ],
-  "status": "todo"
+  "status": "claimed-l2v"
  },
  {
   "slug": "1973-topps-baseball-cards",
@@ -105,7 +105,7 @@
   "why": [
    "base checklist missing: only 17 insert/variation cards, base set is about 660 cards"
   ],
-  "status": "todo"
+  "status": "claimed-l2v"
  },
  {
   "slug": "1977-topps-baseball-cards",
@@ -117,7 +117,7 @@
   "why": [
    "base checklist missing: only 73 insert/variation cards, base set is about 660 cards"
   ],
-  "status": "todo"
+  "status": "claimed-l2v"
  },
  {
   "slug": "1982-donruss-baseball-cards",
@@ -129,7 +129,7 @@
   "why": [
    "base checklist missing: only 14 insert/variation cards, base set is about 660 cards"
   ],
-  "status": "todo"
+  "status": "claimed-l2v"
  },
  {
   "slug": "2015-16-upper-deck-series-hockey-cards",
@@ -141,7 +141,7 @@
   "why": [
    "only Series 2 is on the site (base 251-500); Series 1 missing — replace with TCDB 2015-16 Upper Deck (both series)"
   ],
-  "status": "todo"
+  "status": "claimed-l2v"
  },
  {
   "slug": "25-26-topps-winners-collection-arsenal-soccer-card",
@@ -14024,7 +14024,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "1948-leaf",
@@ -14038,7 +14038,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "1950-bowman-football-cards",
@@ -14052,7 +14052,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "1951-bowman-football-cards",
@@ -14066,7 +14066,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "1958-topps-football-cards",
@@ -14080,7 +14080,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "1961-topps-football-cards",
@@ -14094,7 +14094,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "1963-topps-football-cards",
@@ -14108,7 +14108,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "1964-topps-football-cards",
@@ -14122,7 +14122,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "1965-topps-football-cards",
@@ -14136,7 +14136,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "1966-topps-football-cards",
@@ -14150,7 +14150,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "1967-topps-football-cards",
@@ -14164,7 +14164,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "1968-topps-football-cards",
@@ -14178,7 +14178,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "1969-topps-football-cards",
@@ -14192,7 +14192,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "1970-topps-football-cards",
@@ -14206,7 +14206,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "1971-topps-football-cards",
@@ -14220,7 +14220,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "1972-topps-football-cards",
@@ -14234,7 +14234,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "1973-topps-football-cards",
@@ -14248,7 +14248,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "1974-topps-football-cards",
@@ -14262,7 +14262,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "1975-topps-football-cards",
@@ -14276,7 +14276,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "1981-topps-football-cards",
@@ -14290,7 +14290,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "1982-topps-football-cards",
@@ -14304,7 +14304,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "1983-topps-football-cards",
@@ -14318,7 +14318,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "1987-topps-football-cards",
@@ -14332,7 +14332,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "1988-topps-football-cards",
@@ -14346,7 +14346,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "1991-upper-deck-football-cards",
@@ -14360,7 +14360,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "2012-topps-football-cards",
@@ -14374,7 +14374,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "2012-upper-deck-university-of-notre-dame-football",
@@ -14388,7 +14388,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "2013-panini-black-football-cards",
@@ -14402,7 +14402,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "2013-panini-contenders-football-cards",
@@ -14416,7 +14416,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "2013-panini-limited-football-cards-2",
@@ -14430,7 +14430,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "2013-panini-mega-box-football-cards",
@@ -14444,7 +14444,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "2013-panini-playbook-football-cards",
@@ -14458,7 +14458,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "2013-panini-prominence-football-cards",
@@ -14472,7 +14472,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "2013-panini-rookies-stars-football-cards",
@@ -14486,7 +14486,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "2013-panini-spectra-football-cards",
@@ -14500,7 +14500,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "2013-score-football-cards",
@@ -14514,7 +14514,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "2013-select-football-cards",
@@ -14528,7 +14528,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "2013-sp-authentic-football-cards",
@@ -14542,7 +14542,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "2013-topps-football-cards",
@@ -14556,7 +14556,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "2013-topps-football-complete-set-hobby-edition",
@@ -14570,7 +14570,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "2013-topps-mini-football-cards",
@@ -14584,7 +14584,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "2013-topps-qubi-football-stampers",
@@ -14598,7 +14598,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "2013-topps-supreme-football-cards",
@@ -14612,7 +14612,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "2013-topps-turkey-red-football-cards",
@@ -14626,7 +14626,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "2013-upper-deck-exquisite-football-cards",
@@ -14640,7 +14640,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "2013-upper-deck-football-cards",
@@ -14654,7 +14654,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "2013-upper-deck-usa-football-cards",
@@ -14668,7 +14668,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "2013-upper-deck-quantum-football-cards",
@@ -14682,7 +14682,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "2014-flair-showcase-football-cards",
@@ -14696,7 +14696,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "2014-panini-black-gold-football-cards",
@@ -14710,7 +14710,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "2014-panini-elite-football-cards",
@@ -14724,7 +14724,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "2014-panini-hot-rookies-football-cards",
@@ -14738,7 +14738,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "2014-panini-immaculate-football-cards",
@@ -14752,7 +14752,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "2014-panini-limited-football-cards",
@@ -14766,7 +14766,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "2014-panini-playbook-football-cards",
@@ -14780,7 +14780,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "2014-panini-rookies-and-stars-football",
@@ -14794,7 +14794,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "2014-panini-spectra-football",
@@ -14808,7 +14808,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "2014-panini-totally-certified-football",
@@ -14822,7 +14822,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "2014-topps-chrome-mini-football-cards",
@@ -14836,7 +14836,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "2014-topps-football-cards",
@@ -14850,7 +14850,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "2014-upper-deck-cfl-football-cards",
@@ -14864,7 +14864,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "2014-upper-deck-conference-greats-football-cards",
@@ -14878,7 +14878,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "2014-upper-deck-exquisite-collection-football",
@@ -14892,7 +14892,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "2014-upper-deck-football-cards",
@@ -14906,7 +14906,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "2014-upper-deck-football-cards-2",
@@ -14920,7 +14920,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "2015-donruss-signature-series-football",
@@ -14934,7 +14934,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "2015-leaf-army-american-football-cards",
@@ -14948,7 +14948,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "2015-leaf-best-football-cards",
@@ -14962,7 +14962,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "2015-panini-clear-vision-football-cards",
@@ -14976,7 +14976,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "2015-panini-flawless-football-cards",
@@ -14990,7 +14990,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "2015-panini-gridiron-kings-football",
@@ -15004,7 +15004,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "2015-panini-immaculate-football-cards",
@@ -15018,7 +15018,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "2015-panini-luxe-football-cards",
@@ -15032,7 +15032,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "2015-panini-rookies-stars-football",
@@ -15046,7 +15046,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "2015-topps-definitive-collection-football",
@@ -15060,7 +15060,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "2015-topps-football-cards",
@@ -15074,7 +15074,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "2015-topps-heritage-football-cards",
@@ -15088,7 +15088,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "2015-topps-supreme-football-cards",
@@ -15102,7 +15102,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "2015-upper-deck-football-cards",
@@ -15116,7 +15116,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "2015-upper-deck-usa-football-cards",
@@ -15130,7 +15130,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "2016-donruss-football-cards",
@@ -15144,7 +15144,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "2016-donruss-signature-series-football",
@@ -15158,7 +15158,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "2016-leaf-draft-football-cards",
@@ -15172,7 +15172,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "2016-leaf-metal-us-army-all-american-football",
@@ -15186,7 +15186,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "2016-panini-classics-football-cards",
@@ -15200,7 +15200,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "2016-panini-contenders-draft-picks-football",
@@ -15214,7 +15214,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "2016-panini-encased-football-cards",
@@ -15228,7 +15228,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "2016-panini-flawless-football-cards",
@@ -15242,7 +15242,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "2016-panini-football-cards",
@@ -15256,7 +15256,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "2016-panini-gala-football-cards",
@@ -15270,7 +15270,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "2016-panini-immaculate-football-cards",
@@ -15284,7 +15284,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "2016-panini-impeccable-football-cards",
@@ -15298,7 +15298,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "2016-panini-infinity-football-cards",
@@ -15312,7 +15312,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "2016-panini-national-treasures-collegiate-football",
@@ -15326,7 +15326,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "2016-panini-nfl-stickers-collection",
@@ -15340,7 +15340,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "2016-panini-phoenix-football-cards",
@@ -15354,7 +15354,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "2016-panini-plates-patches-football",
@@ -15368,7 +15368,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "2016-panini-playoff-football-cards",
@@ -15382,7 +15382,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "2016-panini-preferred-football-cards",
@@ -15396,7 +15396,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "2016-panini-prime-signatures-football",
@@ -15410,7 +15410,7 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "claimed-l2v"
  },
  {
   "slug": "2016-panini-prizm-collegiate-draft-picks-football",
