@@ -64,3 +64,8 @@
   free. Rows then go through the normal matcher and review screen with the photo as `image_url`; captions saying sold /
   traded / not mine are skipped by default. The option stays hidden until `ANTHROPIC_API_KEY` and the `R2_*` env vars are
   set (`INSTAGRAM_IMPORT_ADMIN_ONLY=1` shows it to admins only). Bump `PROMPT_VERSION` in the route when the prompt changes.
+- **My PC** (`components/mypc.js`, nav "My PC", `?view=mypc`; old `?view=myplayers` links redirect): a collector's personal
+  collection — players (`cardhq_followed_players`), plus teams, sets and chases in `cardhq_pc_items`
+  (`scripts/sql/2026-10-30-my-pc.sql`). A chase = team or player + card kind (named parallel from `lib/parallels.js`, auto,
+  patch, 1/1, numbered, rookie) and/or words from the parallel name ("Gold Outburst"). Team chases read
+  `public/data/pc-teams/` built by `scripts/build-team-index.mjs` (static + catalog sets; runs after the player index in prebuild).
