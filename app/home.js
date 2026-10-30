@@ -1670,7 +1670,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
         <FeedbackView account={account} admin={fbAdmin.admin} onOpenAuth={() => setAuthOpen(true)} onOpenSet={openSetBySlug}
           onNew={(ctx) => setFeedback(ctx)} onChanged={fbAdmin.refresh} onFix={(r) => setFixing({ slug: r.set_slug, feedback: r })} version={fixVersion} />
       ) : view === 'grid' ? (
-        <GridGame mode={gridOpts.mode} seed={gridOpts.seed} onChange={(o) => openGrid({ mode: o.mode, seed: o.seed || '' })} />
+        <GridGame mode={gridOpts.mode} seed={gridOpts.seed} account={account} onOpenAuth={() => setAuthOpen(true)} onChange={(o) => openGrid({ mode: o.mode, seed: o.seed || '' })} />
       ) : view === 'community' ? (
         <CommunityView account={account} indexSets={sets} onOpenAuth={() => setAuthOpen(true)} />
       ) : view === 'collection' ? (

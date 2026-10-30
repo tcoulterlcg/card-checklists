@@ -18,6 +18,7 @@
 import { readFileSync, writeFileSync, mkdirSync, existsSync, rmSync } from 'node:fs'
 import { classifySet } from '../lib/brands.js'
 import { TYPE } from '../lib/query.js'
+import { teamLogo } from '../lib/team-logos.js'
 import { foldTeam, franchiseName, tidyTeam } from '../lib/teams.js'
 
 const pDir = new URL('../public/data/players/', import.meta.url)
@@ -31,6 +32,7 @@ const sportName = (i) => dir.sports[i] || ''
 
 // team cards, checklists and other non-people that the player index lists like players
 const NOT_A_PLAYER = /^(team|teams|checklist|checklists|header|logo|title card|puzzle|unknown|various|multiple players?|team (card|checklist|photo|logo)|tba|tbd|badge|emblem|crest|escudo|kit|shield|squadra|équipe|equipe|mannschaft|scudetto|mascot|stadium|trophy|angel|miguel)$|\bteam (card|checklist|photo|logo)\b/i
+const LOGO_SPORTS = new Set(['Hockey', 'Football', 'Basketball', 'Baseball'])
 const MIN_ANSWERS = 3   // a square needs at least this many answers
 const MIN_CAT = 12      // a category needs at least this many players in the mode
 
@@ -90,6 +92,12 @@ const TEAM_JUNK = /high school|sparkle|prospect|rookie|all[- ]?star|draft|legend
 const NO_SPORT_CAT = new Set(['Multi-Sport', 'Misc Sports', 'Entertainment', 'Non-Sport'])
 const BRAND_NAMES = new Set(['Panini', 'Topps', 'Upper Deck', 'Leaf', 'Fleer', 'Donruss', 'Pinnacle', 'Score', 'Pacific', 'Bowman'])
 
+// "2018-19 Upper Deck The Cup Hockey" -> "2018-19 Upper Deck The Cup"
+const setLabel = (name) => String(name || '').replace(/\s+(hockey|football|baseball|basketball|soccer)(\s+cards?)?\s*$/i, '').replace(/\bUD Upper Deck\b/, 'Upper Deck').trim()
+
+// 5-year windows by release year: 2016–20, 2021–25 …
+const spanLabel = (y) => { if (!y) return ''; const a = Math.floor((y - 1) / 5) * 5 + 1; return a + '–' + String(a + 4).slice(2) }
+
 function attrs(m, setName, year, sport, team, type, serial, label, base, section) {
   const a = []
   const { brand, product } = classifySet(setName, year)
@@ -102,8 +110,15 @@ function attrs(m, setName, year, sport, team, type, serial, label, base, section
   }
   if (m.kind === 'multi') { if (sport && !NO_SPORT_CAT.has(sport)) a.push(cat(m, 'sport', sport)) }
   else { const t = cleanTeam(team); if (t && !TEAM_JUNK.test(t)) a.push(cat(m, 'team', gridTeam(t, sport))) }
-  if (brand && brand !== 'Other') a.push(cat(m, 'brand', brand))
-  if (product && product !== 'Other' && !BRAND_NAMES.has(product) && product !== brand) a.push(cat(m, 'product', product))
+  // Checklists carry their year ("2018-19 Upper Deck The Cup"): a product line alone is too broad.
+  // Multi-sport: product line + release year across sports ("2021 Prizm").
+  if (m.kind === 'multi') { if (product && product !== 'Other' && !BRAND_NAMES.has(product) && product !== brand && year) a.push(cat(m, 'product', year + ' ' + product)) }
+  else {
+    const sn = setLabel(setName); if (sn) a.push(cat(m, 'set', sn))
+    // the same product line over a 5-year span ("The Cup 2016–20"), for squares one year makes too hard
+    const span = spanLabel(year)
+    if (span && product && product !== 'Other' && !BRAND_NAMES.has(product) && product !== brand) a.push(cat(m, 'product', product + ' ' + span))
+  }
   const d = decadeLabel(year); if (d) a.push(cat(m, 'decade', d))
   const rc = type & TYPE.RC, au = type & TYPE.AU
   if (rc) a.push(cat(m, 'type', 'Rookie card'))
@@ -162,12 +177,14 @@ for (const m of modes) {
   const byKind = new Map()
   for (const [c, n] of size) {
     const kind = m.cats[c][0]
+    // NHL/NFL/NBA/MLB grids show team logos: only teams that have one (no college, national or minor-league text tiles)
+    if (kind === 'team' && LOGO_SPORTS.has([...m.sports][0]) && !teamLogo(m.cats[c][1], [...m.sports][0])) continue
     const min = kind === 'team' ? Math.max(MIN_CAT, Math.round(N * 0.02)) : MIN_CAT
     if (n < min || (kind !== 'type' && kind !== 'team' && n > N * 0.6)) continue
     let l = byKind.get(kind); if (!l) byKind.set(kind, l = []); l.push([c, n])
   }
-  for (const [kind, l] of byKind) { l.sort((a, b) => b[1] - a[1]); for (const [c] of l.slice(0, kind === 'team' || kind === 'product' ? 40 : 30)) okCat.add(c) }
-  const allowed = (a, b) => { const ka = m.cats[a][0], kb = m.cats[b][0]; if (ka === kb) return ka === 'team' || ka === 'type'; return !(ka === 'decade' && kb === 'series') && !(ka === 'series' && kb === 'decade') }   // an era already fixes its decade
+  for (const [kind, l] of byKind) { l.sort((a, b) => b[1] - a[1]); for (const [c] of l.slice(0, kind === 'set' ? 120 : kind === 'team' || kind === 'product' ? 40 : 30)) okCat.add(c) }
+  const allowed = (a, b) => { const ka = m.cats[a][0], kb = m.cats[b][0]; if (ka === kb) return ka === 'team' || ka === 'type'; const dated = new Set(['series', 'set', 'product']); return !(ka === 'decade' && dated.has(kb)) && !(kb === 'decade' && dated.has(ka)) }   // a checklist / era already fixes its decade
   const outCells = {}, usedCats = new Set()
   for (const [k, list] of cells) {
     const x = Math.floor(k / PAIR), y = k % PAIR
@@ -185,7 +202,7 @@ for (const m of modes) {
   const players = order.map(i => m.kind === 'multi' ? [m.players[i].name, m.players[i].cards, m.players[i].sport] : [m.players[i].name, m.players[i].cards])
   const nCells = Object.keys(finalCells).length
   if (cats.length < 6 || nCells < 9) { console.log('grid:', m.id, 'skipped (not enough data:', cats.length, 'categories,', nCells, 'squares)'); continue }
-  writeFileSync(new URL(m.id + '.json', outDir), JSON.stringify({ v: 1, id: m.id, label: m.label, players, cats, cells: finalCells }))
+  writeFileSync(new URL(m.id + '.json', outDir), JSON.stringify({ v: 2, id: m.id, label: m.label, sport: m.kind === 'sport' ? [...m.sports][0] : '', players, cats, cells: finalCells }))
   index.push({ id: m.id, label: m.label, group: m.group, players: players.length, cats: cats.length })
   console.log('grid:', m.id, players.length, 'players,', cats.length, 'categories,', nCells, 'squares')
 }

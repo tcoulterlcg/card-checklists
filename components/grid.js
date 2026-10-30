@@ -7,6 +7,8 @@
 // (scripts/build-grid-index.mjs) — every square shown has at least 3 answers.
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { norm } from '../lib/query'
+import { supa } from '../lib/supa'
+import { teamLogo } from '../lib/team-logos'
 import { ACCENT, ACCENT_TEXT, SURFACE, SURFACE_2, LINE, TEXT, TEXT_2, LABEL, display, eyebrow, title, buttonText } from '../lib/theme'
 
 const GOOD = '#22c55e', BAD = '#ef4444'
@@ -17,9 +19,12 @@ const load = (path) => {
   return cache.get(path)
 }
 
-const KIND_LABEL = { team: 'Team', product: 'Product', brand: 'Brand', decade: 'Decade', type: 'Card', sport: 'Sport', series: 'Era', variant: 'Variant' }
-const WEIGHT = { team: 6, product: 3, brand: 1.2, decade: 1.5, type: 1.5, sport: 2, series: 3, variant: 2 }
-const MAX_KIND = { type: 2, decade: 2, brand: 2, sport: 3, variant: 2 }   // per whole grid
+const KIND_LABEL = { team: 'Team', set: 'Checklist', product: 'Product', brand: 'Brand', decade: 'Decade', type: 'Card', sport: 'Sport', series: 'Era', variant: 'Variant' }
+const WEIGHT = { team: 6, set: 2, product: 3, brand: 1.2, decade: 1.5, type: 1.5, sport: 2, series: 3, variant: 2 }
+const MAX_KIND = { type: 2, decade: 2, brand: 2, sport: 3, variant: 2, set: 3, product: 3 }   // per whole grid
+// Difficulty: aim for every square to have at least FAIR answers (Immaculate Grid level);
+// fall back to the 3-answer floor only when a mode can't make one.
+const FAIR = 6
 
 // ---------- seeded random ----------
 function rng(seed) {
@@ -60,14 +65,100 @@ function makeGrid(data, seed) {
     // the same kind on both axes only for teams (career) and card types
     const rk = new Set(rows.map(kindOf)), ck = new Set(cols.map(kindOf))
     if ([...rk].some(k => ck.has(k) && k !== 'team' && k !== 'type')) continue
+    if (tries < 3000 && Math.min(...rows.flatMap(r => cols.map(c => data.cells[key(r, c)].length))) < FAIR) continue
     if (rand() < 0.5) return { rows, cols }
     return { rows: cols, cols: rows }
   }
   return null
 }
 
+// ---------- play history ----------
+// Every game is kept in this browser (hq.grid.v1.history) and, when signed in, in the account
+// (cardhq_grid_plays, scripts/sql/2026-10-30-grid-plays.sql). Signing in uploads this browser's games.
+const HIST_KEY = 'hq.grid.v1.history'
+function recordOf(mode, gridKey, daily, s) {
+  const score = Object.keys(s.picks).length, used = 9 - s.left
+  return { mode, grid_key: gridKey, daily, picks: s.picks, misses: s.misses, guesses_used: used, score, finished: s.left <= 0 || score === 9 || !!s.gaveUp, updated_at: new Date().toISOString() }
+}
+function localHistory() { try { const v = JSON.parse(localStorage.getItem(HIST_KEY) || '[]'); return Array.isArray(v) ? v : [] } catch { return [] } }
+function saveLocalHistory(rec) {
+  try {
+    const list = localHistory().filter(r => !(r.mode === rec.mode && r.grid_key === rec.grid_key))
+    list.unshift(rec)
+    localStorage.setItem(HIST_KEY, JSON.stringify(list.slice(0, 500)))
+  } catch {}
+}
+let gridTableMissing = false
+async function pushPlays(uid, recs) {
+  if (gridTableMissing || !recs.length) return
+  const { error } = await supa.from('cardhq_grid_plays').upsert(recs.map(r => ({ ...r, user_id: uid })), { onConflict: 'user_id,mode,grid_key' })
+  if (error && /cardhq_grid_plays|relation|schema cache/i.test(error.message || '')) gridTableMissing = true
+}
+async function loadHistory(uid) {
+  const local = localHistory()
+  if (!uid || gridTableMissing) return local
+  const synced = 'hq.grid.v1.synced.' + uid
+  try { if (!localStorage.getItem(synced) && local.length) { await pushPlays(uid, local); localStorage.setItem(synced, '1') } } catch {}
+  const { data, error } = await supa.from('cardhq_grid_plays').select('mode, grid_key, daily, score, guesses_used, finished, updated_at').eq('user_id', uid).order('updated_at', { ascending: false }).limit(1000)
+  if (error || !data) return local
+  // account rows win; add any local game the account doesn't have yet
+  const seen = new Set(data.map(r => r.mode + '|' + r.grid_key))
+  return [...data, ...local.filter(r => !seen.has(r.mode + '|' + r.grid_key))].sort((a, b) => String(b.updated_at).localeCompare(String(a.updated_at)))
+}
+function statsOf(list, mode) {
+  const done = list.filter(r => r.finished)
+  const inMode = done.filter(r => r.mode === mode)
+  // daily streak in this mode: consecutive days, ending today or yesterday, with a finished daily grid
+  const days = new Set(inMode.filter(r => r.daily).map(r => r.grid_key))
+  const dayStr = (d) => d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0')
+  let streak = 0; const d = new Date(); if (!days.has(dayStr(d))) d.setDate(d.getDate() - 1)
+  while (days.has(dayStr(d))) { streak++; d.setDate(d.getDate() - 1) }
+  let best = 0, run = 0, prev = null
+  for (const k of [...days].sort()) { const t = new Date(k + 'T12:00:00'); run = prev && (t - prev) / 864e5 === 1 ? run + 1 : 1; best = Math.max(best, run); prev = t }
+  const avg = (l) => l.length ? (l.reduce((n, r) => n + r.score, 0) / l.length).toFixed(1) : '–'
+  return { played: done.length, avg: avg(done), perfect: done.filter(r => r.score === 9).length, modePlayed: inMode.length, modeAvg: avg(inMode), streak, best }
+}
+
+function History({ uid, ver, modes, mode, onOpen, onOpenAuth }) {
+  const [list, setList] = useState(null)
+  useEffect(() => { let live = true; loadHistory(uid).then(l => { if (live) setList(l) }); return () => { live = false } }, [uid, ver])
+  if (!list) return null
+  const st = statsOf(list, mode)
+  const label = (id) => modes?.find(m => m.id === id)?.label || id
+  const tile = (n, l) => (
+    <div style={{ background: '#0F1320', border: '1px solid ' + LINE, borderRadius: 12, padding: '12px 10px', textAlign: 'center' }}>
+      <div style={{ ...display, fontSize: 30, color: TEXT }}>{n}</div>
+      <div style={{ ...eyebrow, fontSize: 11, color: LABEL, marginTop: 4 }}>{l}</div>
+    </div>
+  )
+  return (
+    <div style={{ marginTop: 28 }}>
+      <div style={{ ...eyebrow, color: LABEL }}>Your stats · {label(mode)}</div>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(110px, 1fr))', gap: 8, marginTop: 10 }}>
+        {tile(st.modePlayed, 'Played')}{tile(st.modeAvg, 'Avg score')}{tile(st.streak, 'Day streak')}{tile(st.best, 'Best streak')}
+      </div>
+      <p style={{ color: LABEL, fontSize: 13, margin: '10px 0 0' }}>
+        All modes: {st.played} played · {st.avg} average · {st.perfect} immaculate.
+        {!uid && <> Saved in this browser only — <button onClick={onOpenAuth} style={{ background: 'none', border: 'none', color: ACCENT_TEXT, cursor: 'pointer', padding: 0, fontSize: 13, fontFamily: 'inherit' }}>sign in</button> to keep your history on every device.</>}
+      </p>
+      {list.length > 0 && (
+        <div style={{ marginTop: 14, border: '1px solid ' + LINE, borderRadius: 12, overflow: 'hidden' }}>
+          {list.slice(0, 12).map((r, i) => (
+            <button key={r.mode + r.grid_key} onClick={() => onOpen({ mode: r.mode, seed: r.daily ? '' : r.grid_key.slice(1) })} disabled={r.daily && r.grid_key !== today()}
+              style={{ width: '100%', display: 'flex', justifyContent: 'space-between', gap: 12, alignItems: 'center', minHeight: 40, padding: '0 14px', border: 'none', borderTop: i ? '1px solid ' + LINE : 'none',
+                background: i % 2 ? '#0F1320' : SURFACE, color: TEXT, fontFamily: 'inherit', fontSize: 14, cursor: r.daily && r.grid_key !== today() ? 'default' : 'pointer', textAlign: 'left' }}>
+              <span>{label(r.mode)} · {r.daily ? r.grid_key : 'Random grid'}</span>
+              <span style={{ color: r.score === 9 ? GOOD : r.finished ? TEXT_2 : ACCENT_TEXT, fontWeight: 600 }}>{r.finished ? r.score + '/9' : 'In progress · ' + r.score + '/9'}</span>
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
+
 // ---------- page ----------
-export function GridGame({ mode: modeProp, seed: seedProp, onChange }) {
+export function GridGame({ mode: modeProp, seed: seedProp, onChange, account, onOpenAuth }) {
   const [modes, setModes] = useState(null)
   const [data, setData] = useState(null)
   const [err, setErr] = useState('')
@@ -95,7 +186,31 @@ export function GridGame({ mode: modeProp, seed: seedProp, onChange }) {
     try { const v = JSON.parse(localStorage.getItem(stateKey) || 'null'); if (v && typeof v.left === 'number') s = v } catch {}
     setSt(s)
   }, [stateKey])
-  const save = (s) => { setSt(s); try { localStorage.setItem(stateKey, JSON.stringify(s)) } catch {} }
+  const gridKey = daily ? today() : 's' + seed
+  const uid = account?.session?.user?.id
+  const save = (s) => {
+    setSt(s)
+    try { localStorage.setItem(stateKey, JSON.stringify(s)) } catch {}
+    const rec = recordOf(mode, gridKey, daily, s)
+    saveLocalHistory(rec)
+    if (uid) pushPlays(uid, [rec])
+    setHistVer(v => v + 1)
+  }
+  // signed in: this grid's saved game follows the account across devices
+  useEffect(() => {
+    if (!uid) return
+    let live = true
+    supa.from('cardhq_grid_plays').select('picks, misses, guesses_used, finished').eq('user_id', uid).eq('mode', mode).eq('grid_key', gridKey).maybeSingle()
+      .then(({ data: row }) => {
+        if (!live || !row) return
+        setSt(cur => {
+          const remote = { picks: row.picks || {}, left: 9 - (row.guesses_used || 0), misses: row.misses || [], gaveUp: row.finished && Object.keys(row.picks || {}).length < 9 && row.guesses_used < 9 }
+          return 9 - cur.left > row.guesses_used ? cur : remote   // whichever has played further
+        })
+      })
+    return () => { live = false }
+  }, [uid, mode, gridKey])
+  const [histVer, setHistVer] = useState(0)
 
   const [open, setOpen] = useState(null)   // [r, c] being guessed
   const [flash, setFlash] = useState('')
@@ -139,7 +254,7 @@ export function GridGame({ mode: modeProp, seed: seedProp, onChange }) {
       <h1 style={{ ...display, fontSize: 'clamp(36px, 7vw, 56px)', margin: '6px 0 8px', color: TEXT }}>The Grid</h1>
       <p style={{ color: TEXT_2, fontSize: 15, margin: '0 0 20px', lineHeight: 1.5 }}>
         Fill each square with a {group === 'tcg' ? 'character' : 'player'} who has a card matching both its row and column.
-        {group === 'tcg' ? '' : 'Team + team means cards with both teams. '}9 guesses, and each {group === 'tcg' ? 'character' : 'player'} only once.
+        {group === 'tcg' ? ' ' : ' Team + team means cards with both teams. '}9 guesses, and each {group === 'tcg' ? 'character' : 'player'} only once.
       </p>
 
       {/* Sports / TCG tabs, then the modes in that group */}
@@ -167,9 +282,9 @@ export function GridGame({ mode: modeProp, seed: seedProp, onChange }) {
               <div style={{ ...display, fontSize: 40, color: TEXT }}>{st.left}</div>
               <div style={{ ...eyebrow, fontSize: 11, color: LABEL }}>guesses left</div>
             </div>
-            {grid.cols.map(c => <Header key={'c' + c} cat={data.cats[c]} />)}
+            {grid.cols.map(c => <Header key={'c' + c} cat={data.cats[c]} sport={data.sport} />)}
             {[0, 1, 2].map(r => [
-              <Header key={'r' + r} cat={data.cats[grid.rows[r]]} />,
+              <Header key={'r' + r} cat={data.cats[grid.rows[r]]} sport={data.sport} />,
               ...[0, 1, 2].map(c => {
                 const pi = st.picks[r + '-' + c]   // name
                 const n = answers(r, c).length
@@ -214,6 +329,8 @@ export function GridGame({ mode: modeProp, seed: seedProp, onChange }) {
             </div>
           )}
 
+          <History uid={uid} ver={histVer} modes={modes} mode={mode} onOpen={onChange} onOpenAuth={onOpenAuth} />
+
           {open && !done && (
             <GuessBox data={data} used={used} rowCat={data.cats[grid.rows[open[0]]]} colCat={data.cats[grid.cols[open[1]]]}
               tcg={group === 'tcg'} onPick={guess} onClose={() => setOpen(null)} />
@@ -224,8 +341,15 @@ export function GridGame({ mode: modeProp, seed: seedProp, onChange }) {
   )
 }
 
-function Header({ cat }) {
+function Header({ cat, sport }) {
   const [kind, label] = cat
+  const logo = kind === 'team' ? teamLogo(label, sport) : ''
+  const [bad, setBad] = useState(false)
+  if (logo && !bad) return (
+    <div title={label} style={{ minHeight: 64, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 4 }}>
+      <img src={logo} alt={label} onError={() => setBad(true)} style={{ width: 'min(76px, 100%)', aspectRatio: '1 / 1', objectFit: 'contain', filter: 'drop-shadow(0 0 1px rgba(255,255,255,0.55)) drop-shadow(0 2px 6px rgba(0,0,0,0.35))' }} />
+    </div>
+  )
   return (
     <div style={{ minHeight: 64, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', padding: '6px 4px' }}>
       <div style={{ ...eyebrow, fontSize: 11, color: LABEL }}>{KIND_LABEL[kind] || kind}</div>

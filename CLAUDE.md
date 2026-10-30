@@ -75,6 +75,11 @@
   except team × team (career). Only squares with ≥3 answers are written, so every grid is solvable. Daily grid is
   seeded by mode + local date; picks are saved in localStorage by player name. Junk "players" (team cards, badges,
   TBA) and junk teams are filtered by `NOT_A_PLAYER` / `TEAM_JUNK` in the script.
+  Categories carry a year: `set` = one checklist ("2018-19 Upper Deck The Cup"), `product` = a product line over a
+  5-year span ("The Cup 2016–20"; multi-sport: "2021 Prizm"); no bare brands/products. The page aims for ≥6 answers per
+  square (`FAIR` in grid.js). NHL/NFL/NBA/MLB team squares show logos (`lib/team-logos.js`, ESPN CDN) and only teams
+  with a logo are used there. Play history: localStorage `hq.grid.v1.history` + `cardhq_grid_plays` for signed-in
+  users (`scripts/sql/2026-10-30-grid-plays.sql`); the page works without the table and syncs once it exists.
 - **Teams are one entry each, under the current name** (`lib/teams.js`, used by the team browse slices and My PC):
   spellings, bare nicknames/cities and glued tags ("Tampa Bay Rays AS") merge, and same-market renames merge via
   `FRANCHISES` ("Tampa Bay Devil Rays" → Tampa Bay Rays, "Mighty Ducks of Anaheim" → Anaheim Ducks). Relocations to a new
