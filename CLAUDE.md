@@ -75,3 +75,7 @@
   except team × team (career). Only squares with ≥3 answers are written, so every grid is solvable. Daily grid is
   seeded by mode + local date; picks are saved in localStorage by player name. Junk "players" (team cards, badges,
   TBA) and junk teams are filtered by `NOT_A_PLAYER` / `TEAM_JUNK` in the script.
+- **Teams are one entry each, under the current name** (`lib/teams.js`, used by the team browse slices and My PC):
+  spellings, bare nicknames/cities and glued tags ("Tampa Bay Rays AS") merge, and same-market renames merge via
+  `FRANCHISES` ("Tampa Bay Devil Rays" → Tampa Bay Rays, "Mighty Ducks of Anaheim" → Anaheim Ducks). Relocations to a new
+  market stay separate teams. When a team is renamed, add its old names to `FRANCHISES`.

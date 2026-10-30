@@ -11,7 +11,8 @@ import { CollectionView, useMyCollection } from '../components/collection'
 import { addWant, removeWant, myWantlist, grailfindrFindUrl, signOutHere, noCardNumber, setOwners, collectionCardN } from '../lib/supa'
 import { FeedbackModal, FeedbackView, useFeedbackAdmin } from '../components/feedback'
 import { FixEditor } from '../components/fix-editor'
-import { useMyPC, MyPCPanel, cardMatchesChase } from '../components/mypc'
+import { useMyPC, MyPCPanel, cardMatchesChase, canonTeam, cardTeams } from '../components/mypc'
+import { foldTeam } from '../lib/teams'
 import { Omnibox, PlayerPage, useMyPlayers, loadPlayerDir, loadTopPlayers, seasonLabel, MemBadge, MemChip, memCodeOf } from '../components/player'
 import { ComparePage } from '../components/compare'
 import { GridGame } from '../components/grid'
@@ -672,10 +673,11 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
   const mineSet = useMemo(() => new Set(myPlayers.list.map(n => n.toLowerCase())), [myPlayers.list])
   const isMine = (p) => { const n = (p || '').toLowerCase(); if (mineSet.has(n)) return true; for (const m of mineSet) if (n.includes(m)) return true; return false }
   // My PC on a set page: a player you collect, a team you collect, or one of your chases
-  const pcTeamSet = useMemo(() => new Set(pc.teams.map(t => norm(t))), [pc.teams])
+  // teams by their one site-wide name, so a Tampa Bay Rays PC also shows Devil Rays cards (lib/teams.js)
+  const pcTeamSet = useMemo(() => new Set(pc.teams.map(t => foldTeam(canonTeam(t, setData ? setData.sport : '')))), [pc.teams, setData])
   const inPC = (c, s) => {
     if (isMine(c.p)) return true
-    if (c.t && pcTeamSet.size && String(c.t).split(/\s+\/\s+|\s*;\s*/).some(x => pcTeamSet.has(norm(x)))) return true
+    if (c.t && pcTeamSet.size && cardTeams(c.t, setData.sport).some(x => pcTeamSet.has(x))) return true
     if (pc.chases.length) {
       const x = c.x || ''
       const card = { p: c.p, t: c.t, section: s.title || '', setName: setData.name, year: setData.year, sport: setData.sport, au: /\bAU\b/.test(x), rc: /\bRC\b/.test(x), one: cardSerial(c, s) === 1, numbered: cardSerial(c, s) > 0 }

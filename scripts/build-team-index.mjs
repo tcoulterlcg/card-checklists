@@ -1,17 +1,20 @@
 // Build the team index (static + catalog sets) that powers "My PC" team chases ("Lightning shields", "Rays SuperFractors").
 //
-//   public/data/pc-teams/dir.json        — { v, teams: [[name, sport, cards, file], ...] }  (most cards first)
+//   public/data/pc-teams/dir.json        — { v, teams: [[name, sport, cards, file, [spellings...]], ...] }  (most cards first)
 //   public/data/pc-teams/<file>.json     — one team's cards, grouped by set section:
 //     { sets: [[slug, name, year]], sections: [...], players: [...],
 //       groups: [[setIdx, sectionIdx, playerIdx, number, flags, playerIdx, number, flags, ...], ...] }
 //
 // Reads the same sets as the player index: static sets in public/data plus the catalog sets that
 // build-player-index.mjs caches in node_modules/.cache/catalog-sets (run that first).
-// One team = one name in one sport ("Tampa Bay Lightning" / Hockey). Cards listing two teams
+// One team = one entry per sport under its current name: spellings, bare nicknames and renamed
+// franchises ("Tampa Bay Devil Rays" -> Tampa Bay Rays) are merged by lib/teams.js. Each dir entry
+// lists the spellings it covers so pages can match a card's team. Cards listing two teams
 // ("Lightning / Red Wings") count for both. Tiny or junk team names are left out.
 //
 //   node scripts/build-team-index.mjs
 import { readFileSync, writeFileSync, readdirSync, mkdirSync, existsSync, rmSync } from 'node:fs'
+import { teamCanon } from '../lib/teams.js'
 
 const dataDir = new URL('../public/data/', import.meta.url)
 const cacheDir = new URL('../node_modules/.cache/catalog-sets/', import.meta.url)
@@ -37,23 +40,39 @@ for (const f of readdirSync(dataDir)) if (f.endsWith('.json') && !SKIP.test(f)) 
 const staticSlugs = new Set(readdirSync(dataDir).filter(f => f.endsWith('.json')).map(f => f.slice(0, -5)))
 if (existsSync(cacheDir)) for (const f of readdirSync(cacheDir)) if (f.endsWith('.json') && !staticSlugs.has(decodeURIComponent(f.slice(0, -5)))) files.push(new URL(f, cacheDir))
 
-// key "norm|sport" -> team bucket
-const teams = new Map()
+function* eachSet() {
+  for (const u of files) {
+    let s
+    try { s = JSON.parse(readFileSync(u, 'utf8')) } catch { continue }
+    if (!s.slug || !Array.isArray(s.sections) || s.incomplete || NO_TEAM_SPORTS.has(s.sport || '')) continue
+    yield s
+  }
+}
+const teamsOf = (c) => String(c.t).split(/\s+\/\s+|\s*;\s*/).map(x => x.trim()).filter(okTeam)
+
+// pass 1: every spelling's card count per sport -> one display name per team
+const spellings = new Map()   // sport -> Map(spelling -> cards)
+for (const s of eachSet()) {
+  let m = spellings.get(s.sport); if (!m) spellings.set(s.sport, m = new Map())
+  for (const sec of s.sections) for (const c of sec.cards || []) if (c.t && c.p) for (const t of teamsOf(c)) m.set(t, (m.get(t) || 0) + 1)
+}
+const canonOf = new Map()   // sport -> Map(spelling -> display)
+for (const [sp, m] of spellings) canonOf.set(sp, teamCanon([...m.entries()], sp))
+
+// pass 2: cards bucketed under the display name
+const teams = new Map()   // "display|sport" -> bucket
 let sets = 0
-for (const u of files) {
-  let s
-  try { s = JSON.parse(readFileSync(u, 'utf8')) } catch { continue }
-  if (!s.slug || !Array.isArray(s.sections) || s.incomplete || NO_TEAM_SPORTS.has(s.sport || '')) continue
+for (const s of eachSet()) {
   sets++
+  const canon = canonOf.get(s.sport)
   for (const sec of s.sections) {
     for (const c of sec.cards || []) {
       if (!c.t || !c.p) continue
-      for (const raw of String(c.t).split(/\s+\/\s+|\s*;\s*/)) {
-        const t = raw.trim(); if (!okTeam(t)) continue
-        const key = norm(t) + '|' + s.sport
+      for (const name of new Set(teamsOf(c).map(t => canon.get(t) || t))) {
+        const key = name + '|' + s.sport
         let b = teams.get(key)
-        if (!b) { b = { names: new Map(), sport: s.sport, cards: 0, sets: [], setId: new Map(), setMeta: [], sections: [], secId: new Map(), players: [], plId: new Map(), groups: new Map() }; teams.set(key, b) }
-        b.names.set(t, (b.names.get(t) || 0) + 1)
+        if (!b) { b = { name, spell: new Set(), sport: s.sport, cards: 0, sets: [], setId: new Map(), setMeta: [], sections: [], secId: new Map(), players: [], plId: new Map(), groups: new Map() }; teams.set(key, b) }
+        for (const t of teamsOf(c)) if ((canon.get(t) || t) === name) b.spell.add(t)
         b.cards++
         const si = intern(s.slug, b.sets, b.setId)
         if (!b.setMeta[si]) b.setMeta[si] = [s.slug, s.name || s.slug, s.year || 0]
@@ -71,9 +90,9 @@ mkdirSync(outDir, { recursive: true })
 const dir = []
 let file = 0, rows = 0
 for (const b of [...teams.values()].filter(b => b.cards >= MIN_CARDS).sort((a, b) => b.cards - a.cards)) {
-  const name = [...b.names.entries()].sort((a, b) => b[1] - a[1])[0][0]
+  const name = b.name
   writeFileSync(new URL(file + '.json', outDir), JSON.stringify({ name, sport: b.sport, sets: b.setMeta, sections: b.sections, players: b.players, groups: [...b.groups.values()] }))
-  dir.push([name, b.sport, b.cards, file++])
+  dir.push([name, b.sport, b.cards, file++, [...b.spell].filter(t => t !== name).sort()])
   rows += b.cards
 }
 writeFileSync(new URL('dir.json', outDir), JSON.stringify({ v: 1, teams: dir }))

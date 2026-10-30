@@ -15,6 +15,7 @@ import { norm, nameHasTok, matchPlayers, TYPE } from '../lib/query'
 import { PAR, PAR_LABEL, parallelKinds } from '../lib/parallels'
 import { ACCENT, ACCENT_TEXT, display, eyebrow, title, buttonText } from '../lib/theme'
 import { loadPlayerDir, loadTopPlayers, loadShard } from './player'
+import { foldTeam, franchiseName } from '../lib/teams'
 
 const SPORT_COLORS = { Baseball: '#60a5fa', Football: '#4ade80', Basketball: '#f97316', Hockey: '#a78bfa', Soccer: '#f43f5e', Racing: '#ef4444', Golf: '#22c55e', Wrestling: '#f59e0b', UFC: '#dc2626', 'Multi-Sport': '#94a3b8' }
 const okJson = (r) => { if (!r.ok) throw new Error(r.status); return r.json() }
@@ -48,11 +49,16 @@ const AU_TITLE = /\bauto|autograph|signature|signing|\bink\b|scripted/i
 const PATCH_TITLE = /\bpatch|laundry|nameplate|logo ?man|shield|emblem|button|\btag\b/i
 const ONE_TITLE = /(^|[^\d])1\/1\b|one of one|\bsuper ?fractor|printing plate/i
 const NUM_TITLE = /(^|\s)\/\s?\d+\b|#'?d\b|numbered/i
-const teamHit = (cardTeam, team) => { if (!cardTeam) return false; const t = norm(team); return String(cardTeam).split(/\s+\/\s+|\s*;\s*/).some(x => norm(x) === t) }
+// Teams match by their one site-wide name (lib/teams.js + the spellings each team-index entry lists),
+// so "Tampa Bay Rays" also finds "Tampa Bay Devil Rays" and "Rays" cards.
+let TEAM_ALIAS = null   // "sport|folded spelling" -> team name
+export const canonTeam = (t, sport) => (TEAM_ALIAS && (TEAM_ALIAS.get(sport + '|' + foldTeam(t)) || TEAM_ALIAS.get('|' + foldTeam(t)))) || franchiseName(t, sport)
+export const cardTeams = (t, sport) => t ? String(t).split(/\s+\/\s+|\s*;\s*/).map(x => foldTeam(canonTeam(x.trim(), sport))) : []
+const teamHit = (cardTeam, team, sport) => { if (!cardTeam) return false; const k = foldTeam(canonTeam(team, sport)); return cardTeams(cardTeam, sport).includes(k) }
 
 // card: { p, t, section, setName, year, sport, au, rc, one, numbered }
 export function cardMatchesChase(c, card) {
-  if (c.team && !teamHit(card.t, c.team)) return false
+  if (c.team && !teamHit(card.t, c.team, card.sport)) return false
   if (c.player && !norm(card.p).includes(norm(c.player))) return false
   if (c.text) {
     const hay = norm(card.section + ' ' + card.setName)
@@ -95,6 +101,9 @@ export function useMyPC(account) {
       })
     })
   }, [userId])
+  const [aliasReady, setAliasReady] = useState(!!TEAM_ALIAS)
+  const needsTeams = items.some(i => i.kind === 'team' || i.kind === 'chase')
+  useEffect(() => { if (needsTeams && !aliasReady) loadTeamDir().then(() => setAliasReady(true)) }, [needsTeams, aliasReady])
   const has = (kind, key) => items.some(i => i.kind === kind && i.key === key)
   const save = (next) => { setItems(next); try { localStorage.setItem(LS_KEY, JSON.stringify(next)) } catch {} }
   const add = async (kind, key, label) => {
@@ -108,15 +117,20 @@ export function useMyPC(account) {
   }
   const toggle = (kind, key, label) => has(kind, key) ? remove(kind, key) : add(kind, key, label)
   const of = (kind) => items.filter(i => i.kind === kind)
-  const teams = useMemo(() => items.filter(i => i.kind === 'team').map(i => i.key), [items])
-  const chases = useMemo(() => items.filter(i => i.kind === 'chase').map(i => parseChase(i.key)).filter(Boolean), [items])
+  const teams = useMemo(() => items.filter(i => i.kind === 'team').map(i => i.key), [items, aliasReady])
+  const chases = useMemo(() => items.filter(i => i.kind === 'chase').map(i => parseChase(i.key)).filter(Boolean), [items, aliasReady])
   return { items, has, add, remove, toggle, of, teams, chases }
 }
 
 // ---------- team directory ----------
 let teamDirPromise = null
 export function loadTeamDir() {
-  if (!teamDirPromise) teamDirPromise = fetch('/data/pc-teams/dir.json').then(okJson).catch(() => { teamDirPromise = null; return { teams: [] } })
+  if (!teamDirPromise) teamDirPromise = fetch('/data/pc-teams/dir.json').then(okJson).then(d => {
+    const m = new Map()
+    for (const t of d.teams) for (const n of [t[0], ...(t[4] || [])]) { m.set(t[1] + '|' + foldTeam(n), t[0]); if (!m.has('|' + foldTeam(n))) m.set('|' + foldTeam(n), t[0]) }
+    TEAM_ALIAS = m
+    return d
+  }).catch(() => { teamDirPromise = null; return { teams: [] } })
   return teamDirPromise
 }
 const teamFileCache = new Map()
@@ -130,15 +144,15 @@ async function chaseCards(c, sets) {
   const out = []
   if (c.team) {
     const dir = await loadTeamDir()
-    const k = norm(c.team)
-    const hits = dir.teams.filter(t => norm(t[0]) === k && (!c.sport || t[1] === c.sport))
+    const k = canonTeam(c.team, c.sport)
+    const hits = dir.teams.filter(t => t[0] === k && (!c.sport || t[1] === c.sport))
     for (const h of hits) {
       const f = await loadTeamFile(h[3]); if (!f) continue
       for (const g of f.groups) {
         const [slug, setName, year] = f.sets[g[0]], section = f.sections[g[1]]
         for (let i = 2; i < g.length; i += 3) {
           const x = g[i + 2] || ''
-          const card = { slug, setName, year, sport: f.sport, section, p: f.players[g[i]], n: g[i + 1], t: c.team, au: x.includes('A'), rc: x.includes('R'), one: x.includes('1'), numbered: x.includes('N') }
+          const card = { slug, setName, year, sport: f.sport, section, p: f.players[g[i]], n: g[i + 1], t: k, au: x.includes('A'), rc: x.includes('R'), one: x.includes('1'), numbered: x.includes('N') }
           if (cardMatchesChase(c, card)) out.push(card)
         }
       }
@@ -213,8 +227,9 @@ function useTeamSuggest(q) {
   return useMemo(() => {
     const t = norm(q); if (!dir || t.length < 2) return []
     const toks = t.split(' ')
-    return dir.teams.filter(x => { const n = norm(x[0]); return toks.every(k => n.includes(k)) }).slice(0, 8)
-      .map(x => ({ id: x[0] + '|' + x[1], label: x[0], meta: x[1] + ' · ' + x[2].toLocaleString() + ' cards', team: x[0], sport: x[1], cards: x[2] }))
+    const formerly = (x) => (x[4] || []).filter(a => a.includes(' ') && !norm(x[0]).includes(norm(a)) && !norm(a).includes(norm(x[0])) && /^[A-Z]/.test(a) && !/[-:(]/.test(a))
+    return dir.teams.filter(x => [x[0], ...(x[4] || [])].some(n0 => { const n = norm(n0); return toks.every(k => n.includes(k)) })).slice(0, 8)
+      .map(x => { const f = formerly(x).slice(0, 2); return { id: x[0] + '|' + x[1], label: x[0], meta: x[1] + ' · ' + x[2].toLocaleString() + ' cards' + (f.length ? ' · incl. ' + f.join(', ') : ''), team: x[0], sport: x[1], cards: x[2] } })
   }, [dir, q])
 }
 
@@ -222,7 +237,7 @@ export function MyPCPanel({ myPlayers, pc, sets, onOpenPlayer, onOpenSet, initia
   const [tab, setTab] = useState(initialTab || 'players')
   const [teamDir, setTeamDir] = useState(null)
   useEffect(() => { loadTeamDir().then(setTeamDir) }, [])
-  const teamInfo = (name) => teamDir && teamDir.teams.find(t => t[0] === name)
+  const teamInfo = (name) => teamDir && (teamDir.teams.find(t => t[0] === name) || teamDir.teams.find(t => t[0] === canonTeam(name, '')))
   const setMeta = useMemo(() => new Map((sets || []).map(s => [s.slug, s])), [sets])
   const TABS = [['players', 'Players', myPlayers.list.length], ['teams', 'Teams', pc.of('team').length], ['sets', 'Sets', pc.of('set').length], ['chases', 'Chases', pc.of('chase').length]]
   return (
@@ -289,7 +304,7 @@ function TeamsTab({ pc, teamInfo, onChase }) {
               <div key={key} style={{ ...box, display: 'flex', gap: 12, alignItems: 'center' }}>
                 <Initials name={key} color={SPORT_COLORS[t && t[1]] || ACCENT} />
                 <div style={{ flex: 1, minWidth: 0 }}>
-                  <p style={{ ...title(16), margin: 0, color: '#EDEDEF', lineHeight: 1.05 }}>{key}</p>
+                  <p style={{ ...title(16), margin: 0, color: '#EDEDEF', lineHeight: 1.05 }}>{t ? t[0] : key}</p>
                   <p style={{ margin: '3px 0 0', color: '#8A93A8', fontSize: 12 }}>{t ? t[1] + ' · ' + t[2].toLocaleString() + ' cards' : '…'}</p>
                 </div>
                 <button aria-label={'Remove ' + key} onClick={() => pc.remove('team', key)} style={xBtn}>×</button>
