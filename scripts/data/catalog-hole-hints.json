@@ -9665,6 +9665,18 @@
    "7 photo"
   ]
  },
+ "2007-08-panini-uefa-champions-league": {
+  "missingPlayers": [
+   "benzema",
+   "luiz",
+   "maria",
+   "ozil",
+   "rakitic"
+  ],
+  "missingInserts": [
+   "sticker"
+  ]
+ },
  "2015-bowman-draft-baseball-cards": {
   "missingPlayers": [
    "anderson",
@@ -12096,6 +12108,12 @@
    "sahlawi"
   ],
   "missingInserts": []
+ },
+ "2006-merlin-england-stickers": {
+  "missingPlayers": [],
+  "missingInserts": [
+   "world cup"
+  ]
  },
  "1990-topps-traded-baseball-cards": {
   "missingPlayers": [
