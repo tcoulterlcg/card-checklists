@@ -32,8 +32,8 @@
   },
   "Soccer": {
    "file": "index/soccer.json",
-   "sets": 1465,
-   "cards": 245791
+   "sets": 1547,
+   "cards": 264134
   },
   "Wrestling": {
    "file": "index/wrestling.json",
@@ -76,11 +76,11 @@
    "cards": 298210
   }
  },
- "sets": 33031,
- "cards": 8136361,
- "updated": "2026-10-29T18:03:50.408Z",
+ "sets": 33113,
+ "cards": 8154704,
+ "updated": "2026-10-30T00:04:22.443Z",
  "visible": {
   "file": "index/visible.json",
-  "sets": 21405
+  "sets": 21489
  }
 }
