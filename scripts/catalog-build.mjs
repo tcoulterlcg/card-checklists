@@ -40,9 +40,15 @@ const STOP = new Set(['and', 'the', 'card', 'cards', 'trading', 'checklist', 'ch
 // Seasons key on their first year ("2005-06" and SportsCardsPro's "2005" are the
 // same product), and the sport is part of the key so "2006 Topps Baseball" never
 // matches "2006-07 Topps Basketball".
-const key = (slug, sport) => (sport || '') + '|' + slug.toLowerCase()
-  .replace(/^(\d{2})-(\d{2})-/, '20$1-').replace(/(^|-)((?:19|20)\d{2})-\d{2}(?=-)/, '$1$2')
-  .split('-').filter(t => t && !STOP.has(t)).sort().join('-')
+// A name that is only year + brand ("1995-96 Topps", "1995-96 Upper Deck") keys to the
+// bare year, which would make different flagship sets look like one product — those
+// key on the full slug instead.
+const key = (slug, sport) => {
+  const toks = slug.toLowerCase()
+    .replace(/^(\d{2})-(\d{2})-/, '20$1-').replace(/(^|-)((?:19|20)\d{2})-\d{2}(?=-)/, '$1$2')
+    .split('-').filter(t => t && !STOP.has(t))
+  return (sport || '') + '|' + (toks.filter(t => !/^\d{4}$/.test(t)).length ? toks.sort().join('-') : 'slug:' + slug.toLowerCase())
+}
 
 const staticIndex = JSON.parse(readFileSync(new URL('../public/data/index.json', import.meta.url), 'utf8')).sets || []
 const staticSlugs = new Set(staticIndex.map(s => s.slug))
