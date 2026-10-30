@@ -423,7 +423,9 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "19-20-upper-deck-sp-game-used-chl-hockey: 250 -> 374 cards, 4 -> 10 sections, covers 100.0% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "20-21-leaf-superlative-hockey",
@@ -2571,7 +2573,9 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2026-upper-deck-team-canada-juniors-hockey: 250 -> 2387 cards, 54 -> 33 sections, covers 100.0% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "2026-upper-deck-team-usa-juniors-hockey",
@@ -2871,7 +2875,9 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "25-26-fleer-ultra-pwhl-hockey-card: 250 -> 1979 cards, 63 -> 49 sections, covers 100.0% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "25-26-panini-football-efl-soccer-card",
@@ -7735,9 +7741,10 @@
   "why": [
    "missing inserts: dual jersey, treasured swatches, tundra tandems jerseys"
   ],
-  "status": "review",
-  "note": "2012-13-upper-deck-artifacts-hockey: 1833 -> 3113 cards, 20 -> 34 sections, covers 81.7% of current",
-  "tcdbSid": 72425
+  "status": "done",
+  "note": "2012-13-upper-deck-artifacts-hockey: 1833 -> 3113 cards, 20 -> 34 sections, covers 99.2% of current",
+  "tcdbSid": 72425,
+  "at": "2026-10-30"
  },
  {
   "slug": "2018-panini-elite-extra-edition-baseball",
@@ -10300,7 +10307,9 @@
    "missing inserts: fabrics",
    "5 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2015-16-upper-deck-contours-hockey-cards: 341 -> 1593 cards, 8 -> 30 sections, covers 100.0% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "2013-disney-monsters-inc-scare-cards",
@@ -10746,7 +10755,9 @@
   "why": [
    "missing inserts: duals"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2014-upper-deck-premier-hockey-cards: 279 -> 1406 cards, 8 -> 35 sections, covers 100.0% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "1992-topps-traded-baseball-cards",
@@ -11540,7 +11551,9 @@
   "why": [
    "missing inserts: star skills fabrics"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2015-sp-game-hockey-cards: 441 -> 2038 cards, 4 -> 62 sections, covers 99.0% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "2014-upper-deck-hockey-cards-2",
@@ -11552,7 +11565,9 @@
   "why": [
    "missing inserts: rinkside signings"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2014-upper-deck-hockey-cards-2: 269 -> 652 cards, 4 -> 23 sections, covers 100.0% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "2013-14-panini-playbook-hockey-cards",
@@ -11590,7 +11605,9 @@
   "why": [
    "missing inserts: authentic fabrics"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2011-12-sp-game-used-hockey-cards: 214 -> 2265 cards, 4 -> 52 sections, covers 99.1% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "certified-nascar-full",
@@ -12240,7 +12257,9 @@
   "why": [
    "missing inserts: script"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2015-upper-deck-hockey-cards: 482 -> 2215 cards, 3 -> 16 sections, covers 100.0% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "2015-16-upper-deck-premier-hockey-cards",
@@ -12264,7 +12283,9 @@
   "why": [
    "missing inserts: jersey"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2015-upper-deck-team-canada-juniors-hockey: 415 -> 1648 cards, 7 -> 40 sections, covers 99.6% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "2015-upper-deck-trilogy-hockey-cards",
@@ -12288,7 +12309,9 @@
   "why": [
    "missing inserts: tundra tandems jerseys"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2014-15-upper-deck-artifacts-hockey-cards: 1207 -> 2381 cards, 13 -> 42 sections, covers 100.0% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "2011-12-panini-dominion-hockey-cards",
@@ -12312,7 +12335,9 @@
   "why": [
    "missing inserts: foundations cornerstone quad"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2006-07-upper-deck-the-cup-hockey: 5979 -> 5979 cards, 92 -> 92 sections, covers 100.0% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "2005-06-upper-deck-the-cup-hockey",
@@ -12724,7 +12749,9 @@
   "why": [
    "only 1 cards scraped — hidden until a full checklist is imported"
   ],
-  "status": "todo"
+  "status": "review",
+  "note": "2015-16-upper-deck-connor-mcdavid-collection-hockey: 1 -> 25 cards, 1 -> 1 sections, covers 0.0% of current",
+  "tcdbSid": 118999
  },
  {
   "slug": "2015-leaf-metal-draft-baseball-cards",
@@ -12748,7 +12775,9 @@
   "why": [
    "only 4 cards scraped — hidden until a full checklist is imported"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2015-leaf-metal-hockey-cards: 4 -> 2384 cards, 1 -> 104 sections, covers 100.0% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "2015-leaf-trinity-baseball-cards",
@@ -13012,7 +13041,9 @@
   "why": [
    "only 3 cards scraped — hidden until a full checklist is imported"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2018-19-upper-deck-game-dated-moments-hockey-cards: 3 -> 128 cards, 1 -> 4 sections, covers 100.0% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "2018-baseball-treasure-mlb-coins",
@@ -20806,7 +20837,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "1999-00-upper-deck-retro-hockey: 186 -> 516 cards, 7 -> 15 sections, covers 99.5% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "2011-12-in-game-captain-c-hockey-cards",
@@ -20876,7 +20909,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2011-12-upper-deck-series-1-hockey: 597 -> 3333 cards, 15 -> 43 sections, covers 99.5% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "2012-13-panini-limited-hockey-cards",
@@ -20890,7 +20925,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "review",
+  "note": "2012-13-panini-limited-hockey-cards: 1473 -> 3858 cards, 38 -> 65 sections, covers 89.1% of current",
+  "tcdbSid": 72869
  },
  {
   "slug": "2012-13-panini-prime-hockey-cards",
@@ -20934,7 +20971,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "review",
+  "note": "2012-13-score-hockey-cards: 783 -> 1880 cards, 14 -> 14 sections, covers 89.4% of current",
+  "tcdbSid": 70561
  },
  {
   "slug": "2012-13-sp-game-used-hockey-cards",
@@ -20948,7 +20987,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2012-13-sp-game-used-hockey-cards: 376 -> 1105 cards, 13 -> 56 sections, covers 100.0% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "2012-13-upper-deck-series-1-hockey",
@@ -21134,7 +21175,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "review",
+  "note": "2013-14-upper-deck-artifacts-hockey-cards: 1976 -> 3362 cards, 18 -> 41 sections, covers 82.6% of current",
+  "tcdbSid": 81461
  },
  {
   "slug": "2013-14-upper-deck-edmonton-oilers-collection-hockey-cards",
@@ -21162,7 +21205,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2013-14-upper-deck-overtime-hockey-cards: 228 -> 320 cards, 4 -> 5 sections, covers 100.0% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "2013-14-upper-deck-series-1-hockey-cards",
@@ -21232,7 +21277,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2014-15-upper-deck-overtime-hockey-cards: 349 -> 1208 cards, 8 -> 17 sections, covers 99.6% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "2014-fleer-showcase-hockey-cards",
@@ -21390,7 +21437,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2015-16-upper-deck-ahl-hockey-cards: 306 -> 336 cards, 5 -> 7 sections, covers 100.0% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "2015-16-upper-deck-fusion-epack-hockey",
@@ -21544,7 +21593,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2016-team-canada-juniors: 386 -> 1655 cards, 7 -> 40 sections, covers 100.0% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "2016-tim-hortons-hockey",
@@ -21572,7 +21623,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "world-cup-of-hockey-official: 40 -> 210 cards, 1 -> 6 sections, covers 100.0% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "2016-17-fleer-showcase-hockey-cards",
@@ -21616,7 +21669,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2016-17-leaf-metal-hockey-cards: 10 -> 2529 cards, 1 -> 117 sections, covers 100.0% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "2016-17-leaf-ultimate-hockey-cards",
@@ -21672,7 +21727,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2016-17-trilogy-hockey: 150 -> 990 cards, 4 -> 22 sections, covers 100.0% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "2016-17-upper-deck-ahl-full",
@@ -21686,7 +21743,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "review",
+  "note": "2016-17-upper-deck-ahl-full: 298 -> 1204 cards, 4 -> 11 sections, covers 84.7% of current",
+  "tcdbSid": 143398
  },
  {
   "slug": "2016-17-upper-deck-biography-season-hockey",
@@ -21700,7 +21759,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "review",
+  "note": "2016-17-upper-deck-biography-season-hockey: 10 -> 10 cards, 1 -> 1 sections, covers 0.0% of current",
+  "tcdbSid": 236396
  },
  {
   "slug": "2016-17-upper-deck-compendium-hockey",
@@ -21882,7 +21943,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2017-upper-deck-team-canada-juniors-hockey: 330 -> 1065 cards, 5 -> 15 sections, covers 100.0% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "overtime-wave-one-full",
@@ -22008,7 +22071,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2017-18-ud-trilogy-hockey: 317 -> 1003 cards, 7 -> 40 sections, covers 100.0% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "2017-18-upper-deck-ahl-checklist-added",
@@ -22022,7 +22087,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2017-18-upper-deck-ahl-checklist-added: 300 -> 1207 cards, 4 -> 11 sections, covers 100.0% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "2017-18-upper-deck-artifacts-hockey",
@@ -22036,7 +22103,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2017-18-upper-deck-artifacts-hockey: 1488 -> 2680 cards, 13 -> 62 sections, covers 97.1% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "2017-18-upper-deck-chl-checklist-added",
@@ -22050,7 +22119,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2017-18-upper-deck-chl-checklist-added: 559 -> 3163 cards, 6 -> 15 sections, covers 99.6% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "2017-18-upper-deck-compendium-hockey-cards",
@@ -22078,7 +22149,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2017-18-upper-deck-overtime-hockey: 423 -> 943 cards, 7 -> 16 sections, covers 100.0% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "2017-18-upper-deck-parkhurst-hockey-nhl-cards",
@@ -22092,7 +22165,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2017-18-upper-deck-parkhurst-hockey-nhl-cards: 418 -> 1145 cards, 8 -> 16 sections, covers 99.8% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "2017-18-upper-deck-series-1-hockey-cards",
@@ -22296,7 +22371,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "review",
+  "note": "18-19-ud-upper-deck-engrained-hockey: 874 -> 866 cards, 31 -> 22 sections, covers 94.8% of current",
+  "tcdbSid": 196984
  },
  {
   "slug": "18-19-ud-upper-deck-ice-hockey",
@@ -22310,7 +22387,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "review",
+  "note": "18-19-ud-upper-deck-ice-hockey: 1087 -> 1041 cards, 76 -> 55 sections, covers 72.3% of current",
+  "tcdbSid": 193988
  },
  {
   "slug": "18-19-ud-upper-deck-premier-hockey",
@@ -22440,7 +22519,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "review",
+  "note": "18-19-ud-upper-deck-ultimate-collection-hockey: 1383 -> 1281 cards, 88 -> 75 sections, covers 97.8% of current",
+  "tcdbSid": 194492
  },
  {
   "slug": "2018-19-leaf-ultimate-hockey-cards",
@@ -22482,7 +22563,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2018-19-o-pee-chee-hockey-cards: 1385 -> 5830 cards, 7 -> 23 sections, covers 100.0% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "2018-19-panini-nhl-stickers-collection-hockey-cards",
@@ -22496,7 +22579,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "review",
+  "note": "2018-19-panini-nhl-stickers-collection-hockey-cards: 573 -> 575 cards, 1 -> 1 sections, covers 89.7% of current",
+  "tcdbSid": 191349
  },
  {
   "slug": "2018-19-sp-retail-hockey",
@@ -22540,7 +22625,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2018-19-upper-deck-ahl-hockey-cards: 224 -> 224 cards, 4 -> 4 sections, covers 100.0% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "2018-19-upper-deck-artifacts-hockey-cards",
@@ -22554,7 +22641,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2018-19-upper-deck-artifacts-hockey-cards: 1299 -> 2518 cards, 12 -> 52 sections, covers 99.3% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "2018-19-upper-deck-chl-hockey-cards",
@@ -22568,7 +22657,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2018-19-upper-deck-chl-hockey-cards: 587 -> 2896 cards, 6 -> 18 sections, covers 99.2% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "2018-19-upper-deck-compendium-hockey-cards",
@@ -22624,7 +22715,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2018-19-upper-deck-overtime-hockey-cards: 479 -> 949 cards, 10 -> 16 sections, covers 97.9% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "2018-19-upper-deck-series-2-hockey-cards",
@@ -22708,7 +22801,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2019-upper-deck-team-canada-juniors-hockey-cards: 417 -> 1349 cards, 7 -> 13 sections, covers 100.0% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "19-20-o-pee-chee-hockey",
@@ -22828,7 +22923,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "review",
+  "note": "19-20-ud-upper-deck-clear-cut-hockey: 977 -> 1038 cards, 61 -> 2 sections, covers 6.2% of current",
+  "tcdbSid": 217646
  },
  {
   "slug": "19-20-ud-upper-deck-credentials-hockey",
@@ -23048,7 +23145,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "review",
+  "note": "19-20-ud-upper-deck-trilogy-hockey: 1195 -> 1115 cards, 85 -> 68 sections, covers 98.9% of current",
+  "tcdbSid": 215391
  },
  {
   "slug": "19-20-ud-upper-deck-ultimate-collection-hockey",
@@ -23178,7 +23277,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2019-20-ud-ahl-hockey: 154 -> 156 cards, 4 -> 4 sections, covers 100.0% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "2019-20-ud-overtime-wave-2-hockey",
@@ -23248,7 +23349,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2019-20-upper-deck-rookie-box-set-hockey: 43 -> 43 cards, 2 -> 2 sections, covers 100.0% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "2019-20-upper-deck-tim-hortons-hockey-cards",
@@ -24182,7 +24285,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "21-22-parkhurst-hockey: 3642 -> 3670 cards, 52 -> 28 sections, covers 100.0% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "21-22-skybox-metal-universe-hockey",
@@ -24212,7 +24317,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "review",
+  "note": "21-22-ud-upper-deck-artifacts-hockey: 4958 -> 4873 cards, 167 -> 78 sections, covers 98.7% of current",
+  "tcdbSid": 275891
  },
  {
   "slug": "21-22-ud-upper-deck-black-diamond-hockey",
@@ -24254,7 +24361,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "review",
+  "note": "21-22-ud-upper-deck-mvp-hockey: 3302 -> 4644 cards, 48 -> 60 sections, covers 62.9% of current",
+  "tcdbSid": 269909
  },
  {
   "slug": "21-22-ud-upper-deck-series-1-hockey",
@@ -24382,7 +24491,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "21-22-upper-deck-sp-game-used-hockey: 4425 -> 4615 cards, 111 -> 71 sections, covers 99.6% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "21-22-upper-deck-spx-hockey",
@@ -24424,7 +24535,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "review",
+  "note": "21-22-upper-deck-synergy-hockey: 2645 -> 2607 cards, 94 -> 81 sections, covers 99.7% of current",
+  "tcdbSid": 278888
  },
  {
   "slug": "21-22-upper-deck-the-cup-hockey",
@@ -24606,7 +24719,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2022-23-upper-deck-tim-hortons-hockey-cards: 271 -> 315 cards, 9 -> 16 sections, covers 100.0% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "2023-tim-hortons-legends-hockey",
@@ -24750,7 +24865,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "22-23-ud-upper-deck-mvp-hockey: 4127 -> 4924 cards, 63 -> 59 sections, covers 98.5% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "22-23-upper-deck-allure-hockey",
@@ -24764,7 +24881,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "22-23-upper-deck-allure-hockey: 5336 -> 6392 cards, 103 -> 113 sections, covers 99.1% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "22-23-upper-deck-artifacts-hockey",
@@ -24978,7 +25097,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "review",
+  "note": "22-23-upper-deck-synergy-hockey: 3084 -> 2999 cards, 88 -> 79 sections, covers 96.7% of current",
+  "tcdbSid": 338930
  },
  {
   "slug": "22-23-upper-deck-the-cup-hockey",
