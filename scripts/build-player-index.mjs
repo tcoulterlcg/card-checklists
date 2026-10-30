@@ -152,7 +152,30 @@ function sectionType(title) {
 }
 
 const intern = (v, pool, map) => { if (map.has(v)) return map.get(v); const id = pool.length; pool.push(v); map.set(v, id); return id }
-const newShard = () => ({ slugs: [], slugId: new Map(), sections: [], secId: new Map(), teams: [], teamId: new Map(), labels: [], labelId: new Map(), rows: [] })
+// Rows are kept in packed integer columns, not one JS array per row: with ~23,000 catalog sets the
+// array-per-row version ran Vercel's build machine out of memory. Text columns (strCols) are
+// interned per store. Reading a row (for…of) rebuilds the same array the old code pushed;
+// a missing trailing value (out rows' optional label) is stored as NONE and left off.
+const NONE = -2147483648
+class RowStore {
+  constructor(width, strCols) { this.w = width; this.isStr = Array.from({ length: width }, (_, i) => strCols.includes(i)); this.pool = []; this.poolId = new Map(); this.buf = new Int32Array(width * 256); this.length = 0 }
+  push(row) {
+    const w = this.w
+    if ((this.length + 1) * w > this.buf.length) { const nb = new Int32Array(this.buf.length * 2); nb.set(this.buf); this.buf = nb }
+    const o = this.length++ * w
+    for (let i = 0; i < w; i++) { const v = row[i]; this.buf[o + i] = v === undefined ? NONE : this.isStr[i] ? intern(v, this.pool, this.poolId) : v }
+  }
+  trim() { this.buf = this.buf.slice(0, this.length * this.w) }   // drop the spare room left by doubling
+  *[Symbol.iterator]() {
+    const w = this.w, b = this.buf
+    for (let j = 0; j < this.length; j++) {
+      const o = j * w, r = []
+      for (let i = 0; i < w; i++) { const v = b[o + i]; if (v === NONE) break; r.push(this.isStr[i] ? this.pool[v] : v) }
+      yield r
+    }
+  }
+}
+const newShard = (width, strCols) => ({ slugs: [], slugId: new Map(), sections: [], secId: new Map(), teams: [], teamId: new Map(), labels: [], labelId: new Map(), rows: new RowStore(width, strCols) })
 
 // ---- pass 0: who is who ----
 // One name can be two people. Cards are keyed by normalized name, except:
@@ -256,7 +279,7 @@ const keyFor = (base, sport) => {
 }
 
 // ---- pass 1: read every set; rows bucketed by the printed name's key ----
-const shards = Array.from({ length: SHARDS }, newShard)
+const shards = Array.from({ length: SHARDS }, () => newShard(13, [0, 3]))   // [0] player key, [3] card number
 // key -> { cards, sports:Map, teams:Map, base:Map(name->n), labels:Map(label->n), minYear, maxYear }
 const players = new Map()
 const sportsPool = [], sportIdx = new Map()
@@ -324,6 +347,8 @@ for (const f of setFiles) {
   }
 }
 
+for (const sh of shards) sh.rows.trim()
+
 // ---- pass 2: roll spellings of one person / character into one player ----
 const moved = mergePlayers(players, sportsPool)
 const canon = (k) => moved.get(k) || k
@@ -342,6 +367,7 @@ for (const [k, pl] of players) {
   if (!pl.minYear && pl.rMin) { g.rMin = g.rMin ? Math.min(g.rMin, pl.rMin) : pl.rMin; g.rMax = Math.max(g.rMax || 0, pl.rMax) }
 }
 for (const g of groups.values()) if (!g.minYear && g.rMin) { g.minYear = g.rMin; g.maxYear = g.rMax }
+for (const pl of players.values()) { pl.teams = pl.sets = pl.labels = null }   // only .base is read from here on (display names); frees memory
 // Cards naming several players / characters ("Elsa and Anna") go to each of them.
 const splits = splitComposites(groups, sportsPool)
 for (const [k, ts] of splits) {
@@ -447,7 +473,7 @@ rookieCounts.clear(); cardSeasons.clear(); firstRookieish.clear()
 const rookieSeasonsFor = (c, yr, sp) => { const st = rookieSeasons.get(rkKey(c, sp)); if (!st) return [0, 0]; let Y = st[0], next = 0; for (const y of st) { if (y <= yr) Y = y; else if (!next) next = y } return [Y, next] }
 const reclassed = { TRIBUTE: 0, BUYBACK: 0, PROSPECT: 0, dropped: 0 }
 
-const out = Array.from({ length: SHARDS }, newShard)
+const out = Array.from({ length: SHARDS }, () => newShard(9, [3]))   // [3] card number; [8] label is optional
 const dedupe = new Set(), mergedInto = new Set([...moved.values(), ...[...splits.values()].flat()])
 let total = 0
 for (let si = 0; si < SHARDS; si++) {
@@ -480,7 +506,8 @@ for (let si = 0; si < SHARDS; si++) {
 }
 out.forEach((o, i) => {
   total += o.rows.length
-  writeFileSync(new URL(i + '.json', outDir), JSON.stringify({ slugs: o.slugs, sections: o.sections, teams: o.teams, labels: o.labels, rows: o.rows }))
+  writeFileSync(new URL(i + '.json', outDir), JSON.stringify({ slugs: o.slugs, sections: o.sections, teams: o.teams, labels: o.labels, rows: [...o.rows] }))
+  out[i] = null
 })
 writeFileSync(new URL('dir.json', outDir), JSON.stringify({ v: 2, shards: SHARDS, sports: sportsPool, players: dir, aka }))
 // top.json: the 5,000 most-carded players with their directory index at [6], so the
