@@ -4166,6 +4166,87 @@
    "wave"
   ]
  },
+ "2002-panini-fifa-world-cup": {
+  "missingPlayers": [
+   "aimar",
+   "albertini",
+   "alex",
+   "alvarenga",
+   "angel",
+   "arce",
+   "arellano",
+   "babangida",
+   "borgetti",
+   "campos",
+   "cardozo",
+   "carini",
+   "castillo",
+   "ceh",
+   "chevanton",
+   "cordoba",
+   "couto",
+   "cruz",
+   "desailly",
+   "dongguk",
+   "dudek",
+   "dugarry",
+   "elber",
+   "estay",
+   "fortune",
+   "george",
+   "goor",
+   "grisalez",
+   "hamann",
+   "hedman",
+   "hernandez",
+   "inamoto",
+   "inzaghi",
+   "knavs",
+   "kozminski",
+   "lizarazu",
+   "lopez",
+   "marcelinho",
+   "masinga",
+   "mcbride",
+   "mccarthy",
+   "montecinos",
+   "neuville",
+   "nigmatullin",
+   "nishizawa",
+   "nunez",
+   "obrien",
+   "ortega",
+   "paredes",
+   "petit",
+   "pope",
+   "rodriguez",
+   "romario",
+   "salas",
+   "sand",
+   "scholl",
+   "serna",
+   "simeunovic",
+   "sorin",
+   "struway",
+   "suarez",
+   "sungyong",
+   "tie",
+   "tommasi",
+   "torrado",
+   "valenzuela",
+   "vampeta",
+   "weifeng",
+   "west",
+   "woonjae",
+   "yepes",
+   "zamorano",
+   "ziege",
+   "zuma"
+  ],
+  "missingInserts": [
+   "road to sticker"
+  ]
+ },
  "2014-bowman-chrome-baseball-cards": {
   "missingPlayers": [
    "aliotti",
@@ -11865,6 +11946,14 @@
    "man match"
   ]
  },
+ "2002-03-panini-futebol-stickers": {
+  "missingPlayers": [
+   "sporting"
+  ],
+  "missingInserts": [
+   "portugal"
+  ]
+ },
  "1958-kane-international-football-stars": {
   "missingPlayers": [
    "anderson"
@@ -15363,6 +15452,12 @@
  "noir-soccer-checklist-added": {
   "missingPlayers": [
    "box"
+  ],
+  "missingInserts": []
+ },
+ "2001-wizards-football-champions-premier-league": {
+  "missingPlayers": [
+   "bounced"
   ],
   "missingInserts": []
  },
