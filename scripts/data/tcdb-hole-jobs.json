@@ -9,7 +9,9 @@
   "why": [
    "base checklist missing: only 48 insert/variation cards, base set is about 176 cards"
   ],
-  "status": "claimed-l2v"
+  "status": "done",
+  "note": "1962-topps-football-cards: 48 -> 224 cards, 1 -> 2 sections, covers 100.0% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "1964-topps-baseball-cards",
@@ -21,7 +23,9 @@
   "why": [
    "base checklist missing: only 164 insert/variation cards, base set is about 587 cards"
   ],
-  "status": "claimed-l2v"
+  "status": "done",
+  "note": "1964-topps-baseball-cards: 164 -> 760 cards, 1 -> 3 sections, covers 99.4% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "1965-topps-baseball-cards",
@@ -33,7 +37,9 @@
   "why": [
    "base checklist missing: only 72 insert/variation cards, base set is about 598 cards"
   ],
-  "status": "claimed-l2v"
+  "status": "done",
+  "note": "1965-topps-baseball-cards: 72 -> 747 cards, 1 -> 4 sections, covers 100.0% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "1966-topps-baseball-cards",
@@ -45,7 +51,9 @@
   "why": [
    "base checklist missing: only 13 insert/variation cards, base set is about 598 cards"
   ],
-  "status": "claimed-l2v"
+  "status": "review",
+  "note": "1966-topps-baseball-cards: 13 -> 737 cards, 1 -> 3 sections, covers 7.7% of current",
+  "tcdbSid": 65
  },
  {
   "slug": "1967-topps-baseball-cards",
@@ -57,7 +65,9 @@
   "why": [
    "base checklist missing: only 48 insert/variation cards, base set is about 609 cards"
   ],
-  "status": "claimed-l2v"
+  "status": "review",
+  "note": "1967-topps-baseball-cards: 48 -> 659 cards, 2 -> 3 sections, covers 70.8% of current",
+  "tcdbSid": 66
  },
  {
   "slug": "1968-topps-baseball-cards",
@@ -81,7 +91,9 @@
   "why": [
    "base checklist missing: only 54 insert/variation cards, base set is about 720 cards"
   ],
-  "status": "claimed-l2v"
+  "status": "review",
+  "note": "1970-topps-baseball-cards: 54 -> 799 cards, 3 -> 4 sections, covers 88.9% of current",
+  "tcdbSid": 70
  },
  {
   "slug": "1971-topps-baseball-cards",
@@ -93,7 +105,9 @@
   "why": [
    "base checklist missing: only 159 insert/variation cards, base set is about 752 cards"
   ],
-  "status": "claimed-l2v"
+  "status": "done",
+  "note": "1971-topps-baseball-cards: 159 -> 953 cards, 2 -> 5 sections, covers 96.2% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "1973-topps-baseball-cards",
@@ -117,7 +131,9 @@
   "why": [
    "base checklist missing: only 73 insert/variation cards, base set is about 660 cards"
   ],
-  "status": "claimed-l2v"
+  "status": "review",
+  "note": "1977-topps-baseball-cards: 73 -> 691 cards, 1 -> 3 sections, covers 0.0% of current",
+  "tcdbSid": 79
  },
  {
   "slug": "1982-donruss-baseball-cards",
@@ -129,7 +145,9 @@
   "why": [
    "base checklist missing: only 14 insert/variation cards, base set is about 660 cards"
   ],
-  "status": "claimed-l2v"
+  "status": "done",
+  "note": "1982-donruss-baseball-cards: 14 -> 689 cards, 1 -> 2 sections, covers 100.0% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "2015-16-upper-deck-series-hockey-cards",
@@ -14024,7 +14042,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "claimed-l2v"
+  "status": "done",
+  "note": "1948-bowman-football-cards: 108 -> 108 cards, 1 -> 1 sections, covers 100.0% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "1948-leaf",
@@ -14038,7 +14058,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "claimed-l2v"
+  "status": "done",
+  "note": "1948-leaf: 98 -> 143 cards, 1 -> 1 sections, covers 99.0% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "1950-bowman-football-cards",
@@ -14052,7 +14074,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "claimed-l2v"
+  "status": "done",
+  "note": "1950-bowman-football-cards: 144 -> 144 cards, 1 -> 1 sections, covers 99.3% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "1951-bowman-football-cards",
@@ -14066,7 +14090,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "claimed-l2v"
+  "status": "done",
+  "note": "1951-bowman-football-cards: 144 -> 153 cards, 1 -> 2 sections, covers 100.0% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "1958-topps-football-cards",
@@ -14080,7 +14106,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "claimed-l2v"
+  "status": "review",
+  "note": "1958-topps-football-cards: 130 -> 148 cards, 1 -> 2 sections, covers 92.3% of current",
+  "tcdbSid": 3201
  },
  {
   "slug": "1961-topps-football-cards",
@@ -14094,7 +14122,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "claimed-l2v"
+  "status": "review",
+  "note": "1961-topps-football-cards: 197 -> 258 cards, 1 -> 2 sections, covers 91.4% of current",
+  "tcdbSid": 3206
  },
  {
   "slug": "1963-topps-football-cards",
@@ -14108,7 +14138,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "claimed-l2v"
+  "status": "done",
+  "note": "1963-topps-football-cards: 169 -> 170 cards, 2 -> 1 sections, covers 95.9% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "1964-topps-football-cards",
@@ -14122,7 +14154,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "claimed-l2v"
+  "status": "done",
+  "note": "1964-topps-football-cards: 200 -> 200 cards, 2 -> 2 sections, covers 96.5% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "1965-topps-football-cards",
@@ -14136,7 +14170,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "claimed-l2v"
+  "status": "done",
+  "note": "1965-topps-football-cards: 212 -> 212 cards, 2 -> 2 sections, covers 99.5% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "1966-topps-football-cards",
@@ -14150,7 +14186,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "claimed-l2v"
+  "status": "done",
+  "note": "1966-topps-football-cards: 132 -> 156 cards, 1 -> 2 sections, covers 97.7% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "1967-topps-football-cards",
@@ -14164,7 +14202,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "claimed-l2v"
+  "status": "done",
+  "note": "1967-topps-football-cards: 163 -> 163 cards, 2 -> 2 sections, covers 95.7% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "1968-topps-football-cards",
@@ -14178,7 +14218,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "claimed-l2v"
+  "status": "done",
+  "note": "1968-topps-football-cards: 258 -> 258 cards, 3 -> 3 sections, covers 99.6% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "1969-topps-football-cards",
@@ -14192,7 +14234,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "claimed-l2v"
+  "status": "done",
+  "note": "1969-topps-football-cards: 265 -> 619 cards, 1 -> 4 sections, covers 100.0% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "1970-topps-football-cards",
@@ -14206,7 +14250,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "claimed-l2v"
+  "status": "review",
+  "note": "1970-topps-football-cards: 357 -> 355 cards, 4 -> 4 sections, covers 96.6% of current",
+  "tcdbSid": 3221
  },
  {
   "slug": "1971-topps-football-cards",
@@ -14220,7 +14266,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "claimed-l2v"
+  "status": "done",
+  "note": "1971-topps-football-cards: 347 -> 381 cards, 3 -> 5 sections, covers 100.0% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "1972-topps-football-cards",
@@ -14234,7 +14282,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "claimed-l2v"
+  "status": "done",
+  "note": "1972-topps-football-cards: 351 -> 351 cards, 1 -> 1 sections, covers 97.7% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "1973-topps-football-cards",
@@ -14248,7 +14298,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "claimed-l2v"
+  "status": "review",
+  "note": "1973-topps-football-cards: 554 -> 607 cards, 2 -> 2 sections, covers 94.2% of current",
+  "tcdbSid": 3224
  },
  {
   "slug": "1974-topps-football-cards",
@@ -14262,7 +14314,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "claimed-l2v"
+  "status": "done",
+  "note": "1974-topps-football-cards: 528 -> 606 cards, 1 -> 3 sections, covers 98.7% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "1975-topps-football-cards",
@@ -14276,7 +14330,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "claimed-l2v"
+  "status": "done",
+  "note": "1975-topps-football-cards: 528 -> 556 cards, 1 -> 3 sections, covers 97.5% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "1981-topps-football-cards",
@@ -14290,7 +14346,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "claimed-l2v"
+  "status": "review",
+  "note": "1981-topps-football-cards: 528 -> 561 cards, 1 -> 5 sections, covers 92.6% of current",
+  "tcdbSid": 3232
  },
  {
   "slug": "1982-topps-football-cards",
@@ -14304,7 +14362,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "claimed-l2v"
+  "status": "review",
+  "note": "1982-topps-football-cards: 528 -> 548 cards, 1 -> 4 sections, covers 93.0% of current",
+  "tcdbSid": 3233
  },
  {
   "slug": "1983-topps-football-cards",
@@ -14318,7 +14378,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "claimed-l2v"
+  "status": "done",
+  "note": "1983-topps-football-cards: 429 -> 496 cards, 2 -> 2 sections, covers 97.2% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "1987-topps-football-cards",
@@ -14332,7 +14394,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "claimed-l2v"
+  "status": "done",
+  "note": "1987-topps-football-cards: 396 -> 933 cards, 1 -> 4 sections, covers 95.2% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "1988-topps-football-cards",
@@ -14346,7 +14410,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "claimed-l2v"
+  "status": "done",
+  "note": "1988-topps-football-cards: 396 -> 444 cards, 1 -> 4 sections, covers 99.0% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "1991-upper-deck-football-cards",
@@ -14360,7 +14426,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "claimed-l2v"
+  "status": "done",
+  "note": "1991-upper-deck-football-cards: 721 -> 2054 cards, 6 -> 9 sections, covers 97.8% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "2012-topps-football-cards",
@@ -14388,7 +14456,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "claimed-l2v"
+  "status": "review",
+  "note": "2012-upper-deck-university-of-notre-dame-football: 195 -> 511 cards, 3 -> 19 sections, covers 93.3% of current",
+  "tcdbSid": 73739
  },
  {
   "slug": "2013-panini-black-football-cards",
@@ -14416,7 +14486,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "claimed-l2v"
+  "status": "review",
+  "note": "2013-panini-contenders-football-cards: 708 -> 3734 cards, 19 -> 42 sections, covers 72.2% of current",
+  "tcdbSid": 86315
  },
  {
   "slug": "2013-panini-limited-football-cards-2",
@@ -14430,7 +14502,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "claimed-l2v"
+  "status": "done",
+  "note": "2013-panini-limited-football-cards-2: 1347 -> 2539 cards, 35 -> 47 sections, covers 100.0% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "2013-panini-mega-box-football-cards",
@@ -14458,7 +14532,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "claimed-l2v"
+  "status": "done",
+  "note": "2013-panini-playbook-football-cards: 1170 -> 2065 cards, 23 -> 51 sections, covers 99.7% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "2013-panini-prominence-football-cards",
@@ -14472,7 +14548,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "claimed-l2v"
+  "status": "done",
+  "note": "2013-panini-prominence-football-cards: 905 -> 1681 cards, 15 -> 14 sections, covers 100.0% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "2013-panini-rookies-stars-football-cards",
