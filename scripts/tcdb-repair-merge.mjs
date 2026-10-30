@@ -125,7 +125,8 @@ for (const f of files) {
     const cover = oldKeys.size ? inside / oldKeys.size : 1
     const nOld = count(old), nNew = count(fresh)
     const line = `${s.slug}: ${nOld} -> ${nNew} cards, ${old.sections.length} -> ${sections.length} sections, covers ${(cover * 100).toFixed(1)}% of current`
-    if (nNew >= nOld && cover >= 0.95) {
+    // PREFER_TCDB=1: Trevor's call (2026-10-30) — when TCDB has the set, its checklist replaces ours outright.
+    if ((nNew >= nOld && cover >= 0.95) || process.env.PREFER_TCDB) {
       const out = { slug: old.slug, name: old.name, year: old.year, sport: old.sport, source: 'tcdb.com', tcdbSid: s.sid, sections }
       carryOver(old, out, norm, core)
       writeFileSync(path, JSON.stringify(out))
