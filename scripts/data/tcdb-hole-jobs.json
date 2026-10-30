@@ -3689,7 +3689,7 @@
    "61 players sold on SCP not on checklist"
   ],
   "status": "review",
-  "note": "2012-13-panini-certified-hockey-cards: 916 -> 2737 cards, 22 -> 50 sections, covers 41.4% of current",
+  "note": "2012-13-panini-certified-hockey-cards: 916 -> 2737 cards, 22 -> 50 sections, covers 86.3% of current",
   "tcdbSid": 72730
  },
  {
@@ -7473,8 +7473,8 @@
    "missing inserts: 1996 97 skybox autographics, thunder noyz boyz, tradition electrifying"
   ],
   "status": "done",
-  "note": "2012-13-fleer-retro-hockey-cards: 513 -> 1248 cards, 9 -> 32 sections, covers 100.0% of current",
-  "at": "2026-10-25"
+  "note": "2012-13-fleer-retro-hockey-cards: 1248 -> 1248 cards, 32 -> 32 sections, covers 100.0% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "2014-topps-ufc-champions-trading-cards",
@@ -8948,7 +8948,9 @@
   "why": [
    "missing inserts: color wheel, violet pixels"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2017-18-o-pee-chee-platinum-hockey-cards: 428 -> 3843 cards, 9 -> 50 sections, covers 100.0% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "2016-17-sp-authentic-hockey-cards",
@@ -9116,7 +9118,9 @@
   "why": [
    "missing inserts: building blocks, pulsar"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2013-panini-prizm-football-cards: 1031 -> 6022 cards, 11 -> 65 sections, covers 99.8% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "2005-06-upper-deck-ultimate-collection-hockey",
@@ -9392,7 +9396,9 @@
   "why": [
    "missing inserts: banner year relic, star skills fabrics"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2017-18-sp-game-used-hockey-cards: 1095 -> 2189 cards, 11 -> 71 sections, covers 100.0% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "2016-upper-deck-national-hockey-card-day",
@@ -9452,7 +9458,9 @@
   "why": [
    "missing inserts: fx, sign times"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2011-12-sp-authentic-hockey-cards: 450 -> 920 cards, 7 -> 27 sections, covers 99.5% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "2018-panini-chronicles-baseball-cards",
@@ -11516,7 +11524,9 @@
   "why": [
    "missing inserts: glow"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2015-16-fleer-showcase-hockey-cards: 477 -> 1251 cards, 10 -> 19 sections, covers 100.0% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "2015-sp-game-hockey-cards",
@@ -11564,7 +11574,9 @@
   "why": [
    "missing inserts: hat tricks memorabilia"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2011-12-panini-titanium-hockey-cards: 1431 -> 2693 cards, 30 -> 44 sections, covers 99.9% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "2011-12-sp-game-used-hockey-cards",
@@ -12140,7 +12152,9 @@
   "why": [
    "missing inserts: future signature material"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2013-panini-totally-certified-football-cards: 1055 -> 2716 cards, 28 -> 30 sections, covers 99.6% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "2013-topps-triple-threads-football-cards",
@@ -12332,7 +12346,9 @@
   "why": [
    "9 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2011-12-panini-contenders-hockey: 535 -> 2076 cards, 16 -> 22 sections, covers 99.7% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "1979-80-o-pee-chee-hockey",
@@ -14592,7 +14608,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "claimed-l2v"
+  "status": "done",
+  "note": "2013-score-football-cards: 1220 -> 6568 cards, 26 -> 52 sections, covers 100.0% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "2013-select-football-cards",
@@ -14606,7 +14624,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "claimed-l2v"
+  "status": "done",
+  "note": "2013-select-football-cards: 874 -> 2674 cards, 20 -> 45 sections, covers 100.0% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "2013-sp-authentic-football-cards",
@@ -14620,7 +14640,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "claimed-l2v"
+  "status": "done",
+  "note": "2013-sp-authentic-football-cards: 461 -> 1295 cards, 8 -> 20 sections, covers 99.4% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "2013-topps-football-cards",
@@ -14662,7 +14684,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "claimed-l2v"
+  "status": "done",
+  "note": "2013-topps-mini-football-cards: 439 -> 3210 cards, 1 -> 10 sections, covers 99.8% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "2013-topps-qubi-football-stampers",
@@ -14690,7 +14714,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "claimed-l2v"
+  "status": "review",
+  "note": "2013-topps-supreme-football-cards: 142 -> 2676 cards, 3 -> 64 sections, covers 83.1% of current",
+  "tcdbSid": 86317
  },
  {
   "slug": "2013-topps-turkey-red-football-cards",
@@ -14788,7 +14814,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "claimed-l2v"
+  "status": "done",
+  "note": "2014-panini-black-gold-football-cards: 570 -> 2418 cards, 20 -> 68 sections, covers 96.0% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "2014-panini-elite-football-cards",
@@ -14802,7 +14830,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "claimed-l2v"
+  "status": "done",
+  "note": "2014-panini-elite-football-cards: 1894 -> 3576 cards, 37 -> 59 sections, covers 99.4% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "2014-panini-hot-rookies-football-cards",
@@ -14816,7 +14846,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "claimed-l2v"
+  "status": "done",
+  "note": "2014-panini-hot-rookies-football-cards: 1205 -> 7250 cards, 20 -> 62 sections, covers 97.1% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "2014-panini-immaculate-football-cards",
@@ -14844,7 +14876,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "claimed-l2v"
+  "status": "review",
+  "note": "2014-panini-limited-football-cards: 792 -> 2813 cards, 26 -> 70 sections, covers 73.1% of current",
+  "tcdbSid": 99817
  },
  {
   "slug": "2014-panini-playbook-football-cards",
@@ -14858,7 +14892,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "claimed-l2v"
+  "status": "done",
+  "note": "2014-panini-playbook-football-cards: 1066 -> 2157 cards, 44 -> 76 sections, covers 96.8% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "2014-panini-rookies-and-stars-football",
@@ -14886,7 +14922,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "claimed-l2v"
+  "status": "review",
+  "note": "2014-panini-spectra-football: 5063 -> 4622 cards, 122 -> 98 sections, covers 70.4% of current",
+  "tcdbSid": 104363
  },
  {
   "slug": "2014-panini-totally-certified-football",
@@ -14900,7 +14938,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "claimed-l2v"
+  "status": "review",
+  "note": "2014-panini-totally-certified-football: 4256 -> 4234 cards, 75 -> 55 sections, covers 93.3% of current",
+  "tcdbSid": 99818
  },
  {
   "slug": "2014-topps-chrome-mini-football-cards",
@@ -14914,7 +14954,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "claimed-l2v"
+  "status": "done",
+  "note": "2014-topps-chrome-mini-football-cards: 648 -> 3886 cards, 12 -> 45 sections, covers 99.6% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "2014-topps-football-cards",
@@ -14942,7 +14984,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "claimed-l2v"
+  "status": "done",
+  "note": "2014-upper-deck-cfl-football-cards: 265 -> 406 cards, 5 -> 10 sections, covers 98.1% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "2014-upper-deck-conference-greats-football-cards",
@@ -14956,7 +15000,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "claimed-l2v"
+  "status": "done",
+  "note": "2014-upper-deck-conference-greats-football-cards: 437 -> 709 cards, 16 -> 10 sections, covers 96.0% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "2014-upper-deck-exquisite-collection-football",
@@ -14970,7 +15016,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "claimed-l2v"
+  "status": "done",
+  "note": "2014-upper-deck-exquisite-collection-football: 245 -> 1570 cards, 6 -> 37 sections, covers 99.0% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "2014-upper-deck-football-cards",
@@ -14984,7 +15032,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "claimed-l2v"
+  "status": "done",
+  "note": "2014-upper-deck-football-cards: 485 -> 1773 cards, 11 -> 23 sections, covers 100.0% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "2014-upper-deck-football-cards-2",
@@ -15194,7 +15244,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "claimed-l2v"
+  "status": "done",
+  "note": "2015-upper-deck-football-cards: 367 -> 499 cards, 6 -> 9 sections, covers 99.3% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "2015-upper-deck-usa-football-cards",
@@ -20864,7 +20916,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "review",
+  "note": "2012-13-panini-rookie-anthology-hockey-cards: 1508 -> 3139 cards, 35 -> 61 sections, covers 89.9% of current",
+  "tcdbSid": 79498
  },
  {
   "slug": "2012-13-score-hockey-cards",
@@ -20962,7 +21016,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "review",
+  "note": "13-14-panini-titanium-hockey: 2832 -> 3789 cards, 56 -> 52 sections, covers 74.2% of current",
+  "tcdbSid": 86226
  },
  {
   "slug": "13-14-panini-totally-certified-hockey",
@@ -21186,7 +21242,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "review",
+  "note": "2014-fleer-showcase-hockey-cards: 412 -> 1313 cards, 8 -> 21 sections, covers 90.5% of current",
+  "tcdbSid": 102647
  },
  {
   "slug": "2014-leaf-heroes-prospects-hockey-cards",
@@ -21228,7 +21286,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2014-upper-deck-masterpieces-hockey: 526 -> 1394 cards, 9 -> 11 sections, covers 100.0% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "2015-leaf-itg-game-used-hockey-cards",
@@ -21522,7 +21582,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2016-17-fleer-showcase-hockey-cards: 556 -> 1908 cards, 14 -> 27 sections, covers 100.0% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "2016-17-itg-heroes-prospects-hockey",
@@ -22054,7 +22116,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2017-18-upper-deck-synergy-hockey-nhl-cards: 298 -> 1154 cards, 8 -> 22 sections, covers 100.0% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "2017-18-upper-deck-vegas-golden-knights-inaugural-cards",
@@ -22166,7 +22230,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "review",
+  "note": "18-19-o-pee-chee-platinum-hockey: 2917 -> 3861 cards, 53 -> 56 sections, covers 87.9% of current",
+  "tcdbSid": 193186
  },
  {
   "slug": "18-19-parkhurst-hockey",
@@ -22180,7 +22246,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "review",
+  "note": "18-19-parkhurst-hockey: 4867 -> 2388 cards, 67 -> 24 sections, covers 92.1% of current",
+  "tcdbSid": 193478
  },
  {
   "slug": "18-19-ud-upper-deck-black-diamond-hockey",
@@ -22292,7 +22360,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "review",
+  "note": "18-19-ud-upper-deck-sp-game-used-hockey: 2663 -> 2686 cards, 96 -> 83 sections, covers 76.8% of current",
+  "tcdbSid": 186099
  },
  {
   "slug": "18-19-ud-upper-deck-spx-hockey",
@@ -22446,7 +22516,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2018-19-ud-mvp-hockey: 899 -> 3704 cards, 9 -> 42 sections, covers 99.7% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "2018-19-upper-deck-ahl-hockey-cards",
@@ -22642,7 +22714,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "19-20-o-pee-chee-hockey: 3836 -> 5270 cards, 59 -> 24 sections, covers 99.5% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "19-20-o-pee-chee-platinum-hockey",
@@ -22656,7 +22730,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "19-20-o-pee-chee-platinum-hockey: 3378 -> 3857 cards, 66 -> 69 sections, covers 98.7% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "19-20-ud-upper-deck-allure-hockey",
@@ -22670,7 +22746,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "19-20-ud-upper-deck-allure-hockey: 2682 -> 3142 cards, 70 -> 53 sections, covers 99.0% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "19-20-ud-upper-deck-artifacts-hockey",
@@ -22754,7 +22832,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "19-20-ud-upper-deck-credentials-hockey: 1297 -> 1354 cards, 52 -> 44 sections, covers 99.5% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "19-20-ud-upper-deck-engrained-hockey",
@@ -22768,7 +22848,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "review",
+  "note": "19-20-ud-upper-deck-engrained-hockey: 1386 -> 1328 cards, 63 -> 42 sections, covers 99.6% of current",
+  "tcdbSid": 222882
  },
  {
   "slug": "19-20-ud-upper-deck-ice-hockey",
@@ -22922,7 +23004,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "19-20-ud-upper-deck-synergy-hockey: 863 -> 1113 cards, 46 -> 34 sections, covers 98.0% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "19-20-ud-upper-deck-the-cup-hockey",
@@ -23034,7 +23118,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2019-20-parkhurst-hockey-cards: 477 -> 1927 cards, 8 -> 20 sections, covers 100.0% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "2019-20-topps-nhl-sticker-collection-hockey-cards",
@@ -23062,7 +23148,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "review",
+  "note": "2019-20-topps-now-nhl-stickers: 10 -> 658 cards, 2 -> 6 sections, covers 80.0% of current",
+  "tcdbSid": 217478
  },
  {
   "slug": "2019-20-ud-ahl-hockey",
@@ -23258,7 +23346,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "review",
+  "note": "20-21-skybox-metal-universe-hockey: 2674 -> 4060 cards, 71 -> 52 sections, covers 90.8% of current",
+  "tcdbSid": 252524
  },
  {
   "slug": "20-21-ud-upper-deck-allure-hockey",
@@ -23314,7 +23404,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "review",
+  "note": "20-21-ud-upper-deck-clear-cut-hockey: 1110 -> 1527 cards, 73 -> 2 sections, covers 6.1% of current",
+  "tcdbSid": 250419
  },
  {
   "slug": "20-21-ud-upper-deck-mvp-hockey",
@@ -23496,7 +23588,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "20-21-upper-deck-sp-signature-edition-legends-hockey: 2481 -> 2865 cards, 45 -> 35 sections, covers 99.1% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "20-21-upper-deck-the-cup-hockey",
@@ -24084,7 +24178,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "review",
+  "note": "21-22-skybox-metal-universe-hockey: 4552 -> 4430 cards, 93 -> 65 sections, covers 99.5% of current",
+  "tcdbSid": 286084
  },
  {
   "slug": "21-22-ud-upper-deck-artifacts-hockey",
@@ -24182,7 +24278,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "21-22-upper-deck-allure-hockey: 3942 -> 5265 cards, 72 -> 67 sections, covers 98.6% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "21-22-upper-deck-credentials-hockey",
@@ -24602,7 +24700,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "22-23-parkhurst-champions-hockey: 6334 -> 7095 cards, 119 -> 64 sections, covers 99.6% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "22-23-skybox-metal-universe-hockey",
@@ -24616,7 +24716,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "22-23-skybox-metal-universe-hockey: 4659 -> 5053 cards, 103 -> 78 sections, covers 99.4% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "22-23-ud-upper-deck-mvp-hockey",
@@ -24938,7 +25040,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2023-24-skybox-e-x-2000-hockey: 251 -> 2638 cards, 8 -> 49 sections, covers 100.0% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "2023-24-sp-game-used-chl-hockey",
@@ -25106,7 +25210,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2023-24-upper-deck-engrained-hockey: 859 -> 2851 cards, 17 -> 66 sections, covers 99.7% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "2023-24-upper-deck-extended-series-hockey",
@@ -25288,7 +25394,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2023-24-upper-deck-tim-hortons-hockey-cards: 217 -> 278 cards, 8 -> 15 sections, covers 100.0% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "2023-24-upper-deck-trilogy-hockey",
@@ -25764,7 +25872,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "24-25-skybox-metal-universe-hockey: 4383 -> 4753 cards, 118 -> 112 sections, covers 100.0% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "24-25-upper-deck-black-diamond-hockey",
