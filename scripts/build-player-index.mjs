@@ -285,11 +285,14 @@ const players = new Map()
 const sportsPool = [], sportIdx = new Map()
 
 let files = 0
+const setMeta = {}
+let files = 0
 for (const f of setFiles) {
   let s
   try { s = JSON.parse(readFileSync(new URL(f, dataDir), 'utf8')) } catch { continue }
   if (!s.slug || !Array.isArray(s.sections) || s.incomplete) continue
   const setNo = files++
+  setMeta[s.slug] = [s.name || s.slug, s.year || 0, s.sport || '']   // for the grid game (scripts/build-grid-index.mjs)
   const sp = intern(s.sport || '', sportsPool, sportIdx)
   const multiYear = isMultiYear(s.name)
   const seen = new Set()
@@ -509,6 +512,7 @@ out.forEach((o, i) => {
   writeFileSync(new URL(i + '.json', outDir), JSON.stringify({ slugs: o.slugs, sections: o.sections, teams: o.teams, labels: o.labels, rows: [...o.rows] }))
   out[i] = null
 })
+writeFileSync(new URL('sets.json', outDir), JSON.stringify(setMeta))
 writeFileSync(new URL('dir.json', outDir), JSON.stringify({ v: 2, shards: SHARDS, sports: sportsPool, players: dir, aka }))
 // top.json: the 5,000 most-carded players with their directory index at [6], so the
 // search box can suggest instantly while the full directory (~2 MB gzipped) loads.

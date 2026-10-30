@@ -69,3 +69,9 @@
   (`scripts/sql/2026-10-30-my-pc.sql`). A chase = team or player + card kind (named parallel from `lib/parallels.js`, auto,
   patch, 1/1, numbered, rookie) and/or words from the parallel name ("Gold Outburst"). Team chases read
   `public/data/pc-teams/` built by `scripts/build-team-index.mjs` (static + catalog sets; runs after the player index in prebuild).
+- **The Grid** (`?view=grid&mode=hockey[&seed=N]`, `components/grid.js`): Immaculate Grid–style game. Data from
+  `scripts/build-grid-index.mjs` (runs in prebuild after the player index; reads `players/sets.json` which
+  `build-player-index.mjs` writes) → `public/data/grid/<mode>.json`. A square = one card matching both categories,
+  except team × team (career). Only squares with ≥3 answers are written, so every grid is solvable. Daily grid is
+  seeded by mode + local date; picks are saved in localStorage by player name. Junk "players" (team cards, badges,
+  TBA) and junk teams are filtered by `NOT_A_PLAYER` / `TEAM_JUNK` in the script.

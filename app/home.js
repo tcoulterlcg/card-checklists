@@ -14,6 +14,7 @@ import { FixEditor } from '../components/fix-editor'
 import { useMyPC, MyPCPanel, cardMatchesChase } from '../components/mypc'
 import { Omnibox, PlayerPage, useMyPlayers, loadPlayerDir, loadTopPlayers, seasonLabel, MemBadge, MemChip, memCodeOf } from '../components/player'
 import { ComparePage } from '../components/compare'
+import { GridGame } from '../components/grid'
 import { norm, setNameMatches, STOP_PLAYER, parseQuery, parseQueryFor, matchPlayers, TYPE, typeLabel, TYPE_COLORS, serialLabel } from '../lib/query'
 import { loadSet, loadIndex, loadRedirects, sectionKey } from '../lib/catalog'
 import { classifySet, brandSort, BRAND_COLORS } from '../lib/brands'
@@ -422,6 +423,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
   const pcCount = myPlayers.list.length + pc.teams.length + pc.chases.length
   const [activePlayer, setActivePlayer] = useState(null)
   const [compareNames, setCompareNames] = useState(['', ''])   // ?compare=A&vs=B
+  const [gridOpts, setGridOpts] = useState({ mode: 'hockey', seed: '' })   // ?view=grid&mode=hockey[&seed=123]
   const [playerParsed, setPlayerParsed] = useState(null)
   const [playerCandidates, setPlayerCandidates] = useState([])
   const [onlyMine, setOnlyMine] = useState(false)
@@ -920,6 +922,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
     if (push !== 'replace') window.scrollTo(0, 0)
   }
   const openView = (v, push, extra = '') => { setNotice(''); nav('?view=' + v + extra, push); setView(v); setActiveSet(null); setSetData(null); setGlobalHits(null); setActivePlayer(null); window.scrollTo(0, 0) }
+  const openGrid = (o, push) => { const mode = String(o.mode || 'hockey').replace(/[^a-z]/g, '') || 'hockey', seed = String(o.seed || '').replace(/\D/g, ''); setGridOpts({ mode, seed }); openView('grid', push, '&mode=' + mode + (seed ? '&seed=' + seed : '')) }
   // Wantlist add — whole set or a single card/parallel from the set page.
   // What's already on the signed-in user's wantlist, so card rows can show ✓ (and toggle off).
   const [wanted, setWanted] = useState(() => new Map())   // key -> row id
@@ -1110,7 +1113,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
       : view === 'player' && activePlayer ? activePlayer.name + ' Cards'
       : view === 'compare' ? (compareNames.filter(Boolean).join(' vs ') || 'Compare players')
       : globalHits ? 'Search: ' + query
-      : view === 'community' ? 'Community' : view === 'collection' ? 'My Collection' : view === 'mypc' ? 'My PC' : view === 'feedback' ? 'Feedback' : ''
+      : view === 'grid' ? 'The Grid' : view === 'community' ? 'Community' : view === 'collection' ? 'My Collection' : view === 'mypc' ? 'My PC' : view === 'feedback' ? 'Feedback' : ''
     document.title = t ? t + ' — CardHQ' : 'CardHQ — Sports Card & TCG Checklists'
   }, [activeSet, setData, view, activePlayer, globalHits, compareNames])
   // Deep links and Back/Forward: ?player=Name[&q=raw] · ?set=slug · ?view=community · ?search=term
@@ -1133,6 +1136,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
     }
     else if (sr && sr.trim().length >= 3) runGlobalSearch(sr, false)
     else if (sr) { goHome(false); setNotice('Type at least 3 letters to search.') }   // not an endless 'Loading…'
+    else if (v === 'grid') openGrid({ mode: sp.get('mode') || 'hockey', seed: sp.get('seed') || '' }, false)
     else if (v === 'myplayers') openView('mypc', false)   // old name of My PC
     else if (v && ['mypc', 'community', 'collection', 'feedback'].includes(v)) openView(v, false, v === 'collection' ? ['cset', 'ctab', 'from'].filter(k => sp.get(k)).map(k => '&' + k + '=' + encodeURIComponent(sp.get(k))).join('') : '')
     else {
@@ -1169,7 +1173,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
     return () => window.removeEventListener('popstate', onPop)
   }, [])
 
-  const NAV_ITEMS = [['Sets', () => { goHome(); setSportFilter('All'); setBrandFilter('All'); setProductFilter('All') }, 'browse'], ['My PC', () => openView('mypc'), 'mypc'], ['Community', () => openView('community'), 'community'], ['My Collection', () => openView('collection'), 'collection']]
+  const NAV_ITEMS = [['Sets', () => { goHome(); setSportFilter('All'); setBrandFilter('All'); setProductFilter('All') }, 'browse'], ['My PC', () => openView('mypc'), 'mypc'], ['Grid', () => openGrid({ mode: gridOpts.mode }), 'grid'], ['Community', () => openView('community'), 'community'], ['My Collection', () => openView('collection'), 'collection']]
   const [scrolled, setScrolled] = useState(false)
   const [pastHero, setPastHero] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
@@ -1663,6 +1667,8 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
       ) : view === 'feedback' ? (
         <FeedbackView account={account} admin={fbAdmin.admin} onOpenAuth={() => setAuthOpen(true)} onOpenSet={openSetBySlug}
           onNew={(ctx) => setFeedback(ctx)} onChanged={fbAdmin.refresh} onFix={(r) => setFixing({ slug: r.set_slug, feedback: r })} version={fixVersion} />
+      ) : view === 'grid' ? (
+        <GridGame mode={gridOpts.mode} seed={gridOpts.seed} onChange={(o) => openGrid({ mode: o.mode, seed: o.seed || '' })} />
       ) : view === 'community' ? (
         <CommunityView account={account} indexSets={sets} onOpenAuth={() => setAuthOpen(true)} />
       ) : view === 'collection' ? (

@@ -9,4 +9,5 @@ pipeline.log*
 public/data/players/
 public/data/teams/
 public/data/pc-teams/
+public/data/grid/
 public/verify-hints.json
