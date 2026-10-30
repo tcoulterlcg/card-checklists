@@ -22,13 +22,13 @@
   },
   "Hockey": {
    "file": "index/hockey.json",
-   "sets": 7054,
-   "cards": 1531499
+   "sets": 7057,
+   "cards": 1533773
   },
   "Soccer": {
    "file": "index/soccer.json",
-   "sets": 2789,
-   "cards": 522383
+   "sets": 2848,
+   "cards": 545841
   },
   "Wrestling": {
    "file": "index/wrestling.json",
@@ -71,11 +71,11 @@
    "cards": 298210
   }
  },
- "sets": 23033,
- "cards": 7457330,
- "updated": "2026-10-30T06:16:52.095Z",
+ "sets": 23095,
+ "cards": 7483062,
+ "updated": "2026-10-30T07:02:43.135Z",
  "visible": {
   "file": "index/visible.json",
-  "sets": 23033
+  "sets": 23095
  }
 }
