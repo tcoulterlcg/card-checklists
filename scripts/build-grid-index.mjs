@@ -18,6 +18,7 @@
 import { readFileSync, writeFileSync, mkdirSync, existsSync, rmSync } from 'node:fs'
 import { classifySet } from '../lib/brands.js'
 import { TYPE } from '../lib/query.js'
+import { foldTeam, franchiseName, tidyTeam } from '../lib/teams.js'
 
 const pDir = new URL('../public/data/players/', import.meta.url)
 const outDir = new URL('../public/data/grid/', import.meta.url)
@@ -69,6 +70,14 @@ const cleanTeam = (t) => {
   if (/[\/&,]| and /i.test(t)) return ''   // combo cards ("Rangers / Islanders")
   return t.replace(/^St\.? /, 'St. ')   // "St Louis Blues" = "St. Louis Blues"
 }
+// One name per team, as on the rest of the site (lib/teams.js): "Tampa Bay Devil Rays" and "Rays" count as
+// Tampa Bay Rays. Spellings come from the team index (build-team-index.mjs runs first in prebuild).
+const TEAM_ALIAS = new Map()
+try {
+  const td = JSON.parse(readFileSync(new URL('../public/data/pc-teams/dir.json', import.meta.url), 'utf8'))
+  for (const x of td.teams) for (const n of [x[0], ...(x[4] || [])]) TEAM_ALIAS.set(x[1] + '|' + foldTeam(n), x[0])
+} catch {}
+const gridTeam = (t, sport) => TEAM_ALIAS.get(sport + '|' + foldTeam(t)) || franchiseName(tidyTeam(t), sport)
 // TCG series: "Pokémon Black Bolt (Scarlet & Violet)" -> "Scarlet & Violet" era
 const seriesOf = (name) => { const m = /\(([^)]+)\)\s*$/.exec(name || ''); return m ? m[1].trim() : '' }
 // TCG card variant from the printed name: "Charizard ex" -> "ex", "Pikachu VMAX" -> "VMAX"
@@ -92,7 +101,7 @@ function attrs(m, setName, year, sport, team, type, serial, label, base, section
     return a
   }
   if (m.kind === 'multi') { if (sport && !NO_SPORT_CAT.has(sport)) a.push(cat(m, 'sport', sport)) }
-  else { const t = cleanTeam(team); if (t && !TEAM_JUNK.test(t)) a.push(cat(m, 'team', t)) }
+  else { const t = cleanTeam(team); if (t && !TEAM_JUNK.test(t)) a.push(cat(m, 'team', gridTeam(t, sport))) }
   if (brand && brand !== 'Other') a.push(cat(m, 'brand', brand))
   if (product && product !== 'Other' && !BRAND_NAMES.has(product) && product !== brand) a.push(cat(m, 'product', product))
   const d = decadeLabel(year); if (d) a.push(cat(m, 'decade', d))
