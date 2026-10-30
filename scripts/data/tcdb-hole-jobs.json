@@ -10732,7 +10732,9 @@
   "why": [
    "missing inserts: extravagant materials"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2016-17-spx-hockey-cards: 295 -> 989 cards, 5 -> 30 sections, covers 100.0% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "2014-upper-deck-premier-hockey-cards",
@@ -21032,7 +21034,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "review",
+  "note": "13-14-panini-totally-certified-hockey: 4719 -> 5835 cards, 60 -> 56 sections, covers 87.2% of current",
+  "tcdbSid": 87645
  },
  {
   "slug": "2013-14-panini-contenders-hockey-cards",
@@ -22262,7 +22266,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "review",
+  "note": "18-19-ud-upper-deck-black-diamond-hockey: 925 -> 938 cards, 80 -> 58 sections, covers 77.9% of current",
+  "tcdbSid": 182291
  },
  {
   "slug": "18-19-ud-upper-deck-clear-cut-hockey",
@@ -22390,7 +22396,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "review",
+  "note": "18-19-ud-upper-deck-synergy-hockey: 892 -> 1054 cards, 37 -> 23 sections, covers 83.5% of current",
+  "tcdbSid": 191581
  },
  {
   "slug": "18-19-ud-upper-deck-the-cup-hockey",
@@ -22790,7 +22798,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "review",
+  "note": "19-20-ud-upper-deck-buybacks-hockey: 3754 -> 3549 cards, 1132 -> 10 sections, covers 93.9% of current",
+  "tcdbSid": 216977
  },
  {
   "slug": "19-20-ud-upper-deck-chronology-volume-2-hockey",
@@ -22878,7 +22888,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "19-20-ud-upper-deck-mvp-hockey: 2216 -> 3647 cards, 50 -> 45 sections, covers 100.0% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "19-20-ud-upper-deck-premier-hockey",
@@ -22990,7 +23002,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "review",
+  "note": "19-20-ud-upper-deck-stature-hockey: 3290 -> 3232 cards, 65 -> 49 sections, covers 99.0% of current",
+  "tcdbSid": 225362
  },
  {
   "slug": "19-20-ud-upper-deck-synergy-hockey",
@@ -23362,7 +23376,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "20-21-ud-upper-deck-allure-hockey: 3088 -> 4332 cards, 83 -> 73 sections, covers 99.2% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "20-21-ud-upper-deck-artifacts-hockey",
@@ -23376,7 +23392,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "review",
+  "note": "20-21-ud-upper-deck-artifacts-hockey: 3421 -> 3539 cards, 148 -> 78 sections, covers 92.8% of current",
+  "tcdbSid": 232045
  },
  {
   "slug": "20-21-ud-upper-deck-black-diamond-hockey",
@@ -24760,7 +24778,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "review",
+  "note": "22-23-upper-deck-artifacts-hockey: 5439 -> 5380 cards, 213 -> 88 sections, covers 92.7% of current",
+  "tcdbSid": 333279
  },
  {
   "slug": "22-23-upper-deck-black-diamond-hockey",
@@ -24942,7 +24962,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "review",
+  "note": "22-23-upper-deck-stature-hockey: 6779 -> 6640 cards, 158 -> 88 sections, covers 97.6% of current",
+  "tcdbSid": 366778
  },
  {
   "slug": "22-23-upper-deck-synergy-hockey",
@@ -25380,7 +25402,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2023-24-upper-deck-synergy-hockey: 571 -> 3164 cards, 22 -> 85 sections, covers 100.0% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "2023-24-upper-deck-tim-hortons-hockey-cards",
@@ -25606,7 +25630,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2024-25-upper-deck-artifacts-hockey: 1922 -> 5117 cards, 25 -> 81 sections, covers 96.3% of current",
+  "at": "2026-10-30"
  },
  {
   "slug": "2024-25-upper-deck-chl-hockey",
@@ -25858,7 +25884,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "review",
+  "note": "24-25-parkhurst-champions-hockey: 3299 -> 3281 cards, 96 -> 42 sections, covers 98.2% of current",
+  "tcdbSid": 476421
  },
  {
   "slug": "24-25-skybox-metal-universe-hockey",
@@ -25888,7 +25916,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "review",
+  "note": "24-25-upper-deck-black-diamond-hockey: 2822 -> 2656 cards, 183 -> 142 sections, covers 98.1% of current",
+  "tcdbSid": 446293
  },
  {
   "slug": "24-25-upper-deck-clear-cut-hockey",
