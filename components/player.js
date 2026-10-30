@@ -572,7 +572,7 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
           {Object.keys(facets.par).length > 0 && (
             <div>
               <p style={legend}>Parallel / patch</p>
-              {['SUPERFRACTOR', 'SHIELD', 'LOGOMAN', 'LAUNDRY', 'NAMEPLATE', 'BUTTON', 'BRAND'].filter(k => facets.par[k]).map(k => (
+              {['SUPERFRACTOR', 'BLACK', 'SHIELD', 'LOGOMAN', 'LAUNDRY', 'NAMEPLATE', 'BUTTON', 'BRAND'].filter(k => facets.par[k]).map(k => (
                 <label key={k} style={lbl}><input type="checkbox" checked={!!pars && pars.has(k)} onChange={() => toggleIn(setPars, pars, k)} style={cb} />{PAR_LABEL[k]}<span style={cnt}>{facets.par[k].toLocaleString()}</span></label>
               ))}
             </div>
