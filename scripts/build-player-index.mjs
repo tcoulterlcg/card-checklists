@@ -284,7 +284,6 @@ const shards = Array.from({ length: SHARDS }, () => newShard(13, [0, 3]))   // [
 const players = new Map()
 const sportsPool = [], sportIdx = new Map()
 
-let files = 0
 const setMeta = {}
 let files = 0
 for (const f of setFiles) {
