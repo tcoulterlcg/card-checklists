@@ -11,7 +11,8 @@ import { CollectionView, useMyCollection } from '../components/collection'
 import { addWant, removeWant, myWantlist, grailfindrFindUrl, signOutHere, noCardNumber, setOwners, collectionCardN } from '../lib/supa'
 import { FeedbackModal, FeedbackView, useFeedbackAdmin } from '../components/feedback'
 import { FixEditor } from '../components/fix-editor'
-import { Omnibox, PlayerPage, MyPlayersPanel, useMyPlayers, loadPlayerDir, loadTopPlayers, seasonLabel, MemBadge, MemChip, memCodeOf } from '../components/player'
+import { useMyPC, MyPCPanel, cardMatchesChase } from '../components/mypc'
+import { Omnibox, PlayerPage, useMyPlayers, loadPlayerDir, loadTopPlayers, seasonLabel, MemBadge, MemChip, memCodeOf } from '../components/player'
 import { ComparePage } from '../components/compare'
 import { norm, setNameMatches, STOP_PLAYER, parseQuery, parseQueryFor, matchPlayers, TYPE, typeLabel, TYPE_COLORS, serialLabel } from '../lib/query'
 import { loadSet, loadIndex, loadRedirects, sectionKey } from '../lib/catalog'
@@ -417,6 +418,8 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
   const [tcgType, setTcgType] = useState('All')
   // Player pages + My Players
   const myPlayers = useMyPlayers(account)
+  const pc = useMyPC(account)   // teams, sets and chases (My PC)
+  const pcCount = myPlayers.list.length + pc.teams.length + pc.chases.length
   const [activePlayer, setActivePlayer] = useState(null)
   const [compareNames, setCompareNames] = useState(['', ''])   // ?compare=A&vs=B
   const [playerParsed, setPlayerParsed] = useState(null)
@@ -666,6 +669,18 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
   }
   const mineSet = useMemo(() => new Set(myPlayers.list.map(n => n.toLowerCase())), [myPlayers.list])
   const isMine = (p) => { const n = (p || '').toLowerCase(); if (mineSet.has(n)) return true; for (const m of mineSet) if (n.includes(m)) return true; return false }
+  // My PC on a set page: a player you collect, a team you collect, or one of your chases
+  const pcTeamSet = useMemo(() => new Set(pc.teams.map(t => norm(t))), [pc.teams])
+  const inPC = (c, s) => {
+    if (isMine(c.p)) return true
+    if (c.t && pcTeamSet.size && String(c.t).split(/\s+\/\s+|\s*;\s*/).some(x => pcTeamSet.has(norm(x)))) return true
+    if (pc.chases.length) {
+      const x = c.x || ''
+      const card = { p: c.p, t: c.t, section: s.title || '', setName: setData.name, year: setData.year, sport: setData.sport, au: /\bAU\b/.test(x), rc: /\bRC\b/.test(x), one: cardSerial(c, s) === 1, numbered: cardSerial(c, s) > 0 }
+      if (pc.chases.some(ch => cardMatchesChase(ch, card))) return true
+    }
+    return false
+  }
   // TCDB flags RC on the base card only; same number + player elsewhere in the set is a parallel of that rookie card
   const rcCards = useMemo(() => {
     const k = new Set()
@@ -698,7 +713,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
         ...s,
         cards: pool.filter(c => {
           if (term && !((c.p || '').toLowerCase().includes(term) || (c.t || '').toLowerCase().includes(term) || (c.d || '').toLowerCase().includes(term) || String(c.n || '').toLowerCase() === term || (s.title || '').toLowerCase().includes(term))) return false
-          if (onlyMine && !isMine(c.p)) return false
+          if (onlyMine && !inPC(c, s)) return false
           // rookie tributes, retrospectives and buybacks look like rookies but aren't
           if (setRcOnly && (!(/\bRC\b/.test(c.x || '') || (c.n && rcCards.has(c.n + '|' + c.p)) || ROOKIE_SECTION.test(s.title || '')) || /tribute|renewed|rookie year|retrospective|remembrance|buy ?backs?\b/i.test((s.title || '') + ' ' + (setData?.name || '')))) return false
           if (setRunFilter !== 'any') {
@@ -712,7 +727,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
         })
       }
     }).filter(s => s.cards.length > 0)
-  }, [setData, activeSection, dQuery, onlyMine, setTypeFilter, setRunFilter, setRcOnly, setMemFilter, mineSet, rcCards])
+  }, [setData, activeSection, dQuery, onlyMine, setTypeFilter, setRunFilter, setRcOnly, setMemFilter, mineSet, rcCards, pcTeamSet, pc.chases])
   useEffect(() => { setSecLimit(20) }, [activeSection, dQuery, onlyMine, setTypeFilter, setRunFilter, setRcOnly, setMemFilter])
   // Group the filtered cards by player (for the "My players" view of a set).
   const byPlayer = useMemo(() => {
@@ -1095,7 +1110,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
       : view === 'player' && activePlayer ? activePlayer.name + ' Cards'
       : view === 'compare' ? (compareNames.filter(Boolean).join(' vs ') || 'Compare players')
       : globalHits ? 'Search: ' + query
-      : view === 'community' ? 'Community' : view === 'collection' ? 'My Collection' : view === 'myplayers' ? 'My Players' : view === 'feedback' ? 'Feedback' : ''
+      : view === 'community' ? 'Community' : view === 'collection' ? 'My Collection' : view === 'mypc' ? 'My PC' : view === 'feedback' ? 'Feedback' : ''
     document.title = t ? t + ' — CardHQ' : 'CardHQ — Sports Card & TCG Checklists'
   }, [activeSet, setData, view, activePlayer, globalHits, compareNames])
   // Deep links and Back/Forward: ?player=Name[&q=raw] · ?set=slug · ?view=community · ?search=term
@@ -1118,7 +1133,8 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
     }
     else if (sr && sr.trim().length >= 3) runGlobalSearch(sr, false)
     else if (sr) { goHome(false); setNotice('Type at least 3 letters to search.') }   // not an endless 'Loading…'
-    else if (v && ['myplayers', 'community', 'collection', 'feedback'].includes(v)) openView(v, false, v === 'collection' ? ['cset', 'ctab', 'from'].filter(k => sp.get(k)).map(k => '&' + k + '=' + encodeURIComponent(sp.get(k))).join('') : '')
+    else if (v === 'myplayers') openView('mypc', false)   // old name of My PC
+    else if (v && ['mypc', 'community', 'collection', 'feedback'].includes(v)) openView(v, false, v === 'collection' ? ['cset', 'ctab', 'from'].filter(k => sp.get(k)).map(k => '&' + k + '=' + encodeURIComponent(sp.get(k))).join('') : '')
     else {
       goHome(false)
       // browse filters live in the URL too (?sport=Hockey&team=...), so Back and shared links restore them
@@ -1153,7 +1169,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
     return () => window.removeEventListener('popstate', onPop)
   }, [])
 
-  const NAV_ITEMS = [['Sets', () => { goHome(); setSportFilter('All'); setBrandFilter('All'); setProductFilter('All') }, 'browse'], ['Players', () => openView('myplayers'), 'myplayers'], ['Community', () => openView('community'), 'community'], ['My Collection', () => openView('collection'), 'collection']]
+  const NAV_ITEMS = [['Sets', () => { goHome(); setSportFilter('All'); setBrandFilter('All'); setProductFilter('All') }, 'browse'], ['My PC', () => openView('mypc'), 'mypc'], ['Community', () => openView('community'), 'community'], ['My Collection', () => openView('collection'), 'collection']]
   const [scrolled, setScrolled] = useState(false)
   const [pastHero, setPastHero] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
@@ -1407,7 +1423,7 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
             </div>
           )}
         </>
-      ) : (activeSet || globalHits || view === 'player' || view === 'myplayers' || view === 'compare') ? (
+      ) : (activeSet || globalHits || view === 'player' || view === 'mypc' || view === 'compare') ? (
         <div style={{ marginBottom: 16 }}>
           {activeSet ? (
             <input
@@ -1459,6 +1475,11 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
                 style={{ ...buttonText, background: 'transparent', color: '#A1A1AA', border: '1px solid #232A3E', borderRadius: 9, padding: '8px 15px', cursor: 'pointer', fontSize: 13 }}>
                 Track in My Collection
               </button>
+              {(() => { const on = pc.has('set', setData.slug); return (
+                <button aria-pressed={on} onClick={() => pc.toggle('set', setData.slug, setData.name)}
+                  style={{ ...buttonText, background: on ? '#0e1630' : 'transparent', color: on ? '#c9d8ff' : '#A1A1AA', border: '1px solid ' + (on ? ACCENT : '#232A3E'), borderRadius: 9, padding: '8px 15px', cursor: 'pointer', fontSize: 13 }}>
+                  {on ? '✓ In My PC' : '+ Add to My PC'}
+                </button>) })()}
               <button onClick={() => setFeedback({ set_slug: setData.slug, set_name: setData.name, sections: (setData.sections || []).map(x => x.title), section: activeSection !== 'All' ? activeSection : '' })}
                 title="Missing card, wrong info, missing parallel (shield, SuperFractor, game-used…)? Tell us."
                 style={{ ...buttonText, background: 'transparent', color: '#A1A1AA', border: '1px solid #232A3E', borderRadius: 9, padding: '8px 15px', cursor: 'pointer', fontSize: 13 }}>
@@ -1510,10 +1531,10 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
 
           {/* FILTER BAR */}
           <div style={{ background: '#0F1320', border: '1px solid #232323', borderRadius: 14, padding: '10px 12px', display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center', marginBottom: 12 }}>
-            {(onlyMine || !setIsTcg) && <button aria-pressed={onlyMine} onClick={() => setOnlyMine(v => !v)} title={myPlayers.list.length ? 'Only show cards of players you collect' : 'Add players from any player page first'}
+            {(onlyMine || !setIsTcg) && <button aria-pressed={onlyMine} onClick={() => setOnlyMine(v => !v)} title={pcCount ? 'Only show your PC: players, teams and chases you collect' : 'Add players, teams or chases in My PC first'}
               style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: onlyMine ? '#0e1630' : '#121626', border: '1px solid ' + (onlyMine ? ACCENT : '#232A3E'), color: onlyMine ? '#8fb0ff' : '#D4D4D8', borderRadius: 10, padding: '0 14px', height: 40, fontSize: 14, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit' }}>
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><path d="M20 21a8 8 0 0 0-16 0" /><circle cx="12" cy="8" r="4" /></svg>
-              My players <span style={{ background: onlyMine ? ACCENT : '#232A3E', color: onlyMine ? '#fff' : '#A1A1AA', borderRadius: 999, padding: '1px 7px', fontSize: 12, fontWeight: 700 }}>{myPlayers.list.length}</span>
+              My PC <span style={{ background: onlyMine ? ACCENT : '#232A3E', color: onlyMine ? '#fff' : '#A1A1AA', borderRadius: 999, padding: '1px 7px', fontSize: 12, fontWeight: 700 }}>{pcCount}</span>
             </button>}
             <Select ariaLabel="Section" value={activeSection} onChange={setActiveSection} defaultValue="All" width={340}
               options={[['All', 'All sections (' + (setData.sections || []).length + ')'], ...(setData.sections || []).map(s => [s.title, s.title + ' (' + s.cards.length + ')'])]} />
@@ -1532,11 +1553,13 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
           </div>
           {onlyMine && (
             <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center', margin: '0 0 14px' }}>
-              <span style={{ ...eyebrow, color: '#8A93A8' }}>Showing cards of</span>
-              {myPlayers.list.length === 0 && <span style={{ color: '#8A93A8', fontSize: 13 }}>nobody yet — open a player page and hit “Collect this player”.</span>}
+              <span style={{ ...eyebrow, color: '#8A93A8' }}>Your PC in this set</span>
+              {pcCount === 0 && <span style={{ color: '#8A93A8', fontSize: 13 }}>nothing yet — add players, teams or chases in My PC.</span>}
               {byPlayer.map(g => <button key={g.name} onClick={() => openPlayerByName(g.name, null, true, setData?.sport)} style={{ background: '#0e1630', border: '1px solid ' + ACCENT + '55', color: '#c9d8ff', fontSize: 13, fontWeight: 600, padding: '5px 10px', borderRadius: 999, cursor: 'pointer', fontFamily: 'inherit' }}>{g.name} <span style={{ color: '#5b82e8' }}>· {g.rows.length}</span></button>)}
+              {pc.teams.map(t => <span key={'t:' + t} style={{ border: '1px solid #232A3E', color: '#A1A1AA', fontSize: 13, padding: '5px 10px', borderRadius: 999 }}>{t}</span>)}
+              {pc.of('chase').map(ch => <span key={'c:' + ch.key} style={{ border: '1px solid #232A3E', color: '#A1A1AA', fontSize: 13, padding: '5px 10px', borderRadius: 999 }}>{ch.label}</span>)}
               {myPlayers.list.filter(n => !byPlayer.some(g => g.name === n)).map(n => <span key={n} style={{ border: '1px solid #232A3E', color: '#8A93A8', fontSize: 13, padding: '5px 10px', borderRadius: 999 }}>{n} · 0</span>)}
-              <button onClick={() => openView('myplayers')} style={{ background: 'none', border: 'none', color: ACCENT_TEXT, fontSize: 13, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit' }}>Manage my players</button>
+              <button onClick={() => openView('mypc')} style={{ background: 'none', border: 'none', color: ACCENT_TEXT, fontSize: 13, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit' }}>Manage My PC</button>
             </div>
           )}
 
@@ -1635,8 +1658,8 @@ export default function Home() {   // rendered by app/page.js (server wrapper th
       ) : view === 'compare' ? (
         <ComparePage names={compareNames} sets={sets} onChange={(n) => openCompare(n, 'replace')}
           onOpenSet={openSetBySlug} onOpenPlayer={(name) => openPlayerByName(name, null, true)} />
-      ) : view === 'myplayers' ? (
-        <MyPlayersPanel myPlayers={myPlayers} onOpenPlayer={(name) => openPlayerByName(name)} onOpenSet={(slug) => openSetBySlug(slug)} />
+      ) : view === 'mypc' ? (
+        <MyPCPanel myPlayers={myPlayers} pc={pc} sets={sets} onOpenPlayer={(name) => openPlayerByName(name)} onOpenSet={(slug) => openSetBySlug(slug)} />
       ) : view === 'feedback' ? (
         <FeedbackView account={account} admin={fbAdmin.admin} onOpenAuth={() => setAuthOpen(true)} onOpenSet={openSetBySlug}
           onNew={(ctx) => setFeedback(ctx)} onChanged={fbAdmin.refresh} onFix={(r) => setFixing({ slug: r.set_slug, feedback: r })} version={fixVersion} />

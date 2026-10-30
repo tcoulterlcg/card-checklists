@@ -520,7 +520,7 @@ function PlayerPageInner({ player, parsed, sets, onOpenSet, myPlayers, onWant, o
           <div style={{ display: 'flex', gap: 10, marginTop: 18, flexWrap: 'wrap' }}>
             <button onClick={() => myPlayers.toggle(player.name)} style={btn(!following)} aria-pressed={following}>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true">{following ? <path d="m5 12 5 5L20 7" /> : <path d="M12 5v14M5 12h14" />}</svg>
-              {following ? 'In my players' : 'Collect this player'}
+              {following ? 'In My PC' : 'Add to My PC'}
             </button>
             <button onClick={exportCsv} style={btn(false)}>Export CSV</button>
             <button onClick={copyLink} style={btn(false)}>{copied || 'Copy link'}</button>
