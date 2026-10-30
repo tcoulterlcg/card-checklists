@@ -1,3 +1,5 @@
+import { Analytics } from '@vercel/analytics/next'
+
 const DESCRIPTION = 'Complete checklists for 5,000+ sports card and TCG sets — every base card, insert, parallel and print run. Search any player, track your wantlist and collection.'
 export const metadata = {
   metadataBase: new URL('https://cardhq.vercel.app'),
@@ -134,6 +136,8 @@ export default function RootLayout({ children }) {
       </head>
       <body style={{ margin: 0, fontFamily: "'Inter', system-ui, sans-serif", background: '#0B0E17', color: '#EDEDEF' }}>
         {children}
+        {/* Vercel Web Analytics: visitors + page views (no cookies) */}
+        <Analytics />
       </body>
     </html>
   )
