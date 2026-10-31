@@ -9951,7 +9951,9 @@
   "why": [
    "missing inserts: nexus play action, patch"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2018-panini-playbook-football-nfl-cards: 931 -> 4943 cards, 37 -> 109 sections, covers 99.2% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2017-donruss-certified-cuts-football-cards",
@@ -10005,7 +10007,9 @@
   "why": [
    "missing inserts: american die cut, jersey"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2015-panini-prestige-football-cards: 981 -> 5898 cards, 27 -> 75 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2015-topps-inception-football",
@@ -10031,7 +10035,9 @@
   "why": [
    "missing inserts: relic, relic trios"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2015-topps-triple-threads-football: 172 -> 4315 cards, 3 -> 78 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2014-panini-select-football",
@@ -10043,7 +10049,9 @@
   "why": [
    "missing inserts: fuschsia, jerseys"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2014-panini-select-football: 5067 -> 5094 cards, 99 -> 77 sections, covers 73.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2013-panini-crown-royale-football-cards",
@@ -10069,7 +10077,9 @@
   "why": [
    "missing inserts: dual jerseys, signatures"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2013-upper-deck-ultimate-collection-football-cards: 197 -> 1255 cards, 4 -> 27 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2014-15-upper-deck-black-diamond-hockey-cards",
@@ -10213,7 +10223,9 @@
   "why": [
    "base skips 6 numbers in #1-90 (e.g. 7, 8, 9, 47, 48)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2020-panini-origins-football: 3887 -> 3562 cards, 110 -> 99 sections, covers 97.8% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2019-topps-tribute-baseball",
@@ -10237,7 +10249,9 @@
   "why": [
    "base skips 6 numbers in #4-97 (e.g. 52, 53, 54, 55, 56)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2021-panini-xr-football: 10787 -> 10663 cards, 434 -> 257 sections, covers 97.5% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2019-panini-encased-football",
@@ -10249,7 +10263,9 @@
   "why": [
    "base skips 6 numbers in #2-100 (e.g. 53, 54, 55, 56, 57)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2019-panini-encased-football: 3212 -> 3209 cards, 122 -> 116 sections, covers 98.5% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2019-panini-playbook-football",
@@ -10261,7 +10277,9 @@
   "why": [
    "base skips 6 numbers in #1-99 (e.g. 42, 43, 44, 82, 83)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2019-panini-playbook-football: 5227 -> 4962 cards, 120 -> 104 sections, covers 99.7% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2021-donruss-elite-football",
@@ -10273,7 +10291,9 @@
   "why": [
    "base skips 6 numbers in #1-100 (e.g. 30, 31, 32, 48, 49)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2021-donruss-elite-football: 6869 -> 6691 cards, 180 -> 144 sections, covers 99.9% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2021-panini-certified-football",
@@ -10335,7 +10355,9 @@
   "why": [
    "base skips 6 numbers in #1-100 (e.g. 16, 17, 18, 59, 60)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2020-panini-absolute-football: 9316 -> 9150 cards, 179 -> 154 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2020-panini-encased-football",
