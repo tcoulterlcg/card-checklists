@@ -14616,7 +14616,9 @@
   "why": [
    "only 0 cards scraped — hidden until a full checklist is imported"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2024-leaf-joe-montana-legacy-collection-football: 0 -> 658 cards, 0 -> 92 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2024-topps-206-baseball",
@@ -14642,7 +14644,9 @@
   "why": [
    "only 0 cards scraped — hidden until a full checklist is imported"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2024-topps-five-star-baseball: 0 -> 2637 cards, 0 -> 78 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2024-topps-lineage-argentina-soccer",
@@ -14704,7 +14708,9 @@
   "why": [
    "only 0 cards scraped — hidden until a full checklist is imported"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "archives-snapshots-baseball: 0 -> 208 cards, 0 -> 5 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "leaf-metal-draft-baseball-full",
@@ -15184,7 +15190,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "claimed-l2v"
+  "status": "done",
+  "note": "2012-topps-football-cards: 579 -> 6451 cards, 8 -> 80 sections, covers 93.8% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2012-upper-deck-university-of-notre-dame-football",
@@ -15215,7 +15223,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "claimed-l2v"
+  "status": "done",
+  "note": "2013-panini-black-football-cards: 859 -> 4872 cards, 15 -> 69 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2013-panini-contenders-football-cards",
@@ -15459,7 +15469,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "claimed-l2v"
+  "status": "done",
+  "note": "2013-topps-turkey-red-football-cards: 180 -> 820 cards, 3 -> 9 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2013-upper-deck-exquisite-football-cards",
@@ -15533,7 +15545,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "claimed-l2v"
+  "status": "done",
+  "note": "2014-flair-showcase-football-cards: 550 -> 1107 cards, 18 -> 11 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2014-panini-black-gold-football-cards",
@@ -15595,7 +15609,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "claimed-l2v"
+  "status": "done",
+  "note": "2014-panini-immaculate-football-cards: 1778 -> 3130 cards, 37 -> 66 sections, covers 99.6% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2014-panini-limited-football-cards",
@@ -15642,7 +15658,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "claimed-l2v"
+  "status": "done",
+  "note": "2014-panini-rookies-and-stars-football: 6850 -> 5796 cards, 108 -> 84 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2014-panini-spectra-football",
@@ -15706,7 +15724,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "claimed-l2v"
+  "status": "done",
+  "note": "2014-topps-football-cards: 1103 -> 7403 cards, 11 -> 82 sections, covers 88.4% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2014-upper-deck-cfl-football-cards",
@@ -15800,7 +15820,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "claimed-l2v"
+  "status": "done",
+  "note": "2015-donruss-signature-series-football: 534 -> 340 cards, 8 -> 2 sections, covers 0.2% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2015-leaf-army-american-football-cards",
@@ -15828,7 +15850,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "claimed-l2v"
+  "status": "done",
+  "note": "2015-leaf-best-football-cards: 20 -> 80 cards, 1 -> 4 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2015-panini-clear-vision-football-cards",
@@ -15856,7 +15880,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "claimed-l2v"
+  "status": "done",
+  "note": "2015-panini-flawless-football-cards: 660 -> 3296 cards, 20 -> 135 sections, covers 98.8% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2015-panini-gridiron-kings-football",
@@ -15870,7 +15896,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "claimed-l2v"
+  "status": "done",
+  "note": "2015-panini-gridiron-kings-football: 728 -> 2758 cards, 27 -> 73 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2015-panini-immaculate-football-cards",
@@ -15926,7 +15954,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "claimed-l2v"
+  "status": "done",
+  "note": "2015-topps-definitive-collection-football: 40 -> 1937 cards, 1 -> 52 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2015-topps-football-cards",
@@ -16048,7 +16078,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "claimed-l2v"
+  "status": "done",
+  "note": "2016-leaf-draft-football-cards: 99 -> 1112 cards, 3 -> 10 sections, covers 99.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2016-leaf-metal-us-army-all-american-football",
@@ -16062,7 +16094,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "claimed-l2v"
+  "status": "done",
+  "note": "2016-leaf-metal-us-army-all-american-football: 212 -> 4959 cards, 3 -> 67 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2016-panini-classics-football-cards",
@@ -16092,7 +16126,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "claimed-l2v"
+  "status": "done",
+  "note": "2016-panini-contenders-draft-picks-football: 648 -> 3272 cards, 16 -> 24 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2016-panini-encased-football-cards",
@@ -16166,7 +16202,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "claimed-l2v"
+  "status": "done",
+  "note": "2016-panini-immaculate-football-cards: 1789 -> 3989 cards, 41 -> 91 sections, covers 99.6% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2016-panini-impeccable-football-cards",
@@ -16194,7 +16232,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "claimed-l2v"
+  "status": "done",
+  "note": "2016-panini-infinity-football-cards: 622 -> 2024 cards, 23 -> 67 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2016-panini-national-treasures-collegiate-football",
@@ -16252,7 +16292,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "claimed-l2v"
+  "status": "done",
+  "note": "2016-panini-plates-patches-football: 491 -> 13096 cards, 12 -> 152 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2016-panini-playoff-football-cards",
@@ -22017,7 +22059,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2013-14-panini-contenders-hockey-cards: 1072 -> 2201 cards, 41 -> 65 sections, covers 95.7% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2013-14-panini-national-treasures-hockey-cards",
@@ -22031,7 +22075,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2013-14-panini-national-treasures-hockey-cards: 2543 -> 11920 cards, 87 -> 255 sections, covers 94.9% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2013-14-panini-nhl-stickers",
@@ -22059,7 +22105,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2013-14-panini-prime-hockey-cards: 2230 -> 3580 cards, 77 -> 96 sections, covers 96.2% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2013-14-panini-prizm-hockey",
@@ -22441,7 +22489,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2015-upper-deck-buybacks-hockey-cards: 100 -> 2571 cards, 1 -> 199 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2015-upper-deck-series-1-hockey-cards",
@@ -24043,7 +24093,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "19-20-ud-upper-deck-spx-hockey: 1164 -> 1337 cards, 80 -> 75 sections, covers 99.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "19-20-ud-upper-deck-stature-hockey",
@@ -24400,7 +24452,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "20-21-o-pee-chee-platinum-hockey: 4835 -> 5326 cards, 89 -> 80 sections, covers 98.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "20-21-parkhurst-hockey",
@@ -25271,7 +25325,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "21-22-o-pee-chee-platinum-hockey: 6485 -> 7009 cards, 85 -> 83 sections, covers 98.6% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "21-22-parkhurst-hockey",
@@ -25940,7 +25996,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "22-23-upper-deck-black-diamond-hockey: 3277 -> 3275 cards, 198 -> 129 sections, covers 98.6% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "22-23-upper-deck-credentials-hockey",
@@ -26204,7 +26262,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2023-24-o-pee-chee-platinum-hockey: 556 -> 7116 cards, 11 -> 88 sections, covers 99.8% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2023-24-skybox-e-x-2000-hockey",
