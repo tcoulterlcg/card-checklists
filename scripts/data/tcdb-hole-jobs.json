@@ -17904,7 +17904,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2020-panini-chronicles-draft-picks-football-cards: 1192 -> 8904 cards, 46 -> 364 sections, covers 96.6% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2020-panini-chronicles-football",
@@ -17950,7 +17952,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2020-panini-contenders-football: 6136 -> 5898 cards, 170 -> 126 sections, covers 98.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2020-panini-contenders-optic-football",
@@ -17964,7 +17968,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2020-panini-contenders-optic-football: 4561 -> 4206 cards, 173 -> 129 sections, covers 97.8% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2020-panini-elements-football",
@@ -17978,7 +17984,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2020-panini-elements-football: 2414 -> 2311 cards, 68 -> 58 sections, covers 98.5% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2020-panini-flawless-collegiate-football-cards",
@@ -17992,7 +18000,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2020-panini-flawless-collegiate-football-cards: 717 -> 2189 cards, 18 -> 163 sections, covers 99.4% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2020-panini-flawless-football",
@@ -18006,7 +18016,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2020-panini-flawless-football: 6624 -> 6007 cards, 539 -> 527 sections, covers 95.1% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2020-panini-honors-football",
@@ -18020,7 +18032,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2020-panini-honors-football: 4361 -> 1400 cards, 55 -> 52 sections, covers 2.7% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2020-panini-immaculate-collegiate-football-football",
@@ -18066,7 +18080,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2020-panini-national-treasures-collegiate-football-cards: 551 -> 3307 cards, 28 -> 109 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2020-panini-nfl-five-trading-card-game-tcg",
@@ -18172,7 +18188,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2020-sage-aspire-football-cards: 72 -> 580 cards, 1 -> 11 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2020-sage-hit-premier-draft-high-series-football-cards",
@@ -18214,7 +18232,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2020-topps-xfl-football-cards: 198 -> 1650 cards, 2 -> 17 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2020-upper-deck-cfl-football-cards",
