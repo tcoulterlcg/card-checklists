@@ -10741,7 +10741,9 @@
   "why": [
    "base skips 5 numbers in #1-96 (e.g. 50, 52, 54, 55, 56)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2020-panini-black-football: 3973 -> 3911 cards, 91 -> 77 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2024-topps-chrome-boxing",
@@ -10753,7 +10755,9 @@
   "why": [
    "base skips 5 numbers in #1-100 (e.g. 14, 17, 37, 76, 77)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2024-topps-chrome-boxing: 427 -> 3082 cards, 15 -> 62 sections, covers 99.2% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2022-topps-museum-collection-baseball",
@@ -10801,7 +10805,9 @@
   "why": [
    "base skips 5 numbers in #1-100 (e.g. 61, 63, 83, 89, 95)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2021-panini-immaculate-collection-baseball: 9823 -> 9018 cards, 276 -> 261 sections, covers 99.3% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2021-panini-national-treasures-baseball",
@@ -10813,7 +10819,9 @@
   "why": [
    "base skips 5 numbers in #1-100 (e.g. 9, 12, 13, 63, 69)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2021-panini-national-treasures-baseball: 10346 -> 8683 cards, 329 -> 305 sections, covers 91.2% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2022-panini-spectra-football",
@@ -10837,7 +10845,9 @@
   "why": [
    "base skips 5 numbers in #1-250 (e.g. 124, 125, 126, 134, 135)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2023-panini-mosaic-football: 21524 -> 21601 cards, 390 -> 233 sections, covers 96.2% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2019-panini-black-football",
@@ -10849,7 +10859,9 @@
   "why": [
    "base skips 4 numbers in #1-50 (e.g. 22, 27, 29, 34)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2019-panini-black-football: 1154 -> 1133 cards, 39 -> 24 sections, covers 88.3% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2024-skybox-marvel-masterpieces-xl-checklist-entertainment",
@@ -10861,7 +10873,9 @@
   "why": [
    "base skips 4 numbers in #1-90 (e.g. 20, 47, 73, 84)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2024-skybox-marvel-masterpieces-xl-checklist-entertainment: 1511 -> 932 cards, 31 -> 16 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2020-topps-tribute-baseball",
@@ -10885,7 +10899,9 @@
   "why": [
    "base skips 4 numbers in #1-97 (e.g. 35, 36, 37, 38)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2021-panini-limited-football: 4404 -> 4292 cards, 129 -> 98 sections, covers 99.6% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2023-panini-immaculate-collection-ufc-cards",
@@ -10909,7 +10925,9 @@
   "why": [
    "base skips 4 numbers in #1-100 (e.g. 38, 42, 44, 64)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2023-panini-national-treasures-baseball: 7768 -> 7274 cards, 281 -> 271 sections, covers 90.5% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2023-topps-museum-collection-baseball",
