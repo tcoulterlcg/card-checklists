@@ -22,10 +22,13 @@
 // narrows slowly on success. Long runs keep going in the background; the
 // javascript_tool call itself must return within 45 s, so always poll.
 (() => {
-  if (window.__tcdb && window.__tcdb.version >= 3) return
+  if (window.__tcdb && window.__tcdb.version >= 4) return
   const sleep = (ms) => new Promise(r => setTimeout(r, ms))
   const parse = (h) => new DOMParser().parseFromString(h, 'text/html')
-  const st = { version: 3, verified: [], vtodo: [], vrunning: false, gap: 6000, minGap: 4000, maxGap: 120000, todo: [], done: [], failed: [], current: null, requests: 0, throttled: 0, running: false, log: [] }
+  // Reloading over an older copy keeps its state (queues, results, throttle). Empty the old
+  // copy's vtodo and wait for st.vrunning to clear before calling verify() on this one.
+  const st = (window.__tcdb && window.__tcdb.st) || { verified: [], vtodo: [], vrunning: false, gap: 6000, minGap: 4000, maxGap: 120000, todo: [], done: [], failed: [], current: null, requests: 0, throttled: 0, running: false, log: [] }
+  st.version = 4
 
   async function get(url) {
     for (let attempt = 0; attempt < 8; attempt++) {
@@ -198,8 +201,42 @@
     .replace(/&/g, ' and ').replace(/['’.]/g, '')
     .replace(new RegExp('\\b(' + [sport, 'cards?', 'checklist', 'trading', 'football', 'baseball', 'basketball', 'hockey', 'soccer', 'racing', 'ufc', 'mma', 'wrestling', 'golf', 'tennis', 'nfl', 'nba', 'nhl', 'mlb'].filter(Boolean).join('|').toLowerCase() + ')\\b', 'g'), ' ')
     .replace(/[^a-z0-9]+/g, ' ').trim()
+  // TCDB's search often leaves the parent set out (it returns its inserts instead), so
+  // when search misses, read the sport's full set list for the year and match by name.
+  const yearCache = new Map()
+  async function yearList(sport, y) {
+    const k = sport + '|' + y
+    if (!yearCache.has(k)) {
+      let doc = null
+      try { doc = await get('/ViewAll.cfm/sp/' + encodeURIComponent(sport) + '/year/' + y) } catch (e) { doc = null }
+      const out = []
+      if (doc) for (const a of doc.querySelectorAll('a[href*="/ViewSet.cfm/sid/"]')) {
+        const m = (a.getAttribute('href') || '').match(/\/ViewSet\.cfm\/sid\/(\d+)\/([^/?#]+)/)
+        const name = a.textContent.replace(/\s+/g, ' ').trim()
+        if (m && name) out.push({ sid: +m[1], path: m[2], name })
+      }
+      yearCache.set(k, out)
+    }
+    return yearCache.get(k)
+  }
   async function locate(job) {
+    if (job.sid && job.path) return { sid: +job.sid, path: job.path, name: job.name }
     const want = norm(job.name, job.sport)
+    const hit = await locateBySearch(job, want)
+    if (hit) return hit
+    const sport = CAT[job.sport] || job.sport
+    if (!sport) return null
+    const y0 = +((String(job.name).match(/^((?:19|20)\d{2})/) || [])[1] || 0)
+    const years = [...new Set([y0, +job.year, +job.year - 1].filter(y => y > 1800))]
+    const noSeries = want.replace(/\bseries (1|2|3|one|two|three|i|ii|iii)\b/g, ' ').replace(/\s+/g, ' ').trim()
+    for (const y of years) {
+      const list = await yearList(sport, y)
+      const exact = list.find(h => norm(h.name, job.sport) === want) || (noSeries !== want && list.find(h => norm(h.name, job.sport) === noSeries))
+      if (exact) return exact
+    }
+    return null
+  }
+  async function locateBySearch(job, want) {
     for (const cat of [CAT[job.sport] || job.sport, '']) {
       const hits = await find(job.name.replace(/\b(cards?|checklist)\b/gi, '').trim(), cat)
       const exact = hits.filter(h => norm(h.name, job.sport) === want || norm(h.path.replace(/-/g, ' '), job.sport) === want)
@@ -260,5 +297,5 @@
 
   const status = () => ({ gap: st.gap, requests: st.requests, throttled: st.throttled, running: st.running, todo: st.todo.length, vtodo: st.vtodo.length, verified: st.verified.length, short: st.verified.filter(v => v.verdict === 'short').length, done: st.done.length, failed: st.failed.map(f => f.slug + ': ' + f.error), current: st.current && { slug: st.current.slug, ...st.current.progress, mins: Math.round((Date.now() - st.current.started) / 60000) } })
 
-  window.__tcdb = { version: 3, st, find, queue: (jobs) => { st.todo.push(...jobs); run(); return st.todo.length }, verify: (jobs) => { st.vtodo.push(...jobs); vrun(); return st.vtodo.length }, verdicts, locate, status, take, stage, slice, stageJson, sliceJson, compact, checklist, rowsOf, flagsToX }
+  window.__tcdb = { version: 4, st, find, yearList, queue: (jobs) => { st.todo.push(...jobs); run(); return st.todo.length }, verify: (jobs) => { st.vtodo.push(...jobs); vrun(); return st.vtodo.length }, verdicts, locate, status, take, stage, slice, stageJson, sliceJson, compact, checklist, rowsOf, flagsToX }
 })()
