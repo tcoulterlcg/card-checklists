@@ -13281,7 +13281,9 @@
   "why": [
    "only 2 cards scraped — hidden until a full checklist is imported"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2010-bowman-baseball-cards: 2 -> 4971 cards, 1 -> 39 sections, covers 0.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2011-topps-ufc-title-shot",
@@ -13305,7 +13307,9 @@
   "why": [
    "only 1 cards scraped — hidden until a full checklist is imported"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2012-13-leaf-metal-basketball-cards: 1 -> 1506 cards, 1 -> 69 sections, covers 0.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2013-leaf-autographed-helmet-football",
@@ -13371,7 +13375,9 @@
   "why": [
    "only 0 cards scraped — hidden until a full checklist is imported"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2014-topps-mlb-chipz: 0 -> 2604 cards, 0 -> 32 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2015-16-upper-deck-connor-mcdavid-collection-hockey",
@@ -13450,7 +13456,9 @@
   "why": [
    "only 0 cards scraped — hidden until a full checklist is imported"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2015-topps-dynasty-baseball-cards: 0 -> 1523 cards, 0 -> 7 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2015-topps-mlb-chipz",
@@ -13598,7 +13606,9 @@
   "why": [
    "only 0 cards scraped — hidden until a full checklist is imported"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2017-panini-nba-finals-private-signings-basketball: 0 -> 128 cards, 0 -> 2 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2017-topps-archives-signature-series-baseball",
@@ -13658,7 +13668,9 @@
   "why": [
    "only 0 cards scraped — hidden until a full checklist is imported"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2017-topps-now-mlb-players-weekend: 0 -> 189 cards, 0 -> 2 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2017-upper-deck-grandeur-hockey-coins",
@@ -13744,7 +13756,9 @@
   "why": [
    "only 3 cards scraped — hidden until a full checklist is imported"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2018-leaf-ultimate-draft-baseball-cards: 3 -> 51 cards, 1 -> 1 sections, covers 0.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2018-leaf-valiant-baseball-baseball",
@@ -13880,7 +13894,9 @@
   "why": [
    "only 0 cards scraped — hidden until a full checklist is imported"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2019-leaf-valiant-baseball-baseball: 0 -> 2202 cards, 0 -> 46 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2019-onyx-vintage-collection-baseball-cards",
@@ -14066,7 +14082,9 @@
   "why": [
    "only 0 cards scraped — hidden until a full checklist is imported"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2020-onyx-nimbus-baseball: 0 -> 392 cards, 0 -> 8 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2020-onyx-vintage-baseball",
@@ -14078,7 +14096,9 @@
   "why": [
    "only 0 cards scraped — hidden until a full checklist is imported"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2020-onyx-vintage-baseball: 0 -> 228 cards, 0 -> 10 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2020-onyx-vintage-extended-baseball",
@@ -14090,7 +14110,9 @@
   "why": [
    "only 0 cards scraped — hidden until a full checklist is imported"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2020-onyx-vintage-extended-baseball: 0 -> 290 cards, 0 -> 5 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2020-topps-archives-signature-series-active-baseball-card-checklist-2",
@@ -14284,7 +14306,9 @@
   "why": [
    "only 0 cards scraped — hidden until a full checklist is imported"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2022-leaf-metal-perfect-game-all-american-classic-baseball: 0 -> 8257 cards, 0 -> 136 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2022-leaf-ultimate-draft-football-rookies-box-set-cards",
@@ -14604,7 +14628,9 @@
   "why": [
    "only 0 cards scraped — hidden until a full checklist is imported"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2024-topps-206-baseball: 0 -> 4523 cards, 0 -> 20 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2024-topps-five-star-baseball",
@@ -14628,7 +14654,9 @@
   "why": [
    "only 0 cards scraped — hidden until a full checklist is imported"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2024-topps-lineage-argentina-soccer: 0 -> 868 cards, 0 -> 78 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2024-topps-luminaries-baseball",
@@ -16310,7 +16338,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2016-panini-unparalleled-football-cards: 1043 -> 4879 cards, 18 -> 103 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2016-upper-deck-cfl-football-cards",
@@ -16422,7 +16452,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2017-panini-contenders-draft-picks-football: 525 -> 4016 cards, 15 -> 23 sections, covers 99.8% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2017-panini-elite-draft-picks-football",
@@ -16436,7 +16468,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2017-panini-elite-draft-picks-football: 466 -> 5738 cards, 8 -> 39 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2017-panini-encased-football-nfl-cards",
@@ -16450,7 +16484,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2017-panini-encased-football-nfl-cards: 675 -> 2502 cards, 21 -> 72 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2017-panini-flawless-collegiate-football-cards",
@@ -16478,7 +16514,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2017-panini-flawless-football-nfl-cards: 1050 -> 4947 cards, 31 -> 225 sections, covers 99.7% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2017-panini-football-cards",
@@ -16506,7 +16544,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2017-panini-illusions-football-cards: 603 -> 2590 cards, 21 -> 71 sections, covers 99.1% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2017-panini-immaculate-collection-football-cards",
@@ -16534,7 +16574,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2017-panini-immaculate-collegiate-football: 475 -> 1388 cards, 27 -> 73 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2017-panini-impeccable-football-cards",
@@ -16576,7 +16618,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2017-panini-majestic-football-cards: 696 -> 2616 cards, 26 -> 81 sections, covers 99.7% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2017-panini-national-treasures-collegiate-football",
@@ -16688,7 +16732,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2017-panini-spectra-football-cards: 680 -> 6472 cards, 20 -> 153 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2017-panini-xr-football-cards",
@@ -16702,7 +16748,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2017-panini-xr-football-cards: 807 -> 7123 cards, 22 -> 177 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2017-sage-autographed-football-cards",
@@ -16758,7 +16806,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2018-immaculate-collection-collegiate-football-cards: 528 -> 1942 cards, 26 -> 101 sections, covers 99.3% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2018-leaf-best-of-football-cards",
@@ -16828,7 +16878,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2018-panini-contenders-optic-football-cards: 398 -> 3277 cards, 15 -> 99 sections, covers 93.6% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2018-panini-elements-football-nfl-cards",
@@ -16870,7 +16922,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2018-panini-flawless-football: 5885 -> 5365 cards, 310 -> 288 sections, covers 94.4% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2018-panini-football-nfl-cards",
@@ -16898,7 +16952,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2018-panini-gold-standard-football-nfl-cards: 937 -> 2697 cards, 31 -> 70 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2018-panini-honors-football",
@@ -16912,7 +16968,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2018-panini-honors-football: 1692 -> 1533 cards, 57 -> 56 sections, covers 55.8% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2018-panini-illusions-football-nfl-cards",
@@ -16926,7 +16984,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2018-panini-illusions-football-nfl-cards: 782 -> 3480 cards, 33 -> 110 sections, covers 98.9% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2018-panini-immaculate-collection-football-nfl-cards",
@@ -16968,7 +17028,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2018-panini-limited-football-nfl-cards: 433 -> 2608 cards, 19 -> 87 sections, covers 91.8% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2018-panini-majestic-football-cards",
@@ -16996,7 +17058,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2018-panini-national-treasures-collegiate-football-cards: 461 -> 2589 cards, 27 -> 99 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2018-panini-nfl-stickers-collection-cards",
@@ -17038,7 +17102,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2018-panini-one-football-nfl-cards: 210 -> 1011 cards, 13 -> 12 sections, covers 99.5% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2018-panini-origins-football-nfl-cards",
@@ -17122,7 +17188,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2018-panini-spectra-football-nfl-cards: 760 -> 6919 cards, 24 -> 171 sections, covers 98.8% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2018-sage-hit-premier-draft-football-cards",
@@ -17164,7 +17232,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2018-score-football-nfl-cards: 934 -> 10637 cards, 19 -> 106 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2018-upper-deck-cfl-football-cards",
@@ -17206,7 +17276,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2019-donruss-elite-football: 5574 -> 5707 cards, 149 -> 131 sections, covers 93.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2019-immaculate-collection-collegiate-football-cards",
@@ -17234,7 +17306,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2019-leaf-draft-football-cards: 101 -> 928 cards, 2 -> 14 sections, covers 94.1% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2019-leaf-trinity-football-cards",
@@ -17290,7 +17364,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2019-panini-chronicles-football: 4442 -> 4441 cards, 130 -> 130 sections, covers 99.4% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2019-panini-contenders-draft-picks-football-cards",
@@ -17402,7 +17478,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2019-panini-luminance-football: 3095 -> 3097 cards, 77 -> 69 sections, covers 79.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2019-panini-national-treasures-collegiate-football-cards",
@@ -17458,7 +17536,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2019-panini-one-football: 1169 -> 1173 cards, 104 -> 16 sections, covers 85.2% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2019-panini-passing-the-torch-football",
@@ -17472,7 +17552,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2019-panini-passing-the-torch-football: 1560 -> 1210 cards, 39 -> 34 sections, covers 99.3% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2019-panini-prizm-draft-picks-football-cards",
@@ -17500,7 +17582,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2019-panini-score-football: 10550 -> 11028 cards, 125 -> 111 sections, covers 99.3% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2019-panini-select-football",
@@ -17514,7 +17598,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2019-panini-select-football: 9736 -> 10357 cards, 185 -> 159 sections, covers 98.1% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2019-sage-autographed-football-cards",
@@ -17584,7 +17670,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2019-upper-deck-cfl-football-cards: 289 -> 2622 cards, 2 -> 22 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2020-donruss-football-factory-set-cards",
@@ -17626,7 +17714,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2020-leaf-draft-football-cards: 100 -> 1672 cards, 1 -> 13 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2020-leaf-flash-of-greatness-football-cards",
@@ -17696,7 +17786,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2020-panini-chronicles-football: 7107 -> 7088 cards, 254 -> 216 sections, covers 97.6% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2020-panini-contenders-draft-picks-football-cards",
@@ -17710,7 +17802,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2020-panini-contenders-draft-picks-football-cards: 570 -> 8217 cards, 13 -> 115 sections, covers 99.8% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2020-panini-contenders-football",
@@ -17808,7 +17902,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2020-panini-immaculate-collegiate-football-football: 616 -> 2949 cards, 24 -> 102 sections, covers 98.7% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2020-panini-luminance-football",
@@ -17822,7 +17918,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2020-panini-luminance-football: 3316 -> 3304 cards, 91 -> 83 sections, covers 99.2% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2020-panini-national-treasures-collegiate-football-cards",
@@ -17864,7 +17962,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2020-panini-nfl-sticker-and-card-collection-football-cards: 663 -> 1167 cards, 2 -> 8 sections, covers 89.3% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2020-panini-obsidian-draft-picks-football-cards",
@@ -17878,7 +17978,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2020-panini-obsidian-draft-picks-football-cards: 218 -> 1377 cards, 4 -> 21 sections, covers 89.1% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2020-panini-one-football",
@@ -17892,7 +17994,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2020-panini-one-football: 1635 -> 1625 cards, 155 -> 25 sections, covers 84.7% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2020-panini-phoenix-football-factory-set-cards",
@@ -17920,7 +18024,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2020-panini-select-football: 21658 -> 22348 cards, 329 -> 216 sections, covers 98.4% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2020-sage-aspire-football-cards",
@@ -17990,7 +18096,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2020-upper-deck-cfl-football-cards: 259 -> 1421 cards, 2 -> 14 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2021-donruss-football-complete-set-nfl-cards",
@@ -18046,7 +18154,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2021-immaculate-collection-collegiate-football-cards: 586 -> 3090 cards, 19 -> 114 sections, covers 96.5% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2021-leaf-pro-set-college-football",
@@ -18074,7 +18184,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2021-panini-chronicles-draft-picks-football-cards: 952 -> 7205 cards, 32 -> 119 sections, covers 92.4% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2021-panini-chronicles-football",
@@ -18116,7 +18228,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2021-panini-contenders-football: 5302 -> 7187 cards, 169 -> 178 sections, covers 96.8% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2021-panini-contenders-optic-football",
@@ -18130,7 +18244,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2021-panini-contenders-optic-football: 6121 -> 5642 cards, 225 -> 162 sections, covers 99.8% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2021-panini-elements-football",
@@ -18144,7 +18260,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2021-panini-elements-football: 2609 -> 2405 cards, 87 -> 76 sections, covers 66.5% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2021-panini-eminence-football",
@@ -18172,7 +18290,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2021-panini-flawless-collegiate-football-cards: 793 -> 2685 cards, 17 -> 155 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2021-panini-flawless-football",
@@ -18186,7 +18306,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2021-panini-flawless-football: 5795 -> 5259 cards, 418 -> 406 sections, covers 91.2% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2021-panini-instant-all-pro-football-cards",
@@ -18214,7 +18336,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2021-panini-instant-all-rookie-team-football-cards: 24 -> 24 cards, 1 -> 1 sections, covers 0.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2021-panini-instant-black-white-rookies-football-cards",
@@ -18242,7 +18366,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2021-panini-instant-captains-football-cards: 32 -> 64 cards, 1 -> 2 sections, covers 0.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2021-panini-instant-field-generals-football-cards",
@@ -18298,7 +18424,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2021-panini-instant-rated-rookie-retro-football-cards: 40 -> 40 cards, 1 -> 1 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2021-panini-instant-score-the-franchise-football-cards",
@@ -18326,7 +18454,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2021-panini-instant-spotlight-rookies-football-cards: 40 -> 80 cards, 1 -> 2 sections, covers 0.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2021-panini-instant-supernova-football-cards",
@@ -18340,7 +18470,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2021-panini-instant-supernova-football-cards: 24 -> 24 cards, 1 -> 1 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2021-panini-instant-year-one-football-cards",
@@ -18382,7 +18514,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2021-panini-national-treasures-collegiate-football-cards: 473 -> 3366 cards, 20 -> 116 sections, covers 99.8% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2021-panini-nfl-five-trading-card-game-football",
@@ -18410,7 +18544,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2021-panini-nfl-player-of-the-day-football-cards: 150 -> 580 cards, 2 -> 7 sections, covers 66.7% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2021-panini-nfl-sticker-card-collection-football",
@@ -18466,7 +18602,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2021-panini-prizm-draft-picks-football-cards: 682 -> 11770 cards, 5 -> 59 sections, covers 99.1% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2021-panini-rookies-stars-football-factory-set-cards",
@@ -18578,7 +18716,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2022-bowman-university-chrome-football: 310 -> 4404 cards, 10 -> 68 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2022-clearly-donruss-football",
@@ -18606,7 +18746,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2022-donruss-elite-football: 8001 -> 7929 cards, 192 -> 172 sections, covers 99.5% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2022-donruss-football",
@@ -18620,7 +18762,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2022-donruss-football: 10631 -> 10718 cards, 166 -> 155 sections, covers 95.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2022-donruss-optic-football",
@@ -18634,7 +18778,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2022-donruss-optic-football: 11726 -> 11692 cards, 212 -> 186 sections, covers 98.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2022-donruss-optic-football-premium-box-set-cards",
@@ -18760,7 +18906,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2022-panini-chronicles-football: 7697 -> 9771 cards, 252 -> 262 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2022-panini-classics-football",
@@ -18872,7 +19020,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2022-panini-gold-standard-football: 4411 -> 4298 cards, 114 -> 102 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2022-panini-honors-football",
@@ -18970,7 +19120,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2022-panini-instant-black-white-rookies-football-cards: 42 -> 42 cards, 1 -> 1 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2022-panini-instant-my-city-football-cards",
@@ -18984,7 +19136,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2022-panini-instant-my-city-football-cards: 32 -> 32 cards, 1 -> 1 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2022-panini-instant-nfl-draft-night-football-cards",
@@ -19096,7 +19250,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2022-panini-instant-year-one-football-cards: 42 -> 84 cards, 1 -> 2 sections, covers 0.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2022-panini-legacy-football",
@@ -19124,7 +19280,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2022-panini-limited-football: 4393 -> 4279 cards, 136 -> 105 sections, covers 99.8% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2022-panini-luminance-football",
@@ -19138,7 +19296,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2022-panini-luminance-football: 4212 -> 4166 cards, 152 -> 117 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2022-panini-mosaic-sparkle-redemption-football-cards",
@@ -19208,7 +19368,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2022-panini-nfl-sticker-card-collection-football: 671 -> 1475 cards, 2 -> 11 sections, covers 98.4% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2022-panini-obsidian-football",
@@ -19236,7 +19398,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2022-panini-one-football: 1800 -> 1753 cards, 173 -> 25 sections, covers 83.9% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2022-panini-origins-football",
@@ -19320,7 +19484,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2022-panini-rookies-and-stars-football: 6733 -> 6675 cards, 178 -> 168 sections, covers 99.7% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2022-panini-select-draft-picks-football-cards",
@@ -19348,7 +19514,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2022-panini-select-football: 22784 -> 22675 cards, 371 -> 254 sections, covers 94.2% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2022-panini-xr-football",
@@ -19362,7 +19530,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2022-panini-xr-football: 10630 -> 10565 cards, 286 -> 258 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2022-panini-zenith-football",
@@ -19390,7 +19560,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2022-pro-set-metal-football-cards: 16 -> 18392 cards, 1 -> 424 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2022-upper-deck-cfl-football",
@@ -19404,7 +19576,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2022-upper-deck-cfl-football: 254 -> 1379 cards, 2 -> 13 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2022-23-bowmans-best-university-football",
@@ -19446,7 +19620,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2023-bowman-u-now-football-cards: 31 -> 282 cards, 1 -> 25 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2023-bowman-university-chrome-football-cards",
@@ -19474,7 +19650,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2023-clearly-donruss-football: 3106 -> 3098 cards, 106 -> 92 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2023-donruss-football",
@@ -19516,7 +19694,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2023-immaculate-collection-collegiate-football-cards: 660 -> 3077 cards, 23 -> 124 sections, covers 99.1% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2023-panini-absolute-football",
@@ -19530,7 +19710,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2023-panini-absolute-football: 11734 -> 11463 cards, 258 -> 226 sections, covers 99.1% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2023-panini-black-football",
@@ -19544,7 +19726,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2023-panini-black-football: 5051 -> 4811 cards, 155 -> 136 sections, covers 96.7% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2023-panini-certified-football",
@@ -19558,7 +19742,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2023-panini-certified-football: 9067 -> 8577 cards, 257 -> 240 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2023-panini-chronicles-draft-picks-football-cards",
@@ -19572,7 +19758,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2023-panini-chronicles-draft-picks-football-cards: 1165 -> 9279 cards, 37 -> 292 sections, covers 88.1% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2023-panini-contenders-football",
@@ -19586,7 +19774,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2023-panini-contenders-football: 9170 -> 7714 cards, 240 -> 177 sections, covers 90.2% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2023-panini-flawless-collegiate-football-cards",
@@ -19600,7 +19790,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2023-panini-flawless-collegiate-football-cards: 660 -> 2736 cards, 17 -> 206 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2023-panini-flawless-football",
@@ -19614,7 +19806,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2023-panini-flawless-football: 6408 -> 5751 cards, 493 -> 478 sections, covers 92.8% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2023-panini-gold-standard-football",
@@ -19656,7 +19850,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2023-panini-immaculate-collection-football: 6035 -> 5064 cards, 246 -> 222 sections, covers 81.8% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2023-panini-impeccable-football",
@@ -19684,7 +19880,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2023-panini-instant-nfl-draft-night-football-cards: 20 -> 124 cards, 1 -> 4 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2023-panini-instant-nflpa-rookie-premiere-football-cards",
@@ -19712,7 +19910,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2023-panini-legacy-football: 6122 -> 7753 cards, 200 -> 163 sections, covers 96.8% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2023-panini-limited-football",
@@ -19754,7 +19954,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2023-panini-national-treasures-collegiate-football-cards: 624 -> 3373 cards, 25 -> 183 sections, covers 94.5% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2023-panini-national-treasures-football",
@@ -19768,7 +19970,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2023-panini-national-treasures-football: 12593 -> 11165 cards, 493 -> 474 sections, covers 91.1% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2023-panini-obsidian-football",
@@ -19782,7 +19986,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2023-panini-obsidian-football: 7480 -> 7680 cards, 175 -> 167 sections, covers 99.7% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2023-panini-one-football",
@@ -19810,7 +20016,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2023-panini-origins-football: 5080 -> 4978 cards, 141 -> 125 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2023-panini-phoenix-football",
@@ -19824,7 +20032,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2023-panini-phoenix-football: 13208 -> 13401 cards, 306 -> 271 sections, covers 99.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2023-panini-plates-and-patches-football",
@@ -19866,7 +20076,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2023-panini-prestige-football: 13617 -> 13120 cards, 229 -> 168 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2023-panini-prizm-draft-picks-football-cards",
@@ -19880,7 +20092,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2023-panini-prizm-draft-picks-football-cards: 781 -> 12474 cards, 22 -> 195 sections, covers 98.7% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2023-panini-prizm-football",
@@ -19922,7 +20136,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2023-panini-select-draft-picks-football-cards: 591 -> 8132 cards, 20 -> 117 sections, covers 99.2% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2023-panini-select-football",
@@ -20048,7 +20264,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2024-bowman-chrome-university-football: 365 -> 9609 cards, 9 -> 97 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2024-clearly-donruss-football",
@@ -20076,7 +20294,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2024-donruss-elite-football: 1038 -> 7667 cards, 40 -> 174 sections, covers 97.7% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2024-donruss-football",
@@ -20090,7 +20310,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2024-donruss-football: 2214 -> 11537 cards, 74 -> 176 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2024-donruss-optic-football",
@@ -20104,7 +20326,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2024-donruss-optic-football: 1139 -> 14795 cards, 40 -> 238 sections, covers 99.4% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2024-leaf-eclectic-football",
