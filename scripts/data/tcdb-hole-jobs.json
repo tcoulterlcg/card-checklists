@@ -7514,7 +7514,9 @@
   "why": [
    "base skips 11 numbers in #1-134 (e.g. 51, 52, 53, 54, 55)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2021-panini-spectra-football: 12605 -> 12641 cards, 435 -> 392 sections, covers 98.5% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2025-topps-series-1-baseball",
@@ -8024,7 +8026,9 @@
   "why": [
    "missing inserts: game gear dual, night moves patch, prime laundry tag"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "13-14-panini-national-treasures-basketball: 2985 -> 5599 cards, 67 -> 99 sections, covers 93.8% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2012-13-panini-contenders-basketball-cards",
@@ -8189,7 +8193,9 @@
   "why": [
    "base skips 10 numbers in #1-100 (e.g. 16, 17, 28, 29, 31)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2021-panini-illusions-football: 8108 -> 7538 cards, 244 -> 237 sections, covers 97.2% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2019-panini-impeccable-football",
@@ -8389,7 +8395,9 @@
   "why": [
    "base skips 9 numbers in #1-100 (e.g. 41, 42, 43, 58, 59)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2020-panini-certified-football: 6821 -> 6825 cards, 155 -> 141 sections, covers 99.9% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2020-panini-legacy-football",
@@ -8493,7 +8501,9 @@
   "why": [
    "base skips 9 numbers in #1-350 (e.g. 57, 106, 149, 179, 206)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2024-topps-series-1-baseball: 632 -> 45660 cards, 15 -> 397 sections, covers 97.3% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2013-panini-absolute-football-cards",
@@ -8561,7 +8571,9 @@
   "why": [
    "base skips 8 numbers in #1-100 (e.g. 2, 14, 15, 16, 17)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2021-panini-diamond-kings-baseball: 5400 -> 5359 cards, 127 -> 115 sections, covers 99.9% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2021-panini-national-treasures-football",
