@@ -3181,7 +3181,9 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "25-26-topps-inception-uefa-club-competitions-soccer-card: 250 -> 3274 cards, 139 -> 137 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "25-26-topps-lineage-bayern-muchen-soccer-card",
@@ -3205,7 +3207,9 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "25-26-topps-museum-collection-uefa-club-competitions-soccer-card: 250 -> 1716 cards, 94 -> 28 sections, covers 43.5% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "25-26-topps-royalty-premier-league-soccer-card",
@@ -3217,7 +3221,9 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "25-26-topps-royalty-premier-league-soccer-card: 250 -> 3346 cards, 93 -> 184 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "25-26-topps-simplicidad-uefa-club-competitions-soccer-card",
@@ -3229,7 +3235,9 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "25-26-topps-simplicidad-uefa-club-competitions-soccer-card: 250 -> 1289 cards, 97 -> 9 sections, covers 0.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "25-26-topps-sl-benfica-soccer-card",
@@ -3279,7 +3287,9 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "26-27-topps-flagship-premier-league-soccer-card: 250 -> 22310 cards, 114 -> 413 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "26-27-topps-summer-signings-uefa-club-competitions-soccer-card",
