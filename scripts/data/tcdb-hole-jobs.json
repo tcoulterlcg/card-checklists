@@ -13105,7 +13105,9 @@
   "why": [
    "base skips 3 numbers in #1-97 (e.g. 45, 46, 47)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2019-panini-phoenix-football: 6639 -> 6860 cards, 140 -> 125 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2019-panini-national-treasures-baseball",
@@ -13131,7 +13133,9 @@
   "why": [
    "base skips 3 numbers in #1-100 (e.g. 76, 77, 92)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2023-panini-elite-extra-edition-baseball: 9680 -> 10043 cards, 224 -> 122 sections, covers 98.7% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2020-panini-obsidian-football",
@@ -13143,7 +13147,9 @@
   "why": [
    "base skips 3 numbers in #1-100 (e.g. 43, 44, 98)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2020-panini-obsidian-football: 5440 -> 5411 cards, 120 -> 103 sections, covers 99.3% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "18-19-ud-upper-deck-chronology-hockey",
@@ -13167,7 +13173,9 @@
   "why": [
    "base skips 3 numbers in #1-125 (e.g. 53, 64, 103)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2024-leaf-vivid-football: 246 -> 26610 cards, 7 -> 355 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2016-topps-transcendent-baseball-cards",
@@ -13205,7 +13213,9 @@
   "why": [
    "8 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2016-17-panini-totally-certified-basketball: 499 -> 2723 cards, 14 -> 64 sections, covers 99.1% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2015-panini-contenders-draft-picks-football",
@@ -13243,7 +13253,9 @@
   "why": [
    "5 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2018-19-panini-cornerstones-basketball-cards: 543 -> 2103 cards, 14 -> 47 sections, covers 94.2% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2010-11-upper-deck-series-1-hockey-review",
@@ -13317,7 +13329,9 @@
   "why": [
    "only 9 cards scraped — hidden until a full checklist is imported"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2013-leaf-memories-baseball-cards: 9 -> 2025 cards, 2 -> 31 sections, covers 22.2% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2013-topps-mlb-chipz",
@@ -13329,7 +13343,9 @@
   "why": [
    "only 0 cards scraped — hidden until a full checklist is imported"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2013-topps-mlb-chipz: 0 -> 521 cards, 0 -> 7 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2014-topps-dynasty-baseball-cards",
@@ -13341,7 +13357,9 @@
   "why": [
    "only 4 cards scraped — hidden until a full checklist is imported"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2014-topps-dynasty-baseball-cards: 4 -> 1027 cards, 4 -> 5 sections, covers 0.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2014-topps-mlb-chipz",
@@ -13380,7 +13398,9 @@
   "why": [
    "only 0 cards scraped — hidden until a full checklist is imported"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2015-leaf-metal-draft-baseball-cards: 0 -> 1431 cards, 0 -> 50 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2015-leaf-metal-hockey-cards",
@@ -13442,7 +13462,9 @@
   "why": [
    "only 1 cards scraped — hidden until a full checklist is imported"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2015-topps-mlb-chipz: 1 -> 846 cards, 1 -> 17 sections, covers 0.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2015-topps-tier-one-baseball-cards",
@@ -13734,7 +13756,9 @@
   "why": [
    "only 0 cards scraped — hidden until a full checklist is imported"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2018-leaf-valiant-baseball-baseball: 0 -> 1160 cards, 0 -> 36 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2018-leaf-valiant-football-cards",
@@ -13746,7 +13770,9 @@
   "why": [
    "only 0 cards scraped — hidden until a full checklist is imported"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2018-leaf-valiant-football-cards: 0 -> 1784 cards, 0 -> 78 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2018-topps-archives-signature-series-active-baseball-cards",
@@ -13866,7 +13892,9 @@
   "why": [
    "only 0 cards scraped — hidden until a full checklist is imported"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2019-onyx-vintage-collection-baseball-cards: 0 -> 144 cards, 0 -> 9 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2019-panini-toronto-raptors-nba-champions-basketball-cards",
@@ -13988,7 +14016,9 @@
   "why": [
    "only 0 cards scraped — hidden until a full checklist is imported"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2020-leaf-metal-draft-baseball: 0 -> 9017 cards, 0 -> 343 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2020-leaf-metal-perfect-game-all-american-baseball",
@@ -14216,7 +14246,9 @@
   "why": [
    "only 0 cards scraped — hidden until a full checklist is imported"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2021-upper-deck-rookie-watch-football-cards: 0 -> 18 cards, 0 -> 2 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2022-23-topps-dynasty-uefa-champions-league-soccer",
@@ -14312,7 +14344,9 @@
   "why": [
    "only 5 cards scraped — hidden until a full checklist is imported"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2022-topps-mlb-all-star-art-collection-baseball-cards: 5 -> 28 cards, 1 -> 7 sections, covers 80.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2022-topps-now-road-to-opening-day-baseball-cards",
@@ -14372,7 +14406,9 @@
   "why": [
    "only 0 cards scraped — hidden until a full checklist is imported"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2023-24-topps-focus-fc-barcelona-soccer: 0 -> 737 cards, 0 -> 32 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2023-24-topps-impact-uefa-club-competitions-soccer",
@@ -14384,7 +14420,9 @@
   "why": [
    "only 0 cards scraped — hidden until a full checklist is imported"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2023-24-topps-impact-uefa-club-competitions-soccer: 0 -> 717 cards, 0 -> 15 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2023-24-topps-selecao-uefa-champions-league-soccer",
