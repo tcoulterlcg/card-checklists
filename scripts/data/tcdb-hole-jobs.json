@@ -19556,7 +19556,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2022-panini-national-treasures-collegiate-football-cards: 505 -> 3236 cards, 23 -> 141 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2022-panini-national-treasures-football",
@@ -19570,7 +19572,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2022-panini-national-treasures-football: 12361 -> 10880 cards, 377 -> 354 sections, covers 95.8% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2022-panini-nfl-five-trading-card-game-tcg-cards",
@@ -23035,7 +23039,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2016-17-upper-deck-compendium-hockey: 1062 -> 6347 cards, 9 -> 15 sections, covers 85.8% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2016-17-upper-deck-mvp-hockey-cards",
@@ -25295,7 +25301,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2021-22-fleer-ultra-hockey-cards: 1149 -> 4600 cards, 29 -> 63 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2021-22-parkhurst-hockey-factory-team-set-cards",
@@ -26047,7 +26055,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2022-23-upper-deck-fleer-ultra-hockey: 1350 -> 5396 cards, 31 -> 75 sections, covers 99.5% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2022-23-upper-deck-mvp-factory-box-set-hockey",
