@@ -19180,7 +19180,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2022-panini-encased-football: 4181 -> 4086 cards, 195 -> 186 sections, covers 91.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2022-panini-flawless-collegiate-football-cards",
@@ -19194,7 +19196,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2022-panini-flawless-collegiate-football-cards: 725 -> 2753 cards, 17 -> 198 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2022-panini-flawless-football",
@@ -19208,7 +19212,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2022-panini-flawless-football: 7481 -> 5887 cards, 471 -> 456 sections, covers 82.6% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2022-panini-gold-standard-football",
@@ -19238,7 +19244,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2022-panini-honors-football: 5083 -> 1360 cards, 53 -> 19 sections, covers 24.2% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2022-panini-illusions-football",
@@ -19266,7 +19274,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2022-panini-immaculate-collection-football: 5168 -> 4886 cards, 171 -> 172 sections, covers 93.7% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2022-panini-impeccable-football",
@@ -19280,7 +19290,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2022-panini-impeccable-football: 3356 -> 3286 cards, 168 -> 158 sections, covers 95.3% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2022-panini-instant-all-pro-team-football-cards",
@@ -19308,7 +19320,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2022-panini-instant-all-rookie-team-football-cards: 24 -> 24 cards, 1 -> 1 sections, covers 0.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2022-panini-instant-black-white-rookies-football-cards",
@@ -19354,7 +19368,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2022-panini-instant-nfl-draft-night-football-cards: 30 -> 120 cards, 1 -> 4 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2022-panini-instant-nflpa-rookie-premiere-football-cards",
@@ -19382,7 +19398,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2022-panini-instant-rated-rookie-retro-football-cards: 45 -> 90 cards, 1 -> 2 sections, covers 0.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2022-panini-instant-spotlight-rookies-football-cards",
@@ -19396,7 +19414,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2022-panini-instant-spotlight-rookies-football-cards: 42 -> 84 cards, 1 -> 2 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2022-panini-instant-studio-rookies-football-cards",
@@ -19410,7 +19430,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2022-panini-instant-studio-rookies-football-cards: 42 -> 84 cards, 1 -> 2 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2022-panini-instant-supernova-football-cards",
@@ -19424,7 +19446,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2022-panini-instant-supernova-football-cards: 24 -> 24 cards, 1 -> 1 sections, covers 0.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2022-panini-instant-the-franchise-football-cards",
@@ -19438,7 +19462,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2022-panini-instant-the-franchise-football-cards: 32 -> 32 cards, 1 -> 1 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2022-panini-instant-year-one-football-cards",
@@ -19468,7 +19494,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2022-panini-legacy-football: 7851 -> 7756 cards, 189 -> 153 sections, covers 82.5% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2022-panini-limited-football",
@@ -22719,7 +22747,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2015-upper-deck-artifacts-hockey-cards: 380 -> 2954 cards, 3 -> 65 sections, covers 95.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2015-upper-deck-buybacks-hockey-cards",
@@ -24799,9 +24829,9 @@
    "verify against TCDB (partial copies block the TCDB import)"
   ],
   "status": "done",
-  "note": "20-21-ud-upper-deck-clear-cut-hockey: 1110 -> 1527 cards, 73 -> 2 sections, covers 6.1% of current",
+  "note": "20-21-ud-upper-deck-clear-cut-hockey: 1527 -> 1527 cards, 2 -> 2 sections, covers 100.0% of current",
   "tcdbSid": 250419,
-  "at": "2026-10-30"
+  "at": "2026-10-31"
  },
  {
   "slug": "20-21-ud-upper-deck-mvp-hockey",
