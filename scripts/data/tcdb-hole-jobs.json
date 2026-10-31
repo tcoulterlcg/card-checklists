@@ -11841,7 +11841,9 @@
   "why": [
    "missing inserts: material treasure"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2012-13-panini-national-treasures-basketball-cards: 1664 -> 4254 cards, 48 -> 73 sections, covers 99.9% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2012-13-panini-threads-basketball-cards",
@@ -11853,7 +11855,9 @@
   "why": [
    "missing inserts: spurs"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2012-13-panini-threads-basketball-cards: 843 -> 1705 cards, 18 -> 21 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "1987-fleer-basketball-cards",
@@ -11891,7 +11895,9 @@
   "why": [
    "missing inserts: vintage materials"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2018-panini-luminance-football: 560 -> 2898 cards, 15 -> 44 sections, covers 92.9% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2018-panini-xr-football-nfl-cards",
@@ -11917,7 +11923,9 @@
   "why": [
    "missing inserts: new generation jersey"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2017-panini-certified-football-cards: 690 -> 4526 cards, 16 -> 95 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2017-panini-origins-football-cards",
@@ -11929,7 +11937,9 @@
   "why": [
    "missing inserts: turquoise"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2017-panini-origins-football-cards: 342 -> 2754 cards, 11 -> 64 sections, covers 88.8% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2017-panini-unparalleled-football-cards",
@@ -11941,7 +11951,9 @@
   "why": [
    "missing inserts: future frame"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2017-panini-unparalleled-football-cards: 696 -> 5915 cards, 16 -> 94 sections, covers 99.8% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2016-panini-national-treasures-football",
@@ -11993,7 +12005,9 @@
   "why": [
    "missing inserts: quad combo patches"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2014-topps-supreme-football-cards: 142 -> 2725 cards, 3 -> 68 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2013-panini-momentum-football-cards",
@@ -12139,7 +12153,9 @@
   "why": [
    "missing inserts: 25"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2018-panini-national-treasures-baseball-cards: 1452 -> 6228 cards, 78 -> 267 sections, covers 93.5% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2018-topps-dynasty-baseball",
@@ -12189,7 +12205,9 @@
   "why": [
    "missing inserts: now road to pittsburgh pirates"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2017-topps-opening-day-baseball-cards: 447 -> 1886 cards, 12 -> 22 sections, covers 97.9% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2016-donruss-optic-baseball-cards",
@@ -12215,7 +12233,9 @@
   "why": [
    "missing inserts: production"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2016-topps-pro-debut-baseball-cards: 312 -> 2892 cards, 6 -> 58 sections, covers 92.5% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2015-panini-diamond-kings-baseball",
@@ -12253,7 +12273,9 @@
   "why": [
    "missing inserts: prime"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2015-panini-immaculate-baseball-cards: 1136 -> 3515 cards, 40 -> 131 sections, covers 96.1% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2015-topps-stadium-club-baseball",
@@ -12289,7 +12311,9 @@
   "why": [
    "missing inserts: combos materials jersey bat"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2014-panini-classics-baseball-cards: 1604 -> 3784 cards, 64 -> 111 sections, covers 99.9% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2013-panini-usa-baseball-champions-baseball-cards",
@@ -12315,7 +12339,9 @@
   "why": [
    "missing inserts: relics"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2013-topps-mini-baseball-cards: 705 -> 6077 cards, 2 -> 13 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "1994-bowman-baseball-cards",
@@ -12367,7 +12393,9 @@
   "why": [
    "missing inserts: memorabilia materials"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2017-18-panini-absolute-basketball-nba-cards: 587 -> 1469 cards, 16 -> 42 sections, covers 99.5% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2016-17-panini-noir-basketball-cards",
@@ -12407,7 +12435,9 @@
   "why": [
    "missing inserts: laundry tags"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2015-16-panini-national-treasures-basketball: 1350 -> 7026 cards, 35 -> 131 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2014-15-panini-prestige-basketball-cards",
@@ -12419,7 +12449,9 @@
   "why": [
    "missing inserts: prestigious premieres signature"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2014-15-panini-prestige-basketball-cards: 2287 -> 2524 cards, 39 -> 29 sections, covers 62.3% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2014-15-spx-basketball-cards",
@@ -12431,7 +12463,9 @@
   "why": [
    "missing inserts: finite legends"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2014-15-spx-basketball-cards: 216 -> 908 cards, 6 -> 28 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2013-14-panini-court-kings-basketball-cards",
@@ -12471,7 +12505,9 @@
   "why": [
    "missing inserts: jersey"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2012-13-panini-innovation-basketball-cards: 977 -> 1802 cards, 22 -> 29 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2012-13-panini-limited-basketball-cards",
@@ -12535,7 +12571,9 @@
   "why": [
    "missing inserts: silhouette jersey"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2017-panini-crown-royale-football-nfl-cards: 286 -> 875 cards, 5 -> 12 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2016-panini-clear-vision-football-cards",
@@ -12547,7 +12585,9 @@
   "why": [
    "missing inserts: prime"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2016-panini-clear-vision-football-cards: 567 -> 3112 cards, 18 -> 80 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2016-panini-crown-royale-football-cards",
@@ -12559,7 +12599,9 @@
   "why": [
    "missing inserts: silhouette jersey"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2016-panini-crown-royale-football-cards: 293 -> 885 cards, 5 -> 12 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2016-panini-limited-football-cards",
@@ -12571,7 +12613,9 @@
   "why": [
    "missing inserts: phenom jersey"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2016-panini-limited-football-cards: 568 -> 3177 cards, 18 -> 67 sections, covers 98.4% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2016-score-football-cards",
@@ -12583,7 +12627,9 @@
   "why": [
    "missing inserts: veteran helmets"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2016-score-football-cards: 964 -> 11509 cards, 23 -> 153 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2015-panini-black-gold-football-cards",
@@ -12659,7 +12705,9 @@
   "why": [
    "missing inserts: greats patch"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2014-panini-flawless-football-cards-2: 1103 -> 2940 cards, 35 -> 103 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2014-sp-authentic-football-cards",
@@ -12699,7 +12747,9 @@
   "why": [
    "missing inserts: mirror signature"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2013-panini-certified-football-cards: 1791 -> 5303 cards, 26 -> 38 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2013-panini-totally-certified-football-cards",
@@ -12725,7 +12775,9 @@
   "why": [
    "missing inserts: relics trios"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2013-topps-triple-threads-football-cards: 158 -> 4710 cards, 2 -> 77 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2012-score-football-cards",
@@ -12737,7 +12789,9 @@
   "why": [
    "missing inserts: glossy"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2012-score-football-cards: 753 -> 4854 cards, 14 -> 25 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "1983-topps-stickers-football",
@@ -13037,7 +13091,9 @@
   "why": [
    "base skips 3 numbers in #4-100 (e.g. 92, 93, 94)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2020-panini-playbook-football: 5756 -> 5612 cards, 139 -> 127 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2019-panini-phoenix-football",
