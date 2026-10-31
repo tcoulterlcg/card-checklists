@@ -1749,7 +1749,9 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2023-topps-chrome-mcdonalds-all-american-basketball: 250 -> 3732 cards, 104 -> 70 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2023-topps-motif-football",
@@ -1761,7 +1763,9 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2023-topps-motif-football: 250 -> 4849 cards, 121 -> 130 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2023-topps-world-classic-baseball",
@@ -1815,7 +1819,9 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2023-topps-xpectations-baseball: 250 -> 947 cards, 30 -> 16 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2023-topss-dynamic-duals-baseball",
@@ -2137,7 +2143,9 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2025-upper-deck-goodwin-champions-card: 250 -> 5021 cards, 107 -> 136 sections, covers 98.2% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2025-upper-deck-sp-signature-edition-aew-wrestling-card",
@@ -2589,7 +2597,9 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2026-topps-chrome-mls-soccer-card: 250 -> 10071 cards, 102 -> 143 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2026-topps-chrome-samurai-japan-baseball-card",
@@ -2863,7 +2873,9 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "22-23-leaf-optichrome-basketball: 250 -> 18378 cards, 202 -> 446 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "22-23-leaf-signature-series-basketball",
@@ -2875,7 +2887,9 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "22-23-leaf-signature-series-basketball: 250 -> 298 cards, 176 -> 2 sections, covers 83.3% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "22-23-leaf-vivid-basketball",
@@ -2887,7 +2901,9 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "22-23-leaf-vivid-basketball: 250 -> 4229 cards, 56 -> 100 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "22-23-topps-chrome-nbl-basketball",
@@ -2951,7 +2967,9 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "24-25-topps-bundesliga-international-stars-soccer-card: 250 -> 946 cards, 23 -> 35 sections, covers 73.1% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "24-25-topps-definitive-collection-uefa-club-competitions-soccer-card",
@@ -3099,7 +3117,9 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "25-26-topps-deco-uefa-club-competitions-soccer-card: 250 -> 2704 cards, 120 -> 22 sections, covers 38.9% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "25-26-topps-fc-barcelona-forever-soccer-card",
@@ -3123,7 +3143,9 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "25-26-topps-gold-bundesliga-soccer-card: 250 -> 2174 cards, 91 -> 36 sections, covers 38.9% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "25-26-topps-gold-premier-league-soccer-card",
