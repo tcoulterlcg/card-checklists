@@ -18992,7 +18992,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2022-immaculate-collection-collegiate-football-cards: 549 -> 2928 cards, 19 -> 97 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2022-leaf-signature-series-football-cards",
@@ -19034,7 +19036,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2022-panini-absolute-football: 10882 -> 10692 cards, 233 -> 206 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2022-panini-black-football",
@@ -19048,7 +19052,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2022-panini-black-football: 4293 -> 4249 cards, 109 -> 94 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2022-panini-certified-football",
@@ -19062,7 +19068,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2022-panini-certified-football: 9911 -> 9898 cards, 242 -> 214 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2022-panini-chronicles-draft-picks-football-cards",
@@ -19076,7 +19084,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2022-panini-chronicles-draft-picks-football-cards: 981 -> 7175 cards, 30 -> 229 sections, covers 99.7% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2022-panini-chronicles-football",
@@ -19106,7 +19116,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2022-panini-classics-football: 8470 -> 8216 cards, 182 -> 105 sections, covers 99.5% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2022-panini-contenders-football",
@@ -19120,7 +19132,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2022-panini-contenders-football: 6607 -> 6413 cards, 185 -> 145 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2022-panini-contenders-optic-football",
@@ -19134,7 +19148,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2022-panini-contenders-optic-football: 6502 -> 6349 cards, 228 -> 156 sections, covers 98.3% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2022-panini-elements-football",
@@ -19148,7 +19164,9 @@
   "why": [
    "verify against TCDB (partial copies block the TCDB import)"
   ],
-  "status": "verify"
+  "status": "done",
+  "note": "2022-panini-elements-football: 3460 -> 3261 cards, 107 -> 95 sections, covers 99.2% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2022-panini-encased-football",
