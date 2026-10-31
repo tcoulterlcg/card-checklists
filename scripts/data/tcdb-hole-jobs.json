@@ -8623,7 +8623,9 @@
   "why": [
    "base skips 8 numbers in #1-100 (e.g. 42, 52, 53, 54, 55)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2020-panini-national-treasures-football: 12902 -> 11334 cards, 366 -> 346 sections, covers 96.1% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2019-donruss-optic-football",
@@ -8688,7 +8690,9 @@
   "why": [
    "base skips 8 numbers in #1-158 (e.g. 63, 79, 90, 99, 128)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2025-leaf-vivid-baseball: 553 -> 38537 cards, 10 -> 631 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2023-topps-stadium-club-baseball",
@@ -8712,7 +8716,9 @@
   "why": [
    "base skips 8 numbers in #1-330 (e.g. 14, 21, 65, 71, 77)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2022-topps-series-1-baseball: 11065 -> 32387 cards, 141 -> 302 sections, covers 98.1% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "1990-topps-traded-baseball-cards",
@@ -8792,7 +8798,9 @@
   "why": [
    "base skips 7 numbers in #1-100 (e.g. 51, 52, 53, 55, 56)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2021-panini-gold-standard-football: 4459 -> 4250 cards, 114 -> 102 sections, covers 97.4% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2021-panini-immaculate-collection-football",
@@ -8854,7 +8862,9 @@
   "why": [
    "base skips 7 numbers in #1-100 (e.g. 29, 30, 31, 32, 74)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2021-panini-rookies-and-stars-football: 8855 -> 8770 cards, 216 -> 188 sections, covers 99.6% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2020-panini-illusions-football",
@@ -8904,7 +8914,9 @@
   "why": [
    "base skips 7 numbers in #1-100 (e.g. 43, 44, 45, 46, 92)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2019-panini-certified-football: 5552 -> 6517 cards, 143 -> 118 sections, covers 99.5% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2019-panini-illusions-football",
@@ -9267,7 +9279,9 @@
   "why": [
    "missing inserts: knight s templar, light"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2015-16-panini-excalibur-basketball-cards: 797 -> 2866 cards, 20 -> 47 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2014-15-panini-prizm-basketball-cards",
@@ -9305,7 +9319,9 @@
   "why": [
    "missing inserts: force relic, tools trade triple relic"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2017-panini-absolute-football-cards: 1199 -> 3914 cards, 42 -> 85 sections, covers 98.2% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2018-topps-big-league-baseball-cards",
@@ -9317,7 +9333,9 @@
   "why": [
    "missing inserts: republic, star caricature reproductions"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2018-topps-big-league-baseball-cards: 514 -> 2743 cards, 5 -> 19 sections, covers 97.3% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2017-topps-national-baseball-card-day-checklist-added",
@@ -9353,7 +9371,9 @@
   "why": [
    "missing inserts: signature swatches, tie dye"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2018-panini-select-football: 901 -> 7443 cards, 20 -> 121 sections, covers 96.4% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2014-panini-prizm-football",
