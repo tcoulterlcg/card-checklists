@@ -1479,7 +1479,9 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2023-leaf-metal-football: 250 -> 35260 cards, 198 -> 644 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2023-leaf-perfect-game-all-american-baseball-card",
@@ -1515,7 +1517,9 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2023-leaf-signature-series-baseball: 250 -> 2864 cards, 69 -> 45 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2023-leaf-signature-series-football",
@@ -1541,7 +1545,9 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2023-leaf-trinity-baseball-card: 250 -> 19541 cards, 180 -> 267 sections, covers 85.7% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2023-leaf-trinity-basketball",
@@ -1615,7 +1621,9 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2023-onyx-vintage-extended-baseball: 250 -> 342 cards, 5 -> 8 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2023-pro-set-metal-football",
@@ -1627,7 +1635,9 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2023-pro-set-metal-football: 250 -> 22307 cards, 192 -> 387 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2023-pro-set-pure-football",
@@ -1725,7 +1735,9 @@
   "why": [
    "Break Ninja preview cut off at 250 cards (A–M players only)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2023-topps-chrome-logofractor-edition-baseball: 250 -> 1505 cards, 32 -> 30 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2023-topps-chrome-mcdonalds-all-american-basketball",
