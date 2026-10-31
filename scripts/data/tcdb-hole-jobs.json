@@ -10369,7 +10369,9 @@
   "why": [
    "base skips 6 numbers in #1-100 (e.g. 46, 47, 48, 94, 95)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2020-panini-encased-football: 3576 -> 3570 cards, 139 -> 133 sections, covers 99.2% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2020-panini-immaculate-football",
@@ -10393,7 +10395,9 @@
   "why": [
    "base skips 6 numbers in #1-100 (e.g. 51, 52, 53, 54, 55)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2020-panini-impeccable-football: 3616 -> 3583 cards, 187 -> 179 sections, covers 98.9% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2020-panini-phoenix-football",
@@ -10405,7 +10409,9 @@
   "why": [
    "base skips 6 numbers in #1-100 (e.g. 16, 17, 18, 95, 96)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2020-panini-phoenix-football: 7784 -> 7807 cards, 171 -> 153 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2020-panini-rookies-and-stars-football",
@@ -10429,7 +10435,9 @@
   "why": [
    "base skips 6 numbers in #1-100 (e.g. 42, 43, 44, 88, 89)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2019-panini-absolute-football: 8936 -> 8811 cards, 170 -> 145 sections, covers 96.3% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2019-panini-immaculate-collection-football",
@@ -10441,7 +10449,9 @@
   "why": [
    "base skips 6 numbers in #1-100 (e.g. 48, 49, 50, 51, 52)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2019-panini-immaculate-collection-football: 4611 -> 4394 cards, 151 -> 147 sections, covers 94.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2019-panini-obsidian-football",
@@ -10453,7 +10463,9 @@
   "why": [
    "base skips 6 numbers in #1-100 (e.g. 46, 47, 48, 88, 89)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2019-panini-obsidian-football: 5087 -> 5062 cards, 120 -> 112 sections, covers 99.3% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2022-panini-national-treasures-racing-nascar",
@@ -10501,7 +10513,9 @@
   "why": [
    "base skips 6 numbers in #1-199 (e.g. 111, 156, 166, 172, 174)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2024-leaf-trinity-baseball: 322 -> 14205 cards, 7 -> 160 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2024-panini-stars-stripes-usa-baseball",
@@ -10513,7 +10527,9 @@
   "why": [
    "base skips 6 numbers in #1-200 (e.g. 11, 22, 24, 73, 83)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2024-panini-stars-stripes-usa-baseball: 2326 -> 9846 cards, 44 -> 149 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2022-panini-mosaic-football",
@@ -10537,7 +10553,9 @@
   "why": [
    "base skips 6 numbers in #1-280 (e.g. 253, 261, 267, 268, 271)"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "1953-topps-baseball-cards: 274 -> 357 cards, 1 -> 2 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2022-panini-prizm-football",
@@ -10612,7 +10630,9 @@
    "missing inserts: relics",
    "6 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2017-topps-tribute-baseball-cards: 90 -> 2268 cards, 1 -> 58 sections, covers 98.9% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2016-17-panini-complete-basketball",
@@ -10653,7 +10673,9 @@
    "missing inserts: front",
    "5 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2013-pinnacle-baseball-cards: 985 -> 1867 cards, 29 -> 51 sections, covers 83.4% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2016-17-panini-grand-reserve-basketball",
@@ -10666,7 +10688,9 @@
    "missing inserts: vintage",
    "5 players sold on SCP not on checklist"
   ],
-  "status": "todo"
+  "status": "done",
+  "note": "2016-17-panini-grand-reserve-basketball: 662 -> 1655 cards, 20 -> 45 sections, covers 100.0% of current",
+  "at": "2026-10-31"
  },
  {
   "slug": "2015-16-upper-deck-contours-hockey-cards",
